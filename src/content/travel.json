@@ -1,0 +1,283 @@
+{
+  "parties": {
+    "gang": {
+      "name": "Шайка «Жажды»",
+      "kind": "bandits",
+      "faction": "thirst",
+      "members": [["raider", 2, 3]],
+      "pace": 1.05,
+      "sight": 5,
+      "hostile": true,
+      "toll": 15
+    },
+    "band": {
+      "name": "Банда «Жажды»",
+      "kind": "bandits",
+      "faction": "thirst",
+      "members": [
+        ["raider_boss", 1, 1],
+        ["raider", 3, 4]
+      ],
+      "pace": 0.95,
+      "sight": 6,
+      "hostile": true,
+      "toll": 40
+    },
+    "caravan": {
+      "name": "Караван Гильдии",
+      "kind": "caravan",
+      "faction": "guild",
+      "members": [
+        ["caravaneer", 1, 1],
+        ["caravan_guard", 2, 4]
+      ],
+      "pace": 0.75,
+      "sight": 5,
+      "trader": "birjuk"
+    },
+    "trust_patrol": {
+      "name": "Патруль Треста",
+      "kind": "trust",
+      "faction": "trust",
+      "members": [["collector", 2, 3]],
+      "pace": 0.9,
+      "sight": 6
+    },
+    "scavengers": {
+      "name": "Старьёвщики с баржи",
+      "kind": "wanderers",
+      "faction": "barge",
+      "members": [["scavenger", 2, 3]],
+      "pace": 0.8,
+      "sight": 4,
+      "trader": "hank"
+    },
+    "waterbearers": {
+      "name": "Водоносы",
+      "kind": "wanderers",
+      "faction": "circle",
+      "members": [["waterbearer", 1, 2]],
+      "pace": 1.1,
+      "sight": 6
+    },
+    "pilgrims": {
+      "name": "Паломники Ковчега",
+      "kind": "wanderers",
+      "faction": "church",
+      "members": [["pilgrim", 3, 5]],
+      "pace": 0.6,
+      "sight": 3
+    },
+    "dry_herd": {
+      "name": "Стадо Сухостоев",
+      "kind": "dry",
+      "members": [["dryman", 4, 6]],
+      "pace": 0.5,
+      "sight": 4,
+      "hostile": true,
+      "night": true
+    },
+    "jackal_pack": {
+      "name": "Стая шакалов",
+      "kind": "beast",
+      "members": [
+        ["jackal_leader", 1, 1],
+        ["jackal", 3, 4]
+      ],
+      "pace": 1.1,
+      "sight": 5,
+      "hostile": true
+    },
+    "jackals": {
+      "name": "Шакалы",
+      "kind": "beast",
+      "members": [["jackal", 2, 4]],
+      "pace": 1.1,
+      "sight": 5,
+      "hostile": true
+    },
+    "behemoth": {
+      "name": "Скорпион-бегемот",
+      "kind": "beast",
+      "members": [["scorpion_behemoth", 1, 1]],
+      "pace": 0.35,
+      "sight": 3,
+      "hostile": true
+    },
+    "erema": {
+      "name": "Водонос Ерёма",
+      "kind": "wanderers",
+      "members": [["erema", 1, 1]],
+      "pace": 0.8,
+      "sight": 4,
+      "dialogue": "meet_erema"
+    },
+    "dry_stone": {
+      "name": "Сухари у Сухого камня",
+      "kind": "bandits",
+      "faction": "bone",
+      "members": [["suhar", 2, 2]],
+      "pace": 0.5,
+      "sight": 3,
+      "dialogue": "meet_dry_stone"
+    }
+  },
+  "lairs": [
+    {
+      "id": "stone_bag",
+      "cell": [8, 20],
+      "party": "gang",
+      "max": 2
+    },
+    {
+      "id": "dry_ravine",
+      "cell": [36, 15],
+      "party": "gang",
+      "max": 2
+    },
+    {
+      "id": "elevator",
+      "cell": [51, 25],
+      "party": "band",
+      "max": 1
+    }
+  ],
+  "routes": [
+    {
+      "id": "salt_road",
+      "party": "caravan",
+      "stops": ["to_salt", "elevator", "barge", "three_pillars", "rusty_well"],
+      "every": 3,
+      "from": 1
+    },
+    {
+      "id": "tract",
+      "party": "caravan",
+      "stops": ["three_pillars", "kolyuchka", "zapruda"],
+      "every": 4,
+      "from": 2
+    },
+    {
+      "id": "trust_round",
+      "party": "trust_patrol",
+      "stops": ["zapruda", "kolyuchka", "three_pillars", "rusty_well", "three_pillars", "kolyuchka"],
+      "every": 1,
+      "from": 1,
+      "loop": true
+    }
+  ],
+  "roamers": [
+    {
+      "party": "scavengers",
+      "count": 1,
+      "area": [26, 20, 36, 40]
+    },
+    {
+      "party": "waterbearers",
+      "count": 1,
+      "area": [18, 8, 30, 30]
+    },
+    {
+      "party": "pilgrims",
+      "count": 1,
+      "area": [26, 36, 40, 44]
+    },
+    {
+      "party": "dry_herd",
+      "count": 2,
+      "area": [38, 25, 52, 35]
+    },
+    {
+      "party": "jackals",
+      "count": 1,
+      "area": [12, 26, 24, 34]
+    }
+  ],
+  "battlefields": {
+    "=": "enc_road",
+    ".": "enc_sand",
+    "~": "enc_sand",
+    "_": "enc_sand",
+    "^": "enc_rocks",
+    ":": "enc_ravine",
+    "|": "enc_ravine",
+    "x": "enc_dead"
+  },
+  "uniques": [
+    {
+      "id": "u_jackals",
+      "party": "jackal_pack",
+      "cell": [16, 32],
+      "if": [
+        {
+          "flag": "job_hunt_jackals",
+          "eq": "active"
+        }
+      ],
+      "roam": 3
+    },
+    {
+      "id": "u_erema",
+      "party": "erema",
+      "cell": [23, 16],
+      "if": [
+        {
+          "flag": "job_hunt_erema",
+          "eq": "active"
+        }
+      ],
+      "roam": 2
+    },
+    {
+      "id": "u_behemoth",
+      "party": "behemoth",
+      "cell": [27, 29],
+      "if": [
+        {
+          "flag": "job_hunt_behemoth",
+          "eq": "active"
+        }
+      ],
+      "roam": 1
+    },
+    {
+      "id": "u_dry_stone",
+      "party": "dry_stone",
+      "cell": [17, 15],
+      "if": [
+        {
+          "flag": "laska_bow_asked"
+        },
+        {
+          "notFlag": "laska_bow"
+        }
+      ],
+      "roam": 0,
+      "beaten": [
+        {
+          "type": "give",
+          "item": "laska_bow"
+        },
+        {
+          "type": "flag",
+          "key": "laska_bow",
+          "value": "fought"
+        },
+        {
+          "type": "inc",
+          "key": "kremen_grudge",
+          "by": 1
+        },
+        {
+          "type": "quest",
+          "quest": "laska_bow",
+          "stage": "done"
+        },
+        {
+          "type": "log",
+          "text": "Под Сухим камнем — свёрток в промасленной коже. Лук Ласки."
+        }
+      ]
+    }
+  ]
+}

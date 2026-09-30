@@ -1,0 +1,19 @@
+{
+  "jacket": { "name": "Кожанка", "dt": 1, "dr": 15, "look": "jacket" },
+  "tirevest": { "name": "Панцирь из покрышек", "dt": 2, "dr": 20, "look": "tirevest", "mods": { "skills": { "sneak": -10 } } },
+  "vest": { "name": "Бронежилет", "dt": 3, "dr": 30, "look": "vest", "mods": { "skills": { "sneak": -10 } } },
+  "tinplate": { "name": "Консервная банка", "dt": 5, "dr": 40, "res": { "fire": 10 }, "look": "tinplate", "mods": { "ap": -1, "skills": { "sneak": -30 } } },
+  "exo": { "name": "Экзокаркас", "dt": 7, "dr": 45, "res": { "shock": -20 }, "look": "exo", "mods": { "ap": -1, "meleeDmg": 4, "skills": { "sneak": -50 } } },
+  "duster": { "name": "Серый пыльник", "dt": 1, "dr": 20, "res": { "fire": 10 }, "look": "duster", "mods": { "skills": { "speech": 5 } } },
+  "waterman": { "name": "Плащ водоноса", "dt": 0, "dr": 10, "res": { "fire": 10 }, "look": "duster", "mods": { "skills": { "sneak": 10 } } },
+  "plated_jacket": { "name": "Кожанка с пластинами", "dt": 2, "dr": 20, "look": "jacket" },
+  "reaper_shell": { "name": "Панцирь жнеца", "dt": 3, "dr": 25, "res": { "poison": 50 }, "look": "shell" },
+  "raider_rig": { "name": "Броня налётчика", "dt": 3, "dr": 30, "look": "vest", "mods": { "skills": { "speech": -10 } } },
+  "nut_mail": { "name": "Гайковая рубаха", "dt": 3, "dr": 25, "res": { "shock": -20 }, "look": "tinplate", "mods": { "skills": { "sneak": -15 } } },
+  "bark": { "name": "«Кора»", "dt": 2, "dr": 20, "res": { "poison": 50, "fire": -20 }, "look": "shell" },
+  "salt_crust": { "name": "Соляная корка", "dt": 4, "dr": 35, "res": { "fire": 30 }, "look": "crust", "mods": { "skills": { "sneak": -20 } } },
+  "shore_plate": { "name": "Береговой доспех", "dt": 6, "dr": 50, "res": { "shock": 40 }, "look": "cuirass", "mods": { "ap": -1, "skills": { "sneak": -40 } } },
+  "dew_cuirass": { "name": "Кираса Росы", "dt": 6, "dr": 45, "res": { "poison": 100, "fire": 20 }, "look": "cuirass", "mods": { "ap": -1, "skills": { "sneak": -40 } } },
+  "snake_scale": { "name": "Змеиная чешуя", "dt": 3, "dr": 35, "res": { "poison": 75, "fire": 20 }, "look": "shell", "mods": { "skills": { "sneak": 10 } } },
+  "wax_cloak": { "name": "Плащ Сургуча", "dt": 1, "dr": 15, "look": "duster", "mods": { "skills": { "sneak": 25 }, "crit": 5 } }
+}

@@ -1,0 +1,4375 @@
+{
+ "zoya": {
+  "speaker": "Зоя Кружка",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "senka",
+      "eq": "given"
+     }
+    ],
+    "node": "cold"
+   },
+   {
+    "if": [
+     {
+      "notFlag": "zoya_met"
+     }
+    ],
+    "node": "hello"
+   },
+   {
+    "node": "bar"
+   }
+  ],
+  "nodes": {
+   "hello": {
+    "text": "Рыжая женщина за стойкой вытирает кружку краем фартука и оценивает вас взглядом — от сапог до лица. — Пыльно на тракте? «Сухая глотка» наливает всем, кто платит. Я — Зоя. Слухи тоже у меня, но они дороже воды.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "zoya_met"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "bar"
+     }
+    ]
+   },
+   "bar": {
+    "text": "Зоя облокачивается на стойку. — Ну?",
+    "options": [
+     {
+      "text": "Что говорят на тракте?",
+      "if": [
+       {
+        "notFlag": "rumor_paper"
+       }
+      ],
+      "next": "rumor_price"
+     },
+     {
+      "text": "Что ещё говорят на тракте?",
+      "if": [
+       {
+        "flag": "rumor_paper"
+       }
+      ],
+      "next": "rumor_again"
+     },
+     {
+      "text": "Кто может прочесть старую довоенную бумагу?",
+      "if": [
+       {
+        "flag": "rumor_paper"
+       },
+       {
+        "flag": "zoya_friend"
+       },
+       {
+        "notFlag": "zoya_told_notary"
+       }
+      ],
+      "next": "notary"
+     },
+     {
+      "text": "Кто прочтёт старую бумагу?",
+      "if": [
+       {
+        "flag": "rumor_paper"
+       },
+       {
+        "notFlag": "zoya_friend"
+       }
+      ],
+      "next": "no_notary"
+     },
+     {
+      "text": "Ты чем-то встревожена.",
+      "if": [
+       {
+        "notFlag": "courier_asked"
+       },
+       {
+        "flag": "rumor_paper"
+       }
+      ],
+      "next": "courier"
+     },
+     {
+      "text": "Сенька жив. Он в Колючке, у Прокопа.",
+      "if": [
+       {
+        "flag": "senka",
+        "eq": "hidden"
+       },
+       {
+        "notFlag": "courier_paid"
+       }
+      ],
+      "next": "courier_hidden"
+     },
+     {
+      "text": "Сенька жив. Он под защитой поста Треста.",
+      "if": [
+       {
+        "flag": "senka",
+        "eq": "trust"
+       },
+       {
+        "notFlag": "courier_paid"
+       }
+      ],
+      "next": "courier_trust"
+     },
+     {
+      "text": "Работа есть?",
+      "if": [
+       {
+        "notFlag": "debt_asked"
+       },
+       {
+        "flag": "rumor_paper"
+       }
+      ],
+      "next": "debt"
+     },
+     {
+      "text": "Вот долг Луки: сорок капель.",
+      "if": [
+       {
+        "flag": "debt",
+        "eq": "shaken"
+       },
+       {
+        "caps": 40
+       },
+       {
+        "notFlag": "debt_done"
+       }
+      ],
+      "next": "debt_paid"
+     },
+     {
+      "text": "Лука не при деньгах, я плачу за него: сорок капель.",
+      "if": [
+       {
+        "flag": "debt",
+        "eq": "paid"
+       },
+       {
+        "caps": 40
+       },
+       {
+        "notFlag": "debt_done"
+       }
+      ],
+      "next": "debt_paid"
+     },
+     {
+      "text": "Лука отдал мне карту. Прости ему долг.",
+      "if": [
+       {
+        "flag": "debt",
+        "eq": "map"
+       },
+       {
+        "notFlag": "debt_done"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "debt_forgiven",
+       "fail": "debt_refused",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "debt_done"
+        },
+        {
+         "type": "flag",
+         "key": "zoya_annoyed"
+        },
+        {
+         "type": "quest",
+         "quest": "debt",
+         "stage": "done"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Гвоздь поит Бугая «Миражом» перед боями.",
+      "if": [
+       {
+        "flag": "mirage_seen"
+       },
+       {
+        "notFlag": "gvozd_out"
+       }
+      ],
+      "next": "gvozd_out"
+     },
+     {
+      "text": "Колючке нужны люди с оружием против Сухарей. Найдёшь?",
+      "if": [
+       {
+        "flag": "raid_day"
+       },
+       {
+        "notFlag": "raid_guards"
+       },
+       {
+        "notFlag": "raid_outcome"
+       }
+      ],
+      "next": "guards"
+     },
+     {
+      "text": "Налей чего-нибудь. Посмотрю, что у тебя есть.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "zoya"
+       }
+      ]
+     },
+     {
+      "text": "Комната на ночь, пять капель.",
+      "if": [
+       {
+        "caps": 5
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -5
+       },
+       {
+        "type": "rest"
+       }
+      ]
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "cold": {
+    "text": "Зоя наливает молча и ставит кружку так, что брага выплёскивается. Она знает, где Сенька. Сказать ей нечего.",
+    "options": [
+     {
+      "text": "Налей.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "zoya"
+       }
+      ]
+     },
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "rumor_price": {
+    "text": "— Слухи стоят. Пять капель — или сплетня за сплетню.",
+    "options": [
+     {
+      "text": "Держи пять капель.",
+      "if": [
+       {
+        "caps": 5
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -5
+       }
+      ],
+      "next": "rumor"
+     },
+     {
+      "text": "Сплетня за сплетню: в Ржавом колодце снова течёт вода.",
+      "if": [
+       {
+        "flag": "trust_outcome"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "zoya_gossip"
+       }
+      ],
+      "next": "rumor"
+     },
+     {
+      "text": "Для нового друга — даром?",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "rumor",
+       "fail": "rumor_no"
+      }
+     },
+     {
+      "text": "Обойдусь.",
+      "next": "bar"
+     }
+    ]
+   },
+   "rumor_no": {
+    "text": "— Друзей у меня полный трактир, и все должны. Пять капель.",
+    "options": [
+     {
+      "text": "Ладно.",
+      "next": "rumor_price"
+     }
+    ]
+   },
+   "rumor": {
+    "text": "Зоя понижает голос. — Говорят, в Ржавом колодце нашли бумагу, за которую Трест готов отдать колодец. Люди Шлюза повесили у поста объявление с наградой. А ещё к нам зачастил Писарь — бродячий грамотей. Ходит, выспрашивает, кто что несёт с юга. Мне он не нравится: платит за чужие письма.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "rumor_paper"
+     },
+     {
+      "type": "quest",
+      "quest": "tract",
+      "stage": "scribe"
+     }
+    ],
+    "options": [
+     {
+      "text": "Кто такой этот Писарь?",
+      "next": "about_scribe"
+     },
+     {
+      "text": "Спасибо.",
+      "next": "bar"
+     }
+    ]
+   },
+   "about_scribe": {
+    "text": "— Сухой, в чёрном, пальцы в чернилах. Заверяет бумаги, пишет прошения. Говорит складно. Кто ему что показал — тот потом всем про это рассказывает, будто сам хотел. — Она вытирает стойку. — Держи бумаги ближе к телу.",
+    "options": [
+     {
+      "text": "Буду.",
+      "next": "bar"
+     }
+    ]
+   },
+   "rumor_again": {
+    "text": "— Сухари у Колючки шастают. Трест поднял налог на воду у поста. Караван Хоря стоит без воды третий день, а Хорь всё ходит сытый. — Зоя пожимает плечами. — Выводы делай сам.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "bar"
+     }
+    ]
+   },
+   "no_notary": {
+    "text": "— Такую бумагу читают в Запруде, там грамотеи при Тресте. Больше не знаю. — Зоя отворачивается к полке. Кажется, знает, но не скажет чужаку.",
+    "options": [
+     {
+      "text": "Понятно.",
+      "next": "bar"
+     }
+    ]
+   },
+   "notary": {
+    "text": "Зоя оглядывается и наклоняется ближе. — За Сеньку я тебе должна, так что слушай. Письма, что через мою стойку идут, все с одной печатью — рука, держащая печать. И все куда-то в Запруду, в Нижний город. Там сидит Нотариус. Говорят, единственный честный человек в Запруде. Он читает любые бумаги. Если кто и прочтёт твою — он.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "zoya_told_notary"
+     },
+     {
+      "type": "flag",
+      "key": "notary_known"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо, Зоя.",
+      "next": "bar"
+     }
+    ]
+   },
+   "courier": {
+    "text": "Зоя на миг перестаёт тереть кружку. — Сын у меня, Сенька. Гонцом бегает, письма носит. Три дня как ушёл — и нет. На тракте всякое бывает, но он шустрый. — Она сжимает тряпку. — Найдёшь — не обижу.",
+    "options": [
+     {
+      "text": "Найду его.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "courier_asked"
+       },
+       {
+        "type": "quest",
+        "quest": "courier",
+        "stage": "asked"
+       }
+      ],
+      "next": "courier_yes"
+     },
+     {
+      "text": "Не моё дело.",
+      "next": "bar"
+     }
+    ]
+   },
+   "courier_yes": {
+    "text": "— Лука-картограф в углу видел его последним, спроси. И следы от ворот ещё свежие, если умеешь читать землю.",
+    "options": [
+     {
+      "text": "Займусь.",
+      "next": "bar"
+     }
+    ]
+   },
+   "courier_hidden": {
+    "text": "Зоя закрывает глаза. — Живой… У Прокопа за частоколом его никто не достанет. — Она выкладывает на стойку тридцать капель. — Бери. И запомни: в «Сухой глотке» ты теперь свой.",
+    "effects": [
+     {
+      "type": "caps",
+      "amount": 30
+     },
+     {
+      "type": "flag",
+      "key": "courier_paid"
+     },
+     {
+      "type": "flag",
+      "key": "zoya_friend"
+     },
+     {
+      "type": "quest",
+      "quest": "courier",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо.",
+      "next": "bar"
+     }
+    ]
+   },
+   "courier_trust": {
+    "text": "— У Треста… — Зоя кривится. — Ну хоть живой. Мытный хоть и зануда, но своих не сдаёт. — Она кладёт пятнадцать капель. — Держи.",
+    "effects": [
+     {
+      "type": "caps",
+      "amount": 15
+     },
+     {
+      "type": "flag",
+      "key": "courier_paid"
+     },
+     {
+      "type": "quest",
+      "quest": "courier",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо.",
+      "next": "bar"
+     }
+    ]
+   },
+   "debt": {
+    "text": "— Есть. Лука Кривоногий, картограф, пропил у меня сорок капель и платить не думает. Выбьешь — десятка твоя.",
+    "options": [
+     {
+      "text": "Выбью.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "debt_asked"
+       },
+       {
+        "type": "quest",
+        "quest": "debt",
+        "stage": "asked"
+       }
+      ],
+      "next": "bar"
+     },
+     {
+      "text": "Не люблю выбивать долги.",
+      "next": "bar"
+     }
+    ]
+   },
+   "debt_paid": {
+    "text": "Зоя пересчитывает капли и пододвигает десять обратно. — Честно. Не ожидала.",
+    "effects": [
+     {
+      "type": "caps",
+      "amount": -40
+     },
+     {
+      "type": "caps",
+      "amount": 10
+     },
+     {
+      "type": "flag",
+      "key": "debt_done"
+     },
+     {
+      "type": "quest",
+      "quest": "debt",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "Бывает.",
+      "next": "bar"
+     }
+    ]
+   },
+   "debt_forgiven": {
+    "text": "— Карту он тебе отдал… ради неё, значит, и пил. — Зоя долго молчит. — Ладно. Пусть подавится. Но ты мне теперь не нравишься.",
+    "options": [
+     {
+      "text": "Переживу.",
+      "next": "bar"
+     }
+    ]
+   },
+   "debt_refused": {
+    "text": "— Долг есть долг. Сорок капель — и точка.",
+    "options": [
+     {
+      "text": "Ладно.",
+      "next": "bar"
+     }
+    ]
+   },
+   "gvozd_out": {
+    "text": "Зоя бледнеет, потом краснеет. — В моём трактире?! — Она выходит из-за стойки, и Гвоздь, увидев её лицо, собирает кассу раньше, чем она дойдёт. — Вон. И чтоб я тебя на тракте не видела. — Бугай садится на пол ринга, держась за голову.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "gvozd_out"
+     },
+     {
+      "type": "flag",
+      "key": "bugai_clean"
+     },
+     {
+      "type": "inc",
+      "key": "rep_circle",
+      "by": 3
+     },
+     {
+      "type": "quest",
+      "quest": "ring",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "bar"
+     }
+    ]
+   },
+   "guards": {
+    "text": "— Люди с оружием есть: двое, что охраняют караваны, сидят без дела. Шестьдесят капель — и они три дня твои.",
+    "options": [
+     {
+      "text": "Держи шестьдесят.",
+      "if": [
+       {
+        "caps": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -60
+       },
+       {
+        "type": "flag",
+        "key": "raid_guards"
+       }
+      ],
+      "next": "guards_ok"
+     },
+     {
+      "text": "Дорого.",
+      "next": "bar"
+     }
+    ]
+   },
+   "guards_ok": {
+    "text": "— Утром будут в Колючке. — Зоя свистит в угол, и двое в пыльниках поднимаются из-за стола.",
+    "options": [
+     {
+      "text": "Хорошо.",
+      "next": "bar"
+     }
+    ]
+   }
+  }
+ },
+ "counter": {
+  "speaker": "Стойка",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Тяжёлая стойка из досок разбитого вагона. Кружки, кувшин с брагой. Под стойкой — ящик, на который Зоя то и дело косится.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zoya_stash": {
+  "speaker": "Ящик под стойкой",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "stash_taken"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Ящик под стойкой, с висячим замком. Зоя стоит спиной — наливает кому-то в дальнем конце.",
+    "options": [
+     {
+      "text": "Тихо заглянуть, пока она не видит.",
+      "check": {
+       "skill": "sneak",
+       "mod": -10,
+       "pass": "found",
+       "fail": "caught",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "zoya_suspicious"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Вскрыть замок.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -10,
+       "pass": "found",
+       "fail": "jammed",
+       "passEffects": [
+        {
+         "type": "karma",
+         "amount": -1
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Под бутылками — перевязанная пачка чужих писем с сорванными печатями. Сверху — кусок красного сургуча с оттиском: рука, держащая печать. Та же рука, что на тубусе. Зоя продаёт кому-то чужие письма.",
+    "options": [
+     {
+      "text": "Забрать сургуч и закрыть ящик.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stash_taken"
+       },
+       {
+        "type": "flag",
+        "key": "seal_mark_2"
+       },
+       {
+        "type": "flag",
+        "key": "zoya_sealwax_known"
+       },
+       {
+        "type": "log",
+        "text": "Сургучная метка: вторая."
+       }
+      ]
+     }
+    ]
+   },
+   "caught": {
+    "text": "— Руки! — Зоя оборачивается раньше, чем крышка поднимается. — В моём трактире по ящикам не лазят.",
+    "options": [
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "jammed": {
+    "text": "Замок не поддаётся, а Зоя уже поворачивается.",
+    "options": [
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Ящик заперт. Внутри, под бутылками, чужие письма.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "luka": {
+  "speaker": "Лука Кривоногий",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "debt_asked"
+     },
+     {
+      "notFlag": "debt"
+     }
+    ],
+    "node": "debt"
+   },
+   {
+    "node": "drunk"
+   }
+  ],
+  "nodes": {
+   "drunk": {
+    "text": "Седой человек водит пальцем по мокрому столу — рисует что-то похожее на реку. — Была тут вода. Вот тут. А вот тут — мост. Я всё помню, я картограф…",
+    "options": [
+     {
+      "text": "Не видел гонца Сеньку, сына Зои?",
+      "if": [
+       {
+        "flag": "courier_asked"
+       },
+       {
+        "notFlag": "senka_gone"
+       }
+      ],
+      "next": "senka"
+     },
+     {
+      "text": "Что за карты ты рисуешь?",
+      "next": "maps"
+     },
+     {
+      "text": "Ты слышал про револьвер «Ласточку»?",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "luka_known"
+       }
+      ],
+      "next": "lastochka"
+     },
+     {
+      "text": "Собери «Ласточку» сам. Детали у меня.",
+      "if": [
+       {
+        "flag": "luka_known"
+       },
+       {
+        "notFlag": "lastochka_done"
+       },
+       {
+        "item": "pickup_barrel"
+       },
+       {
+        "item": "drip_spring"
+       },
+       {
+        "item": "leader_hide"
+       }
+      ],
+      "next": "build"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "senka": {
+    "text": "Лука трезвеет на глазах. — Видел. Бежал к развалинам на южной окраине, оглядывался. За ним никто не шёл, но он всё равно оглядывался. Не говори Зое, что я сказал: она мне и так не наливает.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "luka_hint"
+     }
+    ],
+    "options": [
+     {
+      "text": "Не скажу.",
+      "next": "drunk"
+     }
+    ]
+   },
+   "maps": {
+    "text": "— Тропы. Колодцы. Где вода была и где будет. — Он ухмыляется. — Кое-какие тропы Трест бы купил за золото. Да не продам.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "drunk"
+     }
+    ]
+   },
+   "debt": {
+    "text": "— Сорок капель? — Лука хлопает себя по пустым карманам. — Нету. Есть только… — Его рука ложится на засаленный листок за пазухой. — Нет, это не отдам. Это тропа водоносов в Запруду, мимо ворот. Я по ней десять лет ходил.",
+    "options": [
+     {
+      "text": "Выворачивай карманы, картограф.",
+      "check": {
+       "attr": "str",
+       "mod": 0,
+       "pass": "shaken",
+       "fail": "luka_hold",
+       "passEffects": [
+        {
+         "type": "caps",
+         "amount": 40
+        },
+        {
+         "type": "flag",
+         "key": "debt",
+         "value": "shaken"
+        },
+        {
+         "type": "karma",
+         "amount": -1
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отдай карту — а с Зоей я договорюсь.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "map_deal",
+       "fail": "luka_no",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "water_path_map"
+        },
+        {
+         "type": "flag",
+         "key": "debt",
+         "value": "map"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Я заплачу за тебя Зое.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "water_path_map"
+       },
+       {
+        "type": "flag",
+        "key": "debt",
+        "value": "paid"
+       }
+      ],
+      "next": "paid"
+     },
+     {
+      "text": "Потом."
+     }
+    ]
+   },
+   "shaken": {
+    "text": "Лука вытряхивает из сапога заначку — ровно сорок капель — и смотрит на вас с ненавистью. — На. Подавись. — Карту он прижимает к груди.",
+    "options": [
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "luka_hold": {
+    "text": "Лука оказывается крепче, чем кажется, и вцепляется в лавку. — Нету! Бей — не будет!",
+    "options": [
+     {
+      "text": "Ладно."
+     }
+    ]
+   },
+   "map_deal": {
+    "text": "Лука долго смотрит на листок, потом протягивает его. — Бери. Мне туда уже не дойти. Только скажи Зое, что я… что мы в расчёте.",
+    "options": [
+     {
+      "text": "Скажу."
+     }
+    ]
+   },
+   "luka_no": {
+    "text": "— Карту? Ещё чего. — Лука прячет листок глубже.",
+    "options": [
+     {
+      "text": "Ладно."
+     }
+    ]
+   },
+   "paid": {
+    "text": "Лука не верит. Потом достаёт листок и суёт вам в руки. — Держи. Никто за меня никогда не платил. Тропа водоносов в Запруду — мимо ворот, по старому водоводу. Пригодится.",
+    "options": [
+     {
+      "text": "Спасибо."
+     }
+    ]
+   },
+   "lastochka": {
+    "text": "Лука перестаёт рисовать реку. — «Ласточка»? Кто тебе сказал это слово? — Трезвеет на глазах. — Я её придумал. В Запруде, в оружейной Треста. Одиннадцать лет назад. Когда я сбежал, у меня украли ящик с инструментом, а в нём — чертёж. — Он смотрит на свои трясущиеся руки. — А Ремень, значит… Ну да. Рука у него крепкая. Моя уже нет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "luka_known"
+     },
+     {
+      "type": "quest",
+      "quest": "luka_drawing",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "Руки можно унять.",
+      "next": "luka_hands"
+     },
+     {
+      "text": "Прости, Лука.",
+      "next": "drunk"
+     }
+    ]
+   },
+   "luka_hands": {
+    "text": "— Можно. Если есть ради чего. — Лука отодвигает кружку. — Принеси детали — ствол, пружину, шкуру вожака. Я соберу «Ласточку» лучше, чем по бумажке: я помню, чего в ней нет.",
+    "options": [
+     {
+      "text": "Договорились.",
+      "next": "drunk"
+     }
+    ]
+   },
+   "build": {
+    "text": "Лука два дня не пьёт. Руки у него дрожат только первые полдня. На третье утро он выходит из-за стойки с револьвером: длинный тонкий ствол, рукоять из тёмной шкуры, на ней выцарапано «Л. К.». — Держи. Спуск мягкий, как мысль. — Потом он берёт у Зои огарок и жжёт что-то над кружкой. — Вот и всё. Больше «Ласточек» не будет — ни у Треста, ни у Ремня. Только твоя.",
+    "effects": [
+     {
+      "type": "take",
+      "item": "pickup_barrel"
+     },
+     {
+      "type": "take",
+      "item": "drip_spring"
+     },
+     {
+      "type": "take",
+      "item": "leader_hide"
+     },
+     {
+      "type": "flag",
+      "key": "luka",
+      "value": "sober"
+     },
+     {
+      "type": "give",
+      "item": "lastochka_luka"
+     },
+     {
+      "type": "flag",
+      "key": "lastochka_done"
+     },
+     {
+      "type": "quest",
+      "quest": "luka_drawing",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо, Лука."
+     }
+    ]
+   }
+  }
+ },
+ "gvozd": {
+  "speaker": "Гвоздь",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "ring_result"
+     },
+     {
+      "notFlag": "ring_after"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "ring_done"
+     }
+    ],
+    "node": "closed"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Вертлявый человек в красной рубахе подбрасывает монету. — Ставки на Бугая! Кто против него выйдет — сотня капель, если устоит. Выход — десять капель, чтоб не шлялись зря.",
+    "options": [
+     {
+      "text": "Выйти на ринг (10 капель).",
+      "if": [
+       {
+        "caps": 10
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -10
+       },
+       {
+        "type": "quest",
+        "quest": "ring",
+        "stage": "bet"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Поставить на себя двадцать и выйти (30 капель).",
+      "if": [
+       {
+        "caps": 30
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -30
+       },
+       {
+        "type": "flag",
+        "key": "ring_bet_self"
+       },
+       {
+        "type": "quest",
+        "quest": "ring",
+        "stage": "bet"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Что у Бугая с глазами? Зрачки во весь глаз.",
+      "if": [
+       {
+        "skill": "medic",
+        "gte": 40
+       },
+       {
+        "notFlag": "mirage_seen"
+       }
+      ],
+      "next": "mirage"
+     },
+     {
+      "text": "Бугай шатается и потеет. Что ты ему дал?",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "mirage_seen"
+       }
+      ],
+      "next": "mirage"
+     },
+     {
+      "text": "Отменяй бой, или все узнают про «Мираж».",
+      "if": [
+       {
+        "flag": "mirage_seen"
+       },
+       {
+        "notFlag": "bugai_clean"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "stopped",
+       "fail": "gvozd_laughs",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bugai_clean"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Не сегодня."
+     }
+    ]
+   },
+   "mirage": {
+    "text": "Гвоздь перестаёт улыбаться. — Бодрящее. Все пьют. — Бугай за его спиной трясёт головой, как бык, которого донимают мухи. Зрачки во всю радужку, по губам — белый налёт. «Мираж». Под ним не чувствуют боли — пока сердце не встанет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "mirage_seen"
+     },
+     {
+      "type": "quest",
+      "quest": "ring",
+      "stage": "mirage"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "stopped": {
+    "text": "Гвоздь сплёвывает. — Ладно. Бугаю сегодня воды, и никакой бодрости. Но ставки я не верну. — Бугай садится на канаты и держится за грудь.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "gvozd_laughs": {
+    "text": "— Кто тебе поверит? Трактирщица? Мытный? — Гвоздь смеётся. — Выходи на ринг или не мешай.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Разминайся. Бугай, к бою! — Толпа у ринга подбирается ближе. Только кулаки: ни ножей, ни бинтов.",
+    "options": [
+     {
+      "text": "На ринг.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ring_fight"
+       }
+      ]
+     }
+    ]
+   },
+   "after": {
+    "text": "Толпа у ринга гудит.",
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "won"
+       },
+       {
+        "flag": "bugai_clean"
+       }
+      ],
+      "next": "won"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "won"
+       },
+       {
+        "notFlag": "bugai_clean"
+       }
+      ],
+      "next": "dying"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "lost"
+       }
+      ],
+      "next": "lost"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "left"
+       }
+      ],
+      "next": "lost"
+     }
+    ]
+   },
+   "won": {
+    "text": "Бугай поднимается, трясёт головой и хлопает вас по плечу. Гвоздь, морщась, отсчитывает сотню. — Твоя взяла.",
+    "options": [
+     {
+      "text": "Забрать выигрыш.",
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 100
+       },
+       {
+        "type": "flag",
+        "key": "ring_after"
+       },
+       {
+        "type": "flag",
+        "key": "ring_done"
+       },
+       {
+        "type": "quest",
+        "quest": "ring",
+        "stage": "done"
+       }
+      ],
+      "next": "closed"
+     },
+     {
+      "text": "Забрать выигрыш и ставку.",
+      "if": [
+       {
+        "flag": "ring_bet_self"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 160
+       },
+       {
+        "type": "flag",
+        "key": "ring_after"
+       },
+       {
+        "type": "flag",
+        "key": "ring_done"
+       },
+       {
+        "type": "quest",
+        "quest": "ring",
+        "stage": "done"
+       }
+      ],
+      "next": "closed"
+     }
+    ]
+   },
+   "dying": {
+    "text": "Бугай не встаёт. Пена на губах, пальцы скребут доски. «Мираж» выжег его изнутри. Гвоздь уже прячет кассу.",
+    "options": [
+     {
+      "text": "Откачать его: на бок, рот открыть, воды.",
+      "check": {
+       "skill": "medic",
+       "mod": -10,
+       "pass": "saved",
+       "fail": "died",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bugai_clean"
+        },
+        {
+         "type": "flag",
+         "key": "bugai_saved"
+        },
+        {
+         "type": "karma",
+         "amount": 1
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "bugai_dead"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Звать на помощь.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bugai_dead"
+       }
+      ],
+      "next": "died"
+     }
+    ]
+   },
+   "saved": {
+    "text": "Долгую минуту ничего не происходит. Потом Бугай хрипит и открывает глаза. — Больше… не буду пить, что он даёт. — Гвоздь исчезает за дверью, забыв выигрыш на стойке.",
+    "options": [
+     {
+      "text": "Забрать выигрыш.",
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 100
+       },
+       {
+        "type": "flag",
+        "key": "ring_after"
+       },
+       {
+        "type": "flag",
+        "key": "ring_done"
+       },
+       {
+        "type": "flag",
+        "key": "gvozd_out"
+       },
+       {
+        "type": "quest",
+        "quest": "ring",
+        "stage": "done"
+       }
+      ],
+      "next": "closed"
+     }
+    ]
+   },
+   "died": {
+    "text": "Бугай затихает. Зоя закрывает ему глаза. Гвоздь бросает на стойку сотню капель — плату за молчание — и уходит, не оглядываясь.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 100
+       },
+       {
+        "type": "flag",
+        "key": "ring_after"
+       },
+       {
+        "type": "flag",
+        "key": "ring_done"
+       },
+       {
+        "type": "flag",
+        "key": "gvozd_out"
+       },
+       {
+        "type": "karma",
+        "amount": -1
+       },
+       {
+        "type": "quest",
+        "quest": "ring",
+        "stage": "done"
+       }
+      ],
+      "next": "closed"
+     }
+    ]
+   },
+   "lost": {
+    "text": "— Не твой день. — Гвоздь пересчитывает ставки. — Приходи, когда очухаешься.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ring_after"
+       },
+       {
+        "type": "flag",
+        "key": "ring_done"
+       }
+      ],
+      "next": "closed"
+     }
+    ]
+   },
+   "closed": {
+    "text": "— На сегодня боёв нет. Ринг отдыхает.",
+    "options": [
+     {
+      "text": "Ясно."
+     }
+    ]
+   }
+  }
+ },
+ "bugai": {
+  "speaker": "Бугай",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "bugai_saved"
+     },
+     {
+      "notFlag": "bugai_clean"
+     }
+    ],
+    "node": "saved"
+   },
+   {
+    "if": [
+     {
+      "flag": "bugai_clean"
+     }
+    ],
+    "node": "clean"
+   },
+   {
+    "node": "drugged"
+   }
+  ],
+  "nodes": {
+   "drugged": {
+    "text": "Громадный человек мнёт кулаки и трясёт головой. — Бьёшь ты или тебя? — Глаза у него странно блестят.",
+    "options": [
+     {
+      "text": "Ни то, ни другое."
+     }
+    ]
+   },
+   "clean": {
+    "text": "— Спасибо… что голова ясная. — Бугай тяжело садится на канаты. — Если кому в Колючке нужен кулак — я пойду.",
+    "options": [
+     {
+      "text": "Кулаки у тебя тяжёлые.",
+      "if": [
+       {
+        "flag": "ring_done"
+       },
+       {
+        "notFlag": "knuckles_given"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "bugai_knuckles"
+       },
+       {
+        "type": "flag",
+        "key": "knuckles_given"
+       }
+      ],
+      "next": "knuckles"
+     },
+     {
+      "text": "Держись."
+     }
+    ]
+   },
+   "saved": {
+    "text": "Бугай сидит на канатах, серый, как пепел, и держит кружку воды двумя руками. — Сердце ещё стучит. Твоими молитвами. — Он смеётся и тут же морщится.",
+    "options": [
+     {
+      "text": "Кулаки у тебя тяжёлые.",
+      "if": [
+       {
+        "flag": "ring_done"
+       },
+       {
+        "notFlag": "knuckles_given"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "bugai_knuckles"
+       },
+       {
+        "type": "flag",
+        "key": "knuckles_given"
+       }
+      ],
+      "next": "knuckles"
+     },
+     {
+      "text": "Держись."
+     }
+    ]
+   },
+   "knuckles": {
+    "text": "Бугай стаскивает с пальцев тяжёлый кастет, стёртый о чужие скулы до блеска. — Двенадцать лет носил. Держи. Мне бы теперь не драться. Я теперь, может, в Колючку пойду — там кулак нужен, но не за деньги.",
+    "options": [
+     {
+      "text": "Спасибо, Бугай."
+     }
+    ]
+   }
+  }
+ },
+ "remen": {
+  "speaker": "Оружейник Ремень",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Бородач в кожаном фартуке не отрывается от затвора. — Патроны, бинты, колючие ловушки. Чиню — за отдельную плату.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "remen"
+       }
+      ]
+     },
+     {
+      "text": "Что слышно?",
+      "next": "news"
+     },
+     {
+      "text": "Сделаешь что-нибудь особое? Не с прилавка.",
+      "if": [
+       {
+        "notFlag": "luka_order"
+       }
+      ],
+      "next": "lastochka"
+     },
+     {
+      "text": "Про «Ласточку»…",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "lastochka_done"
+       }
+      ],
+      "next": "order"
+     },
+     {
+      "text": "[Красноречие] Кто носит тебе медь с опор?",
+      "if": [
+       {
+        "flag": "copper_asked"
+       },
+       {
+        "notFlag": "copper_known"
+       },
+       {
+        "notFlag": "remen_copper_failed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "remen_copper",
+       "fail": "remen_copper_no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "copper_known"
+        },
+        {
+         "type": "quest",
+         "quest": "copper",
+         "stage": "truth"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "remen_copper_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Красноречие] Бери у детей лом из развалин подстанции, а не с опор. И плати честно.",
+      "if": [
+       {
+        "flag": "copper_known"
+       },
+       {
+        "notFlag": "copper"
+       },
+       {
+        "notFlag": "copper_deal_failed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "copper_deal",
+       "fail": "copper_nodeal",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "copper",
+         "value": "deal"
+        },
+        {
+         "type": "inc",
+         "key": "rep_circle",
+         "by": 2
+        },
+        {
+         "type": "quest",
+         "quest": "copper",
+         "stage": "done"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "copper_deal_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "news": {
+    "text": "— Сухари у Колючки. Кактусники скупают у меня колючие ловушки. Их на тропе ставят — ноги в клочья. Мудрёная штука: хлам да живица, на верстаке соберёшь, если руки есть.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "hi"
+     }
+    ]
+   },
+   "lastochka": {
+    "text": "Ремень вытирает руки о фартук и достаёт из-под прилавка свёрнутый в трубку чертёж. — «Ласточка». Револьвер лёгкий, как мысль: три движения на выстрел там, где у других четыре. Соберу. Но нужны три вещи, которых у меня нет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "luka_order"
+     },
+     {
+      "type": "quest",
+      "quest": "luka_drawing",
+      "stage": "order"
+     }
+    ],
+    "options": [
+     {
+      "text": "Какие?",
+      "next": "parts"
+     }
+    ]
+   },
+   "parts": {
+    "text": "— Ствол: труба ровная, заводская, как в раме старого пикапа — у Ржавого колодца такой лежит. Пружина из капельника: в Колючке старый кран меняли, пусть Прокоп отдаст. И шкура вожака шакалов на рукоять, чтоб не скользила в поту. Принесёшь — сорок капель за работу.",
+    "options": [
+     {
+      "text": "Детали у меня. Собирай.",
+      "if": [
+       {
+        "item": "pickup_barrel"
+       },
+       {
+        "item": "drip_spring"
+       },
+       {
+        "item": "leader_hide"
+       },
+       {
+        "caps": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "take",
+        "item": "drip_spring"
+       },
+       {
+        "type": "take",
+        "item": "leader_hide"
+       },
+       {
+        "type": "caps",
+        "amount": -40
+       },
+       {
+        "type": "give",
+        "item": "lastochka"
+       },
+       {
+        "type": "flag",
+        "key": "lastochka_done"
+       },
+       {
+        "type": "quest",
+        "quest": "luka_drawing",
+        "stage": "done"
+       }
+      ],
+      "next": "made"
+     },
+     {
+      "text": "[Восприятие] На углу чертежа вытерто клеймо. Чьё оно было?",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "remen_mark"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "remen_mark"
+       }
+      ],
+      "next": "mark"
+     },
+     {
+      "text": "[Красноречие] «Ласточку» придумал Лука. Возьми его в долю — и пусть соберёт мою.",
+      "if": [
+       {
+        "flag": "luka_known"
+       },
+       {
+        "notFlag": "luka"
+       },
+       {
+        "notFlag": "remen_refused"
+       },
+       {
+        "item": "pickup_barrel"
+       },
+       {
+        "item": "drip_spring"
+       },
+       {
+        "item": "leader_hide"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "partners",
+       "fail": "refused",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "remen_refused"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Что нужно, ещё раз?",
+      "next": "parts"
+     },
+     {
+      "text": "Позже.",
+      "next": "hi"
+     }
+    ]
+   },
+   "order": {
+    "text": "— Ну что, детали? — Ремень косится на твой мешок.",
+    "options": [
+     {
+      "text": "Детали у меня. Собирай.",
+      "if": [
+       {
+        "item": "pickup_barrel"
+       },
+       {
+        "item": "drip_spring"
+       },
+       {
+        "item": "leader_hide"
+       },
+       {
+        "caps": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "take",
+        "item": "drip_spring"
+       },
+       {
+        "type": "take",
+        "item": "leader_hide"
+       },
+       {
+        "type": "caps",
+        "amount": -40
+       },
+       {
+        "type": "give",
+        "item": "lastochka"
+       },
+       {
+        "type": "flag",
+        "key": "lastochka_done"
+       },
+       {
+        "type": "quest",
+        "quest": "luka_drawing",
+        "stage": "done"
+       }
+      ],
+      "next": "made"
+     },
+     {
+      "text": "[Восприятие] На углу чертежа вытерто клеймо. Чьё оно было?",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "remen_mark"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "remen_mark"
+       }
+      ],
+      "next": "mark"
+     },
+     {
+      "text": "[Красноречие] «Ласточку» придумал Лука. Возьми его в долю — и пусть соберёт мою.",
+      "if": [
+       {
+        "flag": "luka_known"
+       },
+       {
+        "notFlag": "luka"
+       },
+       {
+        "notFlag": "remen_refused"
+       },
+       {
+        "item": "pickup_barrel"
+       },
+       {
+        "item": "drip_spring"
+       },
+       {
+        "item": "leader_hide"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "partners",
+       "fail": "refused",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "remen_refused"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Что нужно, ещё раз?",
+      "next": "parts"
+     },
+     {
+      "text": "Позже.",
+      "next": "hi"
+     }
+    ]
+   },
+   "made": {
+    "text": "Ремень работает до темноты. Утром на прилавке лежит револьвер с длинным тонким стволом. — «Ласточка». Бери. Второй такой в Низовье нет. — Он улыбается, но на чертёж не смотрит.",
+    "options": [
+     {
+      "text": "Спасибо, Ремень."
+     }
+    ]
+   },
+   "mark": {
+    "text": "Ремень прикрывает угол чертежа ладонью. — Моё клеймо. Стёрлось. — Он врёт, и плохо: под ладонью угадывается капля в кольце — знак оружейной Треста.",
+    "options": [
+     {
+      "text": "Как скажешь.",
+      "next": "order"
+     }
+    ]
+   },
+   "partners": {
+    "text": "Ремень долго молчит, потом сворачивает чертёж. — Лука… Я купил этот лист у барахольщика за бутылку. Знал, чей он: там клеймо. Думал, старик сгорел давно. — Он зовёт Луку из «Сухой глотки». Два дня они спорят над верстаком. На третий Лука, трезвый и злой, кладёт на прилавок «Ласточку». Свою. — Эту — даром. Следующие — пополам.",
+    "effects": [
+     {
+      "type": "take",
+      "item": "pickup_barrel"
+     },
+     {
+      "type": "take",
+      "item": "drip_spring"
+     },
+     {
+      "type": "take",
+      "item": "leader_hide"
+     },
+     {
+      "type": "flag",
+      "key": "luka",
+      "value": "partners"
+     },
+     {
+      "type": "give",
+      "item": "lastochka_luka"
+     },
+     {
+      "type": "flag",
+      "key": "lastochka_done"
+     },
+     {
+      "type": "quest",
+      "quest": "luka_drawing",
+      "stage": "done"
+     },
+     {
+      "type": "karma",
+      "amount": 1
+     }
+    ],
+    "options": [
+     {
+      "text": "Держите друг друга."
+     }
+    ]
+   },
+   "refused": {
+    "text": "— Лука? Пьянь из трактира? — Ремень смеётся слишком громко. — Чертёж мой. Хочешь «Ласточку» — неси детали и сорок капель.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "order"
+     }
+    ]
+   },
+   "remen_copper": {
+    "text": "Ремень откладывает затвор. — Дети с рынка. Шнырь и Галка. Приносят медь, я плачу, как за лом. — Он пожимает плечами. — Откуда медь — не спрашивал. Прячутся в развалинах подстанции, к югу. Подать им нечем платить, вот и режут.",
+    "options": [
+     {
+      "text": "…",
+      "next": "hi"
+     }
+    ]
+   },
+   "remen_copper_no": {
+    "text": "— Медь несут все, кому не лень. — Ремень снова берётся за затвор. — Покупай или иди.",
+    "options": [
+     {
+      "text": "…",
+      "next": "hi"
+     }
+    ]
+   },
+   "copper_deal": {
+    "text": "Ремень чешет бороду. — В развалинах подстанции лома — на десять лет. И опоры стоят, и детям капли. — Он кивает. — Пусть носят оттуда. Буду платить, как взрослым. Скажешь им сам.",
+    "options": [
+     {
+      "text": "Скажу.",
+      "next": "hi"
+     }
+    ]
+   },
+   "copper_nodeal": {
+    "text": "— Я торговец, а не нянька. — Ремень машет рукой. — Где они берут медь — их дело.",
+    "options": [
+     {
+      "text": "…",
+      "next": "hi"
+     }
+    ]
+   }
+  }
+ },
+ "remen_stall": {
+  "speaker": "Прилавок оружейника",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Патроны в банках из-под консервов, ножи, затвор на тряпке. Торгует Ремень.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "nyura": {
+  "speaker": "Нюра",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "rzhavchik",
+      "eq": "home"
+     },
+     {
+      "notFlag": "nyura_thanked"
+     }
+    ],
+    "node": "thanks"
+   },
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Полная женщина раскладывает вяленое мясо. — Вода, еда, соки. Живицу из Колючки беру дороже всех, так и знай.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "nyura"
+       }
+      ]
+     },
+     {
+      "text": "Ты знала бродягу Хэнка?",
+      "if": [
+       {
+        "flag": "dog_hank"
+       },
+       {
+        "notFlag": "nyura_hank"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "nyura_hank"
+       }
+      ],
+      "next": "hank"
+     },
+     {
+      "text": "Хэнк просил передать тебе письмо.",
+      "if": [
+       {
+        "item": "hank_letter"
+       }
+      ],
+      "next": "letter"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "hank": {
+    "text": "Нюра ставит миску на прилавок, очень аккуратно. — Хэнк. — Пять лет назад мой Гордей ушёл с ним по подати и не вернулся. Нашли его у дороги, одного. А Хэнка — нет. Я подала жалобу Мытному: Трест за беглого сборщика платит. Только мне не деньги нужны. Мне нужно, чтобы он посмотрел мне в глаза.",
+    "options": [
+     {
+      "text": "Понимаю.",
+      "next": "hi"
+     }
+    ]
+   },
+   "letter": {
+    "text": "Нюра читает письмо у прилавка. Пятьдесят капель пересыпает на ладонь и долго на них смотрит. — «Я тот, кто оставил его на дороге». Пять лет. Пять лет он сидел в двух днях пути и писал это письмо.",
+    "effects": [
+     {
+      "type": "take",
+      "item": "hank_letter"
+     }
+    ],
+    "options": [
+     {
+      "text": "Ржавчик вернулся к Митяю. Это тоже от него.",
+      "if": [
+       {
+        "flag": "rzhavchik",
+        "eq": "home"
+       }
+      ],
+      "next": "forgive"
+     },
+     {
+      "text": "[Красноречие] Он не бросил — он не смог вернуться. И пять лет живёт с этим.",
+      "check": {
+       "skill": "speech",
+       "pass": "forgive",
+       "fail": "keep"
+      }
+     },
+     {
+      "text": "Решай сама.",
+      "next": "keep"
+     }
+    ]
+   },
+   "forgive": {
+    "text": "Нюра прячет капли в фартук. — Митяю сапоги нужны. — Она молчит. — Передай Хэнку: прощаю. Не за него — за Гордея. Гордей бы простил, он всех прощал. И пусть придёт сам, когда сможет. Посмотрит мне в глаза.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_forgiven"
+     },
+     {
+      "type": "quest",
+      "quest": "collector_dog",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "Передам."
+     }
+    ]
+   },
+   "keep": {
+    "text": "— Деньги возьму. Митяю сапоги нужны. — Нюра складывает письмо и суёт под прилавок. — А прощать — не мне, а Гордею. Пусть Хэнк у него и спрашивает.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_unforgiven"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "thanks": {
+    "text": "Нюра выходит из-за прилавка и обнимает тебя, неловко, пахнет вяленым мясом и дымом. — Ржавчик. Митяй с ним третий день не расстаётся, спит у него на боку. — Она вытирает глаза. — Что у меня есть — тебе дешевле. Всегда.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "nyura_thanked"
+     },
+     {
+      "type": "flag",
+      "key": "nyura_friend"
+     }
+    ],
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "nyura"
+       }
+      ]
+     },
+     {
+      "text": "Береги их."
+     }
+    ]
+   }
+  }
+ },
+ "nyura_stall": {
+  "speaker": "Прилавок с едой",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Фляги, вяленый угорь, связки жареных ящериц. Торгует Нюра.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "mytny": {
+  "speaker": "Сержант Мытный",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "trust_outcome",
+      "eq": "fight"
+     },
+     {
+      "notFlag": "post_settled"
+     }
+    ],
+    "node": "wanted"
+   },
+   {
+    "node": "post"
+   }
+  ],
+  "nodes": {
+   "wanted": {
+    "text": "Сержант Мытный поднимает голову от книги и медленно кладёт руку на винтовку. — Стой. Лицо знакомое. Ржавый колодец, отряд инспектора Шлюза? В книге про тебя написано.",
+    "options": [
+     {
+      "text": "Обознались. Я с барж, первый раз здесь.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "passed",
+       "fail": "post_fight",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "post_settled"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Штраф — пятьдесят капель, и разошлись?",
+      "if": [
+       {
+        "caps": 50
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -50
+       },
+       {
+        "type": "flag",
+        "key": "post_settled"
+       }
+      ],
+      "next": "fined"
+     },
+     {
+      "text": "Хочешь меня взять — попробуй.",
+      "next": "post_fight"
+     }
+    ]
+   },
+   "passed": {
+    "text": "Мытный долго смотрит, потом захлопывает книгу. — Похож, да не тот. Проходи.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "fined": {
+    "text": "— Штраф так штраф. — Мытный вписывает сумму в книгу. — В следующий раз — в Запруду, в «Сухой док».",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "post_fight": {
+    "text": "Мытный вскидывает винтовку. Сборщик у поста тоже.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "post_fight"
+       }
+      ]
+     }
+    ]
+   },
+   "post": {
+    "text": "Сержант в сером пыльнике листает толстую книгу. — Налог на воду платишь? Объявление читал? Трест платит за бумагу из Ржавого колодца. Кто принесёт — будет сыт до конца дней.",
+    "options": [
+     {
+      "text": "Букмекер в «Сухой глотке» травит бойцов «Миражом».",
+      "if": [
+       {
+        "flag": "mirage_seen"
+       },
+       {
+        "notFlag": "gvozd_out"
+       }
+      ],
+      "next": "gvozd_arrest"
+     },
+     {
+      "text": "Вот кисет и нож Ерёмы. Налётчика больше нет.",
+      "if": [
+       {
+        "item": "erema_pouch"
+       },
+       {
+        "flag": "job_hunt_erema",
+        "eq": "active"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "erema_paid",
+       "fail": "erema_doubt",
+       "passEffects": [
+        {
+         "type": "take",
+         "item": "erema_pouch"
+        },
+        {
+         "type": "caps",
+         "amount": 50
+        },
+        {
+         "type": "flag",
+         "key": "job_hunt_erema",
+         "value": "closed"
+        },
+        {
+         "type": "flag",
+         "key": "erema_claimed"
+        },
+        {
+         "type": "inc",
+         "key": "rep_trust",
+         "by": 2
+        }
+       ]
+      }
+     },
+     {
+      "text": "Что за книга?",
+      "next": "book"
+     },
+     {
+      "text": "Беглый сборщик Хэнк прячется в Ржавом колодце.",
+      "if": [
+       {
+        "flag": "dog_hank"
+       },
+       {
+        "notFlag": "hank_taken"
+       },
+       {
+        "notFlag": "hank_forgiven"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 50
+       },
+       {
+        "type": "flag",
+        "key": "hank_taken"
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       },
+       {
+        "type": "inc",
+        "key": "rep_trust",
+        "by": 2
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "done"
+       }
+      ],
+      "next": "hank_turned"
+     },
+     {
+      "text": "Лука Кривоногий — беглый оружейник Треста.",
+      "if": [
+       {
+        "flag": "luka_known"
+       },
+       {
+        "notFlag": "luka"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 40
+       },
+       {
+        "type": "flag",
+        "key": "luka",
+        "value": "gone"
+       },
+       {
+        "type": "flag",
+        "key": "luka_gone"
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       },
+       {
+        "type": "inc",
+        "key": "rep_trust",
+        "by": 2
+       }
+      ],
+      "next": "luka_turned"
+     },
+     {
+      "text": "Есть работа?",
+      "if": [
+       {
+        "notFlag": "copper_asked"
+       }
+      ],
+      "next": "copper"
+     },
+     {
+      "text": "Медь с опор режут дети с рынка, Шнырь и Галка.",
+      "if": [
+       {
+        "flag": "copper_known"
+       },
+       {
+        "notFlag": "copper"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 30
+       },
+       {
+        "type": "flag",
+        "key": "copper",
+        "value": "told"
+       },
+       {
+        "type": "flag",
+        "key": "copper_kids_gone"
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       },
+       {
+        "type": "inc",
+        "key": "rep_trust",
+        "by": 2
+       },
+       {
+        "type": "quest",
+        "quest": "copper",
+        "stage": "done"
+       }
+      ],
+      "next": "copper_told"
+     },
+     {
+      "text": "[Красноречие] Ржавому колодцу нужна льгота: полподати, пока помпа не окупится.",
+      "if": [
+       {
+        "flag": "well_sealed"
+       },
+       {
+        "notFlag": "well_fate"
+       },
+       {
+        "notFlag": "seal_license_failed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "seal_license",
+       "fail": "seal_nolicense",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "well_fate",
+         "value": "licensed"
+        },
+        {
+         "type": "inc",
+         "key": "rep_trust",
+         "by": 2
+        },
+        {
+         "type": "quest",
+         "quest": "well_seal",
+         "stage": "done"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "seal_license_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Выкупить колодец Ржавого из вашей книги.",
+      "if": [
+       {
+        "flag": "well_sealed"
+       },
+       {
+        "notFlag": "well_fate"
+       }
+      ],
+      "next": "seal_price"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "gvozd_arrest": {
+    "text": "— «Мираж» в Трёх столбах? — Мытный захлопывает книгу. — Ну, Гвоздь… — Через четверть часа Гвоздя выводят из трактира со связанными руками. Кто-то в толпе запоминает ваше лицо: у «Жажды» длинные руки.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "gvozd_out"
+     },
+     {
+      "type": "flag",
+      "key": "bugai_clean"
+     },
+     {
+      "type": "flag",
+      "key": "thirst_grudge"
+     },
+     {
+      "type": "inc",
+      "key": "rep_trust",
+      "by": 3
+     },
+     {
+      "type": "quest",
+      "quest": "ring",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "erema_paid": {
+    "text": "Мытный вертит кисет. — Капля вышита… водонос, значит. Ну, налётчик и есть. — Он отсчитывает пятьдесят капель. — Трест благодарит.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "erema_doubt": {
+    "text": "— Кисет — не голова. Принеси что посерьёзнее.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "book": {
+    "text": "— Книга учёта. Кто, сколько, когда. Вода — Треста, значит, всё записано. — Мытный гладит обложку, как кошку. — Без книги — беззаконие.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "post"
+     }
+    ]
+   },
+   "hank_turned": {
+    "text": "Мытный листает книгу назад, далеко назад. — Хэнк… Жалоба вдовы Гордея, пять лет. Трест не забывает. — Отсчитывает капли, не глядя. — Пятьдесят. Завтра туда пойдут двое.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "luka_turned": {
+    "text": "— Кривоногий? Оружейник? — Мытный впервые поднимает глаза от книги. — В Запруде за него давно назначено. Сорок. — Он кивает сборщику, и тот уходит в сторону «Сухой глотки». К вечеру стол Луки пуст.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "copper": {
+    "text": "Мытный захлопывает книгу. — Работа. Кто-то ночью режет медь с опор. Одна уже стонет на ветру. Упадёт — и будет не Три столба, а два, а кто пойдёт на перекрёсток с двумя столбами? — Он не смеётся. — Найдёшь вора — тридцать капель.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "copper_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "copper",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Найду.",
+      "next": "post"
+     }
+    ]
+   },
+   "copper_told": {
+    "text": "— Дети. — Мытный записывает имена в книгу, не поднимая глаз. — Семьям штраф: неделя без воды. Опоры целы — это главное. — Тридцать капель ложатся на стол.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "seal_license": {
+    "text": "Мытный долго листает книгу. — Помпу чинил чужак, Трест в неё не вложил ни капли… Ладно. Льгота: полподати, пока не окупится. — Он пишет строчку и ставит печать. — Скажешь Марте, пусть не радуется: льготы кончаются.",
+    "options": [
+     {
+      "text": "Спасибо, сержант.",
+      "next": "post"
+     }
+    ]
+   },
+   "seal_nolicense": {
+    "text": "— Льготы у Треста для тех, кто платит вовремя. — Мытный не поднимает глаз. — Разговор окончен.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   },
+   "seal_price": {
+    "text": "— Выкуп? — Мытный впервые смотрит с интересом. — Сто капель, и колодец вычеркнут из книги. Пломбу сниму сам, при свидетелях.",
+    "options": [
+     {
+      "text": "Держи сто.",
+      "if": [
+       {
+        "caps": 100
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -100
+       },
+       {
+        "type": "flag",
+        "key": "well_fate",
+        "value": "bought"
+       },
+       {
+        "type": "flag",
+        "key": "well_sealed",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "well_seal",
+        "stage": "done"
+       }
+      ],
+      "next": "seal_bought"
+     },
+     {
+      "text": "Дорого.",
+      "next": "post"
+     }
+    ]
+   },
+   "seal_bought": {
+    "text": "Мытный пересчитывает капли, вычёркивает строку и отдаёт квитанцию. — Колодец Ржавого — ничей. Для Треста — ничей. Смотри, чтобы и для «Жажды» остался ничьим.",
+    "options": [
+     {
+      "text": "…",
+      "next": "post"
+     }
+    ]
+   }
+  }
+ },
+ "collector_post": {
+  "speaker": "Сборщик Треста",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Проходи, не задерживайся. Налоги — к сержанту.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "notice": {
+  "speaker": "Объявление Треста",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "trust_outcome",
+      "eq": "surrender"
+     }
+    ],
+    "node": "surrender"
+   },
+   {
+    "node": "read"
+   }
+  ],
+  "nodes": {
+   "read": {
+    "text": "«ТРЕСТ ВОДОСНАБЖЕНИЯ. Награда 200 капель за бумагу в латунном тубусе, вынесенную из Ржавого колодца. Спрашивать сержанта Мытного. Укрывательство карается по закону о воде». Внизу — оттиск счётчика.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "surrender": {
+    "text": "«ТРЕСТ ВОДОСНАБЖЕНИЯ. Тубус из Ржавого колодца изъят. Разыскивается беглый сборщик по прозвищу Хэнк. Награда — 50 капель». Бумага свежая.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "sign_pillars": {
+  "speaker": "Указатель",
+  "entry": [
+   {
+    "node": "read"
+   }
+  ],
+  "nodes": {
+   "read": {
+    "text": "Три стрелки на ржавой трубе. «Ржавый колодец» — на запад. «Колючка, Запруда» — на север. «Баржа, Соль» — на восток. На последней кто-то нацарапал: «не езди».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "pisar": {
+  "speaker": "Писарь",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "trust_outcome",
+      "eq": "surrender"
+     }
+    ],
+    "node": "intro_hank"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Сухой человек в чёрном, с кожаной сумкой, полной бумаг. Пальцы в чернилах. — Позвольте представиться: писарь. Бумага без печати — просто бумага, а вы, вижу, несёте что-то важное. Латунь, довоенный сургуч… Позвольте заверить. Пять капель, и печать моя будет не хуже нотариальной.",
+    "options": [
+     {
+      "text": "Чернила на твоей «довоенной» печати ещё свежие.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       }
+      ],
+      "next": "exposed"
+     },
+     {
+      "text": "Кто тебя послал, писарь?",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "exposed",
+       "fail": "dodge"
+      }
+     },
+     {
+      "text": "Держи, заверяй.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "next": "copied"
+     },
+     {
+      "text": "Подумаю.",
+      "next": "wait"
+     },
+     {
+      "text": "Проваливай, крыса.",
+      "next": "threat"
+     }
+    ]
+   },
+   "intro_hank": {
+    "text": "Сухой человек в чёрном, с кожаной сумкой, полной бумаг. — Писарь, к вашим услугам. Слышал, тубус из Ржавого колодца уже у Треста. Жаль… А где же тот бродяга, Хэнк? Трест за него платит, но я плачу больше.",
+    "options": [
+     {
+      "text": "Чернила на твоей печати ещё свежие. На кого работаешь?",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       }
+      ],
+      "next": "exposed"
+     },
+     {
+      "text": "Кто тебя послал, писарь?",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "exposed",
+       "fail": "dodge"
+      }
+     },
+     {
+      "text": "Хэнк ушёл на восток, к Барже.",
+      "next": "lie_hank"
+     },
+     {
+      "text": "Хэнк сидит в Ржавом колодце. Плати.",
+      "next": "sold_hank"
+     },
+     {
+      "text": "Подумаю.",
+      "next": "wait"
+     },
+     {
+      "text": "Проваливай, крыса.",
+      "next": "threat"
+     }
+    ]
+   },
+   "dodge": {
+    "text": "— Меня? Нужда, как и всех. — Писарь улыбается одними губами. — Подумайте над моим предложением.",
+    "options": [
+     {
+      "text": "…",
+      "next": "wait"
+     }
+    ]
+   },
+   "wait": {
+    "text": "Писарь кланяется и отходит к доске наград, будто читает объявления. Но то и дело посматривает на вас. Если уйти и понаблюдать, можно узнать, куда он носит свои бумаги.",
+    "options": [
+     {
+      "text": "(Уйти и тихо проследить за ним.)",
+      "if": [
+       {
+        "notFlag": "scribe_warned"
+       }
+      ],
+      "check": {
+       "skill": "sneak",
+       "mod": -10,
+       "pass": "followed",
+       "fail": "spotted",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "scribe_outcome",
+         "value": "followed"
+        },
+        {
+         "type": "flag",
+         "key": "scribe_gone"
+        },
+        {
+         "type": "quest",
+         "quest": "tract",
+         "stage": "prokop"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "scribe_warned"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "spotted": {
+    "text": "Писарь оборачивается на третьем шаге. — Любопытство — дурная привычка на тракте. — Он возвращается к доске и больше не сводит с вас глаз.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "followed": {
+    "text": "Вы уходите к рядам, а потом тенью — за Писарем. Он петляет, заходит в развалины на южной окраине, суёт свёрток под кирпичи и уходит на север по тракту. Больше его у перекрёстка не видели.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "exposed": {
+    "text": "Писарь перестаёт улыбаться. Долго смотрит, как на неудачную строку. — Я служу тем, кто держит печать. Этого довольно. — Он поправляет сумку. — Такую бумагу прочтёт только один человек — Нотариус в Запруде, в Нижнем городе. Идите к нему. Он будет ждать. Мы все… будем ждать. — Писарь уходит на север и не оглядывается.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "scribe_outcome",
+      "value": "exposed"
+     },
+     {
+      "type": "flag",
+      "key": "scribe_gone"
+     },
+     {
+      "type": "flag",
+      "key": "notary_known"
+     },
+     {
+      "type": "quest",
+      "quest": "tract",
+      "stage": "prokop"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "copied": {
+    "text": "Писарь берёт тубус бережно, как младенца, отходит к столу, возится с воском и лампой. Через четверть часа тубус снова у вас: цел, и сбоку — свежая печать Писаря. — Нотариус в Запруде подтвердит мою печать, — говорит он и уходит на север.",
+    "effects": [
+     {
+      "type": "take",
+      "item": "tube"
+     },
+     {
+      "type": "give",
+      "item": "tube_copy"
+     },
+     {
+      "type": "flag",
+      "key": "mandate_copy"
+     },
+     {
+      "type": "flag",
+      "key": "scribe_outcome",
+      "value": "copied"
+     },
+     {
+      "type": "flag",
+      "key": "scribe_gone"
+     },
+     {
+      "type": "flag",
+      "key": "notary_known"
+     },
+     {
+      "type": "quest",
+      "quest": "tract",
+      "stage": "prokop"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "lie_hank": {
+    "text": "— К Барже… — Писарь что-то записывает. — Благодарю. — Не верит ни на каплю.",
+    "options": [
+     {
+      "text": "…",
+      "next": "wait"
+     }
+    ]
+   },
+   "sold_hank": {
+    "text": "Писарь отсчитывает сорок капель. — Прекрасно. — И добавляет, будто между делом: — Трест вам, конечно, подсунул копию, а не расписку. Проверить, что там за бумага, может только Нотариус в Запруде. — Он уходит на юг, к Ржавому колодцу.",
+    "effects": [
+     {
+      "type": "caps",
+      "amount": 40
+     },
+     {
+      "type": "karma",
+      "amount": -2
+     },
+     {
+      "type": "flag",
+      "key": "hank_sold"
+     },
+     {
+      "type": "flag",
+      "key": "scribe_outcome",
+      "value": "sold"
+     },
+     {
+      "type": "flag",
+      "key": "scribe_gone"
+     },
+     {
+      "type": "flag",
+      "key": "notary_known"
+     },
+     {
+      "type": "quest",
+      "quest": "tract",
+      "stage": "prokop"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "threat": {
+    "text": "— Как грубо. — Писарь не двигается с места, только рука скользит под полу пыльника.",
+    "options": [
+     {
+      "text": "Напасть на него.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pisar_fight"
+       },
+       {
+        "type": "karma",
+        "amount": -1
+       }
+      ]
+     },
+     {
+      "text": "Уйти."
+     }
+    ]
+   }
+  }
+ },
+ "scribe_cache": {
+  "speaker": "Груда кирпичей",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "cache_taken"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "if": [
+     {
+      "flag": "scribe_outcome",
+      "eq": "followed"
+     }
+    ],
+    "node": "found"
+   },
+   {
+    "node": "bricks"
+   }
+  ],
+  "nodes": {
+   "bricks": {
+    "text": "Груда битого кирпича у развалин.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Под кирпичами — промасленный свёрток. Донесение, написанное мелким писарским почерком: «Оттиск наблюдает: предъявитель идёт по тракту. Бумага цела. Направить к Нотариусу, Запруда». Под текстом — сургучный оттиск руки.",
+    "options": [
+     {
+      "text": "Забрать донесение.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "scribe_report"
+       },
+       {
+        "type": "flag",
+        "key": "cache_taken"
+       },
+       {
+        "type": "flag",
+        "key": "notary_known"
+       }
+      ]
+     }
+    ]
+   },
+   "empty": {
+    "text": "Под кирпичами пусто.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "senka": {
+  "speaker": "Сенька",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "senka_found"
+     }
+    ],
+    "node": "decide"
+   },
+   {
+    "node": "found"
+   }
+  ],
+  "nodes": {
+   "found": {
+    "text": "Парень с почтовой сумкой вжимается в стену. — Не выдавай! Ты от Писаря? — Разглядев вас, он выдыхает. — Нет… Мать прислала? Слушай: мне дали письмо с красной печатью, Писарю лично. А я перепутал и отдал сержанту Мытному. Потом выкрал обратно, пока тот не прочёл. Теперь Писарь меня ищет, а в письме — список: кто из сборщиков Треста берёт деньги и от кого.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "senka_found"
+     },
+     {
+      "type": "quest",
+      "quest": "courier",
+      "stage": "found"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "decide"
+     }
+    ]
+   },
+   "decide": {
+    "text": "— Что мне делать?",
+    "options": [
+     {
+      "text": "Иди в Колючку, к Прокопу. Скажешь — от меня. Письмо оставь мне.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "senka",
+        "value": "hidden"
+       },
+       {
+        "type": "flag",
+        "key": "senka_saved"
+       },
+       {
+        "type": "give",
+        "item": "letter_unaddressed"
+       }
+      ],
+      "next": "hide"
+     },
+     {
+      "text": "Пойдём к Мытному. Трест тебя защитит, а письмо — ему.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "senka",
+        "value": "trust"
+       },
+       {
+        "type": "flag",
+        "key": "trust_knows_seal"
+       },
+       {
+        "type": "inc",
+        "key": "rep_trust",
+        "by": 3
+       }
+      ],
+      "next": "trust"
+     },
+     {
+      "text": "Писарь хорошо заплатит за тебя.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "senka",
+        "value": "given"
+       },
+       {
+        "type": "caps",
+        "amount": 50
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       },
+       {
+        "type": "quest",
+        "quest": "courier",
+        "stage": "done"
+       }
+      ],
+      "next": "given"
+     },
+     {
+      "text": "Посиди пока тут."
+     }
+    ]
+   },
+   "hide": {
+    "text": "— К Прокопу… за частокол. — Сенька суёт вам письмо и убегает на север, пригибаясь. — Скажи матери, что живой!",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "senka_gone"
+       }
+      ]
+     }
+    ]
+   },
+   "trust": {
+    "text": "— К Трестовым? — Сенька мнётся, но идёт. У поста Мытный читает письмо, багровеет и прячет Сеньку в сторожке. — Этого я не видел, — говорит он и закрывает книгу.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "senka_gone"
+       }
+      ]
+     }
+    ]
+   },
+   "given": {
+    "text": "Вы свистите Писарю. Тот появляется из-за развалин быстро, будто ждал. Отсчитывает капли. Сенька смотрит на вас, не веря. Писарь уводит его на север.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "senka_gone"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "hor": {
+  "speaker": "Хорь",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Человек в выгоревшем пыльнике Гильдии всплёскивает руками. — Добрый человек! Бочки прохудились на жаре, люди мрут. Помоги водой — Гильдия не забудет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hor_met"
+     },
+     {
+      "type": "quest",
+      "quest": "caravan_dry",
+      "stage": "met"
+     }
+    ],
+    "options": [
+     {
+      "text": "Возьми флягу для людей.",
+      "if": [
+       {
+        "item": "flask"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "flask"
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "flask"
+     },
+     {
+      "text": "Что с бочками?",
+      "next": "barrels"
+     },
+     {
+      "text": "Бочки пробиты изнутри. Ты слил воду сам.",
+      "if": [
+       {
+        "flag": "hor_truth"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 20,
+       "pass": "exposed",
+       "fail": "deny",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "caravan_dry",
+         "value": "exposed"
+        },
+        {
+         "type": "flag",
+         "key": "raid_freed"
+        },
+        {
+         "type": "inc",
+         "key": "rep_guild",
+         "by": 5
+        },
+        {
+         "type": "quest",
+         "quest": "caravan_dry",
+         "stage": "freed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Сколько стоит их «долг»?",
+      "if": [
+       {
+        "flag": "hor_truth"
+       }
+      ],
+      "next": "price"
+     },
+     {
+      "text": "Вот бочка воды из Колючки. Людям — даром.",
+      "if": [
+       {
+        "item": "water_barrel"
+       },
+       {
+        "flag": "hor_truth"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "water_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "caravan_dry",
+        "value": "water"
+       },
+       {
+        "type": "flag",
+        "key": "raid_freed"
+       },
+       {
+        "type": "inc",
+        "key": "rep_guild",
+        "by": 3
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       },
+       {
+        "type": "quest",
+        "quest": "caravan_dry",
+        "stage": "freed"
+       }
+      ],
+      "next": "water"
+     },
+     {
+      "text": "Ты торгуешь людьми. Готовься.",
+      "if": [
+       {
+        "flag": "hor_truth"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "flask": {
+    "text": "Хорь берёт флягу, прячет в свой мешок и кланяется. — Благодарствую. — Людям он из неё не наливает.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "barrels": {
+    "text": "— Треснули на жаре, — Хорь разводит руками. — Бывает.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "exposed": {
+    "text": "Вы говорите громко, чтобы слышал весь караван: про пробитые изнутри бочки, про «долги», про копи Соли. Охранники переглядываются и опускают ружья. — Мы нанимались ходить с караваном, а не людьми торговать, — говорит один. Хорь уходит на восток один, с пустыми руками.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hor_gone"
+       },
+       {
+        "type": "flag",
+        "key": "debtors_left"
+       }
+      ]
+     }
+    ]
+   },
+   "deny": {
+    "text": "— Докажи! — Хорь кивает охране, и те кладут руки на ружья.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "price": {
+    "text": "— Долг есть долг, — Хорь сразу перестаёт ныть. — Шестьдесят капель за всех — и они свободны. Копи Соли дают больше.",
+    "options": [
+     {
+      "text": "Держи шестьдесят.",
+      "if": [
+       {
+        "caps": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -60
+       },
+       {
+        "type": "flag",
+        "key": "caravan_dry",
+        "value": "bought"
+       },
+       {
+        "type": "flag",
+        "key": "raid_freed"
+       },
+       {
+        "type": "quest",
+        "quest": "caravan_dry",
+        "stage": "freed"
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Сорок. Больше они не стоят, а довезти до Соли ещё надо.",
+      "if": [
+       {
+        "caps": 40
+       },
+       {
+        "skill": "barter",
+        "gte": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -40
+       },
+       {
+        "type": "flag",
+        "key": "caravan_dry",
+        "value": "bought"
+       },
+       {
+        "type": "flag",
+        "key": "raid_freed"
+       },
+       {
+        "type": "quest",
+        "quest": "caravan_dry",
+        "stage": "freed"
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Подумаю.",
+      "next": "intro"
+     }
+    ]
+   },
+   "bought": {
+    "text": "Хорь пересчитывает капли и машет «должникам»: свободны. Караван уходит на восток налегке. Люди, не веря, обступают вас. — В Колючку пойдём, — говорит старший. — Там руки нужны.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hor_gone"
+       },
+       {
+        "type": "flag",
+        "key": "debtors_left"
+       }
+      ]
+     }
+    ]
+   },
+   "water": {
+    "text": "Вы выкатываете бочку к «должникам». Люди пьют, а Хорь смотрит, как тает его товар. Потом плюёт и уводит караван на восток без них.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hor_gone"
+       },
+       {
+        "type": "flag",
+        "key": "debtors_left"
+       }
+      ]
+     }
+    ]
+   },
+   "fight": {
+    "text": "Хорь пятится за охрану. — Взять!",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hor_fight"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "hor_barrels": {
+  "speaker": "Пустые бочки",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "hor_truth"
+     }
+    ],
+    "node": "known"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Три пустые бочки на телеге.",
+    "options": [
+     {
+      "text": "Осмотреть дыры.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "Осмотреть, как сделаны пробоины.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 40
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "truth": {
+    "text": "Края пробоин вывернуты наружу: дыры пробиты изнутри, пробойником. Никакая жара так не треснет. Кто-то слил воду нарочно.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hor_truth"
+     },
+     {
+      "type": "quest",
+      "quest": "caravan_dry",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "known": {
+    "text": "Бочки пробиты изнутри.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "debtor": {
+  "speaker": "Путник из каравана",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Измождённый человек в выгоревшей рубахе. — Хорь поил нас в пути, из своей фляги. Теперь говорит — должны. Отработаем, говорит, в Соли, в копях… — Он смотрит на пустые бочки. — А ведь вода была. Полные бочки были.",
+    "options": [
+     {
+      "text": "Держись."
+     }
+    ]
+   }
+  }
+ },
+ "hor_guard": {
+  "speaker": "Охранник Хоря",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Не лезь к хозяину. — Охранник отворачивается, но видно, что ему не по себе.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "meet_erema": {
+  "speaker": "Водонос Ерёма",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Худой человек с пустыми флягами на ремне поднимает руки. — Я не налётчик! Трест записал меня в бандиты за воду мимо записи. Я водонос, от Лейки из Запруды. Людям воду ношу.",
+    "options": [
+     {
+      "text": "Награда есть награда.",
+      "next": "fight"
+     },
+     {
+      "text": "Иди. Скажу, что не нашёл.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "gone_u_erema"
+       },
+       {
+        "type": "flag",
+        "key": "erema_spared"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_friend"
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "spared"
+     },
+     {
+      "text": "Дай мне кисет и нож — и исчезни с тракта.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "erema_pouch"
+       },
+       {
+        "type": "flag",
+        "key": "gone_u_erema"
+       },
+       {
+        "type": "flag",
+        "key": "erema_spared"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_friend"
+       }
+      ],
+      "next": "pouch"
+     }
+    ]
+   },
+   "fight": {
+    "text": "Ерёма бросает фляги и хватается за нож.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "fight"
+       }
+      ]
+     }
+    ]
+   },
+   "spared": {
+    "text": "— Лейка тебя запомнит, — говорит Ерёма и уходит в пески. — В Запруде спроси водоносов, если надо будет пройти мимо ворот.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   },
+   "pouch": {
+    "text": "Ерёма отдаёт кисет с вышитой каплей и нож, не торгуясь. — Скажи Мытному, что я мёртв. Лейка тебя запомнит. — Он уходит в пески.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "mityay": {
+  "speaker": "Митяй",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "rzhavchik",
+      "eq": "home"
+     }
+    ],
+    "node": "happy"
+   },
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Мальчишка лет десяти в отцовской кепке строгает палку. — У нас пёс был. Рыжий, Ржавчик. С папкой ушёл и не вернулся. Папку нашли, а его — нет. Не встречался тебе рыжего пса? С медным ошейником?",
+    "options": [
+     {
+      "text": "Смотри, кто пришёл.",
+      "if": [
+       {
+        "flag": "dog_follows"
+       },
+       {
+        "notFlag": "rzhavchik"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "rzhavchik",
+        "value": "home"
+       },
+       {
+        "type": "flag",
+        "key": "dog_follows",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "done"
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       },
+       {
+        "type": "xp",
+        "amount": 40
+       }
+      ],
+      "next": "dog_back"
+     },
+     {
+      "text": "Видел одного у Ржавого колодца.",
+      "if": [
+       {
+        "flag": "rzhavchik_fed"
+       },
+       {
+        "notFlag": "rzhavchik"
+       }
+      ],
+      "next": "seen"
+     },
+     {
+      "text": "Нет, не видел."
+     }
+    ]
+   },
+   "seen": {
+    "text": "Митяй роняет палку. — Правда? Рыжий? — Он смотрит на дорогу, будто пёс вот-вот выйдет из марева. — Он придёт. Он всегда приходил.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "dog_back": {
+    "text": "Рыжий пёс проходит мимо тебя, сначала шагом, потом рысью, потом летит. Митяй падает в пыль, пёс сверху, и оба визжат. Нюра выбегает из-за прилавка и встаёт как вкопанная.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "happy": {
+    "text": "Митяй с Ржавчиком носятся между прилавками. — Он меня помнит! Он всё помнит!",
+    "options": [
+     {
+      "text": "Берегите друг друга."
+     }
+    ]
+   }
+  }
+ },
+ "pylon": {
+  "speaker": "Опора ЛЭП",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Опора ЛЭП, одна из трёх. Ветер гудит в последних проводах. У основания — свежие срезы на медных тягах.",
+    "options": [
+     {
+      "text": "[Восприятие] Осмотреть песок у основания.",
+      "if": [
+       {
+        "flag": "copper_asked"
+       },
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "copper_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "copper_trail"
+       }
+      ],
+      "next": "trail"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "trail": {
+    "text": "Медная стружка, и следы босых ног — маленьких, двое. Ведут на юг, к развалинам подстанции.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "kids": {
+  "speaker": "Шнырь и Галка",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "copper"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "copper_known"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Мальчишка и девчонка лет двенадцати над мотком медной проволоки. Мальчишка прячет кусачки за спину. — Мы ничего! Это старое! С развалин!",
+    "options": [
+     {
+      "text": "Это медь с опор Трёх столбов. Зачем она вам?",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "copper_known"
+       },
+       {
+        "type": "quest",
+        "quest": "copper",
+        "stage": "truth"
+       }
+      ],
+      "next": "why"
+     },
+     {
+      "text": "Ничего."
+     }
+    ]
+   },
+   "why": {
+    "text": "— Подать, — говорит девчонка, Галка. — Трест берёт воду с головы. За мамку, за деда, за малую. Кто не платит — пломба на кружку. А Ремень даёт за медь капли. — Шнырь добавляет: — Мы только с одной опоры. Она всё равно старая.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "again": {
+    "text": "Шнырь и Галка смотрят настороженно. — Ну?",
+    "options": [
+     {
+      "text": "В трансформаторной меди больше, чем на всех опорах. Я её открою.",
+      "if": [
+       {
+        "notFlag": "open_vault_door"
+       }
+      ],
+      "next": "promise"
+     },
+     {
+      "text": "Трансформаторная открыта. Катушки ваши.",
+      "if": [
+       {
+        "flag": "open_vault_door"
+       },
+       {
+        "notFlag": "copper"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "copper",
+        "value": "vault"
+       },
+       {
+        "type": "quest",
+        "quest": "copper",
+        "stage": "done"
+       },
+       {
+        "type": "give",
+        "item": "copper_band"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "vault"
+     },
+     {
+      "text": "Потом."
+     }
+    ]
+   },
+   "promise": {
+    "text": "— Там заперто, — Галка кусает губу. — Ключ у Треста, а замок в ржавчине. Но если откроешь… — Она не договаривает.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "vault": {
+    "text": "Шнырь и Галка катят катушки к выходу, как бочки, и хохочут на всю подстанцию. Галка оборачивается и снимает с руки медный браслет. — Держи. Сама плела. Опоры больше не трогаем, честно!",
+    "options": [
+     {
+      "text": "Бегите."
+     }
+    ]
+   },
+   "after": {
+    "text": "— Опоры больше не трогаем, честно! — хором говорят Шнырь и Галка.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "kids_stash": {
+  "speaker": "Моток проволоки",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Моток проволоки, срезанной с опор. Концы блестят свежей медью.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "vault_door": {
+  "speaker": "Дверь трансформаторной",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_vault_door"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Железная дверь трансформаторной, замок в рыжей корке. На двери — выцветший знак: молния и череп.",
+    "options": [
+     {
+      "text": "[Взлом] Вскрыть замок.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -10,
+       "pass": "opened",
+       "fail": "jammed",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "open_vault_door"
+        },
+        {
+         "type": "xp",
+         "amount": 20
+        }
+       ]
+      }
+     },
+     {
+      "text": "Поддеть дверь монтировкой.",
+      "if": [
+       {
+        "item": "crowbar"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "open_vault_door"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "[Ремонт] Снять дверь с петель.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "open_vault_door"
+       },
+       {
+        "type": "xp",
+        "amount": 20
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "opened": {
+    "text": "Дверь со скрежетом подаётся. Изнутри тянет горячим железом и старым маслом. У трансформатора — медные катушки в рост человека.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "jammed": {
+    "text": "Замок крошится ржавчиной, но не поддаётся.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Дверь трансформаторной открыта.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "coil": {
+  "speaker": "Катушка меди",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Катушка медной проволоки в человеческий рост. На год подати хватит не одной семье.",
+    "options": [
+     {
+      "text": "Отдать катушки Шнырю и Галке.",
+      "if": [
+       {
+        "flag": "copper_known"
+       },
+       {
+        "notFlag": "copper"
+       },
+       {
+        "notFlag": "copper_kids_gone"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "copper",
+        "value": "vault"
+       },
+       {
+        "type": "quest",
+        "quest": "copper",
+        "stage": "done"
+       },
+       {
+        "type": "give",
+        "item": "copper_band"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "given"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "given": {
+    "text": "Шнырь и Галка прибегают на свист и катят катушки к выходу, как бочки. Галка снимает с руки медный браслет. — Держи. Сама плела. Опоры больше не трогаем!",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ }
+}

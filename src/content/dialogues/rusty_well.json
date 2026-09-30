@@ -1,0 +1,7230 @@
+{
+ "marta": {
+  "speaker": "Старейшина Марта",
+  "portrait": "portrait_marta",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "quest_complete"
+     },
+     {
+      "notFlag": "trust_outcome"
+     }
+    ],
+    "node": "trust"
+   },
+   {
+    "if": [
+     {
+      "flag": "krivoy_asked"
+     },
+     {
+      "notFlag": "krivoy_settled"
+     },
+     {
+      "notFlag": "krivoy_left"
+     },
+     {
+      "notFlag": "dead_krivoy"
+     }
+    ],
+    "node": "krivoy"
+   },
+   {
+    "if": [
+     {
+      "flag": "koryagi_done",
+      "eq": "banned"
+     },
+     {
+      "notFlag": "koryagi_child"
+     }
+    ],
+    "node": "koryagi_child"
+   },
+   {
+    "if": [
+     {
+      "flag": "sipuha_here"
+     },
+     {
+      "flag": "day",
+      "gte": 7
+     },
+     {
+      "notFlag": "koryagi_done"
+     }
+    ],
+    "node": "koryagi"
+   },
+   {
+    "if": [
+     {
+      "flag": "trust_outcome",
+      "eq": "surrender"
+     }
+    ],
+    "node": "cold"
+   },
+   {
+    "if": [
+     {
+      "flag": "trust_outcome",
+      "eq": "fight"
+     },
+     {
+      "notFlag": "marta_letter"
+     }
+    ],
+    "node": "letter_fight"
+   },
+   {
+    "if": [
+     {
+      "flag": "trust_outcome"
+     },
+     {
+      "notFlag": "marta_letter"
+     }
+    ],
+    "node": "letter"
+   },
+   {
+    "if": [
+     {
+      "flag": "well_fate",
+      "eq": "torn"
+     },
+     {
+      "notFlag": "seal_thanked"
+     }
+    ],
+    "node": "seal_torn"
+   },
+   {
+    "if": [
+     {
+      "flag": "well_fate"
+     },
+     {
+      "notFlag": "seal_thanked"
+     }
+    ],
+    "node": "seal_thanks"
+   },
+   {
+    "if": [
+     {
+      "flag": "quest_complete"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "pump_fixed"
+     },
+     {
+      "flag": "karma",
+      "lt": 0
+     }
+    ],
+    "node": "report_thief"
+   },
+   {
+    "if": [
+     {
+      "flag": "pump_fixed"
+     }
+    ],
+    "node": "report"
+   },
+   {
+    "if": [
+     {
+      "flag": "quest_accepted"
+     }
+    ],
+    "node": "progress"
+   },
+   {
+    "if": [
+     {
+      "attr": "int",
+      "lt": 4
+     },
+     {
+      "notFlag": "quest_accepted"
+     }
+    ],
+    "node": "dumb"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Незнакомец. Воды у нас нет, так что не проси. Колодец молчит третью неделю: клапан в помпе лопнул, и вся наша жизнь теперь в двух бочках.",
+    "options": [
+     {
+      "text": "Что случилось с помпой?",
+      "next": "pump_info"
+     },
+     {
+      "text": "Я могу помочь.",
+      "next": "offer"
+     },
+     {
+      "text": "Кто вы такие?",
+      "next": "about"
+     },
+     {
+      "text": "Меня зовут {name}.",
+      "if": [
+       {
+        "notFlag": "told_name"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "told_name"
+       }
+      ],
+      "next": "name"
+     },
+     {
+      "text": "Мне пора."
+     }
+    ]
+   },
+   "intro_short": {
+    "text": "Так чего тебе, путник?",
+    "options": [
+     {
+      "text": "Что случилось с помпой?",
+      "next": "pump_info"
+     },
+     {
+      "text": "Я могу помочь.",
+      "next": "offer"
+     },
+     {
+      "text": "Меня зовут {name}.",
+      "if": [
+       {
+        "notFlag": "told_name"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "told_name"
+       }
+      ],
+      "next": "name"
+     },
+     {
+      "text": "Мне пора."
+     }
+    ]
+   },
+   "about": {
+    "text": "Мы Ржавый колодец. Двенадцать душ, три лачуги и дыра в земле, которая раньше давала воду. Я Марта, тут за старшую. Не потому что мудрая, а потому что дольше всех не померла.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "intro_short"
+     }
+    ]
+   },
+   "pump_info": {
+    "text": "Клапан давления треснул. Запасной был на старой насосной станции: по дороге на восток, потом на север. Только туда никто не ходит. Дверь на замке, а ключ давно у кого-то в кармане.",
+    "options": [
+     {
+      "text": "Я могу помочь.",
+      "next": "offer"
+     },
+     {
+      "text": "Понятно.",
+      "next": "intro_short"
+     }
+    ]
+   },
+   "offer": {
+    "text": "Поможешь? Принеси клапан с насосной и поставь его в помпу. Заплачу, чем богаты: пятнадцать капель.",
+    "options": [
+     {
+      "text": "Договорились.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quest_accepted"
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "find_station"
+       }
+      ],
+      "next": "accepted"
+     },
+     {
+      "text": "Пятнадцать капель за прогулку по пустоши? Тут нужно тридцать.",
+      "check": {
+       "skill": "speech",
+       "mod": 10,
+       "pass": "bargain_ok",
+       "fail": "bargain_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bargain"
+        },
+        {
+         "type": "flag",
+         "key": "quest_accepted"
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "find_station"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "quest_accepted"
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "find_station"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Половину вперёд, и я в деле.",
+      "check": {
+       "skill": "barter",
+       "mod": 0,
+       "pass": "advance_ok",
+       "fail": "advance_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "advance"
+        },
+        {
+         "type": "caps",
+         "amount": 5
+        },
+        {
+         "type": "flag",
+         "key": "quest_accepted"
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "find_station"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "quest_accepted"
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "find_station"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Не сейчас."
+     }
+    ]
+   },
+   "bargain_ok": {
+    "text": "Марта долго смотрит на тебя, потом на пустые бочки. — Ладно, стервятник. Тридцать. Но только если вода пойдёт.",
+    "options": [
+     {
+      "text": "По рукам.",
+      "next": "accepted"
+     }
+    ]
+   },
+   "bargain_fail": {
+    "text": "— Не наглей. Пятнадцать, и то от сердца отрываю. Берёшься или нет?",
+    "options": [
+     {
+      "text": "Берусь.",
+      "next": "accepted"
+     }
+    ]
+   },
+   "accepted": {
+    "text": "Дорога ведёт прямо к станции. Хэнк у костра что-то бормотал про ключ, спроси его. И не лезь к скалам: там змеи.",
+    "options": [
+     {
+      "text": "Как поставить клапан?",
+      "if": [
+       {
+        "notFlag": "got_manual"
+       }
+      ],
+      "next": "manual"
+     },
+     {
+      "text": "Змеи? Ты что-то недоговариваешь, Марта.",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 7
+       },
+       {
+        "notFlag": "knows_nest"
+       }
+      ],
+      "next": "beasts"
+     },
+     {
+      "text": "Следы у дороги не змеиные. Кто там водится?",
+      "if": [
+       {
+        "skill": "survival",
+        "gte": 40
+       },
+       {
+        "notFlag": "knows_nest"
+       }
+      ],
+      "next": "beasts"
+     },
+     {
+      "text": "Уже иду."
+     }
+    ]
+   },
+   "manual": {
+    "text": "Держи, старая инструкция от помпы. Читать там особо нечего, но картинки понятные.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "manual"
+     },
+     {
+      "type": "flag",
+      "key": "got_manual"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо."
+     }
+    ]
+   },
+   "progress": {
+    "text": "Ну что, нашёл клапан?",
+    "options": [
+     {
+      "text": "Клапан у меня. Сейчас поставлю.",
+      "if": [
+       {
+        "item": "valve"
+       }
+      ],
+      "next": "go_fix"
+     },
+     {
+      "text": "Есть инструкция к помпе?",
+      "if": [
+       {
+        "notFlag": "got_manual"
+       }
+      ],
+      "next": "manual"
+     },
+     {
+      "text": "Где эта станция?",
+      "next": "where"
+     },
+     {
+      "text": "Как попасть внутрь?",
+      "if": [
+       {
+        "notFlag": "door_open"
+       }
+      ],
+      "next": "key_hint"
+     },
+     {
+      "text": "Скорпионы у насосной. Что ещё о них знаешь?",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 7
+       },
+       {
+        "notFlag": "knows_nest"
+       }
+      ],
+      "next": "beasts"
+     },
+     {
+      "text": "Ещё нет."
+     }
+    ]
+   },
+   "where": {
+    "text": "По дороге на восток, у сгоревшего фургона поверни на север. Бетонная коробка. Не ошибёшься: там ничего живого.",
+    "options": [
+     {
+      "text": "Ясно."
+     }
+    ]
+   },
+   "key_hint": {
+    "text": "Ключ у Хэнка, бродяги у костра. У него карманы глубже нашего колодца. Или найди, чем сорвать петли: на дороге полно брошенного железа.",
+    "options": [
+     {
+      "text": "Понял."
+     }
+    ]
+   },
+   "go_fix": {
+    "text": "Так чего стоишь? Помпа прямо передо мной.",
+    "options": [
+     {
+      "text": "Иду."
+     }
+    ]
+   },
+   "report": {
+    "text": "Вода! Слышишь, как журчит? Дети уже бегут с вёдрами. Ты своё заработал.",
+    "options": [
+     {
+      "text": "И гнезда скорпионов у станции больше нет.",
+      "if": [
+       {
+        "flag": "nest_cleared"
+       },
+       {
+        "notFlag": "nest_paid"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 10
+       },
+       {
+        "type": "flag",
+        "key": "nest_paid"
+       },
+       {
+        "type": "log",
+        "text": "Марта добавляет десять капель за скорпионов."
+       }
+      ],
+      "next": "report"
+     },
+     {
+      "text": "Тридцать капель, как договаривались.",
+      "if": [
+       {
+        "flag": "bargain"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 30
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "quest_complete"
+       }
+      ],
+      "next": "thanks"
+     },
+     {
+      "text": "Остаток, десять капель.",
+      "if": [
+       {
+        "flag": "advance"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 10
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "quest_complete"
+       }
+      ],
+      "next": "thanks"
+     },
+     {
+      "text": "Рад был помочь.",
+      "if": [
+       {
+        "notFlag": "bargain"
+       },
+       {
+        "notFlag": "advance"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 15
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "quest_complete"
+       }
+      ],
+      "next": "thanks"
+     }
+    ]
+   },
+   "thanks": {
+    "text": "Возвращайся, когда захочешь пить. Для тебя в Ржавом колодце вода найдётся всегда. — Только вот что. Караваны уже болтают, что у нас пошла вода. А где вода, туда приходят сборщики Треста — считать чужие вёдра.",
+    "options": [
+     {
+      "text": "Прощай, Марта."
+     }
+    ],
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_hid"
+     },
+     {
+      "type": "quest",
+      "quest": "inspector",
+      "stage": "came"
+     },
+     {
+      "type": "log",
+      "text": "С запада по дороге пылят трое в серых пыльниках. Хэнк у костра вскакивает и исчезает за хижинами."
+     }
+    ]
+   },
+   "after": {
+    "text": "Помпа качает. Пей сколько надо, путник. А дорога на запад ведёт к Трём столбам и Колючке.",
+    "options": [
+     {
+      "text": "Ружьё у тебя на стене — чьё?",
+      "if": [
+       {
+        "flag": "rifle_seen"
+       },
+       {
+        "notFlag": "rifle_asked"
+       },
+       {
+        "notFlag": "semyon"
+       }
+      ],
+      "next": "rifle"
+     },
+     {
+      "text": "Про ружьё на стене…",
+      "if": [
+       {
+        "flag": "rifle_asked"
+       },
+       {
+        "notFlag": "semyon"
+       }
+      ],
+      "next": "rifle_again"
+     },
+     {
+      "text": "Пломба на помпе — это надолго?",
+      "if": [
+       {
+        "flag": "well_sealed"
+       },
+       {
+        "notFlag": "seal_asked"
+       },
+       {
+        "notFlag": "well_fate"
+       }
+      ],
+      "next": "seal"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "dumb": {
+    "text": "Марта щурится. — Ты вообще понимаешь, что я говорю? Воды. Нет. Помпа. Сломана.",
+    "options": [
+     {
+      "text": "Моя хотеть пить.",
+      "next": "dumb_water"
+     },
+     {
+      "text": "Ыы."
+     }
+    ]
+   },
+   "dumb_water": {
+    "text": "— Железка. С насосной. Маленькая, круглая, блестит. Принесёшь, дам капель. Пятнадцать. Это много. Понял?",
+    "options": [
+     {
+      "text": "Моя принести железка!",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quest_accepted"
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "find_station"
+       }
+      ],
+      "next": "dumb_ok"
+     },
+     {
+      "text": "Моя подумать."
+     }
+    ]
+   },
+   "dumb_ok": {
+    "text": "— Иди по дороге. Где костёр, там Хэнк, у него ключ. Держи картинки, может, разберёшься.",
+    "options": [
+     {
+      "text": "Картинки! Спасибо!",
+      "effects": [
+       {
+        "type": "give",
+        "item": "manual"
+       },
+       {
+        "type": "flag",
+        "key": "got_manual"
+       }
+      ]
+     }
+    ]
+   },
+   "name": {
+    "text": "— {name}? Запомню. Имена тут быстро забываются, так что постарайся, чтобы твоё запомнили.",
+    "options": [
+     {
+      "text": "Постараюсь.",
+      "next": "intro_short"
+     }
+    ]
+   },
+   "advance_ok": {
+    "text": "Марта отсчитывает пять капель, каждую как от сердца отрывает. — Остальное, когда вода пойдёт. Десять.",
+    "options": [
+     {
+      "text": "Справедливо.",
+      "next": "accepted"
+     }
+    ]
+   },
+   "advance_fail": {
+    "text": "— Вперёд не плачу. Сделаешь, получишь пятнадцать. Не сделаешь, значит, не судьба.",
+    "options": [
+     {
+      "text": "Ладно, берусь.",
+      "next": "accepted"
+     }
+    ]
+   },
+   "beasts": {
+    "text": "Марта понижает голос. — Скорпионы. Здоровые, с собаку. Гнездо у самой насосной. Огня боятся, а на жареное мясо идут, как дети на воду. Хэнк ящериц жарит, спроси у него.",
+    "options": [
+     {
+      "text": "Учту."
+     }
+    ],
+    "effects": [
+     {
+      "type": "flag",
+      "key": "knows_nest"
+     },
+     {
+      "type": "xp",
+      "amount": 10
+     }
+    ]
+   },
+   "report_thief": {
+    "text": "Вода! Слышишь? — Марта улыбается, но тут же мрачнеет. — Хэнк говорит, ты шаришь по чужим мешкам. У нас за такое вешают. Но воду ты вернул. Забирай своё и не задерживайся.",
+    "options": [
+     {
+      "text": "И гнезда скорпионов у станции больше нет.",
+      "if": [
+       {
+        "flag": "nest_cleared"
+       },
+       {
+        "notFlag": "nest_paid"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 10
+       },
+       {
+        "type": "flag",
+        "key": "nest_paid"
+       },
+       {
+        "type": "log",
+        "text": "Марта добавляет десять капель за скорпионов."
+       }
+      ],
+      "next": "report_thief"
+     },
+     {
+      "text": "Тридцать капель, как договаривались.",
+      "if": [
+       {
+        "flag": "bargain"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 30
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "quest_complete"
+       }
+      ],
+      "next": "thanks"
+     },
+     {
+      "text": "Остаток, десять капель.",
+      "if": [
+       {
+        "flag": "advance"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 10
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "quest_complete"
+       }
+      ],
+      "next": "thanks"
+     },
+     {
+      "text": "Рад был помочь.",
+      "if": [
+       {
+        "notFlag": "bargain"
+       },
+       {
+        "notFlag": "advance"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 15
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "quest_complete"
+       }
+      ],
+      "next": "thanks"
+     }
+    ]
+   },
+   "trust": {
+    "text": "Марта не сводит глаз с серых пыльников у помпы. — Шлюз. Я его знаю: он не кричит и не бьёт. Он записывает. А потом по записям приходят те, кто бьёт. Раз вода — твоих рук дело, говорить с ним тебе.",
+    "options": [
+     {
+      "text": "Колодец платит Тресту налог?",
+      "next": "trust_tax"
+     },
+     {
+      "text": "Где Хэнк?",
+      "next": "trust_hank"
+     },
+     {
+      "text": "Поговорю с ним."
+     }
+    ]
+   },
+   "trust_tax": {
+    "text": "— Платили, пока было чем. Сорок капель за год — и нас впишут в книгу. Шлюз чтит книгу больше, чем Председателя. Скажешь ему, что колодец платит, — я подтвержу.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "trust"
+     }
+    ]
+   },
+   "trust_hank": {
+    "text": "— Как увидел пыльники, так и пропал. — Марта понижает голос. — Думаю, отсиживается в заколоченной хижине. Не знаю, что он натворил у Треста, и знать не хочу. Но выдавать своих — последнее дело.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "trust"
+     }
+    ]
+   },
+   "cold": {
+    "text": "Марта смотрит сквозь тебя. — Тубус уехал в Запруду. Хэнк прятал его пять лет, а тебе хватило пяти минут. За воду — спасибо. А больше нам говорить не о чем.",
+    "options": [
+     {
+      "text": "Прощай, Марта."
+     }
+    ]
+   },
+   "letter": {
+    "text": "— Ушли. — Марта выдыхает, будто держала воздух с самого их прихода. — Шлюз вернётся, такие всегда возвращаются. А тебе здесь больше делать нечего, и это хорошо. Держи. — Она протягивает сложенный листок, запечатанный воском. — Письмо Прокопу, в Колючку. Это хутор Круга колодцев на тракте, за Тремя столбами. Прокоп поможет с дорогой и с людьми. Скажешь, что от Марты.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "letter"
+     },
+     {
+      "type": "flag",
+      "key": "marta_letter"
+     }
+    ],
+    "options": [
+     {
+      "text": "А если Шлюз вернётся?",
+      "next": "letter_more"
+     },
+     {
+      "text": "Спасибо, Марта."
+     }
+    ]
+   },
+   "letter_more": {
+    "text": "— Встретим. — Марта кивает на помпу. — Воду мы теперь умеем чинить сами. Иди на запад, мимо указателя.",
+    "options": [
+     {
+      "text": "Прощай, Марта."
+     }
+    ]
+   },
+   "letter_fight": {
+    "text": "Марта смотрит на тела у дороги и долго молчит. — Трест не простит двоих сборщиков. Шлюз вернётся, и не один. — Она протягивает сложенный листок, запечатанный воском. — Уходи, пока они не вернулись. Письмо Прокопу, в Колючку: это хутор Круга колодцев на тракте, за Тремя столбами. Он спрячет, если понадобится.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "letter"
+     },
+     {
+      "type": "flag",
+      "key": "marta_letter"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо, Марта."
+     }
+    ]
+   },
+   "krivoy": {
+    "text": "Марта смотрит на тощего налётчика у тебя за спиной. — Налётчик? У нас? Он из тех, кто режет караваны.",
+    "options": [
+     {
+      "text": "Он пришёл с пустыми руками. Дай ему шанс.",
+      "if": [
+       {
+        "flag": "karma",
+        "gte": 0
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krivoy_settled"
+       }
+      ],
+      "next": "krivoy_yes"
+     },
+     {
+      "text": "Он знает тропы «Жажды». Нам нужен сторож.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "krivoy_yes",
+       "fail": "krivoy_no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "krivoy_settled"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "krivoy_left"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Ты права. Пусть уходит.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krivoy_left"
+       }
+      ],
+      "next": "krivoy_no"
+     }
+    ]
+   },
+   "krivoy_yes": {
+    "text": "— Будет спать у заколоченной хижины и сторожить воду. Сбежит или украдёт — повешу сама. — Кривой кивает, будто ему пообещали дворец.",
+    "options": [
+     {
+      "text": "Спасибо, Марта."
+     }
+    ]
+   },
+   "krivoy_no": {
+    "text": "— Нет. Пусть идёт своей дорогой. — Кривой молча уходит на запад.",
+    "options": [
+     {
+      "text": "Ясно."
+     }
+    ]
+   },
+   "koryagi": {
+    "text": "— Люди шепчутся, — Марта понижает голос. — Коряга опять у колодца. Говорят, от неё сохнет земля и дети кашляют. Хотят, чтобы ты её прогнал… прогнала… Тьфу. Чтобы её тут не было.",
+    "options": [
+     {
+      "text": "[Наука] Суховей не заразен. Это отравление, а не болезнь.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "koryagi_done",
+        "value": "defended"
+       },
+       {
+        "type": "inc",
+        "key": "rep_dry",
+        "by": 10
+       }
+      ],
+      "next": "koryagi_ok"
+     },
+     {
+      "text": "[Медицина] Её кожа — не зараза. Кашляют от пыли, а не от неё.",
+      "if": [
+       {
+        "skill": "medic",
+        "gte": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "koryagi_done",
+        "value": "defended"
+       },
+       {
+        "type": "inc",
+        "key": "rep_dry",
+        "by": 10
+       }
+      ],
+      "next": "koryagi_ok"
+     },
+     {
+      "text": "Она продаёт противоядие. Без неё скорпионы выкосят половину посёлка.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "koryagi_ok",
+       "fail": "koryagi_no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "koryagi_done",
+         "value": "defended"
+        },
+        {
+         "type": "inc",
+         "key": "rep_dry",
+         "by": 10
+        }
+       ]
+      }
+     },
+     {
+      "text": "Вот двадцать капель людям за беспокойство.",
+      "if": [
+       {
+        "caps": 20
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -20
+       },
+       {
+        "type": "flag",
+        "key": "koryagi_done",
+        "value": "paid"
+       },
+       {
+        "type": "inc",
+        "key": "rep_dry",
+        "by": 5
+       }
+      ],
+      "next": "koryagi_ok"
+     },
+     {
+      "text": "Пусть уходит.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "koryagi_done",
+        "value": "banned"
+       },
+       {
+        "type": "flag",
+        "key": "sipuha_banned"
+       },
+       {
+        "type": "inc",
+        "key": "rep_dry",
+        "by": -20
+       },
+       {
+        "type": "inc",
+        "key": "rep_circle",
+        "by": 5
+       }
+      ],
+      "next": "koryagi_banned"
+     },
+     {
+      "text": "Потом разберусь."
+     }
+    ]
+   },
+   "koryagi_ok": {
+    "text": "Марта долго молчит. — Ладно. Пусть торгует. Но у колодца пусть не стоит.",
+    "options": [
+     {
+      "text": "Договорились."
+     }
+    ]
+   },
+   "koryagi_no": {
+    "text": "— Слова, — отмахивается Марта. — Люди боятся, а страх словами не лечится.",
+    "options": [
+     {
+      "text": "Ещё поговорим."
+     }
+    ]
+   },
+   "koryagi_banned": {
+    "text": "Марта кивает. Сипуха у тележки всё слышала: она молча разворачивается и уходит на запад, не оглядываясь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "koryagi_child": {
+    "text": "Марта серая от бессонной ночи. — Скорпион ужалил сына Лукерьи. Противоядие было только у той коряги, которую мы прогнали. Мальчик жив. Едва.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "koryagi_child"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "rifle": {
+    "text": "Марта не оборачивается к лачуге. — Семёна. Мужа моего. Двадцать лет назад, в самую сушь, он ушёл с караваном Гильдии за водой для колодца. Высокий, шрам через бровь — волк в детстве подрал. Караван нашли у Солончаков: повозки, кости волов и ни одного человека. Ружьё он оставил мне: «Чтоб было чем встретить, если что». — Она молчит. — Не продаётся.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "rifle_asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Семён жив. Он ходит с караваном Гильдии: Бирюк — это он.",
+      "if": [
+       {
+        "flag": "semyon_known"
+       },
+       {
+        "notFlag": "marta_knows"
+       }
+      ],
+      "next": "rifle_tell"
+     },
+     {
+      "text": "Семён написал тебе. Вот письмо.",
+      "if": [
+       {
+        "flag": "marta_knows"
+       },
+       {
+        "item": "semyon_letter"
+       }
+      ],
+      "next": "rifle_letter"
+     },
+     {
+      "text": "[Красноречие] Он придёт, если ты выйдешь к нему. Выйди.",
+      "if": [
+       {
+        "flag": "marta_knows"
+       },
+       {
+        "flag": "semyon_will"
+       },
+       {
+        "notFlag": "reunite_failed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "rifle_reunite",
+       "fail": "rifle_reunite_fail",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "reunite_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Ложь] Я видел могилу Семёна у Солончаков. Он мёртв.",
+      "if": [
+       {
+        "flag": "semyon_known"
+       },
+       {
+        "notFlag": "marta_knows"
+       }
+      ],
+      "next": "rifle_lie"
+     },
+     {
+      "text": "Продай ружьё. Сто двадцать капель: колодцу нужен новый ворот.",
+      "if": [
+       {
+        "caps": 120
+       },
+       {
+        "flag": "karma",
+        "gte": 0
+       }
+      ],
+      "next": "rifle_sell"
+     },
+     {
+      "text": "Ничего."
+     }
+    ]
+   },
+   "rifle_again": {
+    "text": "— Ну? — Марта смотрит на тебя поверх ведра. — Опять про ружьё?",
+    "options": [
+     {
+      "text": "Семён жив. Он ходит с караваном Гильдии: Бирюк — это он.",
+      "if": [
+       {
+        "flag": "semyon_known"
+       },
+       {
+        "notFlag": "marta_knows"
+       }
+      ],
+      "next": "rifle_tell"
+     },
+     {
+      "text": "Семён написал тебе. Вот письмо.",
+      "if": [
+       {
+        "flag": "marta_knows"
+       },
+       {
+        "item": "semyon_letter"
+       }
+      ],
+      "next": "rifle_letter"
+     },
+     {
+      "text": "[Красноречие] Он придёт, если ты выйдешь к нему. Выйди.",
+      "if": [
+       {
+        "flag": "marta_knows"
+       },
+       {
+        "flag": "semyon_will"
+       },
+       {
+        "notFlag": "reunite_failed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "rifle_reunite",
+       "fail": "rifle_reunite_fail",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "reunite_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Ложь] Я видел могилу Семёна у Солончаков. Он мёртв.",
+      "if": [
+       {
+        "flag": "semyon_known"
+       },
+       {
+        "notFlag": "marta_knows"
+       }
+      ],
+      "next": "rifle_lie"
+     },
+     {
+      "text": "Продай ружьё. Сто двадцать капель: колодцу нужен новый ворот.",
+      "if": [
+       {
+        "caps": 120
+       },
+       {
+        "flag": "karma",
+        "gte": 0
+       }
+      ],
+      "next": "rifle_sell"
+     },
+     {
+      "text": "Ничего."
+     }
+    ]
+   },
+   "rifle_tell": {
+    "text": "Ведро выскальзывает из рук Марты и катится по камням. — Бирюк. Бородач с тетрадкой. Каждый третий день у моих ворот. — Она садится на край колодца. — Двадцать лет. И ни слова. Ни одного слова, Семён.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "marta_knows"
+     }
+    ],
+    "options": [
+     {
+      "text": "Семён написал тебе. Вот письмо.",
+      "if": [
+       {
+        "item": "semyon_letter"
+       }
+      ],
+      "next": "rifle_letter"
+     },
+     {
+      "text": "[Красноречие] Он придёт, если ты выйдешь к нему. Выйди.",
+      "if": [
+       {
+        "flag": "semyon_will"
+       },
+       {
+        "notFlag": "reunite_failed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "rifle_reunite",
+       "fail": "rifle_reunite_fail",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "reunite_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Решай сама, Марта."
+     }
+    ]
+   },
+   "rifle_reunite": {
+    "text": "Марта долго молчит. Потом снимает фартук и складывает его вчетверо. — Когда караван встанет у ворот, я выйду. Сама. …Той ночью у колодца двое сидят до утра, и никто в Ржавом колодце не спит. Утром Марта снимает ружьё со стены. — Возьми. Пусть стреляет, а не висит. Мне теперь есть кого встречать.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "semyon",
+      "value": "reunited"
+     },
+     {
+      "type": "give",
+      "item": "skoba"
+     },
+     {
+      "type": "quest",
+      "quest": "wall_rifle",
+      "stage": "done"
+     },
+     {
+      "type": "flag",
+      "key": "semyon_friend"
+     },
+     {
+      "type": "karma",
+      "amount": 1
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо, Марта."
+     }
+    ]
+   },
+   "rifle_reunite_fail": {
+    "text": "— Двадцать лет он мог прийти сам. Каждый третий день мог. — Марта отворачивается. — Хотел бы — пришёл бы. Не проси меня бегать за ним по дороге.",
+    "options": [
+     {
+      "text": "Семён написал тебе. Вот письмо.",
+      "if": [
+       {
+        "item": "semyon_letter"
+       }
+      ],
+      "next": "rifle_letter"
+     },
+     {
+      "text": "Как знаешь."
+     }
+    ]
+   },
+   "rifle_letter": {
+    "text": "Марта читает письмо стоя, потом сидя. Губы шевелятся. — «Не жди меня к ужину — двадцать лет как не жди». Дурак. Старый дурак. — Она вытирает глаза краем фартука. — Прощаю. Передай ему, если увидишь. И возьми ружьё: ему оно больше не нужно, а мне — тем более.",
+    "effects": [
+     {
+      "type": "take",
+      "item": "semyon_letter"
+     },
+     {
+      "type": "flag",
+      "key": "semyon",
+      "value": "forgiven"
+     },
+     {
+      "type": "give",
+      "item": "skoba"
+     },
+     {
+      "type": "quest",
+      "quest": "wall_rifle",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "Передам."
+     }
+    ]
+   },
+   "rifle_lie": {
+    "text": "Марта кивает, медленно, будто давно знала. — Спасибо, что сказал. Двадцать лет я ждала хоть слова. — Она снимает ружьё со стены и держит его, как ребёнка. — Бери. Мне больше некого им встречать.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "semyon",
+      "value": "lied"
+     },
+     {
+      "type": "give",
+      "item": "skoba"
+     },
+     {
+      "type": "quest",
+      "quest": "wall_rifle",
+      "stage": "done"
+     },
+     {
+      "type": "flag",
+      "key": "birjuk_gone"
+     },
+     {
+      "type": "karma",
+      "amount": -2
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "rifle_sell": {
+    "text": "Марта долго смотрит на капли, потом на стену. — Ворот новый нужен, это правда. А Семёну уже всё равно. — Она снимает ружьё. — Бери. И не говори мне, что оно стреляет.",
+    "effects": [
+     {
+      "type": "caps",
+      "amount": -120
+     },
+     {
+      "type": "flag",
+      "key": "semyon",
+      "value": "silent"
+     },
+     {
+      "type": "give",
+      "item": "skoba"
+     },
+     {
+      "type": "quest",
+      "quest": "wall_rifle",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо."
+     }
+    ]
+   },
+   "seal": {
+    "text": "Марта смотрит на свинцовую пуговицу на помпе, как на муху в супе. — Пока Трест не передумает. Каждое ведро по записи, сборщик раз в неделю, а воды всё равно столько, сколько даёт скважина. Кто бы избавил колодец от этой пуговицы — я бы в долгу не осталась.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "seal_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "well_seal",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Посмотрю, что можно сделать."
+     }
+    ]
+   },
+   "seal_thanks": {
+    "text": "Марта ставит на стол полную флягу и ещё одну рядом. — Помпа качает, и никто не пишет наши вёдра в книгу. — Она отсчитывает капли, каждую как от сердца. — Сорок. Больше нет, но и это от души.",
+    "effects": [
+     {
+      "type": "caps",
+      "amount": 40
+     },
+     {
+      "type": "give",
+      "item": "flask",
+      "qty": 2
+     },
+     {
+      "type": "flag",
+      "key": "seal_thanked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо, Марта."
+     }
+    ]
+   },
+   "seal_torn": {
+    "text": "Марта смотрит на твои руки в краске. — Сорвали, значит. Теперь Трест будет знать, кого искать. — Она вздыхает. — Воды это не убавит. Держи флягу. И береги себя: сборщики помнят такие руки.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "flask"
+     },
+     {
+      "type": "flag",
+      "key": "seal_thanked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо, Марта."
+     }
+    ]
+   }
+  }
+ },
+ "hank": {
+  "speaker": "Бродяга Хэнк",
+  "portrait": "portrait_hank",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "hank_forgiven"
+     },
+     {
+      "notFlag": "hank_gun_given"
+     }
+    ],
+    "node": "nyura_forgave"
+   },
+   {
+    "if": [
+     {
+      "flag": "rzhavchik_fed",
+      "gte": 3
+     },
+     {
+      "notFlag": "dog_hank"
+     }
+    ],
+    "node": "dog"
+   },
+   {
+    "if": [
+     {
+      "flag": "trust_outcome",
+      "eq": "surrender"
+     }
+    ],
+    "node": "betrayed"
+   },
+   {
+    "if": [
+     {
+      "item": "tube"
+     },
+     {
+      "notFlag": "hank_confessed"
+     }
+    ],
+    "node": "tube"
+   },
+   {
+    "if": [
+     {
+      "flag": "hank_joins"
+     }
+    ],
+    "node": "joined"
+   },
+   {
+    "if": [
+     {
+      "flag": "trust_outcome"
+     },
+     {
+      "notFlag": "hank_road"
+     }
+    ],
+    "node": "road"
+   },
+   {
+    "if": [
+     {
+      "flag": "stole_key"
+     },
+     {
+      "notFlag": "hank_told"
+     }
+    ],
+    "node": "after_stolen"
+   },
+   {
+    "if": [
+     {
+      "flag": "hank_scared"
+     }
+    ],
+    "node": "scared"
+   },
+   {
+    "if": [
+     {
+      "flag": "key_sold"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "hank_angry"
+     }
+    ],
+    "node": "angry"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Хэнк чистит ногти ножом и не поднимает глаз. — Чего тебе? Если выпить, то кончилось. Если поговорить, то плати.",
+    "options": [
+     {
+      "text": "Говорят, у тебя ключ от насосной.",
+      "if": [
+       {
+        "flag": "quest_accepted"
+       }
+      ],
+      "next": "key"
+     },
+     {
+      "text": "Нашёл записку у скелета на дороге. Там твоё имя.",
+      "if": [
+       {
+        "item": "note"
+       },
+       {
+        "notFlag": "quest_accepted"
+       }
+      ],
+      "next": "key"
+     },
+     {
+      "text": "Что продаёшь?",
+      "next": "trade"
+     },
+     {
+      "text": "Что за скорпионы у насосной?",
+      "if": [
+       {
+        "flag": "knows_nest"
+       }
+      ],
+      "next": "nest_info"
+     },
+     {
+      "text": "Как жизнь?",
+      "next": "life"
+     },
+     {
+      "text": "Ничего."
+     }
+    ]
+   },
+   "life": {
+    "text": "Жизнь? Сижу, грею кости. Пустошь забрала всё, кроме этого костра. Отличное место, чтобы ничего не делать.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "intro"
+     }
+    ]
+   },
+   "key": {
+    "text": "— Может, и у меня. Ключ вещь ценная. Пять капель, и он твой.",
+    "options": [
+     {
+      "text": "Держи пять капель.",
+      "if": [
+       {
+        "skill": "barter",
+        "lt": 60
+       },
+       {
+        "caps": 5
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -5
+       },
+       {
+        "type": "give",
+        "item": "key"
+       },
+       {
+        "type": "flag",
+        "key": "key_sold"
+       }
+      ],
+      "next": "sold"
+     },
+     {
+      "text": "Пять за ржавую железку? Три, и то много.",
+      "if": [
+       {
+        "skill": "barter",
+        "gte": 60
+       },
+       {
+        "caps": 3
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -3
+       },
+       {
+        "type": "give",
+        "item": "key"
+       },
+       {
+        "type": "flag",
+        "key": "key_sold"
+       }
+      ],
+      "next": "sold"
+     },
+     {
+      "text": "Колодец иссяк, Хэнк. Без воды и твой костёр никому не нужен.",
+      "if": [
+       {
+        "notFlag": "hank_speech_tried"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "free",
+       "fail": "refuse",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "hank_speech_tried"
+        },
+        {
+         "type": "give",
+         "item": "key"
+        },
+        {
+         "type": "flag",
+         "key": "key_sold"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "hank_speech_tried"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Ключ. Сейчас же. — Вы нависаете над Хэнком.",
+      "if": [
+       {
+        "attr": "str",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "key"
+       },
+       {
+        "type": "flag",
+        "key": "key_sold"
+       },
+       {
+        "type": "flag",
+        "key": "hank_scared"
+       },
+       {
+        "type": "karma",
+        "amount": -1
+       }
+      ],
+      "next": "scare"
+     },
+     {
+      "text": "[Внушительный] Ключ. Сейчас же.",
+      "if": [
+       {
+        "perk": "imposing"
+       },
+       {
+        "attr": "str",
+        "lt": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "key"
+       },
+       {
+        "type": "flag",
+        "key": "key_sold"
+       },
+       {
+        "type": "flag",
+        "key": "hank_scared"
+       },
+       {
+        "type": "karma",
+        "amount": -1
+       }
+      ],
+      "next": "scare"
+     },
+     {
+      "text": "Обойдусь."
+     }
+    ]
+   },
+   "sold": {
+    "text": "— Приятно иметь дело. И не говори Марте, что я его пять лет хранил.",
+    "options": [
+     {
+      "text": "Не скажу."
+     }
+    ]
+   },
+   "free": {
+    "text": "Хэнк долго смотрит в огонь. — Ладно. Забирай даром. Воду-то и мне пить.",
+    "options": [
+     {
+      "text": "Спасибо, Хэнк."
+     }
+    ]
+   },
+   "refuse": {
+    "text": "— Красиво говоришь. Пять капель всё равно.",
+    "options": [
+     {
+      "text": "Вернуться к делу.",
+      "next": "key"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Ключ у тебя. Чего ещё? Огонь не загораживай.",
+    "options": [
+     {
+      "text": "Что продаёшь?",
+      "next": "trade",
+      "if": [
+       {
+        "notFlag": "hank_scared"
+       }
+      ]
+     },
+     {
+      "text": "Ухожу."
+     }
+    ]
+   },
+   "scare": {
+    "text": "Хэнк бледнеет и суёт ключ вам в руку. — Бери, бери. Только отойди от огня.",
+    "options": [
+     {
+      "text": "То-то же."
+     }
+    ]
+   },
+   "scared": {
+    "text": "Хэнк отворачивается к огню и делает вид, что вас нет.",
+    "options": [
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "angry": {
+    "text": "— А, воришка. Ключ теперь стоит десять капель. И не суй руки к моему мешку.",
+    "options": [
+     {
+      "text": "Держи десять капель.",
+      "if": [
+       {
+        "caps": 10
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -10
+       },
+       {
+        "type": "give",
+        "item": "key"
+       },
+       {
+        "type": "flag",
+        "key": "key_sold"
+       }
+      ],
+      "next": "sold"
+     },
+     {
+      "text": "Что продаёшь?",
+      "next": "trade",
+      "if": [
+       {
+        "notFlag": "hank_scared"
+       }
+      ]
+     },
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "after_stolen": {
+    "text": "Хэнк шарит по карманам и хмурится. — Ты тут ничего не видел? Ключ пропал.",
+    "options": [
+     {
+      "text": "Не видел.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hank_told"
+       }
+      ]
+     },
+     {
+      "text": "Ключ у меня. Прости, Хэнк. Вот пять капель.",
+      "if": [
+       {
+        "caps": 5
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hank_told"
+       },
+       {
+        "type": "caps",
+        "amount": -5
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       },
+       {
+        "type": "log",
+        "text": "Хэнк долго молчит, потом кивает."
+       }
+      ]
+     }
+    ]
+   },
+   "nest_info": {
+    "text": "— Жнецы. Три штуки, один здоровый, как бочка. Днём спят в тени у стены станции. Огня боятся, на жареное мясо идут. Ящерицу продам, если надо.",
+    "options": [
+     {
+      "text": "Продай ящерицу.",
+      "next": "trade"
+     },
+     {
+      "text": "Ясно.",
+      "next": "intro"
+     }
+    ],
+    "effects": [
+     {
+      "type": "xp",
+      "amount": 5
+     }
+    ]
+   },
+   "trade": {
+    "text": "Хэнк разворачивает тряпку с товаром. — Патроны самокрутные, бинты стираные, ящерица свежая. Ну, почти.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "hank"
+       }
+      ]
+     },
+     {
+      "text": "Хватит."
+     }
+    ]
+   },
+   "tube": {
+    "text": "Хэнк замечает латунный блеск у тебя в руках, и нож выскальзывает у него из пальцев. — Откуда это у тебя? …Из ящика на насосной. Конечно. Я сам его туда положил.",
+    "options": [
+     {
+      "text": "Что это такое?",
+      "next": "tube_what"
+     },
+     {
+      "text": "Сам положил? Выкладывай всё с начала.",
+      "next": "tube_stole"
+     }
+    ]
+   },
+   "tube_what": {
+    "text": "— Мандат. Бумага из времён до Огня и латунная пластина с дырочками. Кто их предъявит, тому по старому закону принадлежит вся вода реки Светлой. Все скважины. И Глубокое за плотиной «Заслон», которое двести лет никто не открывал.",
+    "options": [
+     {
+      "text": "Откуда он у тебя?",
+      "next": "tube_stole"
+     }
+    ]
+   },
+   "tube_stole": {
+    "text": "— Я был сборщиком Треста. Серый пыльник, значок-счётчик, всё как положено. Пять лет назад мы везли этот тубус в Запруду под тройной охраной. Председатель Затвор велел сжечь его, как довезём. Сжечь, понимаешь? Воду всей Суши — в печку. Я ночью увёл тубус и сбежал. Спрятал на насосной, а ключ оставил себе. Странно только: в ту ночь часовой спал как убитый, а ворота обоза стояли незапертыми. Будто мне кто-то дорогу открыл.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "mandate",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "Зачем Тресту сжигать воду?",
+      "next": "tube_why"
+     }
+    ]
+   },
+   "tube_why": {
+    "text": "— А ты подумай. Пока Глубокое закрыто, вода есть только в их скважинах, и капли чеканят они. Откроется плотина — и Трест станет кучкой стариков с латунными жетонами. — Хэнк понижает голос. — Меня ищут пять лет. Раз колодец снова дал воду, караваны разнесут это по всему тракту. Скоро здесь будет Инспектор Шлюз. Он всегда находит.",
+    "options": [
+     {
+      "text": "Что мне с ним делать?",
+      "next": "tube_advice"
+     }
+    ]
+   },
+   "tube_advice": {
+    "text": "— Уноси его отсюда. Иди в Соль, это на солончаке за Тремя столбами. Там найдёшь, кто прочтёт пластину, или кто купит её так, что тебе хватит до старости. Только никому не показывай. И не говори Марте. Не хочу, чтобы её колодец сожгли из-за меня.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_confessed"
+     }
+    ],
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "next": "tube_come"
+     },
+     {
+      "text": "[Торговля] И сколько Трест дал бы за такой тубус?",
+      "if": [
+       {
+        "skill": "barter",
+        "gte": 40
+       }
+      ],
+      "next": "tube_price"
+     },
+     {
+      "text": "Я разберусь."
+     }
+    ]
+   },
+   "tube_come": {
+    "text": "— Я? Мои ноги пять лет не ходили дальше этого костра. — Он долго смотрит в огонь. — Спроси ещё раз, когда соберёшься в путь. Может, и соглашусь.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_maybe"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спрошу."
+     }
+    ]
+   },
+   "tube_price": {
+    "text": "— Хэнк мрачнеет. — Столько, что хватит купить колодец. И пулю в затылок в придачу, чтобы не рассказал, где взял. Не будь дураком.",
+    "options": [
+     {
+      "text": "Понял."
+     }
+    ]
+   },
+   "betrayed": {
+    "text": "Хэнк не поднимает глаз от огня. — Пять лет я его прятал. От Треста, от жары, от себя. А ты отдаёшь его Шлюзу, как пустую флягу. — Он плюёт в костёр. — Уходи.",
+    "options": [
+     {
+      "text": "Прощай, Хэнк."
+     }
+    ]
+   },
+   "road": {
+    "text": "Хэнк отряхивает с колен пыль заколоченной хижины. — Ушёл Шлюз. — Он качает головой, будто не верит. — Пять лет я ждал этого дня и думал, что он будет последним. А он всё не кончается.",
+    "options": [
+     {
+      "text": "Пойдём со мной. На запад, в Соль.",
+      "if": [
+       {
+        "flag": "hank_maybe"
+       }
+      ],
+      "next": "joins"
+     },
+     {
+      "text": "Шлюз вернётся, и здесь тебя найдут первым. Пойдём со мной.",
+      "if": [
+       {
+        "notFlag": "hank_maybe"
+       },
+       {
+        "flag": "hank_confessed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 10,
+       "pass": "joins",
+       "fail": "stays_no"
+      }
+     },
+     {
+      "text": "Береги себя, Хэнк.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hank_road"
+       }
+      ],
+      "next": "stays"
+     }
+    ]
+   },
+   "joins": {
+    "text": "Хэнк долго смотрит в огонь, потом затаптывает его сапогом. — Ладно. Этот костёр я всё равно выучил наизусть. — Он закидывает мешок на плечо. — Но если нас сцапают, скажу, что ты меня похитил. Выходим, когда скажешь: догоню у дороги.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_joins"
+     },
+     {
+      "type": "flag",
+      "key": "hank_road"
+     }
+    ],
+    "options": [
+     {
+      "text": "По рукам."
+     }
+    ]
+   },
+   "stays_no": {
+    "text": "— Найдут, — соглашается Хэнк. — Но не сегодня. — Он подбрасывает ветку в огонь. — Иди. Если буду жив, увидимся на тракте.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_road"
+     }
+    ],
+    "options": [
+     {
+      "text": "Прощай, Хэнк."
+     }
+    ]
+   },
+   "stays": {
+    "text": "— И ты. Смотри, чтобы тебя не записали в книжку.",
+    "options": [
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— Я готов. — Хэнк похлопывает по мешку. — Дорога на запад, мимо указателя. Ты впереди.",
+    "options": [
+     {
+      "text": "Идём."
+     }
+    ]
+   },
+   "dog": {
+    "text": "Хэнк замирает с ножом в руке: рыжий пёс сидит у твоих ног. — Ржавчик? — Хэнк садится прямо в пыль. — Медный ошейник… я сам его клепал. Это пёс Гордея. Мы вдвоём собирали подать для Треста на тракте. Пять лет назад я ушёл с тубусом, Гордей шёл со мной. У Трёх столбов нас нагнали, Гордея подстрелили. А я не вернулся. Бросил его на дороге. И пса бросил.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "dog_hank"
+     },
+     {
+      "type": "quest",
+      "quest": "collector_dog",
+      "stage": "collar"
+     }
+    ],
+    "options": [
+     {
+      "text": "У Гордея была семья?",
+      "next": "dog_family"
+     },
+     {
+      "text": "Пёс останется со мной.",
+      "if": [
+       {
+        "notFlag": "rzhavchik"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "rzhavchik",
+        "value": "ours"
+       },
+       {
+        "type": "give",
+        "item": "dog_whistle"
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "done"
+       }
+      ],
+      "next": "dog_ours"
+     },
+     {
+      "text": "Живи с этим, Хэнк."
+     }
+    ]
+   },
+   "dog_family": {
+    "text": "— Жена, Нюра. Торгует едой в Трёх столбах. И сын, Митяй, мелкий был совсем. Я ни разу к ним не зашёл. Пять лет. Не смог. — Хэнк смотрит на пса. — Она подала жалобу Мытному. Правильно подала.",
+    "options": [
+     {
+      "text": "Напиши ей. Я отнесу.",
+      "if": [
+       {
+        "notFlag": "hank_letter_out"
+       }
+      ],
+      "next": "dog_letter"
+     },
+     {
+      "text": "Пёс вернётся к Митяю. Я отведу.",
+      "if": [
+       {
+        "notFlag": "rzhavchik"
+       },
+       {
+        "notFlag": "dog_follows"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dog_follows"
+       }
+      ],
+      "next": "dog_home"
+     },
+     {
+      "text": "Пёс останется со мной.",
+      "if": [
+       {
+        "notFlag": "rzhavchik"
+       },
+       {
+        "notFlag": "dog_follows"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "rzhavchik",
+        "value": "ours"
+       },
+       {
+        "type": "give",
+        "item": "dog_whistle"
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "done"
+       }
+      ],
+      "next": "dog_ours"
+     },
+     {
+      "text": "Это твоя ноша, не моя."
+     }
+    ]
+   },
+   "dog_letter": {
+    "text": "Хэнк пишет огрызком карандаша, зачёркивает, пишет снова. Потом развязывает кисет и отсчитывает в конверт пятьдесят капель. — Вот. Всё, что есть. Если простит… — Он кивает на свою двустволку. — «Сборщик» твой. Мне с ним больше не ходить.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "hank_letter"
+     },
+     {
+      "type": "flag",
+      "key": "hank_letter_out"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отнесу."
+     }
+    ]
+   },
+   "dog_home": {
+    "text": "— Отведи. — Хэнк гладит пса, в первый раз за пять лет. — Скажи Митяю… Нет. Ничего не говори, что от меня.",
+    "options": [
+     {
+      "text": "Идём, Ржавчик."
+     }
+    ]
+   },
+   "dog_ours": {
+    "text": "— Правильно. — Хэнк отворачивается к огню. — Со мной он опять остался бы один.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "nyura_forgave": {
+    "text": "— Простила? — Хэнк долго держит в руках пустой кисет. — Простила… — Он встаёт, достаёт из-под мешка двустволку с медной меткой на ложе и кладёт тебе в руки. — «Сборщик». Мне с ним больше не ходить. А ты ходи.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "collector_gun"
+     },
+     {
+      "type": "flag",
+      "key": "hank_gun_given"
+     },
+     {
+      "type": "xp",
+      "amount": 40
+     }
+    ],
+    "options": [
+     {
+      "text": "Спасибо, Хэнк."
+     }
+    ]
+   }
+  }
+ },
+ "door": {
+  "speaker": "Дверь насосной",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "door_open"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "locked"
+   }
+  ],
+  "nodes": {
+   "locked": {
+    "text": "Тяжёлая стальная дверь с навесным замком. Ржавчина её так и не взяла.",
+    "options": [
+     {
+      "text": "[Ключ] Отпереть замок.",
+      "if": [
+       {
+        "item": "key"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "door_open"
+       },
+       {
+        "type": "flag",
+        "key": "door_method",
+        "value": "ключ"
+       },
+       {
+        "type": "log",
+        "text": "Замок щёлкает и падает в песок."
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "get_valve"
+       }
+      ]
+     },
+     {
+      "text": "[Монтировка] Сорвать петли.",
+      "if": [
+       {
+        "item": "crowbar"
+       },
+       {
+        "attr": "str",
+        "gte": 4
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "door_open"
+       },
+       {
+        "type": "flag",
+        "key": "door_method",
+        "value": "монтировка"
+       },
+       {
+        "type": "log",
+        "text": "Скрежет металла разносится над пустошью."
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "get_valve"
+       }
+      ]
+     },
+     {
+      "text": "[Монтировка] Попробовать сорвать петли.",
+      "if": [
+       {
+        "item": "crowbar"
+       },
+       {
+        "attr": "str",
+        "lt": 4
+       }
+      ],
+      "check": {
+       "attr": "str",
+       "mod": 20,
+       "pass": "forced",
+       "fail": "too_weak",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "door_open"
+        },
+        {
+         "type": "flag",
+         "key": "door_method",
+         "value": "монтировка"
+        },
+        {
+         "type": "log",
+         "text": "Скрежет металла разносится над пустошью."
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "get_valve"
+        }
+       ],
+       "failEffects": []
+      }
+     },
+     {
+      "text": "Вскрыть замок отмычкой.",
+      "if": [
+       {
+        "flag": "lock_fails",
+        "lt": 2
+       }
+      ],
+      "check": {
+       "skill": "lockpick",
+       "mod": 0,
+       "pass": "picked",
+       "fail": "pick_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "door_open"
+        },
+        {
+         "type": "flag",
+         "key": "door_method",
+         "value": "отмычка"
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "get_valve"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "inc",
+         "key": "lock_fails"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Ловкие пальцы] Ещё одна попытка.",
+      "if": [
+       {
+        "perk": "nimble"
+       },
+       {
+        "flag": "lock_fails",
+        "eq": 2
+       }
+      ],
+      "check": {
+       "skill": "lockpick",
+       "mod": 0,
+       "pass": "picked",
+       "fail": "pick_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "door_open"
+        },
+        {
+         "type": "flag",
+         "key": "door_method",
+         "value": "отмычка"
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "get_valve"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "inc",
+         "key": "lock_fails"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "picked": {
+    "text": "Замок сдаётся с сухим щелчком.",
+    "options": [
+     {
+      "text": "Войти."
+     }
+    ]
+   },
+   "pick_fail": {
+    "text": "Отмычка соскальзывает. Механизм скрипит.",
+    "options": [
+     {
+      "text": "Ещё раз.",
+      "if": [
+       {
+        "flag": "lock_fails",
+        "lt": 2
+       }
+      ],
+      "next": "locked"
+     },
+     {
+      "text": "Ещё раз.",
+      "if": [
+       {
+        "perk": "nimble"
+       },
+       {
+        "flag": "lock_fails",
+        "eq": 2
+       }
+      ],
+      "next": "locked"
+     },
+     {
+      "text": "Замок заклинило. Нужен ключ или монтировка.",
+      "if": [
+       {
+        "flag": "lock_fails",
+        "gte": 2
+       },
+       {
+        "noPerk": "nimble"
+       }
+      ]
+     },
+     {
+      "text": "Замок заклинило. Нужен ключ или монтировка.",
+      "if": [
+       {
+        "flag": "lock_fails",
+        "gte": 3
+       }
+      ]
+     }
+    ]
+   },
+   "open": {
+    "text": "Дверь открыта. Изнутри тянет машинным маслом и пылью.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "forced": {
+    "text": "Петли со скрежетом выходят из бетона.",
+    "options": [
+     {
+      "text": "Войти."
+     }
+    ]
+   },
+   "too_weak": {
+    "text": "Монтировка соскальзывает. Сил не хватает.",
+    "options": [
+     {
+      "text": "Ещё раз.",
+      "next": "locked"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "crate": {
+  "speaker": "Ящик с запчастями",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "valve_taken"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "full"
+   }
+  ],
+  "nodes": {
+   "full": {
+    "text": "Армейский ящик. Под ветошью, в промасленной бумаге, лежит латунный клапан давления. Рядом — тяжёлый латунный тубус, запаянный сургучом с гербом Водоуправления.",
+    "options": [
+     {
+      "text": "Забрать клапан и тубус.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "valve"
+       },
+       {
+        "type": "flag",
+        "key": "valve_taken"
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "fix_pump"
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       },
+       {
+        "type": "quest",
+        "quest": "mandate",
+        "stage": "found"
+       }
+      ]
+     },
+     {
+      "text": "Оставить."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустой ящик. Ветошь и мышиный помёт.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "pump": {
+  "speaker": "Колодец с помпой",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "well_sealed"
+     }
+    ],
+    "node": "sealed"
+   },
+   {
+    "if": [
+     {
+      "flag": "pump_fixed"
+     }
+    ],
+    "node": "working"
+   },
+   {
+    "if": [
+     {
+      "item": "valve"
+     }
+    ],
+    "node": "ready"
+   },
+   {
+    "node": "broken"
+   }
+  ],
+  "nodes": {
+   "broken": {
+    "text": "Ручная помпа над каменным колодцем. Рычаг ходит впустую: на месте клапана зияет дыра.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "ready": {
+    "text": "Посадочное место клапана забито ржавчиной. Клапан у вас в руках.",
+    "options": [
+     {
+      "text": "[Инструкция] Поставить клапан по схеме.",
+      "if": [
+       {
+        "item": "manual"
+       },
+       {
+        "attr": "int",
+        "gte": 4
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "valve"
+       },
+       {
+        "type": "flag",
+        "key": "pump_fixed"
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "report"
+       }
+      ],
+      "next": "fixed"
+     },
+     {
+      "text": "[Инструкция] Посмотреть картинки.",
+      "if": [
+       {
+        "item": "manual"
+       },
+       {
+        "attr": "int",
+        "lt": 4
+       }
+      ],
+      "next": "dumb_manual"
+     },
+     {
+      "text": "[Схема] Поставить клапан по схеме станции.",
+      "if": [
+       {
+        "item": "schematic"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "valve"
+       },
+       {
+        "type": "flag",
+        "key": "pump_fixed"
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "report"
+       }
+      ],
+      "next": "fixed"
+     },
+     {
+      "text": "[Золотые руки] Поставить клапан. Дело на пять минут.",
+      "if": [
+       {
+        "perk": "handy"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "valve"
+       },
+       {
+        "type": "flag",
+        "key": "pump_fixed"
+       },
+       {
+        "type": "quest",
+        "quest": "water",
+        "stage": "report"
+       }
+      ],
+      "next": "fixed"
+     },
+     {
+      "text": "Поставить клапан на глаз.",
+      "check": {
+       "skill": "repair",
+       "mod": 10,
+       "pass": "fixed",
+       "fail": "repair_fail",
+       "passEffects": [
+        {
+         "type": "take",
+         "item": "valve"
+        },
+        {
+         "type": "flag",
+         "key": "pump_fixed"
+        },
+        {
+         "type": "quest",
+         "quest": "water",
+         "stage": "report"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "hp",
+         "amount": -2
+        }
+       ]
+      }
+     },
+     {
+      "text": "Не сейчас."
+     }
+    ]
+   },
+   "fixed": {
+    "text": "Резьба схватывается. Вы качаете рычаг. Помпа хрипит, кашляет и выплёвывает струю мутной, но настоящей воды.",
+    "options": [
+     {
+      "text": "Готово."
+     }
+    ]
+   },
+   "repair_fail": {
+    "text": "Ключ срывается, и вы разбиваете костяшки о ржавый фланец.",
+    "options": [
+     {
+      "text": "Попробовать снова.",
+      "next": "ready"
+     },
+     {
+      "text": "Позже."
+     }
+    ]
+   },
+   "working": {
+    "text": "Помпа исправно качает воду. У колодца толпятся дети с вёдрами.",
+    "options": [
+     {
+      "text": "Наполнить флягу водой.",
+      "if": [
+       {
+        "item": "canteen"
+       },
+       {
+        "flag": "water_drawn",
+        "lt": 3
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "canteen"
+       },
+       {
+        "type": "give",
+        "item": "flask"
+       },
+       {
+        "type": "inc",
+        "key": "water_drawn"
+       }
+      ]
+     },
+     {
+      "text": "Опустить тубус в колодец на верёвке.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_well"
+       },
+       {
+        "type": "log",
+        "text": "Тубус спрятан в колодце."
+       }
+      ]
+     },
+     {
+      "text": "Вытянуть тубус из колодца.",
+      "if": [
+       {
+        "flag": "tube_well"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_well",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "dumb_manual": {
+    "text": "Картинки красивые. Стрелочки, кружочки, человечек с ключом. Понятнее не стало.",
+    "options": [
+     {
+      "text": "Эх.",
+      "next": "ready"
+     }
+    ]
+   },
+   "sealed": {
+    "text": "На помпе висит свинцовая пломба Треста с выбитой каплей. Вода есть, но каждое ведро теперь по записи.",
+    "options": [
+     {
+      "text": "Наполнить флягу водой.",
+      "if": [
+       {
+        "item": "canteen"
+       },
+       {
+        "flag": "water_drawn",
+        "lt": 1
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "canteen"
+       },
+       {
+        "type": "give",
+        "item": "flask"
+       },
+       {
+        "type": "inc",
+        "key": "water_drawn"
+       }
+      ]
+     },
+     {
+      "text": "Опустить тубус в колодец на верёвке.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_well"
+       },
+       {
+        "type": "log",
+        "text": "Тубус спрятан в колодце."
+       }
+      ]
+     },
+     {
+      "text": "Вытянуть тубус из колодца.",
+      "if": [
+       {
+        "flag": "tube_well"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_well",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ]
+     },
+     {
+      "text": "[Восприятие] Присмотреться к пломбе.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "seal_trap_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "seal_trap_known"
+       }
+      ],
+      "next": "seal_trap"
+     },
+     {
+      "text": "[Ремонт] Снять пломбу чисто, не тронув капсулы.",
+      "if": [
+       {
+        "flag": "seal_trap_known"
+       }
+      ],
+      "check": {
+       "skill": "repair",
+       "mod": -20,
+       "pass": "seal_free",
+       "fail": "seal_paint",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "well_fate",
+         "value": "free"
+        },
+        {
+         "type": "flag",
+         "key": "well_sealed",
+         "value": false
+        },
+        {
+         "type": "quest",
+         "quest": "well_seal",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 40
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "well_fate",
+         "value": "torn"
+        },
+        {
+         "type": "flag",
+         "key": "well_sealed",
+         "value": false
+        },
+        {
+         "type": "quest",
+         "quest": "well_seal",
+         "stage": "done"
+        },
+        {
+         "type": "flag",
+         "key": "paint_hands"
+        },
+        {
+         "type": "inc",
+         "key": "rep_trust",
+         "by": -10
+        }
+       ]
+      }
+     },
+     {
+      "text": "Сорвать пломбу.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "well_fate",
+        "value": "torn"
+       },
+       {
+        "type": "flag",
+        "key": "well_sealed",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "well_seal",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "paint_hands"
+       },
+       {
+        "type": "inc",
+        "key": "rep_trust",
+        "by": -10
+       }
+      ],
+      "next": "seal_paint"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "seal_trap": {
+    "text": "Под свинцом — крошечная стеклянная капсула с краской. Сорвёшь пломбу — лопнет, и рука надолго станет синей. Трест узнает, кто это сделал, по первой же руке.",
+    "options": [
+     {
+      "text": "…",
+      "next": "sealed"
+     }
+    ]
+   },
+   "seal_free": {
+    "text": "Щипцы, проволока, дыхание затаено. Пломба снимается вместе с капсулой — целой. Помпа свободна, и никто не узнает, чьих это рук дело.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "seal_paint": {
+    "text": "Свинец поддаётся, и в ладонь брызгает синяя краска. Теперь её не отмыть неделю. Зато помпа свободна.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "sign": {
+  "speaker": "Указатель",
+  "entry": [
+   {
+    "node": "read"
+   }
+  ],
+  "nodes": {
+   "read": {
+    "text": "На доске криво выведено: «РЖАВЫЙ КОЛОДЕЦ. ВОДА ЗА ТРУД. ВОРОВ ВЕШАЕМ». Ниже углём дописано: «воды нет».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "car_sedan": {
+  "speaker": "Остов седана",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "sedan_searched"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Седан без колёс. Сиденья давно растащили на заплатки, но бардачок закрыт.",
+    "options": [
+     {
+      "text": "Обыскать бардачок.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sedan_searched"
+       },
+       {
+        "type": "caps",
+        "amount": 3
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "[Восприятие] Под днищем что-то блестит.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "sedan_stash"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sedan_stash"
+       },
+       {
+        "type": "give",
+        "item": "bandage"
+       },
+       {
+        "type": "give",
+        "item": "ammo",
+        "qty": 6
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "stash"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Три капли и выцветшая открытка с морем. Море вы видели только на открытках.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустой остов. Здесь больше нечего брать.",
+    "options": [
+     {
+      "text": "[Восприятие] Под днищем что-то блестит.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "sedan_stash"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sedan_stash"
+       },
+       {
+        "type": "give",
+        "item": "bandage"
+       },
+       {
+        "type": "give",
+        "item": "ammo",
+        "qty": 6
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "stash"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "stash": {
+    "text": "К раме примотан проволокой свёрток: бинты и шесть патронов. Кто-то готовился вернуться.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "car_pickup": {
+  "speaker": "Остов пикапа",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "crowbar_taken"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Пикап лежит на ободах. В кузове под истлевшим брезентом угадывается что-то металлическое.",
+    "options": [
+     {
+      "text": "Поднять брезент.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "crowbar"
+       },
+       {
+        "type": "flag",
+        "key": "crowbar_taken"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "[Ремонт] Открутить что-нибудь полезное.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 30
+       },
+       {
+        "notFlag": "pickup_scrap"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pickup_scrap"
+       },
+       {
+        "type": "give",
+        "item": "scrap"
+       },
+       {
+        "type": "xp",
+        "amount": 5
+       }
+      ],
+      "next": "scrap"
+     },
+     {
+      "text": "[Ремонт] Вырезать из рамы ровную трубу для «Ласточки».",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "skill": "repair",
+        "gte": 25
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "[Сила] Выломать трубу из рамы.",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "attr": "str",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "Отпилить трубу пилой.",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "item": "saw"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Монтировка. Тяжёлая, чуть погнутая. Такой можно уговорить любую дверь.",
+    "options": [
+     {
+      "text": "[Ремонт] Открутить что-нибудь полезное.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 30
+       },
+       {
+        "notFlag": "pickup_scrap"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pickup_scrap"
+       },
+       {
+        "type": "give",
+        "item": "scrap"
+       },
+       {
+        "type": "xp",
+        "amount": 5
+       }
+      ],
+      "next": "scrap"
+     },
+     {
+      "text": "[Ремонт] Вырезать из рамы ровную трубу для «Ласточки».",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "skill": "repair",
+        "gte": 25
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "[Сила] Выломать трубу из рамы.",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "attr": "str",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "Отпилить трубу пилой.",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "item": "saw"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустой кузов и рваный брезент.",
+    "options": [
+     {
+      "text": "[Ремонт] Открутить что-нибудь полезное.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 30
+       },
+       {
+        "notFlag": "pickup_scrap"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pickup_scrap"
+       },
+       {
+        "type": "give",
+        "item": "scrap"
+       },
+       {
+        "type": "xp",
+        "amount": 5
+       }
+      ],
+      "next": "scrap"
+     },
+     {
+      "text": "[Ремонт] Вырезать из рамы ровную трубу для «Ласточки».",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "skill": "repair",
+        "gte": 25
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "[Сила] Выломать трубу из рамы.",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "attr": "str",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "Отпилить трубу пилой.",
+      "if": [
+       {
+        "flag": "luka_order"
+       },
+       {
+        "notFlag": "pickup_barrel_taken"
+       },
+       {
+        "item": "saw"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "pickup_barrel"
+       },
+       {
+        "type": "flag",
+        "key": "pickup_barrel_taken"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "barrel"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "scrap": {
+    "text": "Пружины, пара болтов, кусок жести. Хлам, но полезный.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "barrel": {
+    "text": "Труба рамы выходит с визгом. Внутри она ровная, как по линейке, — такую на заводе тянули. Ремень будет доволен.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "skeleton": {
+  "speaker": "Скелет странника",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "skeleton_searched"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Кости путника, выбеленные солнцем. Рядом истлевшая сумка.",
+    "options": [
+     {
+      "text": "Обыскать сумку.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "note"
+       },
+       {
+        "type": "caps",
+        "amount": 5
+       },
+       {
+        "type": "flag",
+        "key": "skeleton_searched"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Сунуть тубус под рёбра скелета.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_bones"
+       },
+       {
+        "type": "log",
+        "text": "Тубус спрятан под скелетом у дороги."
+       }
+      ]
+     },
+     {
+      "text": "Достать тубус из-под костей.",
+      "if": [
+       {
+        "flag": "tube_bones"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_bones",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ]
+     },
+     {
+      "text": "Оставить мертвеца в покое."
+     }
+    ]
+   },
+   "found": {
+    "text": "Пять капель и записка: «Если найдёшь это, не ходи на станцию без ключа. Хэнк знает».",
+    "options": [
+     {
+      "text": "[Удача] Прощупать подкладку сумки.",
+      "if": [
+       {
+        "attr": "luk",
+        "gte": 7
+       },
+       {
+        "notFlag": "skel_luck"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "skel_luck"
+       },
+       {
+        "type": "caps",
+        "amount": 8
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       },
+       {
+        "type": "flag",
+        "key": "seal_mark_1"
+       }
+      ],
+      "next": "lucky"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Кости. Пустая сумка.",
+    "options": [
+     {
+      "text": "[Удача] Прощупать подкладку сумки.",
+      "if": [
+       {
+        "attr": "luk",
+        "gte": 7
+       },
+       {
+        "notFlag": "skel_luck"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "skel_luck"
+       },
+       {
+        "type": "caps",
+        "amount": 8
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       },
+       {
+        "type": "flag",
+        "key": "seal_mark_1"
+       }
+      ],
+      "next": "lucky"
+     },
+     {
+      "text": "Сунуть тубус под рёбра скелета.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_bones"
+       },
+       {
+        "type": "log",
+        "text": "Тубус спрятан под скелетом у дороги."
+       }
+      ]
+     },
+     {
+      "text": "Достать тубус из-под костей.",
+      "if": [
+       {
+        "flag": "tube_bones"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_bones",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "lucky": {
+    "text": "В подкладке зашиты восемь капель и кусочек красного сургуча с оттиском: рука, держащая печать. Странник копил на что-то. Не успел.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "machine": {
+  "speaker": "Насосный агрегат",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Главный агрегат станции. Мотор вырван с мясом. На пульте лежит журнал обслуживания в жёсткой обложке.",
+    "options": [
+     {
+      "text": "Разобраться в записях журнала.",
+      "if": [
+       {
+        "notFlag": "log_read"
+       },
+       {
+        "notFlag": "log_failed"
+       }
+      ],
+      "check": {
+       "skill": "science",
+       "mod": 0,
+       "pass": "log_ok",
+       "fail": "log_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "log_read"
+        },
+        {
+         "type": "give",
+         "item": "schematic"
+        },
+        {
+         "type": "xp",
+         "amount": 15
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "log_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "log_ok": {
+    "text": "Между графиками давления находится лист со схемой: как ставить клапан на ручную помпу. Вы аккуратно вырываете его.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "log_fail": {
+    "text": "Столбцы цифр, сокращения, пятна масла. Голова начинает болеть.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "hank_bag": {
+  "speaker": "Мешок Хэнка",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "key_sold"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "if": [
+     {
+      "flag": "bag_searched"
+     }
+    ],
+    "node": "watched"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Потёртый армейский мешок. Хэнк клюёт носом у огня, мешок за его спиной.",
+    "options": [
+     {
+      "text": "Тихо пошарить в мешке.",
+      "check": {
+       "skill": "sneak",
+       "mod": -10,
+       "pass": "stolen",
+       "fail": "caught",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "key"
+        },
+        {
+         "type": "flag",
+         "key": "key_sold"
+        },
+        {
+         "type": "flag",
+         "key": "stole_key"
+        },
+        {
+         "type": "karma",
+         "amount": -1
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "bag_searched"
+        },
+        {
+         "type": "flag",
+         "key": "hank_angry"
+        },
+        {
+         "type": "karma",
+         "amount": -1
+        }
+       ]
+      }
+     },
+     {
+      "text": "Сунуть тубус на дно мешка Хэнка.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_bag"
+       },
+       {
+        "type": "log",
+        "text": "Тубус спрятан в мешке Хэнка."
+       }
+      ]
+     },
+     {
+      "text": "Забрать тубус из мешка.",
+      "if": [
+       {
+        "flag": "tube_bag"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_bag",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ]
+     },
+     {
+      "text": "Оставить."
+     }
+    ]
+   },
+   "stolen": {
+    "text": "Пальцы нащупывают холодный металл. Ключ на проволочном кольце. Хэнк всхрапывает и не просыпается.",
+    "options": [
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "caught": {
+    "text": "Хэнк открывает один глаз. — Руки. Убрал. Теперь ключ стоит десять капель, а Марта узнает, кого наняла.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "watched": {
+    "text": "Хэнк не спускает глаз со своего мешка.",
+    "options": [
+     {
+      "text": "Сунуть тубус на дно мешка Хэнка.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_bag"
+       },
+       {
+        "type": "log",
+        "text": "Тубус спрятан в мешке Хэнка."
+       }
+      ]
+     },
+     {
+      "text": "Забрать тубус из мешка.",
+      "if": [
+       {
+        "flag": "tube_bag"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_bag",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Мешок Хэнка. Ничего ценного, только тряпьё и пустые гильзы.",
+    "options": [
+     {
+      "text": "Сунуть тубус на дно мешка Хэнка.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_bag"
+       },
+       {
+        "type": "log",
+        "text": "Тубус спрятан в мешке Хэнка."
+       }
+      ]
+     },
+     {
+      "text": "Забрать тубус из мешка.",
+      "if": [
+       {
+        "flag": "tube_bag"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_bag",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "locker": {
+  "speaker": "Железный шкафчик",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "locker_open"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "locked"
+   }
+  ],
+  "nodes": {
+   "locked": {
+    "text": "Узкий железный шкафчик с навесным замочком. Внутри что-то перекатывается.",
+    "options": [
+     {
+      "text": "Вскрыть замочек.",
+      "if": [
+       {
+        "flag": "locker_fails",
+        "lt": 2
+       }
+      ],
+      "check": {
+       "skill": "lockpick",
+       "mod": 10,
+       "pass": "opened",
+       "fail": "stuck",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "locker_open"
+        },
+        {
+         "type": "give",
+         "item": "bandage"
+        },
+        {
+         "type": "give",
+         "item": "ammo",
+         "qty": 8
+        },
+        {
+         "type": "xp",
+         "amount": 10
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "inc",
+         "key": "locker_fails"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Замочек сломан. Не открыть.",
+      "if": [
+       {
+        "flag": "locker_fails",
+        "gte": 2
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "opened": {
+    "text": "Замочек поддаётся. Внутри бинты и коробка патронов.",
+    "options": [
+     {
+      "text": "Забрать."
+     }
+    ]
+   },
+   "stuck": {
+    "text": "Замочек не поддаётся.",
+    "options": [
+     {
+      "text": "Ещё раз.",
+      "if": [
+       {
+        "flag": "locker_fails",
+        "lt": 2
+       }
+      ],
+      "next": "locked"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустой шкафчик.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "fuel_barrel": {
+  "speaker": "Бочка с маркировкой",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Бочка с облезлой маркировкой «ОГНЕОПАСНО». Внутри плещется что-то едкое. Если по ней выстрелить, рванёт.",
+    "options": [
+     {
+      "text": "[Наука] Смастерить зажигательную бомбу: хлам, горючее, фитиль.",
+      "if": [
+       {
+        "item": "scrap"
+       },
+       {
+        "skill": "science",
+        "gte": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "scrap"
+       },
+       {
+        "type": "give",
+        "item": "firebomb"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "made"
+     },
+     {
+      "text": "[Ремонт] Собрать бомбу из хлама и горючего.",
+      "if": [
+       {
+        "item": "scrap"
+       },
+       {
+        "skill": "repair",
+        "gte": 40
+       },
+       {
+        "skill": "science",
+        "lt": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "scrap"
+       },
+       {
+        "type": "give",
+        "item": "firebomb"
+       },
+       {
+        "type": "xp",
+        "amount": 10
+       }
+      ],
+      "next": "made"
+     },
+     {
+      "text": "Из этого можно сделать бомбу. Нужен хлам: пружины, жесть, болты.",
+      "if": [
+       {
+        "noItem": "scrap"
+       },
+       {
+        "skill": "science",
+        "gte": 40
+       }
+      ]
+     },
+     {
+      "text": "Из этого можно сделать бомбу. Нужен хлам: пружины, жесть, болты.",
+      "if": [
+       {
+        "noItem": "scrap"
+       },
+       {
+        "skill": "repair",
+        "gte": 40
+       },
+       {
+        "skill": "science",
+        "lt": 40
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "made": {
+    "text": "Банка из жести, горючее, фитиль из тряпки. Бросать в скопление скорпионов, самому стоять подальше.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "shluz": {
+  "speaker": "Инспектор Шлюз",
+  "portrait": "portrait_shluz",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "shluz_met"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Серый пыльник без единой пылинки, на груди латунный значок-счётчик. — Инспектор Лев Шлюз, Трест «Чистый ключ». Колодец, который даёт воду, по закону даёт её Тресту: сегодня мы его опечатаем. И второе. Мы ищем беглого сборщика. Пять лет назад он унёс казённую вещь — латунный тубус. Караваны говорят, он прячется у вас.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "shluz_met"
+     }
+    ],
+    "options": [
+     {
+      "text": "Кто вы такие, чтобы опечатывать чужие колодцы?",
+      "next": "about"
+     },
+     {
+      "text": "Беглец? Сгорел он. Видели чёрный фургон у дороги? Там и сгорел, вместе со своим тубусом.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "lie_ok",
+       "fail": "lie_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "trust_outcome",
+         "value": "lie"
+        },
+        {
+         "type": "flag",
+         "key": "shluz_lied"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Обыскивайте. Нам скрывать нечего.",
+      "next": "search"
+     },
+     {
+      "text": "Колодец платит налог Тресту. Марта подтвердит. (40 капель)",
+      "if": [
+       {
+        "caps": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -40
+       }
+      ],
+      "next": "tax"
+     },
+     {
+      "text": "[Торговля] Колодец мелкий, двенадцать душ. По ставке для хуторов — двадцать пять капель в год.",
+      "if": [
+       {
+        "skill": "barter",
+        "gte": 50
+       },
+       {
+        "caps": 25
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -25
+       }
+      ],
+      "next": "tax"
+     },
+     {
+      "text": "Вот ваш тубус.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       }
+      ],
+      "next": "surrender"
+     },
+     {
+      "text": "Колодец не ваш. Уходите, пока можете.",
+      "next": "threat"
+     }
+    ]
+   },
+   "again": {
+    "text": "Шлюз ждёт, заложив руки за спину. — Итак?",
+    "options": [
+     {
+      "text": "Кто вы такие, чтобы опечатывать чужие колодцы?",
+      "next": "about"
+     },
+     {
+      "text": "Беглец? Сгорел он. Видели чёрный фургон у дороги? Там и сгорел, вместе со своим тубусом.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "lie_ok",
+       "fail": "lie_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "trust_outcome",
+         "value": "lie"
+        },
+        {
+         "type": "flag",
+         "key": "shluz_lied"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Обыскивайте. Нам скрывать нечего.",
+      "next": "search"
+     },
+     {
+      "text": "Колодец платит налог Тресту. Марта подтвердит. (40 капель)",
+      "if": [
+       {
+        "caps": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -40
+       }
+      ],
+      "next": "tax"
+     },
+     {
+      "text": "[Торговля] Колодец мелкий, двенадцать душ. По ставке для хуторов — двадцать пять капель в год.",
+      "if": [
+       {
+        "skill": "barter",
+        "gte": 50
+       },
+       {
+        "caps": 25
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -25
+       }
+      ],
+      "next": "tax"
+     },
+     {
+      "text": "Вот ваш тубус.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       }
+      ],
+      "next": "surrender"
+     },
+     {
+      "text": "Колодец не ваш. Уходите, пока можете.",
+      "next": "threat"
+     }
+    ]
+   },
+   "about": {
+    "text": "— Трест «Чистый ключ» держит скважины от Запруды до Трёх столбов и чеканит капли, которыми вы платите. По закону всякая новая вода — наша, пока Председатель не решит иначе. Я не грабитель. Я закон, который пришёл пешком.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "again"
+     }
+    ]
+   },
+   "lie_ok": {
+    "text": "Шлюз долго смотрит на чёрный остов фургона у дороги. — Пепел не допросишь. — Он раскрывает книжку и пишет аккуратно, без помарок: «Беглый сборщик погиб при пожаре, казённое имущество утрачено». — Если я ошибся, я вернусь. Я всегда возвращаюсь.",
+    "options": [
+     {
+      "text": "Дальше.",
+      "next": "well"
+     }
+    ]
+   },
+   "lie_fail": {
+    "text": "— Фургон горел лет десять назад, а беглец пропал пять. — Шлюз даже не повышает голоса. — Врёте вы плохо. Обыскать.",
+    "options": [
+     {
+      "text": "…",
+      "next": "search"
+     }
+    ]
+   },
+   "search": {
+    "text": "Сборщики вытряхивают мешки, заглядывают в бочки, переворачивают лежанку у костра. Шлюз ждёт, заложив руки за спину.",
+    "options": [
+     {
+      "text": "Ждать.",
+      "if": [
+       {
+        "party": "tube"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Ждать.",
+      "if": [
+       {
+        "noParty": "tube"
+       },
+       {
+        "flag": "tube_bag"
+       }
+      ],
+      "next": "found_bag"
+     },
+     {
+      "text": "Ждать.",
+      "if": [
+       {
+        "noParty": "tube"
+       },
+       {
+        "notFlag": "tube_bag"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trust_outcome",
+        "value": "hidden"
+       }
+      ],
+      "next": "clean"
+     }
+    ]
+   },
+   "found": {
+    "text": "Сборщик выуживает из мешка латунный тубус и поднимает над головой. Шлюз не улыбается. — Казённое имущество. Отдайте его добровольно, и я забуду, у кого его нашли.",
+    "options": [
+     {
+      "text": "Забирайте.",
+      "next": "surrender_take"
+     },
+     {
+      "text": "[Красноречие] На латуни написано: «выдан предъявителю». Предъявитель — я. Вы ведь служите закону?",
+      "if": [
+       {
+        "flag": "hank_confessed"
+       }
+      ],
+      "effects": [],
+      "check": {
+       "skill": "speech",
+       "mod": -20,
+       "pass": "law_ok",
+       "fail": "law_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "trust_outcome",
+         "value": "law"
+        },
+        {
+         "type": "flag",
+         "key": "shluz_doubts"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Только через мой труп.",
+      "next": "fight"
+     }
+    ]
+   },
+   "found_bag": {
+    "text": "Сборщик вытряхивает мешок Хэнка: ящеричьи хвосты, гильзы — и латунный тубус. — Мешок беглеца, — Шлюз поднимает тубус. — Значит, и беглец где-то рядом. Обыскать хижины.",
+    "options": [
+     {
+      "text": "Забирайте тубус. А бродягу не трогайте: он тут ни при чём.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "bag_spared",
+       "fail": "bag_taken"
+      }
+     },
+     {
+      "text": "[Красноречие] На латуни написано: «выдан предъявителю». Предъявитель — я. Вы ведь служите закону?",
+      "if": [
+       {
+        "flag": "hank_confessed"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tube_bag",
+        "value": false
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -20,
+       "pass": "law_ok",
+       "fail": "law_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "trust_outcome",
+         "value": "law"
+        },
+        {
+         "type": "flag",
+         "key": "shluz_doubts"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Только через мой труп.",
+      "next": "fight"
+     }
+    ]
+   },
+   "bag_spared": {
+    "text": "— Тубус важнее бродяги. — Шлюз кивает сборщикам, и те отходят от хижин.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "tube_bag",
+      "value": false
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "surrender"
+     }
+    ]
+   },
+   "bag_taken": {
+    "text": "Хэнка вытаскивают из заколоченной хижины. Он не сопротивляется, только смотрит на вас поверх плеча сборщика. — Тубус и беглец, — говорит Шлюз. — Хороший день.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "tube_bag",
+      "value": false
+     },
+     {
+      "type": "flag",
+      "key": "hank_taken"
+     },
+     {
+      "type": "karma",
+      "amount": -1
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "surrender"
+     }
+    ]
+   },
+   "clean": {
+    "text": "Пусто. — Чисто, — говорит Шлюз так, будто это его личная обида. — Пока.",
+    "options": [
+     {
+      "text": "Дальше.",
+      "next": "well"
+     }
+    ]
+   },
+   "surrender_take": {
+    "text": "Сборщик передаёт тубус инспектору.",
+    "effects": [
+     {
+      "type": "take",
+      "item": "tube",
+      "party": true
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "surrender"
+     }
+    ]
+   },
+   "surrender": {
+    "text": "Шлюз принимает тубус двумя руками, как икону, и проверяет сургуч. — Цел. — Впервые он смотрит на вас с интересом. — Трест умеет помнить добро. Вот пропуск: в Запруде вас пропустят без досмотра. И премия. Колодец оставлю без пломбы — в счёт долга.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "trust_outcome",
+      "value": "surrender"
+     },
+     {
+      "type": "flag",
+      "key": "paper_dog"
+     },
+     {
+      "type": "give",
+      "item": "trust_pass"
+     },
+     {
+      "type": "caps",
+      "amount": 30
+     },
+     {
+      "type": "karma",
+      "amount": -1
+     }
+    ],
+    "options": [
+     {
+      "text": "Прощайте, инспектор.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trust_left"
+       },
+       {
+        "type": "flag",
+        "key": "hank_hid",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "inspector",
+        "stage": "gone"
+       }
+      ]
+     },
+     {
+      "text": "Беглец прячется в заколоченной хижине.",
+      "if": [
+       {
+        "notFlag": "hank_taken"
+       }
+      ],
+      "next": "betray"
+     }
+    ]
+   },
+   "betray": {
+    "text": "Хэнка вытаскивают из хижины. Он не сопротивляется, только смотрит — долго, мимо Шлюза, прямо на вас. — Двадцать капель за содействие, — говорит Шлюз. — Трест платит за правду.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "hank_taken"
+     },
+     {
+      "type": "caps",
+      "amount": 20
+     },
+     {
+      "type": "karma",
+      "amount": -2
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trust_left"
+       },
+       {
+        "type": "flag",
+        "key": "hank_hid",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "inspector",
+        "stage": "gone"
+       }
+      ]
+     }
+    ]
+   },
+   "law_ok": {
+    "text": "Шлюз поворачивает тубус к свету и читает строку на латуни. Потом ещё раз. Молчание длится слишком долго. — «Выдан предъявителю», — повторяет он тихо. — Мне сказали: казённое имущество. — Он возвращает тубус. — Я везу закон, а не грабёж. Но Председатель пошлёт не меня, а тех, кто читать не умеет.",
+    "options": [
+     {
+      "text": "Спасибо, инспектор.",
+      "next": "well"
+     }
+    ]
+   },
+   "law_fail": {
+    "text": "— Закон здесь — я, — отрезает Шлюз. — Отдайте тубус, или его заберут силой.",
+    "options": [
+     {
+      "text": "Забирайте.",
+      "next": "surrender_take"
+     },
+     {
+      "text": "Только через мой труп.",
+      "next": "fight"
+     }
+    ]
+   },
+   "well": {
+    "text": "— Остаётся колодец. — Шлюз достаёт из сумки свинцовую пломбу и щипцы. — С пломбой воду берут при сборщике и по записи: ведро на душу, остальное — Тресту.",
+    "options": [
+     {
+      "text": "Колодец платит налог. (40 капель)",
+      "if": [
+       {
+        "caps": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -40
+       }
+      ],
+      "next": "well_taxed"
+     },
+     {
+      "text": "[Торговля] По ставке для хуторов — двадцать пять капель в год.",
+      "if": [
+       {
+        "skill": "barter",
+        "gte": 50
+       },
+       {
+        "caps": 25
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -25
+       }
+      ],
+      "next": "well_taxed"
+     },
+     {
+      "text": "Помпу чинил чужак, Круг за неё не платил. По вашему же закону она пока ничья.",
+      "check": {
+       "skill": "speech",
+       "mod": -20,
+       "pass": "well_argued",
+       "fail": "well_sealed"
+      }
+     },
+     {
+      "text": "Ставьте свою пломбу.",
+      "next": "well_sealed"
+     }
+    ]
+   },
+   "well_taxed": {
+    "text": "Марта выходит из-за спины и кивает: — Платим. — Шлюз пересчитывает капли и пишет квитанцию. — Учтённый колодец — законный колодец. Пломбы не будет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "well_taxed"
+     }
+    ],
+    "options": [
+     {
+      "text": "Прощайте, инспектор.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trust_left"
+       },
+       {
+        "type": "flag",
+        "key": "hank_hid",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "inspector",
+        "stage": "gone"
+       }
+      ]
+     }
+    ]
+   },
+   "well_argued": {
+    "text": "Шлюз морщится, листает книжку, снова морщится. — Формально… верно. — Он прячет пломбу. — Я вернусь с постановлением.",
+    "options": [
+     {
+      "text": "Прощайте, инспектор.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trust_left"
+       },
+       {
+        "type": "flag",
+        "key": "hank_hid",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "inspector",
+        "stage": "gone"
+       }
+      ]
+     }
+    ]
+   },
+   "well_sealed": {
+    "text": "Щипцы щёлкают, и на помпе повисает свинцовая пломба с выбитой каплей. — Вода по записи, — говорит Шлюз. — Сборщик будет раз в неделю.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "well_sealed"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trust_left"
+       },
+       {
+        "type": "flag",
+        "key": "hank_hid",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "inspector",
+        "stage": "gone"
+       }
+      ]
+     }
+    ]
+   },
+   "tax": {
+    "text": "Марта выходит вперёд, вытирая руки о фартук: — Платим, инспектор. Всегда платили. — Шлюз пересчитывает капли и пишет квитанцию. — Учтённый колодец — законный колодец. А законопослушных я не обыскиваю без ордера. — Он захлопывает книжку. — Если беглец объявится, сообщите.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "well_taxed"
+     },
+     {
+      "type": "flag",
+      "key": "trust_outcome",
+      "value": "tax"
+     }
+    ],
+    "options": [
+     {
+      "text": "Непременно.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trust_left"
+       },
+       {
+        "type": "flag",
+        "key": "hank_hid",
+        "value": false
+       },
+       {
+        "type": "quest",
+        "quest": "inspector",
+        "stage": "gone"
+       }
+      ]
+     }
+    ]
+   },
+   "threat": {
+    "text": "Шлюз поднимает бровь. Сборщики за его спиной кладут руки на гвоздомёты. — Это угроза инспектору Треста при исполнении?",
+    "options": [
+     {
+      "text": "Да.",
+      "next": "fight"
+     },
+     {
+      "text": "Нет. Погорячились.",
+      "next": "again"
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Жаль, — говорит Шлюз и отступает на шаг. — Взять.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "trust_fight"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "collector": {
+  "speaker": "Сборщик Треста",
+  "portrait": "portrait_collector",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Сборщик жуёт травинку и смотрит сквозь вас. — С инспектором говори.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "shack_hank": {
+  "speaker": "Заколоченная хижина",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "hank_hid"
+     },
+     {
+      "notFlag": "hank_taken"
+     }
+    ],
+    "node": "hank"
+   },
+   {
+    "node": "boards"
+   }
+  ],
+  "nodes": {
+   "hank": {
+    "text": "Из щели между досками на вас смотрит глаз. — Тсс, — шепчет Хэнк. — Уведи их отсюда. Как угодно.",
+    "options": [
+     {
+      "text": "Сиди тихо."
+     }
+    ]
+   },
+   "boards": {
+    "text": "Доски прибиты крест-накрест. Внутри темно и пахнет старой соломой.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "workbench": {
+  "speaker": "Верстак",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Верстак из старых шпал: тиски, ножовка, банка с гайками. Кто-то до вас чинил здесь всё, что стреляет.",
+    "options": [
+     {
+      "text": "Поработать.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "workbench",
+        "id": "workbench"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "campfire": {
+  "speaker": "Костёр",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Костёр Хэнка. Угли тлеют под закопчённым котелком.",
+    "options": [
+     {
+      "text": "Сварить что-нибудь.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "workbench",
+        "id": "fire"
+       }
+      ]
+     },
+     {
+      "text": "Отдохнуть до утра.",
+      "effects": [
+       {
+        "type": "rest"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "scrap": {
+  "speaker": "Куча хлама",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "scrap_dug",
+      "gte": 3
+     }
+    ],
+    "node": "dug"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Ржавый лом, обрезки жести, колёсный диск. Если порыться, найдётся что продать.",
+    "options": [
+     {
+      "text": "Порыться.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "scrap",
+        "qty": 2
+       },
+       {
+        "type": "inc",
+        "key": "scrap_dug"
+       }
+      ]
+     },
+     {
+      "text": "[Ремонт] Разобрать с толком: гайки и пружины отдельно.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "scrap",
+        "qty": 2
+       },
+       {
+        "type": "give",
+        "item": "nuts",
+        "qty": 4
+       },
+       {
+        "type": "inc",
+        "key": "scrap_dug"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "dug": {
+    "text": "Сегодня тут уже всё перерыто. Завтра ветер нанесёт новое.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "birjuk": {
+  "speaker": "Караванщик Бирюк",
+  "portrait": "portrait_birjuk",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "semyon",
+      "eq": "reunited"
+     }
+    ],
+    "node": "home"
+   },
+   {
+    "if": [
+     {
+      "flag": "semyon",
+      "eq": "forgiven"
+     }
+    ],
+    "node": "forgiven"
+   },
+   {
+    "if": [
+     {
+      "flag": "met_birjuk"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Бородач в выгоревшем плаще сверяет вьюки с засаленной тетрадью. Через бровь — старый белый шрам. — Бирюк, Соляная гильдия. Вода, соль, стволы, тряпки. Цены честные, разговоры за отдельную плату.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "met_birjuk"
+     }
+    ],
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "birjuk"
+       }
+      ]
+     },
+     {
+      "text": "[Восприятие] Твой Сыч мелом метит вьюки. Для кого?",
+      "if": [
+       {
+        "flag": "job_escort",
+        "eq": "active"
+       },
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "sych_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sych_known"
+       }
+      ],
+      "next": "sych"
+     },
+     {
+      "text": "Что нового на тракте?",
+      "next": "news"
+     },
+     {
+      "text": "Ты раньше бывал в Ржавом колодце? Лет двадцать назад?",
+      "if": [
+       {
+        "flag": "rifle_asked"
+       },
+       {
+        "notFlag": "semyon_known"
+       },
+       {
+        "notFlag": "birjuk_shut"
+       },
+       {
+        "notFlag": "semyon"
+       }
+      ],
+      "next": "past"
+     },
+     {
+      "text": "Показать старую фотографию.",
+      "if": [
+       {
+        "item": "old_photo"
+       },
+       {
+        "notFlag": "semyon_known"
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "Про Семёна…",
+      "if": [
+       {
+        "flag": "semyon_known"
+       },
+       {
+        "notFlag": "semyon"
+       }
+      ],
+      "next": "truth_after"
+     },
+     {
+      "text": "Купишь довоенные семена? Сорт «Изобилие».",
+      "if": [
+       {
+        "item": "seed_box"
+       },
+       {
+        "notFlag": "seeds"
+       }
+      ],
+      "next": "seeds_buy"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Опять ты. Ну, чего надо?",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "birjuk"
+       }
+      ]
+     },
+     {
+      "text": "[Восприятие] Твой Сыч мелом метит вьюки. Для кого?",
+      "if": [
+       {
+        "flag": "job_escort",
+        "eq": "active"
+       },
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "sych_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sych_known"
+       }
+      ],
+      "next": "sych"
+     },
+     {
+      "text": "Что нового на тракте?",
+      "next": "news"
+     },
+     {
+      "text": "Ты раньше бывал в Ржавом колодце? Лет двадцать назад?",
+      "if": [
+       {
+        "flag": "rifle_asked"
+       },
+       {
+        "notFlag": "semyon_known"
+       },
+       {
+        "notFlag": "birjuk_shut"
+       },
+       {
+        "notFlag": "semyon"
+       }
+      ],
+      "next": "past"
+     },
+     {
+      "text": "Показать старую фотографию.",
+      "if": [
+       {
+        "item": "old_photo"
+       },
+       {
+        "notFlag": "semyon_known"
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "Про Семёна…",
+      "if": [
+       {
+        "flag": "semyon_known"
+       },
+       {
+        "notFlag": "semyon"
+       }
+      ],
+      "next": "truth_after"
+     },
+     {
+      "text": "Купишь довоенные семена? Сорт «Изобилие».",
+      "if": [
+       {
+        "item": "seed_box"
+       },
+       {
+        "notFlag": "seeds"
+       }
+      ],
+      "next": "seeds_buy"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "news": {
+    "text": "— На тракте «Жажда» режет караваны, Трест режет «Жажду», а мы платим обоим. Воду бери с собой, тут её дороже, чем соли. Кстати, за полные фляги дам больше всех.",
+    "options": [
+     {
+      "text": "Ясно.",
+      "next": "again"
+     }
+    ]
+   },
+   "sych": {
+    "text": "Бирюк переводит взгляд на Сыча, потом на вьюки с белыми крестиками. — Вот оно что. — Он ничего не говорит, только кладёт руку на ружьё. Сыч бледнеет.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "past": {
+    "text": "Бирюк не отрывается от тетради. — Караванщик везде бывал.",
+    "options": [
+     {
+      "text": "[Восприятие] Шрам через бровь. Волк в детстве подрал, так?",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "[Красноречие] Каждый раз, как входишь, ты смотришь на лачугу Марты. Я видел.",
+      "check": {
+       "skill": "speech",
+       "pass": "truth",
+       "fail": "shut",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "birjuk_shut"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Ладно.",
+      "next": "again"
+     }
+    ]
+   },
+   "shut": {
+    "text": "— Товар будешь смотреть или нет? — Бирюк захлопывает тетрадь. Разговор окончен, и на этот раз надолго.",
+    "options": [
+     {
+      "text": "Ладно.",
+      "next": "again"
+     }
+    ]
+   },
+   "truth": {
+    "text": "Бирюк закрывает тетрадь. Долго. — Семён. Так меня звали, пока… — Он трёт шрам. — Караван накрыла пыльная буря у Солончаков. Выжили трое. Нас подобрали солевары, и год я возил их соль, чтобы расплатиться за жизнь. Вернулся — колодец пересох, а Марта уже год носила чёрное. Я простоял у ворот до темноты. И ушёл. Стыдно было, что жив, когда колодец мёртв. Так и хожу двадцать лет: каждый третий день — мимо.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "semyon_known"
+     },
+     {
+      "type": "quest",
+      "quest": "wall_rifle",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "truth_after"
+     }
+    ]
+   },
+   "truth_after": {
+    "text": "— Ну? — Бирюк не поднимает глаз. — Говори, раз начали.",
+    "options": [
+     {
+      "text": "[Красноречие] Двадцать лет — хватит. Иди к ней сам.",
+      "if": [
+       {
+        "notFlag": "semyon_will"
+       },
+       {
+        "notFlag": "birjuk_wont"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "will",
+       "fail": "wont",
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "birjuk_wont"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Напиши ей. Я передам.",
+      "if": [
+       {
+        "notFlag": "semyon_letter_given"
+       }
+      ],
+      "next": "write"
+     },
+     {
+      "text": "Твоё дело.",
+      "next": "again"
+     }
+    ]
+   },
+   "will": {
+    "text": "Бирюк встаёт и отряхивает плащ, как перед смотром. — Скажи ей… Нет. Ничего не говори. Скажи только: я приду, если она выйдет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "semyon_will"
+     }
+    ],
+    "options": [
+     {
+      "text": "Скажу.",
+      "next": "again"
+     }
+    ]
+   },
+   "wont": {
+    "text": "— Не могу. Двадцать лет — это не шаг через порог. — Он вырывает лист из тетради и пишет, не глядя. — Вот. Это могу. Отдай ей.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "semyon_letter"
+     },
+     {
+      "type": "flag",
+      "key": "semyon_letter_given"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отдам.",
+      "next": "again"
+     }
+    ]
+   },
+   "write": {
+    "text": "Бирюк пишет долго, зачёркивает, пишет снова. Складывает лист вчетверо. — Отдай. И не читай.",
+    "effects": [
+     {
+      "type": "give",
+      "item": "semyon_letter"
+     },
+     {
+      "type": "flag",
+      "key": "semyon_letter_given"
+     }
+    ],
+    "options": [
+     {
+      "text": "Не буду.",
+      "next": "again"
+     }
+    ]
+   },
+   "home": {
+    "text": "— А, это ты. — Бирюк улыбается, и шрам уходит под бровь. — Марта велела кормить тебя, если зайдёшь. Тебе у меня — скидка. Навсегда.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "birjuk"
+       }
+      ]
+     },
+     {
+      "text": "[Восприятие] Твой Сыч мелом метит вьюки. Для кого?",
+      "if": [
+       {
+        "flag": "job_escort",
+        "eq": "active"
+       },
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "sych_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sych_known"
+       }
+      ],
+      "next": "sych"
+     },
+     {
+      "text": "Что нового на тракте?",
+      "next": "news"
+     },
+     {
+      "text": "Купишь довоенные семена? Сорт «Изобилие».",
+      "if": [
+       {
+        "item": "seed_box"
+       },
+       {
+        "notFlag": "seeds"
+       }
+      ],
+      "next": "seeds_buy"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "forgiven": {
+    "text": "— Прощает, значит. — Бирюк долго смотрит в сторону колодца. — Дойду когда-нибудь. До ворот я уже дошёл, осталось шагов тридцать. Не торопи.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "birjuk"
+       }
+      ]
+     },
+     {
+      "text": "[Восприятие] Твой Сыч мелом метит вьюки. Для кого?",
+      "if": [
+       {
+        "flag": "job_escort",
+        "eq": "active"
+       },
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "sych_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sych_known"
+       }
+      ],
+      "next": "sych"
+     },
+     {
+      "text": "Что нового на тракте?",
+      "next": "news"
+     },
+     {
+      "text": "Купишь довоенные семена? Сорт «Изобилие».",
+      "if": [
+       {
+        "item": "seed_box"
+       },
+       {
+        "notFlag": "seeds"
+       }
+      ],
+      "next": "seeds_buy"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "seeds_buy": {
+    "text": "— «Изобилие»? — Бирюк присвистывает и нюхает бумажку с семенами. — Солевары за такое дадут вдвое. Восемьдесят капель, и не торгуйся.",
+    "options": [
+     {
+      "text": "По рукам.",
+      "effects": [
+       {
+        "type": "take",
+        "item": "seed_box"
+       },
+       {
+        "type": "caps",
+        "amount": 80
+       },
+       {
+        "type": "flag",
+        "key": "seeds",
+        "value": "sold"
+       },
+       {
+        "type": "quest",
+        "quest": "seeds",
+        "stage": "done"
+       }
+      ],
+      "next": "again"
+     },
+     {
+      "text": "Подумаю.",
+      "next": "again"
+     }
+    ]
+   }
+  }
+ },
+ "caravan_guard": {
+  "speaker": "Охранник Сыч",
+  "portrait": "portrait_caravan_guard",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Улыбчивый парень в очках-консервах протягивает кисет. — Табачку? Бирюк скупой, а я нет. Дорога длинная, всякое бывает.",
+    "options": [
+     {
+      "text": "Спасибо, не надо."
+     }
+    ]
+   }
+  }
+ },
+ "sipuha": {
+  "speaker": "Сипуха",
+  "portrait": "portrait_sipuha",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "met_sipuha"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Высокая фигура в капюшоне катит тележку. Из рукава — рука, как сухая ветка, в трещинах коры. Голос сиплый, насмешливый: — Не пялься, не заразно. Меня зовут Сипуха. Травы, отвары, обереги. Жала скупаю вдвое против любого.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "met_sipuha"
+     }
+    ],
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "sipuha"
+       }
+      ]
+     },
+     {
+      "text": "Кто ты такая?",
+      "next": "who"
+     },
+     {
+      "text": "Зачем тебе жала?",
+      "next": "stings"
+     },
+     {
+      "text": "Ива из Колючки передала кувшин живицы.",
+      "if": [
+       {
+        "item": "resin_jug"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "resin_jug"
+       },
+       {
+        "type": "flag",
+        "key": "resin_thief",
+        "value": "secret"
+       },
+       {
+        "type": "give",
+        "item": "resin_amulet"
+       },
+       {
+        "type": "flag",
+        "key": "resin_amulet_given"
+       },
+       {
+        "type": "inc",
+        "key": "rep_dry",
+        "by": 10
+       },
+       {
+        "type": "quest",
+        "quest": "resin_thief",
+        "stage": "done"
+       }
+      ],
+      "next": "jug"
+     },
+     {
+      "text": "[Красноречие] Откуда у Полусухих живица из Колючки?",
+      "if": [
+       {
+        "flag": "resin_asked"
+       },
+       {
+        "notFlag": "resin_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "resin_who",
+       "fail": "resin_hush",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "resin_known"
+        },
+        {
+         "type": "quest",
+         "quest": "resin_thief",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Живой ещё? Хорошо. Мёртвые у меня ничего не покупают.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "sipuha"
+       }
+      ]
+     },
+     {
+      "text": "Кто ты такая?",
+      "next": "who"
+     },
+     {
+      "text": "Зачем тебе жала?",
+      "next": "stings"
+     },
+     {
+      "text": "Ива из Колючки передала кувшин живицы.",
+      "if": [
+       {
+        "item": "resin_jug"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "resin_jug"
+       },
+       {
+        "type": "flag",
+        "key": "resin_thief",
+        "value": "secret"
+       },
+       {
+        "type": "give",
+        "item": "resin_amulet"
+       },
+       {
+        "type": "flag",
+        "key": "resin_amulet_given"
+       },
+       {
+        "type": "inc",
+        "key": "rep_dry",
+        "by": 10
+       },
+       {
+        "type": "quest",
+        "quest": "resin_thief",
+        "stage": "done"
+       }
+      ],
+      "next": "jug"
+     },
+     {
+      "text": "[Красноречие] Откуда у Полусухих живица из Колючки?",
+      "if": [
+       {
+        "flag": "resin_asked"
+       },
+       {
+        "notFlag": "resin_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "resin_who",
+       "fail": "resin_hush",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "resin_known"
+        },
+        {
+         "type": "quest",
+         "quest": "resin_thief",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "who": {
+    "text": "— Полусухая. Суховей высушил мне кожу, а голову оставил. Нас зовут корягами и жгут, когда Тресту скучно. Живём в приюте Тишины, в Мёртвых полях. Мне сто двенадцать лет, если тебе интересно.",
+    "options": [
+     {
+      "text": "Понятно.",
+      "next": "again"
+     }
+    ]
+   },
+   "stings": {
+    "text": "Она долго молчит. — Для отвара. Противоядие, сам понимаешь. — И смотрит в сторону.",
+    "options": [
+     {
+      "text": "Как скажешь.",
+      "next": "again"
+     }
+    ]
+   },
+   "jug": {
+    "text": "Сипуха принимает кувшин обеими руками, как ребёнка. Пальцы у неё серые и негнущиеся, как ветки. — Девочка. Храбрая девочка. — Она снимает с шеи кожаный мешочек. — Смоляная ладанка. Носи. От деревенения и от яда. Скажи Иве: Тишина помнит.",
+    "options": [
+     {
+      "text": "Скажу."
+     }
+    ]
+   },
+   "resin_who": {
+    "text": "Сипуха долго молчит сквозь повязку. — Девочка с хутора. Дочь старосты. Оставляет кувшин у дороги раз в четыре дня. Если отец узнает — нам конец, а ей хуже. Ты ведь не скажешь?",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "resin_hush": {
+    "text": "— Живица растёт где хочет, путник. — Сипуха отворачивается к своим склянкам.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   }
+  }
+ },
+ "raider_boss": {
+  "speaker": "Главарь налётчиков",
+  "portrait": "portrait_raider",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Трое в чёрном перегородили дорогу. Главный, с золотым зубом, поигрывает револьвером: — Караван наш. Отойди в сторонку и будешь жить.",
+    "options": [
+     {
+      "text": "Караван под охраной Гильдии. Сизый узнает, кто начал войну с Солью.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "talked",
+       "fail": "fight",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "ambush_off"
+        },
+        {
+         "type": "flag",
+         "key": "job_escort_n",
+         "value": 1
+        }
+       ]
+      }
+     },
+     {
+      "text": "Вас навёл Сыч, так? Он и вас сдаст, как сдал Бирюка.",
+      "if": [
+       {
+        "flag": "sych_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ambush_off"
+       },
+       {
+        "type": "flag",
+        "key": "job_escort_n",
+        "value": 1
+       },
+       {
+        "type": "flag",
+        "key": "sych_exposed"
+       }
+      ],
+      "next": "sych"
+     },
+     {
+      "text": "Тридцать капель, и вы нас не видели.",
+      "if": [
+       {
+        "caps": 30
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -30
+       },
+       {
+        "type": "flag",
+        "key": "ambush_off"
+       },
+       {
+        "type": "flag",
+        "key": "job_escort_n",
+        "value": 1
+       }
+      ],
+      "next": "paid"
+     },
+     {
+      "text": "Только через мой труп.",
+      "next": "fight"
+     }
+    ]
+   },
+   "talked": {
+    "text": "— Сизый… — Главарь сплёвывает. — Ладно. Не сегодня. — Трое уходят в скалы.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "sych": {
+    "text": "— Сыч?.. — Главарь мрачнеет. — Ну, раз так, у нас с ним будет отдельный разговор. — Налётчики уходят в скалы.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "paid": {
+    "text": "Главарь пробует каплю на зуб. — Приятно иметь дело. — Трое растворяются в скалах.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Красиво говоришь. — Он взводит курок. — Взять!",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "ambush_fight"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "raider": {
+  "speaker": "Налётчик «Жажды»",
+  "portrait": "portrait_raider",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "— С главным говори. — Налётчик щерится и не сводит глаз с вьюков.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "krivoy": {
+  "speaker": "Кривой",
+  "portrait": "portrait_krivoy",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Тощий налётчик с перебитым носом поднимает пустые руки. — Не стреляй! Я Кривой. Ушёл из «Жажды»: Сизый послал нас на ваш колодец, а я не пошёл. Хочу осесть. Работать. Жить.",
+    "options": [
+     {
+      "text": "За твою голову платят.",
+      "next": "price"
+     },
+     {
+      "text": "Уходи, и чтоб тебя тут не видели.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "leaves",
+       "fail": "stays",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "krivoy_left"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Пойдём к Марте. Пусть она решает.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krivoy_asked"
+       }
+      ],
+      "next": "asked"
+     }
+    ]
+   },
+   "price": {
+    "text": "— Знаю. Пятьдесят капель — это я. — Он не опускает рук. — Решай.",
+    "options": [
+     {
+      "text": "Прости.",
+      "next": "fight"
+     },
+     {
+      "text": "Погоди.",
+      "next": "intro"
+     }
+    ]
+   },
+   "leaves": {
+    "text": "— Уйду. — Он подбирает мешок. — Спасибо, что не выстрелил.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "stays": {
+    "text": "— Некуда мне идти. — Кривой садится на камень. — Хочешь — стреляй.",
+    "options": [
+     {
+      "text": "Прости.",
+      "next": "fight"
+     },
+     {
+      "text": "Пойдём к Марте.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krivoy_asked"
+       }
+      ],
+      "next": "asked"
+     }
+    ]
+   },
+   "asked": {
+    "text": "— Пойду. Хуже уже не будет. — Он идёт за тобой следом, держась поодаль.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fight": {
+    "text": "Кривой медленно опускает руки к поясу. — Ну, как знаешь.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "krivoy_fight"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "krivoy_village": {
+  "speaker": "Кривой",
+  "portrait": "portrait_krivoy",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Кривой сидит у заколоченной хижины с палкой-посохом. — Сторожу. Если «Жажда» полезет, я их узнаю первым.",
+    "options": [
+     {
+      "text": "Держись."
+     }
+    ]
+   }
+  }
+ },
+ "shack_marta": {
+  "speaker": "Лачуга Марты",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "semyon"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "В лачуге Марты пахнет полынью и дымом. Над лежанкой на двух гвоздях висит рычажный карабин: латунная скоба отполирована ладонью, ствол смазан. На прикладе вырезано «С.».",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "rifle_seen"
+     },
+     {
+      "type": "quest",
+      "quest": "wall_rifle",
+      "stage": "seen"
+     }
+    ],
+    "options": [
+     {
+      "text": "[Восприятие] За ремнём ружья что-то заткнуто.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "photo_found"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "old_photo"
+       },
+       {
+        "type": "flag",
+        "key": "photo_found"
+       }
+      ],
+      "next": "photo"
+     },
+     {
+      "text": "Выйти."
+     }
+    ]
+   },
+   "photo": {
+    "text": "Выцветший снимок: молодая Марта, рядом высокий мужчина со шрамом через бровь. На обороте карандашом: «Семён. Год до Засухи». Лицо знакомое: где-то на тракте оно уже попадалось — только с бородой.",
+    "options": [
+     {
+      "text": "Выйти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Два гвоздя над лежанкой и светлое пятно на стене, где двадцать лет висело ружьё.",
+    "options": [
+     {
+      "text": "Выйти."
+     }
+    ]
+   }
+  }
+ },
+ "rzhavchik": {
+  "speaker": "Тощий пёс",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "rzhavchik_fed",
+      "gte": 3
+     }
+    ],
+    "node": "friend"
+   },
+   {
+    "if": [
+     {
+      "flag": "dog_fed_today"
+     }
+    ],
+    "node": "full"
+   },
+   {
+    "if": [
+     {
+      "flag": "rzhavchik_fed",
+      "gte": 1
+     }
+    ],
+    "node": "known"
+   },
+   {
+    "node": "hungry"
+   }
+  ],
+  "nodes": {
+   "hungry": {
+    "text": "У костра Хэнка лежит тощий рыжий пёс: рёбра наружу, на шее позеленевший медный ошейник. Держится на расстоянии броска камня и смотрит на твой мешок. Хэнк говорит, что пёс таскает у него еду с весны.",
+    "options": [
+     {
+      "text": "Бросить жареную ящерицу.",
+      "if": [
+       {
+        "item": "lizard"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "lizard"
+       },
+       {
+        "type": "inc",
+        "key": "rzhavchik_fed"
+       },
+       {
+        "type": "flag",
+        "key": "dog_fed_today"
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "fed"
+       }
+      ],
+      "next": "ate"
+     },
+     {
+      "text": "Бросить кусок вяленого угря.",
+      "if": [
+       {
+        "item": "dried_eel"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "dried_eel"
+       },
+       {
+        "type": "inc",
+        "key": "rzhavchik_fed"
+       },
+       {
+        "type": "flag",
+        "key": "dog_fed_today"
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "fed"
+       }
+      ],
+      "next": "ate"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "known": {
+    "text": "Пёс узнаёт тебя. Встаёт и подходит на шаг ближе, чем вчера. Хвост неуверенно метёт пыль.",
+    "options": [
+     {
+      "text": "Бросить жареную ящерицу.",
+      "if": [
+       {
+        "item": "lizard"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "lizard"
+       },
+       {
+        "type": "inc",
+        "key": "rzhavchik_fed"
+       },
+       {
+        "type": "flag",
+        "key": "dog_fed_today"
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "fed"
+       }
+      ],
+      "next": "ate"
+     },
+     {
+      "text": "Бросить кусок вяленого угря.",
+      "if": [
+       {
+        "item": "dried_eel"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "dried_eel"
+       },
+       {
+        "type": "inc",
+        "key": "rzhavchik_fed"
+       },
+       {
+        "type": "flag",
+        "key": "dog_fed_today"
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "fed"
+       }
+      ],
+      "next": "ate"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "ate": {
+    "text": "Пёс хватает еду и уносится за хижину. Через минуту возвращается, садится поодаль и облизывается. Может, завтра подпустит ближе.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "full": {
+    "text": "Пёс сыт. Дремлет у углей, приоткрыв один глаз на тебя. Хватит на сегодня.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "friend": {
+    "text": "Рыжий пёс встаёт навстречу и тычется носом в ладонь. Вблизи видно клеймо на медном ошейнике — капля в кольце, как на бляхах сборщиков Треста. На ошейнике болтается костяной свисток.",
+    "options": [
+     {
+      "text": "Пойдёшь со мной?",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "rzhavchik",
+        "value": "ours"
+       },
+       {
+        "type": "give",
+        "item": "dog_whistle"
+       },
+       {
+        "type": "quest",
+        "quest": "collector_dog",
+        "stage": "done"
+       }
+      ],
+      "next": "ours"
+     },
+     {
+      "text": "Пойдём. Отведу тебя домой, к Митяю.",
+      "if": [
+       {
+        "flag": "dog_hank"
+       },
+       {
+        "notFlag": "dog_follows"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dog_follows"
+       }
+      ],
+      "next": "home"
+     },
+     {
+      "text": "Почесать за ухом.",
+      "next": "scratch"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "scratch": {
+    "text": "Пёс жмурится и приваливается к твоей ноге всем тощим боком. Хорошо.",
+    "options": [
+     {
+      "text": "…",
+      "next": "friend"
+     }
+    ]
+   },
+   "ours": {
+    "text": "Пёс будто понял: встаёт рядом, у левой ноги. Костяной свисток теперь у тебя. Свистнешь — придёт откуда угодно.",
+    "options": [
+     {
+      "text": "Идём, Ржавчик."
+     }
+    ]
+   },
+   "home": {
+    "text": "Пёс идёт за тобой к воротам и оглядывается на костёр только раз. Дорога до Трёх столбов неблизкая. Митяй ждёт его пятый год.",
+    "options": [
+     {
+      "text": "Идём."
+     }
+    ]
+   }
+  }
+ },
+ "station_hatch": {
+  "speaker": "Люк в отстойник",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "В полу насосной — железный люк на кольце. Снизу тянет сыростью и ржавчиной: там отстойник НС-2, бетонная чаша за станцией.",
+    "options": [
+     {
+      "text": "Спуститься по лестнице.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "rw_cistern",
+        "entry": "ladder"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "cistern_panel": {
+  "speaker": "Щит управления",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Щит управления отстойника. Стрелки мертвы, но эмалевая табличка цела: «Обвод — в колодец посёлка. Открывать только при ремонте помпы».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "bypass_valve": {
+  "speaker": "Обводной вентиль",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "well_fate"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Колесо обводного вентиля в рыжей корке. Судя по трубам, он пускает воду из скважины прямо в колодец посёлка — мимо помпы. И мимо пломбы.",
+    "options": [
+     {
+      "text": "[Ремонт] Расходить колесо маслом и ключом.",
+      "if": [
+       {
+        "flag": "well_sealed"
+       },
+       {
+        "skill": "repair",
+        "gte": 30
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "well_fate",
+        "value": "bypass"
+       },
+       {
+        "type": "flag",
+        "key": "well_bypass"
+       },
+       {
+        "type": "quest",
+        "quest": "well_seal",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 30
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "[Сила] Провернуть колесо руками.",
+      "if": [
+       {
+        "flag": "well_sealed"
+       },
+       {
+        "attr": "str",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "well_fate",
+        "value": "bypass"
+       },
+       {
+        "type": "flag",
+        "key": "well_bypass"
+       },
+       {
+        "type": "quest",
+        "quest": "well_seal",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 30
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "Провернуть колесо монтировкой, как рычагом.",
+      "if": [
+       {
+        "flag": "well_sealed"
+       },
+       {
+        "item": "crowbar"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "well_fate",
+        "value": "bypass"
+       },
+       {
+        "type": "flag",
+        "key": "well_bypass"
+       },
+       {
+        "type": "quest",
+        "quest": "well_seal",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 30
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "Не трогать."
+     }
+    ]
+   },
+   "opened": {
+    "text": "Колесо идёт туго, потом легче. В трубах глухо ухает, и где-то далеко, в посёлке, в колодце заплескалась вода. Пломба на помпе цела. Книга Треста будет писать пустые вёдра.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "done": {
+    "text": "Колесо вентиля повёрнуто до упора. В трубах тихо журчит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "cistern_bag": {
+  "speaker": "Сумка в иле",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "cistern_bag_taken"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Брезентовая сумка рабочего, вросшая в ил рядом с костями. Кто-то спустился сюда чинить трубы и не поднялся.",
+    "options": [
+     {
+      "text": "Открыть сумку.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "ammo",
+        "qty": 8
+       },
+       {
+        "type": "give",
+        "item": "flask"
+       },
+       {
+        "type": "caps",
+        "amount": 6
+       },
+       {
+        "type": "flag",
+        "key": "cistern_bag_taken"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Патроны в промасленной тряпке, мятая фляга и несколько капель. На клапане сумки выцарапано: «НС-2, смена Кирилла».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустая сумка в иле.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ }
+}

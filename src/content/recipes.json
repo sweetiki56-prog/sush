@@ -1,0 +1,19 @@
+{
+  "rifle_scoped": { "inputs": { "rifle": 1, "scope": 1 }, "output": { "rifle_scoped": 1 }, "skill": { "repair": 30 }, "bench": "workbench" },
+  "sawnoff": { "inputs": { "shotgun": 1, "saw": 1 }, "output": { "sawnoff": 1, "saw": 1 }, "skill": { "repair": 20 }, "bench": "workbench" },
+  "stapler": { "inputs": { "nailgun": 1, "spring": 2 }, "output": { "stapler": 1 }, "skill": { "repair": 40 }, "bench": "workbench" },
+  "venom_knife": { "inputs": { "knife": 1, "stinger": 2 }, "output": { "venom_knife": 1 }, "skill": { "survival": 30 }, "bench": "workbench" },
+  "fire_machete": { "inputs": { "machete": 1, "fuel": 5 }, "output": { "fire_machete": 1 }, "skill": { "repair": 25 }, "bench": "workbench" },
+  "nut_sledge": { "inputs": { "sledge": 1, "nuts": 10 }, "output": { "nut_sledge": 1 }, "skill": { "repair": 30 }, "bench": "workbench" },
+  "drum_rattler": { "inputs": { "rattler": 1, "drum": 1 }, "output": { "drum_rattler": 1 }, "skill": { "repair": 50 }, "bench": "workbench" },
+  "boosted_sparker": { "inputs": { "sparker": 1, "drone_cell": 1 }, "output": { "boosted_sparker": 1 }, "skill": { "science": 60 }, "bench": "workbench" },
+  "spitter": { "inputs": { "sprayer": 1, "fuel": 10 }, "output": { "spitter": 1 }, "skill": { "science": 40 }, "bench": "workbench" },
+  "nailbomb": { "inputs": { "tincan": 1, "nails": 6 }, "output": { "nailbomb": 1 }, "skill": { "repair": 20 }, "bench": "workbench" },
+  "plated_jacket": { "inputs": { "jacket": 1, "plates": 2 }, "output": { "plated_jacket": 1 }, "skill": { "repair": 35 }, "bench": "workbench" },
+  "reaper_shell": { "inputs": { "jacket": 1, "reaper_carapace": 1 }, "output": { "reaper_shell": 1 }, "skill": { "repair": 45 }, "bench": "workbench" },
+  "reaper_spear": { "inputs": { "spear": 1, "reaper_sting": 1 }, "output": { "reaper_spear": 1 }, "skill": { "repair": 40 }, "bench": "workbench" },
+  "queen_sting": { "inputs": { "knife": 1, "queen_sting_raw": 1 }, "output": { "queen_sting": 1 }, "skill": { "repair": 50 }, "bench": "workbench" },
+  "scent_lizard": { "inputs": { "lizard": 1, "stinger": 1 }, "output": { "scent_lizard": 1 }, "skill": { "survival": 20 }, "bench": "fire" },
+  "antidote": { "inputs": { "stinger": 1 }, "output": { "antidote": 1 }, "skill": { "survival": 40, "medic": 40 }, "bench": "fire" },
+  "thorn_traps": {"inputs": {"scrap": 2, "resin": 1}, "output": {"thorn_traps": 1}, "skill": {"repair": 30}, "bench": "workbench"}
+}

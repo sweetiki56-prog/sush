@@ -1,0 +1,214 @@
+{
+  "rusty_well": {
+    "name": "Ржавый колодец",
+    "cell": [14, 36],
+    "map": "rusty_well",
+    "entry": "road",
+    "areas": [
+      {
+        "map": "rusty_well",
+        "entry": "road",
+        "name": "Посёлок",
+        "at": [0.36, 0.55]
+      },
+      {
+        "map": "rw_cistern",
+        "entry": "ladder",
+        "name": "Отстойник НС-2",
+        "at": [0.72, 0.32],
+        "known": [
+          {
+            "flag": "door_open"
+          }
+        ]
+      }
+    ]
+  },
+  "three_pillars": {
+    "name": "Три столба",
+    "cell": [18, 28],
+    "chapter": 2,
+    "map": "three_pillars",
+    "entry": "road_w",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "three_pillars",
+        "entry": "road_w",
+        "name": "Перекрёсток",
+        "at": [0.38, 0.4]
+      },
+      {
+        "map": "pillars_ruins",
+        "entry": "north",
+        "name": "Южные развалины",
+        "at": [0.66, 0.7],
+        "known": [
+          {
+            "flag": "copper_asked"
+          }
+        ]
+      }
+    ]
+  },
+  "kolyuchka": {
+    "name": "Колючка",
+    "cell": [20, 19],
+    "chapter": 2,
+    "map": "kolyuchka",
+    "entry": "road_s",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "kolyuchka",
+        "entry": "road_s",
+        "name": "Хутор",
+        "at": [0.34, 0.56]
+      },
+      {
+        "map": "kolyuchka_glass",
+        "entry": "west",
+        "name": "Старые теплицы",
+        "at": [0.72, 0.42],
+        "known": [
+          {
+            "flag": "seeds_asked"
+          }
+        ]
+      }
+    ]
+  },
+  "zapruda": {
+    "name": "Запруда",
+    "cell": [26, 10],
+    "chapter": 3,
+    "reach": [
+      {
+        "if": [
+          {
+            "flag": "notary_known"
+          },
+          {
+            "notFlag": "chapter2_done"
+          }
+        ],
+        "effects": [
+          {
+            "type": "flag",
+            "key": "chapter2_done"
+          },
+          {
+            "type": "quest",
+            "quest": "tract",
+            "stage": "done"
+          }
+        ],
+        "log": "Над дорогой встают водонапорные башни Запруды. Где-то там, в Нижнем городе, контора Нотариуса."
+      }
+    ]
+  },
+  "barge": {
+    "name": "Баржа «Стрежень»",
+    "cell": [31, 25],
+    "chapter": 2,
+    "map": "barge_bed",
+    "entry": "road_w",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "barge_bed",
+        "entry": "road_w",
+        "name": "Мёртвое русло",
+        "at": [0.28, 0.45]
+      },
+      {
+        "map": "barge_deck",
+        "entry": "gangway",
+        "name": "Баржа «Стрежень»",
+        "at": [0.7, 0.34]
+      },
+      {
+        "map": "barge_post",
+        "entry": "north",
+        "name": "Почтовая станция",
+        "at": [0.58, 0.76],
+        "known": [
+          {
+            "flag": "post_known"
+          }
+        ]
+      }
+    ]
+  },
+  "khlebnoe": {
+    "name": "Руины Хлебного",
+    "cell": [45, 30],
+    "chapter": 3
+  },
+  "silence": {
+    "name": "Приют Тишины",
+    "cell": [39, 35],
+    "chapter": 3
+  },
+  "elevator": {
+    "name": "Элеватор",
+    "cell": [51, 25],
+    "chapter": 3
+  },
+  "ark": {
+    "name": "Ковчег",
+    "cell": [32, 43],
+    "chapter": 3
+  },
+  "to_salt": {
+    "name": "Дорога на Соль",
+    "cell": [63, 25],
+    "chapter": 4
+  },
+  "to_upper": {
+    "name": "Дорога в Верховья",
+    "cell": [30, 0],
+    "chapter": 7
+  },
+  "dry_stone": {
+    "name": "Сухой камень",
+    "cell": [17, 15],
+    "open": [
+      {
+        "flag": "laska_bow_asked"
+      }
+    ],
+    "reach": [
+      {
+        "if": [
+          {
+            "flag": "laska_bow_asked"
+          },
+          {
+            "notFlag": "dry_stone_met"
+          }
+        ],
+        "effects": [
+          {
+            "type": "flag",
+            "key": "dry_stone_met"
+          }
+        ],
+        "log": "Сухой камень: плоский валун у высохшего русла, весь в зарубках — счёт дани Костяного круга."
+      }
+    ],
+    "secret": true
+  }
+}

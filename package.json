@@ -1,0 +1,40 @@
+{
+  "name": "sush",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:server": "DEBUG=1 tsx watch server/main.ts",
+    "server": "tsx server/main.ts",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "gen:assets": "node tools/gen-assets.mjs",
+    "gen:map": "node tools/build-map.mjs && node tools/build-rw-cistern.mjs && node tools/build-pillars.mjs && node tools/build-pillars-ruins.mjs && node tools/build-kolyuchka.mjs && node tools/build-kolyuchka-glass.mjs && node tools/build-barge-bed.mjs && node tools/build-barge-deck.mjs && node tools/build-barge-post.mjs && node tools/build-arena.mjs && node tools/build-world.mjs && node tools/build-encounters.mjs",
+    "lint": "eslint src tests tools server"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/kelly-slab": "^5.3.0",
+    "@fontsource/press-start-2p": "^5.3.0",
+    "phaser": "^3.90.0",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@napi-rs/canvas": "^1.0.9",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.2",
+    "@types/ws": "^8.18.1",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.9",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.1",
+    "vite": "^8.3.0",
+    "vitest": "^4.1.11"
+  }
+}

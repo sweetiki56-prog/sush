@@ -1,0 +1,23 @@
+{
+  "maxLevel": 6,
+  "weapons": 2,
+  "rounds": 3,
+  "turnMs": 30000,
+  "roundPauseMs": 5000,
+  "startCountdownMs": 3000,
+  "ammoPerGun": 30,
+  "items": {
+    "bandage": 3,
+    "resin": 2,
+    "antidote": 1,
+    "rush": 2,
+    "hardbrew": 2,
+    "squint": 1,
+    "mirage": 1,
+    "coolant": 1,
+    "tincan": 3,
+    "firebomb": 2,
+    "banger": 2,
+    "nailbomb": 2
+  }
+}
