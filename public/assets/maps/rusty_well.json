@@ -4503,6 +4503,49 @@
     },
     {
      "notFlag": "hank_taken"
+    },
+    {
+     "notFlag": "met_hank"
+    }
+   ]
+  },
+  {
+   "id": "hank_home",
+   "sheet": "hank",
+   "x": 16,
+   "y": 31,
+   "dir": 5,
+   "label": "Хэнк",
+   "dialogue": "comp_hank",
+   "if": [
+    {
+     "flag": "met_hank"
+    },
+    {
+     "notFlag": "with_hank"
+    },
+    {
+     "notFlag": "lost_hank"
+    }
+   ]
+  },
+  {
+   "id": "rzhavchik_wait",
+   "sheet": "dog_rzhavchik",
+   "x": 14,
+   "y": 32,
+   "dir": 2,
+   "label": "Ржавчик",
+   "dialogue": "comp_rzhavchik",
+   "if": [
+    {
+     "flag": "met_rzhavchik"
+    },
+    {
+     "notFlag": "with_rzhavchik"
+    },
+    {
+     "notFlag": "lost_rzhavchik"
     }
    ]
   },

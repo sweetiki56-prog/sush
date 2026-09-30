@@ -35,7 +35,7 @@ export class Pointer {
     const cast = this.w.cast;
     for (const m of cast.aliveHostiles())
       if (m.actor.sprite.getBounds().contains(wx, wy)) return { kind: 'hostile', id: m.id, label: cast.label(m) };
-    for (const m of cast.of('npc'))
+    for (const m of [...cast.of('npc'), ...cast.of('ally').filter((a) => !a.hostile?.dead)])
       if (m.actor.sprite.getBounds().contains(wx, wy)) return { kind: 'npc', id: m.id, label: m.label, dialogue: m.dialogue };
     for (const m of cast.of('player')) {
       if (m.id === session().net?.you || !m.actor.sprite.getBounds().contains(wx, wy)) continue;

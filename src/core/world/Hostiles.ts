@@ -11,6 +11,9 @@ import { Mover } from './Mover';
 export const LURE_MS = 60_000;
 export const PATROL_SPEED = 1.3;
 const PATROL_WAIT = 2500;
+const FOLLOW_GAP = 2.5; // a companion catches up once the leader is farther than this (tiles)
+const FOLLOW_EVERY = 400; // ms between a companion's looks at the leader
+const FOLLOW_SPEED = 4.2; // tiles per second: keeps up with a walking hero
 
 export interface Hostile {
   id: string;
@@ -29,12 +32,15 @@ export interface Hostile {
   gone: boolean; // fled for good
   ally: boolean; // on the players' side: never notices them, fights with them
   ring: false | 'fists' | 'arms'; // a boxer or an arena fighter: fights only bouts (fists, or own weapons)
+  companion?: string; // walks after the leader (core/companions.ts)
 }
 
 export class Hostiles {
   readonly list: Hostile[] = [];
   /** Called whenever a hostile starts walking a path (the room broadcasts it). */
   onWalk: (h: Hostile, path: Tile[]) => void = () => {};
+  /** Where the party's leader stands: companions keep close to it. */
+  leader: () => Tile | null = () => null;
 
   constructor(
     actors: MapActor[],
@@ -66,6 +72,7 @@ export class Hostiles {
       gone: false,
       ally: !!a.ally,
       ring: a.ring === 'arms' ? 'arms' : a.ring ? 'fists' : false,
+      companion: a.companion,
     };
     this.list.push(h);
     return h;
@@ -99,6 +106,10 @@ export class Hostiles {
   update(dtMs: number): void {
     for (const h of this.alive) {
       h.mover.update(dtMs / 1000);
+      if (h.companion) {
+        this.follow(h, dtMs);
+        continue;
+      }
       if (h.mover.moving) continue;
       if (h.lured > 0) {
         h.lured -= dtMs;
@@ -112,6 +123,22 @@ export class Hostiles {
       h.leg = (h.leg + 1) % h.patrol.length;
       this.walk(h, h.patrol[h.leg]);
     }
+  }
+
+  /** A companion: once the leader is a few steps away, walk to a free tile next to it. */
+  private follow(h: Hostile, dtMs: number): void {
+    h.wait -= dtMs;
+    const to = this.leader();
+    if (!to || h.wait > 0) return;
+    h.wait = FOLLOW_EVERY;
+    const at = h.mover.moving ? h.mover.path[h.mover.path.length - 1] ?? h.mover.tile : h.mover.tile;
+    if (Math.hypot(at.x - to.x, at.y - to.y) <= FOLLOW_GAP) return;
+    const pf = this.pf();
+    const path = pf.find(h.mover.tile, pf.around(to.x, to.y));
+    if (!path?.length) return;
+    h.mover.speed = FOLLOW_SPEED;
+    h.mover.walk(path);
+    this.onWalk(h, path);
   }
 
   walk(h: Hostile, to: Tile, done?: () => void): void {

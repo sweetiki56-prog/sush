@@ -1,0 +1,8465 @@
+{
+ "id": "crystal_deep",
+ "name": "Глубокие копи",
+ "width": 44,
+ "height": 40,
+ "ground": [
+  "############################################",
+  "#################################,,#########",
+  "####::::#::::##:::##############::::##::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "###::::::::::::::::::::::::::::::::::::::###",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::::",
+  "##::::::::::::::::::::::::::::::::::::::::::",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "#.::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "##::::::::::::::::::::::::::::::::::::::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "###::::::::::::::::::::::::::::::::::::::###",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "###:::::::::::::::::::::::::::::::::::::::##",
+  "##:::::::::::::::::::::::::::::::::::::::###",
+  "##:::::::::::::::::::::::::::::::::::::::###",
+  "##:::::::::::::::::::::::::::::::::::::::###",
+  "##:::::::::::::::::::::::::::::::::::::::###",
+  "##:::::::::::::::::::::::::::::::::::::::###",
+  "##:::::::::::::::::::::::::::::::::::::::###",
+  "##::::####:#:::::::::::::::########:::::::##",
+  "################..##########################",
+  "############################################"
+ ],
+ "objects": [
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_16",
+   "frame": "rock_0",
+   "x": 27,
+   "y": 16,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_17",
+   "frame": "rock_1",
+   "x": 27,
+   "y": 17,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_20",
+   "frame": "rock_0",
+   "x": 27,
+   "y": 20,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_21",
+   "frame": "rock_1",
+   "x": 27,
+   "y": 21,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_22",
+   "frame": "rock_2",
+   "x": 27,
+   "y": 22,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_23",
+   "frame": "rock_3",
+   "x": 27,
+   "y": 23,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_24",
+   "frame": "rock_0",
+   "x": 27,
+   "y": 24,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_25",
+   "frame": "rock_1",
+   "x": 27,
+   "y": 25,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_26",
+   "frame": "rock_2",
+   "x": 27,
+   "y": 26,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_27",
+   "frame": "rock_3",
+   "x": 27,
+   "y": 27,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_28",
+   "frame": "rock_0",
+   "x": 27,
+   "y": 28,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_29",
+   "frame": "rock_1",
+   "x": 27,
+   "y": 29,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_30",
+   "frame": "rock_2",
+   "x": 27,
+   "y": 30,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_31",
+   "frame": "rock_3",
+   "x": 27,
+   "y": 31,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_32",
+   "frame": "rock_0",
+   "x": 27,
+   "y": 32,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_33",
+   "frame": "rock_1",
+   "x": 27,
+   "y": 33,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_34",
+   "frame": "rock_2",
+   "x": 27,
+   "y": 34,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_35",
+   "frame": "rock_3",
+   "x": 27,
+   "y": 35,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_36",
+   "frame": "rock_0",
+   "x": 27,
+   "y": 36,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_28",
+   "frame": "rock_0",
+   "x": 28,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_29",
+   "frame": "rock_1",
+   "x": 29,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_30",
+   "frame": "rock_2",
+   "x": 30,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_31",
+   "frame": "rock_3",
+   "x": 31,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_32",
+   "frame": "rock_0",
+   "x": 32,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_35",
+   "frame": "rock_3",
+   "x": 35,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_36",
+   "frame": "rock_0",
+   "x": 36,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_37",
+   "frame": "rock_1",
+   "x": 37,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_38",
+   "frame": "rock_2",
+   "x": 38,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_39",
+   "frame": "rock_3",
+   "x": 39,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "collapse_n_40",
+   "frame": "rock_0",
+   "x": 40,
+   "y": 15,
+   "label": "Обвал"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": false,
+   "id": "bitter_fire",
+   "frame": "campfire",
+   "x": 34,
+   "y": 26,
+   "label": "Костёр из соляного угля"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "bitter_stash",
+   "frame": "crate",
+   "x": 38,
+   "y": 32,
+   "label": "Ниша за шкурой",
+   "dialogue": "bitter_stash"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "bitter_altar",
+   "frame": "salt_pile",
+   "x": 31,
+   "y": 20,
+   "label": "Алтарь Горьких",
+   "dialogue": "bitter_altar"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "bitter_bunk_36_22",
+   "frame": "bunk",
+   "x": 36,
+   "y": 22,
+   "label": "Лежанка"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "bitter_bunk_30_30",
+   "frame": "bunk",
+   "x": 30,
+   "y": 30,
+   "label": "Лежанка"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "bitter_bunk_39_25",
+   "frame": "bunk",
+   "x": 39,
+   "y": 25,
+   "label": "Лежанка"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "name_tablet",
+   "frame": "niche",
+   "x": 10,
+   "y": 6,
+   "label": "Табличка в штреке",
+   "dialogue": "name_tablet"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "hammer_cache",
+   "frame": "crate",
+   "x": 5,
+   "y": 33,
+   "label": "Ящик под крепью",
+   "dialogue": "hammer_cache"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "tunnel_mouth",
+   "frame": "ladder",
+   "x": 3,
+   "y": 20,
+   "label": "Соляной тоннель",
+   "dialogue": "salt_tunnel"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "growth_8_14",
+   "frame": "crystal",
+   "x": 8,
+   "y": 14,
+   "label": "Соляная друза"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "growth_18_9",
+   "frame": "crystal",
+   "x": 18,
+   "y": 9,
+   "label": "Соляная друза"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "growth_20_25",
+   "frame": "crystal",
+   "x": 20,
+   "y": 25,
+   "label": "Соляная друза"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "growth_14_31",
+   "frame": "crystal",
+   "x": 14,
+   "y": 31,
+   "label": "Соляная друза"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "growth_23_17",
+   "frame": "crystal",
+   "x": 23,
+   "y": 17,
+   "label": "Соляная друза"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "web_15_20",
+   "frame": "salt_web",
+   "x": 15,
+   "y": 20,
+   "label": "Соляная паутина"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "web_11_26",
+   "frame": "salt_web",
+   "x": 11,
+   "y": 26,
+   "label": "Соляная паутина"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "vein_6_3",
+   "frame": "vein_a",
+   "x": 6,
+   "y": 3,
+   "label": "Светящаяся жила"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "vein_24_3",
+   "frame": "vein_b",
+   "x": 24,
+   "y": 3,
+   "label": "Светящаяся жила"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "id": "vein_4_11",
+   "frame": "vein_b",
+   "x": 4,
+   "y": 11,
+   "label": "Светящаяся жила"
+  },
+  {
+   "id": "rock_0_0",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": 2
+  },
+  {
+   "id": "rock_1_0",
+   "frame": "rock_1",
+   "x": 1,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 1
+  },
+  {
+   "id": "rock_2_0",
+   "frame": "rock_1",
+   "x": 2,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 2
+  },
+  {
+   "id": "rock_3_0",
+   "frame": "rock_0",
+   "x": 3,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": 0
+  },
+  {
+   "id": "rock_4_0",
+   "frame": "rock_3",
+   "x": 4,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -3
+  },
+  {
+   "id": "rock_5_0",
+   "frame": "rock_1",
+   "x": 5,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 2
+  },
+  {
+   "id": "rock_6_0",
+   "frame": "rock_3",
+   "x": 6,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 2
+  },
+  {
+   "id": "rock_7_0",
+   "frame": "rock_1",
+   "x": 7,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 4
+  },
+  {
+   "id": "rock_8_0",
+   "frame": "rock_2",
+   "x": 8,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 3
+  },
+  {
+   "id": "rock_9_0",
+   "frame": "rock_3",
+   "x": 9,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 4
+  },
+  {
+   "id": "rock_10_0",
+   "frame": "rock_3",
+   "x": 10,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": 3
+  },
+  {
+   "id": "rock_11_0",
+   "frame": "rock_0",
+   "x": 11,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 4
+  },
+  {
+   "id": "rock_12_0",
+   "frame": "rock_3",
+   "x": 12,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": -3
+  },
+  {
+   "id": "rock_13_0",
+   "frame": "rock_1",
+   "x": 13,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 4
+  },
+  {
+   "id": "rock_14_0",
+   "frame": "rock_3",
+   "x": 14,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": 3
+  },
+  {
+   "id": "rock_15_0",
+   "frame": "rock_0",
+   "x": 15,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": 3
+  },
+  {
+   "id": "rock_16_0",
+   "frame": "rock_0",
+   "x": 16,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -3
+  },
+  {
+   "id": "rock_17_0",
+   "frame": "rock_0",
+   "x": 17,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": -1
+  },
+  {
+   "id": "rock_18_0",
+   "frame": "rock_3",
+   "x": 18,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 1
+  },
+  {
+   "id": "rock_19_0",
+   "frame": "rock_0",
+   "x": 19,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": -4
+  },
+  {
+   "id": "rock_20_0",
+   "frame": "rock_1",
+   "x": 20,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 1
+  },
+  {
+   "id": "rock_21_0",
+   "frame": "rock_1",
+   "x": 21,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": -3
+  },
+  {
+   "id": "rock_22_0",
+   "frame": "rock_2",
+   "x": 22,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": -3
+  },
+  {
+   "id": "rock_23_0",
+   "frame": "rock_3",
+   "x": 23,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 4
+  },
+  {
+   "id": "rock_24_0",
+   "frame": "rock_0",
+   "x": 24,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": -2
+  },
+  {
+   "id": "rock_25_0",
+   "frame": "rock_0",
+   "x": 25,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": -2
+  },
+  {
+   "id": "rock_26_0",
+   "frame": "rock_2",
+   "x": 26,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 2
+  },
+  {
+   "id": "rock_27_0",
+   "frame": "rock_2",
+   "x": 27,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 2
+  },
+  {
+   "id": "rock_28_0",
+   "frame": "rock_2",
+   "x": 28,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -4
+  },
+  {
+   "id": "rock_29_0",
+   "frame": "rock_3",
+   "x": 29,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 4
+  },
+  {
+   "id": "rock_30_0",
+   "frame": "rock_1",
+   "x": 30,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "id": "rock_31_0",
+   "frame": "rock_3",
+   "x": 31,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": 0
+  },
+  {
+   "id": "rock_32_0",
+   "frame": "rock_2",
+   "x": 32,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 2
+  },
+  {
+   "id": "rock_33_0",
+   "frame": "rock_0",
+   "x": 33,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 3
+  },
+  {
+   "id": "rock_34_0",
+   "frame": "rock_0",
+   "x": 34,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 2
+  },
+  {
+   "id": "rock_35_0",
+   "frame": "rock_3",
+   "x": 35,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": -2
+  },
+  {
+   "id": "rock_36_0",
+   "frame": "rock_1",
+   "x": 36,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -2
+  },
+  {
+   "id": "rock_37_0",
+   "frame": "rock_2",
+   "x": 37,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -1
+  },
+  {
+   "id": "rock_38_0",
+   "frame": "rock_1",
+   "x": 38,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "id": "rock_39_0",
+   "frame": "rock_0",
+   "x": 39,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -1
+  },
+  {
+   "id": "rock_40_0",
+   "frame": "rock_1",
+   "x": 40,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": -3
+  },
+  {
+   "id": "rock_41_0",
+   "frame": "rock_2",
+   "x": 41,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": -4
+  },
+  {
+   "id": "rock_42_0",
+   "frame": "rock_2",
+   "x": 42,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 0
+  },
+  {
+   "id": "rock_43_0",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": -1
+  },
+  {
+   "id": "rock_0_1",
+   "frame": "rock_0",
+   "x": 0,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": -1
+  },
+  {
+   "id": "rock_1_1",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": -1
+  },
+  {
+   "id": "rock_3_1",
+   "frame": "rock_0",
+   "x": 3,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 4
+  },
+  {
+   "id": "rock_4_1",
+   "frame": "rock_3",
+   "x": 4,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -2
+  },
+  {
+   "id": "rock_8_1",
+   "frame": "rock_3",
+   "x": 8,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": 2
+  },
+  {
+   "id": "rock_9_1",
+   "frame": "rock_0",
+   "x": 9,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -1
+  },
+  {
+   "id": "rock_10_1",
+   "frame": "rock_1",
+   "x": 10,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -2
+  },
+  {
+   "id": "rock_11_1",
+   "frame": "rock_3",
+   "x": 11,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 2
+  },
+  {
+   "id": "rock_12_1",
+   "frame": "rock_2",
+   "x": 12,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": -2
+  },
+  {
+   "id": "rock_13_1",
+   "frame": "rock_2",
+   "x": 13,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": -2
+  },
+  {
+   "id": "rock_15_1",
+   "frame": "rock_0",
+   "x": 15,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": -3
+  },
+  {
+   "id": "rock_18_1",
+   "frame": "rock_2",
+   "x": 18,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 4
+  },
+  {
+   "id": "rock_21_1",
+   "frame": "rock_3",
+   "x": 21,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 1
+  },
+  {
+   "id": "rock_23_1",
+   "frame": "rock_2",
+   "x": 23,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -2
+  },
+  {
+   "id": "rock_24_1",
+   "frame": "rock_1",
+   "x": 24,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 0
+  },
+  {
+   "id": "rock_25_1",
+   "frame": "rock_3",
+   "x": 25,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": -2
+  },
+  {
+   "id": "rock_27_1",
+   "frame": "rock_3",
+   "x": 27,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": -2
+  },
+  {
+   "id": "rock_29_1",
+   "frame": "rock_1",
+   "x": 29,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "id": "rock_30_1",
+   "frame": "rock_1",
+   "x": 30,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -3
+  },
+  {
+   "id": "rock_31_1",
+   "frame": "rock_1",
+   "x": 31,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -1
+  },
+  {
+   "id": "rock_32_1",
+   "frame": "rock_3",
+   "x": 32,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 1
+  },
+  {
+   "id": "rock_35_1",
+   "frame": "rock_3",
+   "x": 35,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -3
+  },
+  {
+   "id": "rock_36_1",
+   "frame": "rock_1",
+   "x": 36,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 2
+  },
+  {
+   "id": "rock_38_1",
+   "frame": "rock_3",
+   "x": 38,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "id": "rock_40_1",
+   "frame": "rock_0",
+   "x": 40,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 1
+  },
+  {
+   "id": "rock_42_1",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": 2
+  },
+  {
+   "id": "rock_43_1",
+   "frame": "rock_0",
+   "x": 43,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": 3
+  },
+  {
+   "id": "rock_0_2",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": 2
+  },
+  {
+   "id": "rock_2_2",
+   "frame": "rock_2",
+   "x": 2,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 1
+  },
+  {
+   "id": "rock_3_2",
+   "frame": "rock_1",
+   "x": 3,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": 1
+  },
+  {
+   "id": "rock_8_2",
+   "frame": "rock_0",
+   "x": 8,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "id": "rock_13_2",
+   "frame": "rock_0",
+   "x": 13,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -1
+  },
+  {
+   "id": "rock_14_2",
+   "frame": "rock_2",
+   "x": 14,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": 3
+  },
+  {
+   "id": "rock_18_2",
+   "frame": "rock_2",
+   "x": 18,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 3
+  },
+  {
+   "id": "rock_19_2",
+   "frame": "rock_3",
+   "x": 19,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 0
+  },
+  {
+   "id": "rock_20_2",
+   "frame": "rock_1",
+   "x": 20,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -3
+  },
+  {
+   "id": "rock_21_2",
+   "frame": "rock_3",
+   "x": 21,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 2
+  },
+  {
+   "id": "rock_23_2",
+   "frame": "rock_0",
+   "x": 23,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -1
+  },
+  {
+   "id": "rock_25_2",
+   "frame": "rock_3",
+   "x": 25,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 9,
+   "jy": -3
+  },
+  {
+   "id": "rock_26_2",
+   "frame": "rock_2",
+   "x": 26,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -2
+  },
+  {
+   "id": "rock_28_2",
+   "frame": "rock_3",
+   "x": 28,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 1
+  },
+  {
+   "id": "rock_29_2",
+   "frame": "rock_2",
+   "x": 29,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": -1
+  },
+  {
+   "id": "rock_30_2",
+   "frame": "rock_1",
+   "x": 30,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": -1
+  },
+  {
+   "id": "rock_36_2",
+   "frame": "rock_0",
+   "x": 36,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 1
+  },
+  {
+   "id": "rock_37_2",
+   "frame": "rock_0",
+   "x": 37,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -3
+  },
+  {
+   "id": "rock_42_2",
+   "frame": "rock_1",
+   "x": 42,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "id": "rock_43_2",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": -2
+  },
+  {
+   "id": "rock_0_3",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 3,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": -3
+  },
+  {
+   "id": "rock_1_3",
+   "frame": "rock_3",
+   "x": 1,
+   "y": 3,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 9,
+   "jy": 1
+  },
+  {
+   "id": "rock_2_3",
+   "frame": "rock_0",
+   "x": 2,
+   "y": 3,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 1
+  },
+  {
+   "id": "rock_43_3",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 3,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 2
+  },
+  {
+   "id": "rock_0_4",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": -3
+  },
+  {
+   "id": "rock_1_4",
+   "frame": "rock_2",
+   "x": 1,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 1
+  },
+  {
+   "id": "rock_2_4",
+   "frame": "rock_3",
+   "x": 2,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 0
+  },
+  {
+   "id": "rock_43_4",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -2
+  },
+  {
+   "id": "rock_0_5",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 9,
+   "jy": -2
+  },
+  {
+   "id": "rock_1_5",
+   "frame": "rock_3",
+   "x": 1,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 4
+  },
+  {
+   "id": "rock_2_5",
+   "frame": "rock_0",
+   "x": 2,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 2
+  },
+  {
+   "id": "rock_42_5",
+   "frame": "rock_1",
+   "x": 42,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_5",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 1
+  },
+  {
+   "id": "rock_0_6",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 3
+  },
+  {
+   "id": "rock_1_6",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": -4
+  },
+  {
+   "id": "rock_42_6",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": 1
+  },
+  {
+   "id": "rock_43_6",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_7",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 0
+  },
+  {
+   "id": "rock_2_7",
+   "frame": "rock_1",
+   "x": 2,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 4
+  },
+  {
+   "id": "rock_41_7",
+   "frame": "rock_0",
+   "x": 41,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -2
+  },
+  {
+   "id": "rock_42_7",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_7",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "id": "rock_0_8",
+   "frame": "rock_0",
+   "x": 0,
+   "y": 8,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 1
+  },
+  {
+   "id": "rock_1_8",
+   "frame": "rock_2",
+   "x": 1,
+   "y": 8,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 4
+  },
+  {
+   "id": "rock_42_8",
+   "frame": "rock_2",
+   "x": 42,
+   "y": 8,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_8",
+   "frame": "rock_0",
+   "x": 43,
+   "y": 8,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 4
+  },
+  {
+   "id": "rock_0_9",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 9,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": -1
+  },
+  {
+   "id": "rock_1_9",
+   "frame": "rock_1",
+   "x": 1,
+   "y": 9,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_10",
+   "frame": "rock_0",
+   "x": 0,
+   "y": 10,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": -1
+  },
+  {
+   "id": "rock_0_11",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 11,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 9,
+   "jy": 3
+  },
+  {
+   "id": "rock_1_11",
+   "frame": "rock_1",
+   "x": 1,
+   "y": 11,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": -4
+  },
+  {
+   "id": "rock_42_11",
+   "frame": "rock_1",
+   "x": 42,
+   "y": 11,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_11",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 11,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -3
+  },
+  {
+   "id": "rock_0_12",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 12,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 1
+  },
+  {
+   "id": "rock_1_12",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 12,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_12",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 12,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_13",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 13,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": 0
+  },
+  {
+   "id": "rock_1_13",
+   "frame": "rock_3",
+   "x": 1,
+   "y": 13,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": -1
+  },
+  {
+   "id": "rock_42_13",
+   "frame": "rock_2",
+   "x": 42,
+   "y": 13,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 3
+  },
+  {
+   "id": "rock_43_13",
+   "frame": "rock_0",
+   "x": 43,
+   "y": 13,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": -2
+  },
+  {
+   "id": "rock_0_14",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 0
+  },
+  {
+   "id": "rock_42_14",
+   "frame": "rock_1",
+   "x": 42,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 4
+  },
+  {
+   "id": "rock_43_14",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -3
+  },
+  {
+   "id": "rock_0_15",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 0
+  },
+  {
+   "id": "rock_2_15",
+   "frame": "rock_3",
+   "x": 2,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -1
+  },
+  {
+   "id": "rock_42_15",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_15",
+   "frame": "rock_0",
+   "x": 43,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -1
+  },
+  {
+   "id": "rock_0_16",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 16,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": -1
+  },
+  {
+   "id": "rock_43_16",
+   "frame": "rock_0",
+   "x": 43,
+   "y": 16,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "id": "rock_0_17",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 17,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -3
+  },
+  {
+   "id": "rock_43_17",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 17,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_18",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 18,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 2
+  },
+  {
+   "id": "rock_42_18",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 18,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 3
+  },
+  {
+   "id": "rock_43_18",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 18,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -4
+  },
+  {
+   "id": "rock_0_19",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 19,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 3
+  },
+  {
+   "id": "rock_42_19",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 19,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": 4
+  },
+  {
+   "id": "rock_43_19",
+   "frame": "rock_0",
+   "x": 43,
+   "y": 19,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 9,
+   "jy": 4
+  },
+  {
+   "id": "rock_0_20",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 20,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 1
+  },
+  {
+   "id": "rock_1_20",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 20,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -4
+  },
+  {
+   "id": "rock_42_20",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 20,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 3
+  },
+  {
+   "id": "rock_43_20",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 20,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 1
+  },
+  {
+   "id": "rock_0_21",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 21,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": -1
+  },
+  {
+   "id": "rock_42_21",
+   "frame": "rock_2",
+   "x": 42,
+   "y": 21,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 1
+  },
+  {
+   "id": "rock_43_21",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 21,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 2
+  },
+  {
+   "id": "rock_0_22",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "id": "rock_1_22",
+   "frame": "rock_3",
+   "x": 1,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": -3
+  },
+  {
+   "id": "rock_42_22",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 3
+  },
+  {
+   "id": "rock_43_22",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 3
+  },
+  {
+   "id": "rock_0_23",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 23,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 0
+  },
+  {
+   "id": "rock_42_23",
+   "frame": "rock_2",
+   "x": 42,
+   "y": 23,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": 4
+  },
+  {
+   "id": "rock_43_23",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 23,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 2
+  },
+  {
+   "id": "rock_0_24",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 24,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 1
+  },
+  {
+   "id": "rock_1_24",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 24,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 2
+  },
+  {
+   "id": "rock_42_24",
+   "frame": "rock_2",
+   "x": 42,
+   "y": 24,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 0
+  },
+  {
+   "id": "rock_43_24",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 24,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": -2
+  },
+  {
+   "id": "rock_0_25",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 25,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 0
+  },
+  {
+   "id": "rock_42_25",
+   "frame": "rock_1",
+   "x": 42,
+   "y": 25,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 1
+  },
+  {
+   "id": "rock_43_25",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 25,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_26",
+   "frame": "rock_0",
+   "x": 0,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": -2
+  },
+  {
+   "id": "rock_1_26",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": 0
+  },
+  {
+   "id": "rock_2_26",
+   "frame": "rock_2",
+   "x": 2,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -4
+  },
+  {
+   "id": "rock_42_26",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_26",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_27",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -1
+  },
+  {
+   "id": "rock_1_27",
+   "frame": "rock_3",
+   "x": 1,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -2
+  },
+  {
+   "id": "rock_41_27",
+   "frame": "rock_0",
+   "x": 41,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -1
+  },
+  {
+   "id": "rock_42_27",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": 0
+  },
+  {
+   "id": "rock_43_27",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -4
+  },
+  {
+   "id": "rock_0_28",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "id": "rock_1_28",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 3
+  },
+  {
+   "id": "rock_42_28",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": -3
+  },
+  {
+   "id": "rock_43_28",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_29",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 0
+  },
+  {
+   "id": "rock_1_29",
+   "frame": "rock_3",
+   "x": 1,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "id": "rock_2_29",
+   "frame": "rock_3",
+   "x": 2,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": -1
+  },
+  {
+   "id": "rock_42_29",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_29",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "id": "rock_0_30",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": 3
+  },
+  {
+   "id": "rock_1_30",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 0
+  },
+  {
+   "id": "rock_42_30",
+   "frame": "rock_2",
+   "x": 42,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": -1
+  },
+  {
+   "id": "rock_43_30",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -3
+  },
+  {
+   "id": "rock_0_31",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -1
+  },
+  {
+   "id": "rock_1_31",
+   "frame": "rock_1",
+   "x": 1,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 2
+  },
+  {
+   "id": "rock_41_31",
+   "frame": "rock_1",
+   "x": 41,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 0
+  },
+  {
+   "id": "rock_43_31",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -1
+  },
+  {
+   "id": "rock_0_32",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 9,
+   "jy": -3
+  },
+  {
+   "id": "rock_1_32",
+   "frame": "rock_2",
+   "x": 1,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": -2
+  },
+  {
+   "id": "rock_41_32",
+   "frame": "rock_1",
+   "x": 41,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": -1
+  },
+  {
+   "id": "rock_42_32",
+   "frame": "rock_1",
+   "x": 42,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": 2
+  },
+  {
+   "id": "rock_43_32",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "id": "rock_0_33",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 33,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 3
+  },
+  {
+   "id": "rock_1_33",
+   "frame": "rock_3",
+   "x": 1,
+   "y": 33,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "id": "rock_43_33",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 33,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_34",
+   "frame": "rock_0",
+   "x": 0,
+   "y": 34,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": -2
+  },
+  {
+   "id": "rock_41_34",
+   "frame": "rock_1",
+   "x": 41,
+   "y": 34,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": 2
+  },
+  {
+   "id": "rock_42_34",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 34,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 1
+  },
+  {
+   "id": "rock_43_34",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 34,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -2
+  },
+  {
+   "id": "rock_0_35",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 2
+  },
+  {
+   "id": "rock_1_35",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "id": "rock_41_35",
+   "frame": "rock_2",
+   "x": 41,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -4
+  },
+  {
+   "id": "rock_42_35",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -1
+  },
+  {
+   "id": "rock_43_35",
+   "frame": "rock_2",
+   "x": 43,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": 0
+  },
+  {
+   "id": "rock_0_36",
+   "frame": "rock_0",
+   "x": 0,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -3
+  },
+  {
+   "id": "rock_1_36",
+   "frame": "rock_2",
+   "x": 1,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": 3
+  },
+  {
+   "id": "rock_41_36",
+   "frame": "rock_2",
+   "x": 41,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 3
+  },
+  {
+   "id": "rock_42_36",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -4
+  },
+  {
+   "id": "rock_43_36",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 1
+  },
+  {
+   "id": "rock_0_37",
+   "frame": "rock_3",
+   "x": 0,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": 4
+  },
+  {
+   "id": "rock_1_37",
+   "frame": "rock_2",
+   "x": 1,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 3
+  },
+  {
+   "id": "rock_6_37",
+   "frame": "rock_0",
+   "x": 6,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 1
+  },
+  {
+   "id": "rock_7_37",
+   "frame": "rock_2",
+   "x": 7,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "id": "rock_9_37",
+   "frame": "rock_0",
+   "x": 9,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": 0
+  },
+  {
+   "id": "rock_11_37",
+   "frame": "rock_0",
+   "x": 11,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 3
+  },
+  {
+   "id": "rock_28_37",
+   "frame": "rock_0",
+   "x": 28,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -2
+  },
+  {
+   "id": "rock_29_37",
+   "frame": "rock_0",
+   "x": 29,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": -1
+  },
+  {
+   "id": "rock_30_37",
+   "frame": "rock_2",
+   "x": 30,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 2
+  },
+  {
+   "id": "rock_31_37",
+   "frame": "rock_3",
+   "x": 31,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": -3
+  },
+  {
+   "id": "rock_32_37",
+   "frame": "rock_0",
+   "x": 32,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -6,
+   "jy": -1
+  },
+  {
+   "id": "rock_34_37",
+   "frame": "rock_0",
+   "x": 34,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "id": "rock_42_37",
+   "frame": "rock_1",
+   "x": 42,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": -1
+  },
+  {
+   "id": "rock_43_37",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 4
+  },
+  {
+   "id": "rock_0_38",
+   "frame": "rock_1",
+   "x": 0,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -4
+  },
+  {
+   "id": "rock_1_38",
+   "frame": "rock_0",
+   "x": 1,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": -2
+  },
+  {
+   "id": "rock_2_38",
+   "frame": "rock_0",
+   "x": 2,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 2
+  },
+  {
+   "id": "rock_3_38",
+   "frame": "rock_3",
+   "x": 3,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -1
+  },
+  {
+   "id": "rock_4_38",
+   "frame": "rock_0",
+   "x": 4,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": -2
+  },
+  {
+   "id": "rock_5_38",
+   "frame": "rock_1",
+   "x": 5,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 3
+  },
+  {
+   "id": "rock_6_38",
+   "frame": "rock_2",
+   "x": 6,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -1
+  },
+  {
+   "id": "rock_7_38",
+   "frame": "rock_3",
+   "x": 7,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -2
+  },
+  {
+   "id": "rock_8_38",
+   "frame": "rock_1",
+   "x": 8,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -3
+  },
+  {
+   "id": "rock_9_38",
+   "frame": "rock_3",
+   "x": 9,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -2
+  },
+  {
+   "id": "rock_11_38",
+   "frame": "rock_3",
+   "x": 11,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": -3
+  },
+  {
+   "id": "rock_12_38",
+   "frame": "rock_2",
+   "x": 12,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": -1
+  },
+  {
+   "id": "rock_13_38",
+   "frame": "rock_1",
+   "x": 13,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 4
+  },
+  {
+   "id": "rock_14_38",
+   "frame": "rock_1",
+   "x": 14,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": -1
+  },
+  {
+   "id": "rock_15_38",
+   "frame": "rock_1",
+   "x": 15,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": -2
+  },
+  {
+   "id": "rock_18_38",
+   "frame": "rock_3",
+   "x": 18,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 4
+  },
+  {
+   "id": "rock_19_38",
+   "frame": "rock_1",
+   "x": 19,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -4
+  },
+  {
+   "id": "rock_20_38",
+   "frame": "rock_1",
+   "x": 20,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 3
+  },
+  {
+   "id": "rock_21_38",
+   "frame": "rock_1",
+   "x": 21,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 3
+  },
+  {
+   "id": "rock_22_38",
+   "frame": "rock_3",
+   "x": 22,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 1
+  },
+  {
+   "id": "rock_23_38",
+   "frame": "rock_2",
+   "x": 23,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": 2
+  },
+  {
+   "id": "rock_24_38",
+   "frame": "rock_0",
+   "x": 24,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": -3
+  },
+  {
+   "id": "rock_25_38",
+   "frame": "rock_2",
+   "x": 25,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": -3
+  },
+  {
+   "id": "rock_26_38",
+   "frame": "rock_0",
+   "x": 26,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": -4
+  },
+  {
+   "id": "rock_28_38",
+   "frame": "rock_2",
+   "x": 28,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 3
+  },
+  {
+   "id": "rock_29_38",
+   "frame": "rock_2",
+   "x": 29,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "id": "rock_30_38",
+   "frame": "rock_3",
+   "x": 30,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "id": "rock_31_38",
+   "frame": "rock_2",
+   "x": 31,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -3
+  },
+  {
+   "id": "rock_32_38",
+   "frame": "rock_0",
+   "x": 32,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 1
+  },
+  {
+   "id": "rock_33_38",
+   "frame": "rock_3",
+   "x": 33,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 4
+  },
+  {
+   "id": "rock_34_38",
+   "frame": "rock_0",
+   "x": 34,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": 1
+  },
+  {
+   "id": "rock_35_38",
+   "frame": "rock_3",
+   "x": 35,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 4
+  },
+  {
+   "id": "rock_36_38",
+   "frame": "rock_0",
+   "x": 36,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 1
+  },
+  {
+   "id": "rock_38_38",
+   "frame": "rock_1",
+   "x": 38,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": -2
+  },
+  {
+   "id": "rock_39_38",
+   "frame": "rock_3",
+   "x": 39,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "id": "rock_40_38",
+   "frame": "rock_0",
+   "x": 40,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 0
+  },
+  {
+   "id": "rock_41_38",
+   "frame": "rock_0",
+   "x": 41,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": -3
+  },
+  {
+   "id": "rock_42_38",
+   "frame": "rock_3",
+   "x": 42,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 0
+  },
+  {
+   "id": "rock_43_38",
+   "frame": "rock_3",
+   "x": 43,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -9,
+   "jy": -1
+  },
+  {
+   "id": "rock_0_39",
+   "frame": "rock_2",
+   "x": 0,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -3
+  },
+  {
+   "id": "rock_1_39",
+   "frame": "rock_2",
+   "x": 1,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 2
+  },
+  {
+   "id": "rock_2_39",
+   "frame": "rock_2",
+   "x": 2,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": -1
+  },
+  {
+   "id": "rock_3_39",
+   "frame": "rock_2",
+   "x": 3,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": -2
+  },
+  {
+   "id": "rock_4_39",
+   "frame": "rock_0",
+   "x": 4,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 3
+  },
+  {
+   "id": "rock_5_39",
+   "frame": "rock_3",
+   "x": 5,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -4,
+   "jy": 0
+  },
+  {
+   "id": "rock_6_39",
+   "frame": "rock_1",
+   "x": 6,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -1,
+   "jy": 1
+  },
+  {
+   "id": "rock_7_39",
+   "frame": "rock_1",
+   "x": 7,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": -1
+  },
+  {
+   "id": "rock_8_39",
+   "frame": "rock_0",
+   "x": 8,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -7,
+   "jy": 1
+  },
+  {
+   "id": "rock_9_39",
+   "frame": "rock_2",
+   "x": 9,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 0
+  },
+  {
+   "id": "rock_10_39",
+   "frame": "rock_3",
+   "x": 10,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": -1
+  },
+  {
+   "id": "rock_11_39",
+   "frame": "rock_0",
+   "x": 11,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 2
+  },
+  {
+   "id": "rock_12_39",
+   "frame": "rock_0",
+   "x": 12,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 4
+  },
+  {
+   "id": "rock_13_39",
+   "frame": "rock_1",
+   "x": 13,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 6,
+   "jy": 3
+  },
+  {
+   "id": "rock_14_39",
+   "frame": "rock_0",
+   "x": 14,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 0
+  },
+  {
+   "id": "rock_15_39",
+   "frame": "rock_0",
+   "x": 15,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 3
+  },
+  {
+   "id": "rock_16_39",
+   "frame": "rock_1",
+   "x": 16,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 2,
+   "jy": 1
+  },
+  {
+   "id": "rock_17_39",
+   "frame": "rock_0",
+   "x": 17,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": 0
+  },
+  {
+   "id": "rock_18_39",
+   "frame": "rock_1",
+   "x": 18,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 0
+  },
+  {
+   "id": "rock_19_39",
+   "frame": "rock_1",
+   "x": 19,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 4
+  },
+  {
+   "id": "rock_20_39",
+   "frame": "rock_1",
+   "x": 20,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 2
+  },
+  {
+   "id": "rock_21_39",
+   "frame": "rock_2",
+   "x": 21,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 0
+  },
+  {
+   "id": "rock_22_39",
+   "frame": "rock_1",
+   "x": 22,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -3,
+   "jy": -2
+  },
+  {
+   "id": "rock_23_39",
+   "frame": "rock_0",
+   "x": 23,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -3
+  },
+  {
+   "id": "rock_24_39",
+   "frame": "rock_0",
+   "x": 24,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -2
+  },
+  {
+   "id": "rock_25_39",
+   "frame": "rock_1",
+   "x": 25,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 2
+  },
+  {
+   "id": "rock_26_39",
+   "frame": "rock_2",
+   "x": 26,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 8,
+   "jy": 4
+  },
+  {
+   "id": "rock_27_39",
+   "frame": "rock_0",
+   "x": 27,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 3
+  },
+  {
+   "id": "rock_28_39",
+   "frame": "rock_3",
+   "x": 28,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": 2
+  },
+  {
+   "id": "rock_29_39",
+   "frame": "rock_1",
+   "x": 29,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 0
+  },
+  {
+   "id": "rock_30_39",
+   "frame": "rock_0",
+   "x": 30,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": -3
+  },
+  {
+   "id": "rock_31_39",
+   "frame": "rock_2",
+   "x": 31,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 2
+  },
+  {
+   "id": "rock_32_39",
+   "frame": "rock_3",
+   "x": 32,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 4,
+   "jy": -3
+  },
+  {
+   "id": "rock_33_39",
+   "frame": "rock_2",
+   "x": 33,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "id": "rock_34_39",
+   "frame": "rock_1",
+   "x": 34,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 1,
+   "jy": 2
+  },
+  {
+   "id": "rock_35_39",
+   "frame": "rock_2",
+   "x": 35,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -2,
+   "jy": 3
+  },
+  {
+   "id": "rock_36_39",
+   "frame": "rock_0",
+   "x": 36,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "id": "rock_37_39",
+   "frame": "rock_3",
+   "x": 37,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 1
+  },
+  {
+   "id": "rock_38_39",
+   "frame": "rock_1",
+   "x": 38,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 7,
+   "jy": 4
+  },
+  {
+   "id": "rock_39_39",
+   "frame": "rock_0",
+   "x": 39,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 1
+  },
+  {
+   "id": "rock_40_39",
+   "frame": "rock_1",
+   "x": 40,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 5,
+   "jy": 1
+  },
+  {
+   "id": "rock_41_39",
+   "frame": "rock_0",
+   "x": 41,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": 3,
+   "jy": 4
+  },
+  {
+   "id": "rock_42_39",
+   "frame": "rock_0",
+   "x": 42,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "id": "rock_43_39",
+   "frame": "rock_1",
+   "x": 43,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "block": true,
+   "label": "Скалы",
+   "jx": -8,
+   "jy": 1
+  }
+ ],
+ "triggers": [
+  {
+   "id": "camp_view",
+   "x": 28,
+   "y": 17,
+   "w": 3,
+   "h": 4,
+   "effects": [],
+   "log": "За обвалом — огонь из соляного угля и тени с кувалдами. Лагерь Горьких."
+  }
+ ],
+ "exits": [
+  {
+   "id": "east",
+   "x": 43,
+   "y": 9,
+   "w": 1,
+   "h": 2,
+   "to": "crystal_gate",
+   "entry": "west",
+   "label": "Верхние ярусы"
+  }
+ ],
+ "roofs": [],
+ "entries": {
+  "default": [
+   41,
+   9
+  ],
+  "east": [
+   41,
+   9
+  ],
+  "tunnel": [
+   4,
+   21
+  ]
+ },
+ "actors": [
+  {
+   "id": "player",
+   "sheet": "hero_0",
+   "x": 41,
+   "y": 9,
+   "dir": 6
+  },
+  {
+   "id": "deep_spider_a",
+   "sheet": "salt_spider",
+   "x": 13,
+   "y": 22,
+   "dir": 2,
+   "label": "Соляной паук",
+   "creature": "salt_spider",
+   "group": "deep_spiders"
+  },
+  {
+   "id": "deep_spider_b",
+   "sheet": "salt_spider",
+   "x": 16,
+   "y": 27,
+   "dir": 2,
+   "label": "Соляной паук",
+   "creature": "salt_spider",
+   "group": "deep_spiders"
+  },
+  {
+   "id": "gorech",
+   "sheet": "gorech",
+   "x": 35,
+   "y": 27,
+   "dir": 6,
+   "label": "Горечь",
+   "dialogue": "gorech",
+   "creature": "gorech",
+   "group": "bitter",
+   "peace": [
+    {
+     "notFlag": "bitter_fight"
+    }
+   ],
+   "if": [
+    {
+     "notFlag": "bitter_gone"
+    },
+    {
+     "notFlag": "bitter_left"
+    }
+   ]
+  },
+  {
+   "id": "bitter_a",
+   "sheet": "bitter",
+   "x": 32,
+   "y": 25,
+   "dir": 6,
+   "label": "Горький",
+   "dialogue": "gorech",
+   "creature": "bitter",
+   "group": "bitter",
+   "peace": [
+    {
+     "notFlag": "bitter_fight"
+    }
+   ],
+   "if": [
+    {
+     "notFlag": "bitter_gone"
+    },
+    {
+     "notFlag": "bitter_left"
+    }
+   ]
+  },
+  {
+   "id": "bitter_b",
+   "sheet": "bitter",
+   "x": 37,
+   "y": 28,
+   "dir": 6,
+   "label": "Горький",
+   "dialogue": "gorech",
+   "creature": "bitter",
+   "group": "bitter",
+   "peace": [
+    {
+     "notFlag": "bitter_fight"
+    }
+   ],
+   "if": [
+    {
+     "notFlag": "bitter_gone"
+    },
+    {
+     "notFlag": "bitter_left"
+    }
+   ]
+  }
+ ],
+ "cleared": [
+  {
+   "group": "bitter",
+   "if": [
+    {
+     "flag": "bitter_fight"
+    },
+    {
+     "notFlag": "bitter_way"
+    },
+    {
+     "flag": "tube_stolen"
+    }
+   ],
+   "effects": [
+    {
+     "type": "flag",
+     "key": "bitter_way",
+     "value": "fought"
+    },
+    {
+     "type": "flag",
+     "key": "bitter_gone"
+    },
+    {
+     "type": "flag",
+     "key": "stolen_back"
+    },
+    {
+     "type": "quest",
+     "quest": "crystal",
+     "stage": "promise"
+    },
+    {
+     "type": "xp",
+     "amount": 150
+    },
+    {
+     "type": "give",
+     "item": "tube"
+    },
+    {
+     "type": "flag",
+     "key": "bitter_blood",
+     "value": "fought"
+    }
+   ],
+   "log": "Горькие бегут в темноту штреков. В нише за костром — ваш тубус."
+  },
+  {
+   "group": "bitter",
+   "if": [
+    {
+     "flag": "bitter_fight"
+    },
+    {
+     "notFlag": "bitter_way"
+    },
+    {
+     "notFlag": "tube_stolen"
+    }
+   ],
+   "effects": [
+    {
+     "type": "flag",
+     "key": "bitter_way",
+     "value": "fought"
+    },
+    {
+     "type": "flag",
+     "key": "bitter_gone"
+    },
+    {
+     "type": "flag",
+     "key": "stolen_back"
+    },
+    {
+     "type": "quest",
+     "quest": "crystal",
+     "stage": "promise"
+    },
+    {
+     "type": "xp",
+     "amount": 150
+    },
+    {
+     "type": "give",
+     "item": "quartz_scroll"
+    },
+    {
+     "type": "flag",
+     "key": "bitter_blood",
+     "value": "fought"
+    }
+   ],
+   "log": "Горькие бегут в темноту штреков. В нише за костром — свиток Совета."
+  }
+ ],
+ "outer": {
+  "margin": 34,
+  "pad": 256,
+  "ground": [
+   "~~~~~~~~~~~~...__..............~~~~~~~~~~~~~~~~~~~~~~~~~~..______...,.~~...___________......__________.._______.",
+   "~..~~~~~~~~~~..__...............~~~~~~~~~~~~~~~~~~~~~~~~~~,________,,....._________....,....._________________.,",
+   ".....~~~~~~~~..._...............~~~~~~~~~~~~~~~~~~~~..~~~~._________....__________...~~~~~...________________...",
+   ".._...~~~~~~~...................~~~~~~~~~~~~~~~~~~~....~~.._________.,_______,,__...~~~~~~~..______________.....",
+   "____...~~~~~~,,.,,....,,,_...,...~~~~~~~~~~~~~~~~~~........______________.,,,,.,,,.~~~~~~~~..______________.....",
+   "____...~~~~~......____..___......~~~....~~~~~~~~~..........______________......,~~~~~~~~~~~..._______________..,",
+   "___...~~......,...._________....~~~......................_________________...~~~~~~~~~~~~~~~.......,_________...",
+   "__....~~...,..,...._________....~~~......................_________________...~~~~~~~~~~~~~~~..,....,_________...",
+   "___...........,....._________...~.........................________________...~~~~~~~~~~~~~~.......,.________....",
+   "___...........,.,,...________...~..............~~~~~~~~....____..._.______....~~~~~~~~~~~~...........___..,,....",
+   "__.............,......_______...~...........~~~~~~~~~~~~~~...__......_____....~~~~~~~~~~~.......,,...___..,,,.._",
+   "__...,......,...~~....._______...~~.......~~~~~~~~~~~~~~~~~.._...~~...........~~~~~.....~~...__.,,...........,__",
+   "__..,,~~...~,..~~~~,...______.....~.......~~~~~~~~~~~~~~~~~......~~~..........~~~~~....,,.,,....,,............._",
+   "__,...~~~~~~~~~~~~~....______,...........~~~~~~~~~~~~~~~~~.......~~~~~........~~~~~.......,.....,,............._",
+   "__,..~~~~~~~~~~~~~~~...._____,,...~~~~~~~~~~~~~~~~~~~~~~~~.,...,,.~~~~~~~~~~~~~~~~~~~...,,......,,..............",
+   "__..~~~~~~~~~~~~~~~~~~.._____,...~~~~~~~~~~~~~~~~~~~~~~~...,....,,.~~~~~~~~..~~~~~~~~~....___...,,_.............",
+   "_,,.~~~~~~~~~~~~~~~~~~._____..,.,~~~~~~~~~~~~~~~~~~~~~~....,._..,..~~~~~~~,..~~~~~~~~~....____.,,__........,....",
+   "_,..~~~~~~~~~~~~~~~~~~..____..,,,~~~~~~~~~~~~~~~,~~~~~~....,........~~~~~~~...~~~~~~~~.....____,,__........,....",
+   "_...,~~~~~~~~~~~~~~~~,,,___.......~~~~~~~~~~~~~..~~~~~~......,,......~~~~~~~...~~~~~.........__,._.......~..~~..",
+   "__.,,.~~~~............,,,____.......~~~~~~~~~~.....~~~~~~....,..........~~~.....,,~...,,.......,.__.....~~~~~~~.",
+   "____,,................,..._____.............,......,,.~~~~~.....................,,......,..~.......,.~~~~~~~~~~~",
+   "_____,,,...................____............,,..........~~~~.....,.._____,........,,...~~..~~~~.......~~~~~~~~~~~",
+   "_____,,..._______...........___............,.,...........~.....,,.._______.......,~~~~~~~~~~~~~....~~~~~~~~~~~~~",
+   "._________________...........__..............................,,.._______^_........~~~~~~~~~~~~~.~~~~~~~~~~~~~~~~",
+   "._________________......~~~..^^^^.............^^^..............^^^^^^^^^^^^^......~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "._________________..~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   "._________________,,.....~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   ".__________________,.....^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^~~~~~~~~~~~~~~~~~~~~~~~~~~",
+   ".________,...............^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^....~~~~~~~~~~~~~~~~~~~~~",
+   "________.......,,,.....,.^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^__.,~~~~~~~~~~~~...~~~~~",
+   "_____.....~~~~~,........,^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^___..~~~~~~~~~~~.....~~~",
+   "___.......~~~~~,.......~~~^^^^^##^^####^^^^###^^^^^^^^#^^^^^#####^^^^^^^^^^^^##^#^^^^^^^^__..~~~~~~~~~~.........",
+   "__..~~~~~~~~~~~....~~~~~~~^^^^^##########################^######################^^^^^^^^^__...~~~~~~~~........__",
+   "_..~~~~~~~~~~~~...~~~~~~~~^^^^^^################################################^^^^^^^^^___..~~~~~~~~.......___",
+   "_.~~~~~~~~~~~~~...~~~~~~~~^^^^^^#################################################^^^^^^^^___..~~~~~~~~......____",
+   "_.~~~~~~~~~~~~~..~~~~~~~~~^^^^^^###################################,,###########^^^^^^^^^___..~~~~~~~~......____",
+   "...~~~~~~~~~~~~~~~~~~~~~~~^^^^^^######::::#::::##:::##############::::##::::####^^^^^^^^_____..~~~~~~~..,,.____.",
+   ".,.~~~~~~~~~~~~~~~~~~~~~~~^^^^^^#####:::::::::::::::::::::::::::::::::::::::####^^^^^^^^_____..,~~~~~...,,..._..",
+   "..~~~~~~~~~~~~~~~~~~..~~~~^^^^^^#####:::::::::::::::::::::::::::::::::::::::####^^^^^^^^___.....~~~~~..._.......",
+   "~~~~,,~~~~~~~~~~~~~,..~~~~^^^^^^#####:::::::::::::::::::::::::::::::::::::::####^^^^^^^^........~~~~...._.......",
+   "~~~~......~~~~~~~~,,...~~~^^^^^######:::::::::::::::::::::::::::::::::::::::####^^^^^^^,.........~~.............",
+   "~~~..........~~~~.,,.....^^^^^^######::::::::::::::::::::::::::::::::::::::#####^^^^^^^,~~....,.............___.",
+   "~~,.....,....~~~~.,,,,...^^^^^^#####::::::::::::::::::::::::::::::::::::::::####^^^^^^^~~~~~~~~,........,...____",
+   "~~..........~~~~~......,,^^^^^^^####::::::::::::::::::::::::::::::::::::::::::==================================",
+   "~~....,_.....~~~~......,,^^^^^^^####::::::::::::::::::::::::::::::::::::::::::==================================",
+   "~~~..,,__.......~........^^^^^^#####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~...___.....________",
+   "~~~..,,....,,............^^^^^^#####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~.,.___.....________",
+   "~~...,.....,,,............^^^^^#####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~~,,._______________",
+   "~.........,..............^^^^^^#####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~~......____________",
+   "~....____,........____..,^^^^^^^#####:::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~~~.....____________",
+   "~...______....__________.^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~~~........_________",
+   "~.._____.....___________^^^^^^^####.::::::::::::::::::::::::::::::::::::::::####^^^^^~~~~~~~~~~~~~~....________.",
+   "~.._____...____________^^^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^~~~~~~~~~~~~~~~~..________.",
+   "~...___...._____________^^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~~~~~~~~~..._______.",
+   "~~~......___________....^^^^^^^#####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~~~~~,,,.....______.",
+   "~~~~....___________......^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^^~~~~~~~~~~,,,.........._..",
+   "~~~~..___________........^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^^^.~~~~~~~~..............._",
+   "~~~~~.__..,.._.,,...~~...^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^^^..~~~~~~,..............._",
+   "~~~~.....,,....,,,~~~~...^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^^^..........__.....,.,....,",
+   "~~~.,....,,,..,~~~~~~~...^^^^^^^####::::::::::::::::::::::::::::::::::::::::####^^^^^^^.........____......,.....",
+   "~~~~..~~..,~~~~~~~~~~~...^^^^^^^#####:::::::::::::::::::::::::::::::::::::::#####^^^^^^....._________...........",
+   "~~~~~~~~~~~~~~~~.~~~~~...^^^^^^^#####::::::::::::::::::::::::::::::::::::::######^^^^^^..,,___________..........",
+   "~~~~~~~~~~~~~~~~~~~~~~...^^^^^^^#####:::::::::::::::::::::::::::::::::::::::####^^^^^^^..,.___________..........",
+   "~~~......,...~~~~~~~~~~~.^^^^^^^#####:::::::::::::::::::::::::::::::::::::::####^^^^^^^....,,____..____.....,,..",
+   "~~~...,,.....~~~~~~~..~~~~^^^^^^#####:::::::::::::::::::::::::::::::::::::::####^^^^^^^~~~.,,,._...._,...,.,.,,,",
+   "~~............~~~~.....~~~^^^^^^####:::::::::::::::::::::::::::::::::::::::#####^^^^^^^~~~~~,,.........~~~~~~.,,",
+   "~~...._____.,,,~~.....,~~~^^^^^^####:::::::::::::::::::::::::::::::::::::::#####^^^^^^,~~~~~..........~~~~~~~...",
+   "~~,..._______,,......,,~~~~^^^^^####:::::::::::::::::::::::::::::::::::::::#####^^^^^^~~~~~~..........~~~~~~~...",
+   "~.....____________....~~~~~^^^^^####:::::::::::::::::::::::::::::::::::::::#####^^^^^^~~~~~~~...........~~~~~...",
+   "......._.__________..~~~~~~^^^^^####:::::::::::::::::::::::::::::::::::::::#####^^^^^^~~~~~~~.,.......,..~~~~.,,",
+   ".........___________.~~~~~~^^^^^####:::::::::::::::::::::::::::::::::::::::####^^^^^^^~~~~~~.......,.....~~~~..,",
+   ".......,.___________.~~~~~~^^^^^####::::####:#:::::::::::::::########:::::::###^^^^^^^~~~~~~.,,....,.....~~~~..,",
+   "......,,.._________..~~~~~~^^^^^##################..############################^^^^^^~~~~~~.,,...,,,.........._",
+   ".,,........._______...~~~~~^^^^^################################################^^^^^^~~~~~,.....,.,,.......,.__",
+   "____,..~.....______...~~~~^^^^^^################################################^^^^^^^~~~~.....,,,...........__",
+   "___...~~~~~....___.....~~~^^^^^^###############^^^##########^^##^################^^^^^^~~~~....,,.........._____",
+   "__...~~~~~~~~..__........^^^^^^^^^^^^^^^##^^^^^^^^^^^###^^^^^^^^^^^^^^^^^^^^^^^##^^^^^^.~~................______",
+   "....,~~~~~~~~........___^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^...................______",
+   "...,~~~~~~~~~~......____^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^.......,....,,,.,....____",
+   "...~~~~~~~~~~~~~~~..___^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^,....____.......,,,..,.__",
+   "...~~~~~~~~~~~~~~~..___^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^.....____............,,__",
+   "...~~~~~~~~~~~~~~~..___^^^^^^^^^^^^^^^^^^~~^^^^^^^^^^^^^^^^^~~~~~~~~^^^^^^^^^^^^^^^^^^^..,....,..............___",
+   "...~~~~~~~~~..~~~~...__^^^^^^^^^^^^.~~~~~~~~~~~^^^^^^^^^^^^~~~~~~~~~~~~~^^^^^^^^^^^^^^^.......,..............___",
+   "...~~~~~~~...........__^^^^^^...~..~~~~~~~~~~~~,,.^^^^^^^..~~~~~~~~~~~~~~,...^^^^^,,~~.......................___",
+   "....~~~~~~..._......___^^^^__...~~.~~~~~~~~~~~~~,,__..___..~~~~~~~~~~~~~~......__,,~~~~........~~~~~~........___",
+   "_....~~~~...__......_________..~~~~~~~~~~~~~~~~~......__...~~~~~~~~~~~~~~~.......,~~~~.........~~~~~~~........,.",
+   "__....~~~,.___,,,,,__________..~~~~~~~~~~~~~~~~~.....,__.....~...~~~~~~~~~~~~~~,,~~~~~,.......~~~~~~~~~~~~~~.,..",
+   "__....~~~..___..,,___________...~~~~~~~~~~~~~~~~~...,,_..........~~~~~~~~~~~~~~~~~~~~~,,.....~~~~~~~~~~~~~~~~...",
+   "__....~~~..___...____________....~~~~~~~~~~~~~~~~....._...........~~~~~~~~~~~~~~~~~~~~,,....~~~~~~~~~~~~~~~~~.,.",
+   "_.....~~~..___...____________....~~~~~~~~~~~~~~~~,...._...........~~~~~~~~~~~~~~~~~~~~.,,,..~~~~~~~~~~~~~~~~~...",
+   "_.,.~~~~~.........____________...~~~~~~~~~~~~~~~~,.___.............~~~~~~~~~~~~~~~~~~~......~~~~~~~~~~~~~~~~~...",
+   "...~~~..........,.____________...~~~~~..~~~~~~~~~,,___,,............~~~~~~~~~~~~~~~~~~......~~~~~~~~~~~,..~~....",
+   ".,~~............,,___________.....,~~~.~~~~~~~~~.._____,,,..........~~~~~~~~~~~~~~~~~.......~~~~~~~~~...........",
+   ".~~~...,.....,,.,........._............~~~~~~~~~..____.,,,.........~~~~~~~~~~~~~~~~~.....~~~~~~~~~~~...,_.......",
+   "~~~~..,__.,,,,,,........,,,...........,,~~~~~~~...____..,,,....~~..~~~~~~~~~~~~~~~~~~~.~~~~~~~~~~~~~..,.__...,..",
+   "~~....____..,~~...........,,.........,...~~~~....._......~~~~.~~~~.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~........__.....",
+   "~~..._____...~~~~~~..,,~~.~.....,...,,...~~..,,..,......~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~,........___,,,.",
+   "~..______.....~~~~~..~~~~~~~....,...,........~,,,,.....~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~,.....~..____...",
+   "~,.______.._..~~~~~..~~~~~~~...,.........,...~~..,.....~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.......~..____...",
+   "~,,,________..~~~~~~..~~~~~~.............,,......,.....~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~...........__....",
+   "~~.,,..._____.~~~~~~~~~~~~~~~..,,_____.................~~~~~~,~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~..................",
+   "~~........___...~~~~~~~~~~~~~~.,,_____.......,,,,,.....~~~~~~~~~~~~~~~~~~~~.,~~~~~~~~~~........................,",
+   "~~.........___....~~~~~~~~~~~~~,,______......,,,,.~~.~~~~~~~~~~~~~~~~~~~~....,...~~~~~...................~~~~.~~",
+   "...........__.....~~~~~~~~~~~~~..______......,,...~~~~~~~~~~~~~~~~~~~~~~~.........~~~..______....,,,.....~~~~~.~",
+   "......~~~~........~~~~~~~~~~~~~.._______..........~~~~~~~~~~~,,,.,.~~~~~~........,....___________,.,.....~~~~...",
+   "__....~~~~~~~......~~~~~~~~~~~~..________...,.....~~~~~~~~~~..,,,,..~~.,,........,,,.._____________...~~~~~~~...",
+   "___..~~~~~~~~.,._..~~~~~~~~~~~~.________________..~~~~~~~~~~....,,.....,.........,,,.,______________..~~~~~~~~..",
+   "___..~~~~~~~~,,__.~~~~~~~~~~~~~.________________.,~~~~~~~~~.....,,.....,..........,,..______________,.~~~~~~~~.."
+  ]
+ },
+ "decor": [
+  {
+   "frame": "pylon",
+   "x": -5,
+   "y": 23,
+   "w": 1,
+   "h": 1
+  },
+  {
+   "frame": "pylon",
+   "x": -12,
+   "y": 23,
+   "w": 1,
+   "h": 1
+  },
+  {
+   "frame": "pylon",
+   "x": -19,
+   "y": 23,
+   "w": 1,
+   "h": 1
+  },
+  {
+   "frame": "pylon",
+   "x": 53,
+   "y": 5,
+   "w": 1,
+   "h": 1
+  },
+  {
+   "frame": "car_x_burnt",
+   "x": -9,
+   "y": 27,
+   "w": 2,
+   "h": 1
+  },
+  {
+   "frame": "car_x",
+   "x": -16,
+   "y": 22,
+   "w": 2,
+   "h": 1
+  },
+  {
+   "frame": "tires",
+   "x": -7,
+   "y": 22,
+   "w": 1,
+   "h": 1
+  },
+  {
+   "frame": "barrel",
+   "x": -14,
+   "y": 27,
+   "w": 1,
+   "h": 1
+  },
+  {
+   "frame": "ruin",
+   "x": -13,
+   "y": 5,
+   "w": 3,
+   "h": 3
+  },
+  {
+   "frame": "ruin",
+   "x": 9,
+   "y": -11,
+   "w": 3,
+   "h": 3
+  },
+  {
+   "frame": "ruin",
+   "x": 46,
+   "y": 31,
+   "w": 3,
+   "h": 3
+  },
+  {
+   "frame": "mesa",
+   "x": -12,
+   "y": 12,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 18,
+   "y": 57,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 14,
+   "y": -20,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 58,
+   "y": 21,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 15,
+   "y": -25,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 28,
+   "y": 63,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 31,
+   "y": 50,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 17,
+   "y": -13,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 67,
+   "y": 22,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 33,
+   "y": -13,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 56,
+   "y": 30,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": -26,
+   "y": 12,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 58,
+   "y": 25,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "mesa",
+   "x": 24,
+   "y": -13,
+   "w": 4,
+   "h": 4
+  },
+  {
+   "frame": "cliff_c",
+   "x": 9,
+   "y": -8,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": 52,
+   "y": 31,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 43,
+   "y": 46,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": 13,
+   "y": 50,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 52,
+   "y": 37,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 33,
+   "y": -8,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": -7,
+   "y": 26,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 13,
+   "y": -9,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 48,
+   "y": 15,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_b",
+   "x": -4,
+   "y": 17,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 48,
+   "y": 34,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": -1,
+   "y": -3,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_b",
+   "x": -7,
+   "y": 18,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": -6,
+   "y": -6,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": 55,
+   "y": 12,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": -8,
+   "y": 10,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": 3,
+   "y": 47,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 1,
+   "y": -8,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_b",
+   "x": 3,
+   "y": -6,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 18,
+   "y": 47,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_c",
+   "x": -4,
+   "y": -3,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": 26,
+   "y": 49,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 20,
+   "y": 46,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 49,
+   "y": 11,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 11,
+   "y": -7,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 28,
+   "y": 45,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_c",
+   "x": -2,
+   "y": 24,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_b",
+   "x": 26,
+   "y": -8,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 38,
+   "y": -9,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 13,
+   "y": -7,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 26,
+   "y": 46,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 41,
+   "y": -8,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 18,
+   "y": 44,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 51,
+   "y": 20,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 31,
+   "y": -9,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_c",
+   "x": 41,
+   "y": 46,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": 55,
+   "y": 37,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": -6,
+   "y": 13,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 27,
+   "y": -4,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_b",
+   "x": 40,
+   "y": -3,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 24,
+   "y": -6,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 50,
+   "y": 39,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 35,
+   "y": -4,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 9,
+   "y": 46,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 49,
+   "y": 32,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 20,
+   "y": 44,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": -9,
+   "y": -3,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 15,
+   "y": 45,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 30,
+   "y": -4,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_a",
+   "x": 18,
+   "y": 50,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 29,
+   "y": 49,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 54,
+   "y": 34,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": -9,
+   "y": 29,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 52,
+   "y": 16,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_a",
+   "x": 10,
+   "y": 50,
+   "w": 2,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 4,
+   "y": -4,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_b",
+   "x": 21,
+   "y": 48,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_b",
+   "x": 36,
+   "y": 47,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": -3,
+   "y": 39,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "cliff_b",
+   "x": 11,
+   "y": 48,
+   "w": 3,
+   "h": 2
+  },
+  {
+   "frame": "cliff_c",
+   "x": 23,
+   "y": 45,
+   "w": 2,
+   "h": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": -5,
+   "y": -9,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": 2
+  },
+  {
+   "frame": "rock_0",
+   "x": 27,
+   "y": -9,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": 35,
+   "y": -9,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 1
+  },
+  {
+   "frame": "rock_3",
+   "x": 21,
+   "y": -7,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -1
+  },
+  {
+   "frame": "rock_2",
+   "x": -2,
+   "y": -6,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 0
+  },
+  {
+   "frame": "rock_2",
+   "x": 36,
+   "y": -6,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": 2
+  },
+  {
+   "frame": "rock_1",
+   "x": 0,
+   "y": -5,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 2
+  },
+  {
+   "frame": "rock_0",
+   "x": 35,
+   "y": -5,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": -3
+  },
+  {
+   "frame": "rock_1",
+   "x": 41,
+   "y": -5,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 43,
+   "y": -5,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 3
+  },
+  {
+   "frame": "rock_0",
+   "x": 3,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 6,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 14,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": -1
+  },
+  {
+   "frame": "rock_0",
+   "x": 15,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": 22,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 26,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": -12,
+   "jy": -5
+  },
+  {
+   "frame": "rock_0",
+   "x": 45,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": -4
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": 3,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 3
+  },
+  {
+   "frame": "rock_3",
+   "x": 11,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 0
+  },
+  {
+   "frame": "rock_2",
+   "x": 13,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 39,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": 44,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -4
+  },
+  {
+   "frame": "rock_1",
+   "x": 46,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 2
+  },
+  {
+   "frame": "rock_2",
+   "x": -2,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 4
+  },
+  {
+   "frame": "rock_1",
+   "x": 1,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -1
+  },
+  {
+   "frame": "rock_2",
+   "x": 2,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 4
+  },
+  {
+   "frame": "rock_0",
+   "x": 9,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 0
+  },
+  {
+   "frame": "rock_0",
+   "x": 11,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": 12,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": 3
+  },
+  {
+   "frame": "rock_0",
+   "x": 14,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 5
+  },
+  {
+   "frame": "rock_3",
+   "x": 15,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 17,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 18,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": 20,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 22,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": 5
+  },
+  {
+   "frame": "rock_2",
+   "x": 24,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": 0
+  },
+  {
+   "frame": "rock_0",
+   "x": 37,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -3
+  },
+  {
+   "frame": "rock_0",
+   "x": 38,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 0
+  },
+  {
+   "frame": "rock_2",
+   "x": 43,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 3,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": 6,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": -5
+  },
+  {
+   "frame": "rock_3",
+   "x": 8,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": 10,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 5
+  },
+  {
+   "frame": "rock_2",
+   "x": 11,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 22,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 23,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": 24,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": -12,
+   "jy": 3
+  },
+  {
+   "frame": "rock_1",
+   "x": 25,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 2
+  },
+  {
+   "frame": "rock_0",
+   "x": 28,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -2
+  },
+  {
+   "frame": "rock_3",
+   "x": 30,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 32,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 1
+  },
+  {
+   "frame": "rock_3",
+   "x": 33,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 2
+  },
+  {
+   "frame": "rock_0",
+   "x": 34,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 4
+  },
+  {
+   "frame": "rock_1",
+   "x": 37,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 42,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": 3
+  },
+  {
+   "frame": "rock_3",
+   "x": 44,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 1
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": -1,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": -4
+  },
+  {
+   "frame": "rock_0",
+   "x": 46,
+   "y": 0,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": -2,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -1
+  },
+  {
+   "frame": "rock_0",
+   "x": 44,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 0
+  },
+  {
+   "frame": "rock_0",
+   "x": 46,
+   "y": 1,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": -2,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 5
+  },
+  {
+   "frame": "rock_2",
+   "x": 44,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": 4
+  },
+  {
+   "frame": "rock_0",
+   "x": 45,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -4
+  },
+  {
+   "frame": "rock_0",
+   "x": 46,
+   "y": 2,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": -5
+  },
+  {
+   "frame": "rock_2",
+   "x": -7,
+   "y": 3,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": -5
+  },
+  {
+   "frame": "rock_2",
+   "x": -1,
+   "y": 3,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "frame": "rock_1",
+   "x": -2,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 0
+  },
+  {
+   "frame": "rock_3",
+   "x": -1,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "frame": "rock_0",
+   "x": 44,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 45,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": 0
+  },
+  {
+   "frame": "rock_2",
+   "x": 46,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 1
+  },
+  {
+   "frame": "rock_1",
+   "x": -2,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": 5
+  },
+  {
+   "frame": "rock_2",
+   "x": 44,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 5
+  },
+  {
+   "frame": "rock_1",
+   "x": 45,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 50,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -1
+  },
+  {
+   "frame": "rock_1",
+   "x": -6,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 44,
+   "y": 6,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": -2,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -5
+  },
+  {
+   "frame": "rock_3",
+   "x": 46,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -3
+  },
+  {
+   "frame": "rock_2",
+   "x": -8,
+   "y": 8,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": -2
+  },
+  {
+   "frame": "rock_2",
+   "x": 45,
+   "y": 8,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": 10,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -1
+  },
+  {
+   "frame": "rock_2",
+   "x": -3,
+   "y": 11,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -1
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": 11,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": 45,
+   "y": 11,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 5
+  },
+  {
+   "frame": "rock_1",
+   "x": -1,
+   "y": 12,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 44,
+   "y": 12,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": -4
+  },
+  {
+   "frame": "rock_1",
+   "x": 46,
+   "y": 12,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 2
+  },
+  {
+   "frame": "rock_0",
+   "x": 51,
+   "y": 12,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 4
+  },
+  {
+   "frame": "rock_3",
+   "x": -4,
+   "y": 13,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": 0
+  },
+  {
+   "frame": "rock_3",
+   "x": 44,
+   "y": 13,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 46,
+   "y": 13,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": 2
+  },
+  {
+   "frame": "rock_2",
+   "x": -1,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 0
+  },
+  {
+   "frame": "rock_1",
+   "x": 44,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 45,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": 46,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -1
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": 45,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": -5
+  },
+  {
+   "frame": "rock_0",
+   "x": 46,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": 51,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": -2,
+   "y": 16,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": -5,
+   "y": 17,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": 47,
+   "y": 17,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 0
+  },
+  {
+   "frame": "rock_3",
+   "x": 50,
+   "y": 17,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 44,
+   "y": 18,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 46,
+   "y": 18,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": -10,
+   "y": 19,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 2
+  },
+  {
+   "frame": "rock_1",
+   "x": -4,
+   "y": 19,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": 1
+  },
+  {
+   "frame": "rock_3",
+   "x": -1,
+   "y": 19,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 2
+  },
+  {
+   "frame": "rock_2",
+   "x": -1,
+   "y": 20,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -3
+  },
+  {
+   "frame": "rock_2",
+   "x": -8,
+   "y": 21,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 3
+  },
+  {
+   "frame": "rock_3",
+   "x": -1,
+   "y": 21,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": -3
+  },
+  {
+   "frame": "rock_0",
+   "x": -3,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -5
+  },
+  {
+   "frame": "rock_2",
+   "x": -1,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": -1
+  },
+  {
+   "frame": "rock_2",
+   "x": -1,
+   "y": 23,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": 0
+  },
+  {
+   "frame": "rock_2",
+   "x": 46,
+   "y": 23,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": 52,
+   "y": 23,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 3
+  },
+  {
+   "frame": "rock_3",
+   "x": 44,
+   "y": 24,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": 5
+  },
+  {
+   "frame": "rock_2",
+   "x": 47,
+   "y": 24,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": -1
+  },
+  {
+   "frame": "rock_2",
+   "x": -6,
+   "y": 25,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": -2
+  },
+  {
+   "frame": "rock_2",
+   "x": 44,
+   "y": 25,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -5
+  },
+  {
+   "frame": "rock_2",
+   "x": 47,
+   "y": 25,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": -2
+  },
+  {
+   "frame": "rock_1",
+   "x": 46,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": 49,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 50,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": -5,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": -2,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": -1,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": -4
+  },
+  {
+   "frame": "rock_1",
+   "x": 44,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": 48,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": 4
+  },
+  {
+   "frame": "rock_0",
+   "x": 50,
+   "y": 27,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": -3
+  },
+  {
+   "frame": "rock_1",
+   "x": -2,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 44,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -3
+  },
+  {
+   "frame": "rock_2",
+   "x": 46,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": -1,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 0
+  },
+  {
+   "frame": "rock_0",
+   "x": 45,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 3
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -4
+  },
+  {
+   "frame": "rock_0",
+   "x": 45,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": -4
+  },
+  {
+   "frame": "rock_0",
+   "x": -3,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": -1
+  },
+  {
+   "frame": "rock_0",
+   "x": -1,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": -5
+  },
+  {
+   "frame": "rock_1",
+   "x": -2,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 44,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": 4
+  },
+  {
+   "frame": "rock_0",
+   "x": 45,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 44,
+   "y": 33,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": 34,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": -3
+  },
+  {
+   "frame": "rock_0",
+   "x": 44,
+   "y": 34,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": -1
+  },
+  {
+   "frame": "rock_1",
+   "x": 51,
+   "y": 34,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": -1,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": 5
+  },
+  {
+   "frame": "rock_2",
+   "x": 44,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 35,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": 0
+  },
+  {
+   "frame": "rock_1",
+   "x": 44,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 4
+  },
+  {
+   "frame": "rock_1",
+   "x": 48,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 1
+  },
+  {
+   "frame": "rock_2",
+   "x": 50,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": -1,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "jx": -12,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 37,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -5
+  },
+  {
+   "frame": "rock_3",
+   "x": -6,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 4
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 0
+  },
+  {
+   "frame": "rock_3",
+   "x": 44,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 3
+  },
+  {
+   "frame": "rock_0",
+   "x": 46,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": 5
+  },
+  {
+   "frame": "rock_3",
+   "x": 48,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": -1,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": 3
+  },
+  {
+   "frame": "rock_1",
+   "x": 46,
+   "y": 39,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 0,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": 4
+  },
+  {
+   "frame": "rock_1",
+   "x": 4,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -4
+  },
+  {
+   "frame": "rock_0",
+   "x": 8,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": -2
+  },
+  {
+   "frame": "rock_2",
+   "x": 9,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 1
+  },
+  {
+   "frame": "rock_3",
+   "x": 11,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": 12,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": 3
+  },
+  {
+   "frame": "rock_3",
+   "x": 14,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 15,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": 16,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 4
+  },
+  {
+   "frame": "rock_0",
+   "x": 17,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": -2
+  },
+  {
+   "frame": "rock_3",
+   "x": 18,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": -2
+  },
+  {
+   "frame": "rock_3",
+   "x": 19,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": 20,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -1
+  },
+  {
+   "frame": "rock_1",
+   "x": 21,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -1
+  },
+  {
+   "frame": "rock_0",
+   "x": 22,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -5
+  },
+  {
+   "frame": "rock_0",
+   "x": 24,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -1
+  },
+  {
+   "frame": "rock_2",
+   "x": 25,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": 27,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": 3
+  },
+  {
+   "frame": "rock_0",
+   "x": 29,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 31,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 32,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": -3
+  },
+  {
+   "frame": "rock_3",
+   "x": 34,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": 3
+  },
+  {
+   "frame": "rock_0",
+   "x": 37,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": -5
+  },
+  {
+   "frame": "rock_0",
+   "x": 40,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 41,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 1
+  },
+  {
+   "frame": "rock_2",
+   "x": 43,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 45,
+   "y": 40,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 5
+  },
+  {
+   "frame": "rock_0",
+   "x": 5,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 7,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 8,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 4
+  },
+  {
+   "frame": "rock_0",
+   "x": 16,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -3
+  },
+  {
+   "frame": "rock_2",
+   "x": 20,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 25,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -2
+  },
+  {
+   "frame": "rock_2",
+   "x": 27,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": -1
+  },
+  {
+   "frame": "rock_1",
+   "x": 28,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": -1
+  },
+  {
+   "frame": "rock_0",
+   "x": 30,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": -5
+  },
+  {
+   "frame": "rock_3",
+   "x": 31,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": 32,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 1
+  },
+  {
+   "frame": "rock_2",
+   "x": 33,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": -2
+  },
+  {
+   "frame": "rock_2",
+   "x": 34,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": -3
+  },
+  {
+   "frame": "rock_2",
+   "x": 35,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": 36,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": 40,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -3
+  },
+  {
+   "frame": "rock_1",
+   "x": 43,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -2
+  },
+  {
+   "frame": "rock_1",
+   "x": 44,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": 0
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 46,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": -2
+  },
+  {
+   "frame": "rock_2",
+   "x": 50,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": 51,
+   "y": 41,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 4
+  },
+  {
+   "frame": "rock_3",
+   "x": -2,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": -5
+  },
+  {
+   "frame": "rock_0",
+   "x": 1,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 1
+  },
+  {
+   "frame": "rock_1",
+   "x": 3,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 1
+  },
+  {
+   "frame": "rock_3",
+   "x": 4,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -1
+  },
+  {
+   "frame": "rock_3",
+   "x": 7,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 4
+  },
+  {
+   "frame": "rock_3",
+   "x": 8,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": 1
+  },
+  {
+   "frame": "rock_0",
+   "x": 10,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -2
+  },
+  {
+   "frame": "rock_3",
+   "x": 12,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": 5
+  },
+  {
+   "frame": "rock_3",
+   "x": 15,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 19,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": 1
+  },
+  {
+   "frame": "rock_3",
+   "x": 20,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 1
+  },
+  {
+   "frame": "rock_2",
+   "x": 21,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": 4
+  },
+  {
+   "frame": "rock_3",
+   "x": 23,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": 5
+  },
+  {
+   "frame": "rock_3",
+   "x": 25,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": 26,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": 4
+  },
+  {
+   "frame": "rock_2",
+   "x": 27,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -5
+  },
+  {
+   "frame": "rock_0",
+   "x": 28,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": -5
+  },
+  {
+   "frame": "rock_3",
+   "x": 33,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 5
+  },
+  {
+   "frame": "rock_0",
+   "x": 36,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": 42,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -3
+  },
+  {
+   "frame": "rock_0",
+   "x": -2,
+   "y": 43,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -1
+  },
+  {
+   "frame": "rock_2",
+   "x": 4,
+   "y": 43,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": -2
+  },
+  {
+   "frame": "rock_0",
+   "x": 15,
+   "y": 43,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": 1
+  },
+  {
+   "frame": "rock_2",
+   "x": 39,
+   "y": 43,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 2
+  },
+  {
+   "frame": "rock_3",
+   "x": 0,
+   "y": 44,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": 3
+  },
+  {
+   "frame": "rock_2",
+   "x": 3,
+   "y": 44,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -5
+  },
+  {
+   "frame": "rock_3",
+   "x": 45,
+   "y": 44,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": -4
+  },
+  {
+   "frame": "rock_3",
+   "x": 14,
+   "y": 46,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": -4
+  },
+  {
+   "frame": "rock_2",
+   "x": 50,
+   "y": 46,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": 0
+  },
+  {
+   "frame": "rock_1",
+   "x": 35,
+   "y": 47,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -2
+  },
+  {
+   "frame": "rock_2",
+   "x": 49,
+   "y": 47,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 4
+  },
+  {
+   "frame": "rock_3",
+   "x": 50,
+   "y": 47,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -2
+  },
+  {
+   "frame": "dead_tree",
+   "x": 24,
+   "y": 53,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 2
+  },
+  {
+   "frame": "dead_tree",
+   "x": 29,
+   "y": -9,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "frame": "dead_tree",
+   "x": 39,
+   "y": -10,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 5
+  },
+  {
+   "frame": "cactus",
+   "x": 30,
+   "y": 43,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 0
+  },
+  {
+   "frame": "bush",
+   "x": 33,
+   "y": -9,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": -2
+  },
+  {
+   "frame": "bush",
+   "x": 53,
+   "y": 14,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": 4
+  },
+  {
+   "frame": "cactus",
+   "x": 18,
+   "y": 54,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": -3
+  },
+  {
+   "frame": "cactus",
+   "x": 22,
+   "y": -18,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -4
+  },
+  {
+   "frame": "cactus",
+   "x": -14,
+   "y": 28,
+   "w": 1,
+   "h": 1,
+   "jx": -12,
+   "jy": -2
+  },
+  {
+   "frame": "bush",
+   "x": 6,
+   "y": -14,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": 0
+  },
+  {
+   "frame": "cactus",
+   "x": 17,
+   "y": 61,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": 2
+  },
+  {
+   "frame": "cactus",
+   "x": 47,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -3
+  },
+  {
+   "frame": "dead_tree",
+   "x": 34,
+   "y": 54,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 1
+  },
+  {
+   "frame": "cactus",
+   "x": 11,
+   "y": -21,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -1
+  },
+  {
+   "frame": "bush",
+   "x": -15,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": 2
+  },
+  {
+   "frame": "bush",
+   "x": 60,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": -2
+  },
+  {
+   "frame": "bush",
+   "x": -9,
+   "y": -4,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -4
+  },
+  {
+   "frame": "cactus",
+   "x": 56,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -3
+  },
+  {
+   "frame": "bush",
+   "x": 30,
+   "y": 56,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 2
+  },
+  {
+   "frame": "bush",
+   "x": -8,
+   "y": 20,
+   "w": 1,
+   "h": 1,
+   "jx": -12,
+   "jy": -3
+  },
+  {
+   "frame": "dead_tree",
+   "x": 48,
+   "y": 50,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 0
+  },
+  {
+   "frame": "dead_tree",
+   "x": 34,
+   "y": 58,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 3
+  },
+  {
+   "frame": "bush",
+   "x": 14,
+   "y": -28,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": 0
+  },
+  {
+   "frame": "dead_tree",
+   "x": -3,
+   "y": 29,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 3
+  },
+  {
+   "frame": "bush",
+   "x": 20,
+   "y": -14,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": 0
+  },
+  {
+   "frame": "dead_tree",
+   "x": 37,
+   "y": 53,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 4
+  },
+  {
+   "frame": "dead_tree",
+   "x": -7,
+   "y": 33,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 0
+  },
+  {
+   "frame": "bush",
+   "x": -3,
+   "y": -7,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": 3
+  },
+  {
+   "frame": "cactus",
+   "x": 53,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": 5
+  },
+  {
+   "frame": "bush",
+   "x": 40,
+   "y": -6,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -4
+  },
+  {
+   "frame": "dead_tree",
+   "x": 29,
+   "y": 54,
+   "w": 1,
+   "h": 1,
+   "jx": 3,
+   "jy": 0
+  },
+  {
+   "frame": "bush",
+   "x": -17,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": 0
+  },
+  {
+   "frame": "cactus",
+   "x": 29,
+   "y": -14,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -3
+  },
+  {
+   "frame": "dead_tree",
+   "x": 54,
+   "y": 31,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": -3
+  },
+  {
+   "frame": "dead_tree",
+   "x": -22,
+   "y": 9,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": 0
+  },
+  {
+   "frame": "cactus",
+   "x": 51,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 8,
+   "jy": 1
+  },
+  {
+   "frame": "bush",
+   "x": 7,
+   "y": -13,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": 2
+  },
+  {
+   "frame": "bush",
+   "x": 13,
+   "y": 58,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -3
+  },
+  {
+   "frame": "dead_tree",
+   "x": 5,
+   "y": 44,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -4
+  },
+  {
+   "frame": "cactus",
+   "x": 41,
+   "y": 54,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -5
+  },
+  {
+   "frame": "bush",
+   "x": -17,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": -3
+  },
+  {
+   "frame": "bush",
+   "x": 7,
+   "y": -6,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": 2
+  },
+  {
+   "frame": "cactus",
+   "x": 48,
+   "y": 7,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -1
+  },
+  {
+   "frame": "bush",
+   "x": 1,
+   "y": 44,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": 0
+  },
+  {
+   "frame": "bush",
+   "x": 17,
+   "y": -29,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 1
+  },
+  {
+   "frame": "dead_tree",
+   "x": -15,
+   "y": 4,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": -2
+  },
+  {
+   "frame": "bush",
+   "x": -3,
+   "y": 43,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": 4
+  },
+  {
+   "frame": "bush",
+   "x": -5,
+   "y": -2,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 2
+  },
+  {
+   "frame": "dead_tree",
+   "x": 19,
+   "y": -21,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -1
+  },
+  {
+   "frame": "bush",
+   "x": 13,
+   "y": 57,
+   "w": 1,
+   "h": 1,
+   "jx": 2,
+   "jy": -2
+  },
+  {
+   "frame": "bush",
+   "x": 16,
+   "y": -29,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": -5
+  },
+  {
+   "frame": "cactus",
+   "x": 22,
+   "y": -17,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": 3
+  },
+  {
+   "frame": "bush",
+   "x": 59,
+   "y": 16,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": 2
+  },
+  {
+   "frame": "dead_tree",
+   "x": 10,
+   "y": 52,
+   "w": 1,
+   "h": 1,
+   "jx": 5,
+   "jy": -4
+  },
+  {
+   "frame": "dead_tree",
+   "x": 18,
+   "y": -32,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": 1
+  },
+  {
+   "frame": "bush",
+   "x": 8,
+   "y": -19,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": 4
+  },
+  {
+   "frame": "bush",
+   "x": 35,
+   "y": -6,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": -4
+  },
+  {
+   "frame": "bush",
+   "x": 18,
+   "y": -20,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -5
+  },
+  {
+   "frame": "bush",
+   "x": 7,
+   "y": 50,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": -3
+  },
+  {
+   "frame": "bush",
+   "x": 22,
+   "y": -28,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -2
+  },
+  {
+   "frame": "cactus",
+   "x": 67,
+   "y": 32,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 3
+  },
+  {
+   "frame": "bush",
+   "x": -11,
+   "y": 26,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": -4
+  },
+  {
+   "frame": "dead_tree",
+   "x": -14,
+   "y": 30,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -3
+  },
+  {
+   "frame": "bush",
+   "x": 29,
+   "y": 67,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": -2
+  },
+  {
+   "frame": "cactus",
+   "x": 6,
+   "y": -18,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 0
+  },
+  {
+   "frame": "bush",
+   "x": -20,
+   "y": 15,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": -5
+  },
+  {
+   "frame": "dead_tree",
+   "x": 24,
+   "y": 54,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": 2
+  },
+  {
+   "frame": "bush",
+   "x": -1,
+   "y": 43,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 5
+  },
+  {
+   "frame": "bush",
+   "x": 13,
+   "y": -14,
+   "w": 1,
+   "h": 1,
+   "jx": 12,
+   "jy": 5
+  },
+  {
+   "frame": "bush",
+   "x": -5,
+   "y": 22,
+   "w": 1,
+   "h": 1,
+   "jx": -8,
+   "jy": -4
+  },
+  {
+   "frame": "dead_tree",
+   "x": 41,
+   "y": 51,
+   "w": 1,
+   "h": 1,
+   "jx": -3,
+   "jy": -2
+  },
+  {
+   "frame": "cactus",
+   "x": -1,
+   "y": -8,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": -1
+  },
+  {
+   "frame": "dead_tree",
+   "x": 19,
+   "y": -9,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 0
+  },
+  {
+   "frame": "bush",
+   "x": 8,
+   "y": -11,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": -2
+  },
+  {
+   "frame": "dead_tree",
+   "x": 24,
+   "y": -17,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": -4
+  },
+  {
+   "frame": "bush",
+   "x": 21,
+   "y": -28,
+   "w": 1,
+   "h": 1,
+   "jx": -9,
+   "jy": 2
+  },
+  {
+   "frame": "bush",
+   "x": 26,
+   "y": 61,
+   "w": 1,
+   "h": 1,
+   "jx": -1,
+   "jy": 0
+  },
+  {
+   "frame": "dead_tree",
+   "x": 54,
+   "y": 44,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": -1
+  },
+  {
+   "frame": "bush",
+   "x": 36,
+   "y": 58,
+   "w": 1,
+   "h": 1,
+   "jx": -6,
+   "jy": -2
+  },
+  {
+   "frame": "bush",
+   "x": 12,
+   "y": -23,
+   "w": 1,
+   "h": 1,
+   "jx": 0,
+   "jy": 1
+  },
+  {
+   "frame": "dead_tree",
+   "x": 26,
+   "y": 71,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": 4
+  },
+  {
+   "frame": "dead_tree",
+   "x": 2,
+   "y": -5,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": -1
+  },
+  {
+   "frame": "cactus",
+   "x": 20,
+   "y": -25,
+   "w": 1,
+   "h": 1,
+   "jx": -4,
+   "jy": 2
+  },
+  {
+   "frame": "bush",
+   "x": 51,
+   "y": 36,
+   "w": 1,
+   "h": 1,
+   "jx": 10,
+   "jy": -3
+  },
+  {
+   "frame": "bush",
+   "x": 19,
+   "y": -17,
+   "w": 1,
+   "h": 1,
+   "jx": -2,
+   "jy": 2
+  },
+  {
+   "frame": "bush",
+   "x": -14,
+   "y": 5,
+   "w": 1,
+   "h": 1,
+   "jx": -5,
+   "jy": 5
+  },
+  {
+   "frame": "dead_tree",
+   "x": 32,
+   "y": 42,
+   "w": 1,
+   "h": 1,
+   "jx": 11,
+   "jy": 4
+  },
+  {
+   "frame": "bush",
+   "x": -10,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": 9,
+   "jy": 4
+  },
+  {
+   "frame": "cactus",
+   "x": 23,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 4
+  },
+  {
+   "frame": "dead_tree",
+   "x": 64,
+   "y": 20,
+   "w": 1,
+   "h": 1,
+   "jx": 7,
+   "jy": 3
+  },
+  {
+   "frame": "dead_tree",
+   "x": 7,
+   "y": -3,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 0
+  },
+  {
+   "frame": "bush",
+   "x": 56,
+   "y": 16,
+   "w": 1,
+   "h": 1,
+   "jx": 6,
+   "jy": 3
+  },
+  {
+   "frame": "bush",
+   "x": 49,
+   "y": 38,
+   "w": 1,
+   "h": 1,
+   "jx": 4,
+   "jy": 1
+  },
+  {
+   "frame": "dead_tree",
+   "x": 23,
+   "y": 69,
+   "w": 1,
+   "h": 1,
+   "jx": -12,
+   "jy": -3
+  },
+  {
+   "frame": "dead_tree",
+   "x": 33,
+   "y": -16,
+   "w": 1,
+   "h": 1,
+   "jx": -10,
+   "jy": 3
+  },
+  {
+   "frame": "bush",
+   "x": -23,
+   "y": 16,
+   "w": 1,
+   "h": 1,
+   "jx": -11,
+   "jy": -1
+  },
+  {
+   "frame": "cactus",
+   "x": -6,
+   "y": 9,
+   "w": 1,
+   "h": 1,
+   "jx": -7,
+   "jy": 1
+  },
+  {
+   "frame": "dead_tree",
+   "x": 67,
+   "y": 18,
+   "w": 1,
+   "h": 1,
+   "jx": 1,
+   "jy": 1
+  }
+ ],
+ "wires": [
+  [
+   [
+    -19,
+    23
+   ],
+   [
+    -12,
+    23
+   ]
+  ],
+  [
+   [
+    -12,
+    23
+   ],
+   [
+    -5,
+    23
+   ]
+  ],
+  [
+   [
+    -5,
+    23
+   ],
+   [
+    2,
+    23
+   ]
+  ],
+  [
+   [
+    20,
+    22
+   ],
+   [
+    28,
+    23
+   ]
+  ],
+  [
+   [
+    28,
+    23
+   ],
+   [
+    36,
+    17
+   ]
+  ],
+  [
+   [
+    36,
+    17
+   ],
+   [
+    53,
+    5
+   ]
+  ]
+ ]
+}

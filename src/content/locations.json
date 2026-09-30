@@ -289,6 +289,33 @@
     "name": "Кристалл",
     "cell": [104, 21],
     "chapter": 5,
+    "map": "crystal_gate",
+    "entry": "south",
+    "open": [{ "flag": "chapter4_seen" }],
+    "areas": [
+      { "map": "crystal_gate", "entry": "south", "name": "Верхние ярусы", "at": [0.5, 0.72] },
+      {
+        "map": "crystal_council",
+        "entry": "south",
+        "name": "Совет пластов",
+        "at": [0.5, 0.2],
+        "known": [{ "flag": "crystal_in" }]
+      },
+      {
+        "map": "crystal_baths",
+        "entry": "west",
+        "name": "Рассольные бани",
+        "at": [0.8, 0.42],
+        "known": [{ "flag": "crystal_in" }]
+      },
+      {
+        "map": "crystal_deep",
+        "entry": "east",
+        "name": "Глубокие копи",
+        "at": [0.2, 0.5],
+        "known": [{ "flag": "crystal_in" }]
+      }
+    ],
     "reach": [
       {
         "if": [{ "flag": "crystal_guide" }, { "flag": "krupitsa_fate" }, { "notFlag": "chapter4_done" }],

@@ -13,6 +13,7 @@ import { DerivedPanel } from './sheet/DerivedPanel';
 import { modsText } from './itemText';
 import { SkillPanel } from './sheet/SkillPanel';
 import { ListPanel, type ListItem } from './sheet/ListPanel';
+import { partyOf } from '../core/companions';
 
 const W = 1180;
 const H = 640;
@@ -146,6 +147,11 @@ export class CharacterWindow {
     for (const [id, name] of Object.entries(FACTIONS)) {
       const rep = Number(g.flag(`rep_${id}`) ?? 0);
       if (rep) items.push({ id: `rep_${id}`, name: `${name}: ${repWord(rep)} (${rep})`, desc: 'Репутация: от неё зависят цены, товары для своих и разговоры.', mark: 'none' });
+    }
+    for (const id of partyOf(g.state.flags, g.content.companions ?? {})) {
+      const c = g.content.companions[id];
+      const back = g.flag(`stance_${id}`) === 'back';
+      items.push({ id: `comp_${id}`, name: `◆ Спутник: ${c.name}${back ? ' (позади)' : ''}`, desc: `${c.name} идёт с вами и дерётся рядом. Приказы — в разговоре: клик по спутнику.${back ? ' Сейчас держится позади и бьёт только тех, кто подошёл вплотную.' : ''}`, mark: 'none' });
     }
     for (const id of g.withdrawals()) {
       const def = g.content.items[id];

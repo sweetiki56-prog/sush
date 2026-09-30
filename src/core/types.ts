@@ -50,6 +50,8 @@ export type Effect =
   | { type: 'rest' } // sleep till the next morning (the room decides if it is safe)
   | { type: 'travel' } // the party leaves this place for the world map
   | { type: 'goto'; map: string; entry?: string } // the party moves to another area (a hatch, a gangway)
+  | { type: 'join'; id: string } // a companion walks with the hero (refused over the party limit)
+  | { type: 'leave'; id: string } // a companion goes home and waits there
   | { type: 'confiscate' } // an arrest: weapons, grenades, ammo and armor go into the warden's chest
   | { type: 'unconfiscate' } // and come back
   | { type: 'dayMark'; key: string; in: number } // key = today + `in` (a day something will happen)
@@ -211,6 +213,16 @@ export interface ArenaDef {
   items: Record<string, number>; // consumables and grenades: most you may bring
 }
 
+/** A companion (docs/story/characters.md «Спутники»): see core/companions.ts. */
+export interface CompanionDef {
+  name: string;
+  sheet: string;
+  creature: string; // how it fights: key in creatures.json
+  dialogue: string; // talk and orders
+  auto?: Condition[]; // joins by itself once these hold (the story already sent it along)
+  barks?: { map?: string; if?: Condition[]; text: string }[]; // said once on arriving somewhere
+}
+
 export interface Content {
   items: Record<string, ItemDef>;
   quests: Record<string, QuestDef>;
@@ -226,6 +238,7 @@ export interface Content {
   locations: Record<string, LocationDef>;
   travel: TravelContent;
   arena: ArenaDef;
+  companions: Record<string, CompanionDef>;
 }
 
 export interface GameStateData {

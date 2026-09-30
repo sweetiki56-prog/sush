@@ -5,11 +5,15 @@ import type { Combat } from './Combat';
 import { attackCost } from './rules';
 import { enemies, type Combatant } from './types';
 
+const HOLD_BACK = 2; // tiles from one of our people
+
 export type AiAction = { kind: 'move'; path: Tile[] } | { kind: 'attack'; target: string; weapon: string } | { kind: 'end' };
 
 export function nextAction(c: Combat, self: Combatant): AiAction {
   // the nearest foe (a person, or an ally of theirs), preferring one in sight
-  const people = c.units.filter((u) => u.side !== 'object' && enemies(self, u) && !u.dead && !u.fled && !u.under);
+  let people = c.units.filter((u) => u.side !== 'object' && enemies(self, u) && !u.dead && !u.fled && !u.under);
+  // held back: only those who came within reach of our people count
+  if (self.holdBack) people = people.filter((f) => c.units.some((p) => p.side === 'player' && !p.dead && tileDist(p, f) <= HOLD_BACK));
   const rank = (u: Combatant) => tileDist(self, u) + (c.canSee(self, u) ? 0 : 100);
   const foe = people.sort((a, b) => rank(a) - rank(b))[0];
   if (!foe || self.ap <= 0) return { kind: 'end' };

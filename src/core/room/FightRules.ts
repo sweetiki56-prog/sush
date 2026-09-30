@@ -199,6 +199,12 @@ export class FightRules {
     }
     const h = r.hostiles.byId(id);
     if (h) h.dead = true;
+    if (h?.companion) {
+      // a companion who falls is gone for good
+      r.host?.game.setFlag(`lost_${h.companion}`, true);
+      r.host?.game.setFlag(`with_${h.companion}`, false);
+      return r.logAll(`${r.content.companions[h.companion]?.name ?? u.name} погибает. Больше вы не увидитесь.`);
+    }
     if (h?.ally) {
       r.host?.game.setFlag(`dead_${id}`);
       return r.logAll(`${u.name} погибает.`);

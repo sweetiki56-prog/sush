@@ -32,7 +32,7 @@ const PIT = [14, 15];
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 2, y: 17, dir: 2 },
   { id: 'barysh', sheet: 'barysh', x: 9, y: 15, dir: 2, label: 'Барыш', dialogue: 'barysh' },
-  { id: 'shepot', sheet: 'shepot', x: 21, y: 9, dir: 1, label: 'Шёпот', dialogue: 'shepot', if: [{ notFlag: 'whisper_enemy' }] },
+  { id: 'shepot', sheet: 'shepot', x: 21, y: 9, dir: 1, label: 'Шёпот', dialogue: 'shepot', if: [{ notFlag: 'whisper_enemy' }, { notFlag: 'with_shepot' }, { notFlag: 'lost_shepot' }] },
   // the ladder: one opponent stands in the pit at a time
   { id: 'pit_1', sheet: 'pit_1', x: PIT[0], y: PIT[1], dir: 6, label: 'Сизый', dialogue: 'pit_fighter', creature: 'pit_1', group: 'bout', ring: 'arms', peace: BOUT, if: [{ notFlag: 'arena_1' }] },
   { id: 'pit_2', sheet: 'pit_2', x: PIT[0], y: PIT[1], dir: 6, label: 'Кочерга', dialogue: 'pit_fighter', creature: 'pit_2', group: 'bout', ring: 'arms', peace: BOUT, if: [{ flag: 'arena_1' }, { notFlag: 'arena_2' }] },

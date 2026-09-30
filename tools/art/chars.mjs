@@ -100,6 +100,16 @@ export const CHARS = {
   pit_1: { skin: P.skin1, hair: P.grey2, shirt: P.grey3, pants: P.grey1, boots: P.dark1, coat: null, sleeve: P.grey3, bandana: P.grey4, height: 1.0 },
   pit_2: { skin: P.skin2, hair: P.rust1, shirt: P.rust1, pants: P.dark2, boots: P.dark0, coat: null, sleeve: P.skin2, bald: true, bulk: 1.15, height: 1.04 },
   pit_3: { skin: P.skin0, hair: P.dark1, shirt: P.olive0, pants: P.olive0, boots: P.dark1, coat: null, sleeve: P.olive1, bandana: P.fire1, goggles: true, height: 1.0 },
+  // stage V: Кристалл. Старший Кварц's salt has gone clear as ice; Гранит is a door of a man; the Горькие wear black
+  kvarts: { skin: P.grey3, hair: P.grey5, shirt: P.bone, pants: P.sand2, boots: P.brown0, coat: P.bone, coatLen: 18, sleeve: P.grey3, bald: true, crystals: P.grey6, beard: P.grey6, cane: true, bulk: 1.1, height: 0.96 },
+  granit: { skin: P.grey4, hair: P.grey4, shirt: P.sand1, pants: P.brown0, boots: P.brown0, coat: null, sleeve: P.grey4, bald: true, crystals: P.bone, bulk: 1.45, height: 1.16 },
+  gorech: { skin: P.grey3, hair: P.dark0, shirt: P.dark2, pants: P.dark1, boots: P.dark0, coat: P.dark1, coatLen: 12, sleeve: P.dark1, bald: true, crystals: P.grey5, bandana: P.dark0, bulk: 1.3, height: 1.08 },
+  bitter: { skin: P.grey3, hair: P.dark1, shirt: P.dark1, pants: P.dark2, boots: P.dark0, coat: null, sleeve: P.grey3, bald: true, crystals: P.grey4, bandana: P.red0, bulk: 1.3, height: 1.06 },
+  salt_guard: { skin: P.grey4, hair: P.grey4, shirt: P.bone, pants: P.sand2, boots: P.brown1, coat: P.bone, coatLen: 12, sleeve: P.bone, bald: true, crystals: P.bone, spear: true, bulk: 1.25, height: 1.1 },
+  councilor: { skin: P.grey4, hair: P.grey5, shirt: P.sand2, pants: P.sand3, boots: P.brown1, coat: P.sand1, coatLen: 18, sleeve: P.sand1, bald: true, crystals: P.bone, bulk: 1.15, height: 1.0 },
+  slyuda: { skin: P.grey4, hair: P.grey4, shirt: P.olive1, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.grey4, apron: P.brown2, bald: true, crystals: P.bone, backpack: P.brown2, bulk: 1.2, height: 1.02 },
+  shcholoch: { skin: P.grey4, hair: P.grey4, shirt: P.teal0, pants: P.sand2, boots: P.brown1, coat: P.teal1, coatLen: 16, sleeve: P.teal1, hood: P.teal0, crystals: P.bone, bulk: 1.1, height: 0.98 },
+  rtut: { skin: P.skin1, hair: P.dark1, shirt: P.grey2, pants: P.dark2, boots: P.dark1, coat: P.brown1, coatLen: 12, sleeve: P.brown1, goggles: true, scarf: P.red0, height: 0.97 },
   trust_hunter: { skin: P.skin1, hair: P.dark2, shirt: P.grey1, pants: P.grey1, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, hood: P.grey1, goggles: true, rifle: true, height: 1.01 },
 };
 

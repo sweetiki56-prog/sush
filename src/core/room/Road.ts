@@ -12,6 +12,7 @@ import { flagsHold } from '../Game';
 import { trade } from './Trade';
 import { drops, lowerFirst } from '../words';
 import { meet } from './Meetings';
+import { partyOf } from '../companions';
 
 const SEND_MS = 200;
 const THIRST_HP = 3; // per hour on the road without water
@@ -58,6 +59,11 @@ export function heroOnMap(room: MissionRoom): HeroOnMap {
   const ps = t.escort && partiesOf(room);
   const car = ps ? ps.byId(t.escort!.party) : undefined;
   if (ps && car) strength += ps.strength(car);
+  // companions fight too
+  for (const id of partyOf(room.world.flags, room.content.companions ?? {})) {
+    const def = room.content.creatures[room.content.companions[id].creature];
+    if (def) strength += fighterStrength(def.hp, def.weapons, room.content.weapons, def.dr);
+  }
   return { x: t.x, y: t.y, strength, sneak: t.sneak, water: games.some((g) => g.count('flask') > 0), trustEnemy: room.world.flags.trust_outcome === 'fight', escort: t.escort?.party };
 }
 

@@ -1,0 +1,2854 @@
+{
+ "comp_hank": {
+  "speaker": "Хэнк",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "with_hank"
+     }
+    ],
+    "node": "with"
+   },
+   {
+    "node": "home"
+   }
+  ],
+  "nodes": {
+   "with": {
+    "text": "Хэнк проверяет «Сборщика» и щурится на дорогу. — Ну? Куда теперь?",
+    "options": [
+     {
+      "text": "Держись рядом.",
+      "if": [
+       {
+        "flag": "stance_hank",
+        "eq": "back"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_hank",
+        "value": "close"
+       }
+      ],
+      "next": "close"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "notFlag": "stance_hank"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_hank",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "flag": "stance_hank",
+        "eq": "close"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_hank",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Возвращайся домой и жди меня там.",
+      "effects": [
+       {
+        "type": "leave",
+        "id": "hank"
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Идём дальше."
+     }
+    ]
+   },
+   "close": {
+    "text": "— Рядом. Как в старые времена.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "back": {
+    "text": "— Сзади так сзади. Двустволка и оттуда достанет.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "— Буду у костра. Колодец без меня соскучился.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "home": {
+    "text": "Хэнк сидит у костра, как будто и не уходил. — Снова в путь? Я готов, если ты готов.",
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "hank"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— Пошли. Только быстро, пока не передумал.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "comp_rzhavchik": {
+  "speaker": "Ржавчик",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "with_rzhavchik"
+     }
+    ],
+    "node": "with"
+   },
+   {
+    "node": "home"
+   }
+  ],
+  "nodes": {
+   "with": {
+    "text": "Ржавчик садится у ног и смотрит снизу вверх, виляя хвостом.",
+    "options": [
+     {
+      "text": "Рядом!",
+      "if": [
+       {
+        "flag": "stance_rzhavchik",
+        "eq": "back"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_rzhavchik",
+        "value": "close"
+       }
+      ],
+      "next": "close"
+     },
+     {
+      "text": "Сзади!",
+      "if": [
+       {
+        "notFlag": "stance_rzhavchik"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_rzhavchik",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Сзади!",
+      "if": [
+       {
+        "flag": "stance_rzhavchik",
+        "eq": "close"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_rzhavchik",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Домой! Жди там.",
+      "effects": [
+       {
+        "type": "leave",
+        "id": "rzhavchik"
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Идём дальше."
+     }
+    ]
+   },
+   "close": {
+    "text": "Ржавчик прижимается к ноге.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "back": {
+    "text": "Ржавчик неохотно отходит назад и садится, не сводя глаз с дороги.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "Ржавчик опускает хвост и трусит к костру Ржавого колодца.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "home": {
+    "text": "Ржавчик лежит у костра, положив морду на лапы. Увидев вас, вскакивает.",
+    "options": [
+     {
+      "text": "Ко мне, Ржавчик!",
+      "effects": [
+       {
+        "type": "join",
+        "id": "rzhavchik"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "Ржавчик с лаем прыгает вокруг.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "comp_shepot": {
+  "speaker": "Шёпот",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "with_shepot"
+     }
+    ],
+    "node": "with"
+   },
+   {
+    "node": "home"
+   }
+  ],
+  "nodes": {
+   "with": {
+    "text": "Шёпот поправляет капюшон. — Слушаю.",
+    "options": [
+     {
+      "text": "Держись рядом.",
+      "if": [
+       {
+        "flag": "stance_shepot",
+        "eq": "back"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_shepot",
+        "value": "close"
+       }
+      ],
+      "next": "close"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "notFlag": "stance_shepot"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_shepot",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "flag": "stance_shepot",
+        "eq": "close"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_shepot",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Возвращайся домой и жди меня там.",
+      "effects": [
+       {
+        "type": "leave",
+        "id": "shepot"
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Идём дальше."
+     }
+    ]
+   },
+   "close": {
+    "text": "— Рядом. Как скажешь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "back": {
+    "text": "— Позади — моё место. Оттуда видно всех.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "— Вернусь к брату. Найдёшь меня в «Чаше».",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "home": {
+    "text": "Шёпот сидит в рядах «Пыльной чаши» рядом с братом. — Опять дорога? Вьюн справится и без меня.",
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "shepot"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— Идём. Долг есть долг.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "comp_granit": {
+  "speaker": "Гранит",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "with_granit"
+     }
+    ],
+    "node": "with"
+   },
+   {
+    "node": "home"
+   }
+  ],
+  "nodes": {
+   "with": {
+    "text": "Гранит стоит, как скала, соляные наросты на плечах поблёскивают. — Говори.",
+    "options": [
+     {
+      "text": "Держись рядом.",
+      "if": [
+       {
+        "flag": "stance_granit",
+        "eq": "back"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_granit",
+        "value": "close"
+       }
+      ],
+      "next": "close"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "notFlag": "stance_granit"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_granit",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "flag": "stance_granit",
+        "eq": "close"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_granit",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Возвращайся домой и жди меня там.",
+      "effects": [
+       {
+        "type": "leave",
+        "id": "granit"
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Идём дальше."
+     }
+    ]
+   },
+   "close": {
+    "text": "— Рядом. Я не отстану.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "back": {
+    "text": "— Позади так позади. Молоту всё равно, откуда бить.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "— Буду у ворот Кристалла. Там меня найдёшь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "home": {
+    "text": "Гранит у ворот Кристалла опирается на молот. — Снова со мной? Пойдём.",
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "granit"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— Идём. Мой молот — твой.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "crystal_warden": {
+  "speaker": "Страж ворот",
+  "portrait": "portrait_salt_guard",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "crystal_in"
+     }
+    ],
+    "node": "passed"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Солевик в белом плаще стоит у решётки, опершись на копьё с соляным наконечником. — Люди — вниз, в копи Соли. Кристалл не для вас. Вы приходите брать.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "crystal",
+      "stage": "gate"
+     }
+    ],
+    "options": [
+     {
+      "text": "[Обаяние] Я пришёл не брать, а слушать. Пусти к Старшему Кварцу.",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_way",
+        "value": "charm"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "council"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "charm"
+     },
+     {
+      "text": "Гранит скажет за меня: его брат выпил рассол, а не пресную.",
+      "if": [
+       {
+        "flag": "empty_water"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_way",
+        "value": "water"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "council"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "water"
+     },
+     {
+      "text": "Со мной Сол — ваш, беглый из копей Гильдии. Он вёл меня через корку.",
+      "if": [
+       {
+        "flag": "crystal_guide",
+        "eq": "sol"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_way",
+        "value": "guide"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "council"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "guide"
+     },
+     {
+      "text": "Со мной Жила, сын Пласта, — выкупленный из копей. Он вёл меня через корку.",
+      "if": [
+       {
+        "flag": "crystal_guide",
+        "eq": "debtor"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_way",
+        "value": "guide"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "council"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "guide"
+     },
+     {
+      "text": "Старый Пласт показал мне тропу по трём звёздам. Спроси его, если не веришь.",
+      "if": [
+       {
+        "flag": "crystal_guide",
+        "eq": "plast"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_way",
+        "value": "guide"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "council"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "guide"
+     },
+     {
+      "text": "Мне к главному. Кварц главный? Вот к нему.",
+      "if": [
+       {
+        "attr": "int",
+        "lt": 4
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_way",
+        "value": "simple"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_crystal_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "council"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "flag",
+        "key": "salt_brother"
+       }
+      ],
+      "next": "simple"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "charm": {
+    "text": "Страж долго смотрит вам в глаза. — Слушать… Люди редко приходят слушать. — Решётка уходит в соль.",
+    "options": [
+     {
+      "text": "Войти."
+     }
+    ]
+   },
+   "water": {
+    "text": "Страж опускает копьё. — Гранит говорил о тебе. Кто поит нас рассолом, тот нам не чужой. — Решётка уходит в соль.",
+    "options": [
+     {
+      "text": "Войти."
+     }
+    ]
+   },
+   "guide": {
+    "text": "— Наш привёл тебя через корку. — Страж отступает. — Значит, соль тебя приняла. Иди.",
+    "options": [
+     {
+      "text": "Войти."
+     }
+    ]
+   },
+   "simple": {
+    "text": "Страж вдруг улыбается — впервые. — Ты говоришь, как мы: прямо. Без меда на языке. — Он хлопает вас по плечу так, что приседаешь. — Солёный брат. Иди к Кварцу.",
+    "options": [
+     {
+      "text": "Войти."
+     }
+    ]
+   },
+   "passed": {
+    "text": "— Иди. Соль видит тебя.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "crystal_gate_bars": {
+  "speaker": "Решётка ворот",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Решётка из позеленевшей меди, вмурованная в соль. Поднимает её страж.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "slyuda": {
+  "speaker": "Слюда",
+  "portrait": "portrait_slyuda",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "bitter_blood_asked"
+     }
+    ],
+    "node": "trade"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Солевик-торговец раскладывает на куске кожи соляные друзы и сушёные водоросли. — Слюда. Меняю соль на всё, что не соль. — Он понижает голос. — Людям тут не рады. А после Горьких — тем более.",
+    "options": [
+     {
+      "text": "Кто такие Горькие?",
+      "next": "bitter"
+     },
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "slyuda"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "bitter": {
+    "text": "— Наши, да не наши. Ушли из Кристалла за Горечью, живут в глубоких копях. Похищают людей с дорог — сборщиков, их жён. Совет молчит: боится войны с Трестом. — Слюда плюёт. — А людей всё равно уводят.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "bitter_blood_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "bitter_blood",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "trade": {
+    "text": "— Соль на всё, что не соль.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "slyuda"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "crystal_folk": {
+  "speaker": "Солевик",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Солевик провожает вас медленным взглядом и молчит. Жилы в стенах светятся, как вода под луной.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "quartz": {
+  "speaker": "Старший Кварц",
+  "portrait": "portrait_kvarts",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_promise"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "bitter_way"
+     }
+    ],
+    "node": "promise"
+   },
+   {
+    "if": [
+     {
+      "flag": "quartz_told"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Старый Солевик сидит у стены, покрытой строками. Наросты соли на его плечах стали прозрачными, как лёд. — Кварц. Мне сто сорок лет, и я помню, что рассказывал мой дед. Подойди. Прочти.",
+    "options": [
+     {
+      "text": "Что это за стена?",
+      "next": "wall"
+     }
+    ]
+   },
+   "wall": {
+    "text": "— Стена имён. Здесь каждый Солевик, рождённый в Кристалле. А наверху — первые. — Кварц касается верхних строк: они сбиты. — «Проект Верблюд». До Огня люди делали людей, которым не нужна пресная вода. Нас. Записи о том, как, — у Ордена Росы, в Скиту. Верхние имена кто-то стёр.",
+    "options": [
+     {
+      "text": "Мандат открывает Глубокое. Что это значит для вас?",
+      "next": "price"
+     }
+    ]
+   },
+   "price": {
+    "text": "— Пресная вода Глубокого пойдёт по Светлой и опреснит Солончаки. Для людей — жизнь. Для нас — «пресная хворь»: старики не выдержат и года, молодые уйдут в пустыню, где соль ещё держится. — Кварц смотрит спокойно. — Ты держишь в руках и воду людей, и смерть Солевиков.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "quartz_told"
+     },
+     {
+      "type": "quest",
+      "quest": "crystal",
+      "stage": "bitter"
+     },
+     {
+      "type": "flag",
+      "key": "wall_names_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "wall_names",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "next": "alarm_tube"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "noItem": "tube"
+       }
+      ],
+      "next": "alarm_scroll"
+     }
+    ]
+   },
+   "alarm_tube": {
+    "text": "Снизу, из верхних ярусов, доносится крик. Страж вбегает в зал: — Горькие! Прошли через нижний ход! — Вы хватаетесь за мешок — тубуса нет. В суматохе у ворот кто-то срезал ремень. Кварц закрывает глаза: — Горечь хочет уничтожить Мандат. Он унёс его в глубокие копи.",
+    "effects": [
+     {
+      "type": "take",
+      "item": "tube"
+     },
+     {
+      "type": "flag",
+      "key": "tube_stolen"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "alarm_scroll": {
+    "text": "Снизу доносится крик. Страж вбегает в зал: — Горькие! Прошли через нижний ход и взяли свиток Совета! — Кварц бледнеет. — Свиток с последними именами первых. Горечь хочет, чтобы Кристалл забыл, откуда он. Его лагерь — в глубоких копях.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "scroll_stolen"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "again": {
+    "text": "— Горечь в глубоких копях, за обвалом. — Кварц смотрит на стену. — Решай, как вернуть украденное.",
+    "options": [
+     {
+      "text": "Горечь мстит Тресту за деда, замученного в «Сухом доке». Изгони его из Кристалла — и Совет чист перед людьми.",
+      "if": [
+       {
+        "flag": "bitter_truth"
+       },
+       {
+        "notFlag": "bitter_way"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "exiled",
+       "fail": "unconvinced",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bitter_way",
+         "value": "exiled"
+        },
+        {
+         "type": "quest",
+         "quest": "crystal",
+         "stage": "promise"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        },
+        {
+         "type": "flag",
+         "key": "bitter_gone"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Нашлись имена первых «Верблюдов».",
+      "if": [
+       {
+        "flag": "names_found"
+       },
+       {
+        "notFlag": "wall_names"
+       }
+      ],
+      "next": "names"
+     },
+     {
+      "text": "Отравитель бань — меняла Ртуть. Воск на трубе — его знак.",
+      "if": [
+       {
+        "flag": "salt_earth_truth"
+       },
+       {
+        "notFlag": "salt_earth"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_earth",
+        "value": "exposed"
+       },
+       {
+        "type": "flag",
+        "key": "rtut_gone"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_earth",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "rtut"
+     },
+     {
+      "text": "[Обаяние] Вспомни, старик: чьи имена стёрли наверху?",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 6
+       },
+       {
+        "notFlag": "names_found"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "names_found"
+       },
+       {
+        "type": "quest",
+        "quest": "wall_names",
+        "stage": "truth"
+       }
+      ],
+      "next": "remember"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "unconvinced": {
+    "text": "— Изгнать своих из-за людской беды? — Кварц качает головой. — Совет не согласится. Не сегодня.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "exiled": {
+    "text": "Совет пластов собирается к ночи. Кварц говорит долго и тихо. Утром Горечь уходит из глубоких копей со своими людьми — в пустыню, к солёным озёрам. Украденное лежит у ворот Совета, завёрнутое в соль.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "stolen_back"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "tube_stolen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ],
+      "next": "got_tube"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "notFlag": "tube_stolen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "quartz_scroll"
+       }
+      ],
+      "next": "got_scroll"
+     }
+    ]
+   },
+   "remember": {
+    "text": "Кварц молчит так долго, что кажется — уснул. — Дед называл одно имя шёпотом. Верес. Верес Кассианов, главный над первыми. — Он открывает глаза. — Кассианов… Так зовут и настоятеля Ордена: Кассиан. Совпадение? В пустыне совпадений нет.",
+    "options": [
+     {
+      "text": "…",
+      "next": "names"
+     }
+    ]
+   },
+   "names": {
+    "text": "— Имя Вереса Кассианова стёрли со Стены. Кто-то не хотел, чтобы Солевики знали: наших создателей потомок сидит в Скиту, над записями. — Кварц смотрит на вас. — Что сделаешь с этим именем?",
+    "options": [
+     {
+      "text": "Сохраню. С этим именем Кассиан станет сговорчивее.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "wall_names",
+        "value": "lever"
+       },
+       {
+        "type": "flag",
+        "key": "kassian_kin"
+       },
+       {
+        "type": "quest",
+        "quest": "wall_names",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "names_done"
+     },
+     {
+      "text": "Верни имя на Стену. Пусть Орден и Кристалл знают, что они родня.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "wall_names",
+        "value": "bridge"
+       },
+       {
+        "type": "flag",
+        "key": "order_bridge"
+       },
+       {
+        "type": "quest",
+        "quest": "wall_names",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "names_done"
+     },
+     {
+      "text": "Сотри совсем. Имя — повод для войны.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "wall_names",
+        "value": "erased"
+       },
+       {
+        "type": "quest",
+        "quest": "wall_names",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       }
+      ],
+      "next": "names_done"
+     }
+    ]
+   },
+   "names_done": {
+    "text": "Кварц кивает. — Так тому и быть.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "rtut": {
+    "text": "Кварц долго молчит. — Человек из бань хотел, чтобы мы пошли войной на Скит. — Он зовёт стражу. — Ртуть больше не будет менять у нас ни соль, ни смерть. Спасибо, что сказал правду, а не удобное.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "got_tube": {
+    "text": "Тубус. Печать цела.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "got_scroll": {
+    "text": "Свиток Совета, завёрнутый в кожу. Кварц кивает: — Оставь у себя. Людям тоже надо помнить, откуда мы.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "promise": {
+    "text": "Кварц встаёт — впервые за весь разговор. — Украденное вернулось. Теперь скажи мне прямо, как говорят у нас: когда ты откроешь Глубокое, что будет с солью?",
+    "options": [
+     {
+      "text": "Земля Солевиков останется солёной. Даю слово: я её защищу.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_promise",
+        "value": "protect"
+       },
+       {
+        "type": "flag",
+        "key": "chapter5_done"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "salt_brother"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "end_protect"
+     },
+     {
+      "text": "Опреснять можно по участкам, не трогая ваши озёра. Я найду схемы.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_promise",
+        "value": "sections"
+       },
+       {
+        "type": "flag",
+        "key": "chapter5_done"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "salt_brother"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "end_sections"
+     },
+     {
+      "text": "Обещать не буду. Вода нужна всем.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_promise",
+        "value": "refuse"
+       },
+       {
+        "type": "flag",
+        "key": "chapter5_done"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "end_refuse"
+     }
+    ]
+   },
+   "end_protect": {
+    "text": "Кварц кладёт ладонь на Стену. — Слово человека. Соль запомнит. Когда придёт время, Солевики встанут рядом. — Он поднимает голову. — Орден в Скиту знает больше, чем говорит. Иди туда.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "end_sections": {
+    "text": "— По участкам… — Кварц усмехается. — Люди из Депо когда-то чертили такие схемы. Найдёшь — приходи. Мы подождём. — И тише: — Скит на севере. Там записи о нас.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "end_refuse": {
+    "text": "— Прямо сказано. — Кварц отворачивается к Стене. — Уходи. Солевики не встанут ни за, ни против. Скит — на севере, дорогу найдёшь сам.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Соль помнит слово. — Кварц не поворачивается от Стены.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "councilor": {
+  "speaker": "Советник пластов",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Советник не поднимает глаз от своих рук. — Совет слушает Кварца. Кварц слушает соль.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "name_niches": {
+  "speaker": "Ниши-архив",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "names_found"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "В нишах — свитки на тонкой соляной пластине, выцарапанные гвоздём списки. Старые, осыпающиеся.",
+    "options": [
+     {
+      "text": "Сверить сбитые строки Стены с перечнями в нишах.",
+      "if": [
+       {
+        "flag": "wall_names_asked"
+       }
+      ],
+      "check": {
+       "skill": "science",
+       "mod": -20,
+       "pass": "found",
+       "fail": "dust",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "names_found"
+        },
+        {
+         "type": "quest",
+         "quest": "wall_names",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Один перечень старше других: «Первые, по приказу главного над проектом В. Кассианова». Имя главного выцарапано глубже прочих, будто в злости.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "dust": {
+    "text": "Пластины крошатся в пальцах. Буквы — как соль на ветру.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "done": {
+    "text": "Ниши молчат.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "wall_of_names": {
+  "speaker": "Стена имён",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Тысячи строк, выцарапанных в соли. Верхние сбиты молотком.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "gorech": {
+  "speaker": "Горечь",
+  "portrait": "portrait_gorech",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "bitter_way"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Солевик с чёрным платком на лице сидит у костра из соляного угля. Вокруг — пятеро с кувалдами. — Человек пришёл за украденным. — Голос хриплый. — Горечь. Мы берём у людей то, что люди взяли у нас. Мандат откроет Глубокое, и соль уйдёт. Я его сожгу.",
+    "options": [
+     {
+      "text": "Твой дед умер в «Сухом доке». Я знаю. Совет выслушает тебя — не меня.",
+      "if": [
+       {
+        "flag": "bitter_truth"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "reconciled",
+       "fail": "refused",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bitter_way",
+         "value": "reconciled"
+        },
+        {
+         "type": "quest",
+         "quest": "crystal",
+         "stage": "promise"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        },
+        {
+         "type": "flag",
+         "key": "bitter_blood",
+         "value": "reconciled"
+        },
+        {
+         "type": "quest",
+         "quest": "bitter_blood",
+         "stage": "done"
+        },
+        {
+         "type": "flag",
+         "key": "stolen_back"
+        },
+        {
+         "type": "karma",
+         "amount": 2
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отдай — или отберу.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bitter_fight"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "reconciled": {
+    "text": "Горечь долго молчит. Потом снимает платок: под ним лицо совсем молодое, в соляных рубцах. — Дед кричал две ночи. Трест даже имени не записал. — Он бросает вам свёрток. — Возьми. Я пойду к Кварцу. Пусть Совет решает, кто мы.",
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "tube_stolen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ],
+      "next": "got_tube"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "notFlag": "tube_stolen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "quartz_scroll"
+       }
+      ],
+      "next": "got_scroll"
+     }
+    ]
+   },
+   "refused": {
+    "text": "— Слова. — Горечь отворачивается к огню. — Люди умеют говорить.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Тогда соль рассудит. — Горькие встают, поднимая кувалды.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "got_tube": {
+    "text": "Тубус. Печать цела. Горечь встаёт и уводит своих к Совету.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bitter_left"
+       }
+      ]
+     }
+    ]
+   },
+   "got_scroll": {
+    "text": "Свиток Совета, завёрнутый в кожу. Горечь встаёт и уводит своих к Совету.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bitter_left"
+       }
+      ]
+     }
+    ]
+   },
+   "after": {
+    "text": "Горечь смотрит в огонь и молчит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "bitter_stash": {
+  "speaker": "Тайник Горьких",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "stolen_back"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "if": [
+     {
+      "flag": "bitter_gone"
+     }
+    ],
+    "node": "abandoned"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "abandoned": {
+    "text": "Лагерь пуст, костёр остыл. Ниша за шкурой уцелела: налётчики её не нашли.",
+    "options": [
+     {
+      "text": "Забрать украденное.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bitter_way",
+        "value": "raided"
+       },
+       {
+        "type": "quest",
+        "quest": "crystal",
+        "stage": "promise"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "stolen_back"
+       }
+      ],
+      "next": "took"
+     }
+    ]
+   },
+   "look": {
+    "text": "Ниша за костром, завешенная шкурой. Горькие спят вполглаза.",
+    "options": [
+     {
+      "text": "Забрать украденное, пока не заметили.",
+      "check": {
+       "skill": "sneak",
+       "mod": -10,
+       "pass": "took",
+       "fail": "noticed",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bitter_way",
+         "value": "sneaked"
+        },
+        {
+         "type": "quest",
+         "quest": "crystal",
+         "stage": "promise"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        },
+        {
+         "type": "flag",
+         "key": "stolen_back"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "bitter_fight"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "took": {
+    "text": "Шкура не шуршит, соль не хрустит. Украденное — у вас в руках.",
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "tube_stolen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "tube"
+       }
+      ],
+      "next": "got_tube"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "notFlag": "tube_stolen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "quartz_scroll"
+       }
+      ],
+      "next": "got_scroll"
+     }
+    ]
+   },
+   "noticed": {
+    "text": "Под ногой хрустит соль. — Вор! — Горькие вскакивают.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "got_tube": {
+    "text": "Тубус. Печать цела.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "got_scroll": {
+    "text": "Свиток Совета, завёрнутый в кожу.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустая ниша.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "bitter_altar": {
+  "speaker": "Алтарь Горьких",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "bitter_truth"
+     }
+    ],
+    "node": "known"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Куча соли, в неё воткнута ржавая бляха сборщика Треста и лоскут серой робы с номером.",
+    "options": [
+     {
+      "text": "[Восприятие] На лоскуте — номер камеры «Сухого дока» и имя, выцарапанное на бляхе: Корунд.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bitter_truth"
+       },
+       {
+        "type": "quest",
+        "quest": "bitter_blood",
+        "stage": "truth"
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "Гранит, ты знаешь это имя?",
+      "if": [
+       {
+        "flag": "with_granit"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bitter_truth"
+       },
+       {
+        "type": "quest",
+        "quest": "bitter_blood",
+        "stage": "truth"
+       }
+      ],
+      "next": "granit"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "truth": {
+    "text": "Корунд — дед Горечи. Его взяли сборщики за «кражу воды» и держали в «Сухом доке», пока соль на нём не треснула. Горькие мстят не Кристаллу — Тресту.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "granit": {
+    "text": "Гранит мрачнеет. — Корунд. Дед Горечи. Трест взял его за кражу воды, держал в «Сухом доке», пока не умер. С тех пор Горечь режет людей Треста. — Он сжимает молот. — Мы должны были его остановить. Мы молчали.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "known": {
+    "text": "Бляха сборщика в соли. Память, которая не сохнет.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "name_tablet": {
+  "speaker": "Табличка в штреке",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "names_found"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "В стену штрека вделана металлическая табличка, покрытая коркой соли.",
+    "options": [
+     {
+      "text": "[Восприятие] Под коркой — буквы. Соскоблить соль.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "names_found"
+       },
+       {
+        "type": "quest",
+        "quest": "wall_names",
+        "stage": "truth"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "«Шахта опытного поселения. Проект „Верблюд“. Руководитель — В. Кассианов». Довоенная сталь, довоенная гордость.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "done": {
+    "text": "Табличка, очищенная от соли.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "hammer_cache": {
+  "speaker": "Тайник в штреке",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "hammer_taken"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Под обвалившейся крепью — ящик, обмотанный кожей. Внутри что-то тяжёлое.",
+    "options": [
+     {
+      "text": "Разобрать завал и достать.",
+      "check": {
+       "attr": "str",
+       "mod": 0,
+       "pass": "took",
+       "fail": "heavy",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "salt_hammer"
+        },
+        {
+         "type": "flag",
+         "key": "hammer_taken"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Ремонт] Подпереть крепь и вытащить ящик рычагом.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 50
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "salt_hammer"
+       },
+       {
+        "type": "flag",
+        "key": "hammer_taken"
+       }
+      ],
+      "next": "took"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "took": {
+    "text": "В ящике — молот из тёмного камня с соляными прожилками. Рукоять обмотана кожей, на ней выжжено: «Для того, кто держит Кристалл».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "heavy": {
+    "text": "Крепь стонет, и вы отступаете, пока не обрушилась.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустой ящик.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "salt_tunnel": {
+  "speaker": "Соляной тоннель",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Низкий ход, стены блестят. Солевики ходят им под Солончаками в копи Соли — день пути вместо трёх.",
+    "options": [
+     {
+      "text": "Пройти тоннелем в копи Соли.",
+      "if": [
+       {
+        "flag": "salt_brother"
+       }
+      ],
+      "effects": [
+       {
+        "type": "goto",
+        "map": "salt_mines",
+        "entry": "tunnel"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "shcholoch": {
+  "speaker": "Целительница Щёлочь",
+  "portrait": "portrait_shcholoch",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_earth"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "salt_earth_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Солевичка в капюшоне обтирает старика рассолом. — Щёлочь. Старики в банях слабеют: пьют рассол из источника и тают, как соль в воде. Такого не было сто лет.",
+    "options": [
+     {
+      "text": "Я посмотрю источник.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_earth_asked"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_earth",
+        "stage": "asked"
+       }
+      ],
+      "next": "ask"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "ask": {
+    "text": "— Труба идёт к купели из глубины. Смотри на стыки.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Нашёл что-нибудь? Говорят, это Орден: они всегда боялись нас.",
+    "options": [
+     {
+      "text": "Да, это Орден.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_earth",
+        "value": "blamed"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_earth",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "flag",
+        "key": "crystal_vs_order"
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       }
+      ],
+      "next": "blamed"
+     },
+     {
+      "text": "Нет. Это воск Сургуча, и отравил человек из ваших бань.",
+      "if": [
+       {
+        "flag": "salt_earth_truth"
+       }
+      ],
+      "next": "told"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "blamed": {
+    "text": "Щёлочь сжимает губы. — Орден. Совет узнает. — К вечеру у ворот Кристалла говорят только о Скиту и о мести.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "told": {
+    "text": "— Человек из бань? — Щёлочь оглядывается на прилавок Ртути. — Скажи Кварцу. Совет должен услышать от тебя.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "— Старики пьют рассол и живут, — говорит Щёлочь.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "bath_pipe": {
+  "speaker": "Стык трубы",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_earth"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Старая медная труба подходит к купели. На стыке — налёт, похожий на ржавчину.",
+    "options": [
+     {
+      "text": "[Восприятие] Под налётом — красный воск и оттиск: рука, держащая печать.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "seal_mark_7"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "seal_mark_7"
+       },
+       {
+        "type": "flag",
+        "key": "salt_earth_truth"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_earth",
+        "stage": "truth"
+       }
+      ],
+      "next": "wax"
+     },
+     {
+      "text": "[Наука] Соскоблить налёт и понюхать.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 40
+       },
+       {
+        "notFlag": "salt_earth_truth"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_earth_truth"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_earth",
+        "stage": "truth"
+       }
+      ],
+      "next": "smell"
+     },
+     {
+      "text": "Промыть трубу и выжечь яд.",
+      "if": [
+       {
+        "flag": "salt_earth_truth"
+       }
+      ],
+      "check": {
+       "skill": "science",
+       "mod": -10,
+       "pass": "cleaned",
+       "fail": "fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "salt_earth",
+         "value": "cleaned"
+        },
+        {
+         "type": "quest",
+         "quest": "salt_earth",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 120
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "wax": {
+    "text": "Красный воск запечатывает щель, через которую в трубу вливали что-то тёмное. Сургуч. Кто-то хотел, чтобы Солевики умирали тихо — и винили других.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "smell": {
+    "text": "Налёт пахнет горьким миндалём — человеческий яд, из аптеки довоенных городов. Орден так не травит: Орден вообще не травит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "cleaned": {
+    "text": "Вы гоните кипяток через трубу, пока из стыка не пойдёт чистый рассол. К вечеру старики в купели открывают глаза. Кто отравил — знаете только вы.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fail": {
+    "text": "Налёт въелся глубоко. Нужен другой способ.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "done": {
+    "text": "Чистая труба, чистый рассол.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "rtut": {
+  "speaker": "Меняла Ртуть",
+  "portrait": "portrait_rtut",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_earth",
+      "eq": "exposed"
+     }
+    ],
+    "node": "gone"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Человек в очках-консервах у прилавка с медью и склянками. — Ртуть. Меняю человеческое на солёное. — Пальцы у него в красных пятнах, будто в воске.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "rtut"
+       }
+      ]
+     },
+     {
+      "text": "Горькие держат лагерь в глубоких копях. Трест заплатит за такое?",
+      "if": [
+       {
+        "flag": "bitter_blood_asked"
+       },
+       {
+        "notFlag": "bitter_blood"
+       },
+       {
+        "notFlag": "bitter_way"
+       }
+      ],
+      "next": "sell"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "sell": {
+    "text": "Ртуть снимает очки. — Трест заплатит. Двести. — Он отсчитывает капли, не торгуясь. — Лагерь за обвалом, да? Ночью его не станет.",
+    "options": [
+     {
+      "text": "Бери.",
+      "effects": [
+       {
+        "type": "caps",
+        "amount": 200
+       },
+       {
+        "type": "flag",
+        "key": "bitter_blood",
+        "value": "sold"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_grudge"
+       },
+       {
+        "type": "flag",
+        "key": "bitter_gone"
+       },
+       {
+        "type": "quest",
+        "quest": "bitter_blood",
+        "stage": "done"
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       }
+      ],
+      "next": "sold"
+     },
+     {
+      "text": "Передумал."
+     }
+    ]
+   },
+   "sold": {
+    "text": "Той же ночью в глубоких копях гремят выстрелы. К утру лагерь Горьких пуст: кто убит, кого увели. Солевики у ворот смотрят на вас иначе.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "gone": {
+    "text": "Пустой прилавок.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "granit": {
+  "speaker": "Гранит",
+  "portrait": "portrait_granit",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "empty_water"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "if": [
+     {
+      "flag": "empty_water_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "У ворот, прямо на соли, сидит Солевик ростом с дверь. На коленях — пустая фляга. — Гранит. Брат мой, Кремнец, в копях Соли. Пишут: слёг. Все там слегли. Гильдия поит их водой — хорошей, пресной, говорят. А они тают.",
+    "options": [
+     {
+      "text": "Я посмотрю, что с водой в копях.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "empty_water_asked"
+       },
+       {
+        "type": "flag",
+        "key": "mines_known"
+       },
+       {
+        "type": "quest",
+        "quest": "empty_water",
+        "stage": "asked"
+       }
+      ],
+      "next": "asked"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "asked": {
+    "text": "— Иди. Меня туда не пустят: Гильдия смотрит на мои плечи. — Он сжимает флягу так, что жесть сминается.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Что с водой? — Гранит поднимается.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "done": {
+    "text": "Гранит стоит у ворот, опершись на молот. — Кремнец пьёт рассол и поднимается. Я в долгу. Куда пойдёшь — туда и я, если позовёшь.",
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "if": [
+       {
+        "notFlag": "with_granit"
+       },
+       {
+        "notFlag": "lost_granit"
+       }
+      ],
+      "effects": [
+       {
+        "type": "join",
+        "id": "granit"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— Идём. — Гранит закидывает молот на плечо.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "fresh_tank": {
+  "speaker": "Бак с водой",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "empty_water"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Железный бак у нар должников, с краном и цепью на кружке. Вода прозрачная, холодная — лучше, чем в городе.",
+    "options": [
+     {
+      "text": "[Наука] Попробовать воду. Солевикам нужен рассол, а это — пресная.",
+      "if": [
+       {
+        "flag": "empty_water_asked"
+       },
+       {
+        "skill": "science",
+        "gte": 40
+       },
+       {
+        "notFlag": "empty_water_truth"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "empty_water_truth"
+       },
+       {
+        "type": "quest",
+        "quest": "empty_water",
+        "stage": "truth"
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "[Восприятие] На кране свежая пломба Гильдии. Воду сюда носят нарочно.",
+      "if": [
+       {
+        "flag": "empty_water_asked"
+       },
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "empty_water_truth"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "empty_water_truth"
+       },
+       {
+        "type": "quest",
+        "quest": "empty_water",
+        "stage": "truth"
+       }
+      ],
+      "next": "truth"
+     },
+     {
+      "text": "Провести в бак рассол из старой трубы копра.",
+      "if": [
+       {
+        "flag": "empty_water_truth"
+       }
+      ],
+      "check": {
+       "skill": "repair",
+       "mod": -10,
+       "pass": "pipe",
+       "fail": "leak",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "empty_water",
+         "value": "pipe"
+        },
+        {
+         "type": "quest",
+         "quest": "empty_water",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "truth": {
+    "text": "Для людей эта вода — роскошь. Для Солевиков — медленная смерть: пресная вымывает из них соль, и они слабеют, послушные и тихие. Гильдия знает. Потому и поит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "pipe": {
+    "text": "Старая труба копра ещё держит давление. К вечеру в баке — мутный рассол. Солевики пьют жадно, как пустыня после дождя. Кремнец, брат Гранита, впервые встаёт с нар.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "leak": {
+    "text": "Труба лопается на стыке, рассол уходит в песок.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "done": {
+    "text": "В баке — рассол.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ }
+}

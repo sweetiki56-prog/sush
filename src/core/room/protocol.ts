@@ -61,7 +61,7 @@ export type Intent =
   | { t: 'ready'; on: boolean } // arena: ready for the next round
   | { t: 'debug'; op: DebugOp };
 
-export type ActorKind = 'player' | 'npc' | 'hostile';
+export type ActorKind = 'player' | 'npc' | 'hostile' | 'ally'; // ally: a companion (talks outside a fight)
 
 export interface ActorSnap {
   id: string;

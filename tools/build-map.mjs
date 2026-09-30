@@ -155,7 +155,10 @@ const TRUST_PEACE = [{ notFlag: 'trust_fight' }];
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 3, y: 26, dir: 1 },
   { id: 'marta', sheet: 'marta', x: 14, y: 24, dir: 3, label: 'Старейшина Марта', dialogue: 'marta' },
-  { id: 'hank', sheet: 'hank', x: 16, y: 31, dir: 5, label: 'Бродяга Хэнк', dialogue: 'hank', if: [{ notFlag: 'hank_hid' }, { notFlag: 'hank_taken' }] },
+  { id: 'hank', sheet: 'hank', x: 16, y: 31, dir: 5, label: 'Бродяга Хэнк', dialogue: 'hank', if: [{ notFlag: 'hank_hid' }, { notFlag: 'hank_taken' }, { notFlag: 'met_hank' }] },
+  // companions sent home wait by the fire (stage V)
+  { id: 'hank_home', sheet: 'hank', x: 16, y: 31, dir: 5, label: 'Хэнк', dialogue: 'comp_hank', if: [{ flag: 'met_hank' }, { notFlag: 'with_hank' }, { notFlag: 'lost_hank' }] },
+  { id: 'rzhavchik_wait', sheet: 'dog_rzhavchik', x: 14, y: 32, dir: 2, label: 'Ржавчик', dialogue: 'comp_rzhavchik', if: [{ flag: 'met_rzhavchik' }, { notFlag: 'with_rzhavchik' }, { notFlag: 'lost_rzhavchik' }] },
   { id: 'shluz', sheet: 'shluz', x: 11, y: 24, dir: 1, label: 'Инспектор Шлюз', dialogue: 'shluz', creature: 'inspector', group: 'trust', if: TRUST_HERE, peace: TRUST_PEACE, from: [0, 25] },
   { id: 'collector_a', sheet: 'collector', x: 9, y: 24, dir: 1, label: 'Сборщик Треста', dialogue: 'collector', creature: 'collector', group: 'trust', if: TRUST_HERE, peace: TRUST_PEACE, from: [0, 26] },
   { id: 'collector_b', sheet: 'collector', x: 12, y: 26, dir: 3, label: 'Сборщик Треста', dialogue: 'collector', creature: 'collector', group: 'trust', if: TRUST_HERE, peace: TRUST_PEACE, from: [1, 26] },

@@ -6,6 +6,7 @@ import * as Ch from './character/Character';
 import { ATTR_NAMES, MAX_LEVEL, SKILL_NAMES, type AttrId, type CharacterData, type Mods, type SkillId } from './character/defs';
 import { newState, plainCharacter } from './state';
 import { drops } from './words';
+import { partyLimit } from './companions';
 import type { CheckTarget, Condition, Content, Effect, EncounterAction, FlagValue, GameStateData } from './types';
 import { DMG_TYPES, type ArmorDef, type Resist } from './combat/types';
 
@@ -195,6 +196,20 @@ export class Game {
     const out: Resist = {};
     for (const m of this.gearMods()) for (const t of DMG_TYPES) if (m.res?.[t]) out[t] = (out[t] ?? 0) + m.res[t]!;
     return out;
+  }
+
+  /** A companion walks with the hero, if the party has room (a third of Обаяние, at least one: core/companions.ts). */
+  private joinCompanion(id: string): void {
+    const c = this.content.companions[id];
+    if (!c || this.flag(`lost_${id}`) || this.flag(`with_${id}`)) return;
+    const party = Object.keys(this.content.companions).filter((k) => this.flag(`with_${k}`) && !this.flag(`lost_${k}`));
+    if (party.length >= partyLimit(this.attr('cha'))) {
+      this.log(`${c.name}: «Вас и так много. Отпустите кого-нибудь — тогда пойду».`);
+      return;
+    }
+    this.setFlag(`met_${id}`, true);
+    this.setFlag(`with_${id}`, true);
+    this.log(`${c.name} идёт с вами.`);
   }
 
   /** An arrest: everything that fights leaves the bag (what is equipped stays marked, so it is worn again later). */
@@ -480,6 +495,15 @@ export class Game {
           break;
         case 'goto':
           this.events.emit('goto', e.map, e.entry);
+          break;
+        case 'join':
+          this.joinCompanion(e.id);
+          break;
+        case 'leave':
+          if (this.flag(`with_${e.id}`)) {
+            this.setFlag(`with_${e.id}`, false);
+            this.log(`${this.content.companions[e.id]?.name ?? e.id} уходит ждать на своём месте.`);
+          }
           break;
         case 'confiscate':
           this.confiscate();

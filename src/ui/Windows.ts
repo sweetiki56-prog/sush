@@ -6,6 +6,7 @@ import { C, button, dimmer, fmtTime, glass, metalPanel, title, txt } from './the
 import { karmaWord } from './CharacterWindow';
 import { Window } from './Window';
 import { ScrollBox } from './ScrollBox';
+import { partyOf } from '../core/companions';
 import { jobCount, jobFlag } from '../core/jobs';
 
 
@@ -140,6 +141,16 @@ const KRUPITSA_WORDS: Record<string, string> = { debt: 'в долгу у вас'
 const GUIDE_WORDS: Record<string, string> = { sol: 'Сол, беглый жених', debtor: 'Жила из копей', captain: 'Капитан Бакен', plast: 'старый Пласт' };
 const BOUT_WORDS: Record<string, string> = { spared: 'побеждён и свободен', talked: 'снял маску сам', bought: 'выкуплен', killed: 'убит на арене' };
 
+const CRYSTAL_WORDS: Record<string, string> = { charm: 'словом', water: 'за Гранита', guide: 'со своим проводником', simple: 'как «солёный брат»' };
+const BITTER_WORDS: Record<string, string> = { fought: 'разбиты в лагере', exiled: 'изгнаны Советом', sneaked: 'обворованы тихо', reconciled: 'вернулись к Совету', raided: 'проданы Тресту' };
+const PROMISE_WORDS: Record<string, string> = { protect: 'защитить землю Солевиков', sections: 'опреснять по участкам', refuse: 'ничего не обещано' };
+
+function chapter5Next(game: Game): string {
+  if (game.flag('salt_promise') === 'refuse') return 'Кристалл закрыл ворота за вашей спиной. Скит на севере, и дорогу к нему придётся искать самим.';
+  if (game.flag('crystal_vs_order')) return 'Солевики считают, что их травил Орден. Скит на севере ждёт вас — и, может быть, войну.';
+  return 'Солевики запомнили ваше слово. Записи о «Верблюде» — в Скиту, у Ордена Росы. Дорога лежит на север, через нагорье.';
+}
+
 function chapter4Next(game: Game): string {
   if (game.flag('tube_fake')) return 'Кристалл светится за Соляным морем. В тубусе у вас бумага, которая только выглядит как Мандат. Подлинник — у Гильдии.';
   if (game.flag('krupitsa_fate') === 'fled') return 'Крупица бежала к Тресту и унесла ваш маршрут. Проводник-Солевик ведёт вас через корку к Кристаллу, пока буря заметает следы.';
@@ -165,7 +176,7 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
   const x = (GAME_W - w) / 2;
   const y = 50;
   root.add([dimmer(s, 0.6), metalPanel(s, x, y, w, h), glass(s, x + 16, y + 16, w - 32, h - 32)]);
-  root.add(title(s, GAME_W / 2, y + 48, `ГЛАВА ${['', 'I', 'II', 'III', 'IV'][chapter] ?? chapter} ОКОНЧЕНА`, 22, C.amber).setOrigin(0.5));
+  root.add(title(s, GAME_W / 2, y + 48, `ГЛАВА ${['', 'I', 'II', 'III', 'IV', 'V'][chapter] ?? chapter} ОКОНЧЕНА`, 22, C.amber).setOrigin(0.5));
   const karma = game.flag('karma');
   const well = game.flag('well_sealed') ? 'под пломбой Треста' : game.flag('well_taxed') ? 'платит налог Тресту' : 'свободен';
   const rows2 = [
@@ -222,12 +233,26 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
     ['Капли', String(st.caps)],
     ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
   ];
-  const rows = chapter === 4 ? rows4 : chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
+  const party = partyOf(game.state.flags, game.content.companions ?? {}).map((id) => game.content.companions[id].name);
+  const rows5 = [
+    ['Странник', `${c.name}, уровень ${c.level}`],
+    ['Время в пути', fmtTime(st.stats.playMs)],
+    ['Ворота Кристалла', CRYSTAL_WORDS[String(game.flag('crystal_way'))] ?? '—'],
+    ['Горькие', BITTER_WORDS[String(game.flag('bitter_way'))] ?? '—'],
+    ['Обещание', PROMISE_WORDS[String(game.flag('salt_promise'))] ?? '—'],
+    ['Стена имён', game.flag('wall_names') === 'lever' ? 'имя Кассианова — ваш козырь' : game.flag('wall_names') === 'bridge' ? 'имя вернулось на Стену' : game.flag('wall_names') === 'erased' ? 'имя стёрто' : 'не прочитана'],
+    ['Спутники', party.length ? party.join(', ') : 'никого'],
+    ['Тубус', game.count('tube') ? 'в мешке' : '—'],
+    ['Сургучные метки', String([1, 2, 3, 4, 5, 6, 7].filter((n) => game.flag(`seal_mark_${n}`)).length)],
+    ['Капли', String(st.caps)],
+    ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
+  ];
+  const rows = chapter === 5 ? rows5 : chapter === 4 ? rows4 : chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
   rows.forEach(([k, v], i) => {
     root.add(txt(s, x + 60, y + 88 + i * 27, k, 15, C.crt));
     root.add(txt(s, x + w - 60, y + 88 + i * 27, v, 15, C.crtBright, 360, true).setOrigin(1, 0).setAlign('right'));
   });
-  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 4 ? chapter4Next(game) : chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
+  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 5 ? chapter5Next(game) : chapter === 4 ? chapter4Next(game) : chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
   const bStay = button(s, x + 70, y + h - 72, 250, 32, 'ОСТАТЬСЯ В СУШИ', () => (root.destroy(), onStay()));
   const bNew = button(s, x + w - 320, y + h - 72, 250, 32, 'НОВАЯ ИГРА', onNew);
   root.add([bStay.root, bNew.root]);

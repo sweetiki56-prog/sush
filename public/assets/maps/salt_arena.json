@@ -3207,6 +3207,12 @@
    "if": [
     {
      "notFlag": "whisper_enemy"
+    },
+    {
+     "notFlag": "with_shepot"
+    },
+    {
+     "notFlag": "lost_shepot"
     }
    ]
   },

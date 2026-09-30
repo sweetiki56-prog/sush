@@ -20,6 +20,7 @@ import { trade, type Deal } from './Trade';
 import { rest } from './Days';
 import { activeStorms, leaveToWorld, roadIntent, roadTick, visibleParties } from './Road';
 import { placeOfMap } from '../places';
+import { autoJoins, companionActor } from '../companions';
 import { placeParty, settleMeeting } from './Meetings';
 import { afterBattle, endBattle, takeLoot } from './RoadBattle';
 import type { ActorSnap, EquipSlot, HostileSnap, Intent, ServerMsg } from './protocol';
@@ -190,6 +191,7 @@ export class MissionRoom extends Room {
     this.npcs.clear();
     this.talking.clear();
     this.sentHostile.clear();
+    this.withParty();
     const cast = this.map.actors.filter((a) => a.id !== 'player' && this.present(a));
     for (const a of cast) if (!this.hostile(a)) this.addNpc(a);
     const flag = (k: string) => world.flags[k];
@@ -197,6 +199,7 @@ export class MissionRoom extends Room {
     const hostilePf = this.pathfinder((x, y) => this.npcAt(x, y));
     this.hostiles = new Hostiles(cast.filter((a) => this.hostile(a)), this.content.creatures, flag, () => hostilePf, (x, y) => this.grid.blocksSight(x, y));
     this.hostiles.onWalk = (h, path) => this.broadcast({ t: 'walk', id: h.id, path, speed: h.mover.speed });
+    this.hostiles.leader = () => this.host?.mover.tile ?? null;
     for (const [k, v] of Object.entries(world.flags)) this.grid.applyFlag(k, v);
     for (const h of this.hostiles.list) this.sentHostile.set(h.id, this.hostileKey(h.id));
   }
@@ -215,6 +218,7 @@ export class MissionRoom extends Room {
       p.mover.stop();
     }
     this.useMap(map);
+    this.autoParty();
     this.setup();
     this.host?.game.setFlag('at', mapId);
     this.host?.game.setFlag(`seen_${mapId}`, true); // on the town's plan from now on
@@ -226,7 +230,9 @@ export class MissionRoom extends Room {
       p.mover.teleport(t.x, t.y);
       p.game.state.player = { x: t.x, y: t.y, dir: p.mover.dir };
     }
+    this.gatherParty();
     if (this.host) this.runHooks(this.host, map.arrive);
+    if (this.host) this.barks(this.host, mapId);
     for (const p of this.players.values()) if (p.link) this.connect(p, p.link);
     this.save();
     return true;
@@ -246,6 +252,10 @@ export class MissionRoom extends Room {
     state.travel = this.world.travel;
     const p = this.addPlayer(token, state, null);
     if (!state.log.length) p.game.log('Вы входите в Ржавый колодец. Где-то скрипит несмазанная помпа.');
+    if (this.players.size === 1) {
+      this.autoParty();
+      this.gatherParty();
+    }
     if (this.players.size > 1) {
       const t = this.freeTileNear(p.mover.tile, p);
       this.place(p, t.x, t.y);
@@ -304,7 +314,63 @@ export class MissionRoom extends Room {
   private hostileActor(id: string): ActorSnap {
     const h = this.hostiles.byId(id)!;
     const t = h.mover.tile;
+    if (h.companion) {
+      const c = this.content.companions[h.companion];
+      return { id: h.id, kind: 'ally', sheet: h.sheet, x: t.x, y: t.y, dir: h.mover.dir, path: [...h.mover.path], speed: h.mover.speed, label: c?.name ?? h.def.name, dialogue: c?.dialogue };
+    }
     return { id: h.id, kind: 'hostile', sheet: h.sheet, x: t.x, y: t.y, dir: h.mover.dir, path: [...h.mover.path], speed: h.mover.speed, label: h.def.name };
+  }
+
+  // ---------- companions ----------
+  /** Every map carries an actor for each companion; it is there while that companion walks with the party. */
+  private withParty(): void {
+    if (this.map.actors.some((a) => a.companion)) return;
+    const spawn = this.map.actors.find((a) => a.id === 'player');
+    const [x, y] = this.map.entries?.default ?? [spawn?.x ?? 1, spawn?.y ?? 1];
+    const party = Object.entries(this.content.companions ?? {}).map(([id, c]) => companionActor(id, c, x, y));
+    if (party.length) this.opts.map = { ...this.map, actors: [...this.map.actors, ...party] };
+  }
+
+  /** A save from before companions: whoever the story already sent along joins by itself. */
+  private autoParty(): void {
+    const g = this.host?.game;
+    if (!g) return;
+    for (const id of autoJoins(this.world.flags, this.content.companions ?? {}, (c) => g.testAll(c))) g.apply([{ type: 'join', id }]);
+  }
+
+  /** A free tile beside the leader (for a companion arriving or joining). */
+  private nearLeader(): Tile | null {
+    const at = this.host?.mover.tile;
+    if (!at) return null;
+    const pf = this.playerPf();
+    for (let r = 1; r < 5; r++)
+      for (let dy = -r; dy <= r; dy++)
+        for (let dx = -r; dx <= r; dx++) {
+          const x = at.x + dx;
+          const y = at.y + dy;
+          if (pf.walkable(x, y) && !this.playerAt(x, y) && !this.hostiles.at(x, y) && ![...this.npcs.values()].some((n) => n.mover.tile.x === x && n.mover.tile.y === y)) return { x, y };
+        }
+    return null;
+  }
+
+  /** The party arrived somewhere: companions stand beside the leader. */
+  private gatherParty(): void {
+    for (const h of this.hostiles.alive) {
+      if (!h.companion) continue;
+      const t = this.nearLeader();
+      if (t) h.mover.teleport(t.x, t.y);
+    }
+  }
+
+  /** On arriving: each companion says the first fitting line it has not said yet. */
+  private barks(p: Player, mapId: string): void {
+    for (const h of this.hostiles.alive) {
+      const c = h.companion ? this.content.companions[h.companion] : undefined;
+      const i = c?.barks?.findIndex((b, n) => (!b.map || b.map === mapId) && p.game.testAll(b.if) && !this.world.flags[`bark_${h.companion}_${n}`]) ?? -1;
+      if (!c || i < 0) continue;
+      p.game.setFlag(`bark_${h.companion}_${i}`, true);
+      this.logAll(`${c.name}: «${c.barks![i].text}»`);
+    }
   }
 
   // ---------- who is on the map ----------
@@ -356,7 +422,8 @@ export class MissionRoom extends Room {
         if (foe) continue;
         const t = npc?.mover.tile;
         if (npc) this.dropNpc(npc, false); // the talk that provoked it ends on its own
-        const h = this.hostiles.add(t ? { ...a, x: t.x, y: t.y, dir: npc!.mover.dir } : a);
+        const near = a.companion ? this.nearLeader() : null;
+        const h = this.hostiles.add(t ? { ...a, x: t.x, y: t.y, dir: npc!.mover.dir } : near ? { ...a, x: near.x, y: near.y } : a);
         if (!h) continue;
         this.broadcast({ t: 'spawn', actor: this.hostileActor(h.id) });
         if (npc && !h.dead) turned.push(h.id);
@@ -510,6 +577,12 @@ export class MissionRoom extends Room {
     if (n?.dialogue && !n.leaving) {
       const t = n.mover.tile;
       return { id, label: n.label, dialogue: n.dialogue, npc: true, foot: { x: t.x, y: t.y, w: 1, h: 1 } };
+    }
+    const ally = this.hostiles.byId(id);
+    if (ally?.companion && !ally.dead) {
+      const c = this.content.companions[ally.companion];
+      const t = ally.mover.tile;
+      if (c) return { id, label: c.name, dialogue: c.dialogue, npc: false, foot: { x: t.x, y: t.y, w: 1, h: 1 } };
     }
     const prop = this.grid.props.get(id);
     const o = prop?.obj;
@@ -856,7 +929,8 @@ export class MissionRoom extends Room {
     const people = [...this.players.values()];
     const dist = (a: Tile, b: Tile) => Math.hypot(a.x - b.x, a.y - b.y);
     // allies always come; foes that are called or close by join
-    const near = this.hostiles.alive.filter((h) => h.ally || ids.includes(h.id) || people.some((q) => dist(h.mover.tile, q.mover.tile) <= JOIN_RANGE));
+    let near = this.hostiles.alive.filter((h) => h.ally || ids.includes(h.id) || people.some((q) => dist(h.mover.tile, q.mover.tile) <= JOIN_RANGE));
+    if (near.some((h) => h.ring)) near = near.filter((h) => !h.companion); // a bout is one on one
     this.hostiles.wake(near);
     const bout = near.find((h) => h.ring)?.ring;
     this.ring = !!bout;
@@ -872,6 +946,7 @@ export class MissionRoom extends Room {
       this.broadcast({ t: 'place', id: h.id, x: t.x, y: t.y, dir: h.mover.dir });
       const u = creatureUnit(h.def, h.id, t.x, t.y);
       if (h.ally) u.team = 'player';
+      if (h.companion && this.world.flags[`stance_${h.companion}`] === 'back') u.holdBack = true;
       else if (foesFirst) u.seq += FIRST_SEQ;
       if (this.ring) Object.assign(u, boutRule);
       units.push(u);
@@ -923,7 +998,7 @@ export class MissionRoom extends Room {
     }
     if (this.world.travel?.encounter) return void (this.later = () => afterBattle(this, outcome));
     if (this.host) this.clearedCheck(this.host);
-    for (const h of this.hostiles.alive) this.hostiles.walk(h, h.home);
+    for (const h of this.hostiles.alive) if (!h.companion) this.hostiles.walk(h, h.home);
     for (const q of this.players.values()) this.savePos(q);
   }
 }

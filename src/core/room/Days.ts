@@ -17,6 +17,7 @@ export function rest(room: MissionRoom, p: Player): void {
   if (room.fight) return;
   const people = [...room.players.values()];
   const near = room.hostiles.alive.some((h) => {
+    if (h.ally) return false;
     const t = h.mover.tile;
     return !h.asleep && people.some((q) => Math.hypot(t.x - q.mover.tile.x, t.y - q.mover.tile.y) < DANGER && lineOfSight((x, y) => room.grid.blocksSight(x, y), t, q.mover.tile));
   });

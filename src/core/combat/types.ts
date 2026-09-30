@@ -127,6 +127,7 @@ export interface Combatant {
   burrow?: boolean; // dives and surfaces (see CreatureDef)
   under?: boolean; // under the salt now: no one can reach it
   up?: boolean; // came up this turn (or was driven up by a noise): stays up till its next turn is over
+  holdBack?: boolean; // a companion told to hold back: fights only foes who came close to the party's people
   xp: number;
   loot: Record<string, number>;
   explode?: { radius: number; dmg: [number, number] };
