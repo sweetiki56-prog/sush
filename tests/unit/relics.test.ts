@@ -116,7 +116,7 @@ describe('«Ружьё на стене»', () => {
     const karma = Number(g.flag('karma') ?? 0);
     meet(s, 'marta');
     say(c, 'Про ружьё');
-    say(c, 'Я видел могилу');
+    say(c, 'есть могила Семёна');
     expect(g.flag('semyon')).toBe('lied');
     expect(g.count('skoba')).toBe(1);
     expect(Number(g.flag('karma'))).toBe(karma - 2);

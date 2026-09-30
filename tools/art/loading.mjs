@@ -348,7 +348,8 @@ export function loadingChart(chart) {
   ctx.fillStyle = 'rgba(0,0,0,0.5)';
   ctx.fillRect(14, 18, 900, 620);
   // the middle of the country: the dry river, the Dead fields
-  ctx.drawImage(chart, chart.width * 0.3, chart.height * 0.3, chart.width * 0.5, chart.height * 0.52, 0, 0, 900, 620);
+  const low = Math.min(chart.width, 2560); // Низовье: the first 64 cells of a chart that grew east
+  ctx.drawImage(chart, low * 0.3, chart.height * 0.3, low * 0.5, chart.height * 0.52, 0, 0, 900, 620);
   ctx.restore();
   // a pencil and a coffee ring
   ctx.save();

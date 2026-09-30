@@ -28,7 +28,7 @@ export interface Hostile {
   dead: boolean;
   gone: boolean; // fled for good
   ally: boolean; // on the players' side: never notices them, fights with them
-  ring: boolean; // a boxer: fights only bouts
+  ring: false | 'fists' | 'arms'; // a boxer or an arena fighter: fights only bouts (fists, or own weapons)
 }
 
 export class Hostiles {
@@ -65,7 +65,7 @@ export class Hostiles {
       dead: !!this.flag(`dead_${a.id}`),
       gone: false,
       ally: !!a.ally,
-      ring: !!a.ring,
+      ring: a.ring === 'arms' ? 'arms' : a.ring ? 'fists' : false,
     };
     this.list.push(h);
     return h;

@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import { C, button, glass, hitRow, txt } from './theme';
 import { itemStats } from './itemText';
 import { Window } from './Window';
+import { ScrollBox } from './ScrollBox';
 
 const W = 640;
 const H = 470;
@@ -48,19 +49,22 @@ export class Loot extends Window {
     this.root!.add(body);
     body.add(glass(s, x + 32, y + 64, W - 64, ROWS * ROW_H + 16));
     const list = Object.entries(this.items).filter(([, n]) => n > 0);
-    list.slice(0, ROWS).forEach(([id, n], i) => {
+    // a big pile scrolls inside its glass
+    const box = new ScrollBox(s, body, x + 34, y + 68, W - 68, ROWS * ROW_H + 8);
+    list.forEach(([id, n], i) => {
       const ry = y + 72 + i * ROW_H;
       const def = g.content.items[id];
       const stats = itemStats(g.content, id);
-      body.add([
+      box.content.add([
         s.add.image(x + 56, ry + 15, 'atlas', def?.icon ?? 'icon_note'),
         txt(s, x + 80, ry + 6, `${def?.name ?? id} ×${n}`, 14, C.crtBright),
         txt(s, x + W - 48, ry + 8, stats ? stats.split('\n')[0] : '', 11, C.crtDim).setOrigin(1, 0),
         hitRow(s, x + 36, ry, W - 72, ROW_H - 2, () => {}, () => this.onTake(id)),
       ]);
     });
+    box.fit(list.length * ROW_H + 8);
     if (!list.length) body.add(txt(s, x + 48, y + 80, 'Всё разобрано.', 14, C.crtDim));
-    else if (list.length > ROWS) body.add(txt(s, x + 48, y + 72 + ROWS * ROW_H + 20, `…и ещё ${list.length - ROWS}: возьмите всё`, 12, C.crtDim));
+    else if (list.length > ROWS) body.add(txt(s, x + 48, y + 72 + ROWS * ROW_H + 20, `Ещё ${list.length - ROWS}: колесо ↕ или «Взять всё»`, 12, C.crtDim));
     body.add(txt(s, x + 32, y + H - 58, 'Клик — забрать вещь', 12, C.crtDim));
     const all = button(s, x + W - 380, y + H - 64, 160, 30, 'ВЗЯТЬ ВСЁ', () => this.onTake());
     all.setEnabled(list.length > 0);

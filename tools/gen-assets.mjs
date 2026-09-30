@@ -1,7 +1,7 @@
 // Generates the whole procedural texture pack of «Сушь» into public/assets/gen.
 // Run: npm run gen:assets (after gen:map when the map changes).
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { finalize } from './art/draw.mjs';
+import { canvas, finalize } from './art/draw.mjs';
 import { bakeGround } from './art/ground.mjs';
 import * as B from './art/props_build.mjs';
 import * as M from './art/props_misc.mjs';
@@ -10,6 +10,7 @@ import * as K from './art/props_camp.mjs';
 import * as TN from './art/props_town.mjs';
 import * as AR from './art/props_areas.mjs';
 import * as CT from './art/props_city.mjs';
+import * as SL from './art/props_salt.mjs';
 import { CHARS, ARMOR_LOOKS, buildSheet, buildPortrait, FRAME_W, FRAME_H, FOOT_X, FOOT_Y, POSES } from './art/chars.mjs';
 import { CREATURES, buildCreatureSheet, S_FRAME_W, S_FRAME_H, S_FOOT_X, S_FOOT_Y, S_POSES } from './art/creatures.mjs';
 import { icon, ICONS } from './art/icons.mjs';
@@ -17,7 +18,7 @@ import { gearIcon, GEAR_ICONS } from './art/icons_gear.mjs';
 import { kitIcon, KIT_ICONS } from './art/icons_kit.mjs';
 import { armsIcon, ARMS_ICONS } from './art/icons_arms.mjs';
 import { token, TOKENS } from './art/tokens.mjs';
-import { worldMap } from './art/worldmap.mjs';
+import { worldMap, STRIP_PX } from './art/worldmap.mjs';
 import { loadingChart, loadingDusk, loadingPoster } from './art/loading.mjs';
 import { packAtlas } from './art/pack.mjs';
 import { roofArt } from './art/roofs.mjs';
@@ -31,7 +32,7 @@ const t0 = Date.now();
 
 // ground: one baked image per map
 const grounds = {};
-const BATTLEFIELDS = ['enc_road', 'enc_sand', 'enc_rocks', 'enc_ravine', 'enc_dead'];
+const BATTLEFIELDS = ['enc_road', 'enc_sand', 'enc_rocks', 'enc_ravine', 'enc_dead', 'enc_salt'];
 // every town map (all areas of every place), besides the Rusty Well's village
 const LOCATIONS = JSON.parse(readFileSync('src/content/locations.json', 'utf8'));
 const areasOf = (loc) => loc.areas ?? (loc.map ? [{ map: loc.map }] : []);
@@ -52,7 +53,13 @@ for (const [id, loc] of Object.entries(LOCATIONS))
 
 // the world map chart (kept soft: it is a painting, not a sprite)
 const chart = worldMap(JSON.parse(readFileSync('public/assets/maps/world_low.json', 'utf8')));
-save('worldmap_low.png', chart);
+// cut into strips of 64 cells: a whole chart of the Солончаки is wider than a phone's largest texture
+for (let i = 0; i * STRIP_PX < chart.w; i++) {
+  const w = Math.min(STRIP_PX, chart.w - i * STRIP_PX);
+  const strip = canvas(w, chart.h);
+  strip.ctx.drawImage(chart.c, i * STRIP_PX, 0, w, chart.h, 0, 0, w, chart.h);
+  save(`worldmap_low_${i}.png`, strip);
+}
 // loading screens: small JPEGs, they are the first thing to load
 for (const [id, cv] of [['dusk', loadingDusk()], ['poster', loadingPoster()], ['chart', loadingChart(chart.c)]]) writeFileSync(`${OUT}/loading_${id}.jpg`, cv.c.toBuffer('image/jpeg', 88));
 
@@ -100,6 +107,19 @@ const entries = [
   prop('bunk', CT.bunk()),
   prop('podium', CT.podium()),
   prop('scales', CT.scales()),
+  prop('salt_hi', SL.saltWall('hi')),
+  prop('salt_lo', SL.saltWall('lo')),
+  prop('salt_broken', SL.saltWall('broken')),
+  prop('beam_scales', SL.beamScales()),
+  prop('headframe', SL.headframe()),
+  prop('mine_cart', SL.mineCart()),
+  prop('salt_pile', SL.saltPile()),
+  prop('crystal', SL.crystalGrowth()),
+  prop('stands', SL.stands()),
+  prop('wreck_ribs', SL.wreckRibs()),
+  prop('radio', SL.radioSet()),
+  prop('wagon', SL.wagon()),
+  prop('salt_web', SL.saltWeb()),
   prop('hatch', AR.hatch()),
   prop('ladder', AR.ladder()),
   prop('valve', AR.valve()),

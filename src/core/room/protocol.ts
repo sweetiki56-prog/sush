@@ -177,7 +177,7 @@ export type ServerMsg =
   | { t: 'loot'; items: Record<string, number> | null } // the spoils of a road battle (null: gone, close the window)
   | { t: 'town'; loc: string } // the party stands at a town of several known areas: show its plan to pick one
   | { t: 'depart'; by: string | null; ms: number; where?: string } // co-op: someone leads the party out of town (or to `where`, another area) in `ms` (by null: called off)
-  | { t: 'travel'; x: number; y: number; minute: number; day: number; path: [number, number][]; target: string | null; sneak: boolean; seen?: string; parties: MapParty[]; escort: { to: string; paused: boolean } | null } // the party on the world map
+  | { t: 'travel'; x: number; y: number; minute: number; day: number; path: [number, number][]; target: string | null; sneak: boolean; seen?: string; parties: MapParty[]; escort: { to: string; paused: boolean } | null; storms?: [number, number, number, number][] } // the party on the world map
   | ({ t: 'arena' } & ArenaStatus)
   | LobbyMsg;
 

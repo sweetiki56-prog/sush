@@ -18,7 +18,7 @@ import { useItem as useInWorld } from './ItemUse';
 import { craft } from './Craft';
 import { trade, type Deal } from './Trade';
 import { rest } from './Days';
-import { leaveToWorld, roadIntent, roadTick, visibleParties } from './Road';
+import { activeStorms, leaveToWorld, roadIntent, roadTick, visibleParties } from './Road';
 import { placeOfMap } from '../places';
 import { placeParty, settleMeeting } from './Meetings';
 import { afterBattle, endBattle, takeLoot } from './RoadBattle';
@@ -113,7 +113,7 @@ export class MissionRoom extends Room {
     this.travelSent.ms = this.clock;
     const seen = t.seen !== this.travelSent.seen ? t.seen : undefined;
     this.travelSent.seen = t.seen;
-    this.broadcast({ t: 'travel', x: t.x, y: t.y, minute: t.minute, day: Number(this.world.flags.day ?? 1), path: t.path, target: t.target, sneak: t.sneak, seen, parties: visibleParties(this), escort: t.escort ? { to: this.content.locations[t.escort.to]?.name ?? t.escort.to, paused: t.escort.paused } : null });
+    this.broadcast({ t: 'travel', x: t.x, y: t.y, minute: t.minute, day: Number(this.world.flags.day ?? 1), path: t.path, target: t.target, sneak: t.sneak, seen, parties: visibleParties(this), escort: t.escort ? { to: this.content.locations[t.escort.to]?.name ?? t.escort.to, paused: t.escort.paused } : null, storms: activeStorms(this) });
   }
 
   /** Someone stepped onto the way out. Alone you go; in co-op the others get ten seconds to say «stay». */
@@ -858,9 +858,12 @@ export class MissionRoom extends Room {
     // allies always come; foes that are called or close by join
     const near = this.hostiles.alive.filter((h) => h.ally || ids.includes(h.id) || people.some((q) => dist(h.mover.tile, q.mover.tile) <= JOIN_RANGE));
     this.hostiles.wake(near);
-    this.ring = near.some((h) => h.ring);
+    const bout = near.find((h) => h.ring)?.ring;
+    this.ring = !!bout;
+    // a bout: nobody dies; on the ring of Три столба fists only, in the «Пыльная чаша» everyone's own weapons
+    const boutRule = bout === 'fists' ? { weapons: ['fists'], weapon: 'fists', spare: true } : { spare: true };
     const units: Combatant[] = people.map((q) => playerUnit(q.game, q.mover.tile.x, q.mover.tile.y, q.id));
-    if (this.ring) for (const u of units) Object.assign(u, { weapons: ['fists'], weapon: 'fists', spare: true });
+    if (this.ring) for (const u of units) Object.assign(u, boutRule);
     for (const h of near) {
       const t = h.mover.tile;
       h.mover.stop();
@@ -870,7 +873,7 @@ export class MissionRoom extends Room {
       const u = creatureUnit(h.def, h.id, t.x, t.y);
       if (h.ally) u.team = 'player';
       else if (foesFirst) u.seq += FIRST_SEQ;
-      if (this.ring) Object.assign(u, { weapons: ['fists'], weapon: 'fists', spare: true });
+      if (this.ring) Object.assign(u, boutRule);
       units.push(u);
     }
     if (!this.ring)

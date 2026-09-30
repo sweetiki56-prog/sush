@@ -5,6 +5,7 @@ import { GAME_H, GAME_W } from '../config';
 import { C, button, dimmer, fmtTime, glass, metalPanel, title, txt } from './theme';
 import { karmaWord } from './CharacterWindow';
 import { Window } from './Window';
+import { ScrollBox } from './ScrollBox';
 import { jobCount, jobFlag } from '../core/jobs';
 
 
@@ -13,35 +14,35 @@ export class JournalWindow extends Window {
   show(): void {
     if (this.root) return this.close();
     const s = this.scene;
+    const g = this.game;
     const { x, y } = this.frame(700, 520, 'ЖУРНАЛ');
-    let yy = y + 76;
-    for (const [id, q] of Object.entries(this.game.content.quests)) {
-      const lines = this.game.journal(id);
-      if (!lines.length) continue;
-      const head = txt(s, x + 36, yy, q.title.toUpperCase(), 15, C.amber, 620, true);
-      this.root!.add(head);
-      yy += head.height + 10;
-      for (const l of lines) {
-        const t = txt(s, x + 48, yy, `${l.done ? '✓' : '◆'} ${l.text}`, 13, l.done ? C.crtDim : C.crtBright, 600);
-        this.root!.add(t);
-        yy += t.height + 8;
-      }
+    // the entries scroll inside the frame (wheel, drag, arrows, PgUp/PgDn); quests still open come first
+    const box = new ScrollBox(s, this.root!, x + 24, y + 64, 652, 520 - 88, true);
+    const top = y + 76;
+    let yy = top;
+    const add = (o: Phaser.GameObjects.Text, gap: number) => {
+      box.content.add(o);
+      yy += o.height + gap;
+    };
+    const quests = Object.entries(g.content.quests)
+      .map(([id, q]) => ({ q, lines: g.journal(id) }))
+      .filter((e) => e.lines.length)
+      .map((e) => ({ ...e, closed: e.lines.length === e.q.stages.length }));
+    for (const { q, lines, closed } of [...quests.filter((e) => !e.closed), ...quests.filter((e) => e.closed)]) {
+      add(txt(s, x + 36, yy, `${q.title.toUpperCase()}${closed ? '  ✓' : ''}`, 15, closed ? C.crtDim : C.amber, 620, true), 10);
+      for (const l of lines) add(txt(s, x + 48, yy, `${l.done ? '✓' : '◆'} ${l.text}`, 13, l.done ? C.crtDim : C.crtBright, 600), 8);
     }
     // contracts from the board: one line each, with the count for hunts
-    const g = this.game;
     const jobs = Object.entries(g.content.jobs).filter(([id]) => g.flag(jobFlag(id)) === 'active');
     if (jobs.length) {
-      const head = txt(s, x + 36, yy, 'КОНТРАКТЫ', 15, C.amber, 620, true);
-      this.root!.add(head);
-      yy += head.height + 10;
+      add(txt(s, x + 36, yy, 'КОНТРАКТЫ', 15, C.amber, 620, true), 10);
       for (const [id, j] of jobs) {
         const n = j.hunt ? ` — ${Number(g.flag(jobCount(id)) ?? 0)} из ${j.hunt.count}` : '';
-        const t = txt(s, x + 48, yy, `◆ «${j.title}»${n}. ${j.desc}`, 13, C.crtBright, 600);
-        this.root!.add(t);
-        yy += t.height + 8;
+        add(txt(s, x + 48, yy, `◆ «${j.title}»${n}. ${j.desc}`, 13, C.crtBright, 600), 8);
       }
     }
-    if (yy === y + 76) this.root!.add(txt(s, x + 36, yy, 'Записей нет. Поговорите с жителями поселения.', 14, C.crt));
+    if (yy === top) add(txt(s, x + 36, yy, 'Записей нет. Поговорите с жителями поселения.', 14, C.crt), 0);
+    box.fit(yy - top + 24);
   }
 }
 
@@ -127,10 +128,23 @@ const RIOT_WORDS: Record<string, string> = { led: 'бунт возглавлен
 
 function chapter3Next(game: Game): string {
   const fate = game.flag('forgery_fate');
-  if (fate === 'sold') return 'Капли звенят в мешке, а улики больше нет. Затвор вам благодарен — пока. На севере, за Солончаками, ждёт Соль и вторая половина ключа.';
-  if (fate === 'public') return 'Нижняя Запруда знает, что копия Затвора — подделка. Трест слабеет и звереет. Пора уходить на север, в Соль, пока ворота ещё открыты.';
-  if (fate === 'shlyuz') return 'Шлюз унёс улику в Башню и впервые не знает, кому служит. Дорога ведёт на север, к Соли, где ищут вторую половину ключа.';
-  return 'Улика подделки у вас, Мандат заверен. Нотариус сказал: пластина — только половина. Вторая — где-то на севере, за Солончаками, в Соли.';
+  if (fate === 'sold') return 'Капли звенят в мешке, а улики больше нет. Затвор вам благодарен — пока. На востоке, в Солончаках, ждёт Соль и вторая половина ключа.';
+  if (fate === 'public') return 'Нижняя Запруда знает, что копия Затвора — подделка. Трест слабеет и звереет. Пора уходить на восток, в Соль, пока ворота ещё открыты.';
+  if (fate === 'shlyuz') return 'Шлюз унёс улику в Башню и впервые не знает, кому служит. Дорога ведёт на восток, к Соли, где ищут вторую половину ключа.';
+  return 'Улика подделки у вас, Мандат заверен. Нотариус сказал: пластина — только половина. Вторая — где-то на востоке, в Солончаках, за Солью.';
+}
+
+const GUILD_WORDS: Record<string, string> = { arena: 'арена «Пыльная чаша»', talk: 'слово Крупице', share: 'пай в Гильдии', favor: 'услуга Гильдии' };
+const AMBUSH_WORDS: Record<string, string> = { caught: 'раскусили Крупицу заранее', seen: 'заметили слежку', bought: 'перекупили охотников', fought: 'отбились в буре', slipped: 'обошли в буре' };
+const KRUPITSA_WORDS: Record<string, string> = { debt: 'в долгу у вас', dead: 'мертва', fled: 'бежала к Тресту' };
+const GUIDE_WORDS: Record<string, string> = { sol: 'Сол, беглый жених', debtor: 'Жила из копей', captain: 'Капитан Бакен', plast: 'старый Пласт' };
+const BOUT_WORDS: Record<string, string> = { spared: 'побеждён и свободен', talked: 'снял маску сам', bought: 'выкуплен', killed: 'убит на арене' };
+
+function chapter4Next(game: Game): string {
+  if (game.flag('tube_fake')) return 'Кристалл светится за Соляным морем. В тубусе у вас бумага, которая только выглядит как Мандат. Подлинник — у Гильдии.';
+  if (game.flag('krupitsa_fate') === 'fled') return 'Крупица бежала к Тресту и унесла ваш маршрут. Проводник-Солевик ведёт вас через корку к Кристаллу, пока буря заметает следы.';
+  if (game.flag('last_bout') === 'killed') return 'Шёпот ушла, не простив. Проводник-Солевик ведёт вас через Соляное море к Кристаллу: там знают, где вторая половина ключа.';
+  return 'Соль позади. Проводник-Солевик ведёт вас через Соляное море к Кристаллу, где помнят «Верблюда» и дорогу к Скиту.';
 }
 
 function chapterNext(game: Game): string {
@@ -151,7 +165,7 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
   const x = (GAME_W - w) / 2;
   const y = 50;
   root.add([dimmer(s, 0.6), metalPanel(s, x, y, w, h), glass(s, x + 16, y + 16, w - 32, h - 32)]);
-  root.add(title(s, GAME_W / 2, y + 48, `ГЛАВА ${['', 'I', 'II', 'III'][chapter] ?? chapter} ОКОНЧЕНА`, 22, C.amber).setOrigin(0.5));
+  root.add(title(s, GAME_W / 2, y + 48, `ГЛАВА ${['', 'I', 'II', 'III', 'IV'][chapter] ?? chapter} ОКОНЧЕНА`, 22, C.amber).setOrigin(0.5));
   const karma = game.flag('karma');
   const well = game.flag('well_sealed') ? 'под пломбой Треста' : game.flag('well_taxed') ? 'платит налог Тресту' : 'свободен';
   const rows2 = [
@@ -195,12 +209,25 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
     ['Капли', String(st.caps)],
     ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
   ];
-  const rows = chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
+  const rows4 = [
+    ['Странник', `${c.name}, уровень ${c.level}`],
+    ['Время в пути', fmtTime(st.stats.playMs)],
+    ['Доверие Гильдии', GUILD_WORDS[String(game.flag('guild_trust'))] ?? '—'],
+    ['Засада в буре', AMBUSH_WORDS[String(game.flag('ambush_done'))] ?? '—'],
+    ['Крупица', KRUPITSA_WORDS[String(game.flag('krupitsa_fate'))] ?? 'при делах'],
+    ['Молчун', BOUT_WORDS[String(game.flag('last_bout'))] ?? 'в маске, на арене'],
+    ['Проводник', GUIDE_WORDS[String(game.flag('crystal_guide'))] ?? '—'],
+    ['Тубус', game.flag('tube_fake') ? 'подменён Гильдией' : game.count('tube') ? 'в мешке' : '—'],
+    ['Сургучные метки', String([1, 2, 3, 4, 5, 6].filter((n) => game.flag(`seal_mark_${n}`)).length)],
+    ['Капли', String(st.caps)],
+    ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
+  ];
+  const rows = chapter === 4 ? rows4 : chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
   rows.forEach(([k, v], i) => {
     root.add(txt(s, x + 60, y + 88 + i * 27, k, 15, C.crt));
     root.add(txt(s, x + w - 60, y + 88 + i * 27, v, 15, C.crtBright, 360, true).setOrigin(1, 0).setAlign('right'));
   });
-  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
+  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 4 ? chapter4Next(game) : chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
   const bStay = button(s, x + 70, y + h - 72, 250, 32, 'ОСТАТЬСЯ В СУШИ', () => (root.destroy(), onStay()));
   const bNew = button(s, x + w - 320, y + h - 72, 250, 32, 'НОВАЯ ИГРА', onNew);
   root.add([bStay.root, bNew.root]);

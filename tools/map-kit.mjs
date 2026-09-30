@@ -66,8 +66,9 @@ export function mapKit(W, H, seed) {
     exits.push(o);
   }
 
-  /** A walled building on a floor; `roof` puts a roof over it that melts when someone walks in. */
-  function building(id, x0, y0, x1, y1, doors, label = 'Стена', roof = null) {
+  /** A walled building on a floor; `roof` puts a roof over it that melts when someone walks in; `wall` is the
+   * material's frame prefix (`wall` concrete, `salt` cut salt blocks). */
+  function building(id, x0, y0, x1, y1, doors, label = 'Стена', roof = null, wall = 'wall') {
     if (roof) roofs.push({ id, x0, y0, x1, y1, style: roof });
     fill(x0, y0, x1, y1, 'F');
     const gap = new Set(doors.map(([x, y]) => key(x, y)));
@@ -76,7 +77,7 @@ export function mapKit(W, H, seed) {
         const edge = x === x0 || x === x1 || y === y0 || y === y1;
         if (!edge || gap.has(key(x, y))) continue;
         const back = y === y0 || x === x0;
-        place({ id: `${id}_wall_${x}_${y}`, frame: back ? 'wall_hi' : r() < 0.2 ? 'wall_broken' : 'wall_lo', x, y, label });
+        place({ id: `${id}_wall_${x}_${y}`, frame: back ? `${wall}_hi` : r() < 0.2 ? `${wall}_broken` : `${wall}_lo`, x, y, label });
       }
   }
 

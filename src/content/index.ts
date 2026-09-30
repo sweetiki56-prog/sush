@@ -5,6 +5,7 @@ import pillars from './dialogues/pillars.json';
 import kolyuchka from './dialogues/kolyuchka.json';
 import barge from './dialogues/barge.json';
 import zapruda from './dialogues/zapruda.json';
+import salt from './dialogues/salt.json';
 import character from './character.json';
 import weapons from './weapons.json';
 import creatures from './creatures.json';
@@ -35,7 +36,7 @@ const boards = Object.fromEntries(Object.entries(BOARDS).map(([id, town]) => [id
 export const CONTENT = {
   items,
   quests,
-  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...boards },
+  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...boards },
   character,
   weapons,
   creatures,

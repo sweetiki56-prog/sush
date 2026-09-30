@@ -4,7 +4,7 @@ import type { FlagValue } from '../types';
 import type { MapData, MapObject } from '../../world/MapData';
 
 // tall props that block line of sight in combat (barrels, cacti and crates do not)
-const OPAQUE = /^(shack|wall_|door_closed|tank|machine|rock_|car_|hull_hi|transformer|tower)/;
+const OPAQUE = /^(shack|wall_|salt_hi|salt_lo|salt_broken|door_closed|tank|machine|rock_|car_|hull_hi|transformer|tower|headframe)/;
 
 export interface PropState {
   obj: MapObject;

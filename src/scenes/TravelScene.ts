@@ -7,7 +7,7 @@ import { music } from '../audio/Music';
 import { session } from '../session';
 import type { NetClient, NetEvents } from '../net/NetClient';
 import type { MapParty, ServerMsg } from '../core/room/protocol';
-import { Travel, freshTravel, type TravelState } from '../core/travel/Travel';
+import { Travel, fitSeen, freshTravel, type TravelState } from '../core/travel/Travel';
 import { GAME_H, GAME_W, HUD_H } from '../config';
 import { C, button, glass, txt } from '../ui/theme';
 import { onKey } from '../ui/keys';
@@ -18,6 +18,8 @@ import { loadingFor } from './LoadingScene';
 
 export const CELL = 20; // px per world cell on the chart (tools/art/worldmap.mjs)
 const CHART = 'worldmap_low';
+const STRIP = 64; // cells per chart strip: the chart is cut into strips a phone can hold as textures (tools/gen-assets.mjs)
+const strips = (width: number) => Array.from({ length: Math.ceil(width / STRIP) }, (_, i) => `${CHART}_${i}`);
 const MIN_ZOOM = 1; // never smaller than the chart: no empty edges
 const MAX_ZOOM = 2.4;
 const START_ZOOM = 1.4;
@@ -58,6 +60,9 @@ export class TravelScene extends Phaser.Scene {
   private zoom = START_ZOOM;
   private unsub: (() => void)[] = [];
   private day = 1;
+  private storms: [number, number, number, number][] = [];
+  private stormKey = '';
+  private stormLayer: Phaser.GameObjects.GameObject[] = [];
   private escort: TravelMsg['escort'] = null;
 
   constructor() {
@@ -66,9 +71,10 @@ export class TravelScene extends Phaser.Scene {
 
   create(): void {
     this.net = session().net!;
-    if (!this.textures.exists(CHART)) {
-      loadingFor(this, { style: 'chart', title: 'Карта Низовья', subtitle: 'Водоуправление, лист 3' });
-      this.load.image(CHART, `assets/gen/${CHART}.png`);
+    const keys = strips(session().worldMap!.width);
+    if (!keys.every((k) => this.textures.exists(k))) {
+      loadingFor(this, { style: 'chart', title: 'Карта Суши', subtitle: 'Водоуправление, листы 3–4' });
+      for (const k of keys) this.load.image(k, `assets/gen/${k}.png`);
       this.load.once('complete', () => this.scene.restart());
       this.load.start();
       return;
@@ -78,6 +84,7 @@ export class TravelScene extends Phaser.Scene {
     const W = grid.width * CELL;
     const H = grid.height * CELL;
     this.t = structuredClone(session().game.state.travel ?? freshTravel(grid, [14, 36]));
+    this.t.seen = fitSeen(this.t.seen, grid);
     this.trailPts = [];
     this.figures.clear();
     this.clouds = [];
@@ -89,8 +96,12 @@ export class TravelScene extends Phaser.Scene {
     desk.fillStyle(0x1a110a, 1).fillRect(-600, -600, W + 1200, H + 1200);
     desk.fillStyle(0x000000, 0.45).fillRect(10, 14, W, H);
     // the chart is drawn at twice the resolution (tools/art/worldmap.mjs ART): smooth, crisp when zoomed in
-    this.textures.get(CHART).setFilter(Phaser.Textures.FilterMode.LINEAR);
-    this.world.add([desk, this.add.image(0, 0, CHART).setOrigin(0).setDepth(0).setDisplaySize(W, H)]);
+    this.world.add(desk);
+    keys.forEach((k, i) => {
+      this.textures.get(k).setFilter(Phaser.Textures.FilterMode.LINEAR);
+      const cells = Math.min(STRIP, grid.width - i * STRIP);
+      this.world.add(this.add.image(i * STRIP * CELL, 0, k).setOrigin(0).setDepth(0).setDisplaySize(cells * CELL, H));
+    });
     this.trail = this.add.graphics().setDepth(2);
     this.route = this.add.graphics().setDepth(3);
     this.world.add([this.trail, this.route]);
@@ -280,6 +291,7 @@ export class TravelScene extends Phaser.Scene {
     if (m.seen) this.t.seen = m.seen;
     this.day = m.day;
     this.escort = m.escort;
+    this.showStorms(m.storms ?? []);
     Object.assign(this.me, { tx: m.x * CELL, ty: m.y * CELL, seen: 0 });
     if (!moved && this.trailPts.length === 0) Object.assign(this.me, { x: m.x * CELL, y: m.y * CELL });
     this.others(m.parties);
@@ -341,6 +353,40 @@ export class TravelScene extends Phaser.Scene {
     this.tint.fillColor = light.color;
     if (fog) this.drawFog();
     this.drawInfo();
+  }
+
+  /** Salt storms as a white veil with blowing grit over their stretch of the chart (redrawn only when they change). */
+  private showStorms(storms: [number, number, number, number][]): void {
+    const key = JSON.stringify(storms);
+    if (key === this.stormKey) return;
+    this.stormKey = key;
+    this.storms = storms;
+    this.stormLayer.forEach((o) => o.destroy());
+    this.stormLayer = [];
+    for (const [x0, y0, x1, y1] of storms) {
+      const [px, py, pw, ph] = [x0 * CELL, y0 * CELL, (x1 - x0 + 1) * CELL, (y1 - y0 + 1) * CELL];
+      const veil = this.add.graphics().setDepth(18);
+      for (let k = 0; k < 6; k++) veil.fillStyle(0xf4efe2, 0.07).fillRoundedRect(px - k * 6, py - k * 6, pw + k * 12, ph + k * 12, 18);
+      const grit = this.add.particles(0, 0, 'atlas', {
+        frame: 'dust',
+        x: { min: px, max: px + pw },
+        y: { min: py, max: py + ph },
+        speedX: { min: 40, max: 90 },
+        speedY: { min: -8, max: 8 },
+        lifespan: 1800,
+        scale: { start: 0.5, end: 0.15 },
+        alpha: { start: 0.6, end: 0 },
+        tint: 0xffffff,
+        frequency: 25,
+      });
+      grit.setDepth(19);
+      this.world.add([veil, grit]);
+      this.stormLayer.push(veil, grit);
+    }
+  }
+
+  private inStorm(): boolean {
+    return this.storms.some(([x0, y0, x1, y1]) => this.t.x >= x0 && this.t.x < x1 + 1 && this.t.y >= y0 && this.t.y < y1 + 1);
   }
 
   /** The route ahead as running dashes, the destination pulsing. */
@@ -406,14 +452,14 @@ export class TravelScene extends Phaser.Scene {
   private drawInfo(): void {
     const g = session().game;
     const tr = new Travel(session().worldMap!, this.t);
-    const pace = { survival: g.skill('survival'), perception: g.attr('per'), tracker: g.hasPerk('tracker'), wounded: g.state.hp < g.maxHp / 2, thirsty: !!g.body.thirsty };
+    const pace = { survival: g.skill('survival'), perception: g.attr('per'), tracker: g.hasPerk('tracker'), wounded: g.state.hp < g.maxHp / 2, thirsty: !!g.body.thirsty, storm: this.inStorm() };
     const hh = String(Math.floor(this.t.minute / 60)).padStart(2, '0');
     const mm = String(Math.floor(this.t.minute % 60)).padStart(2, '0');
     const flasks = g.count('flask');
     this.info.setText(
       [
         `День ${this.day}, ${hh}:${mm}${tr.night() ? ' · ночь' : ''}`,
-        `${tr.terrainAt(this.t.x, this.t.y).name} · ${tr.pace(pace).toFixed(1)} кл/ч`,
+        `${tr.terrainAt(this.t.x, this.t.y).name}${pace.storm ? ' · соляная буря' : ''} · ${tr.pace(pace).toFixed(1)} кл/ч`,
         `Вода: ${flasks ? `${flasks} ${flasks === 1 ? 'фляга' : flasks < 5 ? 'фляги' : 'фляг'} (дней пути)` : 'нет'}${g.body.thirsty ? ' · ЖАЖДА' : ''}`,
         this.escort
           ? `С караваном, путь на «${this.escort.to}»${this.escort.paused ? ' · привал' : ''} · пробел — ${this.escort.paused ? 'в путь' : 'стоять'}`

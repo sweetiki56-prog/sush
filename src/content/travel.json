@@ -120,6 +120,38 @@
       "pace": 0.5,
       "sight": 3,
       "dialogue": "meet_dry_stone"
+    },
+    "guild_caravan": {
+      "name": "Караван Гильдии к Кладбищу судов",
+      "kind": "caravan",
+      "faction": "guild",
+      "members": [
+        ["caravaneer", 1, 1],
+        ["caravan_guard", 2, 2]
+      ],
+      "pace": 0.75,
+      "sight": 5,
+      "dialogue": "sea_caravan"
+    },
+    "trust_hunters": {
+      "name": "Охотники Треста",
+      "kind": "trust",
+      "faction": "trust",
+      "members": [["trust_hunter", 3, 3]],
+      "pace": 1,
+      "sight": 6,
+      "hostile": true,
+      "ambush": true,
+      "seen": "ambush_seen",
+      "dialogue": "trust_hunters"
+    },
+    "salt_spiders": {
+      "name": "Соляные пауки",
+      "kind": "beast",
+      "members": [["salt_spider", 2, 3]],
+      "pace": 0.8,
+      "sight": 4,
+      "hostile": true
     }
   },
   "lairs": [
@@ -146,9 +178,16 @@
     {
       "id": "salt_road",
       "party": "caravan",
-      "stops": ["to_salt", "elevator", "barge", "three_pillars", "rusty_well"],
+      "stops": ["salt", "elevator", "barge", "three_pillars", "rusty_well"],
       "every": 3,
       "from": 1
+    },
+    {
+      "id": "sea_road",
+      "party": "caravan",
+      "stops": ["salt", "wrecks"],
+      "every": 4,
+      "from": 3
     },
     {
       "id": "tract",
@@ -191,13 +230,19 @@
       "party": "jackals",
       "count": 1,
       "area": [12, 26, 24, 34]
+    },
+    {
+      "party": "salt_spiders",
+      "count": 2,
+      "area": [80, 20, 104, 38]
     }
   ],
   "battlefields": {
     "=": "enc_road",
     ".": "enc_sand",
     "~": "enc_sand",
-    "_": "enc_sand",
+    "_": "enc_salt",
+    "s": "enc_salt",
     "^": "enc_rocks",
     ":": "enc_ravine",
     "|": "enc_ravine",
@@ -276,6 +321,74 @@
         {
           "type": "log",
           "text": "Под Сухим камнем — свёрток в промасленной коже. Лук Ласки."
+        }
+      ]
+    },
+    {
+      "id": "u_sea_caravan",
+      "party": "guild_caravan",
+      "cell": [74, 24],
+      "route": "sea_road",
+      "if": [
+        {
+          "flag": "sea_caravan"
+        },
+        {
+          "notFlag": "arrived_u_sea_caravan"
+        }
+      ]
+    },
+    {
+      "id": "u_hunters",
+      "party": "trust_hunters",
+      "cell": [84, 28],
+      "roam": 2,
+      "if": [
+        {
+          "flag": "sea_caravan",
+          "eq": "go"
+        },
+        {
+          "notFlag": "ambush_done"
+        }
+      ],
+      "beaten": [
+        {
+          "type": "flag",
+          "key": "ambush_done",
+          "value": "fought"
+        },
+        {
+          "type": "flag",
+          "key": "lair_known"
+        },
+        {
+          "type": "give",
+          "item": "hunt_order"
+        },
+        {
+          "type": "quest",
+          "quest": "salt",
+          "stage": "krupitsa"
+        },
+        {
+          "type": "log",
+          "text": "У старшего охотника за пазухой — приказ с печатью Треста. А в просвете бури корка проваливается широкой воронкой."
+        }
+      ]
+    }
+  ],
+  "storms": [
+    {
+      "id": "sea_storm",
+      "area": [79, 25, 89, 32],
+      "if": [
+        {
+          "flag": "sea_caravan",
+          "eq": "go"
+        },
+        {
+          "notFlag": "ambush_done"
         }
       ]
     }

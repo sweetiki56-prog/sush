@@ -7,6 +7,7 @@ import { synth } from '../audio/Synth';
 import { settings, TEXT_SPEEDS } from '../core/Settings';
 import { C, dimmer, glass, metalPanel, title, txt } from './theme';
 import { onKey } from './keys';
+import { ScrollBox } from './ScrollBox';
 
 const W = 980;
 const H = 470;
@@ -19,6 +20,8 @@ export class DialogueView {
   private waiting = false; // an answer went to the room, the next node has not come yet
   private body!: Phaser.GameObjects.Text;
   private opts: Phaser.GameObjects.Text[] = [];
+  private textBox!: ScrollBox; // a long reply scrolls inside its glass, and so does a long list of answers
+  private optBox!: ScrollBox;
   private full = '';
   private shown = 0;
   private typing: Phaser.Time.TimerEvent | null = null;
@@ -58,9 +61,11 @@ export class DialogueView {
     const tw = W - (tx - X) - 20;
     this.root.add(glass(s, tx, Y + 20, tw, 200));
     this.root.add(title(s, tx + 14, Y + 32, d.speaker.toUpperCase(), 12, C.amber));
-    this.body = txt(s, tx + 14, Y + 58, '', 15, C.crtBright, tw - 28);
-    this.root.add(this.body);
+    this.textBox = new ScrollBox(s, this.root, tx + 4, Y + 52, tw - 10, 164);
+    this.body = txt(s, tx + 14, Y + 58, '', 15, C.crtBright, tw - 34);
+    this.textBox.content.add(this.body);
     this.root.add(glass(s, X + 20, Y + 236, W - 40, H - 256));
+    this.optBox = new ScrollBox(s, this.root, X + 24, Y + 240, W - 50, H - 264, true);
     this.render();
   }
 
@@ -76,6 +81,7 @@ export class DialogueView {
       callback: () => {
         this.shown = Math.min(this.full.length, this.shown + TEXT_SPEEDS[settings().textSpeed].chars);
         this.body.setText(this.full.slice(0, this.shown));
+        this.followText();
         if (this.shown >= this.full.length) this.finishTyping();
       },
     });
@@ -87,16 +93,25 @@ export class DialogueView {
       t.on('pointerover', () => t.setColor(C.crtBright).setBackgroundColor('#1f3b22'));
       t.on('pointerout', () => t.setColor(C.crt).setBackgroundColor('transparent'));
       t.on('pointerdown', () => this.pick(i));
-      this.root!.add(t);
+      this.optBox.content.add(t);
       this.opts.push(t);
       y += t.height + 8;
     });
+    this.optBox.fit(y - (Y + 240));
+    this.optBox.to(0);
+  }
+
+  /** The reply grows as it is typed: once it is taller than its glass, keep the newest line in view. */
+  private followText(): void {
+    this.textBox.fit(this.body.height + 12);
+    this.textBox.toEnd();
   }
 
   private finishTyping(): void {
     this.typing?.remove();
     this.typing = null;
     this.body?.setText(this.full);
+    if (this.root) this.followText();
   }
 
   private pick(i: number): void {

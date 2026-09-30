@@ -66,7 +66,7 @@ describe('parties on the world map', () => {
     const car = ps.list.find((p) => p.route?.id === 'salt_road')!;
     const ev = run(ps, hero(0, 47, 1), 24 * 6);
     const stops = ev.filter((e) => e.t === 'arrive' && e.id === car.id).map((e) => (e as { at: string }).at);
-    expect(stops.slice(0, 3)).toEqual(['to_salt', 'elevator', 'barge']);
+    expect(stops.slice(0, 3)).toEqual(['salt', 'elevator', 'barge']);
     if (stops.includes('rusty_well')) expect(ps.byId(car.id)).toBeUndefined();
   });
 

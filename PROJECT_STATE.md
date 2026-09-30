@@ -1,11 +1,19 @@
 # PROJECT_STATE
 
 ## Current
+Stage K done: Chapter IV «Соль».
+- The world map grows east: the Солончаки and the Salt sea on the same chart (112×48, drawn in strips; old saves keep their fog).
+- Соль of four areas (the market, the Guild yard, the «Пыльная чаша», the mines) and the Кладбище судов with the snake's lair.
+- Main line: the Guild's gate five ways; Крупица's trust four ways; the Guild caravan into a salt storm where the Trust's hunters wait (caught early, spotted, bought off, fought, slipped); the reckoning (debt, fled, dead); a Солевик guide four ways; Кристалл ends the chapter.
+- Seven side quests and the secret salt snake.
+- Journal, dialogues and the loot pile scroll inside their frames (`ScrollBox`).
+- 487 unit and 22 e2e tests.
+
 Stage Z done: Chapter III «Запруда».
 - A city of five areas: the Lower city behind a gated wall, the Drop market with the Notary and the Mint, the Upper city with the Tower and its archive, the prison «Сухой док», the sewers.
 - Main line: the gate four ways; Нотариус Штемпель certifies the Mandate (a half of the key) and points at the forged copy; the archive; Шлюз and the bounty; the prison and four ways out; four choices ending the chapter.
 - Five side quests.
-- 416 unit and 22 e2e tests.
+- 416 unit and 21 e2e tests at the time.
 
 Stage L done: «Районы». Towns are now made of several maps, as in the classic isometric RPGs:
 - hatched ways out at the edges lead to the next area or to the world map;
@@ -211,6 +219,20 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
   - `tests/e2e/zapruda.spec.ts`: pass → Notary (a roof melts) → archive → Шлюз → Лейка → the chapter screen.
   - Also: skill tags doubled by hand in check options («[Красноречие 70%] [Красноречие] …») removed across all dialogues.
 
+## Stage K «Соль»: Chapter IV (done)
+- [x] K0. Bible: the world map grows east to 112×48 (Солончаки), Соль of four areas and the Кладбище судов of two, the chapter's steps by flags (main-quest.md), side quests 33–39 with flags and endings, people (Барыш keeps the arena, Гвоздь of Три столба is his man), the salt spider and the snake, slides, seal mark 6
+- [x] K1. World map: wider chart in strips, old fog fitted, places, routes, parties, the salt storm, the `enc_salt` field
+- [x] K2. Engine: bouts with weapons (`ring: 'arms'`), the burrowing snake, the Chapter IV screen, the menu
+- [x] K3. Art: people of Соль, the Солевик body, the spider, the snake, props, icons
+- [x] K4. Maps: four areas of Соль, the wrecks and the lair
+- [x] K5. Main line (`dialogues/salt.json`, quest `salt`)
+- [x] K6. Side quests: «Последний бой», «Невеста для Солевика», «Соляные долги», «Контрабанда соли», «Счёт на соли», «Бархан ушёл», «Капитан на мели», the snake
+- [x] K7. Balance at level 5:
+  - the arena: Сизый Стрелок 100% / Механик 96% / Говорун 80%, the Жмых brothers 94 / 42 / 21%, Молчун 70 / 13 / 5%;
+  - the hunters in the storm with two caravan guards: Стрелок 58% (the others buy them off, show the forgery or slip away);
+  - three salt spiders: 93 / 32 / 17%; the snake: 19% for a Стрелок, 41% with a «Трещотка»
+- [x] K8. Tests, docs, publish
+
 ## Story milestones («Сушь», see docs/STORY.md)
 - [x] S1. Title «Сушь», no «мини» framing, currency «капли», story bible, Mandate hook in Chapter I (tube, Hank's confession, Marta's warning, chapter-end screen)
 - [x] S2. Chapter I finale: Inspector Шлюз and the collectors (conditional cast from flags, people turning hostile, gunmen AI, spared story figures, six outcomes, well seal, letter, Hank joins, west exit ends the chapter)
@@ -220,7 +242,7 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [x] S6. Chapter II «Тракт»: Три столба, Колючка, Писарь, Сухари raid (stage T)
 - [x] S7. Chapter III «Запруда» (stage Z)
 - [ ] S8. Region Низовье complete (the barge done in stage L): Мёртвые поля, приют Тишины, Элеватор, Ковчег; companions Хэнк, Ржавчик, Тимофей
-- [ ] S9. Chapter IV «Соль» + Соляное море; caravans; arena in the story
+- [x] S9. Chapter IV «Соль» + Соляное море; caravans; arena in the story (stage K)
 - [ ] S10. Chapter V «Кристалл», «Роса-2»; Солевики, Гранит
 - [ ] S11. Chapter VI «Скит»: Орден Росы, Ирга; «Бархан», Зеркальное поле, Могильник
 - [ ] S12. Chapter VII «Шептун и Депо»: Бригада, Лёля, Ведро, туннели; руины Светлоречья
@@ -237,6 +259,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
   - maps: `tools/build-pillars.mjs`, `tools/build-kolyuchka.mjs`;
   - dialogues: `dialogues/pillars.json`, `dialogues/kolyuchka.json`;
   - main-quest flags: `docs/story/main-quest.md`.
+- Chapter III: `tools/build-zap-*.mjs`, `dialogues/zapruda.json`. Chapter IV: `tools/build-salt-*.mjs`, `tools/build-sea-*.mjs`, `dialogues/salt.json`; its flags are in `docs/story/main-quest.md` (Глава IV) and `side-quests.md` №33–39.
 - The world map: `content/travel.json`, `content/locations.json`, `tools/build-world.mjs`, `src/core/travel/`, `src/core/room/{Road,Meetings,RoadBattle}.ts`.
 - Stage R quests: `docs/story/side-quests.md` R1–R6, flags as named there (`semyon`, `rzhavchik`, `luka`, `resin_thief`, `laska_bow`, `hank_forgiven`, `hank_taken`).
 
@@ -248,9 +271,10 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
-- **S9, Chapter IV «Соль»:** the salt works and the Salt sea, the second half of the key (`side-quests.md`, `main-quest.md` Глава IV). The way there: the `to_salt` exit on the world map.
-  - Carry over from Chapter III: `forgery_fate` (public / shlyuz / kept / sold), `shlyuz_doubt`, `ada_witness`, `dull_drops` (die = court evidence), `dry_riot`, `trust_emergency`, `lejka_ally`, `tax_man`, seal marks 1–5.
-  - Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are not built yet; the sewers and the Lower city are ready for them.
+- **S10, Chapter V «Кристалл»:** the city of the Солевики (`locations.md` №12, `main-quest.md` Глава V). The place is on the chart at 104, 21 with `chapter: 5`; its `reach` hook ends Chapter IV.
+  - Carry over from Chapter IV: `crystal_guide` (sol / debtor / captain / plast), `krupitsa_fate` (debt / fled / dead), `guild_trust`, `last_bout` (Шёпот and Вьюн, or `whisper_enemy`), `salt_debts`, `salt_bride`, `salt_smuggle` (`mogilnik_hint`), `tube_fake`, `whisper_radio`, `leather_map`, seal marks 1–6.
+  - Not built yet in the Солончаки: «Роса-2», Зеркальное поле, Могильник бочек, the Скит (chapter 6); the nomad «Бархан» as a moving market.
+- Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are still open; the sewers and the Lower city are ready for them.
 - **S8, the rest of Низовье:**
   - places: Мёртвые поля, Приют Тишины (the Полусухие: `rep_dry`, `resin_thief`), Элеватор, Ковчег;
   - companions Хэнк, Ржавчик, Тимофей.

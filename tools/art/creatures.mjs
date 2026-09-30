@@ -26,6 +26,9 @@ export const CREATURES = {
   eel_queen: { eel: true, skin: P.brown2, dark: P.brown0, belly: P.sand3, scale: 2.1 },
   rust_mite: { mite: true, shell: P.rust1, dark: P.rust0, joint: P.dark2, scale: 0.8 },
   dog_rzhavchik: { dog: true, fur: P.rust2, dark: P.rust0, belly: P.sand3, collar: P.fire1, scale: 1.3 },
+  // stage K: the Salt sea. A pale spider spinning salt threads; the salt snake, an eel's body as thick as a man
+  salt_spider: { spider: true, shell: P.grey5, dark: P.grey2, joint: P.grey3, mark: P.rust2, scale: 1.35 },
+  salt_snake: { eel: true, skin: P.grey5, dark: P.grey2, belly: P.bone, heap: P.bone, scale: 3 },
 };
 
 /** A four-legged beast: body along the facing, legs at the corners, head with a snout and ears, a brush of a tail. */
@@ -68,7 +71,7 @@ function eelParts(c, phase, walking, pose) {
   const out = [];
   const cap = (a, b, r, color, bias = 0) => out.push({ kind: 'cap', a, b, r, color, bias });
   const ball = (p, r, color, bias = 0) => out.push({ kind: 'ball', a: p, r, color, bias });
-  ball([0, -3, 0.2], 3.4, P.sand3, -0.4); // the sand heaped where it came up
+  ball([0, -3, 0.2], 3.4, c.heap ?? P.sand3, -0.4); // the sand (or salt) heaped where it came up
   if (pose === 'dead') {
     for (let k = 0; k < 6; k++) cap([0, -3 + k * 1.8, 0.8], [0, -1.2 + k * 1.8, 0.8], 2 - k * 0.15, k % 2 ? c.skin : c.dark);
     return out;
@@ -110,6 +113,37 @@ function miteParts(c, phase, walking, pose) {
   ball([0, 0.6 + lunge, bz + 1.4], 2.2, shade(c.shell, 0.15));
   ball([0, 3.2 + lunge, bz], 1.4, c.dark);
   if (!dead) for (const side of [-1, 1]) cap([side * 0.6, 4 + lunge, bz + 0.4], [side * 1.8, 6.2 + lunge, bz + 1.6], 0.3, c.dark);
+  return out;
+}
+
+/** A salt spider: a small head, a fat patterned abdomen, eight long legs arched high, fangs. */
+function spiderParts(c, phase, walking, pose) {
+  const out = [];
+  const cap = (a, b, r, color, bias = 0) => out.push({ kind: 'cap', a, b, r, color, bias });
+  const ball = (p, r, color, bias = 0) => out.push({ kind: 'ball', a: p, r, color, bias });
+  const dead = pose === 'dead';
+  const bz = dead ? 1.6 : 4.2;
+  const lunge = pose === 'attack1' ? 1.6 : pose === 'hit' ? -1 : 0;
+  for (let i = 0; i < 4; i++)
+    for (const side of [-1, 1]) {
+      const ph = phase * 2 + i * 1.6 + (side > 0 ? Math.PI : 0);
+      const lift = walking ? Math.max(0, Math.sin(ph)) * 1.4 : 0;
+      const sw = walking ? Math.cos(ph) * 1.2 : 0;
+      const f = 1.8 - i * 1.3 + lunge;
+      const spread = 1 + Math.abs(i - 1.5) * 0.25;
+      const knee = dead ? [side * 3.4, f, 5] : [side * 4.6 * spread, f * 1.5, bz + 5 + lift];
+      const foot = dead ? [side * 4.2, f * 1.2, 7] : [side * 8 * spread, f * 2.2 + sw, 0.6 + lift * 0.4];
+      cap([side * 1.4, f * 0.6, bz], knee, 0.7, c.joint);
+      cap(knee, foot, 0.55, c.dark);
+    }
+  ball([0, -3 + lunge, bz + 1], 3.9, c.shell);
+  ball([0, -3.6 + lunge, bz + 2.6], 1.4, c.mark, 0.4); // the rust hourglass on its back
+  ball([0, 1.5 + lunge, bz + 0.4], 2.3, shade(c.shell, -0.1));
+  if (!dead) {
+    for (const [x, y] of [[-0.7, 3.4], [0.7, 3.4], [-1.3, 3], [1.3, 3]]) ball([x, y + lunge, bz + 1.2], 0.35, P.ink, 0.6);
+    const open = pose === 'attack1' ? 0.9 : 0.3;
+    for (const side of [-1, 1]) cap([side * 0.6, 3.4 + lunge, bz], [side * open, 5 + lunge, bz - 1.4], 0.45, c.dark, 0.4);
+  }
   return out;
 }
 
@@ -183,7 +217,7 @@ export function buildCreatureSheet(c) {
       const pose = S_POSES[col];
       const walking = pose === 'walk';
       const phase = walking ? ((col - 1) / 4) * Math.PI * 2 : 0;
-      const body = c.dog ? dogParts(c, phase, walking, pose) : c.eel ? eelParts(c, phase, walking, pose) : c.mite ? miteParts(c, phase, walking, pose) : scorpParts(c, phase, walking, pose);
+      const body = c.dog ? dogParts(c, phase, walking, pose) : c.eel ? eelParts(c, phase, walking, pose) : c.mite ? miteParts(c, phase, walking, pose) : c.spider ? spiderParts(c, phase, walking, pose) : scorpParts(c, phase, walking, pose);
       renderParts(cv.ctx, col * S_FRAME_W + S_FOOT_X, dir * S_FRAME_H + S_FOOT_Y, dir, body, c.scale);
     }
   return finalize(cv);

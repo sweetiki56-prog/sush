@@ -6,6 +6,8 @@ import { checkChance } from '../SkillCheck';
 import { armorCut, attackCost, BURST_STEP, hitChance, RANGE_PENALTY, resist, rollAttack, rollDamage, typeCut } from './rules';
 import { enemies, teamOf, type Combatant, type CombatEvent, type CombatUse, type Outcome, type WeaponDef } from './types';
 
+const NOISE_STUN = 4; // AP a burrower loses when a burst or a blast drives it up
+
 export const ESCAPE_DIST = 12;
 export const ITEM_AP = 2;
 
@@ -119,6 +121,7 @@ export class Combat {
     const chance = hitChance(u, target, w, dist);
     let reason: string | null = null;
     if (target.dead || target.fled || !enemies(u, target)) reason = 'Цель недоступна.';
+    else if (target.under && (w.burst ?? 1) < 2) reason = 'Ушёл под соль: не достать. Выгнать может очередь или взрыв.';
     else if (dist > w.range) reason = w.skill === 'melee' ? 'Нужно подойти вплотную.' : 'Слишком далеко.';
     else if (!this.canSee(u, target)) reason = 'Не видно цели.';
     else if (w.ammo && u.side === 'player' && this.env.ammo(w.ammo, u) < 1) reason = 'Нет патронов.';
@@ -152,7 +155,7 @@ export class Combat {
     u.ap -= p.cost;
     const counted = !!w.ammo && u.side === 'player';
     const rounds = Math.max(1, Math.min(w.burst ?? 1, counted ? this.env.ammo(w.ammo!, u) : Infinity));
-    const ev: CombatEvent[] = [];
+    const ev: CombatEvent[] = rounds > 1 ? this.noise() : []; // a burst's racket drives a burrower up
     for (let i = 0; i < rounds && !target.dead; i++) {
       if (counted) this.env.spendAmmo(w.ammo!, u);
       const chance = i ? checkChance(p.chance - BURST_STEP * i) : p.chance;
@@ -311,7 +314,7 @@ export class Combat {
 
   /** Everyone within the radius takes a hit (armor and resistances help); barrels caught in it go off too. */
   private blastAt(id: string, at: Tile, radius: number, dmg: [number, number], w?: WeaponDef): CombatEvent[] {
-    const ev: CombatEvent[] = [{ t: 'explode', id, x: at.x, y: at.y, radius }];
+    const ev: CombatEvent[] = [{ t: 'explode', id, x: at.x, y: at.y, radius }, ...this.noise()];
     for (const u of this.units) {
       if (u.dead || u.fled || Math.hypot(u.x - at.x, u.y - at.y) > radius) continue;
       const raw = dmg[0] + Math.floor(this.env.rng() * (dmg[1] - dmg[0] + 1));
@@ -324,6 +327,8 @@ export class Combat {
   endTurn(): CombatEvent[] {
     const ev = this.checkOutcome();
     if (ev.length) return ev;
+    const dive = this.dive(this.current);
+    if (dive.length) return [...dive, ...this.endTurn()];
     for (let n = 0; n < this.order.length; n++) {
       this.idx = (this.idx + 1) % this.order.length;
       if (this.idx === 0) this.round++;
@@ -355,6 +360,44 @@ export class Combat {
       ev.push({ t: 'log', text: `${u.name}: горит!` }, ...this.damage(u, typeCut(u.burnDmg, u, 'fire'), false));
     }
     if (u.dead) return [...ev, ...this.checkOutcome(), ...(this.outcome ? [] : this.endTurn())];
+    if (u.burrow) ev.push(...this.surface(u));
+    return ev;
+  }
+
+  /** A burrower's turn is over: if it did not come up this turn, it goes back under the salt. */
+  private dive(u: Combatant): CombatEvent[] {
+    if (!u.burrow || u.dead || u.fled || u.under) return [];
+    if (u.up) {
+      u.up = false;
+      return [];
+    }
+    u.under = true;
+    return [{ t: 'burrow', id: u.id }, { t: 'log', text: `${u.name} уходит под соль.` }];
+  }
+
+  /** Its turn begins under the salt: it comes up beside the sturdiest foe it can reach. */
+  private surface(u: Combatant): CombatEvent[] {
+    if (!u.under) return [];
+    const foes = this.units.filter((o) => o.side !== 'object' && enemies(u, o) && !o.dead && !o.fled).sort((a, b) => b.hp - a.hp);
+    for (const f of foes)
+      for (const [dx, dy] of [[1, 0], [0, 1], [-1, 0], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+        const x = f.x + dx;
+        const y = f.y + dy;
+        if (x < 0 || y < 0 || x >= this.env.width || y >= this.env.height || this.blocked(x, y, u.id)) continue;
+        Object.assign(u, { x, y, under: false, up: true });
+        return [{ t: 'surface', id: u.id, x, y }, { t: 'log', text: `Соль вспучивается: ${u.name} выныривает у ${f.name}!` }];
+      }
+    return [];
+  }
+
+  /** A burst or a blast: whatever is under the salt comes up where it is, dazed. */
+  private noise(): CombatEvent[] {
+    const ev: CombatEvent[] = [];
+    for (const u of this.units)
+      if (u.under && !u.dead) {
+        Object.assign(u, { under: false, up: true, stunned: Math.max(u.stunned, NOISE_STUN) });
+        ev.push({ t: 'surface', id: u.id, x: u.x, y: u.y }, { t: 'log', text: `Грохот выгоняет наверх: ${u.name} оглушён.` });
+      }
     return ev;
   }
 

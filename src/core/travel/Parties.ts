@@ -20,6 +20,8 @@ export interface PartyTemplate {
   trader?: string; // barter with them
   toll?: number; // what bandits ask to let you pass
   dialogue?: string; // a written meeting talk instead of the one built for the kind (story encounters)
+  ambush?: boolean; // lies in wait like bandits do (rocks, the Dead fields, a storm), whatever its kind
+  seen?: string; // a flag: the hero saw them coming, so they talk instead of shooting from cover
 }
 
 /** One of a kind on the map (a bounty's target): out while `if` holds, gone for good once beaten. */
@@ -29,6 +31,7 @@ export interface UniqueParty {
   cell: [number, number];
   if?: Condition[];
   roam?: number; // cells around its spot (0: stays put)
+  route?: string; // walks this route from its first stop instead of roaming (a story caravan)
   beaten?: Effect[]; // what beating it brings (a cache it guarded)
 }
 
@@ -39,6 +42,14 @@ export interface TravelContent {
   roamers: { party: string; count: number; area: [number, number, number, number] }[];
   battlefields: Record<string, string>; // terrain char -> the map a fight there is fought on
   uniques?: UniqueParty[];
+  storms?: Storm[];
+}
+
+/** A salt storm standing over a stretch of the map while its conditions hold: half the sight, slower going. */
+export interface Storm {
+  id: string;
+  area: [number, number, number, number]; // x0, y0, x1, y1 in cells, inclusive
+  if?: Condition[];
 }
 
 export interface PartyState {
@@ -150,7 +161,7 @@ export class Parties {
     // one of a kind: out while its conditions hold (the caller filters), off the map once they do not
     const due = new Set(uniques.map((u) => u.id));
     for (const u of this.content.uniques ?? []) if (!due.has(u.id) && this.byId(u.id)) this.remove(u.id);
-    for (const u of uniques) if (!this.byId(u.id)) this.add(u.party, u.cell, { id: u.id, home: u.cell, roam: u.roam ?? 3 });
+    for (const u of uniques) if (!this.byId(u.id)) this.add(u.party, u.cell, u.route ? { id: u.id, route: { id: u.route, i: 1 } } : { id: u.id, home: u.cell, roam: u.roam ?? 3 });
     // `angry`: «Жажда» remembers the gangs the hero beat and keeps more of them out
     for (const lair of morning ? this.content.lairs : []) {
       const alive = this.list.filter((p) => p.lair === lair.id).length;
@@ -242,7 +253,7 @@ export class Parties {
       if (heroSeen && hero.water) return this.chase(p, hero, 'hero');
       return this.wander(p, 5);
     }
-    if (tpl.kind === 'trust' && hero.trustEnemy && heroSeen) return this.chase(p, hero, 'hero');
+    if (tpl.kind === 'trust' && (hero.trustEnemy || tpl.hostile) && heroSeen) return this.chase(p, hero, 'hero'); // hunters sent for the hero come anyway
     if (p.route) {
       if (!p.path.length && p.wait <= 0) this.headFor(p, this.locations[this.routeOf(p).stops[p.route.i]].cell);
       return;

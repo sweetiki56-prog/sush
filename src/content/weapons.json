@@ -68,5 +68,7 @@
   "mite_bite": { "name": "Жвала клеща", "skill": "melee", "ap": 3, "dmg": [2, 4], "range": 1 },
   "club": { "name": "Дубинка", "skill": "melee", "ap": 3, "dmg": [3, 7], "range": 1, "stun": { "chance": 15, "ap": 2 } },
   "shiv": { "name": "Заточка", "skill": "melee", "ap": 2, "dmg": [2, 6], "range": 1, "item": "shiv", "crit": 10 },
-  "rat_bite": { "name": "Зубы крысы", "skill": "melee", "ap": 3, "dmg": [2, 5], "range": 1, "poison": { "dmg": 1, "turns": 2 } }
+  "rat_bite": { "name": "Зубы крысы", "skill": "melee", "ap": 3, "dmg": [2, 5], "range": 1, "poison": { "dmg": 1, "turns": 2 } },
+  "spider_bite": { "name": "Жвала паука", "skill": "melee", "ap": 3, "dmg": [2, 6], "range": 1, "poison": { "dmg": 1, "turns": 3 }, "stun": { "chance": 15, "ap": 2 } },
+  "snake_bite": { "name": "Пасть змея", "skill": "melee", "ap": 5, "dmg": [9, 16], "range": 1, "crit": 5 }
 }

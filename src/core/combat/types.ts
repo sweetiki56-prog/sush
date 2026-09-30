@@ -70,6 +70,7 @@ export interface CreatureDef {
   fleeAt: number; // flee below this HP fraction
   spare?: boolean; // a story figure: a blow that would kill makes them leave the fight instead
   rooted?: boolean; // never leaves its tile (an eel under the sand): strikes whoever comes near
+  burrow?: boolean; // dives into the salt every other turn (out of reach) and comes up beside the sturdiest foe
   fleeText?: string; // log line when they run ({name})
 }
 
@@ -123,6 +124,9 @@ export interface Combatant {
   fleeAt: number;
   spare?: boolean; // leaves the fight instead of dying
   rooted?: boolean; // never moves
+  burrow?: boolean; // dives and surfaces (see CreatureDef)
+  under?: boolean; // under the salt now: no one can reach it
+  up?: boolean; // came up this turn (or was driven up by a noise): stays up till its next turn is over
   xp: number;
   loot: Record<string, number>;
   explode?: { radius: number; dmg: [number, number] };
@@ -145,5 +149,7 @@ export type CombatEvent =
   | { t: 'heal'; id: string; amount: number; hp: number }
   | { t: 'revive'; id: string; by: string; hp: number }
   | { t: 'flee'; id: string }
+  | { t: 'burrow'; id: string } // dived under the salt
+  | { t: 'surface'; id: string; x: number; y: number } // came up here
   | { t: 'log'; text: string }
   | { t: 'end'; outcome: Outcome };

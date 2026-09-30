@@ -1,4 +1,4 @@
-// The world map of Низовье as an old expedition chart of the pre-war Water Authority, inked and aged:
+// The world map of Низовье and the Солончаки as an old expedition chart of the pre-war Water Authority, inked and aged:
 // parchment with stains, folds and a burnt edge; land that blends softly between kinds of ground with relief
 // shading; inked mountains, stippled sand, craquelure, dead trees, salt hatching; the dry river with both banks;
 // roads, region names by hand, a cartouche, a compass rose, a scale bar and a framed survey grid.
@@ -9,6 +9,7 @@ import { canvas, makeNoise, rng } from './draw.mjs';
 export const CELL = 20;
 export const ART = 2;
 const PX = CELL * ART; // art pixels per cell
+export const STRIP_PX = 64 * PX; // the chart is saved in strips of 64 cells (tools/gen-assets.mjs)
 
 const INK = 'rgba(52,34,20,';
 const BASE = {
@@ -19,6 +20,7 @@ const BASE = {
   '^': [168, 128, 86],
   x: [150, 142, 124],
   _: [232, 222, 198],
+  s: [240, 236, 222],
   '~': [198, 168, 118],
 };
 
@@ -149,6 +151,18 @@ export function worldMap(data) {
     ctx.fillStyle = 'rgba(255,255,255,0.8)';
     if (r() < 0.4) glint(ctx, x * PX + r() * PX, y * PX + r() * PX);
   }
+  // the Salt sea: a white crust broken into plates, glints, and inked hulks of ships long aground
+  for (const [x, y] of cellsOf('s')) {
+    ctx.strokeStyle = 'rgba(140,128,104,0.35)';
+    ctx.lineWidth = 1;
+    const ox = x * PX;
+    const oy = y * PX;
+    const j = () => (r() - 0.5) * 10;
+    poly(ctx, [[ox + j(), oy + PX / 2 + j()], [ox + PX / 2 + j(), oy + j()], [ox + PX + j(), oy + PX / 2 + j()], [ox + PX / 2 + j(), oy + PX + j()], [ox + j(), oy + PX / 2 + j()]]);
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    if (r() < 0.5) glint(ctx, ox + r() * PX, oy + r() * PX);
+  }
+  for (const [x, y, s] of [[90, 30, 1], [93.5, 32.2, 0.8], [91.2, 33.4, 0.7], [95, 30.4, 0.6]]) hulk(ctx, x * PX, y * PX, 26 * s);
   // the delta: ripple marks of water long gone
   for (const [x, y] of cellsOf('~')) {
     ctx.strokeStyle = `${INK}0.3)`;
@@ -255,8 +269,11 @@ export function worldMap(data) {
   const [dxc, dyc] = centre('x');
   label('М ё р т в ы е   п о л я', dxc, dyc, 34, -0.05);
   label('здесь по ночам бродят Сухостои', dxc, dyc + 36, 20, -0.05, 0.55);
-  const [sx, sy] = centre('_');
-  label('С о л о н ч а к и', sx, sy, 30, Math.PI / 2, 0.6);
+  label('С о л о н ч а к и', 84 * PX, 14 * PX, 34, -0.04, 0.6);
+  const [sx, sy] = centre('s');
+  label('С о л я н о е   м о р е', sx, sy - 3 * PX, 30, 0.06, 0.55);
+  label('корка держит караван, но не бурю', sx, sy - 3 * PX + 32, 18, 0.06, 0.5);
+  label('← Низовье', 61 * PX, 40 * PX, 20, 0, 0.5);
   if (mid.length) {
     const [rx, ry] = mid[Math.floor(mid.length * 0.72)];
     label('Мёртвое русло Светлой', rx * PX + 34, ry * PX, 24, Math.PI / 2 - 0.08, 0.6);
@@ -272,7 +289,7 @@ export function worldMap(data) {
   // ---- the survey grid with its coordinates, and the frame ----
   ctx.strokeStyle = `${INK}0.14)`;
   ctx.lineWidth = 1;
-  const LETTERS = 'АБВГДЕЖИКЛМН';
+  const LETTERS = 'АБВГДЕЖИКЛМНОП';
   for (let x = 8, i = 0; x <= data.width; x += 8, i++) {
     if (x < data.width) line(ctx, x * PX + 0.5, 0, x * PX + 0.5, H);
     frameText(ctx, LETTERS[i], (x - 4) * PX, 26);
@@ -313,6 +330,18 @@ function poly(ctx, pts) {
 function glint(ctx, x, y) {
   ctx.fillRect(x - 3, y, 7, 1);
   ctx.fillRect(x, y - 3, 1, 7);
+}
+/** A ship's hulk lying on its side in the salt: a keel, ribs, a broken mast. */
+function hulk(ctx, x, y, s) {
+  ctx.strokeStyle = 'rgba(52,34,20,0.75)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x - s, y);
+  ctx.quadraticCurveTo(x, y + s * 0.45, x + s, y - s * 0.1);
+  ctx.stroke();
+  ctx.lineWidth = 1.2;
+  for (let k = -3; k <= 3; k++) line(ctx, x + k * s * 0.25, y + s * 0.2 - Math.abs(k) * s * 0.04, x + k * s * 0.25 + 2, y - s * 0.25);
+  line(ctx, x + s * 0.1, y, x + s * 0.5, y - s * 0.8);
 }
 function deadTree(ctx, x, y, h, r) {
   ctx.strokeStyle = 'rgba(36,32,28,0.75)';

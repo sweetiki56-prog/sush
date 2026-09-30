@@ -1,6 +1,6 @@
 # AGENTS.md
 
-«Сушь» is an isometric RPG in the style of 90s classics: turn-based combat, skills, dialogue choices. The story is our own. It is a dry world where water is money and law, and the currency is «капли». Chapters I–III are playable: the Rusty Well, the world map of Низовье, Три столба, Колючка, the barge «Стрежень» and the city of Запруда. Towns are made of several maps, called areas, linked by ways out at their edges and opened from the world map by a town plan. Online co-op and a free-for-all arena work too. Built with Phaser 3.90, TypeScript and Vite, plus a Node WebSocket server.
+«Сушь» is an isometric RPG in the style of 90s classics: turn-based combat, skills, dialogue choices. The story is our own. It is a dry world where water is money and law, and the currency is «капли». Chapters I–IV are playable: the Rusty Well, the world map of Низовье and the Солончаки, Три столба, Колючка, the barge «Стрежень», the city of Запруда, the Guild city of Соль and the Кладбище судов in the Salt sea. Towns are made of several maps, called areas, linked by ways out at their edges and opened from the world map by a town plan. Online co-op and a free-for-all arena work too. Built with Phaser 3.90, TypeScript and Vite, plus a Node WebSocket server.
 
 ## Before you start
 1. Read `PROJECT_STATE.md`. It is the live record: what is done, the next milestones, and the **Handoff** notes.
@@ -33,7 +33,7 @@
 - `src/ui`, `src/world`, `src/fx`, `src/audio`, `src/net` — Phaser UI, map rendering, post effects, synthesized sound and music, client transports.
 - `server/` — the game server.
 - `tools/` — map builders and art generators:
-  - `build-map.mjs` (Rusty Well), `build-rw-cistern.mjs`, `build-pillars.mjs`, `build-pillars-ruins.mjs`, `build-kolyuchka.mjs`, `build-kolyuchka-glass.mjs`, `build-barge-{bed,deck,post}.mjs`, `build-zap-{lower,market,upper,dock,sewers}.mjs`, `build-arena.mjs`, `build-world.mjs`, `build-encounters.mjs`, all on `map-kit.mjs`;
+  - `build-map.mjs` (Rusty Well), `build-rw-cistern.mjs`, `build-pillars.mjs`, `build-pillars-ruins.mjs`, `build-kolyuchka.mjs`, `build-kolyuchka-glass.mjs`, `build-barge-{bed,deck,post}.mjs`, `build-zap-{lower,market,upper,dock,sewers}.mjs`, `build-salt-{market,guild,arena,mines}.mjs`, `build-sea-{wrecks,lair}.mjs`, `build-arena.mjs`, `build-world.mjs`, `build-encounters.mjs`, all on `map-kit.mjs`;
   - `gen-assets.mjs` with `tools/art/*`.
 - `tests/unit` — Vitest. `rooms.ts` builds a real room, `story.ts` has the `say` / `talk` / `winFight` helpers, `sim.ts` runs balance simulations.
 - `tests/e2e` — Playwright, driven through the `window.__world` / `__travel` / `__menu` dev hooks.
@@ -61,6 +61,8 @@ Done means: `npm test`, `npm run lint`, `npm run build` and `npm run test:e2e` a
 - Texts are Russian, address the hero without gender, and say «капли» for money. Names, lore and texts are our own: nothing from Fallout, Wasteland or any other game.
 - A check option's text carries no «[Навык]» tag: the dialogue view adds the skill and the chance itself. Tags for perks or items («[Ловкие пальцы]», «[Схема]») stay.
 - Quest stages only move forward (`Game.setStage`): a late effect never sends the journal back.
+- Text about the hero is gender-neutral, in the journal too: no «я пробрался», «я видел»; use impersonal or present forms.
+- Long lists in a window go in a `ScrollBox` (`src/ui/ScrollBox.ts`): wheel, drag, arrows and PgUp/PgDn, clipped by a mask. Never let text run past a frame.
 - Every problem gets at least three solutions. Every side quest gets a twist and leaves a mark in the ending slides.
 - Commit only when the owner asks. Never touch `.env*` files.
 

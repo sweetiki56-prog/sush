@@ -72,6 +72,7 @@ export function creatureUnit(def: CreatureDef, id: string, x: number, y: number)
     fleeAt: def.fleeAt,
     spare: def.spare,
     rooted: def.rooted,
+    burrow: def.burrow,
     tags: [...(def.tags ?? [])],
     res: { ...(def.res ?? {}) },
   };

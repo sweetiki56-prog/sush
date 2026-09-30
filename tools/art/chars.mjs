@@ -77,6 +77,30 @@ export const CHARS = {
   // Митяй, Нюра's boy of ten: short, thin, his father's cap too big for him
   mityay: { skin: P.skin1, hair: P.brown1, shirt: P.sand2, pants: P.denim0, boots: P.brown0, coat: null, sleeve: P.sand2, hat: P.grey2, height: 0.7, bulk: 0.8 },
   laska: { skin: P.skin3, hair: P.dark1, shirt: P.brown2, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.brown2, bandana: P.bone, height: 0.88 },
+  // stage K: Соль. The Guild wears sand and brown with a fire-orange scarf; the Солевики are broad and grey-skinned,
+  // salt crystals growing on their shoulders and crowns
+  krupitsa: { skin: P.skin1, hair: P.dark0, shirt: P.bone, pants: P.brown1, boots: P.dark1, coat: P.sand3, coatLen: 15, sleeve: P.sand3, shawl: P.fire1, bun: true, height: 0.97 },
+  barysh: { skin: P.skin2, hair: P.dark2, shirt: P.red0, pants: P.dark2, boots: P.dark0, coat: P.red1, coatLen: 10, sleeve: P.red1, hat: P.dark1, beard: P.dark1, bulk: 1.12, height: 1.0 },
+  molchun: { skin: P.skin2, hair: P.dark1, shirt: P.dark2, pants: P.brown0, boots: P.dark0, coat: null, sleeve: P.skin2, bald: true, mask: P.grey3, bulk: 1.3, height: 1.1 },
+  shepot: { skin: P.sand3, hair: P.dark1, shirt: P.brown2, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.brown2, hood: P.sand1, bandana: P.bone, height: 0.93 },
+  merka: { skin: P.skin1, hair: P.grey3, shirt: P.bone, pants: P.dark2, boots: P.dark1, coat: null, sleeve: P.grey4, apron: P.grey2, goggles: true, height: 0.94 },
+  khrust: { skin: P.skin2, hair: P.brown1, shirt: P.olive1, pants: P.brown1, boots: P.brown0, coat: P.brown1, coatLen: 8, sleeve: P.brown1, bandana: P.sand1, backpack: P.brown2, height: 0.99 },
+  efrem: { skin: P.skin1, hair: P.grey4, shirt: P.sand1, pants: P.brown1, boots: P.dark1, coat: P.olive2, coatLen: 12, sleeve: P.olive2, hat: P.sand0, beard: P.grey4, height: 1.02 },
+  lada: { skin: P.skin1, hair: P.brown2, shirt: P.teal1, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.teal1, shawl: P.sand2, bun: true, height: 0.9 },
+  sol: { skin: P.grey4, hair: P.grey4, shirt: P.sand1, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.grey4, bald: true, crystals: P.bone, bulk: 1.2, height: 1.06 },
+  klesch: { skin: P.skin2, hair: P.dark1, shirt: P.grey2, pants: P.brown0, boots: P.dark1, coat: P.brown0, coatLen: 9, sleeve: P.brown0, hat: P.dark2, cane: true, bulk: 1.05, height: 1.0 },
+  plast: { skin: P.grey3, hair: P.grey3, shirt: P.sand2, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.grey3, bald: true, crystals: P.bone, beard: P.grey5, cane: true, bulk: 1.25, height: 1.0 },
+  zhila: { skin: P.grey4, hair: P.grey4, shirt: P.sand0, pants: P.brown0, boots: P.brown0, coat: null, sleeve: P.grey4, bald: true, crystals: P.bone, bulk: 1.28, height: 1.08 },
+  saltfolk: { skin: P.grey4, hair: P.grey4, shirt: P.sand1, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.grey4, bald: true, crystals: P.grey6, bulk: 1.25, height: 1.04 },
+  weigher: { skin: P.skin1, hair: P.dark2, shirt: P.sand2, pants: P.brown1, boots: P.dark1, coat: null, sleeve: P.sand2, apron: P.brown1, hat: P.sand0, height: 0.98 },
+  guild_guard: { skin: P.skin1, hair: P.dark1, shirt: P.sand1, pants: P.brown0, boots: P.dark1, coat: P.brown2, coatLen: 10, sleeve: P.brown2, hat: P.sand0, scarf: P.fire1, rifle: true, bulk: 1.05, height: 1.02 },
+  tamara: { skin: P.skin3, hair: P.dark0, shirt: P.red1, pants: P.brown1, boots: P.brown0, coat: P.teal0, coatLen: 14, sleeve: P.teal0, shawl: P.fire1, bun: true, height: 0.95 },
+  baken: { skin: P.grey3, hair: P.grey5, shirt: P.bone, pants: P.denim0, boots: P.dark1, coat: P.denim1, coatLen: 14, sleeve: P.denim1, hat: P.dark2, beard: P.grey5, crystals: P.bone, cane: true, bulk: 1.15, height: 0.98 },
+  nomad: { skin: P.skin2, hair: P.dark1, shirt: P.rust1, pants: P.brown1, boots: P.brown0, coat: P.sand2, coatLen: 10, sleeve: P.sand2, hood: P.sand1, height: 0.98 },
+  pit_1: { skin: P.skin1, hair: P.grey2, shirt: P.grey3, pants: P.grey1, boots: P.dark1, coat: null, sleeve: P.grey3, bandana: P.grey4, height: 1.0 },
+  pit_2: { skin: P.skin2, hair: P.rust1, shirt: P.rust1, pants: P.dark2, boots: P.dark0, coat: null, sleeve: P.skin2, bald: true, bulk: 1.15, height: 1.04 },
+  pit_3: { skin: P.skin0, hair: P.dark1, shirt: P.olive0, pants: P.olive0, boots: P.dark1, coat: null, sleeve: P.olive1, bandana: P.fire1, goggles: true, height: 1.0 },
+  trust_hunter: { skin: P.skin1, hair: P.dark2, shirt: P.grey1, pants: P.grey1, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, hood: P.grey1, goggles: true, rifle: true, height: 1.01 },
 };
 
 /** Worn armor drawn over the torso: plates, shoulder pads, a stripe, the struts of a powered frame. */
@@ -189,6 +213,20 @@ function parts(cfg, phase, walking, pose = 'idle') {
     ball([0, -4.3, hz + 1.6], 1.3, cfg.bandana, -0.8); // knot
   }
   if (cfg.beard) ball([0, 2.4, hz - 2.4], 2.6, cfg.beard, 0.4);
+  if (cfg.mask) {
+    // an iron mask over the face: a plate, rivets at the cheeks, a strap round the back
+    ball([0, 2.1, hz - 0.2], 3.9, cfg.mask, 0.6);
+    for (const side of [-1, 1]) ball([side * 2.4, 3.4, hz - 1.4], 0.5, shade(cfg.mask, -0.35), 0.8);
+    cap([-4.2, 0, hz + 0.6], [4.2, 0, hz + 0.6], 0.7, P.brown0, -0.2);
+  }
+  if (cfg.crystals) {
+    // salt growing out of a Солевик: spurs on the shoulders, a small crown on the head
+    for (const side of [-1, 1]) {
+      cap([side * 5.4 * bw, -0.6, z(31.5) + zb], [side * 6.4 * bw, -1.4, z(35) + zb], 0.9, cfg.crystals, 0.1);
+      cap([side * 4.2 * bw, -1.2, z(32) + zb], [side * 4.6 * bw, -2.4, z(34.5) + zb], 0.7, shade(cfg.crystals, -0.1), 0.1);
+      cap([side * 1.6, -1, hz + 3.2], [side * 2.1, -1.5, hz + 5.6], 0.6, cfg.crystals, 0.2);
+    }
+  }
   if (cfg.goggles) {
     cap([-2.6, 1.6, hz + 4], [2.6, 1.6, hz + 4], 0.9, P.teal1, 0.6); // goggles pushed up on the forehead
   }

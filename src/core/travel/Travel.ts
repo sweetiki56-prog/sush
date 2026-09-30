@@ -26,12 +26,15 @@ export const TERRAIN: Record<string, Terrain> = {
   '^': { name: 'скалы', speed: 0.4, sight: 0.5 },
   x: { name: 'Мёртвые поля', speed: 0.6, sight: 1 },
   _: { name: 'солончак', speed: 0.8, sight: 0.8 },
+  s: { name: 'соляное море', speed: 0.6, sight: 1.2 },
   '~': { name: 'дельта', speed: 0.7, sight: 1 },
 };
 
 export const MIN_PER_SEC = 45; // game minutes per real second on the road (a road cell in about 1.3 s)
 export const ROAD_PACE = 1; // cells per game hour on the road
 export const DAY_MIN = 1440;
+export const STORM_PACE = 0.7;
+export const STORM_SIGHT = 0.5;
 export const MORNING = 6 * 60;
 
 /** Where the party is on the world map; shared by the room like flags and saved with it. */
@@ -58,6 +61,21 @@ export interface Escort {
   paused: boolean;
 }
 
+/**
+ * The fog of a save made on a narrower map (the chart grew east in stage K): each old row keeps its cells and
+ * the new columns start unseen. A fog of the right size comes back as it is.
+ */
+export function fitSeen(seen: string, grid: WorldGridData): string {
+  const W = grid.width;
+  const H = grid.height;
+  if (seen.length === W * H) return seen;
+  const oldW = Math.floor(seen.length / H);
+  if (!oldW) return '0'.repeat(W * H);
+  let out = '';
+  for (let y = 0; y < H; y++) out += seen.slice(y * oldW, y * oldW + Math.min(oldW, W)).padEnd(W, '0');
+  return out;
+}
+
 export function freshTravel(grid: WorldGridData, at: [number, number]): TravelState {
   return { x: at[0], y: at[1], path: [], target: null, minute: MORNING, seen: '0'.repeat(grid.width * grid.height), sneak: false, sinceDrink: 0 };
 }
@@ -75,13 +93,16 @@ export interface PartyPace {
   wounded: boolean; // someone below half health
   thirsty: boolean;
   perception: number; // the best
+  storm?: boolean; // inside a salt storm: half the sight, slower going
 }
 
 export class Travel {
   constructor(
     readonly grid: WorldGridData,
     readonly s: TravelState,
-  ) {}
+  ) {
+    s.seen = fitSeen(s.seen, grid);
+  }
 
   terrainAt(x: number, y: number): Terrain {
     return terrainOf(this.grid, x, y);
@@ -98,6 +119,7 @@ export class Travel {
     if (p.wounded) v *= 0.85;
     if (p.thirsty) v *= 0.8;
     if (this.s.sneak) v *= 0.7;
+    if (p.storm) v *= STORM_PACE;
     return v;
   }
 
@@ -107,7 +129,7 @@ export class Travel {
 
   /** Sight radius in cells. */
   sight(p: PartyPace): number {
-    const r = (3 + Math.floor(p.perception / 2)) * this.terrainAt(this.s.x, this.s.y).sight;
+    const r = (3 + Math.floor(p.perception / 2)) * this.terrainAt(this.s.x, this.s.y).sight * (p.storm ? STORM_SIGHT : 1);
     return this.night() ? r / 2 : r;
   }
 

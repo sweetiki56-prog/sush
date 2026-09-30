@@ -9,7 +9,7 @@ export type AiAction = { kind: 'move'; path: Tile[] } | { kind: 'attack'; target
 
 export function nextAction(c: Combat, self: Combatant): AiAction {
   // the nearest foe (a person, or an ally of theirs), preferring one in sight
-  const people = c.units.filter((u) => u.side !== 'object' && enemies(self, u) && !u.dead && !u.fled);
+  const people = c.units.filter((u) => u.side !== 'object' && enemies(self, u) && !u.dead && !u.fled && !u.under);
   const rank = (u: Combatant) => tileDist(self, u) + (c.canSee(self, u) ? 0 : 100);
   const foe = people.sort((a, b) => rank(a) - rank(b))[0];
   if (!foe || self.ap <= 0) return { kind: 'end' };

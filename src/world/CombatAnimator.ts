@@ -133,6 +133,26 @@ export class CombatAnimator {
         await this.wait(150);
         break;
       }
+      case 'burrow': {
+        const a = this.cast.actor(e.id);
+        const s = this.spot(e.id);
+        blast(this.scene, s.x, s.y + 8, 26, 300 * this.ctl.mult());
+        if (a) this.scene.tweens.add({ targets: [a.sprite, a.shadow], alpha: 0.18, duration: 300 * this.ctl.mult() });
+        await this.wait(300);
+        break;
+      }
+      case 'surface': {
+        const a = this.cast.actor(e.id);
+        if (a) {
+          a.teleport(e.x, e.y);
+          this.scene.tweens.add({ targets: [a.sprite, a.shadow], alpha: 1, duration: 200 * this.ctl.mult() });
+        }
+        const p = gridToScreen(e.x + 0.5, e.y + 0.5);
+        blast(this.scene, p.x, p.y, 30, 300 * this.ctl.mult());
+        synth.hit();
+        await this.wait(300);
+        break;
+      }
       case 'flee': {
         const a = this.cast.actor(e.id);
         if (a) this.scene.tweens.add({ targets: [a.sprite, a.shadow], alpha: 0, duration: 600 * this.ctl.mult() });

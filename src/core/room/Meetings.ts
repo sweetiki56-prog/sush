@@ -4,7 +4,7 @@ import { battleDialogue, meetingDialogue } from '../travel/Encounters';
 import type { Parties, PartyState } from '../travel/Parties';
 import type { EncounterAction } from '../types';
 import type { MissionRoom } from './Mission';
-import { heroOnMap, partiesOf, travelOf } from './Road';
+import { heroOnMap, partiesOf, stormAt, travelOf } from './Road';
 import { HEAD_START_MIN, startBattle } from './RoadBattle';
 
 const AMBUSH_GROUND = ['^', 'x']; // rocks, the Dead fields
@@ -36,7 +36,8 @@ export function meet(room: MissionRoom, ps: Parties, p: PartyState): void {
   }
   const ground = room.worldMap!.rows[Math.floor(p.y)]?.[Math.floor(p.x)] ?? '.';
   // a gang on the hunt lies in wait in rocks and the Dead fields: Выживание, sharp eyes or a dog see it coming
-  if (tpl.kind === 'bandits' && p.chasing === 'hero' && AMBUSH_GROUND.includes(ground)) {
+  const spotted = !!tpl.seen && !!room.world.flags[tpl.seen];
+  if ((tpl.kind === 'bandits' || tpl.ambush) && !spotted && p.chasing === 'hero' && (AMBUSH_GROUND.includes(ground) || stormAt(room, p.x, p.y))) {
     const games = [...room.players.values()].map((q) => q.game);
     if (!games.some((g) => g.attr('per') >= AMBUSH_EYES || g.hasMod('sentry') || g.silentCheck({ skill: 'survival' }))) {
       room.logAll(`Засада! ${tpl.name} бьёт из укрытия.`);

@@ -4,10 +4,13 @@
 // and could pick two dialogue answers at once under load.
 import type Phaser from 'phaser';
 
-export function onKey(scene: Phaser.Scene, fn: (e: KeyboardEvent) => void): void {
+/** Returns a function that stops listening early (a window closed before its scene). */
+export function onKey(scene: Phaser.Scene, fn: (e: KeyboardEvent) => void): () => void {
   const h = (e: KeyboardEvent) => {
     if (scene.sys.isActive()) fn(e);
   };
+  const off = () => window.removeEventListener('keydown', h);
   window.addEventListener('keydown', h);
-  scene.events.once('shutdown', () => window.removeEventListener('keydown', h));
+  scene.events.once('shutdown', off);
+  return off;
 }

@@ -1,0 +1,5110 @@
+{
+ "guild_gatekeeper": {
+  "speaker": "Привратник Гильдии",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "guild_in"
+     }
+    ],
+    "node": "passed"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Охранник в песочном плаще загораживает решётку. — Двор Гильдии. К гильдмейстеру — по делу. Дело без денег или без поручителя — не дело.",
+    "options": [
+     {
+      "text": "Вот взнос. Сто капель.",
+      "if": [
+       {
+        "caps": 100
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -100
+       },
+       {
+        "type": "flag",
+        "key": "guild_way",
+        "value": "fee"
+       },
+       {
+        "type": "flag",
+        "key": "guild_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_b"
+       }
+      ],
+      "next": "paid"
+     },
+     {
+      "text": "Бирюк из каравана Гильдии поручится.",
+      "if": [
+       {
+        "flag": "semyon_friend"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "guild_way",
+        "value": "letter"
+       },
+       {
+        "type": "flag",
+        "key": "guild_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_b"
+       }
+      ],
+      "next": "letter"
+     },
+     {
+      "text": "Барыш из «Пыльной чаши» за меня слово скажет.",
+      "if": [
+       {
+        "flag": "arena_1"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "guild_way",
+        "value": "arena"
+       },
+       {
+        "type": "flag",
+        "key": "guild_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_b"
+       }
+      ],
+      "next": "arena"
+     },
+     {
+      "text": "Мешки Хруста с Суховеем у вашего весовщика — моих рук дело.",
+      "if": [
+       {
+        "flag": "salt_smuggle",
+        "eq": "guild"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "guild_way",
+        "value": "favor"
+       },
+       {
+        "type": "flag",
+        "key": "guild_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_guild_gate_b"
+       }
+      ],
+      "next": "favor"
+     },
+     {
+      "text": "Дело о Мандате. От Нотариуса Запруды: гильдмейстер захочет это услышать.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "talk",
+       "fail": "no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "guild_way",
+         "value": "talk"
+        },
+        {
+         "type": "flag",
+         "key": "guild_in"
+        },
+        {
+         "type": "flag",
+         "key": "open_guild_gate_a"
+        },
+        {
+         "type": "flag",
+         "key": "open_guild_gate_b"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "paid": {
+    "text": "Охранник взвешивает кошель на ладони. — Проходи. — Решётка ползёт в сторону.",
+    "options": [
+     {
+      "text": "Пройти."
+     }
+    ]
+   },
+   "letter": {
+    "text": "— Бирюк? — Охранник хмыкает. — Раз Бирюк, значит, свои. Проходи.",
+    "options": [
+     {
+      "text": "Пройти."
+     }
+    ]
+   },
+   "arena": {
+    "text": "— Барыш говорил про тебя. Кто стоит на песке «Чаши», тому и двор открыт. Проходи.",
+    "options": [
+     {
+      "text": "Пройти."
+     }
+    ]
+   },
+   "favor": {
+    "text": "— Весовщик рассказывал. Гильдия помнит тех, кто ей помог. Проходи.",
+    "options": [
+     {
+      "text": "Пройти."
+     }
+    ]
+   },
+   "talk": {
+    "text": "Охранник долго смотрит, потом кричит через плечо: — К Агате! По Мандату! — Решётка отъезжает.",
+    "options": [
+     {
+      "text": "Пройти."
+     }
+    ]
+   },
+   "no": {
+    "text": "— От Нотариуса, от Башни, от самого Затвора… Тут таких по три на дню. Взнос — сто капель.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "passed": {
+    "text": "— Проходи, не стой в воротах.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "guild_gate": {
+  "speaker": "Ворота двора",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Решётка на засове. Открывает её привратник — по делу или за взнос.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "guild_guard": {
+  "speaker": "Охрана Гильдии",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Гильдия держит порядок. Капли — на весы, руки — при себе.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "guild_clerk": {
+  "speaker": "Приказчик",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Приказчик пересчитывает мешки и что-то чиркает мелом на стене. — Сорок два, сорок три… Не сбивайте, прошу.",
+    "options": [
+     {
+      "text": "Что это за двор?",
+      "next": "yard"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "yard": {
+    "text": "— Соляная гильдия. Караваны, весы, копи. Всё, что солится, — наше. — Он понижает голос. — А соли тут всё, кроме воды.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "krupitsa": {
+  "speaker": "Агата Крупица",
+  "portrait": "portrait_krupitsa",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "krupitsa_fate"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "ambush_done"
+     }
+    ],
+    "node": "reckoning"
+   },
+   {
+    "if": [
+     {
+      "flag": "tube_at_guild"
+     },
+     {
+      "notFlag": "tube_back"
+     }
+    ],
+    "node": "tube_back"
+   },
+   {
+    "if": [
+     {
+      "flag": "sea_caravan"
+     }
+    ],
+    "node": "waiting"
+   },
+   {
+    "if": [
+     {
+      "flag": "guild_trust"
+     }
+    ],
+    "node": "hire"
+   },
+   {
+    "if": [
+     {
+      "flag": "krupitsa_met"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Женщина за столом улыбается так, будто давно ждала. Песочный плащ, оранжевый шарф, на пальцах — белая пыль соли. — Агата Крупица, гильдмейстер. Вы тот самый человек с тубусом. О вас говорят от Запруды до копей. Садитесь.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "krupitsa_met"
+     },
+     {
+      "type": "flag",
+      "key": "mines_known"
+     },
+     {
+      "type": "quest",
+      "quest": "salt",
+      "stage": "trust"
+     }
+    ],
+    "options": [
+     {
+      "text": "Что обо мне говорят?",
+      "next": "talked"
+     },
+     {
+      "text": "Мне нужен путь через Соляное море, к Кристаллу.",
+      "next": "trust_talk"
+     }
+    ]
+   },
+   "talked": {
+    "text": "— Что вы носите бумагу, за которую Трест платит кровью, а Сургуч — терпением. — Она складывает пальцы. — Я плачу солью. Солью можно заплатить за всё: за воду, за людей, за тишину.",
+    "options": [
+     {
+      "text": "И сколько соли стоит Мандат?",
+      "next": "offer"
+     },
+     {
+      "text": "Мне нужен путь через Соляное море, к Кристаллу.",
+      "next": "trust_talk"
+     }
+    ]
+   },
+   "again": {
+    "text": "— Вернулись? — Крупица не поднимает глаз от счётов. — Гильдия слушает.",
+    "options": [
+     {
+      "text": "О вашем предложении за Мандат.",
+      "if": [
+       {
+        "notFlag": "salt_share"
+       }
+      ],
+      "next": "offer"
+     },
+     {
+      "text": "Караван через Соляное море.",
+      "next": "trust_talk"
+     },
+     {
+      "text": "Мерка подделывает долги Солевиков. Вот его книга.",
+      "if": [
+       {
+        "item": "debt_book"
+       },
+       {
+        "notFlag": "salt_debts"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "debt_book"
+       },
+       {
+        "type": "flag",
+        "key": "salt_debts",
+        "value": "exposed"
+       },
+       {
+        "type": "flag",
+        "key": "merka_gone"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_guide",
+        "value": "debtor"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_debts",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "debts_exposed"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "offer": {
+    "text": "— Пай в Гильдии. Доля с каждого каравана, с каждого пуда из копей. Соль, которой хватит на всю жизнь. За Мандат. — Она протягивает руку. — Бумага будет в надёжных руках: у тех, кто торгует со всеми.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "salt_share",
+      "stage": "offered"
+     }
+    ],
+    "options": [
+     {
+      "text": "По рукам.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_at_guild"
+       },
+       {
+        "type": "flag",
+        "key": "salt_share_deal"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_share",
+        "stage": "check"
+       }
+      ],
+      "next": "share_deal"
+     },
+     {
+      "text": "Мандата при мне нет.",
+      "if": [
+       {
+        "noItem": "tube"
+       }
+      ],
+      "next": "no_tube"
+     },
+     {
+      "text": "Не продаётся.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_share",
+        "value": "refused"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_share",
+        "stage": "done"
+       }
+      ],
+      "next": "share_no"
+     }
+    ]
+   },
+   "share_deal": {
+    "text": "— Разумно. — Крупица кладёт тубус в ящик. — Весовщик печатей проверит его в задней комнате — зайдите ко мне ещё раз, получите обратно вместе с паем. Порядок есть порядок. — Она улыбается. — Теперь Гильдия вам верит.",
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "notFlag": "guild_trust"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "guild_trust",
+        "value": "share"
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "caravan"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_sold"
+       }
+      ],
+      "next": "hire"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "guild_trust"
+       }
+      ],
+      "next": "again"
+     }
+    ]
+   },
+   "no_tube": {
+    "text": "— Тогда принесите. Предложение не сгорит — соль не горит.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "share_no": {
+    "text": "— Жаль. — Крупица пожимает плечами. — Соль терпелива.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "tube_back": {
+    "text": "— Ваш тубус. — Крупица двигает его через стол. — Проверен, печати целы. И бумага на пай, как обещано.",
+    "options": [
+     {
+      "text": "Проверить печать, прежде чем взять.",
+      "check": {
+       "skill": "science",
+       "mod": -10,
+       "pass": "fake_found",
+       "fail": "fake_missed",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "salt_share",
+         "value": "checked"
+        },
+        {
+         "type": "give",
+         "item": "tube"
+        },
+        {
+         "type": "flag",
+         "key": "tube_back"
+        },
+        {
+         "type": "quest",
+         "quest": "salt_share",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 80
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "salt_share",
+         "value": "faked"
+        },
+        {
+         "type": "flag",
+         "key": "tube_fake"
+        },
+        {
+         "type": "give",
+         "item": "tube"
+        },
+        {
+         "type": "flag",
+         "key": "tube_back"
+        },
+        {
+         "type": "quest",
+         "quest": "salt_share",
+         "stage": "done"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Ремонт] Воск свежий, а швы у тубуса не те. Где настоящий?",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 50
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_share",
+        "value": "checked"
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_back"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_share",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "fake_found"
+     },
+     {
+      "text": "Взять тубус.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_share",
+        "value": "faked"
+       },
+       {
+        "type": "flag",
+        "key": "tube_fake"
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_back"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_share",
+        "stage": "done"
+       }
+      ],
+      "next": "taken"
+     }
+    ]
+   },
+   "fake_found": {
+    "text": "Воск на печати ещё мягкий, а ремешок пришит на новую нитку. Крупица смеётся — легко, будто проиграла в карты. — Проверку прошли. — Она достаёт из ящика другой тубус, тяжелее. — Пай остаётся за вами. С такими, как вы, выгоднее дружить.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "fake_missed": {
+    "text": "Печать как печать, тубус как тубус. Крупица кивает: — Пай — ваш.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "taken": {
+    "text": "Тубус привычно ложится в руку. Крупица кивает: — Пай — ваш.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "trust_talk": {
+    "text": "— Через корку ходят только караваны Гильдии, и только с теми, кому Гильдия верит. Доверие у нас покупают: кровью на арене, солью в пай, делом. Или словом — если слово того стоит.",
+    "options": [
+     {
+      "text": "Молчун больше не чемпион. Спросите Барыша.",
+      "if": [
+       {
+        "flag": "last_bout"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "guild_trust",
+        "value": "arena"
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "caravan"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_sold"
+       }
+      ],
+      "next": "hire"
+     },
+     {
+      "text": "Улика подделки у Шлюза: Трест трещит изнутри. Гильдии пора выбрать сторону.",
+      "if": [
+       {
+        "flag": "forgery_fate",
+        "eq": "shlyuz"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 20,
+       "pass": "hire",
+       "fail": "unconvinced",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "guild_trust",
+         "value": "talk"
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "caravan"
+        },
+        {
+         "type": "flag",
+         "key": "krupitsa_sold"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Улика подделки у меня. С ней Затвора можно судить.",
+      "if": [
+       {
+        "flag": "forgery_fate",
+        "eq": "kept"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 20,
+       "pass": "hire",
+       "fail": "unconvinced",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "guild_trust",
+         "value": "talk"
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "caravan"
+        },
+        {
+         "type": "flag",
+         "key": "krupitsa_sold"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Поверьте на слово: Гильдии выгоднее, чтобы Мандат дошёл до Кристалла.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "hire",
+       "fail": "unconvinced",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "guild_trust",
+         "value": "talk"
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "caravan"
+        },
+        {
+         "type": "flag",
+         "key": "krupitsa_sold"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Куплю пай. Двести пятьдесят капель.",
+      "if": [
+       {
+        "caps": 250
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -250
+       },
+       {
+        "type": "flag",
+        "key": "guild_trust",
+        "value": "share"
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "caravan"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_sold"
+       }
+      ],
+      "next": "hire"
+     },
+     {
+      "text": "Контрабанда Хруста — у вашего весовщика, Суховей вылит.",
+      "if": [
+       {
+        "flag": "salt_smuggle",
+        "eq": "guild"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "guild_trust",
+        "value": "favor"
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "caravan"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_sold"
+       }
+      ],
+      "next": "hire"
+     },
+     {
+      "text": "Мерка подделывал долги Солевиков. Книга — у вас.",
+      "if": [
+       {
+        "flag": "salt_debts",
+        "eq": "exposed"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "guild_trust",
+        "value": "favor"
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "caravan"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_sold"
+       }
+      ],
+      "next": "hire"
+     },
+     {
+      "text": "Подумаю."
+     }
+    ]
+   },
+   "unconvinced": {
+    "text": "— Красиво. Но соль не верит словам. — Крупица возвращается к счётам.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "debts_exposed": {
+    "text": "Крупица листает книгу, и улыбка сходит с её лица. — Вдвое. Он писал вдвое. — Она звонит в колокольчик. — Мерку — ко мне. Должников отпустить. — И тише: — На корешке красный воск. Это не наш воск.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "seal_mark_6"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "hire": {
+    "text": "— Караван Гильдии идёт к Кладбищу судов: соль, снасти, вода для старьёвщиков. Охрана — вы. Плата — у остовов. — Крупица разворачивает карту. — Кстати: где думаете вставать на ночь? У старых вешек или ближе к «Бархану»?",
+    "options": [
+     {
+      "text": "Зачем гильдмейстеру знать, где охрана встанет на ночь?",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "caught",
+       "fail": "hire_ok",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "ambush_done",
+         "value": "caught"
+        },
+        {
+         "type": "flag",
+         "key": "ambush_off"
+        },
+        {
+         "type": "flag",
+         "key": "krupitsa_fate",
+         "value": "debt"
+        },
+        {
+         "type": "flag",
+         "key": "mines_known"
+        },
+        {
+         "type": "caps",
+         "amount": 200
+        },
+        {
+         "type": "xp",
+         "amount": 120
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "crystal"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Шёпот видела, как ваш человек ночью бегал к посту Треста.",
+      "if": [
+       {
+        "flag": "whisper_warned"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ambush_done",
+        "value": "caught"
+       },
+       {
+        "type": "flag",
+        "key": "ambush_off"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_fate",
+        "value": "debt"
+       },
+       {
+        "type": "flag",
+        "key": "mines_known"
+       },
+       {
+        "type": "caps",
+        "amount": 200
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "crystal"
+       }
+      ],
+      "next": "caught"
+     },
+     {
+      "text": "У вешек. Договорились.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_sold"
+       }
+      ],
+      "next": "hire_ok"
+     }
+    ]
+   },
+   "hire_ok": {
+    "text": "— Караван выходит от ворот рынка, как только вы выйдете на дорогу. Не отставайте от него. — Крупица сворачивает карту. — В корке бывают бури.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "sea_caravan",
+      "value": "ready"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "caught": {
+    "text": "Крупица долго молчит. Потом снимает перстень и кладёт его на стол. — Трест заплатил за маршрут. Не за вашу голову — за тубус. — Она пододвигает кошель. — Двести капель. И моё слово: охотники не получат ни вешек, ни ночлега. Гильдия в долгу. Караван всё равно идёт — езжайте с ним спокойно.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "sea_caravan",
+      "value": "ready"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "waiting": {
+    "text": "— Караван ждёт у ворот рынка. Выйдете на дорогу — он тронется.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "reckoning": {
+    "text": "Крупица встречает вас стоя. Охрана у двери положила руки на ружья. — Живы. — Не вопрос, а подсчёт.",
+    "options": [
+     {
+      "text": "Вот приказ Треста: «Сведения — от А. К.»",
+      "if": [
+       {
+        "item": "hunt_order"
+       }
+      ],
+      "next": "confess"
+     },
+     {
+      "text": "Охотники ждали ровно там, о чём вы спрашивали.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "confess",
+       "fail": "deny"
+      }
+     },
+     {
+      "text": "Я расскажу Гильдии при всех, кто продал её караван.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_fate",
+        "value": "fled"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_gone"
+       },
+       {
+        "type": "flag",
+        "key": "trust_knows_route"
+       },
+       {
+        "type": "flag",
+        "key": "mines_known"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "crystal"
+       }
+      ],
+      "next": "fled"
+     },
+     {
+      "text": "Защищайся.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_fight"
+       }
+      ],
+      "next": "fight"
+     }
+    ]
+   },
+   "confess": {
+    "text": "— Да. Трест платит честнее, чем кажется. — Крупица садится. — Что теперь? Суд Гильдии? Нож? Или сделка?",
+    "options": [
+     {
+      "text": "Будешь должна. Гильдия откроет мне копи и не станет мешать.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_fate",
+        "value": "debt"
+       },
+       {
+        "type": "flag",
+        "key": "mines_known"
+       },
+       {
+        "type": "caps",
+        "amount": 200
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "crystal"
+       }
+      ],
+      "next": "debt"
+     },
+     {
+      "text": "Гильдия узнает всё.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_fate",
+        "value": "fled"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_gone"
+       },
+       {
+        "type": "flag",
+        "key": "trust_knows_route"
+       },
+       {
+        "type": "flag",
+        "key": "mines_known"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "crystal"
+       }
+      ],
+      "next": "fled"
+     },
+     {
+      "text": "Защищайся.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_fight"
+       }
+      ],
+      "next": "fight"
+     }
+    ]
+   },
+   "deny": {
+    "text": "— Корка большая, охотники — везде. — Крупица разводит руками. — Не ищите виноватых в соли.",
+    "options": [
+     {
+      "text": "Я расскажу Гильдии при всех.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_fate",
+        "value": "fled"
+       },
+       {
+        "type": "flag",
+        "key": "krupitsa_gone"
+       },
+       {
+        "type": "flag",
+        "key": "trust_knows_route"
+       },
+       {
+        "type": "flag",
+        "key": "mines_known"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "crystal"
+       }
+      ],
+      "next": "fled"
+     },
+     {
+      "text": "Защищайся.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "krupitsa_fight"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "debt": {
+    "text": "— Долг Гильдии — это много. — Крупица отсчитывает двести капель. — Копи для вас открыты. И мой совет, бесплатно: к Кристаллу ведут только Солевики. Ищите проводника.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fled": {
+    "text": "Вы рассказываете всё — приказчикам, охране, весовщику. К вечеру Крупицы в Соли нет: говорят, её видели на дороге к посту Треста, с сундуком и двумя охранниками. Гильдия выбирает нового гильдмейстера. Трест теперь знает ваш маршрут.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fight": {
+    "text": "Крупица выхватывает табельный из-под стола. Охрана вскидывает ружья.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Гильдия помнит долги. — Крупица кивает, не улыбаясь.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "merka": {
+  "speaker": "Счетовод Мерка",
+  "portrait": "portrait_merka",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_debts"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "item": "debt_book"
+     }
+    ],
+    "node": "bribe"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Сухой человек в нарукавниках не поднимает головы. — Счётная палата. Долги, выплаты, пуды. Говорите быстро.",
+    "options": [
+     {
+      "text": "Покажите книгу долгов Солевиков.",
+      "if": [
+       {
+        "flag": "salt_debts_asked"
+       },
+       {
+        "notFlag": "debts_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -20,
+       "pass": "shown",
+       "fail": "refused",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "debt_book"
+        },
+        {
+         "type": "flag",
+         "key": "seal_mark_6"
+        },
+        {
+         "type": "flag",
+         "key": "debts_known"
+        },
+        {
+         "type": "quest",
+         "quest": "salt_debts",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "shown": {
+    "text": "Мерка пожимает плечами и раскрывает книгу. — Смотрите. Всё по порядку. — Цифры аккуратные, но у каждого Солевика долг вырос вдвое за один день — в тот, когда книгу переплетали. На корешке — капля красного воска с оттиском руки, держащей печать. Пока Мерка отвернулся к полке, книга оказывается у вас под плащом.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "refused": {
+    "text": "— Книги Гильдии — для Гильдии. — Мерка закрывает шкаф на ключ.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "bribe": {
+    "text": "Мерка поднимает глаза и видит у вас свою книгу. Он бледнеет — и тут же берёт себя в руки. — Сто капель. И вы её не видели.",
+    "options": [
+     {
+      "text": "Договорились.",
+      "effects": [
+       {
+        "type": "take",
+        "item": "debt_book"
+       },
+       {
+        "type": "caps",
+        "amount": 100
+       },
+       {
+        "type": "flag",
+        "key": "salt_debts",
+        "value": "silent"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_debts",
+        "stage": "done"
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       }
+      ],
+      "next": "silent"
+     },
+     {
+      "text": "Нет.",
+      "next": "after_no"
+     }
+    ]
+   },
+   "silent": {
+    "text": "Мерка прячет книгу и снова пишет. Перо не дрожит.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after_no": {
+    "text": "— Как знаете, — сухо говорит Мерка. — Соль терпелива.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "— Мне не о чем с вами говорить.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "debt_book": {
+  "speaker": "Счётная книга",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "debts_known"
+     }
+    ],
+    "node": "gone"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Толстая книга в кожаном переплёте на конторке, рядом — шкаф на ключе. «Долги должников, копи Гильдии».",
+    "options": [
+     {
+      "text": "Вскрыть шкаф и взять книгу, пока Мерка у полок.",
+      "if": [
+       {
+        "flag": "salt_debts_asked"
+       }
+      ],
+      "check": {
+       "skill": "lockpick",
+       "mod": -10,
+       "pass": "took",
+       "fail": "noise",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "debt_book"
+        },
+        {
+         "type": "flag",
+         "key": "seal_mark_6"
+        },
+        {
+         "type": "flag",
+         "key": "debts_known"
+        },
+        {
+         "type": "quest",
+         "quest": "salt_debts",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "took": {
+    "text": "Замок щёлкает. В книге у каждого Солевика долг удвоен одной и той же рукой, одним и тем же днём. На корешке — капля красного воска: рука, держащая печать. Книга уходит под плащ.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "noise": {
+    "text": "Отмычка скребёт по замку. Мерка оборачивается, и вы делаете вид, что рассматриваете счёты.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "gone": {
+    "text": "Пустое место на конторке, где лежала книга.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "salt_shop": {
+  "speaker": "Лавочница Гильдии",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Соль, снасти, стволы. Цены — по весам Гильдии, торг — по совести.",
+    "options": [
+     {
+      "text": "Показывай товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "salt_guild_shop"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "salt_notice": {
+  "speaker": "Доска Гильдии",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Объявления мелом по соляной доске. «Караванам к Кладбищу судов нужна охрана». «Пропала дочь караванщика Ефрема. Вознаграждение». «Караван-сарай Тамары Кочевой не пришёл на стоянку — кто видел, к Гильдии».",
+    "options": [
+     {
+      "text": "Про «Бархан»…",
+      "if": [
+       {
+        "notFlag": "barkhan_asked"
+       }
+      ],
+      "next": "barkhan"
+     },
+     {
+      "text": "Свежий лист, прибитый поверх всех…",
+      "if": [
+       {
+        "flag": "krupitsa_fate",
+        "eq": "fled"
+       }
+      ],
+      "next": "wanted"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "barkhan": {
+    "text": "«Караван-сарай Тамары Кочевой ждали у восточной вешки. Колеи ведут в корку, в сторону моря. Кто найдёт — Гильдия заплатит». Стоянка «Бархана» — к северо-востоку от Соли.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "barkhan_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "barkhan",
+      "stage": "gone"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "wanted": {
+    "text": "Лист с печатью Треста: «Разыскивается путник с тубусом. Награда — от Башни». Кто-то уже пририсовал к описанию рожки.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "guild_scales": {
+  "speaker": "Весы Гильдии",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Весы с длинным коромыслом. На одной чаше — соль, на другой — гири с клеймом Гильдии. Мимо весов на рынок не пройти: весовщик смотрит на каждый мешок.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "salt_folk": {
+  "speaker": "Покупатель",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Соль нынче дорожает, а вода — вдвое. Кому ни скажи — все знают, кто виноват: Трест. А кто на самом деле — никто не знает.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "salt_porter": {
+  "speaker": "Солевик-носильщик",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Широкий серый человек с соляными наростами на плечах медленно ставит мешок. — Люди думают, мы не чувствуем тяжести. Чувствуем. Просто молчим дольше.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "weigher": {
+  "speaker": "Весовщик Гильдии",
+  "entry": [
+   {
+    "if": [
+     {
+      "item": "smuggle_sack"
+     },
+     {
+      "notFlag": "scales_passed"
+     }
+    ],
+    "node": "sack"
+   },
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Всё, что продаётся в Соли, сначала ложится на весы Гильдии. Пуд — пошлина, полпуда — полпошлины.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "sack": {
+    "text": "Весовщик кивает на ваш мешок. — Что везём? На весы.",
+    "options": [
+     {
+      "text": "Пройти, пока он занят гирями.",
+      "check": {
+       "skill": "sneak",
+       "mod": 0,
+       "pass": "slipped",
+       "fail": "caught",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "scales_passed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Соль на засолку, для себя. Личное.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "talked",
+       "fail": "caught",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "scales_passed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Двадцать капель — на гири.",
+      "if": [
+       {
+        "caps": 20
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -20
+       },
+       {
+        "type": "flag",
+        "key": "scales_passed"
+       }
+      ],
+      "next": "paid"
+     },
+     {
+      "text": "Мешки — от Хруста. Забирайте: пусть Гильдия разбирается.",
+      "effects": [
+       {
+        "type": "take",
+        "item": "smuggle_sack"
+       },
+       {
+        "type": "flag",
+        "key": "salt_smuggle",
+        "value": "guild"
+       },
+       {
+        "type": "caps",
+        "amount": 60
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "inc",
+        "key": "rep_guild",
+        "by": 5
+       }
+      ],
+      "next": "guild"
+     }
+    ]
+   },
+   "slipped": {
+    "text": "Весовщик ругается с покупателем из-за полпуда. Вы проходите мимо весов.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "talked": {
+    "text": "— На засолку… — Весовщик машет рукой. — Иди.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "paid": {
+    "text": "Капли исчезают в кармане фартука. — Что-то я сегодня без очков. Иди.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "caught": {
+    "text": "— А ну стой! На весы! — Весовщик хватает мешок за угол. Пришлось отойти.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "guild": {
+    "text": "Весовщик распарывает мешок. Под солью — склянка с серой мутью. Он бледнеет: — Суховей. — Склянку уносят в контору. Вам отсчитывают шестьдесят капель. — Гильдия этого не забудет.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "khrust": {
+  "speaker": "Хруст",
+  "portrait": "portrait_khrust",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_smuggle"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "salt_smuggle_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Жилистый человек в пыльном плаще грызёт соломинку. — Хруст. Вожу соль мимо весов: Гильдия берёт пошлину с каждого пуда, а люди хотят есть. Три мешка до заднего двора, к моему покупателю. Восемьдесят капель.",
+    "options": [
+     {
+      "text": "Возьмусь.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "smuggle_sack"
+       },
+       {
+        "type": "flag",
+        "key": "salt_smuggle_asked"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "asked"
+       }
+      ],
+      "next": "take"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "take": {
+    "text": "— Весовщик у весов на дороге. Пройдёшь мимо — и за стойки, на задний двор. Там тебя ждут.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Мешки у покупателя? Нет? Тогда что стоишь?",
+    "options": [
+     {
+      "text": "Мешки высыпаны в соль. Там был Суховей.",
+      "if": [
+       {
+        "item": "smuggle_sack"
+       },
+       {
+        "flag": "sukhovey_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_smuggle",
+        "value": "dumped"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "take",
+        "item": "smuggle_sack"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "dumped"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "dumped": {
+    "text": "Хруст выплёвывает соломинку. — Суховей? В моих мешках? — Он долго молчит. — Я не знал. Скажи, что не знал. — И уходит к стойкам, не прощаясь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Чего тебе? — Хруст смотрит мимо.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "ukho": {
+  "speaker": "Покупатель",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "На заднем дворе ждёт человек в чёрном, с красной повязкой «Жажды». — Мешки?",
+    "options": [
+     {
+      "text": "Вот мешки.",
+      "if": [
+       {
+        "item": "smuggle_sack"
+       },
+       {
+        "flag": "scales_passed"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_smuggle",
+        "value": "delivered"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "take",
+        "item": "smuggle_sack"
+       },
+       {
+        "type": "caps",
+        "amount": 80
+       },
+       {
+        "type": "flag",
+        "key": "thirst_supplied"
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       }
+      ],
+      "next": "delivered"
+     },
+     {
+      "text": "Мешки — у весов. Весовщик не пропустил.",
+      "if": [
+       {
+        "item": "smuggle_sack"
+       },
+       {
+        "notFlag": "scales_passed"
+       }
+      ],
+      "next": "wait"
+     },
+     {
+      "text": "[Восприятие] Сначала посмотрим, что в мешках.",
+      "if": [
+       {
+        "item": "smuggle_sack"
+       },
+       {
+        "attr": "per",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sukhovey_known"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "truth"
+       }
+      ],
+      "next": "vial"
+     },
+     {
+      "text": "[Наука] Этот мешок тяжелее соли. Что там?",
+      "if": [
+       {
+        "item": "smuggle_sack"
+       },
+       {
+        "skill": "science",
+        "gte": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sukhovey_known"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "truth"
+       }
+      ],
+      "next": "vial"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "wait": {
+    "text": "— Тогда пройди. Хоть бегом, хоть ползком.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "vial": {
+    "text": "Под солью — стеклянная склянка с серой мутью, закрученная проволокой. Суховей: одна склянка отравит колодец целого посёлка. Покупатель тянется за ножом, но не достаёт — ждёт, что вы решите.",
+    "options": [
+     {
+      "text": "Высыпать всё в соль. Сделки не будет.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_smuggle",
+        "value": "dumped"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "take",
+        "item": "smuggle_sack"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "dumped"
+     },
+     {
+      "text": "Подменить склянку солёной водой, отдать мешки и проследить.",
+      "if": [
+       {
+        "flag": "scales_passed"
+       }
+      ],
+      "check": {
+       "skill": "science",
+       "mod": 0,
+       "pass": "tracked",
+       "fail": "spotted",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "salt_smuggle",
+         "value": "tracked"
+        },
+        {
+         "type": "quest",
+         "quest": "salt_smuggle",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 60
+        },
+        {
+         "type": "take",
+         "item": "smuggle_sack"
+        },
+        {
+         "type": "give",
+         "item": "sukhovey_vial"
+        },
+        {
+         "type": "caps",
+         "amount": 80
+        },
+        {
+         "type": "flag",
+         "key": "mogilnik_hint"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отдать как есть.",
+      "if": [
+       {
+        "flag": "scales_passed"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_smuggle",
+        "value": "delivered"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_smuggle",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "take",
+        "item": "smuggle_sack"
+       },
+       {
+        "type": "caps",
+        "amount": 80
+       },
+       {
+        "type": "flag",
+        "key": "thirst_supplied"
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       }
+      ],
+      "next": "delivered"
+     }
+    ]
+   },
+   "delivered": {
+    "text": "Покупатель отсчитывает восемьдесят капель и уносит мешки. Где-то колодец станет серым.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "dumped": {
+    "text": "Соль и серая муть уходят в песок заднего двора. Покупатель плюёт и уходит, не оглядываясь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "tracked": {
+    "text": "Склянка с солёной водой ложится на место настоящей. Покупатель платит и уходит; вы идёте следом до края рынка. Его ждут у повозки с бочками, на бочках — знак «Жажды» и мелом: «Могильник». Настоящая склянка — у вас.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "spotted": {
+    "text": "Проволока не поддаётся, покупатель замечает возню. — Играешь? — Он хватает мешок и исчезает за стойками. Склянка ушла к «Жажде».",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "salt_smuggle",
+      "value": "delivered"
+     },
+     {
+      "type": "quest",
+      "quest": "salt_smuggle",
+      "stage": "done"
+     },
+     {
+      "type": "xp",
+      "amount": 60
+     },
+     {
+      "type": "take",
+      "item": "smuggle_sack"
+     },
+     {
+      "type": "flag",
+      "key": "thirst_supplied"
+     },
+     {
+      "type": "karma",
+      "amount": -1
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "efrem": {
+  "speaker": "Караванщик Ефрем",
+  "portrait": "portrait_efrem",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_bride",
+      "eq": "returned"
+     },
+     {
+      "notFlag": "bride_paid"
+     }
+    ],
+    "node": "pay"
+   },
+   {
+    "if": [
+     {
+      "flag": "salt_bride"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "bride_truth"
+     }
+    ],
+    "node": "truth"
+   },
+   {
+    "if": [
+     {
+      "flag": "salt_bride_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Седой караванщик сидит на оглобле повозки. — Ефрем. Дочь мою, Ладу, увёл Солевик из копей. Гильдия ищет, да у Гильдии дел много. Найдёте — сто пятьдесят капель. Всё, что есть.",
+    "options": [
+     {
+      "text": "Найду.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_bride_asked"
+       },
+       {
+        "type": "flag",
+        "key": "mines_known"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_bride",
+        "stage": "asked"
+       }
+      ],
+      "next": "asked"
+     },
+     {
+      "text": "Слышно что-нибудь про «Бархан»?",
+      "if": [
+       {
+        "notFlag": "barkhan_asked"
+       }
+      ],
+      "next": "barkhan"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "asked": {
+    "text": "— Видели их у копей. Клещ, надсмотрщик, что-то знает, да молчит. Копи Гильдии — к югу от рынка.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "barkhan": {
+    "text": "— Тамара? Ждали её у восточной вешки неделю назад. Колеи ушли в корку, к морю. Там сейчас нехорошо: корка проваливается, пауки. — Ефрем сплёвывает. — Стоянка «Бархана» — к северо-востоку.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "barkhan_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "barkhan",
+      "stage": "gone"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Нашли? — Ефрем поднимается навстречу.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "truth": {
+    "text": "— Нашли? Где она?! — Ефрем хватает вас за рукав.",
+    "options": [
+     {
+      "text": "Её никто не уводил. Лада ушла сама — с Солом.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "blessed",
+       "fail": "furious",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "salt_bride",
+         "value": "freed"
+        },
+        {
+         "type": "quest",
+         "quest": "salt_bride",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 90
+        },
+        {
+         "type": "flag",
+         "key": "crystal_guide",
+         "value": "sol"
+        },
+        {
+         "type": "karma",
+         "amount": 2
+        }
+       ]
+      }
+     },
+     {
+      "text": "Она в дальнем штреке копей.",
+      "next": "told"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "blessed": {
+    "text": "Ефрем садится обратно на оглоблю. Долго молчит. — Сама… Мать её тоже когда-то ушла из дома за караванщиком. — Он достаёт кошель. — Этим я выкуплю долг парня у Гильдии. Пусть идут. — И тише: — Скажите ей, что я… Сами скажите.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "furious": {
+    "text": "— Сама?! Солевик ей голову заморочил! — Ефрем отворачивается. — Приведите её. Хоть силой.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "told": {
+    "text": "— В штреке? С пауками?! — Ефрем бледнеет. — Приведите её, прошу.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "pay": {
+    "text": "Ефрем обнимает дочь, а потом, не глядя на неё, отсчитывает сто пятьдесят капель. — Спасибо. — Лада стоит рядом и смотрит на вас так, что лучше бы не смотрела.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "bride_paid"
+     },
+     {
+      "type": "caps",
+      "amount": 150
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Дочь — это навсегда, — говорит Ефрем. — Остальное — соль.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "lada": {
+  "speaker": "Лада",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "За паутиной, в тупике штрека, сидит девушка в шали, а рядом — молодой Солевик, заслоняющий её плечом. — Вы от отца? — Лада не встаёт. — Меня никто не уводил. Я ушла сама. Гильдия хочет меня домой, а Сола — в копи, навсегда.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "bride_truth"
+     },
+     {
+      "type": "quest",
+      "quest": "salt_bride",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "Уходите в Кристалл. Выход из штрека я прикрою.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_bride",
+        "value": "fled"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_bride",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 90
+       },
+       {
+        "type": "flag",
+        "key": "crystal_guide",
+        "value": "sol"
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "fled"
+     },
+     {
+      "text": "Отец ждёт. Пойдём.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_bride",
+        "value": "returned"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_bride",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 90
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       },
+       {
+        "type": "flag",
+        "key": "sol_chained"
+       }
+      ],
+      "next": "returned"
+     },
+     {
+      "text": "Я поговорю с отцом.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bride_truth"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_bride",
+        "stage": "truth"
+       }
+      ],
+      "next": "plea"
+     }
+    ]
+   },
+   "fled": {
+    "text": "Сол поднимается — он на голову выше вас. — Спасибо. Я знаю тропу через корку к Кристаллу, люди моего народа ходят ею по звёздам. Найдите меня у Кристалла — проведу и вас.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "returned": {
+    "text": "Лада идёт за вами молча. Сола уводит охрана копей: за «похищение» ему прибавят долг. Он не сопротивляется — только смотрит ей вслед.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "plea": {
+    "text": "— Отец упрям, как старый вол. — Лада качает головой. — Но попробуйте.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "sol": {
+  "speaker": "Сол",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Молодой Солевик молчит, только кивает на Ладу: говорить будет она.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "lada_home": {
+  "speaker": "Лада",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Лада смотрит мимо вас, на дорогу к копям.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "plast": {
+  "speaker": "Старый Пласт",
+  "portrait": "portrait_plast",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_debts"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "salt_debts_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Старый Солевик сидит на нарах, соляные наросты на его плечах стали жёлтыми, как старая кость. — Пласт. Мы рубим соль за долги. Долги растут быстрее, чем мы рубим. Сын мой, Жила, родился должником.",
+    "options": [
+     {
+      "text": "Кто пишет ваши долги?",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_debts_asked"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_debts",
+        "stage": "asked"
+       }
+      ],
+      "next": "who"
+     },
+     {
+      "text": "[Обаяние] Ты знаешь дорогу к Кристаллу, старик. Покажи её мне.",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 7
+       },
+       {
+        "notFlag": "crystal_guide"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_guide",
+        "value": "plast"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       }
+      ],
+      "next": "guide"
+     },
+     {
+      "text": "Где-то здесь прячутся девушка и Солевик.",
+      "if": [
+       {
+        "flag": "salt_bride_asked"
+       },
+       {
+        "notFlag": "bride_truth"
+       }
+      ],
+      "next": "bride"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "who": {
+    "text": "— Счетовод Мерка, в Гильдейском дворе. У него книга. В книге — мы.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "guide": {
+    "text": "Пласт долго смотрит вам в лицо. — Ты не торгуешь нами. Это видно. — Он чертит на соли три звезды и линию. — По этим звёздам — через корку. Буду ждать тебя на краю моря, в ночь, когда соберёшься.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "bride": {
+    "text": "Пласт показывает подбородком на восток. — Дальний штрек. Там пауки. Сол сильный, а Лада — храбрая. Не выдавай их Гильдии.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Книга у Мерки. Пока книга у него, мы — у Гильдии.",
+    "options": [
+     {
+      "text": "Книга у меня. Сжечь её?",
+      "if": [
+       {
+        "item": "debt_book"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "salt_debts",
+        "value": "burned"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_debts",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 90
+       },
+       {
+        "type": "take",
+        "item": "debt_book"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_guide",
+        "value": "debtor"
+       },
+       {
+        "type": "flag",
+        "key": "guild_suspicious"
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "burned"
+     },
+     {
+      "text": "[Обаяние] Ты знаешь дорогу к Кристаллу, старик. Покажи её мне.",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 7
+       },
+       {
+        "notFlag": "crystal_guide"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crystal_guide",
+        "value": "plast"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       }
+      ],
+      "next": "guide"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "burned": {
+    "text": "Страница за страницей книга уходит в огонь под котлом. Солевики стоят кругом и молчат. Пласт кладёт руку вам на плечо: — Жила проводит тебя к Кристаллу. Он молодой, звёзды знает лучше меня.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Соль помнит тех, кто помог, — говорит Пласт.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zhila": {
+  "speaker": "Жила",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "crystal_guide",
+      "eq": "debtor"
+     }
+    ],
+    "node": "guide"
+   },
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Молодой Солевик кидает соль в вагонетку, не останавливаясь. — Долг сам себя не отработает.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "guide": {
+    "text": "— Я свободен. — Жила улыбается впервые. — Дорогу к Кристаллу покажу, когда скажешь. Жду у края моря.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "salt_debtor": {
+  "speaker": "Солевик-должник",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "salt_debts",
+      "eq": "silent"
+     }
+    ],
+    "node": "chained"
+   },
+   {
+    "if": [
+     {
+      "flag": "salt_debts"
+     }
+    ],
+    "node": "free"
+   },
+   {
+    "node": "chained"
+   }
+  ],
+  "nodes": {
+   "chained": {
+    "text": "Солевик рубит соль и не поднимает головы.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "free": {
+    "text": "— Свободен, — говорит Солевик, будто пробует слово на вкус. — Непривычно.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "klesch": {
+  "speaker": "Надсмотрщик Клещ",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Надсмотрщик с палкой пересчитывает Солевиков. — Клещ. Копи Гильдии. Людей считаю по головам, этих — по пудам.",
+    "options": [
+     {
+      "text": "Выкупить Пласта, Жилу и третьего. Сколько?",
+      "if": [
+       {
+        "flag": "salt_debts_asked"
+       },
+       {
+        "notFlag": "salt_debts"
+       }
+      ],
+      "next": "buy"
+     },
+     {
+      "text": "Здесь видели девушку и Солевика?",
+      "if": [
+       {
+        "flag": "salt_bride_asked"
+       },
+       {
+        "notFlag": "salt_bride"
+       }
+      ],
+      "next": "bride"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "buy": {
+    "text": "— По книге Мерки — полсотни за голову. Сто пятьдесят за троих, и катитесь со своей жалостью.",
+    "options": [
+     {
+      "text": "Вот сто пятьдесят.",
+      "if": [
+       {
+        "caps": 150
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -150
+       },
+       {
+        "type": "flag",
+        "key": "salt_debts",
+        "value": "bought"
+       },
+       {
+        "type": "quest",
+        "quest": "salt_debts",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 90
+       },
+       {
+        "type": "flag",
+        "key": "crystal_guide",
+        "value": "debtor"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Дорого."
+     }
+    ]
+   },
+   "bought": {
+    "text": "Клещ пересчитывает капли, потом вычёркивает три строчки мелом на доске. — Свободны. Пусть идут, пока Мерка не передумал.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "bride": {
+    "text": "— Двое у дальнего штрека. — Клещ сплёвывает. — Туда я не хожу: там пауки. Хотите — идите сами.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "barysh": {
+  "speaker": "Барыш",
+  "portrait": "portrait_barysh",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "ring_result"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "last_bout"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "if": [
+     {
+      "flag": "arena_3"
+     }
+    ],
+    "node": "champion"
+   },
+   {
+    "if": [
+     {
+      "flag": "arena_1"
+     }
+    ],
+    "node": "ladder"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Бородач в красном кафтане стучит мелом по доске ставок. — Барыш, хозяин «Пыльной чаши». У меня бьются на своём: кто с ножом, кто со стволом. Никто не умирает — упал, значит, проиграл. Три боя — и выходишь против Молчуна. За каждый — приз: тридцать, шестьдесят, девяносто.",
+    "options": [
+     {
+      "text": "Выйти против Сизого.",
+      "if": [
+       {
+        "notFlag": "arena_1"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Откуда у вас Молчун?",
+      "if": [
+       {
+        "flag": "whisper_asked"
+       },
+       {
+        "notFlag": "vyun_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "bill",
+       "fail": "shrug",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "vyun_known"
+        },
+        {
+         "type": "quest",
+         "quest": "last_bout",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "ladder": {
+    "text": "— Следующий! — Барыш подмигивает. — Толпа тебя уже знает.",
+    "options": [
+     {
+      "text": "Выйти против Кочерги.",
+      "if": [
+       {
+        "flag": "arena_1"
+       },
+       {
+        "notFlag": "arena_2"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Выйти против братьев Жмых.",
+      "if": [
+       {
+        "flag": "arena_2"
+       },
+       {
+        "notFlag": "arena_3"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Откуда у вас Молчун?",
+      "if": [
+       {
+        "flag": "whisper_asked"
+       },
+       {
+        "notFlag": "vyun_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "bill",
+       "fail": "shrug",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "vyun_known"
+        },
+        {
+         "type": "quest",
+         "quest": "last_bout",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Купить купчую Молчуна. Триста капель.",
+      "if": [
+       {
+        "flag": "vyun_known"
+       },
+       {
+        "caps": 300
+       },
+       {
+        "notFlag": "last_bout"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -300
+       },
+       {
+        "type": "give",
+        "item": "bout_contract"
+       },
+       {
+        "type": "flag",
+        "key": "last_bout",
+        "value": "bought"
+       },
+       {
+        "type": "flag",
+        "key": "vyun_free"
+       },
+       {
+        "type": "flag",
+        "key": "whisper_warned"
+       },
+       {
+        "type": "quest",
+        "quest": "last_bout",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "champion": {
+    "text": "— Молчун ждёт в яме. Бой за цепь чемпиона. — Барыш понижает голос. — Или бой насмерть: двойной приз, сто восемьдесят. Толпа такое любит.",
+    "options": [
+     {
+      "text": "За цепь. До падения.",
+      "if": [
+       {
+        "notFlag": "last_bout"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Насмерть.",
+      "if": [
+       {
+        "notFlag": "last_bout"
+       },
+       {
+        "notFlag": "death_bout"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "death_bout"
+       }
+      ],
+      "next": "blood"
+     },
+     {
+      "text": "Купить купчую Молчуна. Триста капель.",
+      "if": [
+       {
+        "flag": "vyun_known"
+       },
+       {
+        "caps": 300
+       },
+       {
+        "notFlag": "last_bout"
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -300
+       },
+       {
+        "type": "give",
+        "item": "bout_contract"
+       },
+       {
+        "type": "flag",
+        "key": "last_bout",
+        "value": "bought"
+       },
+       {
+        "type": "flag",
+        "key": "vyun_free"
+       },
+       {
+        "type": "flag",
+        "key": "whisper_warned"
+       },
+       {
+        "type": "quest",
+        "quest": "last_bout",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Откуда у вас Молчун?",
+      "if": [
+       {
+        "flag": "whisper_asked"
+       },
+       {
+        "notFlag": "vyun_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "bill",
+       "fail": "shrug",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "vyun_known"
+        },
+        {
+         "type": "quest",
+         "quest": "last_bout",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "fight": {
+    "text": "— На песок! — Барыш бьёт в гонг. Толпа подаётся вперёд. Бой до падения: своё оружие, но никто не умирает.",
+    "options": [
+     {
+      "text": "В яму.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ring_fight"
+       }
+      ]
+     }
+    ]
+   },
+   "blood": {
+    "text": "Барыш облизывает губы. — Насмерть. Толпа, слыхали?! — Рёв такой, что с рядов сыплется соль. — Молчун выйдет в яму без цепи. Скажи ему в яме.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "bill": {
+    "text": "— Купил, — пожимает плечами Барыш. — У Сухарей. Клан задолжал Гильдии за воду, отдал долг парнем. Купчая у меня — триста капель, и он чей угодно.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "shrug": {
+    "text": "— Где взял, там больше нет. — Барыш отворачивается к доске.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "bought": {
+    "text": "Барыш пересчитывает капли дважды, потом лезет в сундук за купчей. — Молчун — твой. Толпа будет скучать. — Он отпирает клетку. Молчун выходит, снимает маску и долго смотрит на ряды, где сидит Шёпот.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "Барыш стирает с доски чью-то ставку.",
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "won"
+       },
+       {
+        "notFlag": "arena_1"
+       }
+      ],
+      "next": "won_1"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "won"
+       },
+       {
+        "flag": "arena_1"
+       },
+       {
+        "notFlag": "arena_2"
+       }
+      ],
+      "next": "won_2"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "won"
+       },
+       {
+        "flag": "arena_2"
+       },
+       {
+        "notFlag": "arena_3"
+       }
+      ],
+      "next": "won_3"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "won"
+       },
+       {
+        "flag": "arena_3"
+       }
+      ],
+      "next": "won_champion"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "lost"
+       }
+      ],
+      "next": "lost"
+     },
+     {
+      "text": "…",
+      "if": [
+       {
+        "flag": "ring_result",
+        "eq": "left"
+       }
+      ],
+      "next": "lost"
+     }
+    ]
+   },
+   "won_1": {
+    "text": "— Сизый на песке! — Барыш отсчитывает тридцать капель. — Неплохо для первого раза.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "ring_result",
+      "value": false
+     },
+     {
+      "type": "flag",
+      "key": "arena_1"
+     },
+     {
+      "type": "inc",
+      "key": "arena_rank",
+      "by": 1
+     },
+     {
+      "type": "caps",
+      "amount": 30
+     },
+     {
+      "type": "xp",
+      "amount": 40
+     }
+    ],
+    "options": [
+     {
+      "text": "Забрать приз."
+     }
+    ]
+   },
+   "won_2": {
+    "text": "— Кочерга лежит! — Шестьдесят капель со звоном ложатся на стол. — Толпа ставит на тебя.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "ring_result",
+      "value": false
+     },
+     {
+      "type": "flag",
+      "key": "arena_2"
+     },
+     {
+      "type": "inc",
+      "key": "arena_rank",
+      "by": 1
+     },
+     {
+      "type": "caps",
+      "amount": 60
+     },
+     {
+      "type": "xp",
+      "amount": 60
+     }
+    ],
+    "options": [
+     {
+      "text": "Забрать приз."
+     }
+    ]
+   },
+   "won_3": {
+    "text": "— Оба Жмыха! — Девяносто капель. — Барыш смотрит на клетку Молчуна. — Ну, теперь только он.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "ring_result",
+      "value": false
+     },
+     {
+      "type": "flag",
+      "key": "arena_3"
+     },
+     {
+      "type": "inc",
+      "key": "arena_rank",
+      "by": 1
+     },
+     {
+      "type": "caps",
+      "amount": 90
+     },
+     {
+      "type": "xp",
+      "amount": 80
+     }
+    ],
+    "options": [
+     {
+      "text": "Забрать приз."
+     }
+    ]
+   },
+   "won_champion": {
+    "text": "Молчун стоит на коленях в песке. Маска съехала набок. Барыш молчит дольше, чем надо, потом снимает с крюка цепь чемпиона. — Закон арены: кто побил чемпиона, берёт его цепь. — И тише: — И его самого. Он твой. Делай с ним что хочешь.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "ring_result",
+      "value": false
+     },
+     {
+      "type": "flag",
+      "key": "last_bout",
+      "value": "spared"
+     },
+     {
+      "type": "flag",
+      "key": "vyun_free"
+     },
+     {
+      "type": "flag",
+      "key": "whisper_warned"
+     },
+     {
+      "type": "quest",
+      "quest": "last_bout",
+      "stage": "done"
+     },
+     {
+      "type": "xp",
+      "amount": 150
+     },
+     {
+      "type": "flag",
+      "key": "arena_champion"
+     },
+     {
+      "type": "caps",
+      "amount": 90
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "lost": {
+    "text": "— Бывает. — Барыш не смотрит. — Отлежишься — приходи.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "ring_result",
+      "value": false
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "done": {
+    "text": "— Толпа до сих пор говорит о последнем бое. — Барыш качает головой.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "pit_fighter": {
+  "speaker": "Боец арены",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Боец разминает плечи и молча кивает на Барыша: ставки — к нему.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "arena_crowd": {
+  "speaker": "Зритель",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Ставлю на Молчуна! Всегда на Молчуна! Он ни разу не упал.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "molchun": {
+  "speaker": "Молчун",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Огромный боец в железной маске. Из прорезей смотрят спокойные глаза. Он не отвечает.",
+    "options": [
+     {
+      "text": "[Восприятие] Под ремнём маски — выжженный знак: три черты и круг.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       },
+       {
+        "notFlag": "vyun_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "vyun_known"
+       },
+       {
+        "type": "quest",
+        "quest": "last_bout",
+        "stage": "truth"
+       }
+      ],
+      "next": "sign"
+     },
+     {
+      "text": "Шёпот ждёт тебя, Вьюн. Сними маску.",
+      "if": [
+       {
+        "flag": "whisper_word"
+       },
+       {
+        "notFlag": "last_bout"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "unmasked",
+       "fail": "silent",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "last_bout",
+         "value": "talked"
+        },
+        {
+         "type": "flag",
+         "key": "vyun_free"
+        },
+        {
+         "type": "flag",
+         "key": "whisper_warned"
+        },
+        {
+         "type": "quest",
+         "quest": "last_bout",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        },
+        {
+         "type": "karma",
+         "amount": 2
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "sign": {
+    "text": "Знак Сухарей: три черты — три колодца клана, круг — Костяной круг. Молчун замечает ваш взгляд и отворачивается.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "unmasked": {
+    "text": "Молчун долго стоит неподвижно. Потом поднимает руки и расстёгивает ремень. Под маской — молодое лицо со шрамом через бровь. — Шёпот, — говорит он хрипло: первое слово за годы. Он бросает маску в песок и идёт к рядам. Барыш кричит, но никто не двигается ему наперерез.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "silent": {
+    "text": "Молчун не шевелится. Может, не верит. Может, не помнит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "molchun_blood": {
+  "speaker": "Молчун",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Молчун стоит в яме без цепи, в руках — кувалда. Толпа ждёт.",
+    "options": [
+     {
+      "text": "Начнём.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "death_fight"
+       }
+      ]
+     },
+     {
+      "text": "Не сейчас."
+     }
+    ]
+   }
+  }
+ },
+ "shepot": {
+  "speaker": "Шёпот",
+  "portrait": "portrait_shepot",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "vyun_free"
+     }
+    ],
+    "node": "free"
+   },
+   {
+    "if": [
+     {
+      "flag": "whisper_word"
+     }
+    ],
+    "node": "waiting"
+   },
+   {
+    "if": [
+     {
+      "flag": "vyun_known"
+     }
+    ],
+    "node": "tell"
+   },
+   {
+    "if": [
+     {
+      "flag": "whisper_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Разведчица в песочном капюшоне сидит в рядах и смотрит только на клетку Молчуна. — Ты здесь не за ставками. — Голос тихий, как шелест. — Шёпот, из Сухарей. Молчун… Мне надо знать, кто под маской. Самой к нему не подойти: Барыш знает меня в лицо.",
+    "options": [
+     {
+      "text": "Узнаю.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "whisper_asked"
+       },
+       {
+        "type": "quest",
+        "quest": "last_bout",
+        "stage": "asked"
+       }
+      ],
+      "next": "asked"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "asked": {
+    "text": "— Смотри на него близко. Или спроси Барыша, откуда он. Барыш любит хвастать.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Есть новости? — Шёпот не отрывает глаз от клетки.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "tell": {
+    "text": "— Ну?",
+    "options": [
+     {
+      "text": "Это твой брат. Клан продал его Гильдии за долги.",
+      "next": "told"
+     }
+    ]
+   },
+   "told": {
+    "text": "Шёпот сжимает край доски так, что белеют пальцы. — Вьюн. Нам сказали — он умер в пути. — Она снимает с шеи шнурок с костяной бусиной. — Покажи ему. Скажи, что я здесь. Если он ещё помнит, кто он, — снимет маску сам. Если нет… Победи его, не убивая. Или выкупи. Только не убивай.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "whisper_word"
+     },
+     {
+      "type": "give",
+      "item": "whisper_token"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "waiting": {
+    "text": "— Покажи ему бусину. Скажи, что я здесь.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "free": {
+    "text": "Шёпот стоит рядом с братом, впервые без капюшона. — Мы в долгу. — И тише: — Слушай. Человек Крупицы ночью бегал к посту Треста, я видела. Гильдмейстер торгует твоим маршрутом. Будь осторожен в корке.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "vyun": {
+  "speaker": "Вьюн",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Вьюн разминает руки, будто впервые их видит. — Спасибо, — говорит он. Одного слова ему пока хватает.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "sea_caravan": {
+  "speaker": "Караван Гильдии",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "sea_caravan",
+      "eq": "go"
+     }
+    ],
+    "node": "going"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Три повозки под полосатой дерюгой, двое охранников Гильдии и караванщик. — От Крупицы? Идём к Кладбищу судов. Становись рядом — плата у остовов.",
+    "options": [
+     {
+      "text": "[Восприятие] За караваном от самых ворот идёт всадник в сером. Держится далеко.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "ambush_seen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ambush_seen"
+       }
+      ],
+      "next": "seen"
+     },
+     {
+      "text": "Идём.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sea_caravan",
+        "value": "go"
+       },
+       {
+        "type": "encounter",
+        "action": "hire"
+       }
+      ]
+     },
+     {
+      "text": "Пойду своей дорогой, в обход.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sea_caravan",
+        "value": "go"
+       },
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   },
+   "seen": {
+    "text": "Караванщик прищуривается. — Серый плащ, ружьё на ремне… Трестовский. Значит, ждут. — Он проверяет обрез. — Будем смотреть в оба.",
+    "options": [
+     {
+      "text": "Идём.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sea_caravan",
+        "value": "go"
+       },
+       {
+        "type": "encounter",
+        "action": "hire"
+       }
+      ]
+     },
+     {
+      "text": "Пойду своей дорогой, в обход.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "sea_caravan",
+        "value": "go"
+       },
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   },
+   "going": {
+    "text": "— В корке не отставай.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "trust_hunters": {
+  "speaker": "Охотники Треста",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "ambush_seen"
+     }
+    ],
+    "node": "seen"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Из белой мглы выходят трое в серых плащах, с ружьями наизготовку. — Стоять. Тубус — на соль, и разойдёмся.",
+    "options": [
+     {
+      "text": "Сколько вам заплатил Трест? Даю сто пятьдесят сверху.",
+      "if": [
+       {
+        "caps": 150
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -150
+       },
+       {
+        "type": "encounter",
+        "action": "leave"
+       },
+       {
+        "type": "flag",
+        "key": "ambush_done",
+        "value": "bought"
+       },
+       {
+        "type": "flag",
+        "key": "lair_known"
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "krupitsa"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       },
+       {
+        "type": "give",
+        "item": "hunt_order"
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Вот копия мандата Затвора: печати, которой нет в реестре. Вы служите подделке.",
+      "if": [
+       {
+        "item": "forgery_proof"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "doubt",
+       "fail": "fight",
+       "passEffects": [
+        {
+         "type": "encounter",
+         "action": "leave"
+        },
+        {
+         "type": "flag",
+         "key": "ambush_done",
+         "value": "bought"
+        },
+        {
+         "type": "flag",
+         "key": "lair_known"
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "krupitsa"
+        },
+        {
+         "type": "xp",
+         "amount": 100
+        },
+        {
+         "type": "give",
+         "item": "hunt_order"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Уйти в бурю.",
+      "check": {
+       "skill": "sneak",
+       "mod": -10,
+       "pass": "slipped",
+       "fail": "fight",
+       "passEffects": [
+        {
+         "type": "encounter",
+         "action": "flee"
+        },
+        {
+         "type": "flag",
+         "key": "ambush_done",
+         "value": "slipped"
+        },
+        {
+         "type": "flag",
+         "key": "lair_known"
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "krupitsa"
+        },
+        {
+         "type": "xp",
+         "amount": 100
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "encounter",
+         "action": "ambush"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Попробуйте взять.",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "fight"
+       }
+      ],
+      "next": "fight"
+     }
+    ]
+   },
+   "seen": {
+    "text": "Вы видели их ещё у ворот Соли, и они это понимают: засада не удалась. Трое в серых плащах выходят из мглы открыто. — Разговор, значит. Тубус — на соль.",
+    "options": [
+     {
+      "text": "Сколько вам заплатил Трест? Даю сто пятьдесят сверху.",
+      "if": [
+       {
+        "caps": 150
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -150
+       },
+       {
+        "type": "encounter",
+        "action": "leave"
+       },
+       {
+        "type": "flag",
+        "key": "ambush_done",
+        "value": "bought"
+       },
+       {
+        "type": "flag",
+        "key": "lair_known"
+       },
+       {
+        "type": "quest",
+        "quest": "salt",
+        "stage": "krupitsa"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       },
+       {
+        "type": "give",
+        "item": "hunt_order"
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Вот копия мандата Затвора: печати, которой нет в реестре. Вы служите подделке.",
+      "if": [
+       {
+        "item": "forgery_proof"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": 10,
+       "pass": "doubt",
+       "fail": "fight",
+       "passEffects": [
+        {
+         "type": "encounter",
+         "action": "leave"
+        },
+        {
+         "type": "flag",
+         "key": "ambush_done",
+         "value": "bought"
+        },
+        {
+         "type": "flag",
+         "key": "lair_known"
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "krupitsa"
+        },
+        {
+         "type": "xp",
+         "amount": 100
+        },
+        {
+         "type": "give",
+         "item": "hunt_order"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Уйти в бурю.",
+      "check": {
+       "skill": "sneak",
+       "mod": 10,
+       "pass": "slipped",
+       "fail": "fight",
+       "passEffects": [
+        {
+         "type": "encounter",
+         "action": "flee"
+        },
+        {
+         "type": "flag",
+         "key": "ambush_done",
+         "value": "slipped"
+        },
+        {
+         "type": "flag",
+         "key": "lair_known"
+        },
+        {
+         "type": "quest",
+         "quest": "salt",
+         "stage": "krupitsa"
+        },
+        {
+         "type": "xp",
+         "amount": 100
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "encounter",
+         "action": "fight"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Попробуйте взять.",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "fight"
+       }
+      ],
+      "next": "fight"
+     }
+    ]
+   },
+   "bought": {
+    "text": "Старший взвешивает кошель. — Трест платит меньше, чем обещает. — Он бросает вам сложенную бумагу. — Приказ. Нам он больше не нужен. — Трое уходят в бурю. В просвете мглы, там, куда они ушли, корка проваливается широкой воронкой.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "doubt": {
+    "text": "Старший читает копию долго, губы шевелятся. — Седьмой-бис… — Он сворачивает бумагу и отдаёт. — Мы ничего не нашли. — Уходя, он роняет на соль приказ: «Встретить караван Гильдии у вешек. Взять того, кто при тубусе. Сведения — от А. К.» В просвете мглы виднеется воронка в корке.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "slipped": {
+    "text": "Мгла глотает вас, как вода. Когда буря стихает, охотников нет — только их следы, уходящие к воронке в корке.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Взять! — Охотники вскидывают ружья.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "baken": {
+  "speaker": "Капитан Бакен",
+  "portrait": "portrait_baken",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "captain",
+      "eq": "radio"
+     }
+    ],
+    "node": "cursed"
+   },
+   {
+    "if": [
+     {
+      "flag": "captain"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Старый Солевик в капитанской фуражке стоит у мачты и кричит в пустоту: — Боцман! Паруса! Отдать швартовы! — Вокруг лежат кости матросов. — А, пассажир! Опаздываете, отчаливаем с приливом!",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "captain",
+      "stage": "met"
+     }
+    ],
+    "options": [
+     {
+      "text": "Есть, капитан! Поднимем паруса.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "sailed",
+       "fail": "confused",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "captain",
+         "value": "sailed"
+        },
+        {
+         "type": "flag",
+         "key": "crystal_guide",
+         "value": "captain"
+        },
+        {
+         "type": "flag",
+         "key": "lair_known"
+        },
+        {
+         "type": "quest",
+         "quest": "captain",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 120
+        },
+        {
+         "type": "karma",
+         "amount": 1
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Обаяние] Капитан, доложу: прилив пришёл. Команда на местах.",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "captain",
+        "value": "sailed"
+       },
+       {
+        "type": "flag",
+        "key": "crystal_guide",
+        "value": "captain"
+       },
+       {
+        "type": "flag",
+        "key": "lair_known"
+       },
+       {
+        "type": "quest",
+        "quest": "captain",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "sailed"
+     },
+     {
+      "text": "Прилива не будет. Море высохло двести лет назад.",
+      "next": "dry"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "sailed": {
+    "text": "Вы натягиваете дерюгу на мачту, кричите «Есть!» на каждый приказ. Ветер наполняет тряпку, и капитан, щурясь, ведёт «Отраду» через белое море — сквозь рифы, мимо мелей, к причалу, которого нет. — Швартуемся! — Он отдаёт честь пустой палубе. Потом смотрит на вас, и глаза у него впервые ясные. — Спасибо. Я довёл её. — Он садится на бухту каната. — Я знаю тропу через корку, к Кристаллу, — ходил ею мальчишкой. И знаю, где корка дышит: к востоку отсюда воронка, там живёт то, что утопило «Бархан».",
+    "options": [
+     {
+      "text": "А рация в рубке?",
+      "if": [
+       {
+        "notFlag": "captain_radio_asked"
+       }
+      ],
+      "next": "radio_ask"
+     },
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "radio_ask": {
+    "text": "— Судовой журнал? — Капитан хмурится. — Он говорит голосами. Иногда — по ночам — голос из гор.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "captain_radio_asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отдай его мне, капитан. Журнал должен идти с тем, кто продолжает путь.",
+      "check": {
+       "skill": "speech",
+       "mod": -20,
+       "pass": "both",
+       "fail": "keeps",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "captain",
+         "value": "both"
+        },
+        {
+         "type": "give",
+         "item": "whisper_radio"
+        },
+        {
+         "type": "flag",
+         "key": "radio_taken"
+        },
+        {
+         "type": "xp",
+         "amount": 60
+        }
+       ]
+      }
+     },
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "both": {
+    "text": "Капитан снимает рацию с крюка и отдаёт двумя руками, как знамя. — Береги журнал. Голос из гор зовёт себя «Шептуном».",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "keeps": {
+    "text": "— Журнал остаётся на судне. — Капитан кладёт ладонь на рацию.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "dry": {
+    "text": "Капитан смотрит сквозь вас. — Боцман! Этот пассажир бредит. Высадить на берег.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "confused": {
+    "text": "Вы путаете команды. Капитан сбивается, умолкает и садится у мачты. — Прилив ушёл, — говорит он глухо. — Опять ушёл.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "— Кристалл — по трём звёздам, через корку. Скажешь, когда идти.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "cursed": {
+    "text": "— Вор! — кричит капитан. — Боцман, вора на рею!",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "radio": {
+  "speaker": "Рация в рубке",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "radio_taken"
+     }
+    ],
+    "node": "gone"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Довоенная рация в стальном ящике. Шкала настроена на одну частоту, стрелка приварена. Из динамика — треск, и в треске иногда будто слова.",
+    "options": [
+     {
+      "text": "Забрать рацию, пока капитан кричит команды.",
+      "if": [
+       {
+        "notFlag": "captain"
+       }
+      ],
+      "check": {
+       "skill": "sneak",
+       "mod": 0,
+       "pass": "taken",
+       "fail": "noticed",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "captain",
+         "value": "radio"
+        },
+        {
+         "type": "give",
+         "item": "whisper_radio"
+        },
+        {
+         "type": "flag",
+         "key": "radio_taken"
+        },
+        {
+         "type": "quest",
+         "quest": "captain",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 60
+        },
+        {
+         "type": "karma",
+         "amount": -1
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "taken": {
+    "text": "Рация тяжелее, чем кажется. Капитан оборачивается слишком поздно и кричит вслед: «Вор! Журнал!»",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "noticed": {
+    "text": "— Руки прочь от журнала! — Капитан встаёт между вами и рацией.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "gone": {
+    "text": "Пустой крюк в рубке.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "hold_hatch": {
+  "speaker": "Люк в трюм",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "barkhan"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "voices"
+   }
+  ],
+  "nodes": {
+   "voices": {
+    "text": "Из-под люка слышны голоса, кто-то стучит в доски. — Эй! Там кто-то есть?! Мы из «Бархана»! Корка обвалилась, мы третий день в трюме. У кормы — пауки!",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "barkhan",
+      "stage": "found"
+     }
+    ],
+    "options": [
+     {
+      "text": "Выведу вас по гребню остова, пауки не услышат.",
+      "check": {
+       "skill": "survival",
+       "mod": -10,
+       "pass": "led",
+       "fail": "stuck",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "barkhan",
+         "value": "led"
+        },
+        {
+         "type": "flag",
+         "key": "lair_known"
+        },
+        {
+         "type": "quest",
+         "quest": "barkhan",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 120
+        },
+        {
+         "type": "karma",
+         "amount": 2
+        }
+       ]
+      }
+     },
+     {
+      "text": "Выбить доски с этой стороны и откопать вас.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 40
+       }
+      ],
+      "check": {
+       "skill": "repair",
+       "mod": 0,
+       "pass": "dug",
+       "fail": "stuck",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "barkhan",
+         "value": "dug"
+        },
+        {
+         "type": "flag",
+         "key": "lair_known"
+        },
+        {
+         "type": "quest",
+         "quest": "barkhan",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 120
+        },
+        {
+         "type": "karma",
+         "amount": 2
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Сила] Своротить люк руками.",
+      "if": [
+       {
+        "attr": "str",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "barkhan",
+        "value": "dug"
+       },
+       {
+        "type": "flag",
+        "key": "lair_known"
+       },
+       {
+        "type": "quest",
+        "quest": "barkhan",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "dug"
+     },
+     {
+      "text": "Пауки перебиты. Выходите.",
+      "if": [
+       {
+        "flag": "wreck_spiders_dead"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "barkhan",
+        "value": "fought"
+       },
+       {
+        "type": "flag",
+        "key": "lair_known"
+       },
+       {
+        "type": "quest",
+        "quest": "barkhan",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "fought"
+     },
+     {
+      "text": "Сейчас."
+     }
+    ]
+   },
+   "led": {
+    "text": "Вы ведёте людей по гребню остова, шаг в шаг, мимо спящих пауков. Никто не падает. Последней выходит женщина в оранжевой шали.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "dug": {
+    "text": "Доски трещат, соль сыплется, и в пролом один за другим выбираются люди «Бархана». Последней выходит женщина в оранжевой шали.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fought": {
+    "text": "Люк распахивается. Люди «Бархана» выбираются на свет, щурясь. Последней выходит женщина в оранжевой шали.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "stuck": {
+    "text": "Не выходит. Из-под люка вздыхают: — Мы подождём. Мы умеем ждать.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Пустой трюм. На досках — зарубки, по одной на каждый день.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "tamara": {
+  "speaker": "Тамара Кочевая",
+  "portrait": "portrait_tamara",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "tamara_paid"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "thanks"
+   }
+  ],
+  "nodes": {
+   "thanks": {
+    "text": "— Тамара Кочевая, хозяйка «Бархана». — Она кланяется по-кочевому, рукой к сердцу. — Нас затянула воронка: корка ушла из-под колёс, повозки — вниз, к тому, что там живёт. Люди успели в трюм. — Она достаёт свёрток в коже. — Карта. Не вся — половина. На ней места, которых нет на картах Гильдии.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "tamara_paid"
+     },
+     {
+      "type": "give",
+      "item": "leather_map"
+     }
+    ],
+    "options": [
+     {
+      "text": "Что там живёт, в воронке?",
+      "next": "snake"
+     }
+    ]
+   },
+   "snake": {
+    "text": "— Змей. Соляной. Ныряет в корку, как в воду, и выныривает под ногами. — Тамара показывает на восток. — Воронка там. Если пойдёшь — греми погромче. Он не любит шума.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "— «Бархан» соберётся снова, — говорит Тамара. — Кочевые не тонут.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "nomad": {
+  "speaker": "Человек «Бархана»",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Три дня в трюме. Три дня слушали, как пауки ходят по палубе. — Кочевой качает головой. — Спасибо.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "sunken_chest": {
+  "speaker": "Сундук с затонувшего судна",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "chest_opened"
+     }
+    ],
+    "node": "empty"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Окованный сундук, наполовину в соли. Замок проржавел, но держит.",
+    "options": [
+     {
+      "text": "Вскрыть замок.",
+      "check": {
+       "skill": "lockpick",
+       "mod": 0,
+       "pass": "opened",
+       "fail": "stuck",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "chest_opened"
+        },
+        {
+         "type": "give",
+         "item": "shotgun"
+        },
+        {
+         "type": "give",
+         "item": "shells",
+         "qty": 8
+        },
+        {
+         "type": "caps",
+         "amount": 60
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Сила] Сбить крышку.",
+      "if": [
+       {
+        "attr": "str",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "chest_opened"
+       },
+       {
+        "type": "give",
+        "item": "shotgun"
+       },
+       {
+        "type": "give",
+        "item": "shells",
+        "qty": 8
+       },
+       {
+        "type": "caps",
+        "amount": 60
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "opened": {
+    "text": "Внутри, в промасленной тряпке, — двустволка, коробка дроби и мешочек старых капель.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "stuck": {
+    "text": "Замок не поддаётся.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "empty": {
+    "text": "Пустой сундук.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ }
+}

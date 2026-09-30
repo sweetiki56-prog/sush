@@ -32,7 +32,7 @@ export interface MapActor {
   from?: [number, number]; // appears there and walks to x, y; leaves the same way
   respawn?: boolean; // comes back every morning, whatever happened to it (burrows breed)
   ally?: boolean; // a creature on the players' side, fighting under AI (caravan guards on the road)
-  ring?: boolean; // a fight with it is a bout on the ring: fists only, nobody dies
+  ring?: boolean | 'arms'; // a fight with it is a bout: nobody dies; true: fists only, 'arms': everyone's own weapons (the arena of Соль)
 }
 
 export interface MapTrigger {

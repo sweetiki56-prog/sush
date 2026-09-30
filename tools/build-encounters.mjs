@@ -16,6 +16,7 @@ const FIELDS = {
   enc_rocks: { name: 'Скалы', seed: 33, base: ':', rocky: 0.62, props: [['rock_0', 1, 1, 8], ['rock_2', 1, 1, 8], ['rock_3', 1, 1, 6], ['dead_tree', 1, 1, 2]] },
   enc_ravine: { name: 'Трещины', seed: 44, base: ':', cracks: true, props: [['rock_1', 1, 1, 5], ['barrel', 1, 1, 2], ['bush', 1, 1, 4], ['tires', 1, 1, 1]] },
   enc_dead: { name: 'Мёртвые поля', seed: 55, base: ',', props: [['dead_tree', 1, 1, 10], ['skeleton', 1, 1, 3, false], ['barrel_hazard', 1, 1, 2], ['rock_0', 1, 1, 3]] },
+  enc_salt: { name: 'Соляная корка', seed: 66, base: '_', props: [['rock_1', 1, 1, 5], ['rock_3', 1, 1, 3], ['skeleton', 1, 1, 2, false], ['barrel', 1, 1, 2], ['tires', 1, 1, 1]] },
 };
 
 const LABEL = { car_x_burnt: 'Сгоревший фургон', car_y: 'Остов пикапа', tires: 'Покрышки', barrel: 'Ржавая бочка', bush: 'Сухой куст', cactus: 'Кактус', dead_tree: 'Мёртвое дерево', skeleton: 'Кости', barrel_hazard: 'Бочка с горючим' };

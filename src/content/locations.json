@@ -231,10 +231,89 @@
     "cell": [32, 43],
     "chapter": 3
   },
-  "to_salt": {
-    "name": "Дорога на Соль",
-    "cell": [63, 25],
-    "chapter": 4
+  "salt": {
+    "name": "Соль",
+    "cell": [74, 24],
+    "chapter": 4,
+    "map": "salt_market",
+    "entry": "west",
+    "open": [{ "flag": "chapter3_seen" }],
+    "areas": [
+      { "map": "salt_market", "entry": "west", "name": "Соляной рынок", "at": [0.36, 0.62] },
+      { "map": "salt_guild", "entry": "south", "name": "Гильдейский двор", "at": [0.42, 0.24] },
+      { "map": "salt_arena", "entry": "west", "name": "«Пыльная чаша»", "at": [0.76, 0.5] },
+      {
+        "map": "salt_mines",
+        "entry": "north",
+        "name": "Копи",
+        "at": [0.5, 0.84],
+        "known": [{ "flag": "mines_known" }]
+      }
+    ]
+  },
+  "barkhan": {
+    "name": "Стоянка «Бархана»",
+    "cell": [86, 17],
+    "secret": true,
+    "open": [{ "flag": "chapter3_seen" }],
+    "reach": [
+      {
+        "if": [{ "notFlag": "barkhan_seen" }],
+        "effects": [
+          { "type": "flag", "key": "barkhan_seen" },
+          { "type": "quest", "quest": "barkhan", "stage": "gone" }
+        ],
+        "log": "Стоянка «Бархана»: кострища, колышки от шатров — и колеи, уходящие на юго-восток, в белую корку Соляного моря."
+      }
+    ]
+  },
+  "wrecks": {
+    "name": "Кладбище судов",
+    "cell": [92, 31],
+    "chapter": 4,
+    "map": "sea_wrecks",
+    "entry": "west",
+    "open": [{ "flag": "chapter3_seen" }],
+    "areas": [
+      { "map": "sea_wrecks", "entry": "west", "name": "Кладбище судов", "at": [0.4, 0.5] },
+      {
+        "map": "sea_lair",
+        "entry": "rim",
+        "name": "Логово змея",
+        "at": [0.8, 0.3],
+        "known": [{ "flag": "lair_known" }]
+      }
+    ]
+  },
+  "crystal": {
+    "name": "Кристалл",
+    "cell": [104, 21],
+    "chapter": 5,
+    "reach": [
+      {
+        "if": [{ "flag": "crystal_guide" }, { "flag": "krupitsa_fate" }, { "notFlag": "chapter4_done" }],
+        "effects": [
+          { "type": "flag", "key": "chapter4_done" },
+          { "type": "quest", "quest": "salt", "stage": "done" }
+        ],
+        "log": "Проводник-Солевик ведёт по трём звёздам через корку. К рассвету из соли встают светящиеся жилы: Кристалл, город Солевиков."
+      },
+      {
+        "if": [{ "notFlag": "crystal_guide" }],
+        "effects": [],
+        "log": "Корка трещит и проваливается под ногами, следы заметает соль. Без проводника-Солевика дальше не пройти."
+      },
+      {
+        "if": [{ "flag": "crystal_guide" }, { "notFlag": "krupitsa_fate" }],
+        "effects": [],
+        "log": "Проводник качает головой: сначала закончите дела в Соли. Гильдия не прощает незакрытых счетов."
+      }
+    ]
+  },
+  "skit": {
+    "name": "Скит",
+    "cell": [100, 7],
+    "chapter": 6
   },
   "to_upper": {
     "name": "Дорога в Верховья",

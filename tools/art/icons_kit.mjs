@@ -366,6 +366,33 @@ const PART_SHAPES = {
       ctx.fillRect(x - 1, y - 1, 3, 3);
     }
   },
+  // a pre-war field radio: a steel box, two dials, a whip aerial
+  radio(ctx) {
+    poly(ctx, [[5, 13], [25, 13], [25, 28], [5, 28]], P.olive1);
+    poly(ctx, [[5, 13], [25, 13], [23, 10], [7, 10]], P.olive2);
+    for (const x of [11, 19]) {
+      ellipse(ctx, x, 21, 3, 3, P.dark1);
+      ellipse(ctx, x, 21, 1.4, 1.4, P.grey4);
+    }
+    ctx.fillStyle = P.fire1;
+    ctx.fillRect(8, 15, 14, 2);
+    line(ctx, 22, 10, 28, 2, P.grey4);
+  },
+  // a tied sack of salt, a glass neck showing at the mouth
+  sack(ctx) {
+    ellipse(ctx, 16, 21, 10, 8, P.sand2);
+    poly(ctx, [[11, 13], [21, 13], [18, 8], [14, 8]], P.sand3);
+    line(ctx, 12, 12, 20, 12, P.brown0);
+    for (let i = 0; i < 4; i++) ellipse(ctx, 11 + i * 3, 24 - (i % 2), 1.2, 1, P.bone);
+    poly(ctx, [[17, 5], [19, 5], [19, 9], [17, 9]], P.teal1);
+  },
+  // a stoppered glass vial of something grey that swirls
+  vial(ctx) {
+    poly(ctx, [[12, 8], [20, 8], [21, 27], [11, 27]], P.teal0);
+    poly(ctx, [[12, 15], [20, 15], [21, 27], [11, 27]], P.grey3);
+    ellipse(ctx, 15, 21, 2, 3, P.grey5);
+    poly(ctx, [[13, 4], [19, 4], [19, 8], [13, 8]], P.brown1);
+  },
   fuel(ctx) {
     poly(ctx, [[8, 9], [24, 9], [24, 28], [8, 28]], P.red1);
     poly(ctx, [[8, 9], [15, 9], [15, 5], [8, 5]], P.red2);
@@ -399,6 +426,10 @@ export const PART_ICONS = {
   crate_seed: { shape: 'seedbox' },
   mint_die: { shape: 'die' },
   thorn_traps: { shape: 'traps' },
+  whisper_radio: { shape: 'radio' },
+  smuggle_sack: { shape: 'sack' },
+  sukhovey_vial: { shape: 'vial' },
+  leather_map: { shape: 'map' },
 };
 
 export const KIT_ICONS = [...Object.keys(CHARM_ICONS), ...Object.keys(CHEM_ICONS), ...Object.keys(PART_ICONS)];

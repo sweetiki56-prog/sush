@@ -27,7 +27,17 @@ export function partyPace(room: MissionRoom): PartyPace {
     tracker: games.some((g) => g.hasPerk('tracker')),
     wounded: games.some((g) => g.state.hp < g.maxHp / 2),
     thirsty: games.some((g) => g.body.thirsty),
+    storm: !!room.world.travel && stormAt(room, room.world.travel.x, room.world.travel.y),
   };
+}
+
+/** Salt storms raging now (their conditions hold), as rectangles on the map. */
+export function activeStorms(room: MissionRoom): [number, number, number, number][] {
+  return (room.content.travel.storms ?? []).filter((s) => flagsHold(room.world.flags, s.if)).map((s) => s.area);
+}
+
+export function stormAt(room: MissionRoom, x: number, y: number): boolean {
+  return activeStorms(room).some(([x0, y0, x1, y1]) => x >= x0 && x < x1 + 1 && y >= y0 && y < y1 + 1);
 }
 
 /** Everyone else on the world map, over the shared travel state. */
@@ -221,6 +231,7 @@ function escortArrived(room: MissionRoom): void {
     { type: 'caps', amount: esc.pay },
     { type: 'inc', key: 'rep_guild', by: ESCORT_REP },
     { type: 'inc', key: 'road_escorts' },
+    { type: 'flag', key: `arrived_${esc.party}` }, // a story caravan (a unique party) knows it got there
     { type: 'log', text: `Караван дошёл: ${where}. Караванщик отсчитывает ${esc.pay} ${drops(esc.pay)}.` },
   ]);
   for (const q of room.players.values()) q.game.addXp(ESCORT_XP);
