@@ -203,9 +203,18 @@ export function roadTick(room: MissionRoom, ms: number): void {
   if (!tr || room.meeting) return;
   const esc = tr.s.escort;
   const riding = !!esc && !esc.paused && !tr.moving;
-  if (!tr.moving && !riding) return;
-  const minutes = (ms / 1000) * MIN_PER_SEC;
   const ps = partiesOf(room)!;
+  // standing still with someone on your heels: the clock runs, and they close in (or give up)
+  const hunted = !tr.moving && !riding && ps.list.some((p) => p.chasing === 'hero' && !p.calm);
+  if (!tr.moving && !riding && !hunted) return;
+  const minutes = (ms / 1000) * MIN_PER_SEC;
+  if (hunted) {
+    const events = ps.step(minutes, heroOnMap(room), tr.s.minute);
+    const clock = tr.pass(minutes, partyPace(room));
+    for (const e of events) partyEvent(room, ps, e);
+    for (const e of clock) roadEvent(room, e);
+    return room.sendTravel(false, SEND_MS);
+  }
   if (riding) {
     // the caravan sets the pace: we stay at its side
     const events = ps.step(minutes, heroOnMap(room), tr.s.minute);
@@ -252,6 +261,10 @@ function partyEvent(room: MissionRoom, ps: Parties, e: PartyEvent): void {
     if (p) meet(room, ps, p);
   }
   if (e.t === 'arrive' && tr.s.escort?.party === e.id && tr.s.escort.to === e.at) escortArrived(room);
+  if (e.t === 'gaveUp') {
+    const p = ps.byId(e.id);
+    if (p) room.logAll(`${ps.tpl(p).name}: отстали и повернули прочь.`);
+  }
   if (e.t === 'battle') {
     const [a, b] = [ps.byId(e.a), ps.byId(e.b)];
     if (a && b && Math.hypot(a.x - tr.s.x, a.y - tr.s.y) <= tr.sight(partyPace(room)))

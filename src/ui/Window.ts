@@ -25,7 +25,10 @@ export abstract class Window {
     const x = (GAME_W - w) / 2;
     const y = (GAME_H - 116 - h) / 2;
     this.root = s.add.container(0, 0).setDepth(20);
-    const dim = dimmer(s, 0.4).on('pointerdown', () => this.close());
+    // a tap outside the frame closes it; inside (a finger scrolling a list) it does not
+    const dim = dimmer(s, 0.4).on('pointerdown', (p: Phaser.Input.Pointer) => {
+      if (p.x < x || p.x > x + w || p.y < y || p.y > y + h) this.close();
+    });
     this.root.add([dim, metalPanel(s, x, y, w, h), glass(s, x + 16, y + 16, w - 32, h - 32), title(s, x + 32, y + 30, heading, 14)]);
     const b = button(s, x + w - 130, y + 24, 96, 24, 'ЗАКРЫТЬ', () => this.close());
     this.root.add(b.root);

@@ -1,6 +1,6 @@
 // Parties on the world map: who appears where, who chases whom, caravans on their routes, fights without the hero.
 import { describe, it, expect } from 'vitest';
-import { Parties, strengthWord, type HeroOnMap, type PartyState } from '../../src/core/travel/Parties';
+import { Parties, strengthWord, type HeroOnMap, type PartyEvent, type PartyState } from '../../src/core/travel/Parties';
 import { mulberry32 } from '../../src/core/rng';
 import { CONTENT } from '../../src/content';
 import { room, until, WORLD } from './rooms';
@@ -42,7 +42,7 @@ describe('parties on the world map', () => {
     run(ps, weak, 2);
     expect(Math.hypot(gang.x - weak.x, gang.y - weak.y)).toBeLessThan(before);
     const strong = hero(gang.x + 3, gang.y, s * 5);
-    gang.think = 0;
+    Object.assign(gang, { think: 0, calm: 0, chased: 0 }); // a fresh look (the slow pursuit over the rocks may have been given up)
     const d0 = Math.hypot(gang.x - strong.x, gang.y - strong.y);
     run(ps, strong, 3);
     expect(gang.chasing).toBeUndefined();
@@ -99,5 +99,35 @@ describe('parties on the world map', () => {
     expect(until(r, () => (c.last('travel')?.parties ?? []).some((p) => p.kind === 'bandits'), 120_000)).toBe(true);
     expect(until(r, () => g.state.log.some((l) => l.startsWith('Вы натыкаетесь')), 120_000)).toBe(true);
     expect(r.world.travel!.path).toEqual([]);
+  });
+});
+
+describe('a pursuit ends', () => {
+  const pack = (x: number, y: number, pace = 1.1): PartyState => ({ id: 'jackals_9', tpl: pace === 1.1 ? 'jackal_pack' : 'slow_pack', x, y, path: [], members: ['jackal_leader', 'jackal', 'jackal'], hurt: 0, wait: 0, think: 0 });
+
+  it('a hero standing still is caught: the pack closes in and the meeting starts', () => {
+    const { r, clients } = room();
+    const g = r.players.get(clients[0].id)!.game;
+    g.setFlag('trust_outcome', 'tax');
+    g.apply([{ type: 'travel' }]);
+    g.state.hp = 4; // wounded: a pack goes for prey it can take
+    const t = r.world.travel!;
+    Object.assign(t, { x: 16.5, y: 33.5, minute: NOON, parties: [{ ...pack(16.5, 30.5), chasing: 'hero' as const }] });
+    expect(until(r, () => !!r.meeting, 20_000)).toBe(true);
+  });
+
+  it('a pack that cannot catch up gives up after a while and turns away', () => {
+    const slow = { ...CONTENT.travel.parties.jackal_pack, pace: 0.3 };
+    const ps = new Parties(WORLD, [pack(20.5, 20.5, 0.3)], { ...CONTENT.travel, parties: { ...CONTENT.travel.parties, slow_pack: slow } }, CONTENT.creatures, CONTENT.weapons, CONTENT.locations, mulberry32(3));
+    const p = ps.list[0];
+    const ev: PartyEvent[] = [];
+    // the hero is weak and in sight, walking away east faster than they run
+    for (let i = 0; i < 40 && !ev.some((e) => e.t === 'gaveUp'); i++) {
+      const h = hero(22.5 + i * 0.25, 20.5, 1);
+      ev.push(...ps.step(10, h, NOON));
+    }
+    expect(ev.some((e) => e.t === 'gaveUp' && e.id === p.id)).toBe(true);
+    expect(p.chasing).toBeUndefined();
+    expect(p.calm).toBeGreaterThan(0);
   });
 });

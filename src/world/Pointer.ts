@@ -16,6 +16,7 @@ export interface Target {
 }
 
 export class Pointer {
+  private armed: string | null = null; // touch, in a fight: the target or tile tapped once, awaiting the confirming tap
   private cursor: Phaser.GameObjects.Image;
 
   constructor(private w: WorldScene) {
@@ -87,7 +88,22 @@ export class Pointer {
     const target = this.targetAt(wp.x, wp.y);
     const t = screenToTile(wp.x, wp.y);
     const f = this.w.fight;
-    if (f.active) return f.click(target && f.combat!.unit(target.id) ? target.id : null, t);
+    if (this.w.input.pointer2?.isDown) return; // the second finger of a pinch
+    if (f.active) {
+      const unit = target && f.combat!.unit(target.id) ? target.id : null;
+      // a finger has no hover: the first tap shows the chance and the cost, a second tap on the same spot acts
+      if (ptr.wasTouch) {
+        const key = unit ?? `${t.x},${t.y}`;
+        if (this.armed !== key) {
+          this.armed = key;
+          const text = f.describe(unit, t);
+          s.ui.emit('hover', text ? { label: `${text} · коснитесь ещё раз`, interact: true } : null);
+          return;
+        }
+        this.armed = null;
+      }
+      return f.click(unit, t);
+    }
     if (target?.kind === 'hostile') return s.send({ t: 'engage', id: target.id });
     if (target?.dialogue) return s.send({ t: 'interact', id: target.id });
     s.send({ t: 'walk', x: t.x, y: t.y });

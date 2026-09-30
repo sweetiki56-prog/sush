@@ -71,13 +71,15 @@ export interface PartyState {
   calm?: number; // minutes they leave the hero be (paid off, talked down, lost the trail)
   fight?: { with: string; left: number }; // locked in a fight with another party: minutes till it is decided
   roam?: number; // how far from home it wanders (uniques)
+  chased?: number; // minutes spent chasing the hero in this pursuit
 }
 
 export type PartyEvent =
   | { t: 'meet'; id: string } // this party reached the hero
   | { t: 'battle'; a: string; b: string } // two parties started fighting (the hero may still come and join)
   | { t: 'clash'; winner: string; loser: string } // two parties fought it out without the hero
-  | { t: 'arrive'; id: string; at: string }; // a caravan reached a stop
+  | { t: 'arrive'; id: string; at: string } // a caravan reached a stop
+  | { t: 'gaveUp'; id: string }; // a pursuer lost the hero and turned away
 
 export interface HeroOnMap {
   x: number;
@@ -92,6 +94,9 @@ export interface HeroOnMap {
 const MEET = 0.7; // cells
 export const CLASH_MIN = 120; // how long two parties fight before it is decided
 const THINK_MIN = 60;
+const CHASE_THINK = 10; // a pursuer looks where the hero is now this often (minutes)
+export const CHASE_MAX = 180; // a pursuit that has not caught up in three hours is given up
+const GIVE_UP_CALM = 360; // and they leave the hero be for six hours
 
 /** A fighter's worth: health × the best average damage it can deal, as one number. */
 export function fighterStrength(hp: number, weapons: string[], all: Record<string, WeaponDef>, dr = 0): number {
@@ -197,9 +202,27 @@ export class Parties {
         p.fight.left -= minutes; // they stand and fight; the hero may still come
       } else p.think -= minutes;
       if (!p.fight && p.think <= 0) {
+        const was = p.chasing;
         p.think = THINK_MIN;
         this.decide(p, hero, minute);
+        if (p.chasing === 'hero') p.think = CHASE_THINK; // keep the hero in sight: re-aim often
+        // lost sight of the hero mid-pursuit: they turn away and leave the hero be for a while
+        else if (was === 'hero' && !p.calm && Math.hypot(p.x - hero.x, p.y - hero.y) > tpl.sight) {
+          this.part(p.id, GIVE_UP_CALM);
+          ev.push({ t: 'gaveUp', id: p.id });
+        }
       }
+      // a pursuit ends one way or the other: caught (a meeting), or given up after a while or out of sight
+      if (p.chasing === 'hero' && Math.hypot(p.x - hero.x, p.y - hero.y) < MEET) p.chased = 0; // caught up: the meeting settles it
+      else if (p.chasing === 'hero') {
+        p.chased = (p.chased ?? 0) + minutes;
+        const far = Math.hypot(p.x - hero.x, p.y - hero.y) > tpl.sight * 1.5;
+        if (p.chased >= CHASE_MAX || far) {
+          this.part(p.id, GIVE_UP_CALM);
+          this.wander(p, 6);
+          ev.push({ t: 'gaveUp', id: p.id });
+        }
+      } else p.chased = 0;
       if (p.calm) p.calm = Math.max(0, p.calm - minutes);
       if (p.wait > 0) p.wait -= minutes;
       else if (!p.fight) this.walk(p, minutes);

@@ -8,6 +8,7 @@ import { settings, TEXT_SPEEDS } from '../core/Settings';
 import { C, dimmer, glass, metalPanel, title, txt } from './theme';
 import { onKey } from './keys';
 import { ScrollBox } from './ScrollBox';
+import { TOUCH } from './touch';
 
 const W = 980;
 const H = 470;
@@ -89,13 +90,16 @@ export class DialogueView {
     this.opts = [];
     let y = Y + 250;
     d.options.forEach((label, i) => {
-      const t = txt(this.scene, X + 40, y, `${i + 1}. ${label}`, 15, C.crt, W - 90).setInteractive();
+      const t = txt(this.scene, X + 40, y, `${i + 1}. ${label}`, 15, C.crt, W - 90);
+      // the whole row answers, not just the letters: a finger needs a wide, tall target
+      const pad = TOUCH ? 8 : 3;
+      t.setInteractive(new Phaser.Geom.Rectangle(-12, -pad, W - 70, t.height + pad * 2), Phaser.Geom.Rectangle.Contains);
       t.on('pointerover', () => t.setColor(C.crtBright).setBackgroundColor('#1f3b22'));
       t.on('pointerout', () => t.setColor(C.crt).setBackgroundColor('transparent'));
       t.on('pointerdown', () => this.pick(i));
       this.optBox.content.add(t);
       this.opts.push(t);
-      y += t.height + 8;
+      y += t.height + (TOUCH ? 18 : 8);
     });
     this.optBox.fit(y - (Y + 240));
     this.optBox.to(0);

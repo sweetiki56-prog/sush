@@ -79,8 +79,13 @@ test('leave town, pay off one gang, fight the next on a battlefield, go on', asy
   const before = Object.values((await state(page)).items).reduce((a, b) => a + b, 0);
   await page.mouse.click(660, 488); // ВЗЯТЬ ВСЁ
   await expect.poll(async () => Object.values((await state(page)).items).reduce((a, b) => a + b, 0)).toBeGreaterThan(before);
-  await page.mouse.click(840, 488); // В ПУТЬ
-  await expect.poll(async () => (await state(page)).flags.at, { timeout: 30_000 }).toBe('world');
+  // В ПУТЬ: the pile window redraws as the room answers the take, so press again until the party is on the road
+  await expect
+    .poll(async () => {
+      if ((await state(page)).flags.at !== 'world') await page.mouse.click(840, 488);
+      return (await state(page)).flags.at;
+    }, { timeout: 30_000, intervals: [1000] })
+    .toBe('world');
   await page.waitForFunction(() => !!(window as unknown as { __travel?: unknown }).__travel);
   await page.waitForTimeout(500);
   await page.screenshot({ path: 'test-results/e2e-road-05-back.png' });

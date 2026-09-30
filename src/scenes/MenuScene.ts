@@ -14,6 +14,7 @@ import type { GenMeta, MapData } from '../world/MapData';
 import { C, glass, title, txt } from '../ui/theme';
 import { showAbout, showSettings } from '../ui/SettingsPanel';
 import { onKey } from '../ui/keys';
+import { TOUCH } from '../ui/touch';
 
 // camera drifts between these tiles
 const TOUR = [[10, 27], [24, 20], [31, 12], [18, 30]];
@@ -33,6 +34,12 @@ export class MenuScene extends Phaser.Scene {
 
   create(): void {
     music.play('menu');
+    // a phone: the first tap takes the game to full screen, turned sideways (where the browser allows it)
+    if (TOUCH && this.sys.game.device.fullscreen.available && !this.scale.isFullscreen)
+      this.input.once('pointerup', () => {
+        this.scale.startFullscreen();
+        (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> })?.lock?.('landscape').catch(() => {});
+      });
     this.overlay = false;
     const data = session().map as MapData;
     const map = new WorldMap(this, data, this.cache.json.get('meta') as GenMeta);
@@ -86,7 +93,7 @@ export class MenuScene extends Phaser.Scene {
     });
     this.sel = canContinue ? 1 : 0;
     this.paint();
-    ui.add(txt(this, GAME_W / 2, 690, '↑ ↓ выбрать · Enter подтвердить', 12, C.crtDim).setOrigin(0.5));
+    ui.add(txt(this, GAME_W / 2, 690, TOUCH ? 'Коснитесь пункта меню' : '↑ ↓ выбрать · Enter подтвердить', 12, C.crtDim).setOrigin(0.5));
 
     // settings / about overlays are created later: keep them out of the world camera
     const hide = (o: Phaser.GameObjects.GameObject) => cam.ignore(o);

@@ -5,6 +5,7 @@ import { offered, quote, stockOf, unitBuy, unitSell, type Deal } from '../core/r
 import { C, button, glass, txt } from './theme';
 import { itemStats } from './itemText';
 import { Window } from './Window';
+import { dragScroll } from './touch';
 
 const W = 1040;
 const H = 560;
@@ -27,6 +28,7 @@ export class Barter extends Window {
   private body: Phaser.GameObjects.Container | null = null;
   private at = { x: 0, y: 0 };
   private unsub: (() => void)[] = [];
+  private undrag: () => void = () => {};
   private wheel = (p: Phaser.Input.Pointer, _o: unknown, _dx: number, dy: number) => {
     const side = p.x < this.at.x + W / 2 ? 'buy' : 'sell';
     const n = (side === 'buy' ? this.theirs() : this.yours()).length;
@@ -53,6 +55,7 @@ export class Barter extends Window {
     };
     this.unsub = [this.game.events.on('inventory', redraw), this.game.events.on('sync', redraw)];
     this.scene.input.on('wheel', this.wheel);
+    this.undrag = dragScroll(this.scene, (dy, p) => this.wheel(p, null, 0, dy)); // a finger scrolls like the wheel
     this.draw();
   }
 
@@ -60,6 +63,7 @@ export class Barter extends Window {
     this.unsub.forEach((u) => u());
     this.unsub = [];
     this.scene.input.off('wheel', this.wheel);
+    this.undrag();
     this.body = null;
     super.close();
   }

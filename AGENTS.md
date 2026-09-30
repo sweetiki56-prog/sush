@@ -63,6 +63,7 @@ Done means: `npm test`, `npm run lint`, `npm run build` and `npm run test:e2e` a
 - Quest stages only move forward (`Game.setStage`): a late effect never sends the journal back.
 - Text about the hero is gender-neutral, in the journal too: no «я пробрался», «я видел»; use impersonal or present forms.
 - A companion is data (`content/companions.json`) plus a talk with the order nodes; its state is flags (`with_<id>`, `lost_<id>`, `met_<id>`, `stance_<id>`). Its home actor on its home map shows only while it is not with the party.
+- The game must stay playable on a phone by touch alone (landscape): every hotkey has a button, lists scroll by a finger (`dragScroll`, `ScrollBox`), text entry uses `overlayInput`, targets are wide and ~44 px tall, a fight on touch aims on the first tap and acts on the second. `tests/e2e/mobile.spec.ts` plays the start of the game by touch in a phone viewport — extend it with new flows.
 - Long lists in a window go in a `ScrollBox` (`src/ui/ScrollBox.ts`): wheel, drag, arrows and PgUp/PgDn, clipped by a mask. Never let text run past a frame.
 - Every problem gets at least three solutions. Every side quest gets a twist and leaves a mark in the ending slides.
 - Commit only when the owner asks. Never touch `.env*` files.

@@ -22,6 +22,7 @@ import { blast } from '../world/Fx';
 import { exposeDebug } from '../world/debug';
 import { gridToScreen } from '../iso/IsoMath';
 import type { Tile } from '../iso/Pathfinder';
+import { pinchZoom } from '../ui/touch';
 
 export class WorldScene extends Phaser.Scene {
   map!: WorldMap;
@@ -83,6 +84,16 @@ export class WorldScene extends Phaser.Scene {
     this.input.on('wheel', (_p: unknown, _o: unknown, _dx: number, dy: number) => {
       this.zoomIdx = Phaser.Math.Clamp(this.zoomIdx + (dy > 0 ? -1 : 1), 0, ZOOMS.length - 1);
       cam.zoomTo(ZOOMS[this.zoomIdx], 180);
+    });
+    // two fingers step the zoom like the wheel: a quarter wider or closer per step
+    let spread = 1;
+    pinchZoom(this, (f) => {
+      spread *= f;
+      if (spread > 1.25 || spread < 0.8) {
+        this.zoomIdx = Phaser.Math.Clamp(this.zoomIdx + (spread > 1 ? 1 : -1), 0, ZOOMS.length - 1);
+        cam.zoomTo(ZOOMS[this.zoomIdx], 120);
+        spread = 1;
+      }
     });
 
     const on = <K extends keyof NetEvents>(k: K, fn: (...a: NetEvents[K]) => void) => this.unsub.push(this.net.events.on(k, fn));

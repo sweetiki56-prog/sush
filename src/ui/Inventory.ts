@@ -7,6 +7,7 @@ import type { EquipSlot } from '../core/room/protocol';
 import { C, button, glass, txt } from './theme';
 import { itemStats } from './itemText';
 import { Window } from './Window';
+import { dragScroll } from './touch';
 
 const TABS: { id: ItemCat | 'all'; label: string; cats: ItemCat[] }[] = [
   { id: 'all', label: 'ВСЁ', cats: [] },
@@ -57,6 +58,7 @@ export class Inventory extends Window {
   private body: Phaser.GameObjects.Container | null = null;
   private at = { x: 0, y: 0 };
   private unsub: (() => void)[] = [];
+  private undrag: () => void = () => {};
   private wheel = (_p: unknown, _o: unknown, _dx: number, dy: number) => {
     const rows = Math.ceil(this.entries().length / COLS);
     this.scroll = Phaser.Math.Clamp(this.scroll + (dy > 0 ? 1 : -1), 0, Math.max(0, rows - ROWS));
@@ -71,6 +73,7 @@ export class Inventory extends Window {
     const redraw = () => this.root && this.draw();
     this.unsub = [this.game.events.on('inventory', redraw), this.game.events.on('sync', redraw), this.game.events.on('stats', redraw)];
     this.scene.input.on('wheel', this.wheel);
+    this.undrag = dragScroll(this.scene, (dy, p) => this.wheel(p, null, 0, dy)); // a finger scrolls like the wheel
     this.draw();
   }
 
@@ -78,6 +81,7 @@ export class Inventory extends Window {
     this.unsub.forEach((u) => u());
     this.unsub = [];
     this.scene.input.off('wheel', this.wheel);
+    this.undrag();
     this.body = null;
     super.close();
   }

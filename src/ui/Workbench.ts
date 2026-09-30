@@ -6,6 +6,7 @@ import { craftCheck } from '../core/room/Craft';
 import { C, button, glass, hitRow, txt } from './theme';
 import { itemStats } from './itemText';
 import { Window } from './Window';
+import { dragScroll } from './touch';
 
 const W = 900;
 const H = 540;
@@ -20,6 +21,7 @@ export class Workbench extends Window {
   private body: Phaser.GameObjects.Container | null = null;
   private at = { x: 0, y: 0 };
   private unsub: (() => void)[] = [];
+  private undrag: () => void = () => {};
   private wheel = (_p: unknown, _o: unknown, _dx: number, dy: number) => {
     this.scroll = Phaser.Math.Clamp(this.scroll + (dy > 0 ? 1 : -1), 0, Math.max(0, this.recipes().length - ROWS));
     this.draw();
@@ -39,6 +41,7 @@ export class Workbench extends Window {
     const redraw = () => this.root && this.draw();
     this.unsub = [this.game.events.on('inventory', redraw), this.game.events.on('sync', redraw)];
     this.scene.input.on('wheel', this.wheel);
+    this.undrag = dragScroll(this.scene, (dy, p) => this.wheel(p, null, 0, dy)); // a finger scrolls like the wheel
     this.draw();
   }
 
@@ -46,6 +49,7 @@ export class Workbench extends Window {
     this.unsub.forEach((u) => u());
     this.unsub = [];
     this.scene.input.off('wheel', this.wheel);
+    this.undrag();
     this.body = null;
     super.close();
   }

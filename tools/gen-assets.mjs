@@ -61,6 +61,38 @@ for (let i = 0; i * STRIP_PX < chart.w; i++) {
   strip.ctx.drawImage(chart.c, i * STRIP_PX, 0, w, chart.h, 0, 0, w, chart.h);
   save(`worldmap_low_${i}.png`, strip);
 }
+// the app icon for a phone's home screen: a drop over dunes at dusk
+for (const size of [192, 512]) {
+  const ic = canvas(size, size);
+  const { ctx } = ic;
+  const k = size / 192;
+  const sky = ctx.createLinearGradient(0, 0, 0, size);
+  sky.addColorStop(0, '#2b1f17');
+  sky.addColorStop(0.6, '#a84e24');
+  sky.addColorStop(1, '#e6cc97');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, size, size);
+  ctx.fillStyle = '#f0a040';
+  ctx.beginPath();
+  ctx.arc(96 * k, 118 * k, 42 * k, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#5e3d24';
+  ctx.beginPath();
+  ctx.moveTo(0, 140 * k);
+  ctx.quadraticCurveTo(60 * k, 112 * k, 110 * k, 138 * k);
+  ctx.quadraticCurveTo(150 * k, 120 * k, 192 * k, 132 * k);
+  ctx.lineTo(192 * k, 192 * k);
+  ctx.lineTo(0, 192 * k);
+  ctx.fill();
+  ctx.fillStyle = '#7fb8e0';
+  ctx.beginPath();
+  ctx.moveTo(96 * k, 40 * k);
+  ctx.quadraticCurveTo(128 * k, 86 * k, 118 * k, 100 * k);
+  ctx.arc(96 * k, 96 * k, 23 * k, 0.2, Math.PI - 0.2);
+  ctx.quadraticCurveTo(64 * k, 86 * k, 96 * k, 40 * k);
+  ctx.fill();
+  save(`app_icon_${size}.png`, ic);
+}
 // loading screens: small JPEGs, they are the first thing to load
 for (const [id, cv] of [['dusk', loadingDusk()], ['poster', loadingPoster()], ['chart', loadingChart(chart.c)]]) writeFileSync(`${OUT}/loading_${id}.jpg`, cv.c.toBuffer('image/jpeg', 88));
 

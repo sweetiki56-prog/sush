@@ -18,6 +18,8 @@ export class CursorScene extends Phaser.Scene {
 
   update(): void {
     const p = this.input.activePointer;
+    // a finger needs no arrow: it would be left hanging where the last tap was
+    this.pointer.setVisible(!p.wasTouch);
     this.pointer.setPosition(p.x, p.y).setFrame(this.hovering?.interact ? 'hand' : 'pointer');
   }
 }

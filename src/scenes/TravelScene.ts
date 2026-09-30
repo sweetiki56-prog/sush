@@ -11,6 +11,7 @@ import { Travel, fitSeen, freshTravel, type TravelState } from '../core/travel/T
 import { GAME_H, GAME_W, HUD_H } from '../config';
 import { C, button, glass, txt } from '../ui/theme';
 import { onKey } from '../ui/keys';
+import { TOUCH, pinchZoom } from '../ui/touch';
 import { dirFromVector } from '../iso/IsoMath';
 import type { GenMeta } from '../world/MapData';
 import { cloudTexture, daylight, heroSheet, walkAnims } from '../world/travelArt';
@@ -127,8 +128,16 @@ export class TravelScene extends Phaser.Scene {
       this.zoom = Phaser.Math.Clamp(this.zoom + (dy > 0 ? -0.2 : 0.2), MIN_ZOOM, MAX_ZOOM);
       cam.zoomTo(this.zoom, 180);
     });
-    this.input.on('pointerdown', (p: Phaser.Input.Pointer, over: Phaser.GameObjects.GameObject[]) => {
-      if (over.length || session().modal || p.y > GAME_H - HUD_H) return;
+    // two fingers zoom the chart; a tap (not a pinch) sets the course
+    const pinch = pinchZoom(this, (f) => {
+      this.zoom = Phaser.Math.Clamp(this.zoom * f, MIN_ZOOM, MAX_ZOOM);
+      cam.setZoom(this.zoom);
+    });
+    let pinched = false;
+    this.input.on('pointerdown', () => (pinched = pinch.pinching()));
+    this.input.on('pointermove', () => (pinched ||= pinch.pinching()));
+    this.input.on(TOUCH ? 'pointerup' : 'pointerdown', (p: Phaser.Input.Pointer, over: Phaser.GameObjects.GameObject[]) => {
+      if (over.length || session().modal || p.y > GAME_H - HUD_H || pinched || pinch.pinching()) return;
       const at = cam.getWorldPoint(p.x, p.y);
       this.net.send({ t: 'travel', x: Math.floor(at.x / CELL), y: Math.floor(at.y / CELL) });
     });

@@ -16,13 +16,15 @@ import { ListPanel } from '../ui/sheet/ListPanel';
 import { poseFrame } from '../world/Actor';
 import type { GenMeta } from '../world/MapData';
 import { onKey } from '../ui/keys';
+import { TOUCH, overlayInput } from '../ui/touch';
 import { saveCoopCharacter } from '../net/profiles';
 
 const K = CONTENT.character;
 const NAME_CHAR = /^[\p{L}\d '-]$/u;
 const HELP =
   'Распределите свободные очки характеристик, отметьте три основных навыка и, если хотите, возьмите до двух особенностей. ' +
-  'Наведите курсор на любую строку, чтобы прочитать описание. Или выберите готовый шаблон слева.';
+  (TOUCH ? 'Коснитесь строки, чтобы прочитать описание.' : 'Наведите курсор на любую строку, чтобы прочитать описание.') +
+  ' Или выберите готовый шаблон слева.';
 
 export class CreateScene extends Phaser.Scene {
   private draft = new BuildDraft(K);
@@ -72,6 +74,14 @@ export class CreateScene extends Phaser.Scene {
     root.add(this.done.root);
 
     onKey(this, (e) => this.key(e));
+    // a phone types into a real field laid over the name box (only a real input opens its keyboard)
+    if (TOUCH) {
+      const field = (this.nameField = overlayInput(this.game, { x: 38, y: 294, w: 332, h: 30 }, this.draft.name, 16, (v) => {
+        this.draft.setName([...v].filter((ch) => NAME_CHAR.test(ch)).join(''));
+        this.refresh();
+      }, () => this.refresh()));
+      this.events.once('shutdown', () => (field.remove(), (this.nameField = null)));
+    }
     this.time.addEvent({ delay: 450, loop: true, callback: () => ((this.caret = !this.caret), this.refreshName()) });
     this.refresh();
     if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__create = { draft: this.draft, finish: () => this.finish() };
@@ -91,7 +101,7 @@ export class CreateScene extends Phaser.Scene {
     this.lookText = txt(this, x + 78, y + 178, '', 13, C.crt).setOrigin(0.5, 0);
     root.add(this.lookText);
 
-    root.add(txt(this, x + 14, y + 212, 'ИМЯ (печатайте с клавиатуры)', 12, C.crtDim));
+    root.add(txt(this, x + 14, y + 212, TOUCH ? 'ИМЯ (коснитесь поля, чтобы ввести)' : 'ИМЯ (печатайте с клавиатуры)', 12, C.crtDim));
     root.add(glass(this, x + 14, y + 230, 332, 30));
     this.nameText = txt(this, x + 24, y + 236, '', 16, C.crtBright, undefined, true);
     root.add(this.nameText);
@@ -134,7 +144,10 @@ export class CreateScene extends Phaser.Scene {
     return poseFrame(meta.sheets[`hero_${this.draft.look}`], dir, 'idle');
   }
 
+  private nameField: ReturnType<typeof overlayInput> | null = null; // the phone's text field, kept in step with a template's name
+
   private refreshName(): void {
+    this.nameField?.set(this.draft.name);
     const full = this.draft.name.length >= NAME_MAX;
     this.nameText?.setText(this.draft.name + (this.caret && !full ? '_' : ''));
   }

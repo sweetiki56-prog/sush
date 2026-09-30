@@ -2,6 +2,7 @@
 import Phaser from 'phaser';
 import { C, glass, hitRow, title, txt } from '../theme';
 import type { InfoCard } from './InfoCard';
+import { dragScroll } from '../touch';
 
 export interface ListItem {
   id: string;
@@ -38,7 +39,12 @@ export class ListPanel {
       this.render();
     };
     scene.input.on('wheel', wheel);
-    parent.once('destroy', () => scene.input.off('wheel', wheel));
+    const inside = (p: Phaser.Input.Pointer) => p.x >= x && p.x <= x + w && p.y >= y && p.y <= y + h;
+    const undrag = dragScroll(scene, (dy, p) => wheel(p, null, 0, dy), inside); // a finger scrolls like the wheel
+    parent.once('destroy', () => {
+      scene.input.off('wheel', wheel);
+      undrag();
+    });
   }
 
   /** Rows that fit: one column, or two when the list is longer. */

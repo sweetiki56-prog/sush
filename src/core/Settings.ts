@@ -19,7 +19,9 @@ export const TEXT_SPEEDS = [
 ];
 
 const KEY = 'rusty-well-settings';
-const DEFAULTS: Settings = { muted: false, volume: 0.7, music: 0.6, textSpeed: 1, grain: true, zoom: 2, combatFast: false };
+// a phone gets the lighter look by default: no film grain (it costs a full-screen pass every frame)
+const COARSE = typeof globalThis.matchMedia === 'function' && globalThis.matchMedia('(pointer: coarse)').matches;
+const DEFAULTS: Settings = { muted: false, volume: 0.7, music: 0.6, textSpeed: 1, grain: !COARSE, zoom: 2, combatFast: false };
 
 function storage(): KV | null {
   try {

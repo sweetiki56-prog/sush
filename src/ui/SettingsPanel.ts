@@ -5,6 +5,7 @@ import { synth } from '../audio/Synth';
 import { music } from '../audio/Music';
 import { GAME_W } from '../config';
 import { C, button, dimmer, glass, glyphButton, metalPanel, title, txt } from './theme';
+import { TOUCH } from './touch';
 
 interface Row {
   name: string;
@@ -50,11 +51,15 @@ export function showSettings(scene: Phaser.Scene, onClose: () => void): Phaser.G
   return root;
 }
 
-export const CONTROLS =
-  'ЛКМ: идти, говорить, действовать. Колесо: масштаб.\n' +
-  'I: инвентарь. J: журнал. C: персонаж. S: красться. M: звук. Esc: меню.\n' +
-  'В бою: клик по врагу атакует, клик по земле ведёт, пробел завершает ход, F меняет оружие.\n' +
-  'В диалогах: клавиши 1–9.';
+export const CONTROLS = TOUCH
+  ? 'Касание: идти, говорить, действовать. Два пальца: масштаб. Списки листаются пальцем.\n' +
+    'Кнопки внизу: инвентарь, журнал, персонаж, красться, звук, меню.\n' +
+    'В бою: первое касание врага или клетки показывает шанс и цену, второе — действует. Кнопки: конец хода, смена оружия.\n' +
+    'Держите телефон горизонтально; «На экран Домой» — игра без адресной строки.'
+  : 'ЛКМ: идти, говорить, действовать. Колесо: масштаб.\n' +
+    'I: инвентарь. J: журнал. C: персонаж. S: красться. M: звук. Esc: меню.\n' +
+    'В бою: клик по врагу атакует, клик по земле ведёт, пробел завершает ход, F меняет оружие.\n' +
+    'В диалогах: клавиши 1–9.';
 
 export function showAbout(scene: Phaser.Scene, onClose: () => void): void {
   const w = 760;

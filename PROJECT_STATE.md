@@ -1,6 +1,10 @@
 # PROJECT_STATE
 
 ## Current
+Phones and pursuits (done):
+- The game plays by touch on a phone held sideways: finger scrolling in every list, pinch zoom on both maps, the name typed on the phone's keyboard, full screen on the first tap, a turn-your-phone prompt, a home-screen manifest and icon, full-width dialogue answers, two-tap aiming in fights, lighter graphics by default. `tests/e2e/mobile.spec.ts` covers it.
+- World-map pursuers (jackals, gangs) no longer just trail the hero: they catch up and a meeting starts, or lose the trail and turn away.
+
 Stage V done: companions and Chapter V «Кристалл».
 - Companions: Хэнк, Ржавчик, Шёпот and Гранит walk after the hero across areas and the world map, fight beside the party under AI, talk by a click (hold back, go home, come along), may die for good, and say a line on arriving; the party holds ⌊Обаяние/3⌋ of them.
 - Кристалл of four areas (the upper tiers and the gate, the Council of layers with the Wall of names, the brine baths, the deep mines with the camp of the Горькие and a salt tunnel to Соль).
