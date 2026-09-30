@@ -42,7 +42,8 @@
   - A hatch uses the `goto` effect.
   - On arrival at a town, `Road.ts` sends `{ t: 'town' }` when more than one area is known, and `TravelScene` opens `TownScene`, the plan. The `enter` intent walks the party in. With one known area the party enters directly.
 - **Roofs.** `MapData.roofs` come from `k.building(…, roof)`. `tools/art/roofs.mjs` bakes one atlas frame per roof, `roof_<map>_<id>`. `world/Roofs.ts` fades a roof out while this client's hero stands under it. Roofs are visual only: sight and walking are the walls' business.
-- **Doors by flag.** A flag `open_<id>` opens any door prop with that id (`Grid.applyFlag`).
+- **Doors by flag.** A flag `open_<id>` opens any prop with that id whose frame ends in `_closed` (a door, a grille): the frame becomes `_open` and the tile walkable (`Grid.applyFlag`).
+- **Arrest.** The `confiscate` effect moves everything that fights (categories weapon, grenade, ammo, armor) from the bag into `state.confiscated`; `unconfiscate` gives it back. What was equipped stays marked and is worn again once back in the bag. It is per player, so in co-op each player gets their own things back.
 - **Rooted creatures.** `CreatureDef.rooted` (the sand eels) never move or flee. The AI strikes whoever is in reach and otherwise ends its turn, so a boardwalk two tiles away is safe.
 - **The world map screen.** `TravelScene` puts the chart, fog, figures and weather on one camera, which zooms and follows the party and never zooms out past the chart. The console sits on a second camera that ignores zoom.
   - Parties walk as their leader's sprite sheet (the room sends `MapParty.sheet`), with a badge over them.

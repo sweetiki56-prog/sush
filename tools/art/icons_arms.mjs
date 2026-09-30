@@ -243,6 +243,7 @@ export const ARMS_ICONS = {
   piston: ['blade', 'fist'],
   bugai_knuckles: ['blade', 'fist', { body: P.rust1, lit: P.sand4 }],
   reaper_spear: ['blade', 'spear', { tip: P.rust2, wood: P.brown3, wood2: P.brown2 }],
+  shiv: ['blade', 'knife', { body: P.grey4, wood: P.sand3 }],
   queen_sting: ['blade', 'knife', { body: P.dark1, lit: P.grey2, wood: P.rust1 }],
   venom_knife: ['blade', 'knife', { body: P.grey5, drip: P.olive2 }],
   fire_machete: ['blade', 'machete', { fire: P.fire1 }],

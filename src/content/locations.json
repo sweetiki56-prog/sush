@@ -113,6 +113,65 @@
         ],
         "log": "Над дорогой встают водонапорные башни Запруды. Где-то там, в Нижнем городе, контора Нотариуса."
       }
+    ],
+    "map": "zap_lower",
+    "entry": "road_s",
+    "open": [
+      {
+        "flag": "chapter2_seen"
+      }
+    ],
+    "areas": [
+      {
+        "map": "zap_lower",
+        "entry": "road_s",
+        "name": "Нижний город",
+        "at": [0.42, 0.74]
+      },
+      {
+        "map": "zap_market",
+        "entry": "south",
+        "name": "Капельный рынок",
+        "at": [0.52, 0.46],
+        "known": [
+          {
+            "flag": "zap_in"
+          }
+        ]
+      },
+      {
+        "map": "zap_upper",
+        "entry": "south",
+        "name": "Верхний город и Башня",
+        "at": [0.6, 0.18],
+        "known": [
+          {
+            "flag": "upper_ok"
+          }
+        ]
+      },
+      {
+        "map": "zap_dock",
+        "entry": "gate",
+        "name": "«Сухой док»",
+        "at": [0.82, 0.66],
+        "known": [
+          {
+            "flag": "dock_known"
+          }
+        ]
+      },
+      {
+        "map": "zap_sewers",
+        "entry": "aqueduct",
+        "name": "Стоки",
+        "at": [0.18, 0.52],
+        "known": [
+          {
+            "flag": "lejka_ally"
+          }
+        ]
+      }
     ]
   },
   "barge": {

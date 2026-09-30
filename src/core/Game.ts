@@ -27,6 +27,7 @@ export type GameEvents = {
 };
 
 const MAX_LOG = 60;
+const CONFISCATED = new Set(['weapon', 'grenade', 'ammo', 'armor']);
 export const CHECK_XP = 10;
 
 export class Game {
@@ -194,6 +195,27 @@ export class Game {
     const out: Resist = {};
     for (const m of this.gearMods()) for (const t of DMG_TYPES) if (m.res?.[t]) out[t] = (out[t] ?? 0) + m.res[t]!;
     return out;
+  }
+
+  /** An arrest: everything that fights leaves the bag (what is equipped stays marked, so it is worn again later). */
+  private confiscate(): void {
+    const kept = (this.state.confiscated ??= {});
+    for (const [id, n] of Object.entries(this.state.items)) {
+      if (!n || !CONFISCATED.has(this.content.items[id]?.cat ?? '')) continue;
+      kept[id] = (kept[id] ?? 0) + n;
+      delete this.state.items[id];
+    }
+    this.log('Оружие, патроны и броню забирают в ящик надзирателя.');
+    this.events.emit('inventory');
+  }
+
+  private unconfiscate(): void {
+    const kept = this.state.confiscated ?? {};
+    if (!Object.keys(kept).length) return;
+    for (const [id, n] of Object.entries(kept)) this.state.items[id] = (this.state.items[id] ?? 0) + n;
+    this.state.confiscated = {};
+    this.log('Вы забираете своё из ящика надзирателя.');
+    this.events.emit('inventory');
   }
 
   /** The armor being worn (it has to still be in the bag). */
@@ -458,6 +480,12 @@ export class Game {
           break;
         case 'goto':
           this.events.emit('goto', e.map, e.entry);
+          break;
+        case 'confiscate':
+          this.confiscate();
+          break;
+        case 'unconfiscate':
+          this.unconfiscate();
           break;
         case 'encounter':
           this.events.emit('encounter', e.action);

@@ -18,6 +18,8 @@ export const CREATURES = {
   // jackals: lean, sandy, big ears; the pack leader is darker, heavier, with a scar
   jackal: { dog: true, fur: P.sand3, dark: P.brown2, belly: P.sand4, scale: 1.45 },
   jackal_leader: { dog: true, fur: P.brown3, dark: P.brown0, belly: P.sand2, scar: true, scale: 1.75 },
+  // sewer rats of Запруда: grey, hunched, as big as a small dog
+  rat: { dog: true, fur: P.grey2, dark: P.dark2, belly: P.grey4, scale: 0.9 },
   // Ржавчик, the collector's dog: rust-red, thin, a copper collar
   // sand eels rise out of the riverbed; the queen is thick as a barrel; rust mites crawl over iron in swarms
   sand_eel: { eel: true, skin: P.sand2, dark: P.brown1, belly: P.sand4, scale: 1.3 },

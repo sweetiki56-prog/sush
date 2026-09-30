@@ -6,7 +6,7 @@ import { P, hexToRgb } from './palette.mjs';
 
 // cast-shadow length (in tiles, along +x) per object frame prefix
 // [length along +x in tiles, width as a fraction of the footprint]
-const SHADOW = { cliff: [1.3, 1], mesa: [2.4, 1], ruin: [1.2, 1], shack: [1.6, 1], pump: [0.7, 0.8], tank: [1.1, 0.7], barrel: [0.5, 0.55], tires: [0.3, 0.6], car: [0.7, 0.8], pylon: [2.6, 0.12], wall_hi: [1.3, 1], wall_lo: [0.4, 1], wall_broken: [0.3, 1], door: [1.2, 1], crate: [0.5, 0.7], machine: [1.0, 0.85], rock: [0.5, 0.8], cactus: [0.9, 0.25], dead_tree: [1.8, 0.3], sign: [0.8, 0.2], hull_hi: [1.3, 1], hull_lo: [0.4, 1], glass_hi: [0.9, 0.3], transformer: [1.4, 0.9], mast: [3.2, 0.1], safe: [0.6, 0.8], valve: [0.8, 0.3], coil: [0.4, 0.7] };
+const SHADOW = { cliff: [1.3, 1], mesa: [2.4, 1], ruin: [1.2, 1], shack: [1.6, 1], pump: [0.7, 0.8], tank: [1.1, 0.7], barrel: [0.5, 0.55], tires: [0.3, 0.6], car: [0.7, 0.8], pylon: [2.6, 0.12], wall_hi: [1.3, 1], wall_lo: [0.4, 1], wall_broken: [0.3, 1], door: [1.2, 1], crate: [0.5, 0.7], machine: [1.0, 0.85], rock: [0.5, 0.8], cactus: [0.9, 0.25], dead_tree: [1.8, 0.3], sign: [0.8, 0.2], hull_hi: [1.3, 1], hull_lo: [0.4, 1], glass_hi: [0.9, 0.3], transformer: [1.4, 0.9], mast: [3.2, 0.1], safe: [0.6, 0.8], valve: [0.8, 0.3], coil: [0.4, 0.7], tower: [3.4, 1], water_tower: [3, 0.2], bars: [1, 0.3], podium: [0.6, 1] };
 const shadowOf = (frame) => {
   for (const k of Object.keys(SHADOW)) if (frame.startsWith(k)) return SHADOW[k];
   return [0, 0];

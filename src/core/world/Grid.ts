@@ -4,7 +4,7 @@ import type { FlagValue } from '../types';
 import type { MapData, MapObject } from '../../world/MapData';
 
 // tall props that block line of sight in combat (barrels, cacti and crates do not)
-const OPAQUE = /^(shack|wall_|door_closed|tank|machine|rock_|car_|hull_hi|transformer)/;
+const OPAQUE = /^(shack|wall_|door_closed|tank|machine|rock_|car_|hull_hi|transformer|tower)/;
 
 export interface PropState {
   obj: MapObject;
@@ -94,13 +94,13 @@ export class Grid {
       return { id: 'pump', frame: 'pump_fixed' };
     }
     if (key.startsWith('open_')) {
-      // any door by its id: open_vault_door, open_seed_door…
+      // any door or grille by its id: open_vault_door, open_cell_door…
       const id = key.slice(5);
       const p = this.props.get(id);
-      if (!p || !p.obj.frame.startsWith('door')) return null;
-      p.frame = 'door_open';
+      if (!p || !p.obj.frame.endsWith('_closed')) return null; // door_closed, bars_closed
+      p.frame = p.obj.frame.replace(/_closed$/, '_open');
       this.setBlocked(p.obj, false);
-      return { id, frame: 'door_open' };
+      return { id, frame: p.frame };
     }
     if (key.startsWith('blown_')) {
       const id = key.slice(6);

@@ -50,6 +50,8 @@ export type Effect =
   | { type: 'rest' } // sleep till the next morning (the room decides if it is safe)
   | { type: 'travel' } // the party leaves this place for the world map
   | { type: 'goto'; map: string; entry?: string } // the party moves to another area (a hatch, a gangway)
+  | { type: 'confiscate' } // an arrest: weapons, grenades, ammo and armor go into the warden's chest
+  | { type: 'unconfiscate' } // and come back
   | { type: 'dayMark'; key: string; in: number } // key = today + `in` (a day something will happen)
   | { type: 'encounter'; action: EncounterAction }; // how a meeting on the road ends (the room acts once the talk closes)
 
@@ -245,6 +247,8 @@ export interface GameStateData {
   stock?: Record<string, TraderStock>;
   /** Chems at work (ms left) and addictions (ms since the last dose). Missing in older saves. */
   body?: { buffs: { item: string; leftMs: number }[]; hooked: Record<string, number>; thirsty?: boolean };
+  /** Weapons, grenades, ammo and armor taken away on an arrest, until they are got back. */
+  confiscated?: Record<string, number>;
 }
 
 export const START_CAPS = 12;

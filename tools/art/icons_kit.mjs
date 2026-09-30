@@ -335,6 +335,13 @@ const PART_SHAPES = {
     poly(ctx, [[9, 13], [23, 13], [22, 22], [10, 22]], c.lit);
     for (const [x, y] of [[6, 12], [26, 12], [7, 24], [25, 24]]) ctx.fillRect(x - 1, y - 1, 2, 2);
   },
+  // a steel die with a drop cut in its face
+  die(ctx) {
+    poly(ctx, [[10, 10], [22, 10], [22, 26], [10, 26]], P.grey3);
+    poly(ctx, [[10, 10], [22, 10], [20, 7], [12, 7]], P.grey5);
+    ellipse(ctx, 16, 15, 3, 4, P.dark1);
+    ellipse(ctx, 16, 16, 2, 2.5, P.grey4);
+  },
   // a tin box with a paper tag
   seedbox(ctx) {
     poly(ctx, [[6, 12], [26, 12], [26, 27], [6, 27]], P.grey3);
@@ -390,6 +397,7 @@ export const PART_ICONS = {
   water_barrel: { shape: 'barrel' },
   eel_skin: { shape: 'hide', base: P.grey3, lit: P.sand3 },
   crate_seed: { shape: 'seedbox' },
+  mint_die: { shape: 'die' },
   thorn_traps: { shape: 'traps' },
 };
 

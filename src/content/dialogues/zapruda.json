@@ -1,0 +1,4247 @@
+{
+ "zap_gate": {
+  "speaker": "Сборщики на воротах",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "zap_in"
+     }
+    ],
+    "node": "passed"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Двое сборщиков Треста у решётки листают книгу с чужими лицами. — Стой. Кто, откуда, зачем в Запруду? Вход по бумаге. Без бумаги — назад, в пыль.",
+    "options": [
+     {
+      "text": "Вот пропуск Треста.",
+      "if": [
+       {
+        "item": "trust_pass"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "gate_way",
+        "value": "pass"
+       },
+       {
+        "type": "flag",
+        "key": "zap_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "notary"
+       }
+      ],
+      "next": "pass_ok"
+     },
+     {
+      "text": "Вот пропуск Соляной гильдии.",
+      "if": [
+       {
+        "item": "guild_pass"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "gate_way",
+        "value": "pass"
+       },
+       {
+        "type": "flag",
+        "key": "zap_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "notary"
+       }
+      ],
+      "next": "pass_ok"
+     },
+     {
+      "text": "Сам из сборщиков. Иду в контору на Капельном рынке, на отчёт.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "collector_ok",
+       "fail": "collector_fail",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "gate_way",
+         "value": "collector"
+        },
+        {
+         "type": "flag",
+         "key": "zap_in"
+        },
+        {
+         "type": "flag",
+         "key": "open_gate_a"
+        },
+        {
+         "type": "flag",
+         "key": "open_gate_b"
+        },
+        {
+         "type": "quest",
+         "quest": "zapruda",
+         "stage": "notary"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Прорваться.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "zap_wanted"
+       },
+       {
+        "type": "flag",
+        "key": "gate_way",
+        "value": "fight"
+       },
+       {
+        "type": "flag",
+        "key": "zap_in"
+       },
+       {
+        "type": "flag",
+        "key": "open_gate_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_gate_b"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "notary"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "pass_ok": {
+    "text": "Сборщик ведёт пальцем по бумаге, по книге, снова по бумаге. — Проходи. — Решётка ползёт вверх со скрежетом.",
+    "options": [
+     {
+      "text": "Пройти."
+     }
+    ]
+   },
+   "collector_ok": {
+    "text": "— Из сборщиков? — Старший щурится, потом машет рукой. — Отчёт сдают до полудня, смотри не опоздай. — Решётка ползёт вверх.",
+    "options": [
+     {
+      "text": "Пройти."
+     }
+    ]
+   },
+   "collector_fail": {
+    "text": "— Сборщик? Без бляхи? — Оба смеются. — Иди отсюда, сборщик.",
+    "options": [
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "fight": {
+    "text": "Сборщики хватаются за гвоздомёты. Со стены кричат: «Тревога!» Теперь вся стража Запруды будет знать ваше лицо.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "passed": {
+    "text": "— Проходи, не стой. Книга всё помнит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zap_gate_bars": {
+  "speaker": "Решётка ворот",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Решётка южных ворот на засове. Поднимают её сборщики — по бумаге.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "aqueduct": {
+  "speaker": "Устье водовода",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "aqueduct_closed"
+     }
+    ],
+    "node": "closed"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Ржавая решётка в откосе стены, из неё тянет сыростью. Старый водовод: когда-то по нему в город шла вода, теперь — водоносы.",
+    "options": [
+     {
+      "text": "Ерёма говорил: водовод выводит к людям Лейки. Пролезть.",
+      "if": [
+       {
+        "flag": "lejka_friend"
+       },
+       {
+        "notFlag": "zap_in"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "gate_way",
+        "value": "bearers"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_known"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "notary"
+       },
+       {
+        "type": "goto",
+        "map": "zap_sewers",
+        "entry": "aqueduct"
+       }
+      ]
+     },
+     {
+      "text": "По карте Луки: тропа водоносов упирается сюда. Пролезть.",
+      "if": [
+       {
+        "item": "water_path_map"
+       },
+       {
+        "notFlag": "zap_in"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "gate_way",
+        "value": "bearers"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_known"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "notary"
+       },
+       {
+        "type": "goto",
+        "map": "zap_sewers",
+        "entry": "aqueduct"
+       }
+      ]
+     },
+     {
+      "text": "Пролезть в водовод.",
+      "if": [
+       {
+        "flag": "zap_in"
+       }
+      ],
+      "effects": [
+       {
+        "type": "goto",
+        "map": "zap_sewers",
+        "entry": "aqueduct"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "closed": {
+    "text": "Решётка водовода заварена свежим швом. Бляха Треста на шве блестит, как насмешка.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "lower_hatch": {
+  "speaker": "Люк в стоки",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Круглый люк в мостовой. Водоносы ходят здесь по ночам.",
+    "options": [
+     {
+      "text": "Спуститься в стоки.",
+      "if": [
+       {
+        "flag": "lejka_asked"
+       }
+      ],
+      "effects": [
+       {
+        "type": "goto",
+        "map": "zap_sewers",
+        "entry": "lower"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zap_guard": {
+  "speaker": "Стражник Башни",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Проходи. Без дела не стой. В Верхний город — только по бумаге.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zap_folk": {
+  "speaker": "Житель",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Новая подать: капля в сутки с головы. Косой на площади говорит — хватит. Может, и хватит.",
+    "options": [
+     {
+      "text": "Где контора Нотариуса?",
+      "next": "notary"
+     },
+     {
+      "text": "Что за Башня?",
+      "next": "tower"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "notary": {
+    "text": "— На Капельном рынке, за воротами на север. Штемпель — педант, но честный, говорят. Чернила у него вечно на пальцах.",
+    "options": [
+     {
+      "text": "…",
+      "next": "hi"
+     }
+    ]
+   },
+   "tower": {
+    "text": "— Башня Треста, в Верхнем городе. Там Затвор считает наши кружки. А под ней архив — всё, что Трест отнял, лежит там на полках.",
+    "options": [
+     {
+      "text": "…",
+      "next": "hi"
+     }
+    ]
+   }
+  }
+ },
+ "tax_notice": {
+  "speaker": "Объявление",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "«По решению Совета пайщиков: водяная подать с головы — капля в сутки. Неплательщикам — пломба на кружку». Ниже углём: «ХВАТИТ».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "market_notice": {
+  "speaker": "Доска объявлений",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "«Трест платит за сведения о бумаге из Ржавого колодца». «Совет: подать с головы». «Пропал рыжий кот, звать Капитан».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "lejka": {
+  "speaker": "Лейка",
+  "portrait": "portrait_lejka",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "forgery_fate"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "bounty_done"
+     },
+     {
+      "item": "forgery_proof"
+     }
+    ],
+    "node": "proof"
+   },
+   {
+    "if": [
+     {
+      "flag": "met_lejka"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Сухая старуха с плечами носильщицы пересчитывает фляги. — Лейка. Вожу воду тем, кому Трест не наливает. Ты кто — сборщик или жажда?",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "met_lejka"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "again": {
+    "text": "— Ну? — Лейка не отрывается от фляг.",
+    "options": [
+     {
+      "text": "Где найти Нотариуса?",
+      "next": "notary"
+     },
+     {
+      "text": "Ерёма с тракта передаёт привет.",
+      "if": [
+       {
+        "flag": "lejka_friend"
+       },
+       {
+        "notFlag": "erema_told"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "erema_told"
+       }
+      ],
+      "next": "erema"
+     },
+     {
+      "text": "Нужна помощь водоносам?",
+      "if": [
+       {
+        "notFlag": "lejka_asked"
+       }
+      ],
+      "next": "job"
+     },
+     {
+      "text": "В журнале у Тихона фляг всегда больше, чем мест в туннеле.",
+      "if": [
+       {
+        "item": "bearer_log"
+       },
+       {
+        "notFlag": "tikhon_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tikhon_known"
+       },
+       {
+        "type": "quest",
+        "quest": "lejka",
+        "stage": "truth"
+       }
+      ],
+      "next": "log"
+     },
+     {
+      "text": "Тихон пишет кому-то наверх. Он — оттиск Сургуча.",
+      "if": [
+       {
+        "flag": "tikhon_known"
+       },
+       {
+        "notFlag": "lejka"
+       }
+      ],
+      "next": "judge"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "notary": {
+    "text": "— Капельный рынок, за воротами на север. Иди прямо, не сворачивай к Башне.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "erema": {
+    "text": "— Живой, значит! — Лейка впервые улыбается. — Раз Ерёма за тебя, и я за тебя. Держи: люк в стоки на площади — наш. Кто его знает, тот в Запруде не пропадёт.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "lejka_asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "job": {
+    "text": "— Нужна. В прошлый раз в туннеле нас ждали сборщики. Знали час и место. Кто-то из моих троих — Фома, Нина, Тихон — говорит лишнее. — Она суёт засаленную тетрадь. — Журнал выдачи. Найди, кто. Они внизу, в стоках, на пристани.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "lejka_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "lejka",
+      "stage": "asked"
+     },
+     {
+      "type": "give",
+      "item": "bearer_log"
+     }
+    ],
+    "options": [
+     {
+      "text": "Найду.",
+      "next": "again"
+     }
+    ]
+   },
+   "log": {
+    "text": "Лейка листает журнал, водит пальцем. — Тихон. Всегда на две фляги больше. Не продаёт — я бы знала. Носит кому-то наверх, за стену Верхнего города.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "judge": {
+    "text": "Лейка долго молчит. — Тихон. Мы его из стоков вытащили малым, кормили с одной кружки. — Она поднимает глаза. — Что с ним делать?",
+    "options": [
+     {
+      "text": "Суди его сама. Это твои люди.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lejka",
+        "value": "judged"
+       },
+       {
+        "type": "flag",
+        "key": "tikhon_gone"
+       },
+       {
+        "type": "quest",
+        "quest": "lejka",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_ally"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       }
+      ],
+      "next": "judged"
+     },
+     {
+      "text": "Сдадим Тресту. Пусть знают, кто им носит сведения.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lejka",
+        "value": "trust"
+       },
+       {
+        "type": "flag",
+        "key": "tikhon_gone"
+       },
+       {
+        "type": "quest",
+        "quest": "lejka",
+        "stage": "done"
+       },
+       {
+        "type": "inc",
+        "key": "rep_trust",
+        "by": 5
+       },
+       {
+        "type": "xp",
+        "amount": 40
+       }
+      ],
+      "next": "trust"
+     },
+     {
+      "text": "Отпусти его. Пусть бежит к своим.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lejka",
+        "value": "spared"
+       },
+       {
+        "type": "flag",
+        "key": "tikhon_gone"
+       },
+       {
+        "type": "quest",
+        "quest": "lejka",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_ally"
+       },
+       {
+        "type": "flag",
+        "key": "sealwax_watch"
+       },
+       {
+        "type": "xp",
+        "amount": 50
+       }
+      ],
+      "next": "spared"
+     }
+    ]
+   },
+   "judged": {
+    "text": "— Уйдёт в пески с одной флягой. Как положено. — Лейка кладёт руку тебе на плечо. — Теперь ты наш. Стоки — твои, и ночь в Запруде — твоя. Если попадёшь в «Сухой док», скажи Сычу, что ты от Лейки: его жене воду ношу я.",
+    "options": [
+     {
+      "text": "Спасибо, Лейка."
+     }
+    ]
+   },
+   "trust": {
+    "text": "— Трест, значит. — Лейка отворачивается. — Сделаю. Только водоносы тебе больше не помощники.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "spared": {
+    "text": "— Жалостливый. — Лейка качает головой. — Тихон побежит к тем, кто держит печать, и расскажет про тебя. Но я не забуду, что ты не взял на себя его крови. Стоки — твои.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "proof": {
+    "text": "Лейка разглядывает копию Затвора. — Седьмая-бис… Вот как они держат воду: бумагой. — Она прячет руки. — Бумага на площади — это бунт сегодня. Бумага в суде — это вода завтра. Решай.",
+    "options": [
+     {
+      "text": "Сохраню для суда.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "forgery_fate",
+        "value": "kept"
+       },
+       {
+        "type": "flag",
+        "key": "chapter3_done"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "kept"
+     },
+     {
+      "text": "Подумаю."
+     }
+    ]
+   },
+   "kept": {
+    "text": "— Правильно. — Лейка зашивает копию в подкладку твоей куртки грубой ниткой. — В Запруде тебя будут искать. А тебе — на север, в Соль. Вторая половина ключа там, где соль.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Живой. Хорошо. — Лейка кивает. — Вода подождёт. Ты — нет.",
+    "options": [
+     {
+      "text": "Прощай."
+     }
+    ]
+   }
+  }
+ },
+ "foma": {
+  "speaker": "Водонос Фома",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Здоровяк в мокрой рубахе. — Фома. Воду ношу двадцать лет, а пить всё равно хочу.",
+    "options": [
+     {
+      "text": "[Восприятие] Присмотреться.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "next": "look"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "look": {
+    "text": "Руки в мозолях от лямок, сапоги латаные-перелатанные. Пахнет стоками и честным потом.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "nina": {
+  "speaker": "Водоноска Нина",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Худая женщина с фонарём. — Нина. Если Лейка прислала — спрашивай, только быстро.",
+    "options": [
+     {
+      "text": "[Восприятие] Присмотреться.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "next": "look"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "look": {
+    "text": "Пальцы в саже от фонаря, обувь из автомобильной покрышки. Смотрит прямо.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "tikhon": {
+  "speaker": "Водонос Тихон",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Молодой водонос улыбается слишком широко. — Тихон. Всё тихо, всё хорошо.",
+    "options": [
+     {
+      "text": "[Восприятие] Присмотреться.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tikhon_known"
+       },
+       {
+        "type": "quest",
+        "quest": "lejka",
+        "stage": "truth"
+       }
+      ],
+      "next": "look"
+     },
+     {
+      "text": "Кому ты пишешь, Тихон?",
+      "if": [
+       {
+        "flag": "lejka_asked"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "confess",
+       "fail": "deny",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "tikhon_known"
+        },
+        {
+         "type": "quest",
+         "quest": "lejka",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "look": {
+    "text": "Сапоги новые, скрипят. А на пальцах — фиолетовые чернила. Водоносы не пишут.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "confess": {
+    "text": "Улыбка сползает. — Им. Тем, кто держит печать. Они платят за час и место больше, чем Лейка за год. — Он смотрит на выход. — Ты скажешь ей?",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "deny": {
+    "text": "— Никому не пишу. Грамоте не обучен. — Улыбка на месте.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "notary": {
+  "speaker": "Нотариус Штемпель",
+  "portrait": "portrait_shtempel",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "mandate_certified"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "mandate_read"
+     }
+    ],
+    "node": "price"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Добродушный толстяк с лупой в глазу и чернильными пальцами поднимается навстречу. — Евстигней Штемпель, нотариус. Заверяю, сличаю, свидетельствую. Чем могу служить?",
+    "options": [
+     {
+      "text": "Прочтите вот это.",
+      "if": [
+       {
+        "item": "tube"
+       }
+      ],
+      "next": "read"
+     },
+     {
+      "text": "Прочтите вот это.",
+      "if": [
+       {
+        "item": "tube_copy"
+       },
+       {
+        "noItem": "tube"
+       }
+      ],
+      "next": "copy"
+     },
+     {
+      "text": "Мандат у Треста. Что мне теперь делать?",
+      "if": [
+       {
+        "flag": "trust_outcome",
+        "eq": "surrender"
+       },
+       {
+        "noItem": "tube"
+       },
+       {
+        "noItem": "tube_copy"
+       }
+      ],
+      "next": "surrender"
+     },
+     {
+      "text": "Бумага в тайнике, далеко отсюда.",
+      "if": [
+       {
+        "noItem": "tube"
+       },
+       {
+        "noItem": "tube_copy"
+       },
+       {
+        "notFlag": "paper_dog"
+       }
+      ],
+      "next": "hidden"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "hidden": {
+    "text": "— Несите, — разводит руками Штемпель. — Без бумаги я просто нотариус с лупой.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "read": {
+    "text": "Нотариус вскрывает тубус тонким ножом, как письмо от любимой. Лупа ползёт по строкам. — Мандат Водоуправления. Номер один. «Выдан предъявителю». — Он поднимает глаза. — Подлинный. А это… — На ладони звякает латунная пластина с зубцами. — Ключ. Половина ключа. Вторая ушла с гонцом, и без неё плотина не откроется.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "mandate_read"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "price"
+     }
+    ]
+   },
+   "price": {
+    "text": "— Заверение стоит денег или услуги. Триста капель. Или… — Он понижает голос. — В Башне кто-то травит советников. Сослужите Башне — заверю даром.",
+    "options": [
+     {
+      "text": "Триста капель.",
+      "if": [
+       {
+        "caps": 300
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -300
+       },
+       {
+        "type": "flag",
+        "key": "notary_paid"
+       },
+       {
+        "type": "flag",
+        "key": "mandate_certified"
+       },
+       {
+        "type": "flag",
+        "key": "forgery_known"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "forgery"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "certified"
+     },
+     {
+      "text": "Сто пятьдесят — и я не спрашиваю, откуда у вас такие клиенты.",
+      "if": [
+       {
+        "caps": 150
+       },
+       {
+        "notFlag": "haggle_failed"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "certified",
+       "fail": "haggle_fail",
+       "passEffects": [
+        {
+         "type": "caps",
+         "amount": -150
+        },
+        {
+         "type": "flag",
+         "key": "notary_paid"
+        },
+        {
+         "type": "flag",
+         "key": "mandate_certified"
+        },
+        {
+         "type": "flag",
+         "key": "forgery_known"
+        },
+        {
+         "type": "quest",
+         "quest": "zapruda",
+         "stage": "forgery"
+        },
+        {
+         "type": "xp",
+         "amount": 80
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "haggle_failed"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Возьмусь за Башню.",
+      "if": [
+       {
+        "notFlag": "quiet_asked"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quiet_asked"
+       },
+       {
+        "type": "flag",
+        "key": "upper_ok"
+       },
+       {
+        "type": "quest",
+        "quest": "quiet_floor",
+        "stage": "asked"
+       }
+      ],
+      "next": "quiet"
+     },
+     {
+      "text": "Отравитель в Башне найден.",
+      "if": [
+       {
+        "flag": "quiet_floor"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "notary_paid"
+       },
+       {
+        "type": "flag",
+        "key": "mandate_certified"
+       },
+       {
+        "type": "flag",
+        "key": "forgery_known"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "forgery"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "certified"
+     },
+     {
+      "text": "Потом."
+     }
+    ]
+   },
+   "quiet": {
+    "text": "— Распорядитель Совета в Верхнем городе вас примет. — Штемпель пишет записку и дует на чернила. — Страже покажете. Скажете, от меня.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "haggle_fail": {
+    "text": "— Сто пятьдесят — цена копии, а не подлинника, — мягко говорит Штемпель.",
+    "options": [
+     {
+      "text": "…",
+      "next": "price"
+     }
+    ]
+   },
+   "certified": {
+    "text": "Штемпель ставит оттиск, дует на воск. — Заверено. — Он медлит. — И ещё. Председатель Затвор предъявляет Совету «копию» мандата. Её печать — седьмая-бис. А в довоенном реестре седьмой-бис нет. Копия лежит в архиве Башни. Если бы кто-то её увидел…",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "copy": {
+    "text": "Лупа замирает. — Это не подлинник. Печать Писаря, а под ней… копия. Хорошая копия. — Штемпель откладывает тубус и не смотрит вам в глаза. — Где подлинник, не знаю.",
+    "options": [
+     {
+      "text": "[Восприятие] Сейф у вас за спиной приоткрыт. Там латунь.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "safe_seen"
+       }
+      ],
+      "next": "safe"
+     },
+     {
+      "text": "Писарь нёс подлинник в Запруду. К кому, если не к вам?",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "safe",
+       "fail": "copy_deny",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "safe_seen"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Потом."
+     }
+    ]
+   },
+   "copy_deny": {
+    "text": "— Писарь? Не знаю никакого Писаря, — улыбается Штемпель чуть шире, чем надо.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "safe": {
+    "text": "Штемпель вздыхает, как человек, пойманный на варенье. — Писарь сдал его на хранение. Порядок есть порядок: хранение оплачено.",
+    "options": [
+     {
+      "text": "Заверьте подлинник. Он мой по праву предъявителя.",
+      "check": {
+       "skill": "speech",
+       "pass": "tube_back",
+       "fail": "safe_no",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "tube"
+        },
+        {
+         "type": "flag",
+         "key": "tube_back"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Выкуплю. Двести капель.",
+      "if": [
+       {
+        "caps": 200
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -200
+       },
+       {
+        "type": "give",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_back"
+       }
+      ],
+      "next": "tube_back"
+     },
+     {
+      "text": "Потом."
+     }
+    ]
+   },
+   "safe_no": {
+    "text": "— Хранение есть хранение, — Штемпель запирает сейф на два оборота.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "tube_back": {
+    "text": "Штемпель отпирает сейф и кладёт на стол латунный тубус — тяжёлый, настоящий. — Предъявителю. Так написано.",
+    "options": [
+     {
+      "text": "Теперь прочтите его.",
+      "next": "read"
+     }
+    ]
+   },
+   "surrender": {
+    "text": "— У Треста? — Нотариус на миг бледнеет, но быстро улыбается. — Тогда он в архиве Башни. Всё, что Трест отнимает, лежит там, в одной папке с «копией» Председателя. Принесёте — прочту.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "forgery_known"
+     },
+     {
+      "type": "flag",
+      "key": "upper_hint"
+     },
+     {
+      "type": "quest",
+      "quest": "zapruda",
+      "stage": "forgery"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Заверено, — улыбается Штемпель. — Берегите пластину. И себя.",
+    "options": [
+     {
+      "text": "Кто ещё знает о Мандате?",
+      "next": "who"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "who": {
+    "text": "— Бумаги любят тишину, — только и говорит он, вытирая пальцы платком. На платке — красное пятнышко, как от воска.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "notary_registry": {
+  "speaker": "Реестр печатей",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Толстая книга печатей, от довоенных до вчерашних. Штемпель не любит, когда её трогают.",
+    "options": [
+     {
+      "text": "Найти печать седьмую-бис.",
+      "next": "sevenb"
+     },
+     {
+      "text": "[Восприятие] Перевернуть последний лист.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 8
+       },
+       {
+        "notFlag": "seal_mark_4"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "seal_mark_4"
+       },
+       {
+        "type": "log",
+        "text": "Сургучная метка: четвёртая."
+       },
+       {
+        "type": "xp",
+        "amount": 30
+       }
+      ],
+      "next": "wax"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "sevenb": {
+    "text": "Довоенные печати идут по порядку: первая, вторая… седьмая. Седьмой-бис нет. Её дописали позже, другими чернилами.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "wax": {
+    "text": "На обороте последнего листа — капля красного сургуча с оттиском: рука, держащая печать. Та же, что на тубусе. В реестре честного нотариуса.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "notary_safe": {
+  "speaker": "Сейф Нотариуса",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Железный сейф с медной ручкой.",
+    "options": [
+     {
+      "text": "Вскрыть, пока Штемпель смотрит в лупу.",
+      "if": [
+       {
+        "item": "tube_copy"
+       },
+       {
+        "notFlag": "tube_back"
+       },
+       {
+        "noItem": "tube"
+       }
+      ],
+      "check": {
+       "skill": "lockpick",
+       "mod": -20,
+       "pass": "picked",
+       "fail": "caught",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "tube"
+        },
+        {
+         "type": "flag",
+         "key": "tube_back"
+        },
+        {
+         "type": "karma",
+         "amount": -1
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "picked": {
+    "text": "Замок щёлкает тише, чем скрипит перо Штемпеля. В сейфе — латунный тубус, тяжёлый, настоящий.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "caught": {
+    "text": "— Кхм, — говорит Штемпель, не поднимая лупы. — Сейфы не любят, когда их трогают.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "changer": {
+  "speaker": "Меняла",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Меняла звенит каплями в жестяной кружке. — Меняю, взвешиваю, даю в долг под честное слово — если слово тяжёлое.",
+    "options": [
+     {
+      "text": "Покажи товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "zap_market"
+       }
+      ]
+     },
+     {
+      "text": "Капли по рынку лёгкие ходят?",
+      "next": "light"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "light": {
+    "text": "— Ходят. — Меняла понижает голос. — Лёгкие, на четверть. А клеймо — двора. Гравёр божится, что не его работа. Спроси у Гравёра.",
+    "options": [
+     {
+      "text": "…",
+      "next": "hi"
+     }
+    ]
+   }
+  }
+ },
+ "upper_gate": {
+  "speaker": "Стража Верхнего города",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "upper_ok"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "— Верхний город. Пропуск, бляха или приглашение Совета.",
+    "options": [
+     {
+      "text": "Пропуск Ады Затвор.",
+      "if": [
+       {
+        "item": "ada_pass"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "upper_ok"
+       }
+      ],
+      "next": "open"
+     },
+     {
+      "text": "Бляха сборщика.",
+      "if": [
+       {
+        "item": "trust_badge"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "upper_ok"
+       }
+      ],
+      "next": "open"
+     },
+     {
+      "text": "Меня ждут в Совете. Дело государственное.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "open",
+       "fail": "no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "upper_ok"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Пятьдесят капель — за беспокойство.",
+      "if": [
+       {
+        "caps": 50
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -50
+       },
+       {
+        "type": "flag",
+        "key": "upper_ok"
+       }
+      ],
+      "next": "open"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "no": {
+    "text": "— Государственное — это с бумагой. Кругом.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "— Проходи. И не шуми там.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "steward": {
+  "speaker": "Распорядитель Совета",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Сухой человечек в сером кланяется одними глазами. — Распорядитель Совета. Если вы от Нотариуса — двое советников слегли с «сухой лихорадкой». Лекарь говорит — яд. Ищите, но тихо.",
+    "options": [
+     {
+      "text": "Кто бывает в зале Совета?",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quiet_briefed"
+       }
+      ],
+      "next": "who"
+     },
+     {
+      "text": "Прощай."
+     }
+    ]
+   },
+   "who": {
+    "text": "— Советники, стража, Председатель. И его дочь, Ада, — носит отцу травяной отвар. Больше никто.",
+    "options": [
+     {
+      "text": "…",
+      "next": "hi"
+     }
+    ]
+   }
+  }
+ },
+ "ada": {
+  "speaker": "Ада Затвор",
+  "portrait": "portrait_ada",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "quiet_floor"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "ada_exposed"
+     }
+    ],
+    "node": "confront"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Молодая женщина в зелёном отрывается от горшков с травами. — Ада Затвор. Если вы от отца — уходите. Если нет — тем более.",
+    "options": [
+     {
+      "text": "Отвар для Совета — ваш рецепт?",
+      "if": [
+       {
+        "flag": "quiet_asked"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -20,
+       "pass": "confront",
+       "fail": "cold",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "ada_exposed"
+        },
+        {
+         "type": "quest",
+         "quest": "quiet_floor",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "cold": {
+    "text": "— Мой рецепт — от кашля. Прощайте.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "confront": {
+    "text": "Ада не отводит глаз. — Мой. Отец держит город на жажде, а Совет пьёт за его столом. Мне дали средство и план люди, которые хотят Запруде свободы.",
+    "options": [
+     {
+      "text": "Люди с красным воском? С рукой, держащей печать?",
+      "check": {
+       "skill": "speech",
+       "pass": "ally",
+       "fail": "deaf"
+      }
+     },
+     {
+      "text": "Отец узнает.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quiet_floor",
+        "value": "told"
+       },
+       {
+        "type": "quest",
+        "quest": "quiet_floor",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "flag",
+        "key": "zatvor_owes"
+       }
+      ],
+      "next": "told"
+     },
+     {
+      "text": "Заканчивай. Меня здесь не было.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quiet_floor",
+        "value": "helped"
+       },
+       {
+        "type": "quest",
+        "quest": "quiet_floor",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       },
+       {
+        "type": "flag",
+        "key": "council_thinned"
+       },
+       {
+        "type": "give",
+        "item": "ada_pass"
+       }
+      ],
+      "next": "helped"
+     }
+    ]
+   },
+   "deaf": {
+    "text": "— Не знаю никакого воска. — Ада сжимает склянку. — Решай, с кем ты.",
+    "options": [
+     {
+      "text": "Отец узнает.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quiet_floor",
+        "value": "told"
+       },
+       {
+        "type": "quest",
+        "quest": "quiet_floor",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "flag",
+        "key": "zatvor_owes"
+       }
+      ],
+      "next": "told"
+     },
+     {
+      "text": "Заканчивай. Меня здесь не было.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "quiet_floor",
+        "value": "helped"
+       },
+       {
+        "type": "quest",
+        "quest": "quiet_floor",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       },
+       {
+        "type": "flag",
+        "key": "council_thinned"
+       },
+       {
+        "type": "give",
+        "item": "ada_pass"
+       }
+      ],
+      "next": "helped"
+     }
+    ]
+   },
+   "ally": {
+    "text": "Ада бледнеет. — Сургуч… Они назвались «друзьями воды». — Она выливает склянку в горшок с полынью. — Если это они — я их нож в чужой руке. Хватит. — Она пишет записку. — Архив Башни. Кулик пропустит по этой бумаге. И если будет суд — я скажу, кто дал мне яд.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "quiet_floor",
+      "value": "ally"
+     },
+     {
+      "type": "quest",
+      "quest": "quiet_floor",
+      "stage": "done"
+     },
+     {
+      "type": "xp",
+      "amount": 80
+     },
+     {
+      "type": "give",
+      "item": "ada_pass"
+     },
+     {
+      "type": "flag",
+      "key": "ada_witness"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "told": {
+    "text": "Через час стража уводит Аду из оранжереи. Она не оборачивается.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ada_jailed"
+       }
+      ]
+     }
+    ]
+   },
+   "helped": {
+    "text": "— Ты с нами. — Ада улыбается впервые. — Держи пропуск в архив. Совет будет тише, а отец — слабее.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Уходи, пока я не передумала о тебе, — говорит Ада, не поднимая глаз.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "ada_herbs": {
+  "speaker": "Оранжерея Ады",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Полынь, дурман, сухоцвет, аккуратные склянки с подписями.",
+    "options": [
+     {
+      "text": "[Наука] Разобрать склянки.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 40
+       },
+       {
+        "notFlag": "ada_exposed"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ada_exposed"
+       },
+       {
+        "type": "quest",
+        "quest": "quiet_floor",
+        "stage": "truth"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "[Восприятие] Одна пробка залита красным воском.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "ada_exposed"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ada_exposed"
+       },
+       {
+        "type": "quest",
+        "quest": "quiet_floor",
+        "stage": "truth"
+       }
+      ],
+      "next": "wax"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Вытяжка сухоцвета: капля в вино — и «сухая лихорадка». Склянка почти пуста.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "wax": {
+    "text": "Красный воск с оттиском руки, держащей печать. Внутри — вытяжка сухоцвета. Такие склянки не варят в оранжерее: их приносят.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zatvor": {
+  "speaker": "Председатель Затвор",
+  "portrait": "portrait_zatvor",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "forgery_fate"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "item": "forgery_proof"
+     },
+     {
+      "flag": "bounty_done"
+     }
+    ],
+    "node": "sell"
+   },
+   {
+    "if": [
+     {
+      "flag": "zatvor_owes"
+     },
+     {
+      "notFlag": "zatvor_paid"
+     }
+    ],
+    "node": "thanks"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Высокий седой человек в тёмном смотрит в окно на башни. — Кирилл Затвор. Вы тот, кто носит по Низовью старую бумагу. — Он не спрашивает. — Дефицит — единственный порядок, который работает. Дайте людям реку — и через год они утопят друг друга за берег.",
+    "options": [
+     {
+      "text": "Зачем вам поддельная копия мандата?",
+      "if": [
+       {
+        "flag": "forgery_known"
+       }
+      ],
+      "next": "why"
+     },
+     {
+      "text": "Прощайте."
+     }
+    ]
+   },
+   "why": {
+    "text": "— Порядку нужна бумага. Настоящая пропала двести лет назад, вместе с гонцом. Я нашёл замену. — Затвор поворачивается. — Вы бы сделали иначе? Вы бы открыли плотину и смотрели, как Нижний город тонет?",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "thanks": {
+    "text": "— Вы спасли мне Совет. И отняли дочь. — Затвор отсчитывает сто капель, не глядя. — Верхний город для вас открыт. Больше не приходите.",
+    "effects": [
+     {
+      "type": "caps",
+      "amount": 100
+     },
+     {
+      "type": "flag",
+      "key": "zatvor_paid"
+     },
+     {
+      "type": "flag",
+      "key": "upper_ok"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "sell": {
+    "text": "Затвор смотрит на копию в ваших руках, как на старую собаку. — Седьмая-бис. — Он протягивает ладонь. — Четыреста капель, и мы забудем друг о друге.",
+    "options": [
+     {
+      "text": "Продать.",
+      "effects": [
+       {
+        "type": "take",
+        "item": "forgery_proof"
+       },
+       {
+        "type": "caps",
+        "amount": 400
+       },
+       {
+        "type": "flag",
+        "key": "forgery_fate",
+        "value": "sold"
+       },
+       {
+        "type": "flag",
+        "key": "chapter3_done"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "done"
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       }
+      ],
+      "next": "sold"
+     },
+     {
+      "text": "Нет."
+     }
+    ]
+   },
+   "sold": {
+    "text": "Копия исчезает в ящике стола. Капли — тяжёлые, настоящие — ложатся на стол. — Порядок, — говорит Затвор. — Идите на север. Там вас никто не ждёт.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Мы уже поговорили, — говорит Затвор окну.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "kulik": {
+  "speaker": "Писарь архива Кулик",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_archive_door"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Писарь с чернильными пальцами загораживает дверь архива. — Архив Башни. Только по службе или с разрешения.",
+    "options": [
+     {
+      "text": "Пропуск Ады Затвор.",
+      "if": [
+       {
+        "item": "ada_pass"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "open_archive_door"
+       }
+      ],
+      "next": "open"
+     },
+     {
+      "text": "Бляха сборщика. Я по службе.",
+      "if": [
+       {
+        "item": "trust_badge"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "open_archive_door"
+       }
+      ],
+      "next": "open"
+     },
+     {
+      "text": "Восемьдесят капель — и я по службе.",
+      "if": [
+       {
+        "caps": 80
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -80
+       },
+       {
+        "type": "flag",
+        "key": "open_archive_door"
+       }
+      ],
+      "next": "open"
+     },
+     {
+      "text": "[Восприятие] У вас на пальцах красный воск, Кулик.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       }
+      ],
+      "next": "wax"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "wax": {
+    "text": "Кулик прячет руки за спину. — Сургуч для папок. Все им пользуются. — Слишком быстро.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "open": {
+    "text": "Кулик отпирает дверь и отступает. — Только быстро. И ничего не выносить. — Он смотрит, как вы входите, очень внимательно.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "— Архив открыт, — сухо говорит Кулик и что-то пишет.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "archive_door": {
+  "speaker": "Дверь архива",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_archive_door"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Дверь архива Башни, замок с двумя бородками.",
+    "options": [
+     {
+      "text": "Вскрыть, пока Кулик отвернулся.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -20,
+       "pass": "picked",
+       "fail": "jammed",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "open_archive_door"
+        },
+        {
+         "type": "xp",
+         "amount": 20
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "picked": {
+    "text": "Замок сдаётся со второй попытки. Кулик за спиной ничего не заметил. Или сделал вид.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "jammed": {
+    "text": "Замок не поддаётся.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Дверь архива открыта.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "archive_case": {
+  "speaker": "Шкаф с мандатами",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "proof_taken"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Шкаф с мандатами. Папка с надписью «Копии. Председатель».",
+    "options": [
+     {
+      "text": "Открыть папку.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "forgery_proof"
+       },
+       {
+        "type": "flag",
+        "key": "proof_taken"
+       },
+       {
+        "type": "flag",
+        "key": "seal_mark_5"
+       },
+       {
+        "type": "flag",
+        "key": "bounty_on"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "bounty"
+       },
+       {
+        "type": "log",
+        "text": "Сургучная метка: пятая."
+       },
+       {
+        "type": "xp",
+        "amount": 80
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Седьмая-бис. Бумага выцвела под двадцать лет, а сургуч на печати свежий, прошлогодний. На обороте — оттиск руки, держащей печать. Копия Затвора — подделка.",
+    "options": [
+     {
+      "text": "В той же папке — латунный тубус. Забрать и его.",
+      "if": [
+       {
+        "flag": "trust_outcome",
+        "eq": "surrender"
+       },
+       {
+        "noItem": "tube"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "tube"
+       },
+       {
+        "type": "flag",
+        "key": "tube_back"
+       }
+      ],
+      "next": "tube"
+     },
+     {
+      "text": "Уйти."
+     }
+    ]
+   },
+   "tube": {
+    "text": "Тубус Мандата — тот самый, что Шлюз увёз из Ржавого колодца. Трест даже не вскрыл его.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "Пустая папка «Копии. Председатель».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "shluz_z": {
+  "speaker": "Инспектор Шлюз",
+  "portrait": "portrait_shluz",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "bounty_done"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Инспектор Шлюз ждёт у доски объявлений, вежливый и неумолимый. — Председатель назначил за вашу голову двести капель. Я предпочитаю закон награде. Пойдёмте в «Сухой док» — спокойно, без крови.",
+    "options": [
+     {
+      "text": "Иду.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bounty_arrested"
+       },
+       {
+        "type": "flag",
+        "key": "dock_known"
+       },
+       {
+        "type": "confiscate"
+       },
+       {
+        "type": "goto",
+        "map": "zap_dock",
+        "entry": "cell"
+       }
+      ],
+      "next": "arrest"
+     },
+     {
+      "text": "Уйти в толпу.",
+      "check": {
+       "skill": "sneak",
+       "mod": -10,
+       "pass": "slipped",
+       "fail": "caught",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bounty_done",
+         "value": "slipped"
+        },
+        {
+         "type": "quest",
+         "quest": "zapruda",
+         "stage": "choice"
+        }
+       ],
+       "failEffects": [
+        {
+         "type": "flag",
+         "key": "bounty_arrested"
+        },
+        {
+         "type": "flag",
+         "key": "dock_known"
+        },
+        {
+         "type": "confiscate"
+        },
+        {
+         "type": "goto",
+         "map": "zap_dock",
+         "entry": "cell"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Прочтите сами. Копия Затвора — подделка.",
+      "if": [
+       {
+        "item": "forgery_proof"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "doubt",
+       "fail": "no_doubt",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bounty_done",
+         "value": "doubt"
+        },
+        {
+         "type": "flag",
+         "key": "shlyuz_doubt"
+        },
+        {
+         "type": "quest",
+         "quest": "zapruda",
+         "stage": "choice"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Драться.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shluz_fight"
+       }
+      ]
+     }
+    ]
+   },
+   "arrest": {
+    "text": "Шлюз кивает, как будто иначе и быть не могло. Двое стражников берут вас под локти.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "caught": {
+    "text": "Толпа расступается не туда. Тяжёлая рука ложится на плечо. — Не надо, — говорит Шлюз. — Я уже видел, как вы бегаете.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "slipped": {
+    "text": "Толпа смыкается за спиной. Когда Шлюз оборачивается, вас уже нет.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "doubt": {
+    "text": "Шлюз читает долго. Потом ещё раз. — Седьмая-бис. — Он складывает копию и возвращает. — Я ничего не видел. Пока. Уходите, пока я не вспомнил, кто мне платит.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "no_doubt": {
+    "text": "— Бумаги пишут все, — говорит Шлюз. — Пойдёмте.",
+    "options": [
+     {
+      "text": "Иду.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bounty_arrested"
+       },
+       {
+        "type": "flag",
+        "key": "dock_known"
+       },
+       {
+        "type": "confiscate"
+       },
+       {
+        "type": "goto",
+        "map": "zap_dock",
+        "entry": "cell"
+       }
+      ],
+      "next": "arrest"
+     },
+     {
+      "text": "Драться.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shluz_fight"
+       }
+      ]
+     }
+    ]
+   },
+   "after": {
+    "text": "Шлюз стоит у доски, но больше не смотрит на вас как на добычу. — Что вы сделаете с копией?",
+    "options": [
+     {
+      "text": "Отдать её вам. Вы верите в закон — вот он.",
+      "if": [
+       {
+        "item": "forgery_proof"
+       },
+       {
+        "notFlag": "forgery_fate"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "forgery_proof"
+       },
+       {
+        "type": "flag",
+        "key": "shlyuz_doubt"
+       },
+       {
+        "type": "flag",
+        "key": "forgery_fate",
+        "value": "shlyuz"
+       },
+       {
+        "type": "flag",
+        "key": "chapter3_done"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "given"
+     },
+     {
+      "text": "Прощайте."
+     }
+    ]
+   },
+   "given": {
+    "text": "Шлюз убирает копию во внутренний карман, к сердцу. — Я отнесу её в Совет. Если Совет промолчит — отнесу дальше. — Впервые он выглядит человеком, который не знает, кому служит.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "cell_door": {
+  "speaker": "Решётка камеры",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_cell_a_door"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Решётка камеры на засове. Замок старый, язычок болтается.",
+    "options": [
+     {
+      "text": "Поддеть замок проволокой из нар.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -10,
+       "pass": "opened",
+       "fail": "jammed",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "open_cell_a_door"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отжать язычок заточкой.",
+      "if": [
+       {
+        "item": "shiv"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "open_cell_a_door"
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "Постучать кружкой по решётке — позвать надзирателя.",
+      "next": "warden"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "opened": {
+    "text": "Язычок уходит в паз. Решётка открыта — тихо, не скрипнув. Стража смотрит в другую сторону.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "jammed": {
+    "text": "Проволока гнётся. Надо чем-то потвёрже.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Решётка камеры открыта.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "warden": {
+    "text": "Надзиратель Сыч подходит вразвалку, усатый и усталый. — Чего гремишь? Сиди тихо — выйдешь живым. Может быть.",
+    "options": [
+     {
+      "text": "Лейка носит воду твоей жене. Я — от Лейки.",
+      "if": [
+       {
+        "flag": "lejka_ally"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "talked",
+       "fail": "no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "bounty_done",
+         "value": "talked"
+        },
+        {
+         "type": "unconfiscate"
+        },
+        {
+         "type": "quest",
+         "quest": "zapruda",
+         "stage": "choice"
+        },
+        {
+         "type": "flag",
+         "key": "open_cell_a_door"
+        },
+        {
+         "type": "goto",
+         "map": "zap_lower",
+         "entry": "dock"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Залог. Сто пятьдесят капель.",
+      "if": [
+       {
+        "caps": 150
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -150
+       },
+       {
+        "type": "flag",
+        "key": "bounty_done",
+        "value": "bail"
+       },
+       {
+        "type": "unconfiscate"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "choice"
+       },
+       {
+        "type": "flag",
+        "key": "open_cell_a_door"
+       },
+       {
+        "type": "goto",
+        "map": "zap_lower",
+        "entry": "dock"
+       }
+      ],
+      "next": "bail"
+     },
+     {
+      "text": "Ничего."
+     }
+    ]
+   },
+   "talked": {
+    "text": "Сыч долго крутит ус. — От Лейки… — Он отпирает решётку и суёт вам узел с вещами. — Иди. И не попадайся мне больше.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "bail": {
+    "text": "Сыч пересчитывает капли, пишет квитанцию и отдаёт ваши вещи из ящика. — Залог — это не свобода. Это отсрочка.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "no": {
+    "text": "— Все тут от кого-нибудь, — зевает Сыч.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "cell_other": {
+  "speaker": "Решётка",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Чужая камера. Оттуда смотрят без любопытства.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "prisoners": {
+  "speaker": "Заключённые",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Бритый наголо сокамерник сплёвывает в угол. — Новенький. За что?",
+    "options": [
+     {
+      "text": "За бумагу. Дай заточку.",
+      "if": [
+       {
+        "notFlag": "shiv_given"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "shiv"
+       },
+       {
+        "type": "flag",
+        "key": "shiv_given"
+       }
+      ],
+      "next": "shiv"
+     },
+     {
+      "text": "Сколько можно гнить? Поднимем док.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "riot",
+       "fail": "not_today",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "dock_riot"
+        },
+        {
+         "type": "flag",
+         "key": "open_cell_a_door"
+        },
+        {
+         "type": "flag",
+         "key": "open_cell_b_door"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Сила] Выбьем решётки вместе, плечом.",
+      "if": [
+       {
+        "attr": "str",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dock_riot"
+       },
+       {
+        "type": "flag",
+        "key": "open_cell_a_door"
+       },
+       {
+        "type": "flag",
+        "key": "open_cell_b_door"
+       }
+      ],
+      "next": "riot"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "shiv": {
+    "text": "— Держи. Ложку три месяца точил. — В ладонь ложится заточка, тёплая от чужой руки.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "riot": {
+    "text": "— А давай! — Бритый ревёт на весь док. Решётки трещат, заключённые вываливаются в чашу дока. Стража хватается за винтовки.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "not_today": {
+    "text": "— Не сегодня, новенький. Мы тут жить хотим.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "warden": {
+  "speaker": "Надзиратель Сыч",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Надзиратель Сыч, усатый и усталый. — Ты уже здесь был. Не возвращайся.",
+    "options": [
+     {
+      "text": "Прощай."
+     }
+    ]
+   }
+  }
+ },
+ "dock_stash": {
+  "speaker": "Ящик с изъятым",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Ящик надзирателя, под ним опись изъятого.",
+    "options": [
+     {
+      "text": "Забрать своё.",
+      "if": [
+       {
+        "flag": "open_cell_a_door"
+       }
+      ],
+      "effects": [
+       {
+        "type": "unconfiscate"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "dock_grate": {
+  "speaker": "Решётка в стоки",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Решётка в полу дока. Снизу тянет сыростью — стоки.",
+    "options": [
+     {
+      "text": "Спуститься и бежать.",
+      "if": [
+       {
+        "flag": "open_cell_a_door"
+       },
+       {
+        "notFlag": "bounty_done"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bounty_done",
+        "value": "escaped"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "choice"
+       },
+       {
+        "type": "goto",
+        "map": "zap_sewers",
+        "entry": "grate"
+       }
+      ]
+     },
+     {
+      "text": "Спуститься в стоки.",
+      "if": [
+       {
+        "flag": "bounty_done"
+       }
+      ],
+      "effects": [
+       {
+        "type": "goto",
+        "map": "zap_sewers",
+        "entry": "grate"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "podium": {
+  "speaker": "Помост",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Помост из ящиков на площади Нижнего города. Отсюда кричат про подать.",
+    "options": [
+     {
+      "text": "Зачитать толпе копию Затвора.",
+      "if": [
+       {
+        "item": "forgery_proof"
+       },
+       {
+        "flag": "bounty_done"
+       },
+       {
+        "notFlag": "forgery_fate"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "forgery_proof"
+       },
+       {
+        "type": "inc",
+        "key": "riot_heat",
+        "by": 1
+       },
+       {
+        "type": "flag",
+        "key": "forgery_fate",
+        "value": "public"
+       },
+       {
+        "type": "flag",
+        "key": "chapter3_done"
+       },
+       {
+        "type": "quest",
+        "quest": "zapruda",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "public"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "public": {
+    "text": "«Седьмая-бис, — читаете вы, — в довоенном реестре не значится». Площадь молчит. Потом кто-то швыряет кружку в сторону Башни. Потом — все. Трест слабеет. И звереет.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "kosoy": {
+  "speaker": "Косой",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "kosoy_known"
+     }
+    ],
+    "node": "exposed"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Рыжий в красной рубахе стоит на ящике. — Капля в сутки с головы! А завтра — две! Хватит платить Башне за то, что течёт из-под земли!",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "riot_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "dry_riot",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "[Восприятие] Сапоги у тебя новые, Косой. И воск на кошельке — красный.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "kosoy_known"
+       },
+       {
+        "type": "quest",
+        "quest": "dry_riot",
+        "stage": "truth"
+       }
+      ],
+      "next": "seen"
+     },
+     {
+      "text": "Кто тебе платит, Косой?",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "seen",
+       "fail": "shout",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "kosoy_known"
+        },
+        {
+         "type": "quest",
+         "quest": "dry_riot",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Веди. Я с вами.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dry_riot",
+        "value": "led"
+       },
+       {
+        "type": "quest",
+        "quest": "dry_riot",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 70
+       },
+       {
+        "type": "flag",
+        "key": "trust_emergency"
+       }
+      ],
+      "next": "led"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "shout": {
+    "text": "— Мне платит жажда! — ревёт Косой, и толпа ревёт с ним.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "seen": {
+    "text": "Косой спрыгивает с ящика и шипит: — Бунт нужен всем. Трест введёт чрезвычайку, новые печати, новые люди… — Он осекается. — Тем, кто держит печать, бунт нужнее всех.",
+    "options": [
+     {
+      "text": "…",
+      "next": "exposed"
+     }
+    ]
+   },
+   "exposed": {
+    "text": "Косой нервно оглядывается на толпу.",
+    "options": [
+     {
+      "text": "Показать толпе красный воск Косого.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dry_riot",
+        "value": "quelled"
+       },
+       {
+        "type": "quest",
+        "quest": "dry_riot",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 70
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "quelled"
+     },
+     {
+      "text": "Направим толпу на Монетный двор — там чеканят мутные капли.",
+      "if": [
+       {
+        "flag": "dull_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "mint",
+       "fail": "shout",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "dry_riot",
+         "value": "mint"
+        },
+        {
+         "type": "quest",
+         "quest": "dry_riot",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 70
+        },
+        {
+         "type": "flag",
+         "key": "mint_sacked"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Веди. Я с вами.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dry_riot",
+        "value": "led"
+       },
+       {
+        "type": "quest",
+        "quest": "dry_riot",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 70
+       },
+       {
+        "type": "flag",
+        "key": "trust_emergency"
+       }
+      ],
+      "next": "led"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "quelled": {
+    "text": "Вы поднимаете кошелёк Косого над головой. Красный воск видно всем. — Сургуч, — шепчет кто-то. Толпа расходится молча. Косого уже нет.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "mint": {
+    "text": "— На Монетный двор! — Толпа разворачивается от Башни. К вечеру у двора выбиты ворота, а приказ Совета о «лёгких» каплях висит на столбе у рынка.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "led": {
+    "text": "Толпа идёт к Башне. Стража стреляет в воздух, потом — не в воздух. К ночи Трест объявляет чрезвычайный закон и новые печати на каждую кружку.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "gravyor": {
+  "speaker": "Мастер Гравёр",
+  "portrait": "portrait_gravyor",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "dull_drops"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "dull_known"
+     }
+    ],
+    "node": "report"
+   },
+   {
+    "if": [
+     {
+      "flag": "dull_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Щуплый мастер в кожаном фартуке вертит каплю на свет. — Гравёр, мастер двора. По рынку ходят лёгкие капли — на четверть легче моих, а клеймо моё. Кто-то чеканит фальшивки, а повесят меня. Найдите, кто.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "dull_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "dull_drops",
+      "stage": "asked"
+     },
+     {
+      "type": "give",
+      "item": "false_drops"
+     }
+    ],
+    "options": [
+     {
+      "text": "Найду."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Нашли? — Гравёр не отрывается от штампа.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "report": {
+    "text": "Гравёр смотрит на приказ Совета и садится мимо стула. — Мой пресс. Мои руки. По их бумаге. — Он поднимает глаза. — Что теперь?",
+    "options": [
+     {
+      "text": "Обнародую. Нижний город имеет право знать.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dull_drops",
+        "value": "public"
+       },
+       {
+        "type": "quest",
+        "quest": "dull_drops",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 70
+       },
+       {
+        "type": "inc",
+        "key": "riot_heat",
+        "by": 1
+       }
+      ],
+      "next": "public"
+     },
+     {
+      "text": "Совет заплатит, чтобы это не всплыло. Отнесу приказ распорядителю.",
+      "if": [
+       {
+        "item": "council_order"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dull_drops",
+        "value": "blackmail"
+       },
+       {
+        "type": "quest",
+        "quest": "dull_drops",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 70
+       },
+       {
+        "type": "take",
+        "item": "council_order"
+       },
+       {
+        "type": "caps",
+        "amount": 200
+       },
+       {
+        "type": "karma",
+        "amount": -1
+       }
+      ],
+      "next": "blackmail"
+     },
+     {
+      "text": "Штамп заберу для суда.",
+      "if": [
+       {
+        "item": "mint_die"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dull_drops",
+        "value": "die"
+       },
+       {
+        "type": "quest",
+        "quest": "dull_drops",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 70
+       }
+      ],
+      "next": "die"
+     },
+     {
+      "text": "Промолчу. За долю.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dull_drops",
+        "value": "share"
+       },
+       {
+        "type": "quest",
+        "quest": "dull_drops",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 70
+       },
+       {
+        "type": "caps",
+        "amount": 100
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       }
+      ],
+      "next": "share"
+     }
+    ]
+   },
+   "public": {
+    "text": "— Пусть знают. — Гравёр снимает фартук. — А я уйду в Нижний город. Там моё клеймо ещё что-то значит.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "blackmail": {
+    "text": "Распорядитель Совета читает приказ, бледнеет и отсчитывает двести капель. — Бумаги не было, — говорит он. — И вас не было.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "die": {
+    "text": "— Берите, — Гравёр отворачивается. — На суде я скажу, чей это пресс.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "share": {
+    "text": "Гравёр молча отсчитывает сто капель. Руки у него дрожат.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Капли ещё звенят, — вздыхает Гравёр. — Просто теперь я знаю, чем.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "mint_scales": {
+  "speaker": "Весы Монетного двора",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Весы с латунными чашками. Рядом ящик с заготовками для капель.",
+    "options": [
+     {
+      "text": "[Наука] Взвесить мутные капли и заготовки.",
+      "if": [
+       {
+        "item": "false_drops"
+       },
+       {
+        "skill": "science",
+        "gte": 40
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dull_hint"
+       }
+      ],
+      "next": "weighed"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "weighed": {
+    "text": "Мутная капля весит ровно столько, сколько заготовка из ящика в углу. Не из чужой мастерской — отсюда. Фальшивки чеканят на этом дворе.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "mint_press": {
+  "speaker": "Монетный пресс",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Винтовой пресс, тёплый, хотя днём двор не работал.",
+    "options": [
+     {
+      "text": "[Восприятие] Осмотреть пресс.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 7
+       },
+       {
+        "notFlag": "dull_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "council_order"
+       },
+       {
+        "type": "flag",
+        "key": "dull_known"
+       },
+       {
+        "type": "quest",
+        "quest": "dull_drops",
+        "stage": "truth"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Осмотреть пресс внимательно: весы говорят, чеканят здесь.",
+      "if": [
+       {
+        "flag": "dull_hint"
+       },
+       {
+        "notFlag": "dull_known"
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "council_order"
+       },
+       {
+        "type": "flag",
+        "key": "dull_known"
+       },
+       {
+        "type": "quest",
+        "quest": "dull_drops",
+        "stage": "truth"
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Вынуть поддельный штамп из пресса.",
+      "if": [
+       {
+        "flag": "dull_known"
+       },
+       {
+        "noItem": "mint_die"
+       }
+      ],
+      "check": {
+       "skill": "lockpick",
+       "pass": "die",
+       "fail": "jammed",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "mint_die"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "found": {
+    "text": "Под прессом — бумага: «Монетному двору: к Нижнему городу чеканить облегчённый ряд. Совет пайщиков». Печать Башни. В прессе — штамп, не такой, как у Гравёра.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "die": {
+    "text": "Штамп выходит из гнезда с тихим щелчком. Тяжёлый, холодный, с каплей на торце.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "jammed": {
+    "text": "Штамп засел намертво.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "apprentice": {
+  "speaker": "Подмастерье",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Мальчишка в саже метёт стружку. — Мастер злой, не подходите.",
+    "options": [
+     {
+      "text": "Что вы чеканите по ночам?",
+      "if": [
+       {
+        "flag": "dull_asked"
+       },
+       {
+        "notFlag": "dull_known"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "pass": "told",
+       "fail": "silent",
+       "passEffects": [
+        {
+         "type": "give",
+         "item": "council_order"
+        },
+        {
+         "type": "flag",
+         "key": "dull_known"
+        },
+        {
+         "type": "quest",
+         "quest": "dull_drops",
+         "stage": "truth"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "told": {
+    "text": "— Ночью приходят люди из Башни, — шепчет подмастерье. — С бумагой. Мастеру не говорят, мастер спит. — Он суёт вам сложенный лист. — Вот, забыли в прошлый раз.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "silent": {
+    "text": "— Ничего не чеканим. Спим мы по ночам.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "recruiter": {
+  "speaker": "Вербовщик Треста",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "tax_man"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "tax_joined"
+     }
+    ],
+    "node": "round"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Сборщик за столом листает книгу. — Трест набирает сборщиков. Бляха, паёк, десятая часть сбора. Первый обход — по книге.",
+    "options": [
+     {
+      "text": "Записывай.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tax_joined"
+       },
+       {
+        "type": "quest",
+        "quest": "tax_man",
+        "stage": "asked"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "join": {
+    "text": "— Первый обход: колодец вдовы Агафьи в Нижнем городе. Не платит третий месяц. Опечатать. — Он пододвигает свинцовую пломбу. — Бляху получишь, когда пломба будет висеть.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "round": {
+    "text": "— Опечатал колодец вдовы? Нет? Тогда что стоишь?",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "— Сборщик! Бляха при тебе? Книга всё помнит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "agafya": {
+  "speaker": "Вдова Агафья",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "tax_man"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "tax_joined"
+     }
+    ],
+    "node": "round"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Старуха в чёрном платке сидит у колодца. — Воды лишней нет, путник. Колодец мой, мужнин, а Трест говорит — общий.",
+    "options": [
+     {
+      "text": "Вы — мать Лейки?",
+      "if": [
+       {
+        "flag": "met_lejka"
+       }
+      ],
+      "next": "mother"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "mother": {
+    "text": "— Мать. — Агафья поджимает губы. — Не говори ей, что я жаловалась.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "round": {
+    "text": "Вдова видит пломбу у вас в руке и встаёт. — Пришли, значит. Опечатывать. — Из-под крышки колодца тянет сквозняком: внизу не вода, а лестница.",
+    "options": [
+     {
+      "text": "Опечатать.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tax_man",
+        "value": "sealed"
+       },
+       {
+        "type": "quest",
+        "quest": "tax_man",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "give",
+        "item": "trust_badge"
+       },
+       {
+        "type": "inc",
+        "key": "rep_trust",
+        "by": 10
+       },
+       {
+        "type": "flag",
+        "key": "lejka_enemy"
+       },
+       {
+        "type": "flag",
+        "key": "aqueduct_closed"
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       }
+      ],
+      "next": "sealed"
+     },
+     {
+      "text": "Не буду. Пусть Трест ищет другого.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tax_man",
+        "value": "refused"
+       },
+       {
+        "type": "quest",
+        "quest": "tax_man",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "refused"
+     },
+     {
+      "text": "[Взлом] Повесить пломбу, которая снимается рукой.",
+      "if": [
+       {
+        "skill": "lockpick",
+        "gte": 30
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tax_man",
+        "value": "warned"
+       },
+       {
+        "type": "quest",
+        "quest": "tax_man",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "give",
+        "item": "trust_badge"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_warm"
+       }
+      ],
+      "next": "warned"
+     },
+     {
+      "text": "[Ремонт] Согнуть пломбу с секретом: держит только для вида.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 30
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tax_man",
+        "value": "warned"
+       },
+       {
+        "type": "quest",
+        "quest": "tax_man",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       },
+       {
+        "type": "give",
+        "item": "trust_badge"
+       },
+       {
+        "type": "flag",
+        "key": "lejka_warm"
+       }
+      ],
+      "next": "warned"
+     },
+     {
+      "text": "Потом."
+     }
+    ]
+   },
+   "sealed": {
+    "text": "Свинец щёлкает на крышке. Агафья молча уходит в лачугу. Этой ночью водоносам не пройти водоводом. Вербовщик выдаёт бляху: жестяная капля в кольце.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "refused": {
+    "text": "— Спасибо, — говорит Агафья, не глядя. — Скажи Лейке… Ничего не говори.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "warned": {
+    "text": "Пломба висит, как положено. Агафья смотрит, как вы показываете ей секрет, и кивает. — Лейка узнает, кто нам помог. Бляху вербовщик выдаст вам за «опечатанный» колодец.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "Агафья сидит у колодца и молчит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "widow_well": {
+  "speaker": "Колодец вдовы",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Колодец вдовы Агафьи. Из-под крышки тянет сквозняком — внизу не вода, а железная лестница.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ }
+}

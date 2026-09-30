@@ -9,6 +9,7 @@ import * as T from './art/props_terrain.mjs';
 import * as K from './art/props_camp.mjs';
 import * as TN from './art/props_town.mjs';
 import * as AR from './art/props_areas.mjs';
+import * as CT from './art/props_city.mjs';
 import { CHARS, ARMOR_LOOKS, buildSheet, buildPortrait, FRAME_W, FRAME_H, FOOT_X, FOOT_Y, POSES } from './art/chars.mjs';
 import { CREATURES, buildCreatureSheet, S_FRAME_W, S_FRAME_H, S_FOOT_X, S_FOOT_Y, S_POSES } from './art/creatures.mjs';
 import { icon, ICONS } from './art/icons.mjs';
@@ -91,6 +92,14 @@ const entries = [
   prop('board', K.board()),
   prop('scrap_pile', K.scrapPile()),
   prop('burrow', K.burrow()),
+  prop('bars_closed', CT.bars(false)),
+  prop('bars_open', CT.bars(true)),
+  prop('tower', CT.tower()),
+  prop('water_tower', CT.waterTower()),
+  prop('press', CT.press()),
+  prop('bunk', CT.bunk()),
+  prop('podium', CT.podium()),
+  prop('scales', CT.scales()),
   prop('hatch', AR.hatch()),
   prop('ladder', AR.ladder()),
   prop('valve', AR.valve()),

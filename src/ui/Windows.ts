@@ -120,6 +120,19 @@ function chapter2Next(game: Game): string {
   return 'Впереди — водонапорные башни Запруды. Нотариус в Нижнем городе прочтёт Мандат. Если сборщики на воротах пропустят…';
 }
 
+const GATE_WORDS: Record<string, string> = { pass: 'по пропуску', collector: 'назвавшись сборщиком', bearers: 'водоводом, с водоносами', fight: 'с боем' };
+const BOUNTY_WORDS: Record<string, string> = { escaped: 'бежали из «Сухого дока» стоками', talked: 'надзиратель отпустил', riot: 'вырвались с бунтом заключённых', bail: 'вышли под залог', slipped: 'ушли от Шлюза в толпу', doubt: 'Шлюз отпустил, усомнившись', fought: 'отбились от Шлюза' };
+const FORGERY_WORDS: Record<string, string> = { public: 'зачитана на площади', shlyuz: 'у Шлюза', kept: 'при вас, для суда', sold: 'продана Затвору' };
+const RIOT_WORDS: Record<string, string> = { led: 'бунт возглавлен', quelled: 'бунт погашен', mint: 'толпа разнесла Монетный двор' };
+
+function chapter3Next(game: Game): string {
+  const fate = game.flag('forgery_fate');
+  if (fate === 'sold') return 'Капли звенят в мешке, а улики больше нет. Затвор вам благодарен — пока. На севере, за Солончаками, ждёт Соль и вторая половина ключа.';
+  if (fate === 'public') return 'Нижняя Запруда знает, что копия Затвора — подделка. Трест слабеет и звереет. Пора уходить на север, в Соль, пока ворота ещё открыты.';
+  if (fate === 'shlyuz') return 'Шлюз унёс улику в Башню и впервые не знает, кому служит. Дорога ведёт на север, к Соли, где ищут вторую половину ключа.';
+  return 'Улика подделки у вас, Мандат заверен. Нотариус сказал: пластина — только половина. Вторая — где-то на севере, за Солончаками, в Соли.';
+}
+
 function chapterNext(game: Game): string {
   const out = game.flag('trust_outcome');
   if (out === 'surrender') return 'Колодец снова даёт воду, а тубус уехал в Запруду. Трест у вас в долгу. Только отчего-то кажется, что до Запруды тубус не доедет…';
@@ -169,12 +182,25 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
     ['Капли', String(st.caps)],
     ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
   ];
-  const rows = chapter === 2 ? rows2 : rows1;
+  const rows3 = [
+    ['Странник', `${c.name}, уровень ${c.level}`],
+    ['Время в пути', fmtTime(st.stats.playMs)],
+    ['Ворота Запруды', GATE_WORDS[String(game.flag('gate_way'))] ?? '—'],
+    ['Мандат', game.flag('mandate_certified') ? 'заверен Нотариусом' : 'не заверен'],
+    ['Улика подделки', FORGERY_WORDS[String(game.flag('forgery_fate'))] ?? '—'],
+    ['Награда за голову', BOUNTY_WORDS[String(game.flag('bounty_done'))] ?? '—'],
+    ['Нижний город', RIOT_WORDS[String(game.flag('dry_riot'))] ?? 'затаился'],
+    ['Сургучные метки', String([1, 2, 3, 4, 5].filter((n) => game.flag(`seal_mark_${n}`)).length)],
+    ['Убито врагов', String(st.stats.kills)],
+    ['Капли', String(st.caps)],
+    ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
+  ];
+  const rows = chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
   rows.forEach(([k, v], i) => {
     root.add(txt(s, x + 60, y + 88 + i * 27, k, 15, C.crt));
     root.add(txt(s, x + w - 60, y + 88 + i * 27, v, 15, C.crtBright, 360, true).setOrigin(1, 0).setAlign('right'));
   });
-  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
+  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
   const bStay = button(s, x + 70, y + h - 72, 250, 32, 'ОСТАТЬСЯ В СУШИ', () => (root.destroy(), onStay()));
   const bNew = button(s, x + w - 320, y + h - 72, 250, 32, 'НОВАЯ ИГРА', onNew);
   root.add([bStay.root, bNew.root]);

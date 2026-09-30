@@ -1,6 +1,12 @@
 # PROJECT_STATE
 
 ## Current
+Stage Z done: Chapter III «Запруда».
+- A city of five areas: the Lower city behind a gated wall, the Drop market with the Notary and the Mint, the Upper city with the Tower and its archive, the prison «Сухой док», the sewers.
+- Main line: the gate four ways; Нотариус Штемпель certifies the Mandate (a half of the key) and points at the forged copy; the archive; Шлюз and the bounty; the prison and four ways out; four choices ending the chapter.
+- Five side quests.
+- 416 unit and 22 e2e tests.
+
 Stage L done: «Районы». Towns are now made of several maps, as in the classic isometric RPGs:
 - hatched ways out at the edges lead to the next area or to the world map;
 - a town of several known areas opens its plan from the world map;
@@ -190,6 +196,21 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
     - three mites: Стрелок 100%, Механик 93%, Говорун 73%;
     - the eel queen with her brood: Стрелок 32%, Механик 3% (killing her is the hard way; two peaceful ways exist).
 
+## Stage Z «Запруда»: Chapter III (done)
+- [x] Z0. Bible: the five areas, the chapter's steps by flags (main-quest.md), five side quests with endings, people, slides
+- [x] Z1. Engine: the Chapter III screen (`showComplete` rows and the way on), `confiscate` / `unconfiscate` effects (an arrest takes weapons, grenades, ammo and armor into `state.confiscated`), Зоя sells a Guild pass, `open_<id>` opens any `*_closed` prop (door or grille)
+- [x] Z2. Art: 13 people of Запруда, the sewer rat, bars, the Tower, water towers, the mint press and scales, bunks, the platform; icons for the die and the shiv
+- [x] Z3. Maps (tools/build-zap-*.mjs): «Нижний город» (the gate outside the wall), «Капельный рынок» (the Notary and the Mint under roofs), «Верхний город» (the Council hall, the archive, Ада's house), «Сухой док» (cells), «Стоки» (aqueduct, hatch, grate)
+- [x] Z4. Main line (`dialogues/zapruda.json`, quest `zapruda`): the gate four ways; the Notary with each fate of the tube (in the bag, a copy, with the Trust, hidden); the archive four ways; Шлюз and the bounty (arrest, slip away, doubt, fight); «Сухой док» (shiv and grate, bail, Лейка's word, a riot); the choice four ways — each sets `chapter3_done`
+- [x] Z5. Side quests: «Водоносы Лейки», «Тихий этаж» (also pays the Notary), «Мутные капли», «Сухой бунт», «Мытарь» (the badge opens the Upper city and the archive)
+- [x] Z6. Balance at level 3:
+  - breaking the gate: Стрелок 99%, Механик 76%, Говорун 51%;
+  - the dock riot bare-handed with four prisoners against the warden and two club guards: 79% / 56% / 52%.
+- [x] Z7. Tests:
+  - `tests/unit/zapruda.test.ts`: every way of the main line and every ending of the side quests, plus the balance;
+  - `tests/e2e/zapruda.spec.ts`: pass → Notary (a roof melts) → archive → Шлюз → Лейка → the chapter screen.
+  - Also: skill tags doubled by hand in check options («[Красноречие 70%] [Красноречие] …») removed across all dialogues.
+
 ## Story milestones («Сушь», see docs/STORY.md)
 - [x] S1. Title «Сушь», no «мини» framing, currency «капли», story bible, Mandate hook in Chapter I (tube, Hank's confession, Marta's warning, chapter-end screen)
 - [x] S2. Chapter I finale: Inspector Шлюз and the collectors (conditional cast from flags, people turning hostile, gunmen AI, spared story figures, six outcomes, well seal, letter, Hank joins, west exit ends the chapter)
@@ -197,7 +218,7 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [x] S5. Три столба (barter and reputation came with stage G; Соль moves to Chapter IV, S9)
 - [x] S1b. Story bible expanded to an epic (docs/story/: 3 regions, 30 locations, 13 factions, 9 chapters, 70 side quests, secret lines, 8 companions, endings); first Сургуч seal hook in Chapter I
 - [x] S6. Chapter II «Тракт»: Три столба, Колючка, Писарь, Сухари raid (stage T)
-- [ ] S7. Chapter III «Запруда»: multi-map city, Нотариус, archive, «Сухой док»; side quests of the Lower city
+- [x] S7. Chapter III «Запруда» (stage Z)
 - [ ] S8. Region Низовье complete (the barge done in stage L): Мёртвые поля, приют Тишины, Элеватор, Ковчег; companions Хэнк, Ржавчик, Тимофей
 - [ ] S9. Chapter IV «Соль» + Соляное море; caravans; arena in the story
 - [ ] S10. Chapter V «Кристалл», «Роса-2»; Солевики, Гранит
@@ -227,8 +248,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
-- **S7, Chapter III «Запруда»:** a city of several maps, the Нотариус, the archive, «Сухой док», the Lower city side quests (`side-quests.md` 13–20). Its gate is the `zapruda` location.
-  - Carry over: the water-bearers' path map (`water_path_map`), `lejka_friend`, `trust_knows_seal`, `mandate_copy`, `luka`.
+- **S9, Chapter IV «Соль»:** the salt works and the Salt sea, the second half of the key (`side-quests.md`, `main-quest.md` Глава IV). The way there: the `to_salt` exit on the world map.
+  - Carry over from Chapter III: `forgery_fate` (public / shlyuz / kept / sold), `shlyuz_doubt`, `ada_witness`, `dull_drops` (die = court evidence), `dry_riot`, `trust_emergency`, `lejka_ally`, `tax_man`, seal marks 1–5.
+  - Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are not built yet; the sewers and the Lower city are ready for them.
 - **S8, the rest of Низовье:**
   - places: Мёртвые поля, Приют Тишины (the Полусухие: `rep_dry`, `resin_thief`), Элеватор, Ковчег;
   - companions Хэнк, Ржавчик, Тимофей.
@@ -245,9 +267,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 356 tests, with the balance numbers printed to stderr.
+- `npm test`: 416 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 20 tests, about 7 min.
+- `npm run test:e2e`: 22 tests, about 8 min.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;

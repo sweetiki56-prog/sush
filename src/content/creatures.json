@@ -27,5 +27,9 @@
   "erema": { "name": "Водонос Ерёма", "sheet": "waterbearer", "tags": ["human"], "hp": 12, "ap": 8, "seq": 10, "skill": 45, "weapons": ["knife"], "dr": 5, "crit": 5, "perception": 6, "xp": 20, "loot": { "flask": 1 }, "fleeAt": 0.5 },
   "sand_eel": { "name": "Песчаный угорь", "sheet": "sand_eel", "tags": ["beast"], "hp": 12, "ap": 6, "seq": 12, "skill": 55, "weapons": ["eel_bite"], "dr": 5, "crit": 8, "perception": 2, "xp": 30, "loot": { "eel_skin": 1 }, "fleeAt": 0, "rooted": true },
   "eel_queen": { "name": "Матка угрей", "sheet": "eel_queen", "tags": ["beast"], "hp": 36, "ap": 8, "seq": 10, "skill": 60, "weapons": ["eel_bite_big"], "dr": 15, "crit": 8, "perception": 3, "xp": 120, "loot": { "eel_skin": 2 }, "fleeAt": 0, "rooted": true },
-  "rust_mite": { "name": "Ржавый клещ", "sheet": "rust_mite", "tags": ["beast"], "res": { "poison": 50 }, "hp": 5, "ap": 7, "seq": 13, "skill": 45, "weapons": ["mite_bite"], "dr": 0, "crit": 3, "perception": 4, "xp": 10, "fleeAt": 0 }
+  "rust_mite": { "name": "Ржавый клещ", "sheet": "rust_mite", "tags": ["beast"], "res": { "poison": 50 }, "hp": 5, "ap": 7, "seq": 13, "skill": 45, "weapons": ["mite_bite"], "dr": 0, "crit": 3, "perception": 4, "xp": 10, "fleeAt": 0 },
+  "zap_guard": { "name": "Стражник Башни", "sheet": "zap_guard", "tags": ["human"], "hp": 20, "ap": 8, "seq": 10, "skill": 50, "guns": 50, "aim": 6, "weapons": ["rifle", "club"], "dr": 15, "dt": 2, "crit": 5, "perception": 6, "xp": 70, "loot": { "ammo": 8 }, "fleeAt": 0.25 },
+  "prisoner": { "name": "Заключённый", "sheet": "prisoner", "tags": ["human"], "hp": 12, "ap": 7, "seq": 9, "skill": 45, "weapons": ["shiv", "club"], "dr": 0, "crit": 6, "perception": 5, "xp": 30, "fleeAt": 0.3 },
+  "rat": { "name": "Крыса стоков", "sheet": "rat", "tags": ["beast"], "res": { "poison": 50 }, "hp": 6, "ap": 8, "seq": 12, "skill": 45, "weapons": ["rat_bite"], "dr": 0, "crit": 4, "perception": 5, "xp": 12, "fleeAt": 0.3 },
+  "dock_guard": { "name": "Стражник дока", "sheet": "zap_guard", "tags": ["human"], "hp": 16, "ap": 7, "seq": 9, "skill": 50, "weapons": ["club"], "dr": 10, "dt": 1, "crit": 5, "perception": 5, "xp": 50, "fleeAt": 0.3 }
 }
