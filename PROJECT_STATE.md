@@ -239,6 +239,11 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - The journal has no scrolling, and it fills up.
 - `docs/story/side-quests.md` keeps both the early quest list and the stage R versions. The R versions are the built ones.
 
+**Where it is published.**
+- The code: https://github.com/sweetiki56-prog/sush.
+- The single-player game: https://sweetiki56-prog.github.io/sush/, rebuilt by GitHub Actions on every push to `main` in about 2 min.
+- Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
+
 **How to check that everything works**
 - `npm test`: 356 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.

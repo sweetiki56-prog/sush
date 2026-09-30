@@ -47,6 +47,7 @@
 - `npm run lint`
 - `npm run build` — typecheck plus the production build.
 - `npm run gen:map` — rebuild every map JSON in `public/assets/maps/`: all towns, the arena, the world grid and the battlefields. One builder alone also works, e.g. `node tools/build-pillars.mjs`.
+- Publishing: every push to `main` builds the single-player game with `VITE_OFFLINE=1` (no co-op or arena, since a page host has no game server) and puts it on GitHub Pages at https://sweetiki56-prog.github.io/sush/ (`.github/workflows/pages.yml`). Co-op and the arena need `npm run server` or the Docker image on a host with WebSockets.
 - `npm run gen:assets` — regenerate the texture pack in `public/assets/gen/`: atlas, sheets, grounds, the world chart and the loading backdrops. Run it after `gen:map`; it takes about 35 s.
 
 Done means: `npm test`, `npm run lint`, `npm run build` and `npm run test:e2e` all pass. For UI, layout or flow changes, also play the real flow in the browser; one screenshot is not verification.
