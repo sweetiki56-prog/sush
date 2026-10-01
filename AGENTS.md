@@ -33,8 +33,9 @@
 - `src/ui`, `src/world`, `src/fx`, `src/audio`, `src/net` — Phaser UI, map rendering, post effects, synthesized sound and music, client transports.
 - `server/` — the game server.
 - `tools/` — map builders and art generators:
-  - `build-map.mjs` (Rusty Well), `build-rw-cistern.mjs`, `build-pillars.mjs`, `build-pillars-ruins.mjs`, `build-kolyuchka.mjs`, `build-kolyuchka-glass.mjs`, `build-barge-{bed,deck,post}.mjs`, `build-zap-{lower,market,upper,dock,sewers}.mjs`, `build-salt-{market,guild,arena,mines}.mjs`, `build-sea-{wrecks,lair}.mjs`, `build-crystal-{gate,council,baths,deep}.mjs`, `build-arena.mjs`, `build-world.mjs`, `build-encounters.mjs`, all on `map-kit.mjs`;
-  - `gen-assets.mjs` with `tools/art/*`.
+  - `build-*.mjs` — one builder per map, all on `map-kit.mjs`; `gen:map` in `package.json` lists them in order. `build-world.mjs` is the world grid (112×80, the Верховья on top: `north: 32`), `build-encounters.mjs` the road battlefields, `hostage-hooks.mjs` shared `arrive` hooks of Chapter VIII;
+  - `gen-assets.mjs` with `tools/art/*` (people `chars.mjs`, beasts `creatures.mjs`, props `props_*.mjs`, the chart `worldmap.mjs`);
+  - `content-gen/*.py` — the content generators of the late stages (see «Content generators» below).
 - `tests/unit` — Vitest. `rooms.ts` builds a real room, `story.ts` has the `say` / `talk` / `winFight` helpers, `sim.ts` runs balance simulations.
 - `tests/e2e` — Playwright, driven through the `window.__world` / `__travel` / `__menu` dev hooks.
 
@@ -43,12 +44,16 @@
 - `npm run dev:server` — the game server for co-op and the arena on port 8787, with debug intents on. Run it next to `dev`; Vite forwards `/ws` to it.
 - `npm run server` — production: serves `dist/` and the rooms on `PORT`. Saves go to `DATA` (default `server/data`). `docker build -t rusty-well .` packs both.
 - `npm test` — unit tests, under 10 s.
-- `npm run test:e2e` — Playwright, about 8 min. It starts Vite on 5199 and a test server on 8799, and needs `npx playwright install chromium`.
+- `npm run test:e2e` — Playwright, about 13 min. It starts Vite on 5199 and a test server on 8799, and needs `npx playwright install chromium`.
 - `npm run lint`
 - `npm run build` — typecheck plus the production build.
 - `npm run gen:map` — rebuild every map JSON in `public/assets/maps/`: all towns, the arena, the world grid and the battlefields. One builder alone also works, e.g. `node tools/build-pillars.mjs`.
 - Publishing: every push to `main` builds the single-player game with `VITE_OFFLINE=1` (no co-op or arena, since a page host has no game server) and puts it on GitHub Pages at https://sweetiki56-prog.github.io/sush/ (`.github/workflows/pages.yml`). Co-op and the arena need `npm run server` or the Docker image on a host with WebSockets.
-- `npm run gen:assets` — regenerate the texture pack in `public/assets/gen/`: atlas, sheets, grounds, the world chart and the loading backdrops. Run it after `gen:map`; it takes about 35 s.
+- `npm run gen:assets` — regenerate the texture pack in `public/assets/gen/`: atlas, sheets, grounds, the world chart and the loading backdrops. Run it after `gen:map`; it takes about 2–3 min now.
+
+**On a fresh machine** (Codex, a new laptop): Node 20+, Python 3 (only for `tools/content-gen`), then `npm ci` and `npx playwright install chromium`. Nothing else: no keys, no `.env` is needed to build, test or run the single-player game.
+
+**e2e under load.** With 4 workers a few heavy specs (combat, chapter2, road, finale, gear, dam, lowland) can time out; every one of them passes alone. Run `npx playwright test --workers=2`, and rerun a failed spec alone (`npx playwright test tests/e2e/<spec> --workers=1`) before calling it broken.
 
 Done means: `npm test`, `npm run lint`, `npm run build` and `npm run test:e2e` all pass. For UI, layout or flow changes, also play the real flow in the browser; one screenshot is not verification.
 
@@ -66,7 +71,24 @@ Done means: `npm test`, `npm run lint`, `npm run build` and `npm run test:e2e` a
 - The game must stay playable on a phone by touch alone (landscape): every hotkey has a button, lists scroll by a finger (`dragScroll`, `ScrollBox`), text entry uses `overlayInput`, targets are wide and ~44 px tall, a fight on touch aims on the first tap and acts on the second. `tests/e2e/mobile.spec.ts` plays the start of the game by touch in a phone viewport — extend it with new flows.
 - Long lists in a window go in a `ScrollBox` (`src/ui/ScrollBox.ts`): wheel, drag, arrows and PgUp/PgDn, clipped by a mask. Never let text run past a frame.
 - Every problem gets at least three solutions. Every side quest gets a twist and leaves a mark in the ending slides.
-- Commit only when the owner asks. Never touch `.env*` files.
+- Commit only when the owner asks. Never touch `.env*` files. Never put a token or password in a file, a commit or a command: use your own `gh auth`.
+
+## Pitfalls we hit (read before writing content)
+- **A speaker who leaves with the outcome.** If an actor's `if` hides it once a flag is set (`notFlag: 'bell'`, a hostage freed, a raid ended), set that flag on the last «…» option of the closing node, never on the choice or in the node's own `effects`: the actor leaves the map with the flag and the talk closes before its last line is shown.
+- **Map objects have no `if`.** To show or hide something by flags use an actor (with `if`), or a `*_closed` prop (`bars_closed`, `door_closed`) that the flag `open_<id>` opens. Exits take `if` and `closed`.
+- **`cleared` hooks fire every time the group is empty** while their `if` holds: guard them with the flag they set (`notFlag: 'herd'`).
+- **Hostiles attack on sight.** A peaceful way past a guarded room needs `peace` conditions on the guards (an alarm flag, a pass), not just a dialogue.
+- **World-map coordinates.** Since stage U the old land is 32 rows lower (`north` in `world_low.json`); old saves move once in `fitWorld` (`src/core/travel/Travel.ts`). A test or content cell for Низовье or the Солончаки is `y + 32` of the old docs.
+- **Formatting.** `locations.json` and `travel.json` are formatted by Prettier (`npx prettier --write`); `creatures`, `weapons`, `traders`, `companions` use one entry per line (`tools/content-gen/jsonfmt.py`); `quests` and dialogues are `indent=1`, `items` `indent=2`.
+- **Balance simulations are slow.** A test that runs thousands of fights gets an explicit timeout (`it(..., 180_000)`).
+- **The ending is data** (`content/endings.json`): a new place, companion or quest outcome worth remembering gets a slide or a variant there. Slides never decline the hero's name: keep `{name}` in the nominative.
+
+## Content generators
+`tools/content-gen/*.py` wrote the content of the late stages: `skit.py` (Chapter VI), `upper.py` (VII), `bones.py` (VIII), `dam.py` (IX and the ending slides), `lowland.py` (the rest of Низовье). The JSON in `src/content` is the source of truth; the scripts are kept so a whole stage can be regenerated after a change.
+- Run from the repo root, **in this order**, then format: `for g in skit upper bones dam lowland; do python3 tools/content-gen/$g.py; done && npx prettier --write src/content/locations.json src/content/travel.json`. Later scripts patch what earlier ones wrote (the console of «Шептун», the trial, the slides), so never run one of them alone after editing an earlier one.
+- Run as they are, they reproduce the committed JSON byte for byte (`git status` stays clean). If you edit a stage's JSON by hand, either make the same edit in its script or stop using that script for that stage — never let a rerun silently undo a hand edit.
+- Content of Chapters I–V was written before these scripts were kept: edit its JSON directly.
+- New stages may use the same helpers (`F`, `Q`, `G`, `opt`, `node`, `dlg`, `chk`, `E`, `fl`, `nf`, … at the top of any script) or plain JSON edits — both are fine.
 
 ## How to add…
 **A side quest**

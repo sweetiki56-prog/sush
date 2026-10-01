@@ -349,6 +349,8 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 ## Handoff (for the next agent: Codex, Claude, Cursor)
 Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, item or place. Then read this file and the bible in `docs/story/`.
 
+**Switching agents (Codex, Claude, Cursor).** Everything needed is in the repo: `AGENTS.md` (rules, commands, «Pitfalls we hit», «Content generators»), this file, the bible in `docs/story/`, the decisions in `docs/DECISIONS.md`. Setup: `npm ci`, `npx playwright install chromium`. The late stages' content scripts are in `tools/content-gen/`. Next work: «Where to continue» below — S15 (the secrets pass) is the last big milestone; then the Chapter III side quests 18–20 and publishing co-op on a Node host.
+
 **Where things are**
 - Chapter I: `tools/build-map.mjs` and `dialogues/rusty_well.json`.
 - Chapter II:
@@ -388,7 +390,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 **How to check that everything works**
 - `npm test`: 762 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 29 tests, about 13 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
+- `npm run test:e2e`: 29 tests, about 13 min; use `--workers=2` (see «e2e under load» in `AGENTS.md`). Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;
