@@ -1,13 +1,15 @@
-// Builds public/assets/maps/world_low.json: the terrain grid of the world map — Низовье in columns 0–63 and the
-// Солончаки east of it (stage K) — from the landmarks in docs/story/world.md. Deterministic. Run by `npm run gen:map`.
+// Builds public/assets/maps/world_low.json: the terrain grid of the world map — the Верховья in rows 0–31 (stage U),
+// Низовье below them in columns 0–63 and the Солончаки east of it (stage K) — from the landmarks in
+// docs/story/world.md. Deterministic. Run by `npm run gen:map`.
 import { writeFileSync } from 'node:fs';
 import { makeNoise } from './art/draw.mjs';
 
 const W = 112;
 const LOW_W = 64; // Низовье; the Солончаки lie east of it
-const H = 48;
+const H = 48; // Низовье and the Солончаки, drawn first in their own rows as before stage U
+const NORTH = 32; // the Верховья, added on top: everything below moved down by this many rows
 const noise = makeNoise(203);
-// . sand  | riverbed  : cracks  ^ rocks  x dead fields  _ salt  ~ delta  = road  s the Salt sea's crust
+// . sand  | riverbed  : cracks  ^ rocks  x dead fields  _ salt  ~ delta  = road  s the Salt sea's crust  n highland
 const g = Array.from({ length: H }, () => Array(W).fill('.'));
 const set = (x, y, c) => x >= 0 && y >= 0 && x < W && y < H && (g[y][x] = c);
 
@@ -41,14 +43,14 @@ for (let y = 0; y < H; y++) {
 }
 for (let y = 12; y < 19; y++) for (let x = 33; x < 40; x++) if (noise(x * 0.4, y * 0.4) > 0.35) set(x, y, ':');
 
-/** Roads as polylines between cells (docs/story/world.md «Дороги»). */
-export const ROADS = [
+/** Roads of Низовье and the Солончаки, in their own rows (before the Верховья were added on top). */
+const LOW_ROADS = [
   [[14, 36], [16, 32], [18, 28]], // Ржавый колодец — Три столба
   [[18, 28], [19, 24], [20, 19], [23, 14], [26, 10]], // тракт: Колючка, Запруда
   [[18, 28], [24, 27], [31, 25], [38, 23], [45, 23], [51, 25], [63, 25], [68, 24], [74, 24]], // восточная дорога: Баржа, Элеватор, Соль
   [[74, 24], [79, 26], [85, 29], [92, 31]], // соляной путь: Соль — Кладбище судов
 ];
-for (const line of ROADS)
+for (const line of LOW_ROADS)
   for (let i = 1; i < line.length; i++) {
     const [ax, ay] = line[i - 1];
     const [bx, by] = line[i];
@@ -60,6 +62,44 @@ for (const line of ROADS)
     }
   }
 
-const rows = g.map((r) => r.join(''));
-writeFileSync('public/assets/maps/world_low.json', JSON.stringify({ id: 'world_low', name: 'Низовье и Солончаки', width: W, height: H, rows, roads: ROADS }, null, 1));
-console.log(`world: ${W}x${H}`);
+
+// ---- the Верховья (stage U): foothills and canyons up to the dam; snow on the high peaks is the chart's art ----
+const up = Array.from({ length: NORTH }, () => Array(W).fill('n'));
+const setUp = (x, y, c) => x >= 0 && y >= 0 && x < W && y < NORTH && (up[y][x] = c);
+/** The Светлая above Низовье: from the dam «Заслон» down to where the old bed begins (riverX(0) at the seam). */
+const upRiverX = (y) => Math.round(30 + Math.sin(y / 5) * 1.2 * Math.min(1, (NORTH - y) / 6));
+for (let y = 0; y < NORTH; y++)
+  for (let x = 0; x < W; x++) {
+    const n = noise(x * 0.17 + 7, y * 0.17 + 90);
+    const blob = (cx, cy, rx, ry, rough = 0.6) => ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 < 1 + (n - 0.5) * rough;
+    const ridge = y < 2 + n * 2 || x < 3 + n * 4 || x > 60 + n * 6 || (n > 0.62 && Math.abs(x - upRiverX(y)) > 4);
+    if (ridge && !blob(44, 11, 2.2, 1.6) && !blob(24, 20, 4, 2.5) && !blob(11, 12, 3, 2.5) && !blob(40, 24, 4, 2.5) && !blob(35, 5, 1.5, 1.2)) up[y][x] = '^';
+    else if (blob(11, 12, 5, 4, 0.8) || (n < 0.3 && x < 60)) up[y][x] = ':'; // the canyon of the Костяной круг, gullies
+    else if (blob(40, 24, 5, 3)) up[y][x] = '.'; // the old capital's plain
+  }
+// the dam's gorge and the mountains over the Солончаки stay rock
+for (let y = 0; y < NORTH; y++) for (let x = 60; x < W; x++) up[y][x] = noise(x * 0.2, y * 0.2 + 300) > 0.48 || y > NORTH - 4 || y < 3 || x > W - 4 ? '^' : 'n';
+for (let y = 2; y < NORTH; y++) for (let d = -1; d <= 1; d++) setUp(upRiverX(y) + d, y, '|');
+
+/** Roads as polylines between cells on the whole chart (docs/story/world.md «Дороги»). */
+export const ROADS = [
+  ...LOW_ROADS.map((line) => line.map(([x, y]) => [x, y + NORTH])),
+  [[26, 42], [27, 37], [27, 31], [26, 25], [24, 20]], // по руслу на север: Запруда — Депо «Узловое»
+  [[24, 20], [27, 15], [29, 12], [30, 9]], // Депо — перевал «Ворота»
+];
+const all = [...up, ...g];
+for (const line of ROADS.slice(LOW_ROADS.length))
+  for (let i = 1; i < line.length; i++) {
+    const [ax, ay] = line[i - 1];
+    const [bx, by] = line[i];
+    const n = Math.max(Math.abs(bx - ax), Math.abs(by - ay));
+    for (let k = 0; k <= n; k++) {
+      const x = Math.round(ax + ((bx - ax) * k) / n);
+      const y = Math.round(ay + ((by - ay) * k) / n);
+      if (all[y][x] !== '|') all[y][x] = '=';
+    }
+  }
+
+const rows = all.map((r) => r.join(''));
+writeFileSync('public/assets/maps/world_low.json', JSON.stringify({ id: 'world_low', name: 'Сушь', width: W, height: H + NORTH, north: NORTH, rows, roads: ROADS }, null, 1));
+console.log(`world: ${W}x${H + NORTH}`);

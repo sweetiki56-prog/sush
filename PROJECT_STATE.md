@@ -1,6 +1,12 @@
 # PROJECT_STATE
 
 ## Current
+Stage U done: Chapter VII «Шептун и Депо» and the Верховья (S12).
+- The chart grew north to 112×80: the Верховья on top, the old land moved down 32 rows; old saves move with it (fog, the party, every other party), once.
+- The Депо «Узловое» of four areas (the yard, the workshops with the main pump, the archive of the Бригада, the tunnels of the water main), the relay «Шептун» of three (the slope, the tower, the bunker), the pass «Ворота» and the hidden Орлиное гнездо.
+- The archive four ways (the pump, Регламент 17, 500 капель, the tunnels), the plate and Верес's diary, the relay three ways and the voice that names the hero, the record sent to the Circle, to the Trust or nowhere ends the chapter.
+- Side quests 51, 52, 53, 55, 59, 61, 66; Лёля Реле and Ведро join; bald condors and Высокий берег drones on the chart.
+
 Stage S done: Chapter VI «Скит», «Роса-2» and Ирга (S11).
 - The Скит of four areas (the yard with the gate and the dew sails, the cells and the hall, the archive, the works «Роса-1» below) and «Роса-2» of three (the surface with Ирга's camp, the labs with the gas and the rejects, the capsules). A vent under the salt joins the works and the capsules.
 - Into the Скит four ways (knowledge, a bout, Ирга's word, the vent); Штемпель's letter in the archive (seal mark 8); the dew-catchers kept, earned as a keeper or stolen from the safe; брат Стужа fought, called off or slipped; the dew to the Order or to everyone ends the chapter.
@@ -236,6 +242,16 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
   - `tests/e2e/zapruda.spec.ts`: pass → Notary (a roof melts) → archive → Шлюз → Лейка → the chapter screen.
   - Also: skill tags doubled by hand in check options («[Красноречие 70%] [Красноречие] …») removed across all dialogues.
 
+## Stage U «Верховья»: Chapter VII (done)
+- [x] U0. Bible: the chart grows north to 112×80 (world.md), Chapter VII steps by flags, areas of Депо, «Шептун», «Ворота», Орлиное гнездо, side quests 51–53, 55, 59, 61, 66, Лёля and Ведро, slides
+- [x] U1. Engine: the chart north (`north` rows, `fitWorld`), highland terrain `n`, the Chapter VII screen, the region on loading cards by the place's cell
+- [x] U2. Art: the Бригада, Лукич, Шунт, the Высокий берег; «Счётчик», Ведро, bunker machine, eel of the main; flyers (condor, drone); railcar, main pump, relay mast and console, boom, searchlight, booth, water main; snowy peaks on the chart
+- [x] U3. Maps: nine areas
+- [x] U4. Main line (`dialogues/upper.json`, quest `upper`)
+- [x] U5. Side quests 51–53, 55, 59, 61, 66; Лёля and Ведро
+- [x] U6. Balance at level 7: two «Счётчики» — a Стрелок 67%, with Лёля 96%; two bunker machines 55%, with Ведро 90%; three condors 52%; ways round each (the Бригада's pass, the bunker is optional)
+- [x] U7. Tests (`tests/unit/upper.test.ts`, `tests/e2e/upper.spec.ts`), docs, publish
+
 ## Stage S «Скит»: Chapter VI (done)
 - [x] S0. Bible: areas of the Скит and «Роса-2», the chapter's steps by flags, side quests 47–50, Ирга, seal marks 8–9, slides
 - [x] S1. Engine: a healer (`heal` on a creature, AI action `tend`), the Chapter VI screen, no drawn cursor on phones
@@ -282,7 +298,7 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [x] S9. Chapter IV «Соль» + Соляное море; caravans; arena in the story (stage K)
 - [x] S10. Chapter V «Кристалл»; Солевики, Гранит; companions (stage V). «Роса-2» moves to S11 with the Скит
 - [x] S11. Chapter VI «Скит»: Орден Росы, «Роса-2», Ирга (stage S). «Бархан», Зеркальное поле and Могильник are not built yet: they go to the secrets pass (S15)
-- [ ] S12. Chapter VII «Шептун и Депо»: Бригада, Лёля, Ведро, туннели; руины Светлоречья
+- [x] S12. Chapter VII «Шептун и Депо»: Бригада, Лёля, Ведро, туннели (stage U). The ruins of Светлоречье and «Дрезина» go to Chapter VIII
 - [ ] S13. Chapter VIII «Костяной круг»: Сухари, Шёпот; Печатник unmasked
 - [ ] S14. Chapter IX «Заслон»: siege, trial at the control room, endings with slides and nicknames
 - [ ] S15. Secrets pass: 12 seal marks, Палата мер и печатей, bunker, «Литерный», special encounters, secret endings
@@ -298,6 +314,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
   - main-quest flags: `docs/story/main-quest.md`.
 - Chapter III: `tools/build-zap-*.mjs`, `dialogues/zapruda.json`. Chapter IV: `tools/build-salt-*.mjs`, `tools/build-sea-*.mjs`, `dialogues/salt.json`; its flags are in `docs/story/main-quest.md` (Глава IV) and `side-quests.md` №33–39.
 - Chapter V: `tools/build-crystal-*.mjs`, `dialogues/crystal.json`. Chapter VI: `tools/build-skit-*.mjs`, `tools/build-rosa-*.mjs`, `dialogues/skit.json`; flags in `main-quest.md` (Глава VI) and `side-quests.md` №47–50.
+- Chapter VII: `tools/build-depot-*.mjs`, `tools/build-whisper-*.mjs`, `tools/build-gates.mjs`, `tools/build-eagle.mjs`, `dialogues/upper.json`; flags in `main-quest.md` (Глава VII) and `side-quests.md` «Как построено (этап U)».
 - Companions: `content/companions.json`, `core/companions.ts`, the `comp_<id>` talks.
 - The world map: `content/travel.json`, `content/locations.json`, `tools/build-world.mjs`, `src/core/travel/`, `src/core/room/{Road,Meetings,RoadBattle}.ts`.
 - Stage R quests: `docs/story/side-quests.md` R1–R6, flags as named there (`semyon`, `rzhavchik`, `luka`, `resin_thief`, `laska_bow`, `hank_forgiven`, `hank_taken`).
@@ -310,7 +327,8 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
-- **S12, Chapter VII «Шептун и Депо»:** the Верховья begin (`main-quest.md` Глава VII, `locations.md`). The chart still ends at the Солончаки: the Верховья need the world map to grow again (decision 34).
+- **S13, Chapter VIII «Костяной круг»:** the Сухари and the second half of the key (`main-quest.md` Глава VIII, `locations.md` №19 and №22, side quests 54, 56–58, 62–65). The places are already on the chart as stubs: `bone_circle` (11, 12), `capital_ruins` (40, 24); `dam` (30, 2) is Chapter IX.
+  - Carry over from Chapter VII: `threat_told` (circle / trust / silent), `depot_way`, `whisper_way`, `key_half_known`, `veres_diary`, `pump` (fixed / shared / broken, `trust_angry`), `pipe_voice` and `bunker_key`, `clearance` (mandate / hero / free), `watcher_hint`, `lukich` and `gates_pass`, `defector`, `eagle_known`, `second_dam_hint`, companions `with_lelya`, `with_vedro`.
   - Carry over from Chapter VI: `dew_fate` (order / all), `dew_way` (kept / keeper / stolen), `order_ally`, `order_enemy`, `order_cold`, `stuzha_way` (duel / revoked / slipped), `keeper`, `veres_witness` (the first «Верблюд» remembers Верес), `capsule`, `lab_tech` and `fresh_cure` (owed to the Солевики), `unaccounted` and `kolyuchka_dew`, `stempel_letter`, seal marks 1–9.
   - Carry over from Chapter V: `salt_promise`, `bitter_way`, `wall_names` (`kassian_kin`, `order_bridge`), `crystal_vs_order`, `salt_brother`.
   - Companions still to come: Лёля, Тимофей, Ведро; Хэнк's «Долг сборщика».
@@ -329,9 +347,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 586 tests, with the balance numbers printed to stderr.
+- `npm test`: 636 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 25 tests, about 10 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
+- `npm run test:e2e`: 26 tests, about 11 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;

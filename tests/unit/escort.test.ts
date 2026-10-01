@@ -20,7 +20,7 @@ function road(parties: PartyState[]) {
   g.setFlag('trust_outcome', 'tax');
   g.apply([{ type: 'travel' }]);
   const t = r.world.travel!;
-  Object.assign(t, { x: 18.5, y: 29.5, minute: 8 * 60, parties });
+  Object.assign(t, { x: 18.5, y: 61.5, minute: 8 * 60, parties });
   return { r, c, g, t };
 }
 
@@ -30,8 +30,8 @@ const caravan = (x: number, y: number, extra: Partial<PartyState> = {}): PartySt
 
 describe('guarding a caravan', () => {
   it('hire on: ride with the caravan, the clock runs, pay and reputation at its next stop', () => {
-    const { r, c, g, t } = road([caravan(19.5, 29.5, { wait: 9999 })]);
-    c.do({ t: 'travel', x: 19, y: 29 });
+    const { r, c, g, t } = road([caravan(19.5, 61.5, { wait: 9999 })]);
+    c.do({ t: 'travel', x: 19, y: 61 });
     expect(until(r, () => !!r.meeting)).toBe(true);
     const offer = c.last('dialogue')!.options.find((o) => o.startsWith('Нужна охрана'))!;
     expect(offer).toMatch(/Колючка/);
@@ -52,23 +52,23 @@ describe('guarding a caravan', () => {
     expect(until(r, () => !t.escort, 180_000)).toBe(true);
     expect(g.state.caps).toBe(caps + pay);
     expect(Number(g.flag('rep_guild'))).toBe(rep + 3);
-    expect(Math.hypot(t.x - 20.5, t.y - 19.5)).toBeLessThan(1.5); // at Колючка with the caravan
+    expect(Math.hypot(t.x - 20.5, t.y - 51.5)).toBeLessThan(1.5); // at Колючка with the caravan
   });
 
   it('walking off on your own ends the job without pay', () => {
-    const { r, c, t } = road([caravan(19.5, 29.5, { wait: 9999 })]);
-    c.do({ t: 'travel', x: 19, y: 29 });
+    const { r, c, t } = road([caravan(19.5, 61.5, { wait: 9999 })]);
+    c.do({ t: 'travel', x: 19, y: 61 });
     until(r, () => !!r.meeting);
     say(c, 'Нужна охрана');
     say(c, 'По рукам');
-    c.do({ t: 'travel', x: 10, y: 36 });
+    c.do({ t: 'travel', x: 10, y: 68 });
     expect(t.escort).toBeUndefined();
     expect(t.path.length).toBeGreaterThan(0);
   });
 
   it('bandits that stop the caravan are fought with its guards at our side', () => {
-    const { r, c, t } = road([caravan(19.5, 29.5, { wait: 9999 })]);
-    c.do({ t: 'travel', x: 19, y: 29 });
+    const { r, c, t } = road([caravan(19.5, 61.5, { wait: 9999 })]);
+    c.do({ t: 'travel', x: 19, y: 61 });
     until(r, () => !!r.meeting);
     say(c, 'Нужна охрана');
     say(c, 'По рукам');
@@ -85,10 +85,10 @@ describe('guarding a caravan', () => {
 
 describe('a fight already going on', () => {
   it('bandits on a caravan: help it, win, and the caravan pays and the Guild remembers', () => {
-    const gang: PartyState = { id: 'gang_4', tpl: 'gang', x: 20.5, y: 29.5, path: [], members: ['raider'], hurt: 0, wait: 0, think: 9999, fight: { with: 'caravan_7', left: 999 } };
-    const car = caravan(20.5, 29.5, { think: 9999, fight: { with: 'gang_4', left: 999 } });
+    const gang: PartyState = { id: 'gang_4', tpl: 'gang', x: 20.5, y: 61.5, path: [], members: ['raider'], hurt: 0, wait: 0, think: 9999, fight: { with: 'caravan_7', left: 999 } };
+    const car = caravan(20.5, 61.5, { think: 9999, fight: { with: 'gang_4', left: 999 } });
     const { r, c, g, t } = road([gang, car]);
-    c.do({ t: 'travel', x: 20, y: 29 });
+    c.do({ t: 'travel', x: 20, y: 61 });
     expect(until(r, () => !!r.meeting)).toBe(true);
     expect(c.last('dialogue')!.speaker).toBe('Бой на дороге');
     say(c, 'Помочь: Караван');
@@ -123,9 +123,9 @@ describe('a fight already going on', () => {
   });
 
   it('keeping out of it leaves them to it', () => {
-    const gang: PartyState = { id: 'gang_4', tpl: 'gang', x: 20.5, y: 29.5, path: [], members: ['raider'], hurt: 0, wait: 0, think: 9999, fight: { with: 'caravan_7', left: 999 } };
-    const { r, c } = road([gang, caravan(20.5, 29.5, { think: 9999, fight: { with: 'gang_4', left: 999 } })]);
-    c.do({ t: 'travel', x: 20, y: 29 });
+    const gang: PartyState = { id: 'gang_4', tpl: 'gang', x: 20.5, y: 61.5, path: [], members: ['raider'], hurt: 0, wait: 0, think: 9999, fight: { with: 'caravan_7', left: 999 } };
+    const { r, c } = road([gang, caravan(20.5, 61.5, { think: 9999, fight: { with: 'gang_4', left: 999 } })]);
+    c.do({ t: 'travel', x: 20, y: 61 });
     until(r, () => !!r.meeting);
     say(c, 'Переждать');
     say(c, '…');

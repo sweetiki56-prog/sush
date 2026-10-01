@@ -188,7 +188,7 @@ describe('Chapter IV: the caravan and the storm', () => {
 
   it('the caravan takes the hero on as its guard; a storm rises over the sea road', () => {
     const s = out();
-    s.c.do({ t: 'travel', x: 76, y: 25 }); // meetings happen on the move
+    s.c.do({ t: 'travel', x: 76, y: 57 }); // meetings happen on the move
     expect(until(s.r, () => !!s.r.meeting, 5000)).toBe(true);
     say(s.c, 'За караваном от самых ворот');
     expect(s.g.flag('ambush_seen')).toBe(true);
@@ -196,7 +196,7 @@ describe('Chapter IV: the caravan and the storm', () => {
     expect(s.g.flag('sea_caravan')).toBe('go');
     expect(s.t.escort).toMatchObject({ party: 'u_sea_caravan', to: 'wrecks' });
     s.r.sendTravel(true);
-    expect(s.c.last('travel')!.storms).toEqual([[79, 25, 89, 32]]);
+    expect(s.c.last('travel')!.storms).toEqual([[79, 57, 89, 64]]);
   });
 
   const hunters = (x: number, y: number): PartyState => ({ id: 'u_hunters', tpl: 'trust_hunters', x, y, path: [], members: ['trust_hunter', 'trust_hunter', 'trust_hunter'], hurt: 0, wait: 9999, think: 9999, chasing: 'hero' });
@@ -204,8 +204,8 @@ describe('Chapter IV: the caravan and the storm', () => {
   it('seen coming, the hunters talk: bought off, they leave the order and the funnel shows', () => {
     const s = out((g) => g.setFlag('ambush_seen'));
     s.g.setFlag('sea_caravan', 'go');
-    Object.assign(s.t, { x: 84.5, y: 28.5, parties: [hunters(84.8, 28.5)] });
-    s.c.do({ t: 'travel', x: 86, y: 29 });
+    Object.assign(s.t, { x: 84.5, y: 60.5, parties: [hunters(84.8, 60.5)] });
+    s.c.do({ t: 'travel', x: 86, y: 61 });
     expect(until(s.r, () => !!s.r.meeting, 5000)).toBe(true);
     expect(s.c.last('dialogue')!.text).toContain('засада не удалась');
     say(s.c, 'Сколько вам заплатил Трест');
@@ -219,15 +219,15 @@ describe('Chapter IV: the caravan and the storm', () => {
     const s = out((g) => g.setFlag('ambush_seen'));
     s.g.give('forgery_proof');
     s.g.setFlag('sea_caravan', 'go');
-    Object.assign(s.t, { x: 84.5, y: 28.5, parties: [hunters(84.8, 28.5)] });
-    s.c.do({ t: 'travel', x: 86, y: 29 });
+    Object.assign(s.t, { x: 84.5, y: 60.5, parties: [hunters(84.8, 60.5)] });
+    s.c.do({ t: 'travel', x: 86, y: 61 });
     until(s.r, () => !!s.r.meeting, 5000);
     say(s.c, 'копия мандата Затвора');
     expect(s.g.flag('ambush_done')).toBe('bought');
     const t = out((g) => g.setFlag('ambush_seen'));
     t.g.setFlag('sea_caravan', 'go');
-    Object.assign(t.t, { x: 84.5, y: 28.5, parties: [hunters(84.8, 28.5)] });
-    t.c.do({ t: 'travel', x: 86, y: 29 });
+    Object.assign(t.t, { x: 84.5, y: 60.5, parties: [hunters(84.8, 60.5)] });
+    t.c.do({ t: 'travel', x: 86, y: 61 });
     until(t.r, () => !!t.r.meeting, 5000);
     say(t.c, 'Уйти в бурю');
     expect(t.g.flag('ambush_done')).toBe('slipped');
@@ -236,8 +236,8 @@ describe('Chapter IV: the caravan and the storm', () => {
   it('fought off on the salt: the order is in the leader\'s coat', () => {
     const s = out((g) => g.setFlag('ambush_seen'));
     s.g.setFlag('sea_caravan', 'go');
-    Object.assign(s.t, { x: 84.5, y: 28.5, parties: [hunters(84.8, 28.5)] });
-    s.c.do({ t: 'travel', x: 86, y: 29 });
+    Object.assign(s.t, { x: 84.5, y: 60.5, parties: [hunters(84.8, 60.5)] });
+    s.c.do({ t: 'travel', x: 86, y: 61 });
     until(s.r, () => !!s.r.meeting, 5000);
     say(s.c, 'Попробуйте взять');
     say(s.c, '…');
@@ -294,7 +294,7 @@ describe('Chapter IV: the reckoning and the way to Кристалл', () => {
     const s = setup();
     s.g.apply([{ type: 'travel' }]);
     const t = s.r.world.travel!;
-    Object.assign(t, { x: 103.5, y: 21.5, parties: [] });
+    Object.assign(t, { x: 103.5, y: 53.5, parties: [] });
     s.c.do({ t: 'travel', to: 'crystal' });
     until(s.r, () => t.path.length === 0 && !t.target, 20_000);
     expect(s.g.state.log.some((l) => l.includes('Без проводника'))).toBe(true);
@@ -302,7 +302,7 @@ describe('Chapter IV: the reckoning and the way to Кристалл', () => {
     s.g.setFlag('krupitsa_fate', 'debt');
     s.g.setStage('salt', 'crystal');
     t.parties = [];
-    s.c.do({ t: 'travel', x: 101, y: 21 });
+    s.c.do({ t: 'travel', x: 101, y: 53 });
     until(s.r, () => t.path.length === 0, 20_000);
     s.c.do({ t: 'travel', to: 'crystal' });
     expect(until(s.r, () => s.g.flag('chapter4_done') === true, 30_000)).toBe(true);

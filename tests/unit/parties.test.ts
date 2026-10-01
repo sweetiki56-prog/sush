@@ -26,7 +26,7 @@ describe('parties on the world map', () => {
     expect(ps.list.some((p) => p.tpl === 'dry_herd')).toBe(false);
     ps.populate(1, 23 * 60, false);
     expect(ps.list.filter((p) => p.tpl === 'dry_herd')).toHaveLength(2);
-    ps.step(10, hero(0, 0, 10), 7 * 60);
+    ps.step(10, hero(0, 32, 10), 7 * 60);
     expect(ps.list.some((p) => p.tpl === 'dry_herd')).toBe(false);
   });
 
@@ -64,7 +64,7 @@ describe('parties on the world map', () => {
     const ps = make();
     ps.populate(1, NOON, true);
     const car = ps.list.find((p) => p.route?.id === 'salt_road')!;
-    const ev = run(ps, hero(0, 47, 1), 24 * 6);
+    const ev = run(ps, hero(0, 79, 1), 24 * 6);
     const stops = ev.filter((e) => e.t === 'arrive' && e.id === car.id).map((e) => (e as { at: string }).at);
     expect(stops.slice(0, 3)).toEqual(['salt', 'elevator', 'barge']);
     if (stops.includes('rusty_well')) expect(ps.byId(car.id)).toBeUndefined();
@@ -72,10 +72,10 @@ describe('parties on the world map', () => {
 
   it('bandits that catch a weaker caravan fight it for two hours without the hero; the stronger side usually wins', () => {
     const ps = make();
-    const car = { id: 'car', tpl: 'caravan', x: 20.5, y: 20.5, path: [], members: ['caravaneer'], hurt: 0, wait: 99999, think: 99999, route: { id: 'tract', i: 1 } } as PartyState;
-    const band = { id: 'band', tpl: 'band', x: 22.5, y: 20.5, path: [], members: ['raider_boss', 'raider', 'raider', 'raider'], hurt: 0, wait: 0, think: 0, home: [22, 20] } as PartyState;
+    const car = { id: 'car', tpl: 'caravan', x: 20.5, y: 52.5, path: [], members: ['caravaneer'], hurt: 0, wait: 99999, think: 99999, route: { id: 'tract', i: 1 } } as PartyState;
+    const band = { id: 'band', tpl: 'band', x: 22.5, y: 52.5, path: [], members: ['raider_boss', 'raider', 'raider', 'raider'], hurt: 0, wait: 0, think: 0, home: [22, 52] } as PartyState;
     ps.list.push(car, band);
-    const ev = run(ps, hero(60, 5, 1), 5);
+    const ev = run(ps, hero(60, 37, 1), 5);
     // first they lock in a fight that lasts a while (the hero could still come), then it is decided
     const began = ev.findIndex((e) => e.t === 'battle');
     const ended = ev.findIndex((e) => e.t === 'clash' && e.winner === 'band' && e.loser === 'car');
@@ -94,8 +94,8 @@ describe('parties on the world map', () => {
     expect(r.world.travel!.parties!.length).toBeGreaterThan(3);
     // a worn-out hero walks past the Каменный мешок, where the gangs live
     g.state.hp = 4;
-    Object.assign(r.world.travel!, { x: 12.5, y: 24.5 });
-    c.do({ t: 'travel', x: 8, y: 19 });
+    Object.assign(r.world.travel!, { x: 12.5, y: 56.5 });
+    c.do({ t: 'travel', x: 8, y: 51 });
     expect(until(r, () => (c.last('travel')?.parties ?? []).some((p) => p.kind === 'bandits'), 120_000)).toBe(true);
     expect(until(r, () => g.state.log.some((l) => l.startsWith('Вы натыкаетесь')), 120_000)).toBe(true);
     expect(r.world.travel!.path).toEqual([]);
@@ -112,18 +112,18 @@ describe('a pursuit ends', () => {
     g.apply([{ type: 'travel' }]);
     g.state.hp = 4; // wounded: a pack goes for prey it can take
     const t = r.world.travel!;
-    Object.assign(t, { x: 16.5, y: 33.5, minute: NOON, parties: [{ ...pack(16.5, 30.5), chasing: 'hero' as const }] });
+    Object.assign(t, { x: 16.5, y: 65.5, minute: NOON, parties: [{ ...pack(16.5, 62.5), chasing: 'hero' as const }] });
     expect(until(r, () => !!r.meeting, 20_000)).toBe(true);
   });
 
   it('a pack that cannot catch up gives up after a while and turns away', () => {
     const slow = { ...CONTENT.travel.parties.jackal_pack, pace: 0.3 };
-    const ps = new Parties(WORLD, [pack(20.5, 20.5, 0.3)], { ...CONTENT.travel, parties: { ...CONTENT.travel.parties, slow_pack: slow } }, CONTENT.creatures, CONTENT.weapons, CONTENT.locations, mulberry32(3));
+    const ps = new Parties(WORLD, [pack(20.5, 52.5, 0.3)], { ...CONTENT.travel, parties: { ...CONTENT.travel.parties, slow_pack: slow } }, CONTENT.creatures, CONTENT.weapons, CONTENT.locations, mulberry32(3));
     const p = ps.list[0];
     const ev: PartyEvent[] = [];
     // the hero is weak and in sight, walking away east faster than they run
     for (let i = 0; i < 40 && !ev.some((e) => e.t === 'gaveUp'); i++) {
-      const h = hero(22.5 + i * 0.25, 20.5, 1);
+      const h = hero(22.5 + i * 0.25, 52.5, 1);
       ev.push(...ps.step(10, h, NOON));
     }
     expect(ev.some((e) => e.t === 'gaveUp' && e.id === p.id)).toBe(true);

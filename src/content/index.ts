@@ -8,6 +8,7 @@ import zapruda from './dialogues/zapruda.json';
 import salt from './dialogues/salt.json';
 import crystal from './dialogues/crystal.json';
 import skit from './dialogues/skit.json';
+import upper from './dialogues/upper.json';
 import companions from './companions.json';
 import character from './character.json';
 import weapons from './weapons.json';
@@ -39,7 +40,7 @@ const boards = Object.fromEntries(Object.entries(BOARDS).map(([id, town]) => [id
 export const CONTENT = {
   items,
   quests,
-  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...boards },
+  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...upper, ...boards },
   character,
   weapons,
   creatures,

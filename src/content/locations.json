@@ -1,7 +1,7 @@
 {
   "rusty_well": {
     "name": "Ржавый колодец",
-    "cell": [14, 36],
+    "cell": [14, 68],
     "map": "rusty_well",
     "entry": "road",
     "areas": [
@@ -26,7 +26,7 @@
   },
   "three_pillars": {
     "name": "Три столба",
-    "cell": [18, 28],
+    "cell": [18, 60],
     "chapter": 2,
     "map": "three_pillars",
     "entry": "road_w",
@@ -57,7 +57,7 @@
   },
   "kolyuchka": {
     "name": "Колючка",
-    "cell": [20, 19],
+    "cell": [20, 51],
     "chapter": 2,
     "map": "kolyuchka",
     "entry": "road_s",
@@ -88,7 +88,7 @@
   },
   "zapruda": {
     "name": "Запруда",
-    "cell": [26, 10],
+    "cell": [26, 42],
     "chapter": 3,
     "reach": [
       {
@@ -176,7 +176,7 @@
   },
   "barge": {
     "name": "Баржа «Стрежень»",
-    "cell": [31, 25],
+    "cell": [31, 57],
     "chapter": 2,
     "map": "barge_bed",
     "entry": "road_w",
@@ -213,55 +213,93 @@
   },
   "khlebnoe": {
     "name": "Руины Хлебного",
-    "cell": [45, 30],
+    "cell": [45, 62],
     "chapter": 3
   },
   "silence": {
     "name": "Приют Тишины",
-    "cell": [39, 35],
+    "cell": [39, 67],
     "chapter": 3
   },
   "elevator": {
     "name": "Элеватор",
-    "cell": [51, 25],
+    "cell": [51, 57],
     "chapter": 3
   },
   "ark": {
     "name": "Ковчег",
-    "cell": [32, 43],
+    "cell": [32, 75],
     "chapter": 3
   },
   "salt": {
     "name": "Соль",
-    "cell": [74, 24],
+    "cell": [74, 56],
     "chapter": 4,
     "map": "salt_market",
     "entry": "west",
-    "open": [{ "flag": "chapter3_seen" }],
+    "open": [
+      {
+        "flag": "chapter3_seen"
+      }
+    ],
     "areas": [
-      { "map": "salt_market", "entry": "west", "name": "Соляной рынок", "at": [0.36, 0.62] },
-      { "map": "salt_guild", "entry": "south", "name": "Гильдейский двор", "at": [0.42, 0.24] },
-      { "map": "salt_arena", "entry": "west", "name": "«Пыльная чаша»", "at": [0.76, 0.5] },
+      {
+        "map": "salt_market",
+        "entry": "west",
+        "name": "Соляной рынок",
+        "at": [0.36, 0.62]
+      },
+      {
+        "map": "salt_guild",
+        "entry": "south",
+        "name": "Гильдейский двор",
+        "at": [0.42, 0.24]
+      },
+      {
+        "map": "salt_arena",
+        "entry": "west",
+        "name": "«Пыльная чаша»",
+        "at": [0.76, 0.5]
+      },
       {
         "map": "salt_mines",
         "entry": "north",
         "name": "Копи",
         "at": [0.5, 0.84],
-        "known": [{ "flag": "mines_known" }]
+        "known": [
+          {
+            "flag": "mines_known"
+          }
+        ]
       }
     ]
   },
   "barkhan": {
     "name": "Стоянка «Бархана»",
-    "cell": [86, 17],
+    "cell": [86, 49],
     "secret": true,
-    "open": [{ "flag": "chapter3_seen" }],
+    "open": [
+      {
+        "flag": "chapter3_seen"
+      }
+    ],
     "reach": [
       {
-        "if": [{ "notFlag": "barkhan_seen" }],
+        "if": [
+          {
+            "notFlag": "barkhan_seen"
+          }
+        ],
         "effects": [
-          { "type": "flag", "key": "barkhan_seen" },
-          { "type": "quest", "quest": "barkhan", "stage": "gone" }
+          {
+            "type": "flag",
+            "key": "barkhan_seen"
+          },
+          {
+            "type": "quest",
+            "quest": "barkhan",
+            "stage": "gone"
+          }
         ],
         "log": "Стоянка «Бархана»: кострища, колышки от шатров — и колеи, уходящие на юго-восток, в белую корку Соляного моря."
       }
@@ -269,69 +307,131 @@
   },
   "wrecks": {
     "name": "Кладбище судов",
-    "cell": [92, 31],
+    "cell": [92, 63],
     "chapter": 4,
     "map": "sea_wrecks",
     "entry": "west",
-    "open": [{ "flag": "chapter3_seen" }],
+    "open": [
+      {
+        "flag": "chapter3_seen"
+      }
+    ],
     "areas": [
-      { "map": "sea_wrecks", "entry": "west", "name": "Кладбище судов", "at": [0.4, 0.5] },
+      {
+        "map": "sea_wrecks",
+        "entry": "west",
+        "name": "Кладбище судов",
+        "at": [0.4, 0.5]
+      },
       {
         "map": "sea_lair",
         "entry": "rim",
         "name": "Логово змея",
         "at": [0.8, 0.3],
-        "known": [{ "flag": "lair_known" }]
+        "known": [
+          {
+            "flag": "lair_known"
+          }
+        ]
       }
     ]
   },
   "crystal": {
     "name": "Кристалл",
-    "cell": [104, 21],
+    "cell": [104, 53],
     "chapter": 5,
     "map": "crystal_gate",
     "entry": "south",
-    "open": [{ "flag": "chapter4_seen" }],
+    "open": [
+      {
+        "flag": "chapter4_seen"
+      }
+    ],
     "areas": [
-      { "map": "crystal_gate", "entry": "south", "name": "Верхние ярусы", "at": [0.5, 0.72] },
+      {
+        "map": "crystal_gate",
+        "entry": "south",
+        "name": "Верхние ярусы",
+        "at": [0.5, 0.72]
+      },
       {
         "map": "crystal_council",
         "entry": "south",
         "name": "Совет пластов",
         "at": [0.5, 0.2],
-        "known": [{ "flag": "crystal_in" }]
+        "known": [
+          {
+            "flag": "crystal_in"
+          }
+        ]
       },
       {
         "map": "crystal_baths",
         "entry": "west",
         "name": "Рассольные бани",
         "at": [0.8, 0.42],
-        "known": [{ "flag": "crystal_in" }]
+        "known": [
+          {
+            "flag": "crystal_in"
+          }
+        ]
       },
       {
         "map": "crystal_deep",
         "entry": "east",
         "name": "Глубокие копи",
         "at": [0.2, 0.5],
-        "known": [{ "flag": "crystal_in" }]
+        "known": [
+          {
+            "flag": "crystal_in"
+          }
+        ]
       }
     ],
     "reach": [
       {
-        "if": [{ "flag": "crystal_guide" }, { "flag": "krupitsa_fate" }, { "notFlag": "chapter4_done" }],
+        "if": [
+          {
+            "flag": "crystal_guide"
+          },
+          {
+            "flag": "krupitsa_fate"
+          },
+          {
+            "notFlag": "chapter4_done"
+          }
+        ],
         "effects": [
-          { "type": "flag", "key": "chapter4_done" },
-          { "type": "quest", "quest": "salt", "stage": "done" }
+          {
+            "type": "flag",
+            "key": "chapter4_done"
+          },
+          {
+            "type": "quest",
+            "quest": "salt",
+            "stage": "done"
+          }
         ],
         "log": "Проводник-Солевик ведёт по трём звёздам через корку. К рассвету из соли встают светящиеся жилы: Кристалл, город Солевиков."
       },
       {
-        "if": [{ "notFlag": "crystal_guide" }],
+        "if": [
+          {
+            "notFlag": "crystal_guide"
+          }
+        ],
         "effects": [],
         "log": "Корка трещит и проваливается под ногами, следы заметает соль. Без проводника-Солевика дальше не пройти."
       },
       {
-        "if": [{ "flag": "crystal_guide" }, { "notFlag": "krupitsa_fate" }],
+        "if": [
+          {
+            "flag": "crystal_guide"
+          },
+          {
+            "notFlag": "krupitsa_fate"
+          }
+        ],
         "effects": [],
         "log": "Проводник качает головой: сначала закончите дела в Соли. Гильдия не прощает незакрытых счетов."
       }
@@ -339,69 +439,102 @@
   },
   "skit": {
     "name": "Скит",
-    "cell": [100, 7],
+    "cell": [100, 39],
     "chapter": 6,
     "map": "skit_yard",
     "entry": "south",
-    "open": [{ "flag": "chapter5_seen" }],
+    "open": [
+      {
+        "flag": "chapter5_seen"
+      }
+    ],
     "areas": [
-      { "map": "skit_yard", "entry": "south", "name": "Двор Скита", "at": [0.5, 0.7] },
+      {
+        "map": "skit_yard",
+        "entry": "south",
+        "name": "Двор Скита",
+        "at": [0.5, 0.7]
+      },
       {
         "map": "skit_cells",
         "entry": "south",
         "name": "Кельи и зал",
         "at": [0.5, 0.25],
-        "known": [{ "flag": "skit_in" }]
+        "known": [
+          {
+            "flag": "skit_in"
+          }
+        ]
       },
       {
         "map": "skit_archive",
         "entry": "west",
         "name": "Архив «Росы»",
         "at": [0.8, 0.45],
-        "known": [{ "flag": "skit_in" }]
+        "known": [
+          {
+            "flag": "skit_in"
+          }
+        ]
       },
       {
         "map": "skit_depths",
         "entry": "stairs",
         "name": "Цех «Роса-1»",
         "at": [0.3, 0.5],
-        "known": [{ "flag": "skit_in" }]
+        "known": [
+          {
+            "flag": "skit_in"
+          }
+        ]
       }
     ]
   },
   "rosa": {
     "name": "«Роса-2»",
-    "cell": [96, 13],
+    "cell": [96, 45],
     "chapter": 6,
     "map": "rosa_surface",
     "entry": "west",
-    "open": [{ "flag": "chapter5_seen" }],
+    "open": [
+      {
+        "flag": "chapter5_seen"
+      }
+    ],
     "areas": [
-      { "map": "rosa_surface", "entry": "west", "name": "Поверхность", "at": [0.3, 0.6] },
+      {
+        "map": "rosa_surface",
+        "entry": "west",
+        "name": "Поверхность",
+        "at": [0.3, 0.6]
+      },
       {
         "map": "rosa_lab",
         "entry": "stairs",
         "name": "Лаборатории",
         "at": [0.6, 0.45],
-        "known": [{ "flag": "lab_tech_asked" }]
+        "known": [
+          {
+            "flag": "lab_tech_asked"
+          }
+        ]
       },
       {
         "map": "rosa_deep",
         "entry": "ladder",
         "name": "Капсулы",
         "at": [0.75, 0.25],
-        "known": [{ "flag": "lab_tech_asked" }]
+        "known": [
+          {
+            "flag": "lab_tech_asked"
+          }
+        ]
       }
     ]
   },
-  "to_upper": {
-    "name": "Дорога в Верховья",
-    "cell": [30, 0],
-    "chapter": 7
-  },
   "dry_stone": {
     "name": "Сухой камень",
-    "cell": [17, 15],
+    "cell": [17, 47],
     "open": [
       {
         "flag": "laska_bow_asked"
@@ -427,5 +560,129 @@
       }
     ],
     "secret": true
+  },
+  "depot": {
+    "name": "Депо «Узловое»",
+    "cell": [24, 20],
+    "chapter": 7,
+    "map": "depot_yard",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter6_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "depot_yard",
+        "entry": "south",
+        "name": "Двор депо",
+        "at": [0.5, 0.7]
+      },
+      {
+        "map": "depot_shops",
+        "entry": "south",
+        "name": "Мастерские",
+        "at": [0.5, 0.25]
+      },
+      {
+        "map": "depot_archive",
+        "entry": "west",
+        "name": "Архив Бригады",
+        "at": [0.82, 0.45],
+        "known": [
+          {
+            "flag": "open_archive_door"
+          }
+        ]
+      },
+      {
+        "map": "depot_tunnels",
+        "entry": "yard",
+        "name": "Туннели водовода",
+        "at": [0.25, 0.5],
+        "known": [
+          {
+            "flag": "tunnel_open"
+          }
+        ]
+      }
+    ]
+  },
+  "whisper": {
+    "name": "Ретранслятор «Шептун»",
+    "cell": [44, 11],
+    "chapter": 7,
+    "map": "whisper_slope",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter6_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "whisper_slope",
+        "entry": "south",
+        "name": "Склон",
+        "at": [0.5, 0.75]
+      },
+      {
+        "map": "whisper_tower",
+        "entry": "south",
+        "name": "Вышка",
+        "at": [0.5, 0.2]
+      },
+      {
+        "map": "whisper_bunker",
+        "entry": "door",
+        "name": "Бункер",
+        "at": [0.75, 0.5],
+        "known": [
+          {
+            "flag": "open_bunker_door"
+          }
+        ]
+      }
+    ]
+  },
+  "gates": {
+    "name": "Перевал «Ворота»",
+    "cell": [30, 9],
+    "chapter": 7,
+    "map": "gates_post",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter6_done"
+      }
+    ]
+  },
+  "bone_circle": {
+    "name": "Костяной круг",
+    "cell": [11, 12],
+    "chapter": 8
+  },
+  "capital_ruins": {
+    "name": "Руины Светлоречья",
+    "cell": [40, 24],
+    "chapter": 8
+  },
+  "dam": {
+    "name": "Заслон",
+    "cell": [30, 2],
+    "chapter": 9
+  },
+  "eagle": {
+    "name": "Орлиное гнездо",
+    "cell": [35, 5],
+    "secret": true,
+    "open": [
+      {
+        "flag": "eagle_known"
+      }
+    ],
+    "map": "eagle_nest",
+    "entry": "south"
   }
 }

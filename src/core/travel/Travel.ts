@@ -10,6 +10,7 @@ export interface WorldGridData {
   height: number;
   rows: string[];
   roads: [number, number][][];
+  north?: number; // rows added on top since the first chart (the Верховья, stage U): old saves move down by this
 }
 
 export interface Terrain {
@@ -24,6 +25,7 @@ export const TERRAIN: Record<string, Terrain> = {
   '|': { name: 'русло', speed: 0.9, sight: 1.33 },
   ':': { name: 'трещины', speed: 0.6, sight: 1 },
   '^': { name: 'скалы', speed: 0.4, sight: 0.5 },
+  n: { name: 'нагорье', speed: 0.6, sight: 1.2 },
   x: { name: 'Мёртвые поля', speed: 0.6, sight: 1 },
   _: { name: 'солончак', speed: 0.8, sight: 0.8 },
   s: { name: 'соляное море', speed: 0.6, sight: 1.2 },
@@ -62,18 +64,47 @@ export interface Escort {
 }
 
 /**
- * The fog of a save made on a narrower map (the chart grew east in stage K): each old row keeps its cells and
- * the new columns start unseen. A fog of the right size comes back as it is.
+ * The fog of a save made on a smaller map: the chart grew east in stage K and north in stage U. Each old row keeps
+ * its cells; new columns on the right and new rows on top start unseen. A fog of the right size comes back as it is.
  */
 export function fitSeen(seen: string, grid: WorldGridData): string {
   const W = grid.width;
   const H = grid.height;
   if (seen.length === W * H) return seen;
-  const oldW = Math.floor(seen.length / H);
+  const top = oldTop(seen, grid);
+  const oldH = H - top;
+  const oldW = Math.floor(seen.length / oldH);
   if (!oldW) return '0'.repeat(W * H);
-  let out = '';
-  for (let y = 0; y < H; y++) out += seen.slice(y * oldW, y * oldW + Math.min(oldW, W)).padEnd(W, '0');
+  let out = '0'.repeat(W * top);
+  for (let y = 0; y < oldH; y++) out += seen.slice(y * oldW, y * oldW + Math.min(oldW, W)).padEnd(W, '0');
   return out;
+}
+
+/** How many rows were added on top since this fog was saved: all of `north` for a save older than them, else none. */
+function oldTop(seen: string, grid: WorldGridData): number {
+  const north = grid.north ?? 0;
+  if (!north || seen.length === grid.width * grid.height) return 0;
+  return seen.length % (grid.height - north) === 0 && seen.length % grid.height !== 0 ? north : 0;
+}
+
+/**
+ * A save from before the chart grew: the fog widened and taller, and everyone on it moved down with the old land
+ * (the party, its path, every other party with its home and path). Once fitted, the fog has the full size, so a
+ * second call changes nothing.
+ */
+export function fitWorld(s: TravelState, grid: WorldGridData): void {
+  const dy = oldTop(s.seen, grid);
+  s.seen = fitSeen(s.seen, grid);
+  if (!dy) return;
+  const down = (c: [number, number]): [number, number] => [c[0], c[1] + dy];
+  s.y += dy;
+  s.path = s.path.map(down);
+  for (const p of s.parties ?? []) {
+    p.y += dy;
+    p.path = p.path.map(down);
+    if (p.home) p.home = down(p.home);
+    if (p.area) p.area = [p.area[0], p.area[1] + dy, p.area[2], p.area[3] + dy];
+  }
 }
 
 export function freshTravel(grid: WorldGridData, at: [number, number]): TravelState {
@@ -101,7 +132,7 @@ export class Travel {
     readonly grid: WorldGridData,
     readonly s: TravelState,
   ) {
-    s.seen = fitSeen(s.seen, grid);
+    fitWorld(s, grid);
   }
 
   terrainAt(x: number, y: number): Terrain {

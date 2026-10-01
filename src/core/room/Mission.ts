@@ -20,6 +20,7 @@ import { trade, type Deal } from './Trade';
 import { rest } from './Days';
 import { activeStorms, leaveToWorld, roadIntent, roadTick, visibleParties } from './Road';
 import { placeOfMap } from '../places';
+import { fitWorld } from '../travel/Travel';
 import { autoJoins, companionActor } from '../companions';
 import { placeParty, settleMeeting } from './Meetings';
 import { afterBattle, endBattle, takeLoot } from './RoadBattle';
@@ -84,6 +85,7 @@ export class MissionRoom extends Room {
     readonly world: WorldData,
   ) {
     super(opts);
+    if (world.travel && opts.worldMap) fitWorld(world.travel, opts.worldMap); // a save from before the chart grew
     this.setup();
   }
 

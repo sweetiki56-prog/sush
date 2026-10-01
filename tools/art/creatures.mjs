@@ -28,6 +28,15 @@ export const CREATURES = {
   dog_rzhavchik: { dog: true, fur: P.rust2, dark: P.rust0, belly: P.sand3, collar: P.fire1, scale: 1.3 },
   // stage K: the Salt sea. A pale spider spinning salt threads; the salt snake, an eel's body as thick as a man
   sentry: { mite: true, shell: P.grey3, dark: P.dark1, joint: P.grey2, scale: 1.7 },
+  // stage U: the Верховья. «Счётчики», the old sentries of the water main, brass gone green; Ведро is one of them
+  // painted over in a bucket's blue; the bunker's machines are dark; eels of the flooded main; bald condors over the
+  // canyons and the drones of the Высокий берег, both in the air
+  counter: { mite: true, shell: P.olive1, dark: P.dark1, joint: P.brown1, scale: 1.6 },
+  vedro: { mite: true, shell: P.teal1, dark: P.dark1, joint: P.grey3, scale: 1.6 },
+  bunker_machine: { mite: true, shell: P.dark2, dark: P.dark0, joint: P.grey2, scale: 1.8 },
+  main_eel: { eel: true, skin: P.teal0, dark: P.dark1, belly: P.grey4, scale: 1.4 },
+  condor: { bird: true, body: P.dark2, wing: P.dark1, tip: P.grey4, head: P.skin0, beak: P.bone, scale: 1.6 },
+  drone: { bird: true, drone: true, body: P.grey4, wing: P.grey2, tip: P.dark1, head: P.red1, beak: P.grey5, scale: 1.1 },
   salt_spider: { spider: true, shell: P.grey5, dark: P.grey2, joint: P.grey3, mark: P.rust2, scale: 1.35 },
   salt_snake: { eel: true, skin: P.grey5, dark: P.grey2, belly: P.bone, heap: P.bone, scale: 3 },
 };
@@ -92,6 +101,44 @@ function eelParts(c, phase, walking, pose) {
   cap(p, [p[0], p[1] + 2.4, p[2] + open], 0.9, c.dark, 0.3);
   cap(p, [p[0], p[1] + 2.4, p[2] - open], 0.9, c.belly, 0.3);
   for (const side of [-1, 1]) ball([p[0] + side * 1.1, p[1] + 0.8, p[2] + 1.2], 0.35, P.ink, 0.6);
+  return out;
+}
+
+/** A flyer: a condor on broad flapping wings, or a drone on four rotors; both hang above the ground. */
+function birdParts(c, phase, walking, pose) {
+  const out = [];
+  const cap = (a, b, r, color, bias = 0) => out.push({ kind: 'cap', a, b, r, color, bias });
+  const ball = (p, r, color, bias = 0) => out.push({ kind: 'ball', a: p, r, color, bias });
+  const dead = pose === 'dead';
+  const lunge = pose === 'attack1' ? 1.4 : pose === 'attack2' ? 0.6 : pose === 'hit' ? -1 : 0;
+  const bz = dead ? 1.2 : 8 + (walking ? Math.cos(phase) * 0.6 : 0) - lunge * 1.5;
+  if (c.drone) {
+    ball([0, lunge, bz], 2.4, c.body);
+    ball([0, lunge + 1.6, bz - 0.4], 0.8, c.head, 0.3);
+    for (const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      const arm = [sx * 3.2, sy * 3.2 + lunge, bz + 0.6];
+      cap([0, lunge, bz + 0.3], arm, 0.4, c.wing);
+      if (!dead) cap([arm[0] - 1.6, arm[1], arm[2] + 0.5], [arm[0] + 1.6, arm[1], arm[2] + 0.5], 0.25, c.tip);
+    }
+    cap([0, lunge, bz - 2], [0, lunge + 0.8, bz - 3.4], 0.3, c.beak);
+    return out;
+  }
+  // wings: up and down with the walk cycle, held wide when gliding, folded on the ground
+  const flap = dead ? -0.6 : walking ? Math.sin(phase) * 2.6 : pose === 'attack1' ? 2.6 : 0.6;
+  for (const side of [-1, 1]) {
+    const shoulder = [side * 1.2, lunge, bz + 0.6];
+    const elbow = dead ? [side * 3, lunge - 1, bz] : [side * 4.4, lunge - 0.4, bz + flap * 0.6];
+    const tip = dead ? [side * 4.2, lunge - 2.4, bz - 0.2] : [side * 8, lunge - 1.2, bz + flap];
+    cap(shoulder, elbow, 1.1, c.wing);
+    cap(elbow, tip, 0.8, c.wing);
+    cap([tip[0] * 0.96, tip[1], tip[2]], [tip[0] * 1.08, tip[1] - 0.8, tip[2] - 0.3], 0.5, c.tip);
+  }
+  ball([0, lunge, bz], 2, c.body);
+  cap([0, lunge - 1.6, bz], [0, lunge - 3.6, bz - 0.4], 0.9, c.wing); // tail
+  cap([0, lunge + 1.4, bz + 0.6], [0, lunge + 2.6, bz + 1.4], 0.55, c.head); // the bald neck
+  ball([0, lunge + 2.9, bz + 1.6], 0.8, c.head, 0.3);
+  cap([0, lunge + 3.4, bz + 1.6], [0, lunge + 4.4, bz + 1], 0.35, c.beak, 0.3);
+  if (!dead) for (const side of [-1, 1]) cap([side * 0.6, lunge, bz - 1.4], [side * 0.7, lunge + 0.6, bz - 2.8], 0.3, c.beak);
   return out;
 }
 
@@ -218,7 +265,7 @@ export function buildCreatureSheet(c) {
       const pose = S_POSES[col];
       const walking = pose === 'walk';
       const phase = walking ? ((col - 1) / 4) * Math.PI * 2 : 0;
-      const body = c.dog ? dogParts(c, phase, walking, pose) : c.eel ? eelParts(c, phase, walking, pose) : c.mite ? miteParts(c, phase, walking, pose) : c.spider ? spiderParts(c, phase, walking, pose) : scorpParts(c, phase, walking, pose);
+      const body = c.bird ? birdParts(c, phase, walking, pose) : c.dog ? dogParts(c, phase, walking, pose) : c.eel ? eelParts(c, phase, walking, pose) : c.mite ? miteParts(c, phase, walking, pose) : c.spider ? spiderParts(c, phase, walking, pose) : scorpParts(c, phase, walking, pose);
       renderParts(cv.ctx, col * S_FRAME_W + S_FOOT_X, dir * S_FRAME_H + S_FOOT_Y, dir, body, c.scale);
     }
   return finalize(cv);

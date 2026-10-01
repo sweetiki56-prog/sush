@@ -72,5 +72,7 @@
   "spider_bite": { "name": "Жвала паука", "skill": "melee", "ap": 3, "dmg": [2, 6], "range": 1, "poison": { "dmg": 1, "turns": 3 }, "stun": { "chance": 15, "ap": 2 } },
   "snake_bite": { "name": "Пасть змея", "skill": "melee", "ap": 5, "dmg": [9, 16], "range": 1, "crit": 5 },
   "sentry_zap": { "name": "Разряд машины", "skill": "guns", "ap": 4, "dmg": [6, 12], "range": 6, "type": "shock" },
-  "reject_claw": { "name": "Когти «Верблюда»", "skill": "melee", "ap": 3, "dmg": [4, 9], "range": 1 }
+  "reject_claw": { "name": "Когти «Верблюда»", "skill": "melee", "ap": 3, "dmg": [4, 9], "range": 1 },
+  "condor_beak": { "name": "Клюв кондора", "skill": "melee", "ap": 3, "dmg": [4, 8], "range": 1 },
+  "drone_zap": { "name": "Разрядник дрона", "skill": "guns", "ap": 4, "dmg": [4, 8], "range": 6, "type": "shock" }
 }

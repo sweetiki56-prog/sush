@@ -137,7 +137,8 @@ export class WorldScene extends Phaser.Scene {
     if (this.mapId.startsWith('enc_')) return { style: 'dusk', title: 'Засада на дороге', subtitle: `${map.name}. Держитесь вместе.` };
     const place = placeOfMap(session().game?.content.locations ?? {}, this.mapId);
     const area = place && (place.loc.areas?.length ?? 0) > 1 ? place.area.name : null;
-    return { style: 'poster', title: place?.loc.name ?? map.name, subtitle: this.mapId === 'arena' ? 'Бой до последнего стоящего' : area ? `${area}. Низовье, бассейн Светлой` : 'Низовье, бассейн Светлой' };
+    const where = `${regionOf(place?.loc.cell, session().worldMap)}, бассейн Светлой`;
+    return { style: 'poster', title: place?.loc.name ?? map.name, subtitle: this.mapId === 'arena' ? 'Бой до последнего стоящего' : area ? `${area}. ${where}` : where };
   }
 
   /** The music of this place when nobody is fighting. */
@@ -195,4 +196,11 @@ export class WorldScene extends Phaser.Scene {
     const cam = this.cameras.main;
     return { x: (p.x - cam.worldView.x) * cam.zoom, y: (p.y - cam.worldView.y) * cam.zoom };
   }
+}
+
+/** The region a place lies in, by its cell on the chart: the Верховья on top, the Солончаки east of Низовье. */
+function regionOf(cell: [number, number] | undefined, grid: { north?: number } | null | undefined): string {
+  if (!cell) return 'Низовье';
+  if (cell[1] < (grid?.north ?? 0)) return 'Верховья';
+  return cell[0] >= 64 ? 'Солончаки' : 'Низовье';
 }

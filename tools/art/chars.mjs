@@ -121,6 +121,18 @@ export const CHARS = {
   petr: { skin: P.brown2, hair: P.grey2, shirt: P.bone, pants: P.grey3, boots: P.grey1, coat: P.bone, coatLen: 16, sleeve: P.brown2, bald: true, goggles: true, cane: true, height: 0.98 },
   camel_reject: { skin: P.grey3, hair: P.grey3, shirt: P.grey2, pants: P.grey2, boots: P.grey1, coat: null, sleeve: P.grey3, bald: true, crystals: P.bone, bulk: 1.1, height: 0.9 },
   camel_first: { skin: P.grey4, hair: P.grey4, shirt: P.bone, pants: P.bone, boots: P.grey3, coat: null, sleeve: P.grey4, bald: true, crystals: P.grey6, bulk: 1.2, height: 1.06 },
+  // stage U: the Верховья. The Бригада of the Депо in work clothes, the Trust's old guard of the pass, the people
+  // of the Высокий берег in steel-blue, Шунт the dry technician in the water main
+  sverlo: { skin: P.skin1, hair: P.grey3, shirt: P.rust1, pants: P.denim0, boots: P.dark1, coat: P.rust2, coatLen: 9, sleeve: P.rust2, hat: P.sand4, beard: P.grey3, bulk: 1.25, height: 1.02 },
+  manometr: { skin: P.skin0, hair: P.grey5, shirt: P.denim1, pants: P.denim0, boots: P.brown0, coat: P.brown2, coatLen: 14, sleeve: P.brown2, beard: P.grey5, goggles: true, bald: true, cane: true, height: 0.92 },
+  lelya: { skin: P.skin2, hair: P.rust1, shirt: P.teal1, pants: P.denim1, boots: P.dark1, coat: null, sleeve: P.teal1, bandana: P.red1, goggles: true, backpack: P.olive1, bun: true, height: 0.93 },
+  brigadier: { skin: P.skin1, hair: P.brown1, shirt: P.rust1, pants: P.denim0, boots: P.dark1, coat: null, sleeve: P.rust1, hat: P.sand4, apron: P.brown1, height: 1.0 },
+  fedot: { skin: P.skin1, hair: P.brown1, shirt: P.teal0, pants: P.denim0, boots: P.dark1, coat: null, sleeve: P.teal0, bandana: P.teal1, apron: P.brown1, height: 0.98 },
+  lukich: { skin: P.skin0, hair: P.grey5, shirt: P.grey3, pants: P.dark2, boots: P.dark0, coat: P.grey2, coatLen: 14, sleeve: P.grey2, hat: P.dark1, beard: P.grey5, rifle: true, height: 0.97 },
+  shunt: { skin: P.grey2, hair: P.grey1, shirt: P.denim0, pants: P.grey1, boots: P.grey1, coat: P.grey2, coatLen: 12, sleeve: P.grey2, goggles: true, bald: true, height: 1.0 },
+  yarina: { skin: P.skin1, hair: P.dark1, shirt: P.denim1, pants: P.grey2, boots: P.dark0, coat: null, sleeve: P.denim1, armor: { plate: P.denim1, pads: P.grey4, stripe: P.bone }, bun: true, rifle: true, height: 1.0 },
+  shore_soldier: { skin: P.skin1, hair: P.dark2, shirt: P.denim1, pants: P.grey2, boots: P.dark0, coat: null, sleeve: P.denim1, armor: { plate: P.denim1, pads: P.grey4, stripe: P.bone }, hat: P.grey2, rifle: true, bulk: 1.1, height: 1.03 },
+  ratmir: { skin: P.skin2, hair: P.dark1, shirt: P.denim1, pants: P.grey2, boots: P.dark0, coat: P.sand3, coatLen: 12, sleeve: P.denim1, scarf: P.sand4, height: 0.99 },
   trust_hunter: { skin: P.skin1, hair: P.dark2, shirt: P.grey1, pants: P.grey1, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, hood: P.grey1, goggles: true, rifle: true, height: 1.01 },
 };
 

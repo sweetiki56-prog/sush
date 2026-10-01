@@ -1,0 +1,3258 @@
+{
+ "sverlo": {
+  "speaker": "Бригадир Сверло",
+  "portrait": "portrait_sverlo",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_archive_door"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "sverlo_met"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Широкий человек в рыжей робе и каске поднимает ладонь, как шлагбаум. — Сверло, бригадир. Пункт первый регламента: посторонний на территории депо — только по делу. Пункт второй: дела у постороннего обычно нет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "sverlo_met"
+     }
+    ],
+    "options": [
+     {
+      "text": "Мне нужен архив Бригады. В тубусе — Мандат, и его надо прочесть.",
+      "effects": [
+       {
+        "type": "quest",
+        "quest": "upper",
+        "stage": "archive"
+       }
+      ],
+      "next": "ask"
+     },
+     {
+      "text": "Что такое Бригада?",
+      "next": "who"
+     },
+     {
+      "text": "Сдать Регламент 17.",
+      "next": "exam"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "who": {
+    "text": "— Потомственные ремонтники Водоуправления. Двести лет держим водовод, насосы и туннели. Трест платит за воду в Запруду, мы держим трубу. Регламент — наш закон. Семнадцатый пункт — святой.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "again": {
+    "text": "— По делу?",
+    "options": [
+     {
+      "text": "Архив. Как туда попасть?",
+      "effects": [
+       {
+        "type": "quest",
+        "quest": "upper",
+        "stage": "archive"
+       }
+      ],
+      "next": "ask"
+     },
+     {
+      "text": "Сдать Регламент 17.",
+      "if": [
+       {
+        "notFlag": "exam_failed"
+       }
+      ],
+      "next": "exam"
+     },
+     {
+      "text": "Насос поднят. Бригада обязана.",
+      "if": [
+       {
+        "flag": "pump",
+        "eq": "fixed"
+       }
+      ],
+      "next": "open_pump"
+     },
+     {
+      "text": "Насос поднят. Бригада обязана.",
+      "if": [
+       {
+        "flag": "pump",
+        "eq": "shared"
+       }
+      ],
+      "next": "open_pump"
+     },
+     {
+      "text": "Вот 500 капель на запчасти.",
+      "if": [
+       {
+        "caps": 500
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -500
+       },
+       {
+        "type": "flag",
+        "key": "depot_way",
+        "value": "paid"
+       },
+       {
+        "type": "flag",
+        "key": "open_archive_door"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "open_paid"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "ask": {
+    "text": "— Архив — для своих. Свой — это кто, по регламенту: поднял главный насос — Бригада в долгу; сдал Регламент 17 — Бригада принимает; внёс пятьсот капель на запчасти — по прейскуранту. — Он загибает третий палец. — Других пунктов нет.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "pump",
+      "stage": "asked"
+     },
+     {
+      "type": "quest",
+      "quest": "regulation",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "exam": {
+    "text": "— Экзамен. Один вопрос, как всегда. — Сверло прищуривается. — Пункт семнадцатый. Дословно.",
+    "options": [
+     {
+      "text": "[Интеллект] «Воду не перекрывать, пока ниже по течению кто-то пьёт».",
+      "if": [
+       {
+        "attr": "int",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "regulation",
+        "value": "exam"
+       }
+      ],
+      "next": "passed"
+     },
+     {
+      "text": "За меня поручится Дед Манометр.",
+      "if": [
+       {
+        "flag": "manometr_vouch"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "regulation",
+        "value": "vouch"
+       }
+      ],
+      "next": "passed"
+     },
+     {
+      "text": "Показать допуск Бригады — свежий, с печатью.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -10,
+       "pass": "passed",
+       "fail": "caught",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "regulation",
+         "value": "forged"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Приду позже.",
+      "next": "again"
+     }
+    ]
+   },
+   "passed": {
+    "text": "Сверло долго молчит. Потом протягивает руку, тяжёлую, как задвижка. — Принят. Решётка туннелей тебя пропустит, «Счётчики» — тоже: в журнал впишу. Архив — направо, за оградой.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "depot_way",
+      "value": "brigade"
+     },
+     {
+      "type": "flag",
+      "key": "open_archive_door"
+     },
+     {
+      "type": "xp",
+      "amount": 100
+     },
+     {
+      "type": "flag",
+      "key": "counter_pass"
+     },
+     {
+      "type": "quest",
+      "quest": "regulation",
+      "stage": "done"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "caught": {
+    "text": "Сверло вертит бумагу и кладёт в карман. — Печать двести лет не меняли, а у тебя она новая. Пункт девятый: подлог — вон с территории. — Он отворачивается. — Насос или капли. Других пунктов нет.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "exam_failed"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open_pump": {
+    "text": "— Насос поднят. — Сверло снимает каску. — Бригада в долгу. Архив открыт, решётка тоже.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "depot_way",
+      "value": "pump"
+     },
+     {
+      "type": "flag",
+      "key": "open_archive_door"
+     },
+     {
+      "type": "xp",
+      "amount": 100
+     },
+     {
+      "type": "flag",
+      "key": "counter_pass"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "open_paid": {
+    "text": "Сверло пересчитывает капли дважды и записывает в книгу. — По прейскуранту. Архив открыт. Туннели — не по прейскуранту.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Регламент соблюдай. И трубы не трогай без спроса.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "brigadier": {
+  "speaker": "Бригадник",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Слышишь гул? Вода идёт. Пока гудит — живём.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "depot_sign": {
+  "speaker": "Табличка",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Эмаль облупилась: «Узловая станция водовода № 3. Посторонним вход воспрещён». Ниже мелом: «Регламент 17 помни».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "archive_door": {
+  "speaker": "Дверь архива",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_archive_door"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "shut"
+   }
+  ],
+  "nodes": {
+   "shut": {
+    "text": "Стальная дверь на засове изнутри. За оградой — архив Бригады. Пускает только Сверло.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Дверь открыта.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "tunnel_gate": {
+  "speaker": "Решётка туннелей",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "tunnel_open"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "if": [
+     {
+      "flag": "counter_pass"
+     }
+    ],
+    "node": "pass"
+   },
+   {
+    "node": "shut"
+   }
+  ],
+  "nodes": {
+   "shut": {
+    "text": "Решётка на замке. Из темноты тянет сыростью и гулом воды.",
+    "options": [
+     {
+      "text": "Вскрыть замок.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -10,
+       "pass": "picked",
+       "fail": "stuck",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "tunnel_open"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "picked": {
+    "text": "Замок щёлкает. Внизу — лестница.",
+    "options": [
+     {
+      "text": "Спуститься.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "depot_tunnels",
+        "entry": "yard"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "stuck": {
+    "text": "Отмычка скребёт. Кто-то из бригадников оглядывается.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "pass": {
+    "text": "Бригадник у решётки кивает и отпирает. — Свой. Ступай.",
+    "options": [
+     {
+      "text": "Спуститься.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "tunnel_open"
+       },
+       {
+        "type": "goto",
+        "map": "depot_tunnels",
+        "entry": "yard"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Решётка открыта.",
+    "options": [
+     {
+      "text": "Спуститься.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "depot_tunnels",
+        "entry": "yard"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "main_pump": {
+  "speaker": "Главный насос",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "pump"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Главный насос стоит: сорван подшипник, обмотка выгорела. На корпусе бирка: «Подача — Запруда. Отвод на посёлки — заглушен по распоряжению Треста».",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "pump",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "[Ремонт] Перебрать подшипник и перемотать обмотку — как было.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 50
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pump",
+        "value": "fixed"
+       },
+       {
+        "type": "quest",
+        "quest": "pump",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "fixed"
+     },
+     {
+      "text": "[Ремонт] Перебрать — и снять заглушку с отвода на посёлки.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 90
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pump",
+        "value": "shared"
+       },
+       {
+        "type": "quest",
+        "quest": "pump",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 200
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "shared"
+     },
+     {
+      "text": "Лёля, снимем заглушку вдвоём?",
+      "if": [
+       {
+        "flag": "with_lelya"
+       },
+       {
+        "skill": "repair",
+        "gte": 70
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pump",
+        "value": "shared"
+       },
+       {
+        "type": "quest",
+        "quest": "pump",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 200
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "shared"
+     },
+     {
+      "text": "Не трогать. Пусть Запруда посидит без воды.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pump",
+        "value": "broken"
+       },
+       {
+        "type": "flag",
+        "key": "trust_angry"
+       },
+       {
+        "type": "quest",
+        "quest": "pump",
+        "stage": "done"
+       }
+      ],
+      "next": "broken"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "fixed": {
+    "text": "Насос вздрагивает, кашляет и гудит. Где-то далеко вода снова пошла на юг, в Запруду.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "shared": {
+    "text": "Заглушка со звоном падает на бетон. Насос гудит, а по отводу, сухому двести лет, идёт вода — в посёлки ниже по склону. Трест заметит не сразу.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "broken": {
+    "text": "Насос молчит. Через неделю в Запруде кончится запас, и Трест придёт спрашивать, почему. Бригада тоже спросит.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "done": {
+    "text": "Насос.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "manometr": {
+  "speaker": "Дед Манометр",
+  "portrait": "portrait_manometr",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Старик в очках с толстыми стёклами не отрывается от тисков. — Манометр. Меня так прозвали, когда тебя ещё не было. Чего надо?",
+    "options": [
+     {
+      "text": "Что не так с насосом?",
+      "next": "pump"
+     },
+     {
+      "text": "Поручишься за меня перед Сверлом?",
+      "if": [
+       {
+        "notFlag": "manometr_vouch"
+       },
+       {
+        "flag": "veres_witness"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "manometr_vouch"
+       }
+      ],
+      "next": "vouch"
+     },
+     {
+      "text": "Поручишься за меня перед Сверлом?",
+      "if": [
+       {
+        "notFlag": "manometr_vouch"
+       },
+       {
+        "flag": "kassian_kin"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "manometr_vouch"
+       }
+      ],
+      "next": "vouch"
+     },
+     {
+      "text": "Поручишься за меня перед Сверлом? Я пришёл не за водой.",
+      "if": [
+       {
+        "notFlag": "manometr_vouch"
+       },
+       {
+        "notFlag": "veres_witness"
+       },
+       {
+        "notFlag": "kassian_kin"
+       }
+      ],
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "vouch",
+       "fail": "no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "manometr_vouch"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Кто такой Кран?",
+      "if": [
+       {
+        "flag": "lukich_asked"
+       },
+       {
+        "notFlag": "kran_suspect"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "kran_suspect"
+       }
+      ],
+      "next": "kran"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "pump": {
+    "text": "— Насос качает в Запруду. Трест платит Бригаде водой и не трогает посёлки, пока вода идёт. Встанет насос — Трест режет посёлки. — Он постукивает по трубе. — А отвод на посёлки заглушили при моём деде. Знающий снимет.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "pump",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "vouch": {
+    "text": "— Верес, говоришь… — Манометр снимает очки. — Дед мой его видел. Ладно. Скажу Сверлу: свой.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "no": {
+    "text": "— Все пришли не за водой. — Манометр возвращается к тискам.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "kran": {
+    "text": "— Кран? Слесарь. Пришёл с юга полгода назад, руки водоноса: мозоль от коромысла не спрячешь. Спрашивал про «Ворота». — Старик пожимает плечами. — Мне всё равно, кто он был. Трубы он держит.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   }
+  }
+ },
+ "kran": {
+  "speaker": "Кран",
+  "portrait": "portrait_fedot",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "lukich",
+      "eq": "reunited"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "kran_is_fedot"
+     }
+    ],
+    "node": "known"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Парень в робе с чужого плеча возится с фланцем. — Кран. Слесарь. Работы много.",
+    "options": [
+     {
+      "text": "Ты — Федот, сын Лукича с «Ворот».",
+      "if": [
+       {
+        "flag": "lukich_asked"
+       },
+       {
+        "flag": "kran_suspect"
+       }
+      ],
+      "next": "confess"
+     },
+     {
+      "text": "[Восприятие] Мозоль от коромысла. Ты водонос — и, похоже, сын Лукича.",
+      "if": [
+       {
+        "flag": "lukich_asked"
+       },
+       {
+        "attr": "per",
+        "gte": 7
+       }
+      ],
+      "next": "confess"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "confess": {
+    "text": "Кран замирает. — Тише. — Он оглядывается. — Федот. Носил воду Лейки, пока Трест не объявил награду. Отец на «Ворот»? Значит, живой. — Он сжимает ключ. — Не говори Тресту. Прошу.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "kran_is_fedot"
+     },
+     {
+      "type": "quest",
+      "quest": "lukich",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "known": {
+    "text": "— Отец… как он?",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "after": {
+    "text": "Федот улыбается впервые. — Отец обещал прийти в выходной. Сказал, что ты — свой.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "depot_trader": {
+  "speaker": "Кладовщик Бригады",
+  "portrait": "portrait_brigadier",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Склад Бригады. Гвозди, батареи, железо. Всё по прейскуранту.",
+    "options": [
+     {
+      "text": "Показать товар.",
+      "effects": [
+       {
+        "type": "open",
+        "window": "barter",
+        "id": "brigade"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "plate_table": {
+  "speaker": "Стол чертёжника",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "plate_read"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Лёля и Манометр расстилают на столе синьку затворов Заслона и кладут рядом пластину из тубуса. Лёля водит пальцем: — Вот. Половина кода — затворы, один в один. А вторая… — Манометр читает пометку на полях: «Вторая половина — у охраны плотины». — Охрана плотины, — говорит старик. — Двести лет назад её сняли. Куда ушли — никто не писал. Но Верес говорил на «Шептуне» — его записи на вышке.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "plate_read"
+     },
+     {
+      "type": "quest",
+      "quest": "upper",
+      "stage": "whisper"
+     },
+     {
+      "type": "xp",
+      "amount": 150
+     }
+    ],
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "done": {
+    "text": "Синька затворов и пластина. Половина кода сходится.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "diary_shelf": {
+  "speaker": "Полка с дневниками",
+  "entry": [
+   {
+    "if": [
+     {
+      "item": "veres_diary"
+     }
+    ],
+    "node": "taken"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Среди журналов дежурств — переплетённая копия: «Дневник Смотрителя И. А. Вереса. Список для Бригады».",
+    "options": [
+     {
+      "text": "Взять копию.",
+      "effects": [
+       {
+        "type": "give",
+        "item": "veres_diary"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       }
+      ],
+      "next": "read"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "read": {
+    "text": "«Мандат передать совету посёлков бассейна Светлой — тем, кто пьёт ниже по течению. Гонец ушёл сегодня». Запись последняя. Гонец, видимо, не дошёл.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "taken": {
+    "text": "Пустое место на полке.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "archive_hatch": {
+  "speaker": "Люк в туннели",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Люк в полу, лестница в гул воды.",
+    "options": [
+     {
+      "text": "Спуститься в туннели.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "depot_tunnels",
+        "entry": "archive"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "tunnel_up_yard": {
+  "speaker": "Лестница во двор",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Наверх, к решётке во дворе.",
+    "options": [
+     {
+      "text": "Подняться.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "depot_yard",
+        "entry": "tunnel"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "tunnel_up_archive": {
+  "speaker": "Лестница к архиву",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Лестница упирается в люк. Над ним, по плану на стене, — архив Бригады.",
+    "options": [
+     {
+      "text": "Подняться в архив.",
+      "if": [
+       {
+        "notFlag": "depot_way"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "depot_way",
+        "value": "tunnels"
+       },
+       {
+        "type": "quest",
+        "quest": "upper",
+        "stage": "archive"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       },
+       {
+        "type": "goto",
+        "map": "depot_archive",
+        "entry": "hatch"
+       }
+      ]
+     },
+     {
+      "text": "Подняться в архив.",
+      "if": [
+       {
+        "flag": "depot_way"
+       }
+      ],
+      "effects": [
+       {
+        "type": "goto",
+        "map": "depot_archive",
+        "entry": "hatch"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "shunt_nest": {
+  "speaker": "Гнездо из ветоши",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Ветошь, жестяная кружка, огрызок карандаша. На стене трубы — столбики цифр: давление, по часам, день за днём. Последняя запись свежая.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "pipe_voice",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "shunt": {
+  "speaker": "Голос в трубе",
+  "portrait": "portrait_shunt",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Сухой, серый человек в робе Водоуправления прижимает ухо к трубе. — Илья Андреич? Задвижка семь держит. Держит! Двести… двести смен держит. — Глаза у него как у Сухостоя, но смотрит он прямо на тебя. — Вы не Илья Андреич.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "pipe_voice",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Смотритель ушёл наверх. Велел передать: смена окончена.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "calmed",
+       "fail": "agitated",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "pipe_voice",
+         "value": "calmed"
+        },
+        {
+         "type": "quest",
+         "quest": "pipe_voice",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 120
+        },
+        {
+         "type": "give",
+         "item": "bunker_key"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Первый «Верблюд» помнит Вереса в лицо. Верес велел тебе отдыхать, Шунт.",
+      "if": [
+       {
+        "flag": "veres_witness"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pipe_voice",
+        "value": "calmed"
+       },
+       {
+        "type": "quest",
+        "quest": "pipe_voice",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "give",
+        "item": "bunker_key"
+       }
+      ],
+      "next": "calmed"
+     },
+     {
+      "text": "Иди вниз, Шунт. Там вода — всё как ты держал.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "pipe_voice",
+        "value": "released"
+       },
+       {
+        "type": "quest",
+        "quest": "pipe_voice",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       }
+      ],
+      "next": "released"
+     },
+     {
+      "text": "Ты Сухостой. Хватит держать.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shunt_fight"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "calmed": {
+    "text": "Шунт долго молчит. Потом достаёт из-за пазухи ключ на проволоке. — Сухой водосброс. Илья Андреич велел — только своему. Отдохну. — Он садится у трубы и закрывает глаза.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "agitated": {
+    "text": "— Врёшь! — Шунт прижимается к трубе. — Илья Андреич придёт сам.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "released": {
+    "text": "Шунт кивает, как будто слышал это сто раз, и уходит в боковую шахту, к воде. Шаги затихают.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Задвижку не отдам! — Шунт кидается с голыми руками.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "vedro_broken": {
+  "speaker": "Ведро",
+  "portrait": "portrait_vedro",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "vedro_free"
+     }
+    ],
+    "node": "free"
+   },
+   {
+    "if": [
+     {
+      "flag": "vedro_fixed"
+     }
+    ],
+    "node": "home"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Сторожевой «Счётчик» лежит на боку, лапы поджаты. На медном корпусе кто-то вывел синей краской: ВЕДРО. Внутри что-то тикает.",
+    "options": [
+     {
+      "text": "[Ремонт] Перебрать привод лап.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 50
+       }
+      ],
+      "next": "fixed"
+     },
+     {
+      "text": "[Наука] Перезапустить логику по схеме на крышке.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 50
+       }
+      ],
+      "next": "fixed"
+     },
+     {
+      "text": "Лёля, посмотришь?",
+      "if": [
+       {
+        "flag": "with_lelya"
+       }
+      ],
+      "next": "fixed"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "fixed": {
+    "text": "«Счётчик» вздрагивает, встаёт на лапы и мигает линзой. — ДЕЖУРСТВО. ПРИКАЗ НЕ НАЙДЕН. СЛЕДУЮ ЗА БЛИЖАЙШИМ ДОПУЩЕННЫМ. — Линза останавливается на тебе.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "vedro_fixed"
+     },
+     {
+      "type": "quest",
+      "quest": "clearance",
+      "stage": "asked"
+     },
+     {
+      "type": "xp",
+      "amount": 100
+     }
+    ],
+    "options": [
+     {
+      "text": "Пойдём.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "vedro"
+       }
+      ]
+     },
+     {
+      "text": "Жди здесь."
+     }
+    ]
+   },
+   "home": {
+    "text": "Ведро стоит у трубы. — ОЖИДАЮ.",
+    "options": [
+     {
+      "text": "Пойдём.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "vedro"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "free": {
+    "text": "Ведро ходит своим обходом. На тебя мигает линзой — без приказа, просто так.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "bunker_door": {
+  "speaker": "Дверь бункера",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_bunker_door"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "shut"
+   }
+  ],
+  "nodes": {
+   "shut": {
+    "text": "Стальная дверь под мачтой. Кодовый замок, над ним табличка: «Аппаратная. Питание вышки».",
+    "options": [
+     {
+      "text": "Вскрыть кодовый замок.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -15,
+       "pass": "opened",
+       "fail": "stuck",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "open_bunker_door"
+        }
+       ]
+      }
+     },
+     {
+      "text": "[Наука] Набрать код по износу кнопок.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "open_bunker_door"
+       }
+      ],
+      "next": "opened"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "opened": {
+    "text": "Замок щёлкает. Изнутри тянет холодом и машинным маслом.",
+    "options": [
+     {
+      "text": "Войти.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "whisper_bunker",
+        "entry": "door"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "stuck": {
+    "text": "Замок пищит и гаснет. Попробовать ещё раз.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Дверь бункера открыта.",
+    "options": [
+     {
+      "text": "Войти.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "whisper_bunker",
+        "entry": "door"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "bunker_up": {
+  "speaker": "Лестница наверх",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Наверх, на склон.",
+    "options": [
+     {
+      "text": "Подняться.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "whisper_slope",
+        "entry": "bunker"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "power_panel": {
+  "speaker": "Щиток питания",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "bunker_power"
+     }
+    ],
+    "node": "on"
+   },
+   {
+    "node": "off"
+   }
+  ],
+  "nodes": {
+   "off": {
+    "text": "Щиток с рубильником: «ПИТАНИЕ ВЫШКИ». Предохранители целы.",
+    "options": [
+     {
+      "text": "Поднять рубильник.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bunker_power"
+       },
+       {
+        "type": "xp",
+        "amount": 60
+       }
+      ],
+      "next": "up"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "up": {
+    "text": "Рубильник встаёт с лязгом. Наверху, сквозь бетон, начинает гудеть мачта.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "on": {
+    "text": "Рубильник поднят. Мачта гудит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "duty_log": {
+  "speaker": "Журнал дежурств",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "clearance",
+      "eq": "mandate"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "if": [
+     {
+      "flag": "clearance",
+      "eq": "hero"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "if": [
+     {
+      "flag": "clearance",
+      "eq": "free"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "if": [
+     {
+      "flag": "with_vedro"
+     }
+    ],
+    "node": "vedro"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Терминал с журналом дежурств «Счётчиков»: смены, обходы, номера. Последняя строка: «Номер 14 — ПРИКАЗ: ОХРАНА КОНЦЕССИОНЕРА. Концессионер — держатель полного Мандата №1».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "vedro": {
+    "text": "Ведро подходит к терминалу и замирает. — НОМЕР 14. ЭТО Я. ПРИКАЗ: ОХРАНА КОНЦЕССИОНЕРА. КОНЦЕССИОНЕР — ДЕРЖАТЕЛЬ ПОЛНОГО МАНДАТА. — Линза медленно поворачивается к тубусу у тебя за спиной.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "clearance",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "Оставить приказ как есть.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "clearance",
+        "value": "mandate"
+       },
+       {
+        "type": "quest",
+        "quest": "clearance",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "mandate"
+     },
+     {
+      "text": "Переписать приказ: охранять меня, а не бумагу.",
+      "check": {
+       "skill": "science",
+       "mod": -10,
+       "pass": "hero",
+       "fail": "refused",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "clearance",
+         "value": "hero"
+        },
+        {
+         "type": "quest",
+         "quest": "clearance",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        }
+       ]
+      }
+     },
+     {
+      "text": "Стереть приказ. Пусть Ведро решает само.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "clearance",
+        "value": "free"
+       },
+       {
+        "type": "quest",
+        "quest": "clearance",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "vedro_free"
+       },
+       {
+        "type": "leave",
+        "id": "vedro"
+       }
+      ],
+      "next": "free"
+     }
+    ]
+   },
+   "mandate": {
+    "text": "— ПРИКАЗ ПРИНЯТ. — Ведро встаёт за твоим плечом. — ДО ПЕРЕДАЧИ МАНДАТА. — Кому достанется Мандат, за тем Ведро и пойдёт.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "hero": {
+    "text": "Терминал думает. Строка мигает и меняется: «ОХРАНА: {name}». Ведро щёлкает лапами. — ПРИКАЗ ПРИНЯТ. МАНДАТ — ВТОРИЧЕН.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "refused": {
+    "text": "Терминал отвечает красным: «ДОСТУП ЗАПРЕЩЁН». Попробовать ещё раз.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "free": {
+    "text": "Строка гаснет. Ведро стоит долго. Потом говорит тише, чем обычно: — ПРИКАЗА НЕТ. ИДУ… ПОСМОТРЕТЬ НА ВОДУ. — И уходит вниз, к туннелям, сам.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "done": {
+    "text": "Журнал дежурств.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "relay_console": {
+  "speaker": "Пульт ретранслятора",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "threat_told"
+     }
+    ],
+    "node": "on"
+   },
+   {
+    "if": [
+     {
+      "flag": "whisper_way"
+     }
+    ],
+    "node": "choice_or_on"
+   },
+   {
+    "node": "off"
+   }
+  ],
+  "nodes": {
+   "off": {
+    "text": "Пульт мёртв. Стрелки на нуле, лампы тёмные. На крышке выцарапано: «Питание — снизу. Мозги — свои».",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "upper",
+      "stage": "whisper"
+     }
+    ],
+    "options": [
+     {
+      "text": "[Наука] Перекоммутировать на аварийные батареи.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "whisper_way",
+        "value": "tech"
+       },
+       {
+        "type": "quest",
+        "quest": "tower_voice",
+        "stage": "asked"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "start"
+     },
+     {
+      "text": "[Ремонт] Перемотать сгоревший трансформатор.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "whisper_way",
+        "value": "tech"
+       },
+       {
+        "type": "quest",
+        "quest": "tower_voice",
+        "stage": "asked"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "start"
+     },
+     {
+      "text": "Лёля, справишься?",
+      "if": [
+       {
+        "flag": "with_lelya"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "whisper_way",
+        "value": "lelya"
+       },
+       {
+        "type": "quest",
+        "quest": "tower_voice",
+        "stage": "asked"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "start"
+     },
+     {
+      "text": "Питание подано снизу. Включить.",
+      "if": [
+       {
+        "flag": "bunker_power"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "whisper_way",
+        "value": "bunker"
+       },
+       {
+        "type": "quest",
+        "quest": "tower_voice",
+        "stage": "asked"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "start"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "start": {
+    "text": "Лампы загораются одна за другой, мачта над головой гудит на всю гору. Динамик шипит, и в шипении — голос: «…Глубокое будет первой целью. Заречье придёт за водой, как только затворы откроются. Половина ключа — у охраны плотины. Пусть держат».",
+    "options": [
+     {
+      "text": "…",
+      "next": "voice"
+     }
+    ]
+   },
+   "voice": {
+    "text": "Шипение. Запись должна кончиться — но голос говорит медленнее, будто смотрит прямо на тебя: «{name}. Не отдавай её тем, кто ставит печати». Динамик щёлкает. Тишина. В мешке тяжелеет тубус.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "key_half_known"
+     },
+     {
+      "type": "quest",
+      "quest": "upper",
+      "stage": "choice"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "choice"
+     }
+    ]
+   },
+   "choice_or_on": {
+    "text": "Пульт гудит. Вышка ловит и передаёт — на весь бассейн Светлой, если захотеть.",
+    "options": [
+     {
+      "text": "Решить, кому передать запись.",
+      "if": [
+       {
+        "flag": "key_half_known"
+       },
+       {
+        "notFlag": "threat_told"
+       }
+      ],
+      "next": "choice"
+     },
+     {
+      "text": "Послушать записи Вереса.",
+      "next": "on"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "choice": {
+    "text": "Охрана плотины — значит, Сухари, их потомки: вторая половина ключа у них. А за горами — Заречье, и оно ждёт, когда затворы откроются. Вышка может передать запись. Кому?",
+    "options": [
+     {
+      "text": "Передать на частоте Круга и Бригады. Пусть посёлки знают.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "threat_told",
+        "value": "circle"
+       },
+       {
+        "type": "flag",
+        "key": "chapter7_done"
+       },
+       {
+        "type": "quest",
+        "quest": "upper",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 300
+       },
+       {
+        "type": "flag",
+        "key": "militia_warned"
+       }
+      ],
+      "next": "told"
+     },
+     {
+      "text": "Передать на частоте Треста. Пусть крепят «Ворота».",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "threat_told",
+        "value": "trust"
+       },
+       {
+        "type": "flag",
+        "key": "chapter7_done"
+       },
+       {
+        "type": "quest",
+        "quest": "upper",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 300
+       },
+       {
+        "type": "flag",
+        "key": "trust_warned"
+       }
+      ],
+      "next": "told"
+     },
+     {
+      "text": "Никому. Стереть запись с ленты.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "threat_told",
+        "value": "silent"
+       },
+       {
+        "type": "flag",
+        "key": "chapter7_done"
+       },
+       {
+        "type": "quest",
+        "quest": "upper",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 300
+       }
+      ],
+      "next": "told"
+     },
+     {
+      "text": "Подумать."
+     }
+    ]
+   },
+   "told": {
+    "text": "Лента крутится и останавливается. Что сделано — сделано. Вторая половина ключа — у Сухарей, в Костяном круге.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "on": {
+    "text": "Пять катушек с записями Вереса. Каждая — час у пульта.",
+    "options": [
+     {
+      "text": "Запись 1.",
+      "if": [
+       {
+        "notFlag": "tower_records"
+       }
+      ],
+      "next": "rec1"
+     },
+     {
+      "text": "Запись 2.",
+      "if": [
+       {
+        "flag": "tower_records",
+        "eq": 1
+       }
+      ],
+      "next": "rec2"
+     },
+     {
+      "text": "Запись 3.",
+      "if": [
+       {
+        "flag": "tower_records",
+        "eq": 2
+       }
+      ],
+      "next": "rec3"
+     },
+     {
+      "text": "Запись 4.",
+      "if": [
+       {
+        "flag": "tower_records",
+        "eq": 3
+       }
+      ],
+      "next": "rec4"
+     },
+     {
+      "text": "Запись 5.",
+      "if": [
+       {
+        "flag": "tower_records",
+        "eq": 4
+       }
+      ],
+      "next": "rec5"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "rec1": {
+    "text": "«Запись первая. Пробный пуск. Глубокое наполнено на сорок процентов. Красиво — как море на открытке. И. В.»",
+    "effects": [
+     {
+      "type": "inc",
+      "key": "tower_records",
+      "by": 1
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "on"
+     }
+    ]
+   },
+   "rec2": {
+    "text": "«Запись вторая. Заречье прислало ноту: доля Светлой — их по старому договору. Совет пайщиков смеётся. Я — нет».",
+    "effects": [
+     {
+      "type": "inc",
+      "key": "tower_records",
+      "by": 1
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "on"
+     }
+    ]
+   },
+   "rec3": {
+    "text": "«Запись третья. В НИИ „Роса“ сыплют порошок на опытное поле. Земля после него не родит. Назвали „Суховей“. Я подписал отказ».",
+    "effects": [
+     {
+      "type": "inc",
+      "key": "tower_records",
+      "by": 1
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "on"
+     }
+    ]
+   },
+   "rec4": {
+    "text": "«Запись четвёртая. Охрана плотины принесла присягу: не отдать воду войне. Хорошие люди. Половину ключа оставлю им».",
+    "effects": [
+     {
+      "type": "inc",
+      "key": "tower_records",
+      "by": 1
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "on"
+     }
+    ]
+   },
+   "rec5": {
+    "text": "Пятая запись начинается с шипения. Потом голос — тот же, но будто ближе: «Ты хочешь спросить, где я. Скала над Глубоким, сухой водосброс. Там ответы». Вслух никто ничего не спрашивал.",
+    "effects": [
+     {
+      "type": "inc",
+      "key": "tower_records",
+      "by": 1
+     },
+     {
+      "type": "flag",
+      "key": "watcher_hint"
+     },
+     {
+      "type": "quest",
+      "quest": "tower_voice",
+      "stage": "done"
+     },
+     {
+      "type": "xp",
+      "amount": 150
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "on"
+     }
+    ]
+   }
+  }
+ },
+ "lukich": {
+  "speaker": "Сторож Лукич",
+  "portrait": "portrait_lukich",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "lukich",
+      "eq": "betrayed"
+     }
+    ],
+    "node": "enemy"
+   },
+   {
+    "if": [
+     {
+      "flag": "lukich"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "if": [
+     {
+      "flag": "lukich_asked"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Седой стражник в старой шинели Треста греет руки над чайником. — Лукич. Сторож. Пропуск к плотине? До особого распоряжения — никому. — Он понижает голос. — Но бумага найдётся. Двести капель — и одна услуга.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "lukich_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "lukich",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Что за услуга?",
+      "next": "family"
+     }
+    ]
+   },
+   "family": {
+    "text": "— Жена в Запруде, в Нижнем городе. Сын… — Лукич мнёт фуражку. — Сын носил воду Лейке. Трест объявил награду, и он сбежал. Куда — не знаю. Найдёшь — скажи: отец ждёт.",
+    "options": [
+     {
+      "text": "…",
+      "next": "again"
+     }
+    ]
+   },
+   "again": {
+    "text": "— Ну?",
+    "options": [
+     {
+      "text": "Твой сын в Депо. Чинит трубы под именем Кран.",
+      "if": [
+       {
+        "flag": "kran_is_fedot"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lukich",
+        "value": "reunited"
+       },
+       {
+        "type": "quest",
+        "quest": "lukich",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "give",
+        "item": "gates_pass"
+       },
+       {
+        "type": "flag",
+        "key": "lukich_friend"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "reunited"
+     },
+     {
+      "text": "Пропуск за двести капель.",
+      "if": [
+       {
+        "caps": 200
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -200
+       },
+       {
+        "type": "flag",
+        "key": "lukich",
+        "value": "bought"
+       },
+       {
+        "type": "quest",
+        "quest": "lukich",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "give",
+        "item": "gates_pass"
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "reunited": {
+    "text": "Лукич снимает фуражку и долго смотрит на дорогу вниз. — Живой. — Он суёт тебе бумагу с печатью, не глядя. — Пропуск. Даром. Когда придёт время идти к плотине — шлагбаум для тебя поднимется.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "bought": {
+    "text": "Лукич прячет капли и выписывает пропуск. — Печать настоящая. Время придёт — пригодится.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Пропуск при тебе? Береги.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "enemy": {
+    "text": "Лукич смотрит сквозь тебя и молчит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "gate_guard": {
+  "speaker": "Стражник заставы",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Проход к плотине закрыт по распоряжению Совета пайщиков. Проходи мимо.",
+    "options": [
+     {
+      "text": "В Депо прячется беглый водонос Лейки. Слесарь Кран.",
+      "if": [
+       {
+        "flag": "kran_is_fedot"
+       },
+       {
+        "notFlag": "lukich"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lukich",
+        "value": "betrayed"
+       },
+       {
+        "type": "quest",
+        "quest": "lukich",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "caps",
+        "amount": 300
+       },
+       {
+        "type": "flag",
+        "key": "fedot_gone"
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       }
+      ],
+      "next": "betray"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "betray": {
+    "text": "Стражник записывает и отсчитывает триста капель. К вечеру по дороге на Депо уходят трое. У будки Лукич стоит, белый как бумага, — он всё слышал.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "boom": {
+  "speaker": "Шлагбаум",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Шлагбаум в красно-белую полоску. Табличка: «Проход к плотине — по особому распоряжению Совета пайщиков». За ним дорога уходит вверх, в ущелье, к Заслону.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "meet_defector": {
+  "speaker": "Беглец",
+  "portrait": "portrait_ratmir",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Человек в стальной синеве, без оружия, бежит по осыпи, оглядываясь. Над каньоном жужжат дроны. — Не стреляйте! Ратмир, рядовой Высокого берега. — Он падает на колени. — У нас за горами ушли ледники. Люди пьют талый снег, а снега больше нет. Приказ — «взять Глубокое любой ценой». Я не хочу брать его ценой.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "defector",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Спрячу тебя в Депо, у Бригады.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "defector",
+        "value": "saved"
+       },
+       {
+        "type": "quest",
+        "quest": "defector",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "gone_u_defector"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "flag",
+        "key": "defector_saved"
+       },
+       {
+        "type": "flag",
+        "key": "eagle_known"
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "saved"
+     },
+     {
+      "text": "Верну тебя твоему капитану. Пусть решает она.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "defector",
+        "value": "returned"
+       },
+       {
+        "type": "quest",
+        "quest": "defector",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "gone_u_defector"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "flag",
+        "key": "eagle_known"
+       }
+      ],
+      "next": "returned"
+     },
+     {
+      "text": "Трест на «Воротах» разберётся, кто ты такой.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "defector",
+        "value": "trust"
+       },
+       {
+        "type": "quest",
+        "quest": "defector",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "gone_u_defector"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "flag",
+        "key": "trust_knows_shore"
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       }
+      ],
+      "next": "trust"
+     },
+     {
+      "text": "Беги дальше сам.",
+      "next": "leave"
+     }
+    ]
+   },
+   "saved": {
+    "text": "Ратмир хватает тебя за руку. — Пост над перевалом. Орлиное гнездо. Капитан Ветрова — честная. Если хочешь говорить с Берегом — говори с ней. — Дроны уходят за гребень.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   },
+   "returned": {
+    "text": "Ратмир опускает голову. — Ветрова… она поймёт. Она тоже не хочет войны. Пост на скале над перевалом — Орлиное гнездо. — Дрон снижается, мигает и ведёт вас обоих вверх по тропе.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   },
+   "trust": {
+    "text": "Ратмир смотрит, не веря. Стражники «Ворот» уводят его вниз. Вечером на заставе говорят: «Берег» у порога, и Трест об этом знает.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   },
+   "leave": {
+    "text": "Ратмир бежит дальше, по осыпи, и дроны жужжат над ним.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "meet_drones": {
+  "speaker": "Дроны Высокого берега",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Над каньоном висят два дрона, стальные и синие, как небо над горами. Линзы поворачиваются следом. Потом дроны разворачиваются и уходят за хребет — докладывать.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "drones_seen"
+       },
+       {
+        "type": "encounter",
+        "action": "leave"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "yarina": {
+  "speaker": "Капитан Ветрова",
+  "portrait": "portrait_yarina",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Женщина в стальной кирасе Высокого берега смотрит на тебя поверх бинокля. — Ярина Ветрова, капитан. Тебя ведут дроны с самого Депо. — Она опускает бинокль. — Говори.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "yarina_met"
+     }
+    ],
+    "options": [
+     {
+      "text": "Ратмир у Бригады. Живой.",
+      "if": [
+       {
+        "flag": "defector",
+        "eq": "saved"
+       }
+      ],
+      "next": "saved"
+     },
+     {
+      "text": "Ратмир у вас. Не наказывайте его.",
+      "if": [
+       {
+        "flag": "defector",
+        "eq": "returned"
+       }
+      ],
+      "next": "returned"
+     },
+     {
+      "text": "Зачем Высокому берегу Глубокое?",
+      "next": "why"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "saved": {
+    "text": "— Значит, не все приказы исполняются. — Ветрова почти улыбается. — Хорошо. Пусть живёт.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "returned": {
+    "text": "— Не накажу. — Она смотрит в сторону, где сидит Ратмир. — Он сказал вслух то, что думаем мы все.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "why": {
+    "text": "— Ледники ушли. У нас пьют талый снег, а снега всё меньше. Глубокое — единственная большая вода по эту сторону гор. — Ветрова сжимает бинокль. — Мы не хотим войны. Но если затворы откроют для Треста — мы придём первыми. Если для всех — может, договоримся.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "second_dam_hint"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   }
+  }
+ },
+ "shore_soldier": {
+  "speaker": "Солдат Высокого берега",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Капитан занята. Не подходи к прожектору.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "ratmir": {
+  "speaker": "Ратмир",
+  "portrait": "portrait_ratmir",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Капитан не наказала. Сказала: «Говори вслух, раз начал». — Ратмир улыбается. — Спасибо.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "nest_radio": {
+  "speaker": "Рация",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Рация шипит: «Гнездо — Берегу. Застава Треста без изменений. В Депо — движение. Приказ прежний»…",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "lelya": {
+  "speaker": "Лёля Реле",
+  "portrait": "portrait_lelya",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "met_lelya"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Из-под мёртвого мотора выбирается девушка в бандане и очках, вся в масле. — Лёля. Реле — потому что щёлкаю быстро. — Она смотрит на твой тубус. — Это что, тот самый? Можно потрогать? Нет? Ладно.",
+    "options": [
+     {
+      "text": "Пойдёшь со мной? Мне нужен инженер.",
+      "if": [
+       {
+        "flag": "archive_seen"
+       }
+      ],
+      "effects": [
+       {
+        "type": "join",
+        "id": "lelya"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Насос поднят. Пойдёшь со мной?",
+      "if": [
+       {
+        "flag": "pump",
+        "eq": "fixed"
+       }
+      ],
+      "effects": [
+       {
+        "type": "join",
+        "id": "lelya"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Насос поднят. Пойдёшь со мной?",
+      "if": [
+       {
+        "flag": "pump",
+        "eq": "shared"
+       }
+      ],
+      "effects": [
+       {
+        "type": "join",
+        "id": "lelya"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "[Обаяние] Схема затворов в тубусе, а ты ещё под мотором?",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "join",
+        "id": "lelya"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Пока просто смотрю."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Опять ты. Идём куда-нибудь?",
+    "options": [
+     {
+      "text": "Идём.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "lelya"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "join": {
+    "text": "Лёля вытирает руки о штаны и закидывает за спину Искровик. — Регламент говорит «не покидать пост». Регламент не видел твой тубус.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "comp_lelya": {
+  "speaker": "Лёля Реле",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "with_lelya"
+     }
+    ],
+    "node": "with"
+   },
+   {
+    "node": "home"
+   }
+  ],
+  "nodes": {
+   "with": {
+    "text": "Лёля что-то подкручивает в Искровике. — Слушаю. Только быстро.",
+    "options": [
+     {
+      "text": "Держись рядом.",
+      "if": [
+       {
+        "flag": "stance_lelya",
+        "eq": "back"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_lelya",
+        "value": "close"
+       }
+      ],
+      "next": "close"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "notFlag": "stance_lelya"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_lelya",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "flag": "stance_lelya",
+        "eq": "close"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_lelya",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Возвращайся домой и жди меня там.",
+      "effects": [
+       {
+        "type": "leave",
+        "id": "lelya"
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Идём дальше."
+     }
+    ]
+   },
+   "close": {
+    "text": "— Рядом. Как скажешь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "back": {
+    "text": "— Позади так позади. Оттуда лучше видно, что чинить.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "— Вернусь в мастерские. Насосы без меня скучают.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "home": {
+    "text": "Лёля сидит под мотором в мастерских. — Опять дорога? Дай гаечный ключ найду.",
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "lelya"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— Идём. Регламент подождёт.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  },
+  "portrait": "portrait_lelya"
+ },
+ "comp_vedro": {
+  "speaker": "Ведро",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "with_vedro"
+     }
+    ],
+    "node": "with"
+   },
+   {
+    "node": "home"
+   }
+  ],
+  "nodes": {
+   "with": {
+    "text": "— СЛУШАЮ. — Линза Ведра мигает.",
+    "options": [
+     {
+      "text": "Держись рядом.",
+      "if": [
+       {
+        "flag": "stance_vedro",
+        "eq": "back"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_vedro",
+        "value": "close"
+       }
+      ],
+      "next": "close"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "notFlag": "stance_vedro"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_vedro",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "flag": "stance_vedro",
+        "eq": "close"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_vedro",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Возвращайся домой и жди меня там.",
+      "effects": [
+       {
+        "type": "leave",
+        "id": "vedro"
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Идём дальше."
+     }
+    ]
+   },
+   "close": {
+    "text": "— Рядом. Как скажешь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "back": {
+    "text": "— ДИСТАНЦИЯ: ПОЗАДИ. ПРИНЯТО.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "— ВОЗВРАЩАЮСЬ НА ОБХОД. ТУННЕЛИ. ОЖИДАЮ.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "home": {
+    "text": "Ведро стоит у трубы в туннелях. — ОЖИДАЮ.",
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "vedro"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— СЛЕДУЮ.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  },
+  "portrait": "portrait_vedro"
+ }
+}

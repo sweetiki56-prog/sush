@@ -18,6 +18,7 @@ const BASE = {
   '|': [186, 146, 100],
   ':': [196, 156, 104],
   '^': [168, 128, 86],
+  n: [182, 158, 112], // the highland of the Верховья: drier grass and stone
   x: [150, 142, 124],
   _: [232, 222, 198],
   s: [240, 236, 222],
@@ -40,7 +41,7 @@ export function worldMap(data) {
     const y0 = Math.floor(wy - 0.5);
     const fx = wx - 0.5 - x0;
     const fy = wy - 0.5 - y0;
-    const v = (x, y) => (at(x, y) === '^' ? 1 : at(x, y) === ':' ? 0.25 : 0);
+    const v = (x, y) => (at(x, y) === '^' ? 1 : at(x, y) === 'n' ? 0.45 : at(x, y) === ':' ? 0.25 : 0);
     return v(x0, y0) * (1 - fx) * (1 - fy) + v(x0 + 1, y0) * fx * (1 - fy) + v(x0, y0 + 1) * (1 - fx) * fy + v(x0 + 1, y0 + 1) * fx * fy;
   };
 
@@ -187,7 +188,25 @@ export function worldMap(data) {
   const peaks = [];
   for (const [x, y] of cellsOf('^')) for (let k = 0; k < 2; k++) if (r() < 0.75) peaks.push([x * PX + r() * PX, y * PX + r() * PX, 16 + r() * 16]);
   peaks.sort((a, b) => a[1] - b[1]);
-  for (const [x, y, s] of peaks) mountain(ctx, x, y, s, r);
+  const snowLine = (data.north ?? 0) * 0.45 * PX; // the high peaks of the Верховья keep their snow
+  for (const [x, y, s] of peaks) mountain(ctx, x, y, s, r, y < snowLine);
+  // the highland: tufts of dry grass and scattered stones
+  for (const [x, y] of cellsOf('n')) {
+    ctx.strokeStyle = 'rgba(70,64,36,0.32)';
+    ctx.lineWidth = 1.2;
+    for (let k = 0; k < 3; k++) {
+      const gx = x * PX + r() * PX;
+      const gy = y * PX + r() * PX;
+      line(ctx, gx, gy, gx - 3, gy - 6);
+      line(ctx, gx, gy, gx + 3, gy - 6);
+    }
+    if (r() < 0.3) {
+      ctx.fillStyle = 'rgba(96,78,52,0.5)';
+      ctx.beginPath();
+      ctx.ellipse(x * PX + r() * PX, y * PX + r() * PX, 4, 2.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
 
   // ---- the dry river: a sandy bed between two inked banks, the old current as a faint dashed thread ----
   const rows = [];
@@ -269,17 +288,22 @@ export function worldMap(data) {
   const [dxc, dyc] = centre('x');
   label('М ё р т в ы е   п о л я', dxc, dyc, 34, -0.05);
   label('здесь по ночам бродят Сухостои', dxc, dyc + 36, 20, -0.05, 0.55);
-  label('С о л о н ч а к и', 84 * PX, 14 * PX, 34, -0.04, 0.6);
+  const N = data.north ?? 0; // rows the Верховья added on top: the old labels sit below them
+  label('С о л о н ч а к и', 84 * PX, (14 + N) * PX, 34, -0.04, 0.6);
   const [sx, sy] = centre('s');
   label('С о л я н о е   м о р е', sx, sy - 3 * PX, 30, 0.06, 0.55);
   label('корка держит караван, но не бурю', sx, sy - 3 * PX + 32, 18, 0.06, 0.5);
-  label('← Низовье', 61 * PX, 40 * PX, 20, 0, 0.5);
+  label('← Низовье', 61 * PX, (40 + N) * PX, 20, 0, 0.5);
   if (mid.length) {
     const [rx, ry] = mid[Math.floor(mid.length * 0.72)];
     label('Мёртвое русло Светлой', rx * PX + 34, ry * PX, 24, Math.PI / 2 - 0.08, 0.6);
   }
-  label('К а м е н н ы й   м е ш о к', 5 * PX, 22 * PX, 24, -Math.PI / 2 + 0.1, 0.6);
-  label('↑ Верховья', 30.5 * PX, 1.6 * PX, 22, 0, 0.6);
+  label('К а м е н н ы й   м е ш о к', 5 * PX, (22 + N) * PX, 24, -Math.PI / 2 + 0.1, 0.6);
+  if (N) {
+    label('В е р х о в ь я', 48 * PX, 19 * PX, 34, -0.03, 0.6);
+    label('предгорья и каньоны до самой плотины', 48 * PX, 19 * PX + 36, 18, -0.03, 0.5);
+    label('↑ Заслон', 30.5 * PX, 1.4 * PX, 22, 0, 0.6);
+  }
 
   // ---- a cartouche, a compass rose, a scale bar ----
   cartouche(ctx, 2.2 * PX, H - 6.2 * PX, 13 * PX, 4.2 * PX);
@@ -354,7 +378,7 @@ function deadTree(ctx, x, y, h, r) {
   }
 }
 /** An inked peak: lit left face, hatched right face, a snowless ridge line. */
-function mountain(ctx, x, y, s, r) {
+function mountain(ctx, x, y, s, r, snow = false) {
   const peak = [x + (r() - 0.5) * s * 0.2, y - s];
   const lb = [x - s * 0.75, y];
   const rb = [x + s * 0.75, y];
@@ -377,6 +401,17 @@ function mountain(ctx, x, y, s, r) {
   for (let k = 1; k < 5; k++) {
     const t = k / 5;
     line(ctx, peak[0] + (rb[0] - peak[0]) * t, peak[1] + (rb[1] - peak[1]) * t, peak[0] + s * 0.1 + (rb[0] - peak[0]) * t * 0.3, y);
+  }
+  if (snow) {
+    ctx.fillStyle = 'rgba(246,242,232,0.95)';
+    ctx.beginPath();
+    ctx.moveTo(...peak);
+    ctx.lineTo(peak[0] - s * 0.3, peak[1] + s * 0.38);
+    ctx.lineTo(peak[0] - s * 0.08, peak[1] + s * 0.3);
+    ctx.lineTo(peak[0] + s * 0.06, peak[1] + s * 0.42);
+    ctx.lineTo(peak[0] + s * 0.3, peak[1] + s * 0.4);
+    ctx.closePath();
+    ctx.fill();
   }
   ctx.strokeStyle = 'rgba(52,34,20,0.9)';
   ctx.lineWidth = 1.8;

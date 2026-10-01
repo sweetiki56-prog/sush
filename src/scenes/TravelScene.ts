@@ -7,7 +7,7 @@ import { music } from '../audio/Music';
 import { session } from '../session';
 import type { NetClient, NetEvents } from '../net/NetClient';
 import type { MapParty, ServerMsg } from '../core/room/protocol';
-import { Travel, fitSeen, freshTravel, type TravelState } from '../core/travel/Travel';
+import { Travel, fitWorld, freshTravel, type TravelState } from '../core/travel/Travel';
 import { GAME_H, GAME_W, HUD_H } from '../config';
 import { C, button, glass, txt } from '../ui/theme';
 import { onKey } from '../ui/keys';
@@ -85,7 +85,7 @@ export class TravelScene extends Phaser.Scene {
     const W = grid.width * CELL;
     const H = grid.height * CELL;
     this.t = structuredClone(session().game.state.travel ?? freshTravel(grid, [14, 36]));
-    this.t.seen = fitSeen(this.t.seen, grid);
+    fitWorld(this.t, grid);
     this.trailPts = [];
     this.figures.clear();
     this.clouds = [];

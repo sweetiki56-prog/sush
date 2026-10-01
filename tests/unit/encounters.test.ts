@@ -22,11 +22,11 @@ function meetGang(caps = 100) {
   g.setFlag('trust_outcome', 'tax');
   g.apply([{ type: 'travel' }]);
   const t = r.world.travel!;
-  Object.assign(t, { x: 20.5, y: 36.5, parties: [] });
+  Object.assign(t, { x: 20.5, y: 68.5, parties: [] });
   g.state.caps = caps;
-  const gang: PartyState = { id: 'gang_9', tpl: 'gang', x: 22.5, y: 36.5, path: [], members: ['raider', 'raider'], hurt: 0, wait: 9999, think: 9999 };
+  const gang: PartyState = { id: 'gang_9', tpl: 'gang', x: 22.5, y: 68.5, path: [], members: ['raider', 'raider'], hurt: 0, wait: 9999, think: 9999 };
   t.parties!.push(gang);
-  c.do({ t: 'travel', x: 23, y: 36 });
+  c.do({ t: 'travel', x: 23, y: 68 });
   expect(until(r, () => !!r.meeting, 60_000)).toBe(true);
   return { r, c, g, gang };
 }
@@ -80,13 +80,13 @@ describe('meetings on the road', () => {
     expect(gang.calm).toBeGreaterThan(0);
     expect(r.fight).toBeNull();
     // the road is open again
-    c.do({ t: 'travel', x: 30, y: 36 });
+    c.do({ t: 'travel', x: 30, y: 68 });
     expect(r.world.travel!.path.length).toBeGreaterThan(0);
   });
 
   it('while the talk is open nobody walks off', () => {
     const { r, c } = meetGang();
-    c.do({ t: 'travel', x: 30, y: 36 });
+    c.do({ t: 'travel', x: 30, y: 68 });
     expect(r.world.travel!.path).toEqual([]);
   });
 
@@ -174,8 +174,8 @@ describe('meetings on the road', () => {
     const g = r.players.get(c.id)!.game;
     g.apply([{ type: 'travel' }]);
     const t = r.world.travel!;
-    Object.assign(t, { x: 20.5, y: 36.5, parties: [{ id: 'caravan_1', tpl: 'caravan', x: 21.5, y: 36.5, path: [], members: ['caravaneer', 'caravan_guard'], hurt: 0, wait: 9999, think: 9999 }] });
-    c.do({ t: 'travel', x: 22, y: 36 });
+    Object.assign(t, { x: 20.5, y: 68.5, parties: [{ id: 'caravan_1', tpl: 'caravan', x: 21.5, y: 68.5, path: [], members: ['caravaneer', 'caravan_guard'], hurt: 0, wait: 9999, think: 9999 }] });
+    c.do({ t: 'travel', x: 22, y: 68 });
     expect(until(r, () => !!r.meeting)).toBe(true);
     say(c, 'Покажи');
     expect(c.last('window')).toMatchObject({ kind: 'barter', id: CONTENT.travel.parties.caravan.trader });
@@ -202,7 +202,7 @@ describe('meetings on the road', () => {
     const ps = r.world.travel!.parties!;
     ps.length = 0;
     r.world.travel!.minute = 23 * 60 + 59;
-    c.do({ t: 'travel', x: 5, y: 36 });
+    c.do({ t: 'travel', x: 5, y: 68 });
     until(r, () => (r.world.flags.day as number) >= 2 || !!r.meeting, 120_000);
     const lairs = CONTENT.travel.lairs.filter((l) => CONTENT.travel.parties[l.party].kind === 'bandits');
     for (const l of lairs) expect(ps.filter((p) => p.lair === l.id).length, l.id).toBe(l.max + 1);
