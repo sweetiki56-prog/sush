@@ -661,12 +661,87 @@
   "bone_circle": {
     "name": "Костяной круг",
     "cell": [11, 12],
-    "chapter": 8
+    "chapter": 8,
+    "map": "bone_camp",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter7_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "bone_camp",
+        "entry": "south",
+        "name": "Лагерь",
+        "at": [0.5, 0.7]
+      },
+      {
+        "map": "bone_trail",
+        "entry": "south",
+        "name": "Тропа испытаний",
+        "at": [0.5, 0.25],
+        "known": [
+          {
+            "flag": "bones_in"
+          }
+        ]
+      },
+      {
+        "map": "oath_cave",
+        "entry": "crawl",
+        "name": "Пещера клятвы",
+        "at": [0.8, 0.2],
+        "known": [
+          {
+            "flag": "cave_seen"
+          }
+        ]
+      }
+    ]
   },
   "capital_ruins": {
     "name": "Руины Светлоречья",
     "cell": [40, 24],
-    "chapter": 8
+    "chapter": 8,
+    "map": "ruins_streets",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter7_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "ruins_streets",
+        "entry": "south",
+        "name": "Улицы",
+        "at": [0.5, 0.7]
+      },
+      {
+        "map": "ruins_museum",
+        "entry": "south",
+        "name": "Музей Водоуправления",
+        "at": [0.5, 0.2]
+      },
+      {
+        "map": "ruins_library",
+        "entry": "west",
+        "name": "Библиотека",
+        "at": [0.85, 0.45]
+      },
+      {
+        "map": "ruins_cellar",
+        "entry": "ladder",
+        "name": "Подвалы",
+        "at": [0.3, 0.55],
+        "known": [
+          {
+            "flag": "hostage"
+          }
+        ]
+      }
+    ]
   },
   "dam": {
     "name": "Заслон",

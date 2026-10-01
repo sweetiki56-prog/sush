@@ -14,6 +14,7 @@ import * as SL from './art/props_salt.mjs';
 import * as CR from './art/props_crystal.mjs';
 import * as SK from './art/props_skit.mjs';
 import * as UP from './art/props_upper.mjs';
+import * as BN from './art/props_bones.mjs';
 import { CHARS, ARMOR_LOOKS, buildSheet, buildPortrait, FRAME_W, FRAME_H, FOOT_X, FOOT_Y, POSES } from './art/chars.mjs';
 import { CREATURES, buildCreatureSheet, S_FRAME_W, S_FRAME_H, S_FOOT_X, S_FOOT_Y, S_POSES } from './art/creatures.mjs';
 import { icon, ICONS } from './art/icons.mjs';
@@ -172,6 +173,13 @@ const entries = [
   prop('searchlight', UP.searchlight()),
   prop('booth', UP.booth()),
   prop('big_pipe', UP.bigPipe()),
+  prop('tent', BN.tent()),
+  prop('bone_ring', BN.boneRing()),
+  prop('oath_mural', BN.oathMural()),
+  prop('display_case', BN.displayCase()),
+  prop('card_catalog', BN.cardCatalog()),
+  prop('colonnade', BN.colonnade()),
+  prop('draisine', BN.draisine()),
   prop('hatch', AR.hatch()),
   prop('ladder', AR.ladder()),
   prop('valve', AR.valve()),

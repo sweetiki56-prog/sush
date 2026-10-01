@@ -1,6 +1,11 @@
 # PROJECT_STATE
 
 ## Current
+Stage B done: Chapter VIII «Костяной круг» (S13).
+- The Костяной круг of three areas (the camp behind a gate of ribs, the trail of trials, the cave of the oath) and the ruins of Светлоречье of four (the streets with the city hall, the museum of the Water Authority, the library, the cellars).
+- The gate four ways; the second half of the key four ways (the dry week, Верес's diary, stolen from the cave, taken by force); the Printer named by the traitor's letter, Ада's letter, the library's margin or the kidnapper's slip; the hostage (Лёля if she walks along, else Марта) freed by a storm, a bargain or a fake tube from Манометр. All sides learn the Mandate is whole.
+- Side quests 54, 56–58, 62–65; seal marks 10–11; a draisine between the Депо, the ruins and the pass.
+
 Stage U done: Chapter VII «Шептун и Депо» and the Верховья (S12).
 - The chart grew north to 112×80: the Верховья on top, the old land moved down 32 rows; old saves move with it (fog, the party, every other party), once.
 - The Депо «Узловое» of four areas (the yard, the workshops with the main pump, the archive of the Бригада, the tunnels of the water main), the relay «Шептун» of three (the slope, the tower, the bunker), the pass «Ворота» and the hidden Орлиное гнездо.
@@ -242,6 +247,16 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
   - `tests/e2e/zapruda.spec.ts`: pass → Notary (a roof melts) → archive → Шлюз → Лейка → the chapter screen.
   - Also: skill tags doubled by hand in check options («[Красноречие 70%] [Красноречие] …») removed across all dialogues.
 
+## Stage B «Кости»: Chapter VIII (done)
+- [x] B0. Bible: steps by flags, areas of the Костяной круг and the ruins, side quests 54, 56–58, 62–65, seal marks 10–11, slides
+- [x] B1. Engine: the Chapter VIII screen; the hostage hides Лёля and Марта from their maps (`lelya_taken`, `marta_taken`), the note comes by `arrive` hooks (`tools/hostage-hooks.mjs`)
+- [x] B2. Art: Трещина, Щебень, «Мираж», Оттиск, agents, marauders, Хранитель-4, the wild machine; tent, bone ring, oath mural, display case, card catalogue, colonnade, draisine
+- [x] B3. Maps: seven areas, draisine stops in the Депо, the ruins and at «Ворота»
+- [x] B4. Main line (`dialogues/bones.json`, quest `bones`)
+- [x] B5. Side quests 54, 56–58, 62–65; barks for Шёпот, Лёля, Ведро
+- [x] B6. Balance at level 8: the elders of the circle — a Стрелок 19%, with Ведро 56%; the cellar 19%, with Лёля 58%; Хранитель-4 86% (Механик 15%); peaceful ways round each
+- [x] B7. Tests (`tests/unit/bones.test.ts`, `tests/e2e/bones.spec.ts`), docs, publish
+
 ## Stage U «Верховья»: Chapter VII (done)
 - [x] U0. Bible: the chart grows north to 112×80 (world.md), Chapter VII steps by flags, areas of Депо, «Шептун», «Ворота», Орлиное гнездо, side quests 51–53, 55, 59, 61, 66, Лёля and Ведро, slides
 - [x] U1. Engine: the chart north (`north` rows, `fitWorld`), highland terrain `n`, the Chapter VII screen, the region on loading cards by the place's cell
@@ -299,7 +314,7 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [x] S10. Chapter V «Кристалл»; Солевики, Гранит; companions (stage V). «Роса-2» moves to S11 with the Скит
 - [x] S11. Chapter VI «Скит»: Орден Росы, «Роса-2», Ирга (stage S). «Бархан», Зеркальное поле and Могильник are not built yet: they go to the secrets pass (S15)
 - [x] S12. Chapter VII «Шептун и Депо»: Бригада, Лёля, Ведро, туннели (stage U). The ruins of Светлоречье and «Дрезина» go to Chapter VIII
-- [ ] S13. Chapter VIII «Костяной круг»: Сухари, Шёпот; Печатник unmasked
+- [x] S13. Chapter VIII «Костяной круг»: Сухари, the Printer unmasked, the hostage; the ruins of Светлоречье (stage B)
 - [ ] S14. Chapter IX «Заслон»: siege, trial at the control room, endings with slides and nicknames
 - [ ] S15. Secrets pass: 12 seal marks, Палата мер и печатей, bunker, «Литерный», special encounters, secret endings
 
@@ -314,6 +329,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
   - main-quest flags: `docs/story/main-quest.md`.
 - Chapter III: `tools/build-zap-*.mjs`, `dialogues/zapruda.json`. Chapter IV: `tools/build-salt-*.mjs`, `tools/build-sea-*.mjs`, `dialogues/salt.json`; its flags are in `docs/story/main-quest.md` (Глава IV) and `side-quests.md` №33–39.
 - Chapter V: `tools/build-crystal-*.mjs`, `dialogues/crystal.json`. Chapter VI: `tools/build-skit-*.mjs`, `tools/build-rosa-*.mjs`, `dialogues/skit.json`; flags in `main-quest.md` (Глава VI) and `side-quests.md` №47–50.
+- Chapter VIII: `tools/build-bone-*.mjs`, `tools/build-oath-cave.mjs`, `tools/build-ruins-*.mjs`, `tools/hostage-hooks.mjs`, `dialogues/bones.json`; flags in `main-quest.md` (Глава VIII) and `side-quests.md` «Как построено (этап B)».
 - Chapter VII: `tools/build-depot-*.mjs`, `tools/build-whisper-*.mjs`, `tools/build-gates.mjs`, `tools/build-eagle.mjs`, `dialogues/upper.json`; flags in `main-quest.md` (Глава VII) and `side-quests.md` «Как построено (этап U)».
 - Companions: `content/companions.json`, `core/companions.ts`, the `comp_<id>` talks.
 - The world map: `content/travel.json`, `content/locations.json`, `tools/build-world.mjs`, `src/core/travel/`, `src/core/room/{Road,Meetings,RoadBattle}.ts`.
@@ -327,7 +343,8 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
-- **S13, Chapter VIII «Костяной круг»:** the Сухари and the second half of the key (`main-quest.md` Глава VIII, `locations.md` №19 and №22, side quests 54, 56–58, 62–65). The places are already on the chart as stubs: `bone_circle` (11, 12), `capital_ruins` (40, 24); `dam` (30, 2) is Chapter IX.
+- **S14, Chapter IX «Заслон»:** the siege, the way to the control room, the trial at the console and the endings with slides (`main-quest.md` Глава IX, `endings.md`, `locations.md` №24). `dam` (30, 2) is a stub on the chart behind the pass «Ворота» (`gates_pass` lifts the boom).
+  - Evidence for the trial: `stempel_letter`, `printer_letter`, `ada_letter`, `veres_diary`, `land_books` (or `land_books_brigade`), `suhovey_book`, the Notary's register (Chapter III), `mandate_copy`; allies and enemies: `threat_told`, `militia_warned`, `kremen_strike`, `bones_enemy`, `order_ally`/`order_enemy`, `salt_promise`, `defector`, `second_dam_hint`, `lukich_friend`; `manual_release` and `gate_scheme` (the secret ending «Утопленник»); `watcher_rod`; `clearance` (Ведро's order).
   - Carry over from Chapter VII: `threat_told` (circle / trust / silent), `depot_way`, `whisper_way`, `key_half_known`, `veres_diary`, `pump` (fixed / shared / broken, `trust_angry`), `pipe_voice` and `bunker_key`, `clearance` (mandate / hero / free), `watcher_hint`, `lukich` and `gates_pass`, `defector`, `eagle_known`, `second_dam_hint`, companions `with_lelya`, `with_vedro`.
   - Carry over from Chapter VI: `dew_fate` (order / all), `dew_way` (kept / keeper / stolen), `order_ally`, `order_enemy`, `order_cold`, `stuzha_way` (duel / revoked / slipped), `keeper`, `veres_witness` (the first «Верблюд» remembers Верес), `capsule`, `lab_tech` and `fresh_cure` (owed to the Солевики), `unaccounted` and `kolyuchka_dew`, `stempel_letter`, seal marks 1–9.
   - Carry over from Chapter V: `salt_promise`, `bitter_way`, `wall_names` (`kassian_kin`, `order_bridge`), `crystal_vs_order`, `salt_brother`.
@@ -347,9 +364,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 636 tests, with the balance numbers printed to stderr.
+- `npm test`: 684 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 26 tests, about 11 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
+- `npm run test:e2e`: 27 tests, about 11 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;

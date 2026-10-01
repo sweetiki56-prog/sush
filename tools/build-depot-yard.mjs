@@ -20,6 +20,7 @@ place({ id: 'archive_door', frame: 'door_closed', x: 34, y: 14, label: 'Двер
 place({ id: 'tunnel_gate', frame: 'bars_closed', x: 30, y: 28, label: 'Решётка туннелей', dialogue: 'tunnel_gate' });
 for (const [x, y] of [[12, 26], [14, 27]]) place({ id: `pipe_${x}_${y}`, frame: 'big_pipe', x, y, w: 2, h: 1, label: 'Труба водовода' });
 for (const [x, y] of [[8, 16], [26, 26], [16, 5]]) place({ id: `barrel_${x}_${y}`, frame: 'barrel', x, y, label: 'Бочка солярки' });
+place({ id: 'draisine_depot', frame: 'draisine', x: 15, y: 21, label: 'Дрезина', dialogue: 'draisine' });
 place({ id: 'depot_sign', frame: 'sign', x: 22, y: 31, label: 'Табличка «Узловое»', dialogue: 'depot_sign' });
 k.scenery([[3, 3, 36, 32]], { cactus: 2, dead_tree: 2, bush: 4 });
 
@@ -35,7 +36,7 @@ const actors = [
 ];
 
 k.write('depot_yard', 'Депо «Узловое»', {
-  entries: { default: [19, 33], south: [19, 33], north: [19, 2], east: [33, 14], tunnel: [30, 27] },
+  entries: { default: [19, 33], south: [19, 33], north: [19, 2], east: [33, 14], tunnel: [30, 27], rail: [15, 23] },
   roads: { south: [19, 20], north: [19, 20], east: [14, 15] },
   actors,
   arrive: [{ if: [{ notFlag: 'upper_started' }], effects: [{ type: 'flag', key: 'upper_started' }, { type: 'quest', quest: 'upper', stage: 'north' }] }],

@@ -18,6 +18,7 @@ place({ id: 'boom_post', frame: 'wall_hi', x: 21, y: 10, label: 'Стена за
 place({ id: 'boom_b', frame: 'bars_closed', x: 19, y: 10, label: 'Шлагбаум', dialogue: 'boom' });
 place({ id: 'boom_c', frame: 'bars_closed', x: 20, y: 10, label: 'Шлагбаум', dialogue: 'boom' });
 place({ id: 'booth', frame: 'booth', x: 23, y: 14, label: 'Будка сторожа' });
+place({ id: 'draisine_gates', frame: 'draisine', x: 12, y: 26, label: 'Дрезина', dialogue: 'draisine_station' });
 place({ id: 'gates_light', frame: 'searchlight', x: 14, y: 12, label: 'Прожектор' });
 for (const [x, y] of [[12, 20], [27, 22]]) place({ id: `crate_${x}_${y}`, frame: 'crate', x, y, label: 'Ящик Треста' });
 k.scenery([[8, 4, 31, 29]], { cactus: 2, dead_tree: 1, bush: 3 });
@@ -31,7 +32,7 @@ const actors = [
 ];
 
 k.write('gates_post', 'Перевал «Ворота»', {
-  entries: { default: [19, 28], south: [19, 28] },
+  entries: { default: [19, 28], south: [19, 28], rail: [13, 27] },
   roads: { south: [19, 20] },
   actors,
   arrive: [{ if: [{ notFlag: 'gates_seen' }], effects: [{ type: 'flag', key: 'gates_seen' }], log: 'Перевал «Ворота»: застава Треста поперёк единственной дороги к плотине. За шлагбаумом дорога уходит вверх, в ущелье.' }],

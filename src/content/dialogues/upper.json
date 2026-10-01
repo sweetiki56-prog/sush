@@ -768,7 +768,68 @@
       "next": "kran"
      },
      {
+      "text": "[Наука] Сделаем копию тубуса — такую, чтобы Сургуч поверил.",
+      "if": [
+       {
+        "flag": "key_whole"
+       },
+       {
+        "notFlag": "fake_made"
+       },
+       {
+        "skill": "science",
+        "gte": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "fake_mandate"
+       },
+       {
+        "type": "flag",
+        "key": "fake_made"
+       }
+      ],
+      "next": "fake"
+     },
+     {
+      "text": "[Ремонт] Сделаем копию тубуса — печать, замок, пластину.",
+      "if": [
+       {
+        "flag": "key_whole"
+       },
+       {
+        "notFlag": "fake_made"
+       },
+       {
+        "skill": "repair",
+        "gte": 60
+       }
+      ],
+      "effects": [
+       {
+        "type": "give",
+        "item": "fake_mandate"
+       },
+       {
+        "type": "flag",
+        "key": "fake_made"
+       }
+      ],
+      "next": "fake"
+     },
+     {
       "text": "Отойти."
+     }
+    ]
+   },
+   "fake": {
+    "text": "Манометр долго вертит тубус под лупой, потом достаёт из ящика жесть, воск и старый штамп Водоуправления. К вечеру на верстаке лежат два тубуса. — Различишь? — Не различишь. — Вот и они не различат.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
      }
     ]
    },

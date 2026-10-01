@@ -133,6 +133,15 @@ export const CHARS = {
   yarina: { skin: P.skin1, hair: P.dark1, shirt: P.denim1, pants: P.grey2, boots: P.dark0, coat: null, sleeve: P.denim1, armor: { plate: P.denim1, pads: P.grey4, stripe: P.bone }, bun: true, rifle: true, height: 1.0 },
   shore_soldier: { skin: P.skin1, hair: P.dark2, shirt: P.denim1, pants: P.grey2, boots: P.dark0, coat: null, sleeve: P.denim1, armor: { plate: P.denim1, pads: P.grey4, stripe: P.bone }, hat: P.grey2, rifle: true, bulk: 1.1, height: 1.03 },
   ratmir: { skin: P.skin2, hair: P.dark1, shirt: P.denim1, pants: P.grey2, boots: P.dark0, coat: P.sand3, coatLen: 12, sleeve: P.denim1, scarf: P.sand4, height: 0.99 },
+  // stage B: the Костяной круг and the ruins of Светлоречье. Mother Трещина in bone beads, the quiet traitor Щебень,
+  // «Мираж» in pale robes, the Сургуч's people in town grey, marauders, the museum's automaton
+  tresh: { skin: P.skin0, hair: P.grey5, shirt: P.sand3, pants: P.brown1, boots: P.brown0, coat: P.sand4, coatLen: 18, sleeve: P.sand3, shawl: P.bone, beard: null, bun: true, cane: true, height: 0.94 },
+  shcheben: { skin: P.skin1, hair: P.dark1, shirt: P.sand3, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.sand3, bandana: P.bone, spear: true, height: 0.97 },
+  mirage: { skin: P.skin2, hair: P.grey4, shirt: P.bone, pants: P.bone, boots: P.sand3, coat: P.bone, coatLen: 18, sleeve: P.bone, hood: P.bone, backpack: P.teal1, height: 1.02 },
+  ottisk: { skin: P.skin1, hair: P.dark2, shirt: P.grey3, pants: P.dark2, boots: P.dark0, coat: P.dark2, coatLen: 16, sleeve: P.dark2, hat: P.dark1, scarf: P.red1, height: 1.03 },
+  sealwax_agent: { skin: P.skin1, hair: P.brown1, shirt: P.grey3, pants: P.dark2, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, scarf: P.red1, rifle: true, height: 1.0 },
+  marauder: { skin: P.skin2, hair: P.dark1, shirt: P.olive1, pants: P.denim0, boots: P.dark1, coat: P.brown2, coatLen: 10, sleeve: P.brown2, bandana: P.rust1, backpack: P.olive1, rifle: true, height: 1.0 },
+  curator: { skin: P.grey4, hair: P.grey4, shirt: P.denim1, pants: P.denim0, boots: P.grey2, coat: P.denim1, coatLen: 14, sleeve: P.grey4, hat: P.denim0, goggles: true, bald: true, bulk: 1.1, height: 1.05 },
   trust_hunter: { skin: P.skin1, hair: P.dark2, shirt: P.grey1, pants: P.grey1, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, hood: P.grey1, goggles: true, rifle: true, height: 1.01 },
 };
 

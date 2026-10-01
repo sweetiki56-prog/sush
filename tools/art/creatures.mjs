@@ -35,6 +35,8 @@ export const CREATURES = {
   vedro: { mite: true, shell: P.teal1, dark: P.dark1, joint: P.grey3, scale: 1.6 },
   bunker_machine: { mite: true, shell: P.dark2, dark: P.dark0, joint: P.grey2, scale: 1.8 },
   main_eel: { eel: true, skin: P.teal0, dark: P.dark1, belly: P.grey4, scale: 1.4 },
+  // stage B: wild machines of the ruins, «Счётчики» gone feral, rust and scrap
+  wild_machine: { mite: true, shell: P.rust1, dark: P.dark1, joint: P.rust0, scale: 1.7 },
   condor: { bird: true, body: P.dark2, wing: P.dark1, tip: P.grey4, head: P.skin0, beak: P.bone, scale: 1.6 },
   drone: { bird: true, drone: true, body: P.grey4, wing: P.grey2, tip: P.dark1, head: P.red1, beak: P.grey5, scale: 1.1 },
   salt_spider: { spider: true, shell: P.grey5, dark: P.grey2, joint: P.grey3, mark: P.rust2, scale: 1.35 },

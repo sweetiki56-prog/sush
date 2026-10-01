@@ -153,6 +153,16 @@ const DEPOT_WORDS: Record<string, string> = { pump: 'за поднятый на�
 const WHISPER_WORDS: Record<string, string> = { tech: 'руками и головой', lelya: 'вместе с Лёлей', bunker: 'из взломанного бункера' };
 const THREAT_WORDS: Record<string, string> = { circle: 'Бригаде и Кругу', trust: 'Тресту, через Лукича', silent: 'никому' };
 
+const CIRCLE_WORDS: Record<string, string> = { shepot: 'с Шёпот', kremen: 'по старой памяти Кремня', trial: 'как испытуемый', forced: 'силой' };
+const KEY_WORDS: Record<string, string> = { trial: 'сухой неделей', diary: 'словом Вереса', stolen: 'украдена из пещеры', taken: 'отнята силой' };
+const PRINTER_WORDS: Record<string, string> = { traitor: 'по письму предателя', ada: 'по письму Ады', library: 'по полям книги', scribe: 'со слов Писаря' };
+const HOSTAGE_WORDS: Record<string, string> = { stormed: 'штурмом', bargained: 'торгом', fake: 'за поддельный Мандат' };
+
+function chapter8Next(game: Game): string {
+  if (game.flag('bones_enemy')) return 'Обе половины ключа у вас, но Сухари помнят, как вы их взяли. Все знают, что Мандат полон. Все идут к Заслону.';
+  return 'Обе половины ключа в тубусе, Печатник назван. Теперь все знают, что Мандат полон, — и все идут к Заслону. Глава IX.';
+}
+
 function chapter7Next(game: Game): string {
   if (game.flag('threat_told') === 'trust') return 'Трест крепит «Ворота» и смотрит за горы. Вторая половина ключа — у Сухарей, в Костяном круге. Они не любят тех, кто говорит с Трестом.';
   if (game.flag('threat_told') === 'silent') return 'О Заречье знаете только вы — и голос с вышки, который знал ваше имя. Вторая половина ключа — у Сухарей, в Костяном круге.';
@@ -195,7 +205,7 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
   const x = (GAME_W - w) / 2;
   const y = 50;
   root.add([dimmer(s, 0.6), metalPanel(s, x, y, w, h), glass(s, x + 16, y + 16, w - 32, h - 32)]);
-  root.add(title(s, GAME_W / 2, y + 48, `ГЛАВА ${['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII'][chapter] ?? chapter} ОКОНЧЕНА`, 22, C.amber).setOrigin(0.5));
+  root.add(title(s, GAME_W / 2, y + 48, `ГЛАВА ${['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][chapter] ?? chapter} ОКОНЧЕНА`, 22, C.amber).setOrigin(0.5));
   const karma = game.flag('karma');
   const well = game.flag('well_sealed') ? 'под пломбой Треста' : game.flag('well_taxed') ? 'платит налог Тресту' : 'свободен';
   const rows2 = [
@@ -291,12 +301,24 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
     ['Капли', String(st.caps)],
     ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
   ];
-  const rows = chapter === 7 ? rows7 : chapter === 6 ? rows6 : chapter === 5 ? rows5 : chapter === 4 ? rows4 : chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
+  const rows8 = [
+    ['Странник', `${c.name}, уровень ${c.level}`],
+    ['Время в пути', fmtTime(st.stats.playMs)],
+    ['В Костяной круг', CIRCLE_WORDS[String(game.flag('circle_way'))] ?? '—'],
+    ['Вторая половина ключа', KEY_WORDS[String(game.flag('key_way'))] ?? '—'],
+    ['Печатник', PRINTER_WORDS[String(game.flag('printer_way'))] ?? '—'],
+    ['Заложник', HOSTAGE_WORDS[String(game.flag('hostage_way'))] ?? '—'],
+    ['Спутники', party.length ? party.join(', ') : 'никого'],
+    ['Сургучные метки', String([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].filter((n) => game.flag(`seal_mark_${n}`)).length)],
+    ['Капли', String(st.caps)],
+    ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
+  ];
+  const rows = chapter === 8 ? rows8 : chapter === 7 ? rows7 : chapter === 6 ? rows6 : chapter === 5 ? rows5 : chapter === 4 ? rows4 : chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
   rows.forEach(([k, v], i) => {
     root.add(txt(s, x + 60, y + 88 + i * 27, k, 15, C.crt));
     root.add(txt(s, x + w - 60, y + 88 + i * 27, v, 15, C.crtBright, 360, true).setOrigin(1, 0).setAlign('right'));
   });
-  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 7 ? chapter7Next(game) : chapter === 6 ? chapter6Next(game) : chapter === 5 ? chapter5Next(game) : chapter === 4 ? chapter4Next(game) : chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
+  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 8 ? chapter8Next(game) : chapter === 7 ? chapter7Next(game) : chapter === 6 ? chapter6Next(game) : chapter === 5 ? chapter5Next(game) : chapter === 4 ? chapter4Next(game) : chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
   const bStay = button(s, x + 70, y + h - 72, 250, 32, 'ОСТАТЬСЯ В СУШИ', () => (root.destroy(), onStay()));
   const bNew = button(s, x + w - 320, y + h - 72, 250, 32, 'НОВАЯ ИГРА', onNew);
   root.add([bStay.root, bNew.root]);

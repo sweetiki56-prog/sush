@@ -4487,7 +4487,12 @@
    "y": 24,
    "dir": 3,
    "label": "Старейшина Марта",
-   "dialogue": "marta"
+   "dialogue": "marta",
+   "if": [
+    {
+     "notFlag": "marta_taken"
+    }
+   ]
   },
   {
    "id": "hank",

@@ -24,7 +24,7 @@ k.exit({ id: 'south', x: 19, y: H - 1, w: 2, h: 1, to: 'depot_yard', entry: 'nor
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 19, y: 29, dir: 1 },
   { id: 'manometr', sheet: 'manometr', x: 11, y: 15, dir: 3, label: 'Дед Манометр', dialogue: 'manometr' },
-  { id: 'lelya', sheet: 'lelya', x: 22, y: 11, dir: 6, label: 'Лёля Реле', dialogue: 'lelya', if: [{ notFlag: 'with_lelya' }, { notFlag: 'lost_lelya' }] },
+  { id: 'lelya', sheet: 'lelya', x: 22, y: 11, dir: 6, label: 'Лёля Реле', dialogue: 'lelya', if: [{ notFlag: 'with_lelya' }, { notFlag: 'lost_lelya' }, { notFlag: 'lelya_taken' }] },
   { id: 'depot_trader', sheet: 'brigadier', x: 28, y: 15, dir: 5, label: 'Кладовщик Бригады', dialogue: 'depot_trader' },
 ];
 

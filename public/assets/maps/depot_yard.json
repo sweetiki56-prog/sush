@@ -458,6 +458,17 @@
    "w": 1,
    "h": 1,
    "block": true,
+   "id": "draisine_depot",
+   "frame": "draisine",
+   "x": 15,
+   "y": 21,
+   "label": "Дрезина",
+   "dialogue": "draisine"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
    "id": "depot_sign",
    "frame": "sign",
    "x": 22,
@@ -3449,6 +3460,10 @@
   "tunnel": [
    30,
    27
+  ],
+  "rail": [
+   15,
+   23
   ]
  },
  "actors": [

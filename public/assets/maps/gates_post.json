@@ -295,6 +295,17 @@
    "w": 1,
    "h": 1,
    "block": true,
+   "id": "draisine_gates",
+   "frame": "draisine",
+   "x": 12,
+   "y": 26,
+   "label": "Дрезина",
+   "dialogue": "draisine_station"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
    "id": "gates_light",
    "frame": "searchlight",
    "x": 14,
@@ -3187,6 +3198,10 @@
   "south": [
    19,
    28
+  ],
+  "rail": [
+   13,
+   27
   ]
  },
  "actors": [

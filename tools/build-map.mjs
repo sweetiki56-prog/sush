@@ -154,7 +154,7 @@ const TRUST_HERE = [{ flag: 'quest_complete' }, { notFlag: 'trust_left' }];
 const TRUST_PEACE = [{ notFlag: 'trust_fight' }];
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 3, y: 26, dir: 1 },
-  { id: 'marta', sheet: 'marta', x: 14, y: 24, dir: 3, label: 'Старейшина Марта', dialogue: 'marta' },
+  { id: 'marta', sheet: 'marta', x: 14, y: 24, dir: 3, label: 'Старейшина Марта', dialogue: 'marta', if: [{ notFlag: 'marta_taken' }] },
   { id: 'hank', sheet: 'hank', x: 16, y: 31, dir: 5, label: 'Бродяга Хэнк', dialogue: 'hank', if: [{ notFlag: 'hank_hid' }, { notFlag: 'hank_taken' }, { notFlag: 'met_hank' }] },
   // companions sent home wait by the fire (stage V)
   { id: 'hank_home', sheet: 'hank', x: 16, y: 31, dir: 5, label: 'Хэнк', dialogue: 'comp_hank', if: [{ flag: 'met_hank' }, { notFlag: 'with_hank' }, { notFlag: 'lost_hank' }] },

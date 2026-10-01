@@ -4176,6 +4176,9 @@
     },
     {
      "notFlag": "lost_lelya"
+    },
+    {
+     "notFlag": "lelya_taken"
     }
    ]
   },
