@@ -114,6 +114,7 @@ function run(g: Game, units: Combatant[], ground: Partial<CombatEnv> = {}): Resu
     if (u.side === 'player') playerTurn(c, g, u);
     else for (let a = nextAction(c, u), n = 0; a.kind !== 'end' && n < 20; a = nextAction(c, u), n++) {
       if (a.kind === 'move') c.move(a.path);
+      else if (a.kind === 'tend') c.tend(a.target);
       else {
         u.weapon = a.weapon;
         c.attack(a.target);

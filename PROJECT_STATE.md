@@ -1,6 +1,12 @@
 # PROJECT_STATE
 
 ## Current
+Stage S done: Chapter VI «Скит», «Роса-2» and Ирга (S11).
+- The Скит of four areas (the yard with the gate and the dew sails, the cells and the hall, the archive, the works «Роса-1» below) and «Роса-2» of three (the surface with Ирга's camp, the labs with the gas and the rejects, the capsules). A vent under the salt joins the works and the capsules.
+- Into the Скит four ways (knowledge, a bout, Ирга's word, the vent); Штемпель's letter in the archive (seal mark 8); the dew-catchers kept, earned as a keeper or stolen from the safe; брат Стужа fought, called off or slipped; the dew to the Order or to everyone ends the chapter.
+- Side quests 47–50 («Неучтённый», «Испытание знанием», «Лаборант», «Последняя капсула»), seal mark 9 on the lab door.
+- Ирга joins and bandages the wounded in fights (a new healer AI action).
+
 Phones and pursuits (done):
 - The game plays by touch on a phone held sideways: finger scrolling in every list, pinch zoom on both maps, the name typed on the phone's keyboard, full screen on the first tap, a turn-your-phone prompt, a home-screen manifest and icon, full-width dialogue answers, two-tap aiming in fights, lighter graphics by default. `tests/e2e/mobile.spec.ts` covers it.
 - World-map pursuers (jackals, gangs) no longer just trail the hero: they catch up and a meeting starts, or lose the trail and turn away.
@@ -230,6 +236,16 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
   - `tests/e2e/zapruda.spec.ts`: pass → Notary (a roof melts) → archive → Шлюз → Лейка → the chapter screen.
   - Also: skill tags doubled by hand in check options («[Красноречие 70%] [Красноречие] …») removed across all dialogues.
 
+## Stage S «Скит»: Chapter VI (done)
+- [x] S0. Bible: areas of the Скит and «Роса-2», the chapter's steps by flags, side quests 47–50, Ирга, seal marks 8–9, slides
+- [x] S1. Engine: a healer (`heal` on a creature, AI action `tend`), the Chapter VI screen, no drawn cursor on phones
+- [x] S2. Art: people of the Order, Ирга, Пётр, the «Верблюды», the sentry machine; dew sail, stacks, capsule, terminal
+- [x] S3. Maps: seven areas, the vent between «Роса-2» and the works
+- [x] S4. Main line (`dialogues/skit.json`, quest `skit`)
+- [x] S5. Side quests 47–50, Ирга as a companion
+- [x] S6. Balance at level 6: Стужа's duel — a Стрелок 68%; two sentries 70%; three rejects alone 30%, with Ирга 69% (Механик 33%, Говорун 22% with her); peaceful ways around each
+- [x] S7. Tests (`tests/unit/skit.test.ts`, `tests/e2e/skit.spec.ts`), docs, publish
+
 ## Stage V «Кристалл»: companions and Chapter V (done)
 - [x] V0. Bible: companions (follow, fight beside, orders, limit, death, barks; `with_<id>`, `lost_<id>`), Кристалл of four areas, the chapter's steps by flags, side quests 43–46, slides, seal mark 7
 - [x] V1. Companions in the engine
@@ -265,7 +281,7 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [ ] S8. Region Низовье complete (the barge done in stage L): Мёртвые поля, приют Тишины, Элеватор, Ковчег; companions Хэнк, Ржавчик, Тимофей
 - [x] S9. Chapter IV «Соль» + Соляное море; caravans; arena in the story (stage K)
 - [x] S10. Chapter V «Кристалл»; Солевики, Гранит; companions (stage V). «Роса-2» moves to S11 with the Скит
-- [ ] S11. Chapter VI «Скит»: Орден Росы, Ирга; «Бархан», Зеркальное поле, Могильник
+- [x] S11. Chapter VI «Скит»: Орден Росы, «Роса-2», Ирга (stage S). «Бархан», Зеркальное поле and Могильник are not built yet: they go to the secrets pass (S15)
 - [ ] S12. Chapter VII «Шептун и Депо»: Бригада, Лёля, Ведро, туннели; руины Светлоречья
 - [ ] S13. Chapter VIII «Костяной круг»: Сухари, Шёпот; Печатник unmasked
 - [ ] S14. Chapter IX «Заслон»: siege, trial at the control room, endings with slides and nicknames
@@ -281,6 +297,8 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
   - dialogues: `dialogues/pillars.json`, `dialogues/kolyuchka.json`;
   - main-quest flags: `docs/story/main-quest.md`.
 - Chapter III: `tools/build-zap-*.mjs`, `dialogues/zapruda.json`. Chapter IV: `tools/build-salt-*.mjs`, `tools/build-sea-*.mjs`, `dialogues/salt.json`; its flags are in `docs/story/main-quest.md` (Глава IV) and `side-quests.md` №33–39.
+- Chapter V: `tools/build-crystal-*.mjs`, `dialogues/crystal.json`. Chapter VI: `tools/build-skit-*.mjs`, `tools/build-rosa-*.mjs`, `dialogues/skit.json`; flags in `main-quest.md` (Глава VI) and `side-quests.md` №47–50.
+- Companions: `content/companions.json`, `core/companions.ts`, the `comp_<id>` talks.
 - The world map: `content/travel.json`, `content/locations.json`, `tools/build-world.mjs`, `src/core/travel/`, `src/core/room/{Road,Meetings,RoadBattle}.ts`.
 - Stage R quests: `docs/story/side-quests.md` R1–R6, flags as named there (`semyon`, `rzhavchik`, `luka`, `resin_thief`, `laska_bow`, `hank_forgiven`, `hank_taken`).
 
@@ -292,9 +310,10 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
-- **S11, Chapter VI «Скит»:** the citadel of the Орден Росы and the station «Роса-2» (`main-quest.md` Глава VI, `locations.md` №13–14, side quests 47–50). The Скит is on the chart at 100, 7 (`chapter: 6`).
-  - Carry over from Chapter V: `salt_promise` (protect / sections / refuse), `bitter_way`, `wall_names` (`kassian_kin`, `order_bridge`), `crystal_vs_order`, `crystal_grudge`, `salt_brother` (the salt tunnel), companions (`with_<id>`, `lost_<id>`), seal marks 1–7.
-  - Companions still to come: Ирга (Солончаки), Лёля, Тимофей, Ведро; Хэнк's «Долг сборщика».
+- **S12, Chapter VII «Шептун и Депо»:** the Верховья begin (`main-quest.md` Глава VII, `locations.md`). The chart still ends at the Солончаки: the Верховья need the world map to grow again (decision 34).
+  - Carry over from Chapter VI: `dew_fate` (order / all), `dew_way` (kept / keeper / stolen), `order_ally`, `order_enemy`, `order_cold`, `stuzha_way` (duel / revoked / slipped), `keeper`, `veres_witness` (the first «Верблюд» remembers Верес), `capsule`, `lab_tech` and `fresh_cure` (owed to the Солевики), `unaccounted` and `kolyuchka_dew`, `stempel_letter`, seal marks 1–9.
+  - Carry over from Chapter V: `salt_promise`, `bitter_way`, `wall_names` (`kassian_kin`, `order_bridge`), `crystal_vs_order`, `salt_brother`.
+  - Companions still to come: Лёля, Тимофей, Ведро; Хэнк's «Долг сборщика».
 - Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are still open; the sewers and the Lower city are ready for them.
 - **S8, the rest of Низовье:**
   - places: Мёртвые поля, Приют Тишины (the Полусухие: `rep_dry`, `resin_thief`), Элеватор, Ковчег;
@@ -302,8 +321,6 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - **The ending slides** (`docs/story/endings.md`) already list the stage R marks. The slides screen for the finale is not built yet.
 
 **Known limits**
-- There are no companions in the party yet. Hank and Ржавчик exist only as flags: `hank_joins` and `rzhavchik = ours` change talk and gear, and nobody walks with the hero. Companions as `team: 'player'` AI allies (decision 25) are the plan for S8.
-- The journal has no scrolling, and it fills up.
 - `docs/story/side-quests.md` keeps both the early quest list and the stage R versions. The R versions are the built ones.
 
 **Where it is published.**
@@ -312,16 +329,15 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 416 tests, with the balance numbers printed to stderr.
+- `npm test`: 586 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 22 tests, about 8 min.
+- `npm run test:e2e`: 25 tests, about 10 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;
   - look at Марта's shack, the dog at Hank's fire, and Бирюк (`__world.flag('caravan_here')`, then re-enter the map).
 
 ## Later
-- Journal with scrolling or pages (it fills up as chapters add quests)
 - Arena: point-budget mode, teams 2×2, bots
 - Voice chat, accounts, ranking
 - Fog of war

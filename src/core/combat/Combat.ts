@@ -242,6 +242,17 @@ export class Combat {
     return [{ t: 'throw', id: u.id, item: weapon, x: spot.x, y: spot.y, chance: p.chance, roll, hit }, ...this.blastAt(`${u.id}:${weapon}`, spot, w.thrown!.radius, w.dmg, w)];
   }
 
+  /** A healer bandages a friend next to it. */
+  tend(targetId: string): CombatEvent[] {
+    const u = this.current;
+    const t = this.unit(targetId);
+    if (!u.heal || !t || t.dead || tileDist(u, t) > 1 || u.ap < ITEM_AP) return [];
+    u.ap -= ITEM_AP;
+    const before = t.hp;
+    t.hp = Math.min(t.maxHp, t.hp + u.heal);
+    return [{ t: 'use', id: u.id, item: 'bandage' }, { t: 'heal', id: t.id, amount: t.hp - before, hp: t.hp }, { t: 'log', text: `${u.name} перевязывает раны: ${t.name}.` }];
+  }
+
   /** A consumable in a fight: heal, cure, extra AP or a resistance buff. */
   consume(item: string, use: CombatUse, heal = use.heal ?? 0): CombatEvent[] {
     const u = this.current;

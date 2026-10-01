@@ -71,6 +71,7 @@ export interface CreatureDef {
   spare?: boolean; // a story figure: a blow that would kill makes them leave the fight instead
   rooted?: boolean; // never leaves its tile (an eel under the sand): strikes whoever comes near
   burrow?: boolean; // dives into the salt every other turn (out of reach) and comes up beside the sturdiest foe
+  heal?: number; // a healer: bandages a badly wounded friend next to it for this many HP (a companion medic)
   fleeText?: string; // log line when they run ({name})
 }
 
@@ -125,6 +126,7 @@ export interface Combatant {
   spare?: boolean; // leaves the fight instead of dying
   rooted?: boolean; // never moves
   burrow?: boolean; // dives and surfaces (see CreatureDef)
+  heal?: number; // bandages a wounded friend (see CreatureDef)
   under?: boolean; // under the salt now: no one can reach it
   up?: boolean; // came up this turn (or was driven up by a noise): stays up till its next turn is over
   holdBack?: boolean; // a companion told to hold back: fights only foes who came close to the party's people

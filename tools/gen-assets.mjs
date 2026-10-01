@@ -12,6 +12,7 @@ import * as AR from './art/props_areas.mjs';
 import * as CT from './art/props_city.mjs';
 import * as SL from './art/props_salt.mjs';
 import * as CR from './art/props_crystal.mjs';
+import * as SK from './art/props_skit.mjs';
 import { CHARS, ARMOR_LOOKS, buildSheet, buildPortrait, FRAME_W, FRAME_H, FOOT_X, FOOT_Y, POSES } from './art/chars.mjs';
 import { CREATURES, buildCreatureSheet, S_FRAME_W, S_FRAME_H, S_FOOT_X, S_FOOT_Y, S_POSES } from './art/creatures.mjs';
 import { icon, ICONS } from './art/icons.mjs';
@@ -158,6 +159,10 @@ const entries = [
   prop('niche', CR.niche()),
   prop('brine_pool', CR.brinePool()),
   prop('wall_names', CR.wallNames()),
+  prop('dew_sail', SK.dewSail()),
+  prop('stacks', SK.stacks()),
+  prop('capsule', SK.capsule()),
+  prop('terminal', SK.terminal()),
   prop('hatch', AR.hatch()),
   prop('ladder', AR.ladder()),
   prop('valve', AR.valve()),

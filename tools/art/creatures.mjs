@@ -27,6 +27,7 @@ export const CREATURES = {
   rust_mite: { mite: true, shell: P.rust1, dark: P.rust0, joint: P.dark2, scale: 0.8 },
   dog_rzhavchik: { dog: true, fur: P.rust2, dark: P.rust0, belly: P.sand3, collar: P.fire1, scale: 1.3 },
   // stage K: the Salt sea. A pale spider spinning salt threads; the salt snake, an eel's body as thick as a man
+  sentry: { mite: true, shell: P.grey3, dark: P.dark1, joint: P.grey2, scale: 1.7 },
   salt_spider: { spider: true, shell: P.grey5, dark: P.grey2, joint: P.grey3, mark: P.rust2, scale: 1.35 },
   salt_snake: { eel: true, skin: P.grey5, dark: P.grey2, belly: P.bone, heap: P.bone, scale: 3 },
 };

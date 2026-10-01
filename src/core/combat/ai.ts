@@ -3,13 +3,28 @@ import type { Tile } from '../../iso/Pathfinder';
 import { tileDist } from '../../iso/LineOfSight';
 import type { Combat } from './Combat';
 import { attackCost } from './rules';
+import { ITEM_AP } from './Combat';
 import { enemies, type Combatant } from './types';
 
 const HOLD_BACK = 2; // tiles from one of our people
 
-export type AiAction = { kind: 'move'; path: Tile[] } | { kind: 'attack'; target: string; weapon: string } | { kind: 'end' };
+export type AiAction = { kind: 'move'; path: Tile[] } | { kind: 'attack'; target: string; weapon: string } | { kind: 'tend'; target: string } | { kind: 'end' };
+
+const TEND_BELOW = 0.5; // a healer goes to a friend under half health
 
 export function nextAction(c: Combat, self: Combatant): AiAction {
+  // a healer sees to a badly wounded friend first: bandage if next to them, else go to them
+  if (self.heal && self.ap >= ITEM_AP) {
+    const hurt = c.units
+      .filter((u) => u !== self && u.side !== 'object' && !u.dead && !u.fled && !enemies(self, u) && u.hp < u.maxHp * TEND_BELOW)
+      .sort((a, b) => tileDist(self, a) - tileDist(self, b))[0];
+    if (hurt && tileDist(self, hurt) <= 1) return { kind: 'tend', target: hurt.id };
+    if (hurt && self.ap > ITEM_AP) {
+      const pf = c.pathfinder(self.id);
+      const path = pf.find(self, pf.around(hurt.x, hurt.y));
+      if (path?.length && path.length <= self.ap - ITEM_AP) return { kind: 'move', path };
+    }
+  }
   // the nearest foe (a person, or an ally of theirs), preferring one in sight
   let people = c.units.filter((u) => u.side !== 'object' && enemies(self, u) && !u.dead && !u.fled && !u.under);
   // held back: only those who came within reach of our people count

@@ -73,6 +73,7 @@ export function creatureUnit(def: CreatureDef, id: string, x: number, y: number)
     spare: def.spare,
     rooted: def.rooted,
     burrow: def.burrow,
+    heal: def.heal,
     tags: [...(def.tags ?? [])],
     res: { ...(def.res ?? {}) },
   };

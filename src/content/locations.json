@@ -340,7 +340,59 @@
   "skit": {
     "name": "Скит",
     "cell": [100, 7],
-    "chapter": 6
+    "chapter": 6,
+    "map": "skit_yard",
+    "entry": "south",
+    "open": [{ "flag": "chapter5_seen" }],
+    "areas": [
+      { "map": "skit_yard", "entry": "south", "name": "Двор Скита", "at": [0.5, 0.7] },
+      {
+        "map": "skit_cells",
+        "entry": "south",
+        "name": "Кельи и зал",
+        "at": [0.5, 0.25],
+        "known": [{ "flag": "skit_in" }]
+      },
+      {
+        "map": "skit_archive",
+        "entry": "west",
+        "name": "Архив «Росы»",
+        "at": [0.8, 0.45],
+        "known": [{ "flag": "skit_in" }]
+      },
+      {
+        "map": "skit_depths",
+        "entry": "stairs",
+        "name": "Цех «Роса-1»",
+        "at": [0.3, 0.5],
+        "known": [{ "flag": "skit_in" }]
+      }
+    ]
+  },
+  "rosa": {
+    "name": "«Роса-2»",
+    "cell": [96, 13],
+    "chapter": 6,
+    "map": "rosa_surface",
+    "entry": "west",
+    "open": [{ "flag": "chapter5_seen" }],
+    "areas": [
+      { "map": "rosa_surface", "entry": "west", "name": "Поверхность", "at": [0.3, 0.6] },
+      {
+        "map": "rosa_lab",
+        "entry": "stairs",
+        "name": "Лаборатории",
+        "at": [0.6, 0.45],
+        "known": [{ "flag": "lab_tech_asked" }]
+      },
+      {
+        "map": "rosa_deep",
+        "entry": "ladder",
+        "name": "Капсулы",
+        "at": [0.75, 0.25],
+        "known": [{ "flag": "lab_tech_asked" }]
+      }
+    ]
   },
   "to_upper": {
     "name": "Дорога в Верховья",

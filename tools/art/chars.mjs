@@ -110,6 +110,17 @@ export const CHARS = {
   slyuda: { skin: P.grey4, hair: P.grey4, shirt: P.olive1, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.grey4, apron: P.brown2, bald: true, crystals: P.bone, backpack: P.brown2, bulk: 1.2, height: 1.02 },
   shcholoch: { skin: P.grey4, hair: P.grey4, shirt: P.teal0, pants: P.sand2, boots: P.brown1, coat: P.teal1, coatLen: 16, sleeve: P.teal1, hood: P.teal0, crystals: P.bone, bulk: 1.1, height: 0.98 },
   rtut: { skin: P.skin1, hair: P.dark1, shirt: P.grey2, pants: P.dark2, boots: P.dark1, coat: P.brown1, coatLen: 12, sleeve: P.brown1, goggles: true, scarf: P.red0, height: 0.97 },
+  // stage S: the Орден Росы wears white and steel; Ирга fled in a patched habit; Пётр is a Полусухой, bark for skin
+  kassian: { skin: P.skin1, hair: P.grey5, shirt: P.bone, pants: P.grey4, boots: P.grey2, coat: P.bone, coatLen: 18, sleeve: P.bone, hood: P.grey5, beard: P.grey5, height: 1.0 },
+  stuzha: { skin: P.skin0, hair: P.dark1, shirt: P.grey4, pants: P.grey3, boots: P.dark1, coat: P.bone, coatLen: 14, sleeve: P.grey4, armor: { plate: P.grey5, pads: P.grey6, stripe: P.teal1 }, bulk: 1.2, rifle: true, height: 1.08 },
+  dew_knight: { skin: P.skin1, hair: P.grey3, shirt: P.grey4, pants: P.grey3, boots: P.dark1, coat: P.bone, coatLen: 12, sleeve: P.grey4, hood: P.bone, armor: { plate: P.grey5, pads: P.grey6, stripe: P.teal1 }, rifle: true, bulk: 1.1, height: 1.04 },
+  novice: { skin: P.skin2, hair: P.brown1, shirt: P.bone, pants: P.sand3, boots: P.brown1, coat: P.sand4, coatLen: 16, sleeve: P.sand4, height: 0.95 },
+  svitok: { skin: P.skin1, hair: P.grey4, shirt: P.bone, pants: P.grey4, boots: P.brown1, coat: P.sand3, coatLen: 17, sleeve: P.sand3, goggles: true, bald: true, height: 0.93 },
+  ivan: { skin: P.skin0, hair: P.brown2, shirt: P.bone, pants: P.sand3, boots: P.brown1, coat: P.sand4, coatLen: 16, sleeve: P.sand4, height: 0.92 },
+  irga: { skin: P.skin1, hair: P.rust1, shirt: P.teal0, pants: P.grey3, boots: P.dark1, coat: P.bone, coatLen: 12, sleeve: P.teal0, hood: P.grey4, scarf: P.red1, backpack: P.olive1, height: 0.94 },
+  petr: { skin: P.brown2, hair: P.grey2, shirt: P.bone, pants: P.grey3, boots: P.grey1, coat: P.bone, coatLen: 16, sleeve: P.brown2, bald: true, goggles: true, cane: true, height: 0.98 },
+  camel_reject: { skin: P.grey3, hair: P.grey3, shirt: P.grey2, pants: P.grey2, boots: P.grey1, coat: null, sleeve: P.grey3, bald: true, crystals: P.bone, bulk: 1.1, height: 0.9 },
+  camel_first: { skin: P.grey4, hair: P.grey4, shirt: P.bone, pants: P.bone, boots: P.grey3, coat: null, sleeve: P.grey4, bald: true, crystals: P.grey6, bulk: 1.2, height: 1.06 },
   trust_hunter: { skin: P.skin1, hair: P.dark2, shirt: P.grey1, pants: P.grey1, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, hood: P.grey1, goggles: true, rifle: true, height: 1.01 },
 };
 

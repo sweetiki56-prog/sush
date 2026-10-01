@@ -128,6 +128,7 @@ export class Fight {
       const a = nextAction(c, u);
       if (a.kind === 'end') break;
       if (a.kind === 'move') ev.push(...c.move(a.path));
+      else if (a.kind === 'tend') ev.push(...c.tend(a.target));
       else {
         u.weapon = a.weapon;
         ev.push(...c.attack(a.target));
