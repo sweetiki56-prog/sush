@@ -1535,5 +1535,19 @@
     "icon": "icon_letter",
     "cat": "quest",
     "value": 0
+  },
+  "lead_bloom": {
+    "name": "Свинцовый цветок",
+    "desc": "Сизые головки на серых стеблях. Лекарство Полусухих от деревенения.",
+    "icon": "icon_mint_leaf",
+    "cat": "quest",
+    "value": 0
+  },
+  "weather_reports": {
+    "name": "Метеосводки «Шептуна»",
+    "desc": "Лента сводок: давление, ветер, влажность над всей Сушью.",
+    "icon": "icon_letter",
+    "cat": "quest",
+    "value": 0
   }
 }

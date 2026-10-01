@@ -4235,6 +4235,20 @@
    "dialogue": "agafya"
   },
   {
+   "id": "zasov",
+   "sheet": "zasov",
+   "x": 10,
+   "y": 30,
+   "dir": 2,
+   "label": "Засов",
+   "dialogue": "zasov",
+   "if": [
+    {
+     "notFlag": "hank_debt"
+    }
+   ]
+  },
+  {
    "id": "kosoy",
    "sheet": "kosoy",
    "x": 22,

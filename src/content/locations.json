@@ -212,24 +212,101 @@
     ]
   },
   "khlebnoe": {
-    "name": "Руины Хлебного",
+    "name": "Мёртвые поля и Хлебное",
     "cell": [45, 62],
-    "chapter": 3
+    "map": "dead_fields",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "dead_fields",
+        "entry": "south",
+        "name": "Мёртвые поля",
+        "at": [0.5, 0.7]
+      },
+      {
+        "map": "khlebnoe_ruins",
+        "entry": "south",
+        "name": "Руины Хлебного",
+        "at": [0.5, 0.25]
+      }
+    ]
   },
   "silence": {
     "name": "Приют Тишины",
     "cell": [39, 67],
-    "chapter": 3
+    "map": "silence_house",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ]
   },
   "elevator": {
     "name": "Элеватор",
     "cell": [51, 57],
-    "chapter": 3
+    "map": "elevator_yard",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "elevator_yard",
+        "entry": "south",
+        "name": "Двор",
+        "at": [0.5, 0.7]
+      },
+      {
+        "map": "elevator_floors",
+        "entry": "south",
+        "name": "Этажи",
+        "at": [0.5, 0.25]
+      },
+      {
+        "map": "elevator_brewery",
+        "entry": "ladder",
+        "name": "Варочная",
+        "at": [0.2, 0.6],
+        "known": [
+          {
+            "flag": "mirage_brew_asked"
+          }
+        ]
+      }
+    ]
   },
   "ark": {
     "name": "Ковчег",
     "cell": [32, 75],
-    "chapter": 3
+    "map": "ark_camp",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ],
+    "areas": [
+      {
+        "map": "ark_camp",
+        "entry": "south",
+        "name": "Лагерь паломников",
+        "at": [0.5, 0.7]
+      },
+      {
+        "map": "ark_ship",
+        "entry": "south",
+        "name": "Ковчег",
+        "at": [0.5, 0.25]
+      }
+    ]
   },
   "salt": {
     "name": "Соль",
@@ -802,5 +879,107 @@
     ],
     "map": "eagle_nest",
     "entry": "south"
+  },
+  "stray_spot": {
+    "name": "Влажная низина",
+    "cell": [22, 76],
+    "secret": true,
+    "open": [
+      {
+        "flag": "stray_asked"
+      },
+      {
+        "notFlag": "stray"
+      }
+    ],
+    "reach": [
+      {
+        "if": [
+          {
+            "notFlag": "stray"
+          },
+          {
+            "notFlag": "day"
+          }
+        ],
+        "effects": [
+          {
+            "type": "flag",
+            "key": "stray",
+            "value": "found"
+          },
+          {
+            "type": "flag",
+            "key": "dry_rain_hint"
+          },
+          {
+            "type": "quest",
+            "quest": "stray",
+            "stage": "done"
+          },
+          {
+            "type": "xp",
+            "amount": 150
+          }
+        ],
+        "log": "В низине земля влажная, будто здесь был дождь. Агния сидит у лужицы и смотрит в небо. Она жива."
+      },
+      {
+        "if": [
+          {
+            "notFlag": "stray"
+          },
+          {
+            "flag": "day",
+            "ltFlag": "stray_deadline"
+          }
+        ],
+        "effects": [
+          {
+            "type": "flag",
+            "key": "stray",
+            "value": "found"
+          },
+          {
+            "type": "flag",
+            "key": "dry_rain_hint"
+          },
+          {
+            "type": "quest",
+            "quest": "stray",
+            "stage": "done"
+          },
+          {
+            "type": "xp",
+            "amount": 150
+          }
+        ],
+        "log": "В низине земля влажная, будто здесь был дождь. Агния сидит у лужицы и смотрит в небо. Она жива."
+      },
+      {
+        "if": [
+          {
+            "notFlag": "stray"
+          },
+          {
+            "flag": "day",
+            "gteFlag": "stray_deadline"
+          }
+        ],
+        "effects": [
+          {
+            "type": "flag",
+            "key": "stray",
+            "value": "dead"
+          },
+          {
+            "type": "quest",
+            "quest": "stray",
+            "stage": "done"
+          }
+        ],
+        "log": "В низине земля влажная. Агния лежит у пересохшей лужицы. Поздно."
+      }
+    ]
   }
 }

@@ -43,6 +43,7 @@ const actors = [
   ...[['gate_col_a', 19, 34], ['gate_col_b', 22, 34]].map(([id, x, y]) => ({ id, sheet: 'collector', x, y, dir: 6, label: 'Сборщик на воротах', dialogue: 'zap_gate', creature: 'collector', group: 'gate', peace: WANTED })),
   { id: 'lejka', sheet: 'lejka', x: 8, y: 22, dir: 1, label: 'Лейка', dialogue: 'lejka' },
   { id: 'agafya', sheet: 'agafya', x: 32, y: 26, dir: 5, label: 'Вдова Агафья', dialogue: 'agafya' },
+  { id: 'zasov', sheet: 'zasov', x: 10, y: 30, dir: 2, label: 'Засов', dialogue: 'zasov', if: [{ notFlag: 'hank_debt' }] },
   { id: 'kosoy', sheet: 'kosoy', x: 22, y: 16, dir: 5, label: 'Косой', dialogue: 'kosoy', if: [{ notFlag: 'dry_riot' }] },
   { id: 'lower_guard', sheet: 'zap_guard', x: 25, y: 9, dir: 3, label: 'Стражник Башни', dialogue: 'zap_guard', creature: 'zap_guard', group: 'lower_guard', peace: WANTED, patrol: [[25, 9], [25, 20], [17, 20]] },
   ...[['folk_a', 'debtor', 14, 8], ['folk_b', 'pilgrim', 27, 18], ['folk_c', 'farmer', 12, 18]].map(([id, sheet, x, y]) => ({ id, sheet, x, y, dir: 2, label: 'Житель Нижнего города', dialogue: 'zap_folk' })),

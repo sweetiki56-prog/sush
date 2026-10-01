@@ -142,6 +142,21 @@ export const CHARS = {
   sealwax_agent: { skin: P.skin1, hair: P.brown1, shirt: P.grey3, pants: P.dark2, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, scarf: P.red1, rifle: true, height: 1.0 },
   marauder: { skin: P.skin2, hair: P.dark1, shirt: P.olive1, pants: P.denim0, boots: P.dark1, coat: P.brown2, coatLen: 10, sleeve: P.brown2, bandana: P.rust1, backpack: P.olive1, rifle: true, height: 1.0 },
   curator: { skin: P.grey4, hair: P.grey4, shirt: P.denim1, pants: P.denim0, boots: P.grey2, coat: P.denim1, coatLen: 14, sleeve: P.grey4, hat: P.denim0, goggles: true, bald: true, bulk: 1.1, height: 1.05 },
+  // stage N: the rest of Низовье. The half-dry of the shelter grey and slow, the farmers of Свинцовый, the people of
+  // «Жажда» on the Elevator, the Ark's prophet and pilgrims, an old jailer of the Trust
+  kora: { skin: P.grey3, hair: P.grey5, shirt: P.olive1, pants: P.brown1, boots: P.brown0, coat: P.olive0, coatLen: 18, sleeve: P.olive1, shawl: P.sand4, bun: true, cane: true, height: 0.9 },
+  timofey: { skin: P.grey3, hair: P.grey4, shirt: P.bone, pants: P.grey2, boots: P.brown0, coat: P.brown2, coatLen: 16, sleeve: P.brown2, goggles: true, beard: P.grey4, backpack: P.brown1, height: 0.96 },
+  halfdry: { skin: P.grey3, hair: P.grey2, shirt: P.olive0, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.grey3, scarf: P.sand3, height: 0.98 },
+  ponomar: { skin: P.grey2, hair: P.grey4, shirt: P.dark1, pants: P.dark2, boots: P.dark0, coat: P.dark1, coatLen: 18, sleeve: P.dark1, hood: P.dark1, beard: P.grey4, height: 0.95 },
+  gvozdar: { skin: P.skin2, hair: P.grey3, shirt: P.rust1, pants: P.denim0, boots: P.brown0, coat: P.brown2, coatLen: 10, sleeve: P.rust1, hat: P.sand3, beard: P.grey3, bulk: 1.15, height: 1.0 },
+  sizy: { skin: P.skin1, hair: P.grey2, shirt: P.red1, pants: P.dark2, boots: P.dark0, coat: P.grey1, coatLen: 14, sleeve: P.grey1, goggles: true, bandana: P.grey4, rifle: true, height: 1.04 },
+  kub: { skin: P.skin2, hair: P.grey4, shirt: P.sand3, pants: P.brown1, boots: P.brown0, coat: null, sleeve: P.skin2, apron: P.brown0, bald: true, beard: P.grey4, bulk: 1.2, height: 0.94 },
+  klyuchnik: { skin: P.skin1, hair: P.brown1, shirt: P.teal0, pants: P.denim0, boots: P.dark1, coat: null, sleeve: P.teal0, scarf: P.teal1, height: 0.99 },
+  oblako: { skin: P.skin1, hair: P.bone, shirt: P.bone, pants: P.bone, boots: P.sand3, coat: P.water1 ?? P.teal1, coatLen: 18, sleeve: P.bone, beard: P.bone, cane: true, height: 1.03 },
+  fanatic: { skin: P.skin2, hair: P.dark1, shirt: P.bone, pants: P.sand3, boots: P.brown0, coat: null, sleeve: P.bone, bandana: P.teal1, spear: true, height: 1.0 },
+  agnia: { skin: P.skin1, hair: P.rust1, shirt: P.bone, pants: P.sand3, boots: P.brown0, coat: P.sand4, coatLen: 14, sleeve: P.bone, shawl: P.teal1, height: 0.9 },
+  zasov: { skin: P.skin0, hair: P.grey5, shirt: P.grey2, pants: P.dark2, boots: P.dark0, coat: P.grey1, coatLen: 14, sleeve: P.grey1, hat: P.dark1, beard: P.grey5, cane: true, height: 0.95 },
+  raid_captain: { skin: P.skin1, hair: P.dark2, shirt: P.grey2, pants: P.grey1, boots: P.dark0, coat: P.grey3, coatLen: 12, sleeve: P.grey3, hat: P.grey1, scarf: P.grey4, rifle: true, bulk: 1.1, height: 1.03 },
   trust_hunter: { skin: P.skin1, hair: P.dark2, shirt: P.grey1, pants: P.grey1, boots: P.dark0, coat: P.grey2, coatLen: 12, sleeve: P.grey2, hood: P.grey1, goggles: true, rifle: true, height: 1.01 },
 };
 

@@ -1,6 +1,11 @@
 # PROJECT_STATE
 
 ## Current
+Stage N done: the rest of Низовье (S8).
+- Four places open after Chapter I: the Dead fields with the farm Свинцовый and the ruins of Хлебное, the shelter of Тишина, the Elevator of «Жажда» (yard, floors, the «Мираж» still), the Ark (the pilgrims' camp and the ship).
+- Side quests 24–32: the lead flower (Тимофей's), the raid on the shelter, the bell of Хлебное, the herd, who brews «Мираж», the debtor, the stolen water, the Ark and its radio, the lost pilgrim (found in time or too late); Хэнк's «Долг сборщика» in the Lower city of Запруда with new evidence for the trial (`hank_testimony`).
+- Тимофей Книжник joins (a healer like Ирга); the «Шептун» console gives weather reports for the Ark; slides for the shelter, the Elevator, the Ark, Хлебное and Тимофей; the nickname «Пророк без дождя».
+
 Stage F done: Chapter IX «Заслон» and the ending (S14) — the main story can be played to its end.
 - The boom of «Ворота» four ways; «Заслон» of four areas (the approach with the camps of the siege, the crest with the Trust's army and Шлюз, the machine hall, the control room).
 - The sides of the siege come by the flags of the whole game; the treaty of the shores or war; the crest stormed, passed by the Бригада's water main or opened by Шлюз; the dam's sentries stood down by hand, by Ведро's clearance, or fought; the trial by the evidence of all chapters (3 judge, 5 make Затвор confess), a fight, or a deal with the Trust or the Printer; seven choices at the console.
@@ -252,6 +257,14 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
   - `tests/e2e/zapruda.spec.ts`: pass → Notary (a roof melts) → archive → Шлюз → Лейка → the chapter screen.
   - Also: skill tags doubled by hand in check options («[Красноречие 70%] [Красноречие] …») removed across all dialogues.
 
+## Stage N «Низовье»: the rest of the lowland (done)
+- [x] N0. Bible: side quests 24–32, «Долг сборщика», people
+- [x] N1–N2. Art: Кора, Тимофей, the half-dry, Пономарь, Гвоздарь, Сизый, Дед Куб, Ключник, Отец Облако, fanatics, Агния, Засов, the raid captain; lead flower, bell tower, «Суховей» barrels, still, water truck
+- [x] N3. Maps: eight areas; Засов in the Lower city
+- [x] N4–N5. Content (`dialogues/lowland.json`), Тимофей
+- [x] N6. Balance at level 3–4: the raid — a Стрелок 72%, with Тимофей 96%; the herd 97%; Сизый and his men 62%
+- [x] N7. Tests (`tests/unit/lowland.test.ts`, `tests/e2e/lowland.spec.ts`), docs, publish
+
 ## Stage F «Заслон»: Chapter IX and the ending (done)
 - [x] F0. Bible: steps by flags, areas, the trial, the slides
 - [x] F1. Engine: `core/endings.ts`, `content/endings.json`, the slideshow (`ui/Ending.ts`), Chapter IX in the UI
@@ -324,7 +337,7 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [x] S1b. Story bible expanded to an epic (docs/story/: 3 regions, 30 locations, 13 factions, 9 chapters, 70 side quests, secret lines, 8 companions, endings); first Сургуч seal hook in Chapter I
 - [x] S6. Chapter II «Тракт»: Три столба, Колючка, Писарь, Сухари raid (stage T)
 - [x] S7. Chapter III «Запруда» (stage Z)
-- [ ] S8. Region Низовье complete (the barge done in stage L): Мёртвые поля, приют Тишины, Элеватор, Ковчег; companions Хэнк, Ржавчик, Тимофей
+- [x] S8. Region Низовье complete: Мёртвые поля, приют Тишины, Элеватор, Ковчег; Тимофей; «Долг сборщика» (stage N)
 - [x] S9. Chapter IV «Соль» + Соляное море; caravans; arena in the story (stage K)
 - [x] S10. Chapter V «Кристалл»; Солевики, Гранит; companions (stage V). «Роса-2» moves to S11 with the Скит
 - [x] S11. Chapter VI «Скит»: Орден Росы, «Роса-2», Ирга (stage S). «Бархан», Зеркальное поле and Могильник are not built yet: they go to the secrets pass (S15)
@@ -344,6 +357,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
   - main-quest flags: `docs/story/main-quest.md`.
 - Chapter III: `tools/build-zap-*.mjs`, `dialogues/zapruda.json`. Chapter IV: `tools/build-salt-*.mjs`, `tools/build-sea-*.mjs`, `dialogues/salt.json`; its flags are in `docs/story/main-quest.md` (Глава IV) and `side-quests.md` №33–39.
 - Chapter V: `tools/build-crystal-*.mjs`, `dialogues/crystal.json`. Chapter VI: `tools/build-skit-*.mjs`, `tools/build-rosa-*.mjs`, `dialogues/skit.json`; flags in `main-quest.md` (Глава VI) and `side-quests.md` №47–50.
+- The rest of Низовье: `tools/build-{dead-fields,khlebnoe-ruins,silence,elevator-*,ark-*}.mjs`, `dialogues/lowland.json`; flags in `side-quests.md` «Как построено (этап N)».
 - Chapter IX and the ending: `tools/build-dam-*.mjs`, `dialogues/dam.json`, `content/endings.json`, `core/endings.ts`, `ui/Ending.ts`; flags in `main-quest.md` (Глава IX).
 - Chapter VIII: `tools/build-bone-*.mjs`, `tools/build-oath-cave.mjs`, `tools/build-ruins-*.mjs`, `tools/hostage-hooks.mjs`, `dialogues/bones.json`; flags in `main-quest.md` (Глава VIII) and `side-quests.md` «Как построено (этап B)».
 - Chapter VII: `tools/build-depot-*.mjs`, `tools/build-whisper-*.mjs`, `tools/build-gates.mjs`, `tools/build-eagle.mjs`, `dialogues/upper.json`; flags in `main-quest.md` (Глава VII) and `side-quests.md` «Как построено (этап U)».
@@ -361,9 +375,6 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 **Where to continue**
 - **S15, the secrets pass:** the twelve seal marks (12 — «Литерный») and the Палата мер и печатей under the ruins, the Watcher's bunker (`bunker_key`, `watcher_hint`), «Литерный» (the draisine's brand), «Последний гонец», «Вторая плотина» (`second_dam_hint`, `defector_saved`), «Бархан», Зеркальное поле, Могильник; their evidence then joins the trial (`dam.json`, `zatvor_dam`) and their slides `endings.json`.
 - Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are still open; the sewers and the Lower city are ready for them.
-- **S8, the rest of Низовье:**
-  - places: Мёртвые поля, Приют Тишины (the Полусухие: `rep_dry`, `resin_thief`), Элеватор, Ковчег;
-  - companions Хэнк, Ржавчик, Тимофей.
 - **The ending slides** are data (`content/endings.json`): add a slide or a variant when a new place, companion or quest outcome should be remembered.
 
 **Known limits**
@@ -375,9 +386,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 716 tests, with the balance numbers printed to stderr.
+- `npm test`: 762 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 28 tests, about 12 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
+- `npm run test:e2e`: 29 tests, about 13 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;

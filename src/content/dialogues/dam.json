@@ -1113,6 +1113,29 @@
       "next": "shown"
      },
      {
+      "text": "Показания Хэнка и тюремщика Засова: побег сборщику открыл Сургуч.",
+      "if": [
+       {
+        "flag": "hank_testimony"
+       },
+       {
+        "notFlag": "shown_hank"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_hank"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
       "text": "Суд окончен. Ты правил по подделке, Затвор.",
       "if": [
        {

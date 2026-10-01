@@ -1,0 +1,2371 @@
+{
+ "gvozdar": {
+  "speaker": "Староста Гвоздарь",
+  "portrait": "portrait_gvozdar",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "lead_flower"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Широкий мужик в соломенной шляпе загораживает калитку. — Гвоздарь. Это мой хутор, моя земля и мои цветы. Отравленная земля, говорите? Зато ничья — была, пока мы не пришли.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "herd",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Сухостои идут к хутору. Чуют воду.",
+      "if": [
+       {
+        "notFlag": "herd"
+       }
+      ],
+      "next": "herd"
+     },
+     {
+      "text": "Мне нужны свинцовые цветы — для приюта Тишины.",
+      "if": [
+       {
+        "flag": "lead_flower_asked"
+       }
+      ],
+      "next": "flower"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "herd": {
+    "text": "Гвоздарь мрачнеет. — Знаю. Ходят кругами. — Он косится на бочку под рогожей. — Воды у нас нет. Нечем им пахнуть.",
+    "options": [
+     {
+      "text": "Отдайте стаду воду из бочки под рогожей — попьют и уйдут.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "shared",
+       "fail": "no",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "herd",
+         "value": "shared"
+        },
+        {
+         "type": "quest",
+         "quest": "herd",
+         "stage": "done"
+        },
+        {
+         "type": "xp",
+         "amount": 120
+        },
+        {
+         "type": "flag",
+         "key": "svinec_grateful"
+        }
+       ]
+      }
+     },
+     {
+      "text": "Подготовьте факелы. Встретим их у изгороди.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "herd_fight"
+       }
+      ],
+      "next": "fire"
+     },
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "shared": {
+    "text": "Гвоздарь долго молчит, потом сам откатывает бочку за изгородь. Стадо пьёт и уходит в поля. — Тридцать лет копили, — говорит он. — Ну и пусть.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "no": {
+    "text": "— Нет у нас воды.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "fire": {
+    "text": "Хуторяне хватают факелы. Стадо уже у изгороди.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "flower": {
+    "text": "— Цветы? — Гвоздарь хмыкает. — Поляна — наша. Мы пьём с этой земли, едим с неё, хороним в ней. Не отдам.",
+    "options": [
+     {
+      "text": "Сто пятьдесят капель за одну срезку.",
+      "if": [
+       {
+        "caps": 150
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -150
+       },
+       {
+        "type": "flag",
+        "key": "lead_flower",
+        "value": "bought"
+       },
+       {
+        "type": "quest",
+        "quest": "lead_flower",
+        "stage": "done"
+       },
+       {
+        "type": "give",
+        "item": "lead_bloom"
+       },
+       {
+        "type": "flag",
+        "key": "dry_cure"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "Стадо ушло благодаря мне. Одна срезка — за это.",
+      "if": [
+       {
+        "flag": "svinec_grateful"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lead_flower",
+        "value": "talked"
+       },
+       {
+        "type": "quest",
+        "quest": "lead_flower",
+        "stage": "done"
+       },
+       {
+        "type": "give",
+        "item": "lead_bloom"
+       },
+       {
+        "type": "flag",
+        "key": "dry_cure"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "talked"
+     },
+     {
+      "text": "Полусухие умирают от «деревенения». Это лекарство, а не букет.",
+      "check": {
+       "skill": "speech",
+       "mod": -15,
+       "pass": "talked",
+       "fail": "refuse",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "lead_flower",
+         "value": "talked"
+        },
+        {
+         "type": "quest",
+         "quest": "lead_flower",
+         "stage": "done"
+        },
+        {
+         "type": "give",
+         "item": "lead_bloom"
+        },
+        {
+         "type": "flag",
+         "key": "dry_cure"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        }
+       ]
+      }
+     },
+     {
+      "text": "Уходите с отравленной земли. Сами.",
+      "next": "drive"
+     },
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "bought": {
+    "text": "Гвоздарь пересчитывает капли и сам срезает охапку. — Приходи ещё. С каплями.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "talked": {
+    "text": "Гвоздарь машет рукой. — Режь. Только корни не трогай.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "refuse": {
+    "text": "— Не отдам.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "drive": {
+    "text": "— Это угроза? — Хуторяне подходят ближе. Но их трое, и они фермеры. Гвоздарь сплёвывает, собирает своих и уходит в поля, не оглядываясь.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lead_flower",
+        "value": "driven"
+       },
+       {
+        "type": "quest",
+        "quest": "lead_flower",
+        "stage": "done"
+       },
+       {
+        "type": "give",
+        "item": "lead_bloom"
+       },
+       {
+        "type": "flag",
+        "key": "dry_cure"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "svinec_empty"
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       }
+      ]
+     }
+    ]
+   },
+   "after": {
+    "text": "— Цветы растут. Земля помнит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "svinec_farmer": {
+  "speaker": "Хуторянин",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Говорят, земля отравлена. А картошка растёт. Свинцовая, но растёт.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "lead_glade": {
+  "speaker": "Свинцовый цветок",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Тяжёлые сизые головки на серых стеблях. Цветут только там, где упал Суховей.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "hidden_barrel": {
+  "speaker": "Бочка под рогожей",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "herd"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Бочка под рогожей. Внутри плещется вода — немного, но запах слышен даже тебе.",
+    "options": [
+     {
+      "text": "Наполнить пустую бочку каплей воды и укатить в поля — пусть стадо идёт за ней.",
+      "if": [
+       {
+        "item": "flask"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "flask"
+       },
+       {
+        "type": "flag",
+        "key": "herd",
+        "value": "decoy"
+       },
+       {
+        "type": "quest",
+        "quest": "herd",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "flag",
+        "key": "svinec_grateful"
+       }
+      ],
+      "next": "decoy"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "decoy": {
+    "text": "Пустая бочка с каплей воды катится в поля. Стадо поворачивает за запахом и уходит к горизонту.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "done": {
+    "text": "Бочка под рогожей.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "ponomar": {
+  "speaker": "Пономарь",
+  "portrait": "portrait_ponomar",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "На колокольне — высохший, серый человек с верёвкой в руках. — Вечерня, — говорит он медленно. — Отец Аввакум велел звонить к вечерне. Я звоню. Двести лет звоню. Он всё не идёт.",
+    "options": [
+     {
+      "text": "Пойдём в приют Тишины. Там ждут таких, как ты.",
+      "next": "led"
+     },
+     {
+      "text": "Вечерня окончена. Отец Аввакум велел отдохнуть.",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "vespers",
+       "fail": "ring"
+      }
+     },
+     {
+      "text": "Звони дальше.",
+      "next": "left"
+     }
+    ]
+   },
+   "led": {
+    "text": "Пономарь бережно сматывает верёвку. — В приют… Там тоже звонят? — Он спускается, ступенька за ступенькой.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bell",
+        "value": "led"
+       },
+       {
+        "type": "quest",
+        "quest": "bell",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "flag",
+        "key": "ponomar_in_silence"
+       }
+      ]
+     }
+    ]
+   },
+   "vespers": {
+    "text": "Пономарь кивает, будто слышал это много раз и наконец поверил. Он садится у колокола и закрывает глаза. Колокол замолкает.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bell",
+        "value": "vespers"
+       },
+       {
+        "type": "quest",
+        "quest": "bell",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       }
+      ]
+     }
+    ]
+   },
+   "ring": {
+    "text": "— Он не говорил, — упрямо отвечает Пономарь и тянет верёвку.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "left": {
+    "text": "Колокол бьёт снова. Над полями поднимаются головы Сухостоев.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "bell",
+        "value": "left"
+       },
+       {
+        "type": "quest",
+        "quest": "bell",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "flag",
+        "key": "bell_calls"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "suhovey_store": {
+  "speaker": "Склад бочек",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Жёлтые бочки с чёрной полосой: «Суховей. Опытная партия». Половина вскрыта. От склада к дороге на Элеватор — свежие следы телег.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "brew_clue"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "kora": {
+  "speaker": "Матушка Кора",
+  "portrait": "portrait_kora",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Старуха с кожей, как кора, говорит медленно, будто растёт. — Кора. Мы тут тихие. Лечим. Пишем. Ждём, пока нас оставят в покое.",
+    "options": [
+     {
+      "text": "Что такое «деревенение»?",
+      "next": "wood"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "wood": {
+    "text": "— Суховей сушит землю. А нас — изнутри: пальцы деревенеют, потом сердце. Свинцовый цветок помогает. Растёт только на отравленной земле. Тимофей знает, где.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   }
+  }
+ },
+ "halfdry": {
+  "speaker": "Полусухой",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Полусухой медленно поднимает глаза от книги. — Тише. Здесь пишут.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "silence_books": {
+  "speaker": "Книги Полусухих",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Рукописи на обёрточной бумаге: «Травы Мёртвых полей», «Довоенная Сушь. Что помню», «Как жить медленно».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "timofey": {
+  "speaker": "Тимофей Книжник",
+  "portrait": "portrait_timofey",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "met_timofey"
+     }
+    ],
+    "node": "again"
+   },
+   {
+    "if": [
+     {
+      "flag": "lead_flower"
+     }
+    ],
+    "node": "cured"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Сухой старик в очках закрывает книгу на пальце. — Тимофей. Книжник. Мне сто восемьдесят лет, и я помню, как пахла Светлая. — Он смотрит на тебя внимательно. — Вы идёте далеко. Возьмите меня с собой — когда-нибудь. А сейчас — цветы.",
+    "options": [
+     {
+      "text": "Какие цветы?",
+      "next": "flower"
+     },
+     {
+      "text": "[Обаяние] Пойдём со мной сейчас. Цветы найдём по дороге.",
+      "if": [
+       {
+        "attr": "cha",
+        "gte": 7
+       }
+      ],
+      "effects": [
+       {
+        "type": "join",
+        "id": "timofey"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "flower": {
+    "text": "— Свинцовый цветок. Лекарство от деревенения. Растёт на поляне у хутора Свинцовый, но староста его не отдаст. — Тимофей вздыхает. — Или семена… в «Росе-2», говорят, были семена всего.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "lead_flower_asked"
+     },
+     {
+      "type": "quest",
+      "quest": "lead_flower",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Семена есть у меня — Пётр из «Росы-2» дал лекарство. Вырастим в Колючке.",
+      "if": [
+       {
+        "flag": "lab_tech"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lead_flower",
+        "value": "grown"
+       },
+       {
+        "type": "quest",
+        "quest": "lead_flower",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "dry_cure"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "grown"
+     },
+     {
+      "text": "[Наука] Цветок можно вырастить на любой отравленной земле — дай семена, посажу в Колючке.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 50
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "lead_flower",
+        "value": "grown"
+       },
+       {
+        "type": "quest",
+        "quest": "lead_flower",
+        "stage": "done"
+       },
+       {
+        "type": "flag",
+        "key": "dry_cure"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "grown"
+     },
+     {
+      "text": "Найду цветы.",
+      "next": "intro"
+     }
+    ]
+   },
+   "grown": {
+    "text": "Тимофей бережно пересчитывает семена. — В Колючке у Прокопа есть грядка под живицу… Да. Вырастет. — Он впервые улыбается.",
+    "options": [
+     {
+      "text": "…",
+      "next": "cured"
+     }
+    ]
+   },
+   "cured": {
+    "text": "— Лекарство есть. Пальцы у Коры уже гнутся. — Тимофей встаёт. — Я обещал пойти с вами. Иду.",
+    "options": [
+     {
+      "text": "Пойдём.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "timofey"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Позже."
+     }
+    ]
+   },
+   "again": {
+    "text": "— Опять дорога? Книга подождёт.",
+    "options": [
+     {
+      "text": "Пойдём.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "timofey"
+       }
+      ],
+      "next": "join"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "join": {
+    "text": "Тимофей кладёт книгу в мешок. — Я буду записывать. Всё, что увидим.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "suhorukov": {
+  "speaker": "Капитан Сухоруков",
+  "portrait": "portrait_raid_captain",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Офицер Треста в серой шинели стоит у ворот приюта, за ним — сборщики с факелами. — Капитан Сухоруков. Приказ: очаг заразы ликвидировать. Отойдите.",
+    "options": [
+     {
+      "text": "Полусухие не заразны. Вот записи «Росы»: это последствие Суховея, а не мор.",
+      "if": [
+       {
+        "item": "fresh_cure"
+       }
+      ],
+      "next": "talked"
+     },
+     {
+      "text": "Полусухие не заразны. Вот записи «Росы»: это последствие Суховея, а не мор.",
+      "if": [
+       {
+        "flag": "lab_tech"
+       }
+      ],
+      "next": "talked"
+     },
+     {
+      "text": "[Наука] Деревенение не передаётся. Это отравление, а не мор — вот как его отличить.",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 50
+       }
+      ],
+      "next": "talked"
+     },
+     {
+      "text": "Дай им уйти в Колючку. Сжигать будет нечего.",
+      "next": "move"
+     },
+     {
+      "text": "Только через меня.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "raid_fight"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "talked": {
+    "text": "Сухоруков долго смотрит на бумаги, потом на Полусухих у грядок. — Отбой, — говорит он сборщикам. — Доложу, что очага не обнаружено.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "silence_raid",
+        "value": "talked"
+       },
+       {
+        "type": "quest",
+        "quest": "silence_raid",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ]
+     }
+    ]
+   },
+   "move": {
+    "text": "— В Колючку? — Сухоруков хмыкает. — Пусть Прокоп сам их кормит. — Он даёт полчаса на сборы.",
+    "options": [
+     {
+      "text": "Прокоп примет — Колючка уже помогает Полусухим.",
+      "if": [
+       {
+        "flag": "resin_thief",
+        "eq": "open"
+       }
+      ],
+      "next": "moved"
+     },
+     {
+      "text": "Уговорю Прокопа по дороге.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "moved",
+       "fail": "nomove"
+      }
+     },
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "moved": {
+    "text": "Полусухие уходят караваном в Колючку: медленно, с книгами за спиной. Приют пустеет, но никто не сгорит.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "silence_raid",
+        "value": "moved"
+       },
+       {
+        "type": "quest",
+        "quest": "silence_raid",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "silence_gone"
+       }
+      ]
+     }
+    ]
+   },
+   "nomove": {
+    "text": "— Полчаса прошли, — говорит Сухоруков.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Значит, и тебя спишем на заразу. — Сборщики поднимают гвоздомёты.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "raid_collector": {
+  "speaker": "Сборщик Треста",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Приказ есть приказ.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "thirst_guard": {
+  "speaker": "Охрана «Жажды»",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Пришёл за «Миражом» — плати. Пришёл за делом — иди к Сизому, наверх.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "stolen_truck": {
+  "speaker": "Водовоз Треста",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "stolen_truck"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Серый водовоз с белой полосой: на боку — «Трест. Подача №4». Бак полон. Шины спущены, но насос цел.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "stolen_truck",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Вернуть Тресту: пусть патруль заберёт.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stolen_truck",
+        "value": "trust"
+       },
+       {
+        "type": "quest",
+        "quest": "stolen_truck",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "caps",
+        "amount": 100
+       },
+       {
+        "type": "flag",
+        "key": "trust_warm"
+       }
+      ],
+      "next": "trust"
+     },
+     {
+      "text": "Отвести воду Кругу колодцев.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stolen_truck",
+        "value": "circle"
+       },
+       {
+        "type": "quest",
+        "quest": "stolen_truck",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "karma",
+        "amount": 2
+       }
+      ],
+      "next": "circle"
+     },
+     {
+      "text": "Оставить «Жажде» — за долю.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stolen_truck",
+        "value": "thirst"
+       },
+       {
+        "type": "quest",
+        "quest": "stolen_truck",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 120
+       },
+       {
+        "type": "caps",
+        "amount": 80
+       },
+       {
+        "type": "karma",
+        "amount": -2
+       }
+      ],
+      "next": "thirst"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "trust": {
+    "text": "Патруль Треста приходит ночью и уводит водовоз. Капитан пишет расписку: «вознаграждение — сто капель».",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "circle": {
+    "text": "Водовоз уходит по тракту к посёлкам. На каждом хуторе его встречают с вёдрами.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "thirst": {
+    "text": "Сизый отсчитывает долю и хлопает по плечу. — Наш человек.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "done": {
+    "text": "Место, где стоял водовоз.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "brewery_hatch": {
+  "speaker": "Спуск в варочную",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Люк, из которого тянет сладким.",
+    "options": [
+     {
+      "text": "Спуститься.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "elevator_brewery",
+        "entry": "ladder"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "brewery_up": {
+  "speaker": "Лестница во двор",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Наверх, во двор.",
+    "options": [
+     {
+      "text": "Подняться.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "elevator_yard",
+        "entry": "brewery"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "sizy": {
+  "speaker": "Сизый",
+  "portrait": "portrait_sizy",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Весёлый человек в красной рубахе раскачивается на стуле. — Сизый! Хозяин «Жажды», «Миража» и всего, что тут плохо лежит. Чем порадуешь?",
+    "options": [
+     {
+      "text": "Ключник в клетке. Сколько он должен?",
+      "if": [
+       {
+        "notFlag": "debtor"
+       }
+      ],
+      "next": "debt"
+     },
+     {
+      "text": "Кто варит «Мираж»?",
+      "next": "brew"
+     },
+     {
+      "text": "Конец «Жажде».",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "thirst_enemy"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "debt": {
+    "text": "— Двести капель. Воду для больной дочки он брал у меня в долг. — Сизый смеётся. — Ну, «у меня». Мне его продала Гильдия — вместе с распиской. Вот она.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "debtor",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "Вот двести капель.",
+      "if": [
+       {
+        "caps": 200
+       }
+      ],
+      "effects": [
+       {
+        "type": "caps",
+        "amount": -200
+       },
+       {
+        "type": "flag",
+        "key": "open_cage"
+       },
+       {
+        "type": "flag",
+        "key": "debtor",
+        "value": "bought"
+       },
+       {
+        "type": "quest",
+        "quest": "debtor",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "guild_sold_debtor"
+       }
+      ],
+      "next": "bought"
+     },
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "bought": {
+    "text": "Сизый бросает ключ от клетки. — С тобой приятно иметь дело. Заходи ещё.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "brew": {
+    "text": "— Дед Куб, внизу. Хорошо варит. А из чего — не спрашивай.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "mirage_brew",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "fight": {
+    "text": "Сизый перестаёт улыбаться. — Ну, раз так…",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "klyuchnik": {
+  "speaker": "Ключник",
+  "portrait": "portrait_klyuchnik",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_cage"
+     }
+    ],
+    "node": "free"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "В клетке сидит худой парень в выцветшей рубахе водоноса. — Ключник. Брат Лейки. Брал воду для дочки — долг продали «Жажде». Вытащи меня — Лейка не забудет.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "debtor",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Вскрыть замок клетки.",
+      "check": {
+       "skill": "lockpick",
+       "mod": -10,
+       "pass": "picked",
+       "fail": "stuck"
+      }
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "picked": {
+    "text": "Замок клетки щёлкает. Ключник выскальзывает наружу. — Через стоки, к Лейке. Спасибо.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "open_cage"
+       },
+       {
+        "type": "flag",
+        "key": "debtor",
+        "value": "freed"
+       },
+       {
+        "type": "quest",
+        "quest": "debtor",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ]
+     }
+    ]
+   },
+   "stuck": {
+    "text": "Замок не поддаётся.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "free": {
+    "text": "Клетка открыта. — Иду к Лейке, — говорит Ключник.",
+    "options": [
+     {
+      "text": "…",
+      "if": [
+       {
+        "notFlag": "debtor"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "debtor",
+        "value": "stormed"
+       },
+       {
+        "type": "quest",
+        "quest": "debtor",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ]
+     },
+     {
+      "text": "Иди."
+     }
+    ]
+   }
+  }
+ },
+ "debtor_cage": {
+  "speaker": "Клетка",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_cage"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "shut"
+   }
+  ],
+  "nodes": {
+   "shut": {
+    "text": "Клетка из арматуры на замке.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Клетка открыта.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "kub": {
+  "speaker": "Дед Куб",
+  "portrait": "portrait_kub",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Толстый старик в кожаном фартуке помешивает куб. — Куб. Варю. Не мешай.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "mirage_brew",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Из чего варишь «Мираж»?",
+      "next": "what"
+     }
+    ]
+   },
+   "what": {
+    "text": "— Из жёлтых бочек, — Куб кивает на склад. — Порошок со складов Хлебного. Чуток в куб — и голова лёгкая. — Он не видит, что сказал. Порошок — Суховей. Вот почему Мёртвые поля вокруг Элеватора растут.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "mirage_brew",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "[Ремонт] Перекрыть клапан и дать кубу закипеть.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 40
+       }
+      ],
+      "next": "blown"
+     },
+     {
+      "text": "Бросить зажигательную бутылку в топку.",
+      "if": [
+       {
+        "item": "firebomb"
+       }
+      ],
+      "next": "blown"
+     },
+     {
+      "text": "Поставки теперь через меня. Триста капель с каждой партии.",
+      "next": "taken"
+     },
+     {
+      "text": "Трест узнает, где варят «Мираж».",
+      "next": "trust"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "blown": {
+    "text": "Куб гудит, свистит — и лопается, обдав подвал сладким паром. Варочная мертва. Дед Куб сидит на полу и плачет над своим ремеслом.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "mirage_brew",
+        "value": "blown"
+       },
+       {
+        "type": "quest",
+        "quest": "mirage_brew",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "take",
+        "item": "firebomb"
+       },
+       {
+        "type": "flag",
+        "key": "mirage_brew",
+        "value": "blown"
+       },
+       {
+        "type": "quest",
+        "quest": "mirage_brew",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ]
+     }
+    ]
+   },
+   "taken": {
+    "text": "Куб пожимает плечами. — Мне всё равно, кому. — Он варит дальше.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "mirage_brew",
+        "value": "taken"
+       },
+       {
+        "type": "quest",
+        "quest": "mirage_brew",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "caps",
+        "amount": 300
+       },
+       {
+        "type": "karma",
+        "amount": -3
+       }
+      ]
+     }
+    ]
+   },
+   "trust": {
+    "text": "Через три дня патруль Треста накрывает варочную. Куба увозят в Запруду.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "mirage_brew",
+        "value": "trust"
+       },
+       {
+        "type": "quest",
+        "quest": "mirage_brew",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "trust_warm"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "still": {
+  "speaker": "Варочный куб",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Медный куб гудит над огнём. Из змеевика капает мутное — «Мираж».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "brew_barrels": {
+  "speaker": "Жёлтые бочки",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Бочки с надписью «Суховей. Опытная партия». Те же, что на складах Хлебного.",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "brew_clue"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "ark_radio": {
+  "speaker": "Приёмник",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Довоенный приёмник, тщательно спрятанный под мешковиной. Из динамика шипит: «…область пониженного давления… осадков не ожидается…». Это сводки «Шептуна».",
+    "effects": [
+     {
+      "type": "flag",
+      "key": "ark_radio_seen"
+     },
+     {
+      "type": "quest",
+      "quest": "ark",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "oblako": {
+  "speaker": "Отец Облако",
+  "portrait": "portrait_oblako",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "ark"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Высокий старик в бело-голубых одеждах опирается на посох. — Мир тебе, путник. Дождь придёт к тем, кто ждёт. Ты ждёшь?",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "ark",
+      "stage": "asked"
+     }
+    ],
+    "options": [
+     {
+      "text": "Приёмник в каюте. Ты слушаешь сводки — и пророчишь по ним.",
+      "if": [
+       {
+        "flag": "ark_radio_seen"
+       }
+      ],
+      "next": "radio"
+     },
+     {
+      "text": "[Восприятие] Ты смотришь на небо, как метеоролог, а не как пророк.",
+      "if": [
+       {
+        "attr": "per",
+        "gte": 6
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ark_radio_seen"
+       }
+      ],
+      "next": "radio"
+     },
+     {
+      "text": "Жду. И помогу.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ark",
+        "value": "believed"
+       },
+       {
+        "type": "quest",
+        "quest": "ark",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "karma",
+        "amount": 1
+       }
+      ],
+      "next": "believe"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "radio": {
+    "text": "Отец Облако долго молчит. — Они пришли умирать в пустыню. Я дал им ждать. Ждать — лучше, чем умирать. — Он смотрит на тебя. — Что ты сделаешь?",
+    "options": [
+     {
+      "text": "Скажу паломникам правду.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ark",
+        "value": "exposed"
+       },
+       {
+        "type": "quest",
+        "quest": "ark",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "fanatics_angry"
+       },
+       {
+        "type": "flag",
+        "key": "ark_left"
+       }
+      ],
+      "next": "exposed"
+     },
+     {
+      "text": "Оставлю как есть.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ark",
+        "value": "left"
+       },
+       {
+        "type": "quest",
+        "quest": "ark",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Вот свежие метеосводки с «Шептуна». Пусть твой дождь будет хотя бы вовремя.",
+      "if": [
+       {
+        "item": "weather_reports"
+       }
+      ],
+      "effects": [
+       {
+        "type": "take",
+        "item": "weather_reports"
+       },
+       {
+        "type": "flag",
+        "key": "ark",
+        "value": "rain_came"
+       },
+       {
+        "type": "quest",
+        "quest": "ark",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "rain"
+     }
+    ]
+   },
+   "exposed": {
+    "text": "Ты говоришь паломникам правду у сходней. Одни плачут и уходят. Другие — фанатики — хватаются за копья.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "Отец Облако кивает и возвращается к приёмнику.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "rain": {
+    "text": "Отец Облако читает сводки, шевеля губами. — По этим сводкам дождя не будет ещё год, — говорит он. А через неделю над Ковчегом идёт дождь. Не по сводкам. Просто идёт.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "believe": {
+    "text": "— Тогда жди вместе с нами. — Облако благословляет тебя.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "— Мир тебе.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "pilgrim_talk": {
+  "speaker": "Паломник",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Дождь придёт. Отец сказал.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "fanatic": {
+  "speaker": "Фанатик",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "Фанатик молча сжимает копьё.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "agnia_mother": {
+  "speaker": "Мать Агнии",
+  "portrait": "portrait_pilgrim",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "stray"
+     }
+    ],
+    "node": "after"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Женщина с пустой флягой хватает тебя за рукав. — Агния, дочка… Ушла в пустыню ждать дождя одна. Вчера. Найди её!",
+    "options": [
+     {
+      "text": "[Выживание] Следы ведут на запад, к низине. Я найду её сразу.",
+      "if": [
+       {
+        "skill": "survival",
+        "gte": 50
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stray",
+        "value": "found"
+       },
+       {
+        "type": "flag",
+        "key": "dry_rain_hint"
+       },
+       {
+        "type": "quest",
+        "quest": "stray",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "found"
+     },
+     {
+      "text": "Найду. Куда она пошла?",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stray_asked"
+       },
+       {
+        "type": "dayMark",
+        "key": "stray_deadline",
+        "in": 2
+       },
+       {
+        "type": "quest",
+        "quest": "stray",
+        "stage": "asked"
+       }
+      ],
+      "next": "where"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "where": {
+    "text": "— На запад, к низине у старого русла. Там, говорят, бывает сыро.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "found": {
+    "text": "К вечеру ты приводишь Агнию: босую, с мокрым подолом. — Там, в низине, земля влажная, — шепчет она. — Как будто дождь был.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "after": {
+    "text": "Мать Агнии смотрит в пустыню и молчит.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "agnia": {
+  "speaker": "Агния",
+  "portrait": "portrait_agnia",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— В низине земля мокрая. Я видела. Дождь был — только там.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zasov": {
+  "speaker": "Засов",
+  "portrait": "portrait_zasov",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Старик в старой шинели тюремщика Треста щурится на тебя. — Засов. Был ключником в «Сухом доке». Теперь — никто.",
+    "options": [
+     {
+      "text": "Хэнк сбежал при тебе. Дверь была не заперта.",
+      "if": [
+       {
+        "flag": "with_hank"
+       }
+      ],
+      "next": "who"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "who": {
+    "text": "Хэнк выходит вперёд. Засов бледнеет. — Я… не запер. Мне велели. Человек с красным сургучом на перчатке: «Оставь дверь — и получишь пенсию». — Он мнёт фуражку. — Сургуч хотел, чтобы ты унёс тубус из Запруды. Своими ногами.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "hank_debt",
+      "stage": "truth"
+     }
+    ],
+    "options": [
+     {
+      "text": "Хэнк, решай ты.",
+      "next": "forgive"
+     },
+     {
+      "text": "Шлюз должен это услышать.",
+      "next": "given"
+     },
+     {
+      "text": "Имя. Кто был с сургучом?",
+      "check": {
+       "skill": "speech",
+       "mod": 0,
+       "pass": "testimony",
+       "fail": "forgive"
+      }
+     }
+    ]
+   },
+   "forgive": {
+    "text": "Хэнк долго смотрит на старика. — Я двадцать лет думал, что мне повезло. — Он кладёт Засову в ладонь каплю. — Живи. Ты тоже был пешкой.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hank_debt",
+        "value": "forgiven"
+       },
+       {
+        "type": "quest",
+        "quest": "hank_debt",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ]
+     }
+    ]
+   },
+   "given": {
+    "text": "Засова уводят люди Шлюза. Хэнк отворачивается.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hank_debt",
+        "value": "given"
+       },
+       {
+        "type": "quest",
+        "quest": "hank_debt",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "trust_warm"
+       }
+      ]
+     }
+    ]
+   },
+   "testimony": {
+    "text": "— Оттиск, — шепчет Засов. — Он так себя звал. — Хэнк записывает каждое слово, и Засов ставит под показаниями крест. Улика для суда.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hank_debt",
+        "value": "testimony"
+       },
+       {
+        "type": "quest",
+        "quest": "hank_debt",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       },
+       {
+        "type": "flag",
+        "key": "hank_testimony"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "comp_timofey": {
+  "speaker": "Тимофей Книжник",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "with_timofey"
+     }
+    ],
+    "node": "with"
+   },
+   {
+    "node": "home"
+   }
+  ],
+  "nodes": {
+   "with": {
+    "text": "Тимофей закрывает записную книжку. — Слушаю.",
+    "options": [
+     {
+      "text": "Держись рядом.",
+      "if": [
+       {
+        "flag": "stance_timofey",
+        "eq": "back"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_timofey",
+        "value": "close"
+       }
+      ],
+      "next": "close"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "notFlag": "stance_timofey"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_timofey",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Держись позади, не лезь вперёд.",
+      "if": [
+       {
+        "flag": "stance_timofey",
+        "eq": "close"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "stance_timofey",
+        "value": "back"
+       }
+      ],
+      "next": "back"
+     },
+     {
+      "text": "Возвращайся домой и жди меня там.",
+      "effects": [
+       {
+        "type": "leave",
+        "id": "timofey"
+       }
+      ],
+      "next": "left"
+     },
+     {
+      "text": "Идём дальше."
+     }
+    ]
+   },
+   "close": {
+    "text": "— Рядом. Как скажешь.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "back": {
+    "text": "— Позади. Оттуда лучше видно, что записать.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "left": {
+    "text": "— Вернусь в приют. Книга ждёт.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "home": {
+    "text": "Тимофей пишет в приюте Тишины. — Снова в путь? Я готов.",
+    "options": [
+     {
+      "text": "Пойдём со мной.",
+      "effects": [
+       {
+        "type": "join",
+        "id": "timofey"
+       }
+      ],
+      "next": "joined"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "joined": {
+    "text": "— Идём. Я буду записывать.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  },
+  "portrait": "portrait_timofey"
+ }
+}

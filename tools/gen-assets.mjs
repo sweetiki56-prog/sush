@@ -16,6 +16,7 @@ import * as SK from './art/props_skit.mjs';
 import * as UP from './art/props_upper.mjs';
 import * as BN from './art/props_bones.mjs';
 import * as DM from './art/props_dam.mjs';
+import * as LW from './art/props_lowland.mjs';
 import { CHARS, ARMOR_LOOKS, buildSheet, buildPortrait, FRAME_W, FRAME_H, FOOT_X, FOOT_Y, POSES } from './art/chars.mjs';
 import { CREATURES, buildCreatureSheet, S_FRAME_W, S_FRAME_H, S_FOOT_X, S_FOOT_Y, S_POSES } from './art/creatures.mjs';
 import { icon, ICONS } from './art/icons.mjs';
@@ -182,6 +183,11 @@ const entries = [
   prop('colonnade', BN.colonnade()),
   prop('draisine', BN.draisine()),
   prop('turbine', DM.turbine()),
+  prop('lead_flower', LW.leadFlower()),
+  prop('bell_tower', LW.bellTower()),
+  prop('suhovey_stack', LW.suhoveyStack()),
+  prop('still', LW.still()),
+  prop('water_truck', LW.waterTruck()),
   prop('sluice_gate', DM.sluiceGate()),
   prop('banner_trust', DM.banner(P.grey2)),
   prop('banner_circle', DM.banner(P.teal1)),
