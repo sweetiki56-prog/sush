@@ -3,6 +3,7 @@ import type { AttrId, CharacterContent, CharacterData, Mods, SkillId } from './c
 import type { ArmorDef, CombatUse, CreatureDef, WeaponDef } from './combat/types';
 import type { TravelState } from './travel/Travel';
 import type { TravelContent } from './travel/Parties';
+import type { EndingSlide } from './endings';
 
 export type { AttrId, SkillId } from './character/defs';
 export { SKILL_NAMES, ATTR_NAMES } from './character/defs';
@@ -239,6 +240,7 @@ export interface Content {
   travel: TravelContent;
   arena: ArenaDef;
   companions: Record<string, CompanionDef>;
+  endings: EndingSlide[]; // the slides of the ending (Chapter IX), see core/endings.ts
 }
 
 export interface GameStateData {

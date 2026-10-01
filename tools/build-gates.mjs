@@ -24,17 +24,19 @@ for (const [x, y] of [[12, 20], [27, 22]]) place({ id: `crate_${x}_${y}`, frame:
 k.scenery([[8, 4, 31, 29]], { cactus: 2, dead_tree: 1, bush: 3 });
 
 k.exit({ id: 'south', x: 19, y: H - 1, w: 2, h: 1, to: 'world', label: 'Карта мира' });
+k.exit({ id: 'north', x: 19, y: 0, w: 2, h: 1, to: 'dam_approach', entry: 'gates', label: 'Дорога к Заслону', if: [{ flag: 'boom_up' }], closed: 'Шлагбаум опущен: проход к плотине закрыт.' });
 
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 19, y: 28, dir: 1 },
   { id: 'lukich', sheet: 'lukich', x: 22, y: 16, dir: 5, label: 'Сторож Лукич', dialogue: 'lukich' },
-  ...[['gate_guard_a', 16, 13], ['gate_guard_b', 24, 12]].map(([id, x, y]) => ({ id, sheet: 'zap_guard', x, y, dir: 2, label: 'Стражник заставы', dialogue: 'gate_guard' })),
+  ...[['gate_guard_a', 16, 13], ['gate_guard_b', 24, 12]].map(([id, x, y]) => ({ id, sheet: 'zap_guard', x, y, dir: 2, label: 'Стражник заставы', dialogue: 'gate_guard', creature: 'zap_guard', group: 'gate_guards', peace: [{ notFlag: 'gates_fight' }] })),
 ];
 
 k.write('gates_post', 'Перевал «Ворота»', {
-  entries: { default: [19, 28], south: [19, 28], rail: [13, 27] },
+  entries: { default: [19, 28], south: [19, 28], rail: [13, 27], north: [19, 3] },
   roads: { south: [19, 20] },
   actors,
   arrive: [{ if: [{ notFlag: 'gates_seen' }], effects: [{ type: 'flag', key: 'gates_seen' }], log: 'Перевал «Ворота»: застава Треста поперёк единственной дороги к плотине. За шлагбаумом дорога уходит вверх, в ущелье.' }],
+  cleared: [{ group: 'gate_guards', if: [{ flag: 'gates_fight' }, { notFlag: 'boom_up' }], effects: [{ type: 'flag', key: 'boom_up' }, { type: 'flag', key: 'boom_way', value: 'forced' }, { type: 'flag', key: 'open_boom_b' }, { type: 'flag', key: 'open_boom_c' }], log: 'Стража заставы лежит. Шлагбаум задран к небу — дорога к Заслону открыта.' }],
   triggers: [],
 });

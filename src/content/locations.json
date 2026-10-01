@@ -746,7 +746,50 @@
   "dam": {
     "name": "Заслон",
     "cell": [30, 2],
-    "chapter": 9
+    "chapter": 9,
+    "map": "dam_approach",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "boom_up"
+      }
+    ],
+    "areas": [
+      {
+        "map": "dam_approach",
+        "entry": "south",
+        "name": "Подступы",
+        "at": [0.5, 0.75]
+      },
+      {
+        "map": "dam_crest",
+        "entry": "south",
+        "name": "Гребень",
+        "at": [0.5, 0.4]
+      },
+      {
+        "map": "dam_machines",
+        "entry": "south",
+        "name": "Машинный зал",
+        "at": [0.3, 0.25],
+        "known": [
+          {
+            "flag": "dam_way"
+          }
+        ]
+      },
+      {
+        "map": "dam_control",
+        "entry": "ladder",
+        "name": "Зал пульта",
+        "at": [0.7, 0.15],
+        "known": [
+          {
+            "flag": "machines_way"
+          }
+        ]
+      }
+    ]
   },
   "eagle": {
     "name": "Орлиное гнездо",

@@ -2568,12 +2568,199 @@
   "speaker": "Шлагбаум",
   "entry": [
    {
+    "if": [
+     {
+      "flag": "boom_up"
+     }
+    ],
+    "node": "up"
+   },
+   {
     "node": "look"
    }
   ],
   "nodes": {
    "look": {
     "text": "Шлагбаум в красно-белую полоску. Табличка: «Проход к плотине — по особому распоряжению Совета пайщиков». За ним дорога уходит вверх, в ущелье, к Заслону.",
+    "options": [
+     {
+      "text": "Пропуск Лукича. Поднимайте.",
+      "if": [
+       {
+        "flag": "chapter8_done"
+       },
+       {
+        "item": "gates_pass"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "boom_up"
+       },
+       {
+        "type": "flag",
+        "key": "boom_way",
+        "value": "pass"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_b"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_c"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "raised"
+     },
+     {
+      "text": "Лукич, подними. Ты обещал.",
+      "if": [
+       {
+        "flag": "chapter8_done"
+       },
+       {
+        "flag": "lukich_friend"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "boom_up"
+       },
+       {
+        "type": "flag",
+        "key": "boom_way",
+        "value": "lukich"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_b"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_c"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "raised"
+     },
+     {
+      "text": "Шлюз сам усомнился в приказе. Поднимайте — отвечу перед ним.",
+      "if": [
+       {
+        "flag": "chapter8_done"
+       },
+       {
+        "flag": "shlyuz_doubt"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "boom_up"
+       },
+       {
+        "type": "flag",
+        "key": "boom_way",
+        "value": "shluz"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_b"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_c"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "raised"
+     },
+     {
+      "text": "Шлюз сам усомнился в приказе. Поднимайте — отвечу перед ним.",
+      "if": [
+       {
+        "flag": "chapter8_done"
+       },
+       {
+        "flag": "shluz_doubts"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "boom_up"
+       },
+       {
+        "type": "flag",
+        "key": "boom_way",
+        "value": "shluz"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_b"
+       },
+       {
+        "type": "flag",
+        "key": "open_boom_c"
+       },
+       {
+        "type": "xp",
+        "amount": 100
+       }
+      ],
+      "next": "raised"
+     },
+     {
+      "text": "Поднять силой.",
+      "if": [
+       {
+        "flag": "chapter8_done"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "gates_fight"
+       }
+      ],
+      "next": "force"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "raised": {
+    "text": "Шлагбаум со скрипом задирается к небу. Дорога к Заслону открыта.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "force": {
+    "text": "Стражники заставы вскидывают оружие.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "up": {
+    "text": "Шлагбаум поднят. Дорога уходит вверх, к Заслону.",
     "options": [
      {
       "text": "Отойти."

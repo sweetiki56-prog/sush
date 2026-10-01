@@ -18,10 +18,12 @@ import { onKey } from '../ui/keys';
 import type { WorldScene } from './WorldScene';
 import { OnlinePanel } from '../ui/OnlinePanel';
 import { ArenaPanel } from '../ui/ArenaPanel';
+import { showEnding } from '../ui/Ending';
+import { slidesFor } from '../core/endings';
 
 type Win = Inventory | JournalWindow | CharacterWindow | Workbench | Barter;
 
-const CHAPTERS = [1, 2, 3, 4, 5, 6, 7, 8];
+const CHAPTERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export class UIScene extends Phaser.Scene {
   private hud!: Hud;
@@ -319,16 +321,13 @@ export class UIScene extends Phaser.Scene {
     this.completeShown.add(chapter);
     s.send({ t: 'seen', chapter });
     s.setModal(true);
-    showComplete(
-      this,
-      s.game,
-      chapter,
-      () => {
-        if (!s.solo) return this.toMenu();
-        clearSave();
-        window.location.reload();
-      },
-      () => s.setModal(false),
-    );
+    const onNew = () => {
+      if (!s.solo) return this.toMenu();
+      clearSave();
+      window.location.reload();
+    };
+    // the last chapter ends the story: its slides instead of a table
+    if (chapter === 9) return showEnding(this, slidesFor(s.game, s.game.content.endings), onNew, () => s.setModal(false));
+    showComplete(this, s.game, chapter, onNew, () => s.setModal(false));
   }
 }

@@ -1,0 +1,1624 @@
+{
+ "dam_militia": {
+  "speaker": "Ополченец Круга",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Пришли все, кто услышал запись с «Шептуна». Двенадцать посёлков, сорок ружей. — Ополченец кивает на гребень. — Скажешь «вперёд» — пойдём вперёд.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "dam_dry": {
+  "speaker": "Кремень",
+  "portrait": "portrait_kremen",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "kremen_strike"
+     }
+    ],
+    "node": "strike"
+   },
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Мать прислала. Клятва: не отдать воду войне. Если на гребне война — мы её остановим.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "strike": {
+    "text": "— Карта водоводов привела нас под самый гребень. Трест узнает, кто здесь охрана. — Кремень скалится. — Пойдёшь на штурм — пойдём рядом.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "dam_order": {
+  "speaker": "Рыцарь Росы",
+  "portrait": "portrait_dew_knight",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Настоятель Кассиан велел: Орден встанет рядом, когда Сушь будет решать. Мы здесь.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "dam_salt": {
+  "speaker": "Солевик",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Кварц помнит обещание. Солевики пришли посмотреть, как его держат. — Солевик стучит кулаком в ладонь. — И помочь, если надо.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "yarina_dam": {
+  "speaker": "Капитан Ветрова",
+  "portrait": "portrait_yarina",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "shore_treaty"
+     }
+    ],
+    "node": "treaty"
+   },
+   {
+    "if": [
+     {
+      "flag": "shore_war"
+     }
+    ],
+    "node": "war"
+   },
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Ветрова стоит у синего знамени, за ней — дроны на земле, как спящие птицы. — Высокий берег ждёт. Если затворы откроют для Треста, мы спустимся. Если для всех — может, договоримся.",
+    "options": [
+     {
+      "text": "Ратмир жив, потому что ему поверили. Поверь и ты: часть воды — Берегу, когда Заслон откроется.",
+      "if": [
+       {
+        "flag": "defector",
+        "eq": "saved"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shore_treaty"
+       },
+       {
+        "type": "xp",
+        "amount": 150
+       }
+      ],
+      "next": "treaty"
+     },
+     {
+      "text": "Договор берегов: часть воды — вам, ни одного выстрела у плотины.",
+      "check": {
+       "skill": "speech",
+       "mod": -10,
+       "pass": "treaty",
+       "fail": "wait",
+       "passEffects": [
+        {
+         "type": "flag",
+         "key": "shore_treaty"
+        },
+        {
+         "type": "xp",
+         "amount": 150
+        }
+       ]
+      }
+     },
+     {
+      "text": "Уходите за горы. Здесь вам ничего не достанется.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shore_war"
+       }
+      ],
+      "next": "war"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "treaty": {
+    "text": "Ветрова протягивает руку. — Договор берегов. Если слово нарушат — мы вернёмся. — Дроны поднимаются и уходят за хребет.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "wait": {
+    "text": "— Слова. — Ветрова смотрит на гребень. — Посмотрим, что ты сделаешь у пульта.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "war": {
+    "text": "— Тогда до встречи у плотины, — говорит Ветрова без злости.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "aqueduct_hatch": {
+  "speaker": "Люк водовода",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "dam_way"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Люк Бригады с номером «3-бис». Водовод уходит под гребень — прямо к машинному залу. Замок проржавел насквозь.",
+    "options": [
+     {
+      "text": "Сверить с картой охраны плотины.",
+      "if": [
+       {
+        "item": "aqueduct_map"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dam_way",
+        "value": "aqueduct"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "machines"
+       },
+       {
+        "type": "xp",
+        "amount": 200
+       }
+      ],
+      "next": "go"
+     },
+     {
+      "text": "Лёля, это твой водовод.",
+      "if": [
+       {
+        "flag": "with_lelya"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dam_way",
+        "value": "aqueduct"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "machines"
+       },
+       {
+        "type": "xp",
+        "amount": 200
+       }
+      ],
+      "next": "go"
+     },
+     {
+      "text": "[Ремонт] Сорвать прикипевший замок и отжать задвижку.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 70
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dam_way",
+        "value": "aqueduct"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "machines"
+       },
+       {
+        "type": "xp",
+        "amount": 200
+       }
+      ],
+      "next": "go"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "go": {
+    "text": "Водовод сухой, гулкий. Через час пути — решётка, а за ней гул машинного зала.",
+    "options": [
+     {
+      "text": "Пролезть.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "dam_machines",
+        "entry": "aqueduct"
+       }
+      ]
+     }
+    ]
+   },
+   "open": {
+    "text": "Люк водовода.",
+    "options": [
+     {
+      "text": "Спуститься.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "dam_machines",
+        "entry": "aqueduct"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "hall_door": {
+  "speaker": "Ворота машинного зала",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "open_hall_door_a"
+     }
+    ],
+    "node": "open"
+   },
+   {
+    "node": "shut"
+   }
+  ],
+  "nodes": {
+   "shut": {
+    "text": "Стальные ворота, засов изнутри. Открыть их может только тот, кто стоит за ними, — или Шлюз.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "open": {
+    "text": "Ворота открыты.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "trust_soldier": {
+  "speaker": "Солдат Треста",
+  "entry": [
+   {
+    "node": "hi"
+   }
+  ],
+  "nodes": {
+   "hi": {
+    "text": "— Назад. Приказ Председателя.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "shluz_dam": {
+  "speaker": "Инспектор Шлюз",
+  "portrait": "portrait_shluz",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Шлюз в шинели Треста стоит у ворот машинного зала. — Опять ты. — Он не тянется к оружию. — От колодца до плотины. Я всё думал, что ты сделаешь с этой бумагой.",
+    "options": [
+     {
+      "text": "Ты усомнился в приказе ещё у колодца. Открой ворота.",
+      "if": [
+       {
+        "flag": "shluz_doubts"
+       }
+      ],
+      "next": "parley"
+     },
+     {
+      "text": "Ты видел копию Затвора. Ты знаешь, что она поддельная. Открой.",
+      "if": [
+       {
+        "flag": "shlyuz_doubt"
+       }
+      ],
+      "next": "parley"
+     },
+     {
+      "text": "Затвор правит по подделке. Открой ворота — и посмотришь на суд сам.",
+      "check": {
+       "skill": "speech",
+       "mod": -20,
+       "pass": "parley",
+       "fail": "refuse"
+      }
+     },
+     {
+      "text": "Тогда силой.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "crest_fight"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "parley": {
+    "text": "Шлюз долго смотрит на тубус, потом на своих солдат. — Отбой, — говорит он негромко. — Ворота открыть. Я иду на суд свидетелем. — Солдаты расступаются.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "dam_way",
+        "value": "parley"
+       },
+       {
+        "type": "flag",
+        "key": "open_hall_door_a"
+       },
+       {
+        "type": "flag",
+        "key": "open_hall_door_b"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "machines"
+       },
+       {
+        "type": "xp",
+        "amount": 250
+       },
+       {
+        "type": "flag",
+        "key": "shluz_ally"
+       }
+      ]
+     }
+    ]
+   },
+   "refuse": {
+    "text": "— Приказ есть приказ. — Шлюз отворачивается к воротам.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Как знаешь. — Шлюз поднимает руку, и солдаты вскидывают гвоздомёты.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "sentry_panel": {
+  "speaker": "Щиток охраны",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "sentries_off"
+     }
+    ],
+    "node": "off"
+   },
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Щиток охраны плотины: «РЕЖИМ: ОХРАНА. ДОПУСК: КОНЦЕССИОНЕР». Машины ходят обходом и пока не смотрят на тебя.",
+    "options": [
+     {
+      "text": "[Ремонт] Разомкнуть цепь охраны.",
+      "if": [
+       {
+        "skill": "repair",
+        "gte": 70
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "machines_way",
+        "value": "off"
+       },
+       {
+        "type": "flag",
+        "key": "sentries_off"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "trial"
+       },
+       {
+        "type": "xp",
+        "amount": 250
+       }
+      ],
+      "next": "done"
+     },
+     {
+      "text": "[Наука] Перевести режим в «обслуживание».",
+      "if": [
+       {
+        "skill": "science",
+        "gte": 70
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "machines_way",
+        "value": "off"
+       },
+       {
+        "type": "flag",
+        "key": "sentries_off"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "trial"
+       },
+       {
+        "type": "xp",
+        "amount": 250
+       }
+      ],
+      "next": "done"
+     },
+     {
+      "text": "Ведро, передай допуск.",
+      "if": [
+       {
+        "flag": "with_vedro"
+       },
+       {
+        "flag": "clearance",
+        "eq": "mandate"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "machines_way",
+        "value": "vedro"
+       },
+       {
+        "type": "flag",
+        "key": "sentries_off"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "trial"
+       },
+       {
+        "type": "xp",
+        "amount": 250
+       }
+      ],
+      "next": "vedro"
+     },
+     {
+      "text": "Ведро, передай допуск.",
+      "if": [
+       {
+        "flag": "with_vedro"
+       },
+       {
+        "flag": "clearance",
+        "eq": "hero"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "machines_way",
+        "value": "vedro"
+       },
+       {
+        "type": "flag",
+        "key": "sentries_off"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "trial"
+       },
+       {
+        "type": "xp",
+        "amount": 250
+       }
+      ],
+      "next": "vedro"
+     },
+     {
+      "text": "Разбить щиток ломом.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "hall_alarm"
+       }
+      ],
+      "next": "smash"
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "smash": {
+    "text": "Щиток искрит и гаснет. Под сводами воет сирена, и машины плотины разом поворачиваются к тебе.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "done": {
+    "text": "Машины плотины замирают на полушаге и садятся на брюхо.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "vedro": {
+    "text": "Ведро прижимается линзой к щитку. — НОМЕР 14. ДОПУСК ПЕРЕДАН. — Машины плотины поворачиваются к тебе и опускают головы.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   },
+   "off": {
+    "text": "Щиток: «РЕЖИМ: ОБСЛУЖИВАНИЕ».",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "machines_up": {
+  "speaker": "Лестница в зал пульта",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "machines_way"
+     }
+    ],
+    "node": "go"
+   },
+   {
+    "node": "no"
+   }
+  ],
+  "nodes": {
+   "no": {
+    "text": "Лестница наверх. Машины плотины не пустят к ней чужого.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "go": {
+    "text": "Лестница в зал пульта.",
+    "options": [
+     {
+      "text": "Подняться.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "dam_control",
+        "entry": "ladder"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "control_down": {
+  "speaker": "Лестница вниз",
+  "entry": [
+   {
+    "node": "look"
+   }
+  ],
+  "nodes": {
+   "look": {
+    "text": "Вниз, в машинный зал.",
+    "options": [
+     {
+      "text": "Спуститься.",
+      "effects": [
+       {
+        "type": "goto",
+        "map": "dam_machines",
+        "entry": "south"
+       }
+      ]
+     },
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ },
+ "zatvor_dam": {
+  "speaker": "Председатель Затвор",
+  "portrait": "portrait_zatvor",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Гордей Затвор, Председатель Совета пайщиков, стоит у пульта, сложив руки за спиной. — Тубус, — говорит он устало. — Двести лет эту бумагу искали, чтобы сжечь. Ты принёс её сам. Говори, раз пришёл.",
+    "effects": [
+     {
+      "type": "quest",
+      "quest": "dam",
+      "stage": "trial"
+     }
+    ],
+    "options": [
+     {
+      "text": "Копия Мандата из архива Башни: печать № 7-бис в реестре не значится.",
+      "if": [
+       {
+        "flag": "forgery_proof"
+       },
+       {
+        "flag": "forgery_fate",
+        "eq": "kept"
+       },
+       {
+        "notFlag": "shown_forgery"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_forgery"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Копия Мандата из архива Башни: печать № 7-бис в реестре не значится.",
+      "if": [
+       {
+        "flag": "forgery_proof"
+       },
+       {
+        "flag": "forgery_fate",
+        "eq": "public"
+       },
+       {
+        "notFlag": "shown_forgery"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_forgery"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Копия Мандата из архива Башни: печать № 7-бис в реестре не значится.",
+      "if": [
+       {
+        "flag": "forgery_proof"
+       },
+       {
+        "flag": "forgery_fate",
+        "eq": "shlyuz"
+       },
+       {
+        "notFlag": "shown_forgery"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_forgery"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Реестр Нотариуса: печать «копии Затвора» не сходится.",
+      "if": [
+       {
+        "flag": "mandate_certified"
+       },
+       {
+        "notFlag": "shown_register"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_register"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Письмо Первого Печатника Штемпеля: «копия изготовлена по образцу».",
+      "if": [
+       {
+        "item": "stempel_letter"
+       },
+       {
+        "notFlag": "shown_stempel"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_stempel"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Письмо за подписью «Е. Штемпель» — приказы Сургуча.",
+      "if": [
+       {
+        "item": "printer_letter"
+       },
+       {
+        "notFlag": "shown_printer"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_printer"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Свидетельство Ады Затвор: яд в Башню дал нотариус.",
+      "if": [
+       {
+        "item": "ada_letter"
+       },
+       {
+        "notFlag": "shown_ada"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_ada"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Свидетельство Ады Затвор: яд в Башню дал нотариус.",
+      "if": [
+       {
+        "flag": "quiet_floor",
+        "eq": "ally"
+       },
+       {
+        "notFlag": "shown_ada"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_ada"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Инспектор Шлюз: Трест знал о подделке.",
+      "if": [
+       {
+        "flag": "shluz_ally"
+       },
+       {
+        "notFlag": "shown_shluz"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_shluz"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Инспектор Шлюз: Трест знал о подделке.",
+      "if": [
+       {
+        "flag": "shlyuz_doubt"
+       },
+       {
+        "notFlag": "shown_shluz"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_shluz"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Дневник Вереса: Мандат шёл совету посёлков.",
+      "if": [
+       {
+        "item": "veres_diary"
+       },
+       {
+        "notFlag": "shown_diary"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_diary"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Земельные книги: колодцы Круга — собственность посёлков.",
+      "if": [
+       {
+        "item": "land_books"
+       },
+       {
+        "notFlag": "shown_land"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_land"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Земельные книги: колодцы Круга — собственность посёлков.",
+      "if": [
+       {
+        "flag": "land_books_brigade"
+       },
+       {
+        "notFlag": "shown_land"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_land"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Отчёт о Суховее с вырванными страницами: «Изъять. Е. Ш.».",
+      "if": [
+       {
+        "item": "suhovey_book"
+       },
+       {
+        "notFlag": "shown_suhovey"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_suhovey"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Суд окончен. Ты правил по подделке, Затвор.",
+      "if": [
+       {
+        "flag": "evidence",
+        "gte": 3
+       }
+      ],
+      "next": "judged"
+     },
+     {
+      "text": "Признай сам. При всех.",
+      "if": [
+       {
+        "flag": "evidence",
+        "gte": 5
+       }
+      ],
+      "next": "persuaded"
+     },
+     {
+      "text": "Мандат — Тресту. Назови цену.",
+      "next": "deal"
+     },
+     {
+      "text": "Хватит слов.",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "control_fight"
+       }
+      ],
+      "next": "fight"
+     },
+     {
+      "text": "Позже."
+     }
+    ]
+   },
+   "shown": {
+    "text": "Затвор молчит. Улик на столе: {f:evidence}.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "judged": {
+    "text": "Шлюз, если он здесь, первым кладёт руку на плечо Председателя. Стража Башни смотрит на улики — и опускает оружие. — Под суд, — говорит кто-то. Затвора уводят. Если Печатник был здесь, его уводят следом.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trial_way",
+        "value": "judged"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "choice"
+       },
+       {
+        "type": "xp",
+        "amount": 300
+       },
+       {
+        "type": "flag",
+        "key": "zatvor_judged"
+       }
+      ]
+     }
+    ]
+   },
+   "persuaded": {
+    "text": "Затвор долго смотрит на разложенные бумаги. Потом снимает с шеи ключ от Башни и кладёт на пульт. — Подделка. Я знал. Отец знал. — Он поворачивается к стражникам. — Опустите оружие. Председатель сдаётся.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trial_way",
+        "value": "persuaded"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "choice"
+       },
+       {
+        "type": "xp",
+        "amount": 300
+       },
+       {
+        "type": "flag",
+        "key": "zatvor_persuaded"
+       }
+      ]
+     }
+    ]
+   },
+   "deal": {
+    "text": "Затвор впервые улыбается. — Капли. Дом в Верхнем городе. Место в Совете. — Он протягивает руку за тубусом.",
+    "options": [
+     {
+      "text": "По рукам.",
+      "next": "sold"
+     },
+     {
+      "text": "Нет. Не продаётся.",
+      "next": "intro"
+     }
+    ]
+   },
+   "sold": {
+    "text": "Тубус переходит из рук в руки. Затвор подносит его к спиртовке пульта.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trial_way",
+        "value": "deal_trust"
+       },
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "trust"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 300
+       }
+      ]
+     }
+    ]
+   },
+   "fight": {
+    "text": "— Стража! — Затвор отступает за пульт.",
+    "options": [
+     {
+      "text": "…"
+     }
+    ]
+   }
+  }
+ },
+ "stempel_dam": {
+  "speaker": "Нотариус Штемпель",
+  "portrait": "portrait_shtempel",
+  "entry": [
+   {
+    "node": "intro"
+   }
+  ],
+  "nodes": {
+   "intro": {
+    "text": "Евстигней Штемпель протирает лупу. — Добрый день. Мы ведь встречались в Запруде — я заверял вашу бумагу. — Он улыбается. — Сургуч не воюет, а заверяет. Оставьте Мандат себе. Мы позаботимся, чтобы все бумаги вокруг него были правильными. Власть бумаги — самая долгая власть.",
+    "options": [
+     {
+      "text": "Договорились. Бумаги — ваши, вода — моя.",
+      "next": "deal"
+     },
+     {
+      "text": "Нет."
+     }
+    ]
+   },
+   "deal": {
+    "text": "Штемпель кивает и ставит на чистом листе печать — рука, держащая печать. — Затвор вам больше не помешает. Его мы заверим как больного.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trial_way",
+        "value": "deal_sealwax"
+       },
+       {
+        "type": "flag",
+        "key": "sealwax_rules"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "choice"
+       },
+       {
+        "type": "xp",
+        "amount": 200
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "dam_console": {
+  "speaker": "Пульт Заслона",
+  "entry": [
+   {
+    "if": [
+     {
+      "flag": "ending"
+     }
+    ],
+    "node": "done"
+   },
+   {
+    "if": [
+     {
+      "flag": "trial_way"
+     }
+    ],
+    "node": "choice"
+   },
+   {
+    "node": "wait"
+   }
+  ],
+  "nodes": {
+   "wait": {
+    "text": "Пульт с прорезью под тубус. Затвор стоит рядом и не даёт подойти.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   },
+   "choice": {
+    "text": "Прорезь под тубус, две половины пластины, рычаги затворов. Глубокое за стеклом — синее, как на открытке. Кому достанется Мандат — тому и вода.",
+    "options": [
+     {
+      "text": "Кругу колодцев. Открыть по уговору: ведро на душу.",
+      "next": "circle"
+     },
+     {
+      "text": "Тресту. Сжечь Мандат.",
+      "next": "trust"
+     },
+     {
+      "text": "Гильдии. Вода — товар, пусть возят караваны.",
+      "next": "guild"
+     },
+     {
+      "text": "Бригаде. Медленно и по регламенту, по участкам.",
+      "next": "brigade"
+     },
+     {
+      "text": "Сухарям. Запечатать плотину навсегда.",
+      "next": "dry"
+     },
+     {
+      "text": "Себе. Концессионер — {name}.",
+      "next": "self"
+     },
+     {
+      "text": "Третий ярус. Ручной сброс — без Мандата.",
+      "if": [
+       {
+        "flag": "manual_release"
+       },
+       {
+        "item": "gate_scheme"
+       }
+      ],
+      "next": "flood"
+     },
+     {
+      "text": "Лёля, третий ярус. Ручной сброс.",
+      "if": [
+       {
+        "flag": "manual_release"
+       },
+       {
+        "flag": "plate_scheme",
+        "eq": "lelya"
+       },
+       {
+        "flag": "with_lelya"
+       }
+      ],
+      "next": "flood"
+     },
+     {
+      "text": "Ещё подумать."
+     }
+    ]
+   },
+   "circle": {
+    "text": "Тубус входит в прорезь. Затворы открываются на ладонь — по уговору, по графику, ведро на душу. Вода уходит вниз, к посёлкам, медленно, будто боится.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "circle"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   "trust": {
+    "text": "Мандат горит на спиртовке пульта. Затворы остаются закрыты. Вода принадлежит тем, кто её продаёт.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "trust"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   "guild": {
+    "text": "Тубус уходит в руки гильдейского приказчика. Затворы открываются для караванов: вода теперь — товар с ценой.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "guild"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   "brigade": {
+    "text": "Тубус в руках Сверла. — По регламенту, — говорит он. — Участок за участком, двадцать лет. — Затворы открываются на палец.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "brigade"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   "dry": {
+    "text": "Тубус и обе половины пластины ложатся в нишу пульта. Сухари заливают её свинцом. Плотина запечатана: ни войны за воду, ни воды.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "dry"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   "self": {
+    "text": "Тубус входит в прорезь, и пульт оживает под твоими руками. Концессионер Глубокого — {name}. Вода пойдёт туда, куда ты скажешь.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "self"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   "flood": {
+    "text": "Третий ярус. Рычаг ручного сброса поддаётся с третьего раза. Плотина вздыхает — и Глубокое уходит в ущелье стеной синей воды. Светлая возвращается за один день.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "ending",
+        "value": "flood"
+       },
+       {
+        "type": "flag",
+        "key": "chapter9_done"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "done"
+       },
+       {
+        "type": "xp",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   "done": {
+    "text": "Пульт Заслона.",
+    "options": [
+     {
+      "text": "Отойти."
+     }
+    ]
+   }
+  }
+ }
+}

@@ -35,6 +35,8 @@ export const CREATURES = {
   vedro: { mite: true, shell: P.teal1, dark: P.dark1, joint: P.grey3, scale: 1.6 },
   bunker_machine: { mite: true, shell: P.dark2, dark: P.dark0, joint: P.grey2, scale: 1.8 },
   main_eel: { eel: true, skin: P.teal0, dark: P.dark1, belly: P.grey4, scale: 1.4 },
+  // stage F: the dam's own sentries, big and painted in the Water Authority's blue and white
+  dam_sentry: { mite: true, shell: P.denim1, dark: P.dark1, joint: P.bone, scale: 2.1 },
   // stage B: wild machines of the ruins, «Счётчики» gone feral, rust and scrap
   wild_machine: { mite: true, shell: P.rust1, dark: P.dark1, joint: P.rust0, scale: 1.7 },
   condor: { bird: true, body: P.dark2, wing: P.dark1, tip: P.grey4, head: P.skin0, beak: P.bone, scale: 1.6 },

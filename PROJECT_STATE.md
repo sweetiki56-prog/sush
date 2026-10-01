@@ -1,6 +1,11 @@
 # PROJECT_STATE
 
 ## Current
+Stage F done: Chapter IX «Заслон» and the ending (S14) — the main story can be played to its end.
+- The boom of «Ворота» four ways; «Заслон» of four areas (the approach with the camps of the siege, the crest with the Trust's army and Шлюз, the machine hall, the control room).
+- The sides of the siege come by the flags of the whole game; the treaty of the shores or war; the crest stormed, passed by the Бригада's water main or opened by Шлюз; the dam's sentries stood down by hand, by Ведро's clearance, or fought; the trial by the evidence of all chapters (3 judge, 5 make Затвор confess), a fight, or a deal with the Trust or the Printer; seven choices at the console.
+- The ending: slides picked by flags (`content/endings.json`, `core/endings.ts`, `ui/Ending.ts`) — the choice, the fates of Затвор, the Сургуч, the Высокий берег, Шлюз, the dew, the Солевики, the places, the companions, and a nickname.
+
 Stage B done: Chapter VIII «Костяной круг» (S13).
 - The Костяной круг of three areas (the camp behind a gate of ribs, the trail of trials, the cave of the oath) and the ruins of Светлоречье of four (the streets with the city hall, the museum of the Water Authority, the library, the cellars).
 - The gate four ways; the second half of the key four ways (the dry week, Верес's diary, stolen from the cave, taken by force); the Printer named by the traitor's letter, Ада's letter, the library's margin or the kidnapper's slip; the hostage (Лёля if she walks along, else Марта) freed by a storm, a bargain or a fake tube from Манометр. All sides learn the Mandate is whole.
@@ -247,6 +252,16 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
   - `tests/e2e/zapruda.spec.ts`: pass → Notary (a roof melts) → archive → Шлюз → Лейка → the chapter screen.
   - Also: skill tags doubled by hand in check options («[Красноречие 70%] [Красноречие] …») removed across all dialogues.
 
+## Stage F «Заслон»: Chapter IX and the ending (done)
+- [x] F0. Bible: steps by flags, areas, the trial, the slides
+- [x] F1. Engine: `core/endings.ts`, `content/endings.json`, the slideshow (`ui/Ending.ts`), Chapter IX in the UI
+- [x] F2. Art: the dam's sentry; turbine, sluice gate, banners of six sides
+- [x] F3. Maps: four areas; the pass opens north once the boom is up
+- [x] F4. Main line (`dialogues/dam.json`, quest `dam`)
+- [x] F5. Slides: 22 slides with variants by the flags of chapters I–IX
+- [x] F6. Balance at level 9: the crest — a Стрелок 2% alone, 81% with the four sides of the siege; the dam's sentries 31% (two quiet ways round them); the control room 42%
+- [x] F7. Tests (`tests/unit/dam.test.ts`, `tests/e2e/dam.spec.ts`), docs, publish
+
 ## Stage B «Кости»: Chapter VIII (done)
 - [x] B0. Bible: steps by flags, areas of the Костяной круг and the ruins, side quests 54, 56–58, 62–65, seal marks 10–11, slides
 - [x] B1. Engine: the Chapter VIII screen; the hostage hides Лёля and Марта from their maps (`lelya_taken`, `marta_taken`), the note comes by `arrive` hooks (`tools/hostage-hooks.mjs`)
@@ -315,7 +330,7 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [x] S11. Chapter VI «Скит»: Орден Росы, «Роса-2», Ирга (stage S). «Бархан», Зеркальное поле and Могильник are not built yet: they go to the secrets pass (S15)
 - [x] S12. Chapter VII «Шептун и Депо»: Бригада, Лёля, Ведро, туннели (stage U). The ruins of Светлоречье and «Дрезина» go to Chapter VIII
 - [x] S13. Chapter VIII «Костяной круг»: Сухари, the Printer unmasked, the hostage; the ruins of Светлоречье (stage B)
-- [ ] S14. Chapter IX «Заслон»: siege, trial at the control room, endings with slides and nicknames
+- [x] S14. Chapter IX «Заслон»: siege, trial at the control room, endings with slides and nicknames (stage F)
 - [ ] S15. Secrets pass: 12 seal marks, Палата мер и печатей, bunker, «Литерный», special encounters, secret endings
 
 ## Handoff (for the next agent: Codex, Claude, Cursor)
@@ -329,6 +344,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
   - main-quest flags: `docs/story/main-quest.md`.
 - Chapter III: `tools/build-zap-*.mjs`, `dialogues/zapruda.json`. Chapter IV: `tools/build-salt-*.mjs`, `tools/build-sea-*.mjs`, `dialogues/salt.json`; its flags are in `docs/story/main-quest.md` (Глава IV) and `side-quests.md` №33–39.
 - Chapter V: `tools/build-crystal-*.mjs`, `dialogues/crystal.json`. Chapter VI: `tools/build-skit-*.mjs`, `tools/build-rosa-*.mjs`, `dialogues/skit.json`; flags in `main-quest.md` (Глава VI) and `side-quests.md` №47–50.
+- Chapter IX and the ending: `tools/build-dam-*.mjs`, `dialogues/dam.json`, `content/endings.json`, `core/endings.ts`, `ui/Ending.ts`; flags in `main-quest.md` (Глава IX).
 - Chapter VIII: `tools/build-bone-*.mjs`, `tools/build-oath-cave.mjs`, `tools/build-ruins-*.mjs`, `tools/hostage-hooks.mjs`, `dialogues/bones.json`; flags in `main-quest.md` (Глава VIII) and `side-quests.md` «Как построено (этап B)».
 - Chapter VII: `tools/build-depot-*.mjs`, `tools/build-whisper-*.mjs`, `tools/build-gates.mjs`, `tools/build-eagle.mjs`, `dialogues/upper.json`; flags in `main-quest.md` (Глава VII) and `side-quests.md` «Как построено (этап U)».
 - Companions: `content/companions.json`, `core/companions.ts`, the `comp_<id>` talks.
@@ -343,17 +359,12 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
-- **S14, Chapter IX «Заслон»:** the siege, the way to the control room, the trial at the console and the endings with slides (`main-quest.md` Глава IX, `endings.md`, `locations.md` №24). `dam` (30, 2) is a stub on the chart behind the pass «Ворота» (`gates_pass` lifts the boom).
-  - Evidence for the trial: `stempel_letter`, `printer_letter`, `ada_letter`, `veres_diary`, `land_books` (or `land_books_brigade`), `suhovey_book`, the Notary's register (Chapter III), `mandate_copy`; allies and enemies: `threat_told`, `militia_warned`, `kremen_strike`, `bones_enemy`, `order_ally`/`order_enemy`, `salt_promise`, `defector`, `second_dam_hint`, `lukich_friend`; `manual_release` and `gate_scheme` (the secret ending «Утопленник»); `watcher_rod`; `clearance` (Ведро's order).
-  - Carry over from Chapter VII: `threat_told` (circle / trust / silent), `depot_way`, `whisper_way`, `key_half_known`, `veres_diary`, `pump` (fixed / shared / broken, `trust_angry`), `pipe_voice` and `bunker_key`, `clearance` (mandate / hero / free), `watcher_hint`, `lukich` and `gates_pass`, `defector`, `eagle_known`, `second_dam_hint`, companions `with_lelya`, `with_vedro`.
-  - Carry over from Chapter VI: `dew_fate` (order / all), `dew_way` (kept / keeper / stolen), `order_ally`, `order_enemy`, `order_cold`, `stuzha_way` (duel / revoked / slipped), `keeper`, `veres_witness` (the first «Верблюд» remembers Верес), `capsule`, `lab_tech` and `fresh_cure` (owed to the Солевики), `unaccounted` and `kolyuchka_dew`, `stempel_letter`, seal marks 1–9.
-  - Carry over from Chapter V: `salt_promise`, `bitter_way`, `wall_names` (`kassian_kin`, `order_bridge`), `crystal_vs_order`, `salt_brother`.
-  - Companions still to come: Лёля, Тимофей, Ведро; Хэнк's «Долг сборщика».
+- **S15, the secrets pass:** the twelve seal marks (12 — «Литерный») and the Палата мер и печатей under the ruins, the Watcher's bunker (`bunker_key`, `watcher_hint`), «Литерный» (the draisine's brand), «Последний гонец», «Вторая плотина» (`second_dam_hint`, `defector_saved`), «Бархан», Зеркальное поле, Могильник; their evidence then joins the trial (`dam.json`, `zatvor_dam`) and their slides `endings.json`.
 - Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are still open; the sewers and the Lower city are ready for them.
 - **S8, the rest of Низовье:**
   - places: Мёртвые поля, Приют Тишины (the Полусухие: `rep_dry`, `resin_thief`), Элеватор, Ковчег;
   - companions Хэнк, Ржавчик, Тимофей.
-- **The ending slides** (`docs/story/endings.md`) already list the stage R marks. The slides screen for the finale is not built yet.
+- **The ending slides** are data (`content/endings.json`): add a slide or a variant when a new place, companion or quest outcome should be remembered.
 
 **Known limits**
 - `docs/story/side-quests.md` keeps both the early quest list and the stage R versions. The R versions are the built ones.
@@ -364,9 +375,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 684 tests, with the balance numbers printed to stderr.
+- `npm test`: 716 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 27 tests, about 11 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
+- `npm run test:e2e`: 28 tests, about 12 min. Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;

@@ -10,6 +10,7 @@ import crystal from './dialogues/crystal.json';
 import skit from './dialogues/skit.json';
 import upper from './dialogues/upper.json';
 import bones from './dialogues/bones.json';
+import dam from './dialogues/dam.json';
 import companions from './companions.json';
 import character from './character.json';
 import weapons from './weapons.json';
@@ -22,6 +23,7 @@ import traders from './traders.json';
 import jobs from './jobs.json';
 import locations from './locations.json';
 import travel from './travel.json';
+import endings from './endings.json';
 import { boardDialogue } from '../core/jobs';
 import type { Content, JobDef } from '../core/types';
 
@@ -41,7 +43,7 @@ const boards = Object.fromEntries(Object.entries(BOARDS).map(([id, town]) => [id
 export const CONTENT = {
   items,
   quests,
-  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...upper, ...bones, ...boards },
+  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...upper, ...bones, ...dam, ...boards },
   character,
   weapons,
   creatures,
@@ -52,6 +54,7 @@ export const CONTENT = {
   jobs,
   locations,
   travel,
+  endings,
   arena,
   companions,
 } as unknown as Content;

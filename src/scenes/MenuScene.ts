@@ -70,7 +70,7 @@ export class MenuScene extends Phaser.Scene {
     ui.add(band);
     ui.add(title(this, GAME_W / 2 + 4, 124, 'СУШЬ', 60, '#120d0a').setOrigin(0.5));
     ui.add(title(this, GAME_W / 2, 120, 'СУШЬ', 60, C.amber).setOrigin(0.5));
-    ui.add(txt(this, GAME_W / 2, 180, 'Низовье, Солончаки и Верховья · Главы I–VIII', 18, C.sand).setOrigin(0.5).setShadow(2, 2, '#120d0a', 0, true, true));
+    ui.add(txt(this, GAME_W / 2, 180, 'Низовье, Солончаки и Верховья · Главы I–IX', 18, C.sand).setOrigin(0.5).setShadow(2, 2, '#120d0a', 0, true, true));
     ui.add(glass(this, GAME_W / 2 - 170, 262, 340, (ONLINE ? 6 : 4) * 44 + 26));
     this.items = [
       { label: 'НОВАЯ ИГРА', enabled: true, run: () => this.scene.start('Create') },
