@@ -73,7 +73,6 @@ describe('Chapter IX: the boom of the pass', () => {
     expect(opts(s)).toHaveLength(1);
   });
 });
-
 describe('Chapter IX: the siege', () => {
   it('the sides come by the flags of the whole game', () => {
     const all = setup((g) => {
@@ -271,7 +270,7 @@ describe('the ending slides', () => {
   });
 
   it('the choice comes first and the nickname last; slides with no match are skipped; {name} is the hero', () => {
-    const g = game({ ending: 'circle', trial_way: 'judged', printer_known: true, dew_fate: 'all', shore_treaty: true, met_lelya: true });
+    const g = game({ ending: 'circle', trial_way: 'judged', printer_known: true, dew_fate: 'all', shore_treaty: true, met_lelya: true, blood_drawn: true });
     const sl = slidesFor(g, CONTENT.endings);
     expect(sl[0]).toMatchObject({ id: 'choice' });
     expect(sl[0].text).toContain('Кругу колодцев');

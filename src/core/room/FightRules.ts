@@ -209,6 +209,10 @@ export class FightRules {
       r.host?.game.setFlag(`dead_${id}`);
       return r.logAll(`${u.name} погибает.`);
     }
+    // «Сухие руки»: only people killed by the party break the run. Animals,
+    // machines and Сухостои deliberately do not count; the creature tag is
+    // shared by town and road fights, so one irreversible world flag is enough.
+    if (h?.def.tags?.includes('human')) r.host?.game.setFlag('blood_drawn', true);
     const killer = r.players.get(this.lastAttacker ?? '') ?? r.host!;
     killer.game.setFlag(`dead_${id}`);
     if (h) r.jobKill(killer, h);

@@ -20,6 +20,7 @@ place({ id: 'land_registry', frame: 'stacks', x: 9, y: 7, label: 'Земельн
 place({ id: 'hall_table', frame: 'table', x: 13, y: 9, label: 'Стол регистратора' });
 place({ id: 'draisine_ruins', frame: 'draisine', x: 36, y: 21, label: 'Дрезина', dialogue: 'draisine_station' });
 place({ id: 'cellar_hatch', frame: 'hatch', x: 17, y: 28, block: false, label: 'Спуск в подвалы', dialogue: 'cellar_hatch' });
+place({ id: 'chamber_door', frame: 'door_closed', x: 8, y: 12, label: 'Дверь Палаты мер и печатей', dialogue: 'chamber_door' });
 for (const [x, y] of [[35, 33], [15, 34], [38, 9]]) place({ id: `car_${x}_${y}`, frame: 'car_x_burnt', x, y, label: 'Сгоревшая машина' });
 k.scenery([[3, 3, 40, 36]], { cactus: 2, dead_tree: 4, bush: 6 });
 
@@ -34,7 +35,7 @@ const actors = [
 ];
 
 k.write('ruins_streets', 'Руины Светлоречья', {
-  entries: { default: [21, 37], south: [21, 37], north: [21, 2], east: [41, 19], rail: [36, 23], cellar: [17, 29] },
+  entries: { default: [21, 37], south: [21, 37], north: [21, 2], east: [41, 19], rail: [36, 23], cellar: [17, 29], chamber: [9, 13] },
   roads: { south: [21, 22], north: [21, 22], east: [19, 20] },
   actors,
   arrive: [{ if: [{ notFlag: 'ruins_seen' }], effects: [{ type: 'flag', key: 'ruins_seen' }], log: 'Светлоречье: проспект колоннад, министерства без крыш. Двести лет назад здесь решали, кому течь воде.' }, ...HOSTAGE_HOOKS],

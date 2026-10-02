@@ -1,6 +1,12 @@
 # PROJECT_STATE
 
 ## Current
+Stage P done: the first half of the secrets pass (S15a).
+- «Последний гонец» at the southern post station, the Watcher's bunker above Deep Water, the treasury train «Литерный» with seal mark 12, and the Chamber of Weights and Seals under the city hall.
+- Four new trial pieces (`courier_letter` counts twice, `watcher_diary`, `drop_stamps`, `chamber_ledger`), the collapse of illegal капли, and ending slides for the courier, the bunker, the train and the Chamber.
+- «Сухие руки»: a human death sets the irreversible `blood_drawn`; a bloodless path can make Затвор surrender with four pieces of evidence and earns its slide and nickname. Beasts, machines and Сухостои do not count.
+- S15b remains: the Double, the King of the Elevator, the Printer's apprentice line, Бархан/Блик, the Mirror field, the Burial ground, the city that does not exist, and special world-map meetings.
+
 Stage N done: the rest of Низовье (S8).
 - Four places open after Chapter I: the Dead fields with the farm Свинцовый and the ruins of Хлебное, the shelter of Тишина, the Elevator of «Жажда» (yard, floors, the «Мираж» still), the Ark (the pilgrims' camp and the ship).
 - Side quests 24–32: the lead flower (Тимофей's), the raid on the shelter, the bell of Хлебное, the herd, who brews «Мираж», the debtor, the stolen water, the Ark and its radio, the lost pilgrim (found in time or too late); Хэнк's «Долг сборщика» in the Lower city of Запруда with new evidence for the trial (`hank_testimony`).
@@ -344,12 +350,12 @@ Phase 3 done: the game runs in rooms (solo is a local room), a Node WebSocket se
 - [x] S12. Chapter VII «Шептун и Депо»: Бригада, Лёля, Ведро, туннели (stage U). The ruins of Светлоречье and «Дрезина» go to Chapter VIII
 - [x] S13. Chapter VIII «Костяной круг»: Сухари, the Printer unmasked, the hostage; the ruins of Светлоречье (stage B)
 - [x] S14. Chapter IX «Заслон»: siege, trial at the control room, endings with slides and nicknames (stage F)
-- [ ] S15. Secrets pass: 12 seal marks, Палата мер и печатей, bunker, «Литерный», special encounters, secret endings
+- [ ] S15. Secrets pass: S15a (the courier, Watcher's bunker, «Литерный», seal mark 12, Палата, «Сухие руки») is done; S15b (the Double, the Printer's apprentice, special places and encounters) remains
 
 ## Handoff (for the next agent: Codex, Claude, Cursor)
 Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, item or place. Then read this file and the bible in `docs/story/`.
 
-**Switching agents (Codex, Claude, Cursor).** Everything needed is in the repo: `AGENTS.md` (rules, commands, «Pitfalls we hit», «Content generators»), this file, the bible in `docs/story/`, the decisions in `docs/DECISIONS.md`. Setup: `npm ci`, `npx playwright install chromium`. The late stages' content scripts are in `tools/content-gen/`. Next work: «Where to continue» below — S15 (the secrets pass) is the last big milestone; then the Chapter III side quests 18–20 and publishing co-op on a Node host.
+**Switching agents (Codex, Claude, Cursor).** Everything needed is in the repo: `AGENTS.md` (rules, commands, «Pitfalls we hit», «Content generators»), this file, the bible in `docs/story/`, the decisions in `docs/DECISIONS.md`. Setup: `npm ci`, `npx playwright install chromium`. The late stages' content scripts are in `tools/content-gen/`. Next work: «Where to continue» below — S15b is the last big content milestone; then the Chapter III side quests 18–20 and publishing co-op on a Node host.
 
 **Where things are**
 - Chapter I: `tools/build-map.mjs` and `dialogues/rusty_well.json`.
@@ -366,6 +372,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Companions: `content/companions.json`, `core/companions.ts`, the `comp_<id>` talks.
 - The world map: `content/travel.json`, `content/locations.json`, `tools/build-world.mjs`, `src/core/travel/`, `src/core/room/{Road,Meetings,RoadBattle}.ts`.
 - Stage R quests: `docs/story/side-quests.md` R1–R6, flags as named there (`semyon`, `rzhavchik`, `luka`, `resin_thief`, `laska_bow`, `hank_forgiven`, `hank_taken`).
+- Stage P secrets: `tools/build-{post-station,watcher-bunker,literny-tunnel,literny-train,seal-chamber}.mjs`, `dialogues/secrets.json`, and the reproducible `tools/content-gen/secrets.py`; the trial is patched in `dam.json`.
 
 **Towns of several areas (stage L).** A town is a list of `areas` in `locations.json` (its `map` is the first area). Maps link by `exits` at their edges; hatches and ladders use the `goto` effect. To add an area:
 1. Write a builder on `tools/map-kit.mjs`: `k.exit(...)` for its ways out, `k.building(..., roof)` for buildings with an inside.
@@ -375,7 +382,7 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
-- **S15, the secrets pass:** the twelve seal marks (12 — «Литерный») and the Палата мер и печатей under the ruins, the Watcher's bunker (`bunker_key`, `watcher_hint`), «Литерный» (the draisine's brand), «Последний гонец», «Вторая плотина» (`second_dam_hint`, `defector_saved`), «Бархан», Зеркальное поле, Могильник; their evidence then joins the trial (`dam.json`, `zatvor_dam`) and their slides `endings.json`.
+- **S15b, the rest of the secrets pass:** «Двойник»; «Король Элеватора»; the three steps of «Ученик Печатника»; «Бархан» and Блик; Зеркальное поле; Могильник; the City that does not exist; the twelve special world-map meetings. «Вторая плотина» already works at the dam, but its full secret route may be expanded here.
 - Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are still open; the sewers and the Lower city are ready for them.
 - **The ending slides** are data (`content/endings.json`): add a slide or a variant when a new place, companion or quest outcome should be remembered.
 
@@ -388,9 +395,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 762 tests, with the balance numbers printed to stderr.
+- `npm test`: 784 tests, with the balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 29 tests, about 13 min; use `--workers=2` (see «e2e under load» in `AGENTS.md`). Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
+- `npm run test:e2e`: 30 tests, about 14 min; use `--workers=2` (see «e2e under load» in `AGENTS.md`). Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;

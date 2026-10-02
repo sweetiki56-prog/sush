@@ -1136,6 +1136,103 @@
       "next": "shown"
      },
      {
+      "text": "Письмо последнего гонца: Верес передал Мандат Совету колодцев.",
+      "if": [
+       {
+        "flag": "courier_letter"
+       },
+       {
+        "notFlag": "shown_courier"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_courier"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 2
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Личный дневник Вереса: Сургуч готовил подмену закона.",
+      "if": [
+       {
+        "flag": "watcher_diary"
+       },
+       {
+        "notFlag": "shown_watcher"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_watcher"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
+      "text": "Законные штампы: капли Треста чеканятся без права.",
+      "if": [
+       {
+        "flag": "drop_stamps",
+        "eq": "kept"
+       },
+       {
+        "notFlag": "shown_stamps"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_stamps"
+       },
+       {
+        "type": "flag",
+        "key": "drops_collapsed"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "stamps"
+     },
+     {
+      "text": "Книга Палаты: приказы Печатника и поддельные решения Совета.",
+      "if": [
+       {
+        "flag": "chamber_ledger"
+       },
+       {
+        "notFlag": "shown_chamber"
+       }
+      ],
+      "effects": [
+       {
+        "type": "flag",
+        "key": "shown_chamber"
+       },
+       {
+        "type": "inc",
+        "key": "evidence",
+        "by": 1
+       }
+      ],
+      "next": "shown"
+     },
+     {
       "text": "Суд окончен. Ты правил по подделке, Затвор.",
       "if": [
        {
@@ -1144,6 +1241,19 @@
        }
       ],
       "next": "judged"
+     },
+     {
+      "text": "За тобой нет крови. Признай подделку сам — и никто здесь не умрёт.",
+      "if": [
+       {
+        "flag": "evidence",
+        "gte": 4
+       },
+       {
+        "notFlag": "blood_drawn"
+       }
+      ],
+      "next": "dry_persuaded"
      },
      {
       "text": "Признай сам. При всех.",
@@ -1290,6 +1400,47 @@
     "options": [
      {
       "text": "…"
+     }
+    ]
+   },
+   "stamps": {
+    "text": "Затвор сравнивает штамп с каплей и бледнеет. Весть уйдёт с плотины быстрее воды: накопления бедняков превращаются в металл, а власть Треста — в слух.",
+    "options": [
+     {
+      "text": "…",
+      "next": "intro"
+     }
+    ]
+   },
+   "dry_persuaded": {
+    "text": "Затвор смотрит на оружие, которое так и не пришлось поднять. — Путь сюда пройден без человеческой крови. Значит, бумага ещё может остановить кровь. — Он подписывает отказ от поддельной копии и сам отдаёт его Шлюзу.",
+    "options": [
+     {
+      "text": "…",
+      "effects": [
+       {
+        "type": "flag",
+        "key": "trial_way",
+        "value": "persuaded"
+       },
+       {
+        "type": "flag",
+        "key": "zatvor_persuaded"
+       },
+       {
+        "type": "flag",
+        "key": "dry_hands"
+       },
+       {
+        "type": "quest",
+        "quest": "dam",
+        "stage": "choice"
+       },
+       {
+        "type": "xp",
+        "amount": 300
+       }
+      ]
      }
     ]
    }

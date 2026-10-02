@@ -543,6 +543,17 @@
    "w": 1,
    "h": 1,
    "block": true,
+   "id": "chamber_door",
+   "frame": "door_closed",
+   "x": 8,
+   "y": 12,
+   "label": "Дверь Палаты мер и печатей",
+   "dialogue": "chamber_door"
+  },
+  {
+   "w": 1,
+   "h": 1,
+   "block": true,
    "id": "car_35_33",
    "frame": "car_x_burnt",
    "x": 35,
@@ -3812,6 +3823,10 @@
   "cellar": [
    17,
    29
+  ],
+  "chamber": [
+   9,
+   13
   ]
  },
  "actors": [

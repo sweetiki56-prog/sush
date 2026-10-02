@@ -215,6 +215,7 @@ describe('Chapter I finale: Inspector Шлюз', () => {
     expect(r.fight).toBeNull();
     expect(c.last('combatEnd')!.outcome).toBe('victory');
     expect(flags(r)).toMatchObject({ trust_outcome: 'fight', fled_shluz: true, dead_collector_a: true, dead_collector_b: true, hank_hid: false });
+    expect(g.flag('blood_drawn')).toBe(true);
     expect(g.state.log.some((l) => l.includes('уходит в марево, зажимая рану'))).toBe(true);
     expect(g.stage('inspector')).toBe('gone');
     expect(r.npcs.has('hank')).toBe(true);

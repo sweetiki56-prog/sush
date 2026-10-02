@@ -817,6 +817,17 @@
             "flag": "hostage"
           }
         ]
+      },
+      {
+        "map": "seal_chamber",
+        "entry": "south",
+        "name": "Палата мер и печатей",
+        "at": [0.18, 0.3],
+        "known": [
+          {
+            "flag": "chamber_known"
+          }
+        ]
       }
     ]
   },
@@ -979,6 +990,60 @@
           }
         ],
         "log": "В низине земля влажная. Агния лежит у пересохшей лужицы. Поздно."
+      }
+    ]
+  },
+  "post_station": {
+    "name": "Последняя почтовая станция",
+    "cell": [30, 70],
+    "map": "post_station",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "chapter1_done"
+      }
+    ]
+  },
+  "watcher_bunker": {
+    "name": "Бункер Смотрителя",
+    "cell": [34, 3],
+    "secret": true,
+    "map": "watcher_bunker",
+    "entry": "south",
+    "open": [
+      {
+        "flag": "watcher_known"
+      }
+    ]
+  },
+  "literny": {
+    "name": "Тоннель «Литерного»",
+    "cell": [66, 50],
+    "secret": true,
+    "map": "literny_tunnel",
+    "entry": "west",
+    "open": [
+      {
+        "flag": "literny_known"
+      }
+    ],
+    "areas": [
+      {
+        "map": "literny_tunnel",
+        "entry": "west",
+        "name": "Тоннель",
+        "at": [0.3, 0.5]
+      },
+      {
+        "map": "literny_train",
+        "entry": "west",
+        "name": "Бронепоезд",
+        "at": [0.7, 0.5],
+        "known": [
+          {
+            "flag": "literny_seen"
+          }
+        ]
       }
     ]
   }

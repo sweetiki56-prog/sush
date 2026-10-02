@@ -5118,6 +5118,10 @@
      {
       "type": "give",
       "item": "leather_map"
+     },
+     {
+      "type": "flag",
+      "key": "literny_known"
      }
     ],
     "options": [

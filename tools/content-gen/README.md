@@ -6,7 +6,7 @@ truth; these are kept so a stage can be regenerated after a change. See «Conten
 Run from the repo root, in this order, then format:
 
 ```sh
-for g in skit upper bones dam lowland; do python3 tools/content-gen/$g.py; done
+for g in skit upper bones dam lowland secrets; do python3 tools/content-gen/$g.py; done
 npx prettier --write src/content/locations.json src/content/travel.json
 ```
 
@@ -17,5 +17,6 @@ npx prettier --write src/content/locations.json src/content/travel.json
 | `bones.py` | B — Chapter VIII «Костяной круг», the ruins | `dialogues/bones.json`; … |
 | `dam.py` | F — Chapter IX «Заслон» and the ending slides | `dialogues/dam.json`, `endings.json`; … |
 | `lowland.py` | N — the rest of Низовье, Тимофей, «Долг сборщика» | `dialogues/lowland.json`; … |
+| `secrets.py` | P — S15a: гонец, бункер, «Литерный», Палата, «Сухие руки» | `dialogues/secrets.json`; quests, items, places, trial, slides |
 
 `jsonfmt.py` formats the one-entry-per-line files (`creatures`, `weapons`, `traders`, `companions`).

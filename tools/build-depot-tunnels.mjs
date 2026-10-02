@@ -38,7 +38,7 @@ k.write('depot_tunnels', 'Туннели водовода', {
   actors,
   arrive: [{ if: [{ notFlag: 'tunnels_seen' }], effects: [{ type: 'flag', key: 'tunnels_seen' }], log: 'Туннели водовода: бетон, сырость, ровный гул воды в трубе. Где-то далеко кто-то зовёт: «Илья Андреич!»' }],
   cleared: [
-    { group: 'shunt', if: [{ flag: 'shunt_fight' }, { notFlag: 'pipe_voice' }], effects: [{ type: 'flag', key: 'pipe_voice', value: 'killed' }, { type: 'quest', quest: 'pipe_voice', stage: 'done' }], log: 'Шунт затихает у своей трубы. В кармане робы — пропуск техника Водоуправления, выцветший до белизны.' },
+    { group: 'shunt', if: [{ flag: 'shunt_fight' }, { notFlag: 'pipe_voice' }], effects: [{ type: 'flag', key: 'pipe_voice', value: 'killed' }, { type: 'flag', key: 'watcher_known' }, { type: 'give', item: 'bunker_key' }, { type: 'quest', quest: 'pipe_voice', stage: 'done' }], log: 'Шунт затихает у своей трубы. В кармане робы — ключ от сухого водосброса.' },
   ],
   triggers: [{ id: 'flood', x: 27, y: 25, w: 7, h: 7, repeat: true, if: [{ notFlag: 'flood_drained' }], effects: [{ type: 'flag', key: 'flood_wet' }], log: 'Вода по колено. Что-то скользкое трогает ногу.' }],
 });

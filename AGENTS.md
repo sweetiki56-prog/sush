@@ -85,7 +85,7 @@ Done means: `npm test`, `npm run lint`, `npm run build` and `npm run test:e2e` a
 
 ## Content generators
 `tools/content-gen/*.py` wrote the content of the late stages: `skit.py` (Chapter VI), `upper.py` (VII), `bones.py` (VIII), `dam.py` (IX and the ending slides), `lowland.py` (the rest of Низовье). The JSON in `src/content` is the source of truth; the scripts are kept so a whole stage can be regenerated after a change.
-- Run from the repo root, **in this order**, then format: `for g in skit upper bones dam lowland; do python3 tools/content-gen/$g.py; done && npx prettier --write src/content/locations.json src/content/travel.json`. Later scripts patch what earlier ones wrote (the console of «Шептун», the trial, the slides), so never run one of them alone after editing an earlier one.
+- Run from the repo root, **in this order**, then format: `for g in skit upper bones dam lowland secrets; do python3 tools/content-gen/$g.py; done && npx prettier --write src/content/locations.json src/content/travel.json`. Later scripts patch what earlier ones wrote (the console of «Шептун», the trial, the slides), so never run one of them alone after editing an earlier one.
 - Run as they are, they reproduce the committed JSON byte for byte (`git status` stays clean). If you edit a stage's JSON by hand, either make the same edit in its script or stop using that script for that stage — never let a rerun silently undo a hand edit.
 - Content of Chapters I–V was written before these scripts were kept: edit its JSON directly.
 - New stages may use the same helpers (`F`, `Q`, `G`, `opt`, `node`, `dlg`, `chk`, `E`, `fl`, `nf`, … at the top of any script) or plain JSON edits — both are fine.
