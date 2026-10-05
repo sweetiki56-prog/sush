@@ -1046,5 +1046,20 @@
         ]
       }
     ]
+  },
+  "rocket": {
+    "name": "Обитель Ракеты",
+    "cell": [92, 43],
+    "secret": true,
+    "map": "rocket_outpost",
+    "entry": "south",
+    "open": [{ "flag": "rocket_found" }],
+    "areas": [
+      { "map": "rocket_outpost", "entry": "south", "name": "Внешний пост", "at": [0.1, 0.5] },
+      { "map": "rocket_tunnel", "entry": "south", "name": "Путь Покорности", "at": [0.3, 0.5], "known": [{ "flag": "rocket_tunnel_seen" }] },
+      { "map": "rocket_sanctuary", "entry": "south", "name": "Закрытый сад", "at": [0.5, 0.5], "known": [{ "flag": "rocket_sanctuary_seen" }] },
+      { "map": "rocket_palace", "entry": "south", "name": "Зал Ракеты", "at": [0.7, 0.5], "known": [{ "flag": "rocket_palace_seen" }] },
+      { "map": "rocket_archive", "entry": "south", "name": "Архив", "at": [0.9, 0.5], "known": [{ "flag": "rocket_archive_seen" }] }
+    ]
   }
 }

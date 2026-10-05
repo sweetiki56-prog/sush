@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { C, glass, hitRow, title, txt } from '../theme';
 import type { InfoCard } from './InfoCard';
 import { dragScroll } from '../touch';
+import { settings } from '../../core/Settings';
 
 export interface ListItem {
   id: string;
@@ -87,7 +88,7 @@ export class ListPanel {
       this.objs.push(hit, t);
     });
     if (!all.length && this.empty) this.objs.push(txt(s, this.x + 16, this.y + 40, this.empty, 13, C.crtDim, this.w - 32));
-    if (all.length > this.capacity) this.objs.push(txt(s, this.x + this.w - 10, this.y + 12, `${this.offset + 1}–${this.offset + items.length} из ${all.length} ↕`, 11, C.crtDim).setOrigin(1, 0));
+    if (all.length > this.capacity) this.objs.push(txt(s, this.x + this.w - 10, this.y + 12, `${this.offset + 1}–${this.offset + items.length} ${settings().language === 'en' ? 'of' : 'из'} ${all.length} ↕`, 11, C.crtDim).setOrigin(1, 0));
     this.parent.add(this.objs);
   }
 }

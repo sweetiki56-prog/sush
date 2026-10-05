@@ -3243,8 +3243,8 @@
   {
    "id": "mite_b",
    "sheet": "rust_mite",
-   "x": 28,
-   "y": 21,
+   "x": 26,
+   "y": 20,
    "dir": 2,
    "label": "Ржавый клещ",
    "creature": "rust_mite",

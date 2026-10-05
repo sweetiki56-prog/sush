@@ -48,7 +48,8 @@ export interface TravelContent {
 /** A salt storm standing over a stretch of the map while its conditions hold: half the sight, slower going. */
 export interface Storm {
   id: string;
-  area: [number, number, number, number]; // x0, y0, x1, y1 in cells, inclusive
+  area?: [number, number, number, number]; // fixed rectangle, inclusive
+  route?: [number, number][]; // moving 3×3 storm: centre at each hour of the cycle
   if?: Condition[];
 }
 

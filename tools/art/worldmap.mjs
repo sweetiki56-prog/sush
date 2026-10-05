@@ -25,7 +25,8 @@ const BASE = {
   '~': [198, 168, 118],
 };
 
-export function worldMap(data) {
+export function worldMap(data, locale = 'ru') {
+  const en = locale === 'en';
   const W = data.width * PX;
   const H = data.height * PX;
   const cv = canvas(W, H);
@@ -286,34 +287,34 @@ export function worldMap(data) {
     return [(sx + 0.5) * PX, (sy + 0.5) * PX];
   };
   const [dxc, dyc] = centre('x');
-  label('М ё р т в ы е   п о л я', dxc, dyc, 34, -0.05);
-  label('здесь по ночам бродят Сухостои', dxc, dyc + 36, 20, -0.05, 0.55);
+  label(en ? 'D E A D   F I E L D S' : 'М ё р т в ы е   п о л я', dxc, dyc, 34, -0.05);
+  label(en ? 'Drywood roam here at night' : 'здесь по ночам бродят Сухостои', dxc, dyc + 36, 20, -0.05, 0.55);
   const N = data.north ?? 0; // rows the Верховья added on top: the old labels sit below them
-  label('С о л о н ч а к и', 84 * PX, (14 + N) * PX, 34, -0.04, 0.6);
+  label(en ? 'S A L T   F L A T S' : 'С о л о н ч а к и', 84 * PX, (14 + N) * PX, 34, -0.04, 0.6);
   const [sx, sy] = centre('s');
-  label('С о л я н о е   м о р е', sx, sy - 3 * PX, 30, 0.06, 0.55);
-  label('корка держит караван, но не бурю', sx, sy - 3 * PX + 32, 18, 0.06, 0.5);
-  label('← Низовье', 61 * PX, (40 + N) * PX, 20, 0, 0.5);
+  label(en ? 'S A L T   S E A' : 'С о л я н о е   м о р е', sx, sy - 3 * PX, 30, 0.06, 0.55);
+  label(en ? 'the crust bears a caravan, not a storm' : 'корка держит караван, но не бурю', sx, sy - 3 * PX + 32, 18, 0.06, 0.5);
+  label(en ? '← Lowlands' : '← Низовье', 61 * PX, (40 + N) * PX, 20, 0, 0.5);
   if (mid.length) {
     const [rx, ry] = mid[Math.floor(mid.length * 0.72)];
-    label('Мёртвое русло Светлой', rx * PX + 34, ry * PX, 24, Math.PI / 2 - 0.08, 0.6);
+    label(en ? 'Dry bed of the Svetlaya' : 'Мёртвое русло Светлой', rx * PX + 34, ry * PX, 24, Math.PI / 2 - 0.08, 0.6);
   }
-  label('К а м е н н ы й   м е ш о к', 5 * PX, (22 + N) * PX, 24, -Math.PI / 2 + 0.1, 0.6);
+  label(en ? 'S T O N E   H O L L O W' : 'К а м е н н ы й   м е ш о к', 5 * PX, (22 + N) * PX, 24, -Math.PI / 2 + 0.1, 0.6);
   if (N) {
-    label('В е р х о в ь я', 48 * PX, 19 * PX, 34, -0.03, 0.6);
-    label('предгорья и каньоны до самой плотины', 48 * PX, 19 * PX + 36, 18, -0.03, 0.5);
-    label('↑ Заслон', 30.5 * PX, 1.4 * PX, 22, 0, 0.6);
+    label(en ? 'H I G H L A N D S' : 'В е р х о в ь я', 48 * PX, 19 * PX, 34, -0.03, 0.6);
+    label(en ? 'foothills and canyons up to the dam' : 'предгорья и каньоны до самой плотины', 48 * PX, 19 * PX + 36, 18, -0.03, 0.5);
+    label(en ? '↑ Zaslon Dam' : '↑ Заслон', 30.5 * PX, 1.4 * PX, 22, 0, 0.6);
   }
 
   // ---- a cartouche, a compass rose, a scale bar ----
-  cartouche(ctx, 2.2 * PX, H - 6.2 * PX, 13 * PX, 4.2 * PX);
-  compass(ctx, W - 5.2 * PX, 5.5 * PX, 2.8 * PX);
-  scaleBar(ctx, W - 16 * PX, H - 2.4 * PX);
+  cartouche(ctx, 2.2 * PX, H - 6.2 * PX, 13 * PX, 4.2 * PX, locale);
+  compass(ctx, W - 5.2 * PX, 5.5 * PX, 2.8 * PX, locale);
+  scaleBar(ctx, W - 16 * PX, H - 2.4 * PX, locale);
 
   // ---- the survey grid with its coordinates, and the frame ----
   ctx.strokeStyle = `${INK}0.14)`;
   ctx.lineWidth = 1;
-  const LETTERS = 'АБВГДЕЖИКЛМНОП';
+  const LETTERS = en ? 'ABCDEFGHJKLMNPQR' : 'АБВГДЕЖИКЛМНОП';
   for (let x = 8, i = 0; x <= data.width; x += 8, i++) {
     if (x < data.width) line(ctx, x * PX + 0.5, 0, x * PX + 0.5, H);
     frameText(ctx, LETTERS[i], (x - 4) * PX, 26);
@@ -422,7 +423,7 @@ function mountain(ctx, x, y, s, r, snow = false) {
   ctx.stroke();
 }
 /** A framed title plate with scrolled ends. */
-function cartouche(ctx, x, y, w, h) {
+function cartouche(ctx, x, y, w, h, locale) {
   ctx.fillStyle = 'rgba(236,216,176,0.92)';
   ctx.strokeStyle = 'rgba(52,34,20,0.85)';
   ctx.lineWidth = 3;
@@ -443,14 +444,14 @@ function cartouche(ctx, x, y, w, h) {
   ctx.fillStyle = 'rgba(52,34,20,0.95)';
   ctx.textAlign = 'center';
   ctx.font = 'bold 48px "Georgia", "Times New Roman", serif';
-  ctx.fillText('Н И З О В Ь Е', x + w / 2, y + h * 0.48);
+  ctx.fillText(locale === 'en' ? 'L O W L A N D S' : 'Н И З О В Ь Е', x + w / 2, y + h * 0.48);
   ctx.font = 'italic 20px "Georgia", "Times New Roman", serif';
-  ctx.fillText('Водоуправление бассейна Светлой · лист 3', x + w / 2, y + h * 0.72);
+  ctx.fillText(locale === 'en' ? 'Svetlaya Basin Water Authority · sheet 3' : 'Водоуправление бассейна Светлой · лист 3', x + w / 2, y + h * 0.72);
   ctx.font = 'italic 16px "Georgia", "Times New Roman", serif';
-  ctx.fillText('поправки от руки — после Засухи', x + w / 2, y + h * 0.88);
+  ctx.fillText(locale === 'en' ? 'hand corrections — after the Drought' : 'поправки от руки — после Засухи', x + w / 2, y + h * 0.88);
 }
 /** An eight-point star with north («С») on top. */
-function compass(ctx, x, y, rad) {
+function compass(ctx, x, y, rad, locale) {
   ctx.strokeStyle = 'rgba(52,34,20,0.8)';
   ctx.lineWidth = 1.5;
   ctx.beginPath();
@@ -483,10 +484,10 @@ function compass(ctx, x, y, rad) {
   ctx.fillStyle = 'rgba(52,34,20,0.95)';
   ctx.font = 'bold 30px "Georgia", serif';
   ctx.textAlign = 'center';
-  ctx.fillText('С', x, y - rad - 10);
+  ctx.fillText(locale === 'en' ? 'N' : 'С', x, y - rad - 10);
 }
 /** A scale bar: 0 — 10 — 20 км (a cell is about two kilometres). */
-function scaleBar(ctx, x, y) {
+function scaleBar(ctx, x, y, locale) {
   const seg = 5 * PX; // 10 km
   for (let k = 0; k < 2; k++) {
     ctx.fillStyle = k % 2 ? 'rgba(236,216,176,0.95)' : 'rgba(52,34,20,0.9)';
@@ -498,7 +499,7 @@ function scaleBar(ctx, x, y) {
   ctx.fillStyle = 'rgba(52,34,20,0.95)';
   ctx.font = 'italic 18px "Georgia", serif';
   ctx.textAlign = 'center';
-  for (const [k, t] of [[0, '0'], [1, '10'], [2, '20 км']]) ctx.fillText(t, x + k * seg, y - 8);
+  for (const [k, t] of [[0, '0'], [1, '10'], [2, locale === 'en' ? '20 km' : '20 км']]) ctx.fillText(t, x + k * seg, y - 8);
 }
 function frameText(ctx, t, x, y) {
   ctx.fillStyle = 'rgba(236,216,176,0.9)';

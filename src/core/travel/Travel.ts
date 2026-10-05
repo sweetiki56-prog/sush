@@ -113,6 +113,7 @@ export function freshTravel(grid: WorldGridData, at: [number, number]): TravelSt
 
 export type TravelEvent =
   | { t: 'arrived'; target: string | null } // the path ran out (at a location, or a spot on the map)
+  | { t: 'interrupt'; reason: string } // a world event caught a traversed cell before the next one
   | { t: 'day' } // midnight passed on the road
   | { t: 'drink' } // a day of travel since the last water: everyone needs a flask
   | { t: 'hour' }; // an hour passed (thirst and the like tick by hours)
@@ -188,7 +189,7 @@ export class Travel {
   }
 
   /** Real time passes: only while the party moves does the world's clock run. */
-  tick(ms: number, p: PartyPace): TravelEvent[] {
+  tick(ms: number, p: PartyPace, interrupt?: (x: number, y: number, minute: number) => string | null): TravelEvent[] {
     if (!this.moving) return [];
     const s = this.s;
     const ev: TravelEvent[] = [];
@@ -207,6 +208,13 @@ export class Travel {
         s.y = cy;
         s.path.shift();
         left -= need;
+        const reason = interrupt?.(nx, ny, s.minute + minutes - left);
+        if (reason) {
+          ev.push(...this.pass(minutes - left, p));
+          this.halt();
+          ev.push({ t: 'interrupt', reason });
+          return ev;
+        }
       } else {
         s.x += ((cx - s.x) * (left * perMin)) / d;
         s.y += ((cy - s.y) * (left * perMin)) / d;

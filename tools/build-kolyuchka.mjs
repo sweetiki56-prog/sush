@@ -63,6 +63,8 @@ const actors = [
   { id: 'prokop', sheet: 'prokop', x: 11, y: 14, dir: 3, label: 'Прокоп', dialogue: 'prokop' },
   { id: 'iva', sheet: 'iva', x: 13, y: 12, dir: 3, label: 'Ива', dialogue: 'iva', if: [...PEACE_TIME, { notFlag: 'iva_locked' }] },
   { id: 'laska', sheet: 'laska', x: 24, y: 13, dir: 3, label: 'Девчонка у амбара', dialogue: 'laska', if: [{ flag: 'laska_met' }, { notFlag: 'laska_gone' }] },
+  { id: 'town_cat', sheet: 'cat_town', x: 16, y: 15, dir: 1, label: 'Кошка у капельника', dialogue: 'street_cat' },
+  { id: 'town_dog', sheet: 'dog_town', x: 23, y: 22, dir: 3, label: 'Сторожевой пёс', dialogue: 'street_dog' },
   // farmers: at work in peace, the militia when the raid comes to a fight
   ...[[16, 21], [20, 25], [11, 25]].map(([x, y], i) => ({ id: `farmer_${i}`, sheet: 'farmer', x, y, dir: 3, label: 'Хуторянин', dialogue: 'farmer', if: PEACE_TIME })),
   // the militia come out through the north gate to stand with the hero at the trail

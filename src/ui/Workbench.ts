@@ -1,8 +1,12 @@
 // Workbench or campfire: the recipes of that bench, what they need and what you have, and a button to make it.
 // Crafting goes to the room as an intent; the window redraws when the bag changes.
 import Phaser from 'phaser';
-import { SKILL_NAMES } from '../core/character/defs';
+import type { SkillId } from '../core/character/defs';
 import { craftCheck } from '../core/room/Craft';
+import { settings } from '../core/Settings';
+import { skillName } from '../i18n/character';
+import { contentText } from '../i18n/display';
+import { uiText } from '../i18n/ui';
 import { C, button, glass, hitRow, txt } from './theme';
 import { itemStats } from './itemText';
 import { Window } from './Window';
@@ -35,7 +39,7 @@ export class Workbench extends Window {
   showBench(bench: 'workbench' | 'fire'): void {
     if (this.root) this.close();
     this.bench = bench;
-    this.at = this.frame(W, H, bench === 'fire' ? 'КОСТЁР' : 'ВЕРСТАК');
+    this.at = this.frame(W, H, uiText(bench === 'fire' ? 'craft.fire' : 'craft.bench', settings().language));
     this.scroll = 0;
     this.picked = this.recipes()[0] ?? null;
     const redraw = () => this.root && this.draw();
@@ -70,6 +74,7 @@ export class Workbench extends Window {
   private draw(): void {
     const s = this.scene;
     const g = this.game;
+    const locale = settings().language;
     const { x, y } = this.at;
     this.body?.destroy();
     const body = (this.body = s.add.container(0, 0));
@@ -83,15 +88,15 @@ export class Workbench extends Window {
       const on = id === this.picked;
       body.add([
         s.add.image(x + 56, ry + 15, 'atlas', g.content.items[out]?.icon ?? 'icon_note'),
-        txt(s, x + 80, ry + 6, `${on ? '▸ ' : ''}${g.content.items[out]?.name ?? out}`, 14, on ? C.amber : ok ? C.crtBright : C.crtDim),
+        txt(s, x + 80, ry + 6, `${on ? '▸ ' : ''}${g.content.items[out] ? contentText(`/items/${out}/name`, g.content.items[out].name, locale) : out}`, 14, on ? C.amber : ok ? C.crtBright : C.crtDim),
         hitRow(s, x + 36, ry, 372, ROW_H - 2, () => {}, () => {
           this.picked = id;
           this.draw();
         }),
       ]);
     });
-    if (!list.length) body.add(txt(s, x + 48, y + 80, 'Здесь делать нечего.', 14, C.crtDim));
-    if (list.length > ROWS) body.add(txt(s, x + 404, y + 70, `колесо ↕`, 11, C.crtDim).setOrigin(1, 0));
+    if (!list.length) body.add(txt(s, x + 48, y + 80, uiText('craft.empty', locale), 14, C.crtDim));
+    if (list.length > ROWS) body.add(txt(s, x + 404, y + 70, uiText('inventory.wheel', locale), 11, C.crtDim).setOrigin(1, 0));
 
     const id = this.picked;
     if (!id) return;
@@ -101,17 +106,17 @@ export class Workbench extends Window {
     const c = craftCheck(g, r);
     const px = x + 436;
     body.add(s.add.image(px + 32, y + 100, 'atlas', def.icon).setScale(2));
-    body.add(txt(s, px + 76, y + 70, def.name, 16, C.amber, W - 540, true));
-    body.add(txt(s, px, y + 140, def.desc, 13, C.crt, W - 480));
-    const stats = itemStats(g.content, out);
+    body.add(txt(s, px + 76, y + 70, contentText(`/items/${out}/name`, def.name, locale), 16, C.amber, W - 540, true));
+    body.add(txt(s, px, y + 140, contentText(`/items/${out}/desc`, def.desc, locale), 13, C.crt, W - 480));
+    const stats = itemStats(g.content, out, locale);
     if (stats) body.add(txt(s, px, y + 230, stats, 12, C.sand, W - 480));
-    const need = Object.entries(r.inputs).map(([it, n]) => `${g.content.items[it]?.name ?? it}: ${g.count(it)}/${n}`);
-    body.add(txt(s, px, y + 300, `Нужно:\n${need.join('\n')}`, 13, C.crt, W - 480));
+    const need = Object.entries(r.inputs).map(([it, n]) => `${g.content.items[it] ? contentText(`/items/${it}/name`, g.content.items[it].name, locale) : it}: ${g.count(it)}/${n}`);
+    body.add(txt(s, px, y + 300, `${uiText('craft.need', locale)}\n${need.join('\n')}`, 13, C.crt, W - 480));
     if (c.skill) {
-      const names = Object.keys(r.skill ?? {}).map((k) => `${SKILL_NAMES[k as keyof typeof SKILL_NAMES]} ${r.skill![k as keyof typeof r.skill]}%`);
-      body.add(txt(s, px, y + 300 + (need.length + 1) * 20, `Навык: ${names.join(' или ')} (у вас ${c.skill.have}%)`, 13, c.skill.have >= c.skill.need ? C.crt : C.red, W - 480));
+      const names = Object.keys(r.skill ?? {}).map((k) => `${skillName(k as SkillId, locale)} ${r.skill![k as keyof typeof r.skill]}%`);
+      body.add(txt(s, px, y + 300 + (need.length + 1) * 20, uiText('craft.skill', locale).replace('{names}', names.join(uiText('craft.or', locale))).replace('{have}', String(c.skill.have)), 13, c.skill.have >= c.skill.need ? C.crt : C.red, W - 480));
     }
-    const b = button(s, px, y + H - 64, 240, 30, 'СДЕЛАТЬ', () => this.onCraft(id));
+    const b = button(s, px, y + H - 64, 240, 30, uiText('craft.make', locale), () => this.onCraft(id));
     b.setEnabled(c.ok);
     body.add(b.root);
   }

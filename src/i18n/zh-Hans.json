@@ -1,0 +1,1416 @@
+{
+  "/quests/water/title": {
+    "ru": "Вода для Ржавого колодца",
+    "zh-Hans": "锈井之水"
+  },
+  "/quests/water/stages/0/journal": {
+    "ru": "Старейшина Марта просит принести клапан давления с заброшенной насосной станции к северо-востоку от поселения.",
+    "zh-Hans": "村长玛尔塔要你从聚落东北方的废弃泵站带回一个压力阀。"
+  },
+  "/quests/mandate/title": {
+    "ru": "Мандат",
+    "zh-Hans": "水权令"
+  },
+  "/quests/mandate/stages/0/journal": {
+    "ru": "В ящике под клапаном лежал запаянный латунный тубус с гербом Водоуправления. Хэнк побледнел бы, увидев его. Стоит спросить.",
+    "zh-Hans": "阀门下的箱子里有一只封死的黄铜圆筒，上面刻着水务局的徽记。汉克见了准会变脸。该问问他。"
+  },
+  "/quests/mandate/stages/1/journal": {
+    "ru": "Хэнк признался: он дезертир Треста, а в тубусе Мандат — право на всю воду реки Светлой. Трест хочет его сжечь. Хэнк советует уходить из посёлка: через Три столба и Колючку к Нотариусу в Запруде. Соль — позже.",
+    "zh-Hans": "汉克承认自己是托拉斯的逃兵。筒中装着水权令，赋予持有人对斯韦特拉亚河全部河水的权利。托拉斯想烧毁它。汉克建议离开村子，经三柱镇和科柳奇卡，去扎普鲁达找公证人。盐城以后再去。"
+  },
+  "/quests/inspector/title": {
+    "ru": "Сборщики Треста",
+    "zh-Hans": "托拉斯的征收员"
+  },
+  "/dialogues/marta/speaker": {
+    "ru": "Старейшина Марта",
+    "zh-Hans": "村长玛尔塔"
+  },
+  "/dialogues/marta/nodes/after/text": {
+    "ru": "Помпа качает. Пей сколько надо, путник. Выход к тракту — на запад, мимо указателя. На карте мира держи на север к Трём столбам, а дальше — к Колючке.",
+    "zh-Hans": "水泵又能抽水了。旅人，需要多少就喝多少。经过路标往西走，便能离开村子上大路。到了世界地图，往北去三柱镇，再前往科柳奇卡。"
+  },
+  "/dialogues/marta/nodes/letter_more/text": {
+    "ru": "— Встретим. — Марта кивает на помпу. — Её мы теперь умеем чинить сами. Выходи на запад, мимо указателя. На тракте держи на север.",
+    "zh-Hans": "“我们会等你。”玛尔塔朝水泵点点头。“这水泵，以后我们自己也能修了。经过路标向西出村，上了大路再往北走。”"
+  },
+  "/armor/jacket/name": {
+    "ru": "Кожанка",
+    "zh-Hans": "皮夹克"
+  },
+  "/armor/tirevest/name": {
+    "ru": "Панцирь из покрышек",
+    "zh-Hans": "轮胎护甲背心"
+  },
+  "/armor/vest/name": {
+    "ru": "Бронежилет",
+    "zh-Hans": "防弹背心"
+  },
+  "/armor/tinplate/name": {
+    "ru": "Консервная банка",
+    "zh-Hans": "铁皮罐头甲"
+  },
+  "/armor/exo/name": {
+    "ru": "Экзокаркас",
+    "zh-Hans": "外骨骼框架"
+  },
+  "/armor/duster/name": {
+    "ru": "Серый пыльник",
+    "zh-Hans": "灰色防尘长衣"
+  },
+  "/armor/waterman/name": {
+    "ru": "Плащ водоноса",
+    "zh-Hans": "运水人斗篷"
+  },
+  "/armor/plated_jacket/name": {
+    "ru": "Кожанка с пластинами",
+    "zh-Hans": "嵌甲皮夹克"
+  },
+  "/armor/reaper_shell/name": {
+    "ru": "Панцирь жнеца",
+    "zh-Hans": "收割者甲壳"
+  },
+  "/armor/raider_rig/name": {
+    "ru": "Броня налётчика",
+    "zh-Hans": "掠夺者护甲"
+  },
+  "/armor/nut_mail/name": {
+    "ru": "Гайковая рубаха",
+    "zh-Hans": "螺母锁甲"
+  },
+  "/armor/bark/name": {
+    "ru": "«Кора»",
+    "zh-Hans": "树皮甲"
+  },
+  "/armor/salt_crust/name": {
+    "ru": "Соляная корка",
+    "zh-Hans": "盐壳甲"
+  },
+  "/armor/shore_plate/name": {
+    "ru": "Береговой доспех",
+    "zh-Hans": "河岸板甲"
+  },
+  "/armor/dew_cuirass/name": {
+    "ru": "Кираса Росы",
+    "zh-Hans": "露水胸甲"
+  },
+  "/armor/snake_scale/name": {
+    "ru": "Змеиная чешуя",
+    "zh-Hans": "蛇鳞甲"
+  },
+  "/armor/wax_cloak/name": {
+    "ru": "Плащ Сургуча",
+    "zh-Hans": "苏尔古奇的斗篷"
+  },
+  "/character/attrs/str": {
+    "ru": "Физическая сила. Влияет на очки здоровья, урон в ближнем бою и на то, получится ли что-то сорвать или кого-то запугать.",
+    "zh-Hans": "身体力量。影响生命值、近战伤害，以及撬开东西或威吓他人的能力。"
+  },
+  "/character/attrs/per": {
+    "ru": "Зоркость и чутьё. Влияет на очерёдность хода в бою, меткость на дальней дистанции и на то, заметите ли вы тайник.",
+    "zh-Hans": "眼力与直觉。影响战斗中的行动顺序、远距离命中率，以及能否发现隐藏物资。"
+  },
+  "/character/attrs/end": {
+    "ru": "Стойкость к ранам и ядам. Влияет на очки здоровья и прирост здоровья с уровнем.",
+    "zh-Hans": "抵御伤害和毒素的能力。影响生命值，以及升级时增加的生命值。"
+  },
+  "/character/attrs/cha": {
+    "ru": "Умение нравиться и убеждать. Основа Красноречия и Торговли.",
+    "zh-Hans": "赢得好感与说服他人的能力。是口才与交易技能的基础。"
+  },
+  "/character/attrs/int": {
+    "ru": "Сообразительность и знания. Влияет на Ремонт, Науку и число очков навыков за уровень. С очень низким интеллектом трудно говорить связно.",
+    "zh-Hans": "机智与知识。影响修理、科学和每级获得的技能点数。智力过低时，很难把话说清楚。"
+  },
+  "/character/attrs/agi": {
+    "ru": "Координация и быстрота. Определяет очки действия в бою, Взлом, Скрытность и Стрельбу.",
+    "zh-Hans": "协调与速度。决定战斗中的行动点数，并影响开锁、潜行和枪械技能。"
+  },
+  "/character/attrs/luk": {
+    "ru": "Судьба. Влияет на шанс критического попадания и на мелкие находки.",
+    "zh-Hans": "命运的眷顾。影响暴击概率，也影响旅途中的零星发现。"
+  },
+  "/character/skills/guns": {
+    "ru": "Стрельба из винтовок и пистолетов. Шанс попасть с расстояния.",
+    "zh-Hans": "使用步枪和手枪。决定远距离命中的概率。"
+  },
+  "/character/skills/melee": {
+    "ru": "Нож, дубина, кулаки. Шанс попасть вплотную.",
+    "zh-Hans": "使用刀、棍棒和拳头。决定近身攻击的命中概率。"
+  },
+  "/character/skills/medic": {
+    "ru": "Перевязка ран, бинты лечат лучше.",
+    "zh-Hans": "包扎伤口，让绷带发挥更好的治疗效果。"
+  },
+  "/character/skills/sneak": {
+    "ru": "Двигаться незаметно и таскать чужое.",
+    "zh-Hans": "悄悄行动，顺手拿走别人的东西。"
+  },
+  "/character/skills/lockpick": {
+    "ru": "Открывать замки без ключа.",
+    "zh-Hans": "不用钥匙打开锁。"
+  },
+  "/character/skills/speech": {
+    "ru": "Убеждать, уговаривать, выторговывать условия.",
+    "zh-Hans": "说服别人、用言语化解麻烦，并争取更好的条件。"
+  },
+  "/character/skills/barter": {
+    "ru": "Цены у торговцев.",
+    "zh-Hans": "影响商人开出的价格。"
+  },
+  "/character/skills/repair": {
+    "ru": "Чинить механизмы.",
+    "zh-Hans": "修理机械。"
+  },
+  "/character/skills/science": {
+    "ru": "Разбираться в старой технике и записях.",
+    "zh-Hans": "读懂旧时代的技术和记录。"
+  },
+  "/character/skills/survival": {
+    "ru": "Знание пустоши: звери, следы, яды, приманки.",
+    "zh-Hans": "熟悉荒地：野兽、踪迹、毒物与诱饵。"
+  },
+  "/items/rocket_fang/name": {
+    "ru": "Клык",
+    "zh-Hans": "方",
+    "draft": true
+  },
+  "/items/rocket_collar/name": {
+    "ru": "Ошейник Ракеты",
+    "zh-Hans": "衣领",
+    "draft": true
+  },
+  "/creatures/rocket_guard/name": {
+    "ru": "Страж Обители",
+    "zh-Hans": "监护人",
+    "draft": true
+  },
+  "/endings/32/variants/6/text": {
+    "ru": "Обитель сохранила тайну источника и отвела немного воды паломникам. За стеной растут деревья; снаружи спорят, достаточно ли этих капель. Ракета живёт там, как и прежде.",
+    "zh-Hans": "圣所继续隐藏水源，只拨出少量水给朝圣者。墙内树木生长，墙外的人争论：这几滴水究竟够不够。拉克塔仍住在那里。",
+    "draft": true
+  },
+  "/endings/32/variants/9/text": {
+    "ru": "Весть об источнике купили люди власти. Таблички и сборщики сменили старых хранителей. Ракету не тронули: её имя оказалось полезным для торговли водой.",
+    "zh-Hans": "权势者买下水源的消息。新告示和税吏取代了旧守护人。没人伤害拉克塔：她的名字对卖水很有用。",
+    "draft": true
+  },
+  "/endings/32/variants/10/text": {
+    "ru": "После боя очиститель Обители остановился. Воду разбирали поспешно, сад высох; Ракета исчезла в песках. Никто так и не узнал, что удерживало её жизнь семьдесят лет.",
+    "zh-Hans": "战斗过后，圣所的净化器停了。人们匆忙取尽存水，花园枯萎；拉克塔消失在沙海里。没人知道是什么让她活了七十年。",
+    "draft": true
+  },
+  "/endings/32/variants/0/text": {
+    "ru": "После потопа Обитель впустила беженцев. Сад выжил лишь наполовину, зато вода и стены спасли людей. Ракета лежала у дверей, пока не стихли крики.",
+    "zh-Hans": "洪水过后，圣所收留了难民。花园损失了一半，但高墙和净水救下许多人。拉克塔守在门边，直到呼喊声平息。",
+    "draft": true
+  },
+  "/companions/timofey/barks/4/text": {
+    "ru": "Семьдесят лет в одном журнале. Люди сменились, а почерк про её ухо всё тот же.",
+    "zh-Hans": "一本杂志七十年。人变了，但她耳边的字迹却还是一样。",
+    "draft": true
+  },
+  "/items/rocket_water/name": {
+    "ru": "Вода Обители",
+    "zh-Hans": "水",
+    "draft": true
+  },
+  "/items/rocket_log/name": {
+    "ru": "Служебный журнал Обители",
+    "zh-Hans": "服务日志",
+    "draft": true
+  },
+  "/locations/rocket/name": {
+    "ru": "Обитель Ракеты",
+    "zh-Hans": "拉克塔的圣所"
+  },
+  "/items/rocket_fang/desc": {
+    "ru": "Узкий металлический нож хранителей. Не зуб собаки.",
+    "zh-Hans": "窄金属守护刀。不是狗牙。",
+    "draft": true
+  },
+  "/items/rocket_collar/desc": {
+    "ru": "Красная кожа, старая застёжка. Восприятие +1. Хранители прислушиваются к носителю.",
+    "zh-Hans": "红色皮革，旧扣。感知+1。监护人听从载体。",
+    "draft": true
+  },
+  "/endings/32/title": {
+    "ru": "Обитель Ракеты",
+    "zh-Hans": "拉克塔的圣所",
+    "draft": true
+  },
+  "/locations/rocket/areas/4/name": {
+    "ru": "Архив",
+    "zh-Hans": "档案",
+    "draft": true
+  },
+  "/quests/rocket/title": {
+    "ru": "Обитель Ракеты",
+    "zh-Hans": "拉克塔的圣所",
+    "draft": true
+  },
+  "/locations/rocket/areas/3/name": {
+    "ru": "Зал Ракеты",
+    "zh-Hans": "大厅",
+    "draft": true
+  },
+  "/quests/rocket/stages/2/journal": {
+    "ru": "Подземный ход ведёт к охраняемому источнику. В нишах спрятаны старые журналы и учёт воды.",
+    "zh-Hans": "隧道通往受守卫的水源。壁龛里藏着旧档案和用水账本。",
+    "draft": true
+  },
+  "/items/rocket_log/desc": {
+    "ru": "Семьдесят лет записей об одной собаке и пометка об обходе охранных машин Заслона.",
+    "zh-Hans": "七十年关于一只狗的记录和一张关于绕过安全车辆扎斯隆的笔记。",
+    "draft": true
+  },
+  "/weapons/rocket_fang/name": {
+    "ru": "Клык",
+    "zh-Hans": "方",
+    "draft": true
+  },
+  "/locations/rocket/areas/1/name": {
+    "ru": "Путь Покорности",
+    "zh-Hans": "提交路径",
+    "draft": true
+  },
+  "/locations/rocket/areas/0/name": {
+    "ru": "Внешний пост",
+    "zh-Hans": "外部帖子",
+    "draft": true
+  },
+  "/locations/rocket/areas/2/name": {
+    "ru": "Закрытый сад",
+    "zh-Hans": "室内花园",
+    "draft": true
+  },
+  "/endings/32/variants/5/text": {
+    "ru": "Обитель открыла выдачу воды соседям по счёту. Сад стал меньше, людей за стеной — больше. Ракета всё так же спит возле миски; Толмач называет это согласием.",
+    "zh-Hans": "圣所开始按量向邻近聚落供水。花园缩小了，获救的人却多了。拉克塔依旧睡在食盆旁；托尔马奇称这是她的默许。",
+    "draft": true
+  },
+  "/quests/rocket/stages/1/journal": {
+    "ru": "Под неприметным сараем есть проход. Можно договориться, обойти охрану или идти силой.",
+    "zh-Hans": "不起眼的棚屋下藏着通道。可以谈判、寻找技术通道，或强行闯入。",
+    "draft": true
+  },
+  "/items/rocket_water/desc": {
+    "ru": "Очищенная вода из малого источника. Утоляет жажду; пустая фляга остаётся.",
+    "zh-Hans": "来自小水源的纯净水。解渴；空烧瓶仍然存在。",
+    "draft": true
+  },
+  "/quests/rocket/stages/0/journal": {
+    "ru": "Буря привела к скрытому посту. Над воротами — силуэт собаки; стражи требуют сдать вещи.",
+    "zh-Hans": "沙暴中出现一处隐蔽哨所。门上是狗的剪影，守卫要求交出装备。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/speaker": {
+    "ru": "Псарь",
+    "zh-Hans": "猎犬大师",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/text": {
+    "ru": "— Стой. За этой чертой оружие, одежда и припасы идут в личный ящик. Тубус с печатью оставь при себе: бумагу Ракета не нюхает.",
+    "zh-Hans": "- 停止。除此之外，武器、衣服和补给品都会放入个人箱子中。让管子保持密封：拉克塔没有纸味。",
+    "draft": true
+  },
+  "/quests/rocket/stages/6/journal": {
+    "ru": "Судьба Обители решена. Причина долголетия единственной Ракеты осталась тайной.",
+    "zh-Hans": "圣所的命运已经定下。唯一的拉克塔为何如此长寿，仍是谜。",
+    "draft": true
+  },
+  "/dialogues/sentry_panel/nodes/look/options/2/text": {
+    "ru": "По записи Обители найти служебный размыкатель и отключить охрану.",
+    "zh-Hans": "根据入口圣所，找到服务开关并禁用安全。",
+    "draft": true
+  },
+  "/quests/rocket/stages/4/journal": {
+    "ru": "Архив подтверждает: это одна и та же Ракета уже семьдесят лет. Почему она живёт так долго, записи не объясняют. Воды слишком мало для всей Суши, но ею можно делиться.",
+    "zh-Hans": "档案证实，七十年来始终是同一只拉克塔，却无法解释她为何长寿。水源不足以供给整个苏什，但仍能分出一部分。",
+    "draft": true
+  },
+  "/quests/rocket/stages/5/journal": {
+    "ru": "Теперь нужно решить, кому будет доступен источник Обители.",
+    "zh-Hans": "必须决定谁能取用圣所的水源。",
+    "draft": true
+  },
+  "/dialogues/sentry_panel/nodes/look/options/3/text": {
+    "ru": "По записи Обители перевести машины на старый канал обслуживания.",
+    "zh-Hans": "通过预约，将车辆转移到旧服务通道。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/passed/options/0/text": {
+    "ru": "Войти.",
+    "zh-Hans": "登录。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/bluffed/text": {
+    "ru": "Псарь смотрит на инструмент, потом на пустые руки. — Если врёшь, Толмач узнает прежде меня. Проходи.",
+    "zh-Hans": "猎人看看仪器，然后看看他空空的双手。 “如果你在撒谎，托尔马赫会比我先发现的。”进来吧。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/bluffed/options/0/text": {
+    "ru": "Пройти.",
+    "zh-Hans": "经过。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/refused/options/0/text": {
+    "ru": "Ещё раз.",
+    "zh-Hans": "再次。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/refused/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/0/text": {
+    "ru": "Сдать вещи под расписку.",
+    "zh-Hans": "凭收据交出东西。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/who/options/0/text": {
+    "ru": "Вернуться к разговору.",
+    "zh-Hans": "回到谈话。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/passed/text": {
+    "ru": "Псарь ставит печать на ящике. — За сараем ковёр. Под ним люк. Вернёшься — вернём всё до последней иглы.",
+    "zh-Hans": "猎人在盒子上贴上封条。 — 谷仓后面有一块地毯。下面有一个舱口。如果你回来了，我们会把一切都归还到最后一针。",
+    "draft": true
+  },
+  "/quests/rocket/stages/3/journal": {
+    "ru": "За стеной — маленький сад. Ракета жива; Толмач говорит за неё, а хранители знают о поступках странника.",
+    "zh-Hans": "墙后有座小花园。拉克塔仍然活着；译犬者代她说话，守护人也知道你过去的所作所为。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/1/text": {
+    "ru": "Объяснить, что пришёл проверить очиститель.",
+    "zh-Hans": "说明他是来检查净化器的。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/2/text": {
+    "ru": "Показать ошейник: Ракета уже знает меня.",
+    "zh-Hans": "秀领：拉克塔已经认识我了。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/threat/options/1/text": {
+    "ru": "Опустить руки.",
+    "zh-Hans": "把你的手放下。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/open/options/0/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/friend/options/0/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/3/text": {
+    "ru": "Кто такая Ракета?",
+    "zh-Hans": "拉克塔是谁？",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/5/text": {
+    "ru": "Пока уйти.",
+    "zh-Hans": "暂时离开吧。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/4/text": {
+    "ru": "Прорваться через пост.",
+    "zh-Hans": "突破帖子。",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/nodes/look/options/0/text": {
+    "ru": "Спуститься.",
+    "zh-Hans": "下去。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/who/text": {
+    "ru": "— Не «кто». Кому. Вода досталась ей первой. Остальные только научились считать капли.",
+    "zh-Hans": "- 不是“谁”。给谁。她先拿了水。其余的人刚刚学会了数水滴。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/refused/text": {
+    "ru": "— У очистителя есть свои люди. Сдавай вещи, ищи другой путь или уходи.",
+    "zh-Hans": "——净化者有自己的人。放弃你的东西，另谋出路，或者离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/nodes/look/text": {
+    "ru": "Под потёртым ковром — тяжёлый люк. Снизу доносится ровный гул насоса.",
+    "zh-Hans": "破旧的地毯下面是一个沉重的舱口。从下面传来泵稳定的嗡嗡声。",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/speaker": {
+    "ru": "Люк под ковром",
+    "zh-Hans": "在地毯下孵化",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/speaker": {
+    "ru": "Технический лаз",
+    "zh-Hans": "技术漏洞",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/threat/options/0/text": {
+    "ru": "Начать прорыв.",
+    "zh-Hans": "开始突破。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/friend/text": {
+    "ru": "Псарь кивает. — Друг Ракеты проходит без обряда. Вещи больше не нужны как залог.",
+    "zh-Hans": "猎人点点头。 — 朋友拉克塔没有举行任何仪式就去世了。不再需要物品作为抵押品。",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/2/text": {
+    "ru": "Проверить схему кабеля.",
+    "zh-Hans": "检查电缆图。",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/nodes/look/options/1/text": {
+    "ru": "Вернуться к посту.",
+    "zh-Hans": "返回帖子。",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/1/text": {
+    "ru": "Вскрыть крышку.",
+    "zh-Hans": "打开盖子。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/options/2/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/0/text": {
+    "ru": "Разобрать крепления.",
+    "zh-Hans": "拆卸紧固件。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/threat/text": {
+    "ru": "Псарь отступает к прожектору. — Ракета не просила ничьей крови. Это твой выбор.",
+    "zh-Hans": "猎人退到了聚光灯下。 ——拉克塔没有向任何人要血。这是你的选择。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/warning/options/0/text": {
+    "ru": "Остановиться.",
+    "zh-Hans": "停留。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/returned/options/0/text": {
+    "ru": "Закрыть ящик.",
+    "zh-Hans": "关闭盒子。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/options/1/text": {
+    "ru": "Дёрнуть замок тайком.",
+    "zh-Hans": "偷偷拉开锁。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/returned/text": {
+    "ru": "Замок открывается на выданный номер. Всё на месте; пост теперь смотрит на тебя внимательнее.",
+    "zh-Hans": "锁打开到所发出的号码。一切都已就位；这篇文章现在更仔细地审视你。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/speaker": {
+    "ru": "Ящик паломника",
+    "zh-Hans": "朝圣者的盒子",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/options/0/text": {
+    "ru": "Забрать своё и уйти.",
+    "zh-Hans": "带上你的然后离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/3/text": {
+    "ru": "Пока оставить.",
+    "zh-Hans": "暂时先放着吧。",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/speaker": {
+    "ru": "Цепь",
+    "zh-Hans": "链",
+    "draft": true
+  },
+  "/dialogues/rocket_mark/nodes/look/options/0/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/alarm/text": {
+    "ru": "За стеной звенит тревога. Путь к люку открыт, но стражи не дадут пройти просто так.",
+    "zh-Hans": "墙后警报响起。通往舱门的路是开放的，但守卫不会让你就这样通过。",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/text": {
+    "ru": "За проржавевшей крышкой идёт труба. Её можно открыть инструментом или протиснуться вдоль кабеля.",
+    "zh-Hans": "生锈的盖子后面有一根管子。可以用工具将其打开或沿着电缆挤压。",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/open/text": {
+    "ru": "— Проход открыт. Ящик помечен твоим именем, если в нём что-то лежит.",
+    "zh-Hans": "- 通道是开放的。如果盒子里有东西的话，盒子上会标有你的名字。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/text": {
+    "ru": "На крышке — имя и целая печать. По ту сторону поста стоит Псарь.",
+    "zh-Hans": "盖子上有一个名字和一个完整的印章。哨所的另一边站着驯犬师。",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/options/0/text": {
+    "ru": "Куда ведёт ход?",
+    "zh-Hans": "它通向哪里？",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/way/options/0/text": {
+    "ru": "Понятно.",
+    "zh-Hans": "天气晴朗。",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/options/2/text": {
+    "ru": "Идти дальше.",
+    "zh-Hans": "继续前行。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/warning/options/1/text": {
+    "ru": "Сорвать печать и поднять тревогу.",
+    "zh-Hans": "打破封印并发出警报。",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/options/1/text": {
+    "ru": "Соседям нужна вода.",
+    "zh-Hans": "邻居们需要水。",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/speaker": {
+    "ru": "Кладовая",
+    "zh-Hans": "食品储藏室",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/text": {
+    "ru": "— Я сторожу дверь, не воду. И всё чаще думаю, есть ли между ними разница.",
+    "zh-Hans": "“我守的是门，不是水。”我越来越多地想知道它们之间是否有区别。",
+    "draft": true
+  },
+  "/dialogues/rocket_mark/nodes/look/text": {
+    "ru": "На потемневшем металле — голова собаки с надрезом на левом ухе. На обороте дата семидесятилетней давности.",
+    "zh-Hans": "深色金属上是一只狗的头，左耳上有伤口。背面写着七十年前的日期。",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/nodes/look/text": {
+    "ru": "Первые листы начинаются семьдесят лет назад: Ракета привела людей к чистой воде, прежде чем загудел очиститель. В поздних записях её отметина на ухе не меняется.",
+    "zh-Hans": "第一张纸开始于七十年前：拉克塔在净化器发出嗡嗡声之前带领人们获得干净的水。在后来的录音中，她的耳标没有改变。",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/speaker": {
+    "ru": "Галерея",
+    "zh-Hans": "画廊",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/nodes/look/options/0/text": {
+    "ru": "Сравнить изображения.",
+    "zh-Hans": "比较图像。",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/doubt/options/0/text": {
+    "ru": "Не выдам.",
+    "zh-Hans": "我不会放弃它。",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/speaker": {
+    "ru": "Старые журналы",
+    "zh-Hans": "旧杂志",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/way/text": {
+    "ru": "— К саду. Он меньше, чем говорят снаружи, но больше, чем видят соседи.",
+    "zh-Hans": "- 去花园。它比外面说的要小，但比邻居看到的要大。",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/warning/text": {
+    "ru": "Псарь замечает руку на замке. — Ящик твой. Зачем ломать собственную печать?",
+    "zh-Hans": "猎人注意到了放在锁上的手。 - 盒子是你的了。为何要打破自己的封印？",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/alarm/text": {
+    "ru": "Печать рвётся. Стражи поднимают оружие; путь к наружной дороге ещё свободен.",
+    "zh-Hans": "封印破裂。守卫们举起了武器；通往外路的道路仍然畅通。",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/3/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_wall/speaker": {
+    "ru": "Фреска",
+    "zh-Hans": "壁画",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/2/text": {
+    "ru": "Попросить Летописца открыть после аудиенции.",
+    "zh-Hans": "请编年史家在观众结束后打开它。",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/nodes/look/options/0/text": {
+    "ru": "Запомнить даты.",
+    "zh-Hans": "记住日期。",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/speaker": {
+    "ru": "Запретная дверь",
+    "zh-Hans": "禁门",
+    "draft": true
+  },
+  "/dialogues/rocket_wall/nodes/look/options/0/text": {
+    "ru": "Идти дальше.",
+    "zh-Hans": "继续前行。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/before/options/0/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/1/text": {
+    "ru": "Разобрать старую петлю.",
+    "zh-Hans": "拆卸旧铰链。",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/nodes/look/text": {
+    "ru": "Камень, жесть и выцветшая краска. На всех изображениях — одна Ракета: та же отметина левого уха. Подписи с датами идут через семь десятилетий, без нумерации и смены имени.",
+    "zh-Hans": "石头、锡和褪色的油漆。所有图像都显示相同的拉克塔：相同的左耳标记。带有日期的签名经历了七个十年，没有编号或名称更改。",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/0/text": {
+    "ru": "Вскрыть замок отмычкой.",
+    "zh-Hans": "拿起开锁的钥匙。",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/text": {
+    "ru": "Пыль закрывает табличку «R.A.K.E.T.A.». За дверью — старые бланки станции.",
+    "zh-Hans": "灰尘覆盖了“R.A.K.E.T.A.”符号。门后是旧的车站形式。",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/nodes/look/text": {
+    "ru": "Мешки с крупой и банки с водой. На двери: «Запас общины — не запас страны». В углу лежит вяленый угорь.",
+    "zh-Hans": "袋装麦片和罐装水。门上写着：“社区保护区不是国家保护区。”角落里有干鳗鱼。",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/nodes/look/options/0/text": {
+    "ru": "Взять один кусок для подношения.",
+    "zh-Hans": "取一件供养。",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/doubt/text": {
+    "ru": "— Знаю. Моя сестра живёт за стеной. Псарю я этого не говорю.",
+    "zh-Hans": "- 我知道。我姐姐住在墙后面。我不会对养狗人说这些。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/3/text": {
+    "ru": "Сначала осмотреть архив.",
+    "zh-Hans": "首先，浏览档案。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/shared/text": {
+    "ru": "Хранитель перечёркивает старые нормы. — Сад придётся уменьшить. Людей за воротами — нет.",
+    "zh-Hans": "《卫报》删除了旧的规范。 — 花园必须缩小。门外没有人。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/1/text": {
+    "ru": "Открыть соседям счётную выдачу воды.",
+    "zh-Hans": "向邻居开放计量供水。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/0/text": {
+    "ru": "Сохранить Обитель, но выдавать воду паломникам.",
+    "zh-Hans": "保留圣所，但给香客供水。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/closed/options/0/text": {
+    "ru": "Оставить хранителей работать.",
+    "zh-Hans": "让监护人继续工作。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/shared/options/0/text": {
+    "ru": "Продолжать.",
+    "zh-Hans": "继续。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sold/options/0/text": {
+    "ru": "Уйти.",
+    "zh-Hans": "离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_mark/speaker": {
+    "ru": "Знак Обители",
+    "zh-Hans": "标志圣所",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/speaker": {
+    "ru": "Хранитель Миски",
+    "zh-Hans": "碗的守护者",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/text": {
+    "ru": "— Очиститель поднимает мало воды. Мы оставили её себе и назвали это верностью Ракете. Теперь нужно решить, сколько стен у слова «наше».",
+    "zh-Hans": "“净化器抽出的水不多。我们把它留给自己，还称之为忠于拉克塔。如今得想想，‘我们的’这三个字能围住多大一片地方。”",
+    "draft": true
+  },
+  "/dialogues/rocket_wall/nodes/look/text": {
+    "ru": "Ракета у чаши воды. Надпись не обещает дождя: «Не лги о том, сколько осталось». Художник тщательно повторил надрез на ухе.",
+    "zh-Hans": "拉克塔旁边有一碗水。标语上并没有承诺会下雨：“不要谎报还剩多少雨量。”艺术家仔细地重复了耳朵上的切口。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/closed/text": {
+    "ru": "— Малую долю выдадим за стену. Это меньше, чем просили. Больше, чем было вчера.",
+    "zh-Hans": "“我们会捐出一小部分来建墙。”这比要求的要少。比昨天多了。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/before/text": {
+    "ru": "— Сначала поговори с Толмачом. Источник мал; решение о нём здесь не принимают у ворот.",
+    "zh-Hans": "- 首先，与托尔马赫交谈。来源较小；有关此事的决定不是在这里门口做出的。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/2/text": {
+    "ru": "Продать сведения об источнике.",
+    "zh-Hans": "出售水源的消息。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/after/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sale/options/0/text": {
+    "ru": "Уйти.",
+    "zh-Hans": "离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/options/2/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/filled/options/0/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/break/options/1/text": {
+    "ru": "Остановиться.",
+    "zh-Hans": "停留。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/options/1/text": {
+    "ru": "Повредить очиститель и поднять тревогу.",
+    "zh-Hans": "损坏净化器并发出警报。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/filled/text": {
+    "ru": "Вода заполняет принесённую тару. Хранитель закрывает вентиль до следующего дня.",
+    "zh-Hans": "水充满了带来的容器。管理员关闭阀门直到第二天。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/after/options/0/text": {
+    "ru": "Предложить купить дар Ракеты.",
+    "zh-Hans": "提出购买拉克塔礼物。",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/speaker": {
+    "ru": "Счётчик воды",
+    "zh-Hans": "水表",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sold/text": {
+    "ru": "— Нас будут считать чужими счетами. Ты получил капли; они получат нашу воду.",
+    "zh-Hans": "“我们将被视为别人的账户。”你得到了水滴；他们会得到我们的水。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/after/text": {
+    "ru": "— Решение записано. Вода от этого не прибавилась, но теперь известно, кто получит следующую чашу.",
+    "zh-Hans": "- 决定被写下来。这并没有增加水量，但现在已经知道谁将收到下一杯水了。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/break/text": {
+    "ru": "— Насос не выдержит удара, — предупреждает хранитель. — Вместе с садом погибнет и вода для тех, кто придёт после нас.",
+    "zh-Hans": "“泵无法承受冲击，”饲养员警告说。 “我们后人的水也将与花园一起消失。”",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sale/text": {
+    "ru": "— Дар можно выпить или отдать. Продавать его тем, кто уже наполнил эту флягу, бессмысленно.",
+    "zh-Hans": "- 礼物可以饮用或赠送。把它卖给那些已经装满这个瓶子的人是没有意义的。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/broken/text": {
+    "ru": "Очиститель глохнет. Стражи бегут к чаше. Южный выход ещё открыт.",
+    "zh-Hans": "净化器停转。守卫们跑向碗。南出口仍然开放。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/options/0/text": {
+    "ru": "Наполнить одну пустую флягу.",
+    "zh-Hans": "装满一个空烧瓶。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/break/options/0/text": {
+    "ru": "Разбить щиток.",
+    "zh-Hans": "打破盾牌。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/text": {
+    "ru": "Струя тонка. На медном счётчике видно: за день сюда приходит меньше воды, чем нужно целому посёлку.",
+    "zh-Hans": "溪水很细。铜水表显示，这里每天的水量少于整个村庄的需要量。",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/speaker": {
+    "ru": "Чаша источника",
+    "zh-Hans": "春碗",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/4/text": {
+    "ru": "Уйти.",
+    "zh-Hans": "离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/lie/options/1/text": {
+    "ru": "Уйти.",
+    "zh-Hans": "离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/nodes/look/text": {
+    "ru": "Малый водоносный слой падает каждый сухой год. Сад и пайки держатся не чудом, а строгим расходом и работающим очистителем.",
+    "zh-Hans": "每年干旱的年份，这个小含水层都会下降。花园和口粮的维持不是靠奇迹，而是靠严格的消费和有效的净化器。",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/nodes/look/options/0/text": {
+    "ru": "Запомнить расчёт.",
+    "zh-Hans": "记住计算。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/1/text": {
+    "ru": "Мне было важно никому не навредить.",
+    "zh-Hans": "我尽力不伤害任何人。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/0/text": {
+    "ru": "Люди пострадали из-за меня. Не стану это скрывать.",
+    "zh-Hans": "我伤害过别人，我不会隐瞒。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/after_lie/text": {
+    "ru": "Ракета всё ещё смотрит на тебя. Толмач кладёт папку рядом, не открывая.",
+    "zh-Hans": "拉克塔仍在看着你。口译员将文件夹放在他旁边，但没有打开。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/meat/options/0/text": {
+    "ru": "Подождать.",
+    "zh-Hans": "等待。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/after_lie/options/1/text": {
+    "ru": "Уйти.",
+    "zh-Hans": "离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/after_lie/options/0/text": {
+    "ru": "Сказать правду теперь.",
+    "zh-Hans": "现在就说实话吧。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/text": {
+    "ru": "Чёрно-подпалая собака смотрит на тебя. Левое ухо надрезано. Толмач ждёт, пока она моргнёт: — Она спрашивает, что ты делал с чужой водой.",
+    "zh-Hans": "黑色和棕褐色的狗正在看着你。左耳被割断。翻译等着她眨眼：“她问你用别人的水做了什么。”",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/2/text": {
+    "ru": "От меня никто не пострадал.",
+    "zh-Hans": "没有人被我伤害。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/speaker": {
+    "ru": "Ракета",
+    "zh-Hans": "拉克塔",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/honest/options/1/text": {
+    "ru": "Отойти без ответа.",
+    "zh-Hans": "不作回答就离开。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/lie/options/0/text": {
+    "ru": "Признать ложь.",
+    "zh-Hans": "承认谎言。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/friend/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/3/text": {
+    "ru": "Положить перед Ракетой вяленого угря.",
+    "zh-Hans": "将干鳗鱼放在前面。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/lie/text": {
+    "ru": "Ракета тихо рычит. Толмач открывает папку с донесениями: — Не проси собаку поверить бумаге, которую сам же опроверг.",
+    "zh-Hans": "拉克塔低声咆哮。翻译打开一个装有报告的文件夹：“不要让狗相信你自己驳斥过的论文。”",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/welcome/text": {
+    "ru": "Ракета садится у чаши. — Друг Ракеты, — говорит Толмач. — Теперь решай, как жить с этой водой.",
+    "zh-Hans": "拉克塔在碗边坐下。 “朋友拉克塔，”托尔马赫说。 - 现在决定如何与这些水一起生活。",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/honest/options/0/text": {
+    "ru": "Не требовать объяснения и принять её взгляд.",
+    "zh-Hans": "不要要求解释并接受她的观点。",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/look/text": {
+    "ru": "— Я передаю то, что вижу, и то, что приносят стражи. Про голос в зале меня не спрашивай: динамик давно отключён, если верить Летописцу.",
+    "zh-Hans": "“我传达我所看到的以及警卫带来的东西。”不要问我大厅里的声音：据《编年史家》报道，扬声器早已关闭。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/friend/text": {
+    "ru": "Ракета подставляет голову под ладонь. Толмач молчит — на этот раз перевод не нужен.",
+    "zh-Hans": "拉克塔将头放在手掌下。口译员沉默了——这一次不需要翻译了。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/pet/text": {
+    "ru": "Шерсть тёплая, шершавая. Что произошло с ней за эти семьдесят лет, она не расскажет.",
+    "zh-Hans": "羊毛温暖而粗糙。她不会告诉你她的前七十年是什么样的。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/honest/text": {
+    "ru": "Толмач ещё не успел заговорить. Кажется, кто-то произнёс: «Воды мало. Людей больше». Ржавчик, если он рядом, поднимает уши; остальные смотрят на старый динамик над дверью.",
+    "zh-Hans": "托尔马奇还没开口，你仿佛听到一句话：“水太少，人太多。”若尔扎夫奇克在场，它竖起耳朵；其他人望向门上的旧扬声器。",
+    "draft": true
+  },
+  "/dialogues/rocket_throne/nodes/look/options/0/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_guard/speaker": {
+    "ru": "Страж Обители",
+    "zh-Hans": "监护人",
+    "draft": true
+  },
+  "/dialogues/rocket_guard/nodes/look/options/0/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/speaker": {
+    "ru": "Толмач",
+    "zh-Hans": "托尔马赫",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/pet/options/0/text": {
+    "ru": "Пусть отдыхает.",
+    "zh-Hans": "让他休息吧。",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/look/options/0/text": {
+    "ru": "А Ракета одна и та же?",
+    "zh-Hans": "拉克塔是一样的吗？",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/welcome/options/0/text": {
+    "ru": "Идти к Хранителю Миски.",
+    "zh-Hans": "去找碗守护者。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/meat/text": {
+    "ru": "Ракета съедает угря. Толмач начал говорить, но собака уже подошла и обнюхала руку. Кто здесь решил первым, неясно.",
+    "zh-Hans": "拉克塔吃鳗鱼。翻译开始讲话，但狗已经走近并嗅了嗅那只手。目前还不清楚是谁首先决定的。",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/friend/options/0/text": {
+    "ru": "Погладить Ракету.",
+    "zh-Hans": "帕特·拉克塔.",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_throne/nodes/look/text": {
+    "ru": "Когда-то здесь крепился насосный пульт. Теперь это возвышение с миской: дворец построен не вместо станции, а вокруг неё.",
+    "zh-Hans": "很久以前，这里安装了一个泵控制面板。现在，这是一个带有碗的高地：宫殿不是在车站周围建造的，而是在车站周围建造的。",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/nodes/look/text": {
+    "ru": "Последний год: воды хватает сорока людям и небольшой зелёной полосе. Пока сад поливают, за стену отпускают меньше фляг, чем просят.",
+    "zh-Hans": "去年：有足够四十人用的水和一小片绿地。当花园浇水时，墙后释放的瓶子比要求的要少。",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_project/nodes/look/options/0/text": {
+    "ru": "Оставить гипотезу открытой.",
+    "zh-Hans": "保留假设。",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/nodes/look/options/0/text": {
+    "ru": "Запомнить расход.",
+    "zh-Hans": "记住消费。",
+    "draft": true
+  },
+  "/dialogues/rocket_project/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/speaker": {
+    "ru": "Книга пайков",
+    "zh-Hans": "口粮书",
+    "draft": true
+  },
+  "/dialogues/rocket_throne/speaker": {
+    "ru": "Старое основание",
+    "zh-Hans": "老地基",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/speaker": {
+    "ru": "Медицинский журнал",
+    "zh-Hans": "医学杂志",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/nodes/look/options/0/text": {
+    "ru": "Сверить записи.",
+    "zh-Hans": "检查记录。",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/same/options/0/text": {
+    "ru": "Проверить архив.",
+    "zh-Hans": "检查存档。",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/same/text": {
+    "ru": "— Я родился после неё. Мой отец тоже. Найдёшь в архиве записи его отца — сравни отметину уха.",
+    "zh-Hans": "- 我是在她之后出生的。我的父亲也是。如果您在档案中找到他父亲的记录，请比较耳标。",
+    "draft": true
+  },
+  "/dialogues/rocket_project/speaker": {
+    "ru": "Папка R.A.K.E.T.A.",
+    "zh-Hans": "文件夹 R.A.K.E.T.A.",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/speaker": {
+    "ru": "Служебная запись",
+    "zh-Hans": "服务记录",
+    "draft": true
+  },
+  "/dialogues/rocket_guard/nodes/look/text": {
+    "ru": "— Воду считаем мы. За стеной считают, сколько у нас осталось совести. Может, правы и те и другие.",
+    "zh-Hans": "— 我们数水。他们在墙后计算着我们还剩下多少良知。也许两者都是对的。",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/nodes/look/text": {
+    "ru": "Почерки сменяются, даты тянутся семьдесят лет. В каждой записи — одна отметина левого уха и те же измерения. Нет ни смерти, ни появления другой собаки.",
+    "zh-Hans": "七十年间，记录者的笔迹不断更替。每一条都写着同一道左耳缺口、同样的测量数据；从无死亡或换狗的记载。",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/look/text": {
+    "ru": "Схема обслуживания охранных машин: такой же размыкатель применяли на Заслоне. Это путь к щитку, не право открыть водохранилище.",
+    "zh-Hans": "保安车服务图：扎斯隆使用了相同的断路器。这是去盾牌的方法，不是开水库的方法。",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/options/0/text": {
+    "ru": "Почему?",
+    "zh-Hans": "为什么？",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/options/2/text": {
+    "ru": "Отойти.",
+    "zh-Hans": "走开。",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/look/options/0/text": {
+    "ru": "Снять копию схемы.",
+    "zh-Hans": "复制该图。",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/options/1/text": {
+    "ru": "Спросить о служебной записи.",
+    "zh-Hans": "询问服务记录。",
+    "draft": true
+  },
+  "/dialogues/rocket_project/nodes/look/text": {
+    "ru": "Отчёт неполон. Упомянуты старый очиститель и курс терапии для одного животного. Дозы и результаты вырваны. Это возможное объяснение долгой жизни Ракеты, но не доказательство.",
+    "zh-Hans": "报告残缺不全。它提到旧净化器和针对一只动物的治疗；剂量与结果页已被撕去。这或许能解释拉克塔的长寿，却不能证明什么。",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/dam/options/0/text": {
+    "ru": "Осмотреть папку.",
+    "zh-Hans": "检查文件夹。",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/speaker": {
+    "ru": "Летописец",
+    "zh-Hans": "编年史家",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/why/options/0/text": {
+    "ru": "Принять неопределённость.",
+    "zh-Hans": "拥抱不确定性。",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/copied/options/0/text": {
+    "ru": "Сложить лист.",
+    "zh-Hans": "折叠纸张。",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/why/text": {
+    "ru": "— Старые врачи пробовали лечить её. Что помогло — лечение, вода или что-то ещё — никто уже не знает.",
+    "zh-Hans": "“老医生试图治疗她。什么有帮助——治疗、水或其他东西——已经没有人知道了。",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/copied/text": {
+    "ru": "Копия коротка. Летописец отказывается толковать пропущенную строку про Ракету.",
+    "zh-Hans": "副本很短。编年史家拒绝解释关于拉克塔的缺失台词。",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/dam/text": {
+    "ru": "— Машины Заслона тоже имеют служебный размыкатель. Бумага рядом, если хочешь проверить сам.",
+    "zh-Hans": "——扎斯隆汽车也有一个服务开关。如果您想亲自检查的话，纸张就在附近。",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/text": {
+    "ru": "— Здесь нет списка Ракет. Только список людей, которые служили одной собаке. Отец умер, дед умер. Она живёт.",
+    "zh-Hans": "— 没有拉克塔的名单。只是一份服务过一只狗的人的名单。父亲去世，祖父去世。她还活着。",
+    "draft": true
+  },
+  "/companions/hank/barks/4/text": {
+    "ru": "Малый источник, большие стены. Трест за такой выставил бы счёт всему тракту.",
+    "zh-Hans": "小小的水源，围着高墙。托拉斯会让整条商路为它付账。",
+    "draft": true
+  },
+  "/companions/rzhavchik/barks/3/text": {
+    "ru": "Тихое гавканье. Ржавчик обнюхивает след у миски и отступает, не поджимая хвост.",
+    "zh-Hans": "一声轻吠。尔扎夫奇克嗅了嗅食盆旁的气味，退开时却没有夹起尾巴。",
+    "draft": true
+  },
+  "/companions/shepot/barks/5/text": {
+    "ru": "У Сухарей была бы общая чаша. Но я вижу, как мало сюда капает.",
+    "zh-Hans": "苏哈里人会共用这只碗。但我也看见，流进来的水有多么少。",
+    "draft": true
+  },
+  "/companions/granit/barks/3/text": {
+    "ru": "Забирают оружие у гостей. Значит, сами гостями никого не считают.",
+    "zh-Hans": "他们收走来客的武器。看来他们根本没把谁当客人。",
+    "draft": true
+  },
+  "/companions/irga/barks/3/text": {
+    "ru": "Я видела, как тайны Орден называл заботой. Здесь то же искушение.",
+    "zh-Hans": "我见过教团把隐瞒称作关怀。这里也有同样的诱惑。",
+    "draft": true
+  },
+  "/companions/lelya/barks/5/text": {
+    "ru": "Терапия тут описана наполовину. Кто назвал это доказательством, не читал вторую страницу.",
+    "zh-Hans": "治疗记录只有一半。谁把这当成证据，就是没读到第二页。",
+    "draft": true
+  },
+  "/companions/vedro/barks/5/text": {
+    "ru": "БИОЛОГИЧЕСКИЙ ОБЪЕКТ. ВОЗРАСТ ПО ДОКУМЕНТАМ НЕ СОВПАДАЕТ С ВНЕШНИМ ВИДОМ.",
+    "zh-Hans": "生物目标。档案年龄与外观不符。",
+    "draft": true
+  },
+  "/endings/32/variants/1/text": {
+    "ru": "После потопа Обитель заперла ворота перед беженцами. Вода спасла сад, но не людей у стены. Ракета долго сидела у закрытой двери.",
+    "zh-Hans": "洪水过后，圣所对难民紧闭大门。水救下花园，却救不了墙外的人。拉克塔守在紧闭的门边。",
+    "draft": true
+  },
+  "/endings/32/variants/2/text": {
+    "ru": "После потопа Трест поставил у источника охрану и продавал воду беженцам. Ракету не тронули: её имя стояло на каждом пропуске.",
+    "zh-Hans": "洪水过后，托拉斯派兵守住水源，向难民卖水。每张通行证上都有拉克塔的名字。",
+    "draft": true
+  },
+  "/endings/32/variants/3/text": {
+    "ru": "После потопа Гильдия открыла у ворот счётную лавку. Беженцы платили за воду, которую прежде сторожили ради Ракеты.",
+    "zh-Hans": "洪水过后，行会在门口开设配给铺。难民花钱购买曾以拉克塔之名守护的水。",
+    "draft": true
+  },
+  "/endings/32/variants/4/text": {
+    "ru": "Потоп дошёл до руин Обители. Без очистителя вода в чаше стала грязной, сад погиб. Следов Ракеты среди беженцев никто не видел.",
+    "zh-Hans": "洪水淹过圣所废墟。没有净化器，水变脏了，花园也死去。难民中无人见过拉克塔的踪迹。",
+    "draft": true
+  },
+  "/endings/32/variants/7/text": {
+    "ru": "Трест выкупил тайну источника и поставил у ворот стражу и сборщика. Имя Ракеты осталось на пропусках, а воду стали выдавать по приказу.",
+    "zh-Hans": "托拉斯买下水源的秘密，在门口布置守卫和税吏。通行证上仍写着拉克塔的名字，供水却改由命令决定。",
+    "draft": true
+  },
+  "/endings/32/variants/8/text": {
+    "ru": "Гильдия купила путь к источнику. У старых ворот появились вывеска и цены; имя Ракеты помогает продавать воду.",
+    "zh-Hans": "行会买下通往水源的路线。旧大门挂上招牌和价目表；拉克塔的名字成了卖水的招徕。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/text": {
+    "ru": "— Кому? Трест возьмёт станцию под охрану, Гильдия — под счёт. Ни те ни другие не отдадут её соседям даром.",
+    "zh-Hans": "“卖给谁？托拉斯会派兵接管，行会会给水标价。他们都不会免费分给邻居。”",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/options/0/text": {
+    "ru": "Передать сведения Тресту.",
+    "zh-Hans": "把消息交给托拉斯。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/options/1/text": {
+    "ru": "Передать сведения Гильдии.",
+    "zh-Hans": "把消息交给行会。",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/options/2/text": {
+    "ru": "Никому. Вернуться к разговору.",
+    "zh-Hans": "都不给。继续谈。",
+    "draft": true
+  },
+  "/locations/rusty_well/name": {
+    "ru": "Ржавый колодец",
+    "zh-Hans": "锈井"
+  },
+  "/locations/three_pillars/name": {
+    "ru": "Три столба",
+    "zh-Hans": "三柱镇"
+  },
+  "/locations/kolyuchka/name": {
+    "ru": "Колючка",
+    "zh-Hans": "科柳奇卡"
+  },
+  "/locations/zapruda/name": {
+    "ru": "Запруда",
+    "zh-Hans": "扎普鲁达"
+  },
+  "/locations/barge/name": {
+    "ru": "Баржа «Стрежень»",
+    "zh-Hans": "斯特列任号驳船"
+  },
+  "/locations/khlebnoe/name": {
+    "ru": "Мёртвые поля и Хлебное",
+    "zh-Hans": "死田与赫列布诺耶"
+  },
+  "/locations/silence/name": {
+    "ru": "Приют Тишины",
+    "zh-Hans": "寂静收容所"
+  },
+  "/locations/elevator/name": {
+    "ru": "Элеватор",
+    "zh-Hans": "升降塔"
+  },
+  "/locations/ark/name": {
+    "ru": "Ковчег",
+    "zh-Hans": "方舟"
+  },
+  "/locations/salt/name": {
+    "ru": "Соль",
+    "zh-Hans": "盐城"
+  },
+  "/locations/barkhan/name": {
+    "ru": "Стоянка «Бархана»",
+    "zh-Hans": "巴尔汗营地"
+  },
+  "/locations/wrecks/name": {
+    "ru": "Кладбище судов",
+    "zh-Hans": "船只墓地"
+  },
+  "/locations/crystal/name": {
+    "ru": "Кристалл",
+    "zh-Hans": "晶城"
+  },
+  "/locations/skit/name": {
+    "ru": "Скит",
+    "zh-Hans": "隐修院"
+  },
+  "/locations/rosa/name": {
+    "ru": "«Роса-2»",
+    "zh-Hans": "露水二号站"
+  },
+  "/locations/dry_stone/name": {
+    "ru": "Сухой камень",
+    "zh-Hans": "干石"
+  },
+  "/locations/depot/name": {
+    "ru": "Депо «Узловое»",
+    "zh-Hans": "乌兹洛沃耶机务段"
+  },
+  "/locations/whisper/name": {
+    "ru": "Ретранслятор «Шептун»",
+    "zh-Hans": "“低语者”中继站"
+  },
+  "/locations/gates/name": {
+    "ru": "Перевал «Ворота»",
+    "zh-Hans": "关门山口"
+  },
+  "/locations/bone_circle/name": {
+    "ru": "Костяной круг",
+    "zh-Hans": "骨环"
+  },
+  "/locations/capital_ruins/name": {
+    "ru": "Руины Светлоречья",
+    "zh-Hans": "斯韦特洛列奇耶遗址"
+  },
+  "/locations/dam/name": {
+    "ru": "Заслон",
+    "zh-Hans": "扎斯隆大坝"
+  },
+  "/locations/eagle/name": {
+    "ru": "Орлиное гнездо",
+    "zh-Hans": "鹰巢"
+  },
+  "/locations/stray_spot/name": {
+    "ru": "Влажная низина",
+    "zh-Hans": "潮湿洼地"
+  },
+  "/locations/post_station/name": {
+    "ru": "Последняя почтовая станция",
+    "zh-Hans": "最后驿站"
+  },
+  "/locations/watcher_bunker/name": {
+    "ru": "Бункер Смотрителя",
+    "zh-Hans": "守望者地堡"
+  },
+  "/locations/literny/name": {
+    "ru": "Тоннель «Литерного»",
+    "zh-Hans": "利捷尔内隧道"
+  }
+}

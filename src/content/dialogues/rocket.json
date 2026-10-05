@@ -1,0 +1,152 @@
+{
+ "rocket_psar": {
+  "speaker": "Псарь",
+  "portrait": "portrait_rocket_guard",
+  "entry": [
+   { "if": [{ "flag": "rocket_friend" }], "node": "friend" },
+   { "if": [{ "flag": "rocket_gate_open" }], "node": "open" },
+   { "node": "halt" }
+  ],
+  "nodes": {
+   "halt": { "text": "— Стой. За этой чертой оружие, одежда и припасы идут в личный ящик. Тубус с печатью оставь при себе: бумагу Ракета не нюхает.", "options": [
+    { "text": "Сдать вещи под расписку.", "effects": [{ "type": "rocketEscrow", "action": "seize" }, { "type": "flag", "key": "rocket_gate_open" }], "next": "passed" },
+    { "text": "Объяснить, что пришёл проверить очиститель.", "check": { "skill": "speech", "mod": -10, "pass": "bluffed", "fail": "refused", "passEffects": [{ "type": "flag", "key": "rocket_gate_open" }] } },
+    { "text": "Показать ошейник: Ракета уже знает меня.", "if": [{ "item": "rocket_collar" }], "effects": [{ "type": "flag", "key": "rocket_gate_open" }], "next": "bluffed" },
+    { "text": "Кто такая Ракета?", "next": "who" },
+    { "text": "Прорваться через пост.", "effects": [{ "type": "autosave" }], "next": "threat" },
+    { "text": "Пока уйти." }
+   ] },
+   "who": { "text": "— Не «кто». Кому. Вода досталась ей первой. Остальные только научились считать капли.", "options": [{ "text": "Вернуться к разговору.", "next": "halt" }] },
+   "passed": { "text": "Псарь ставит печать на ящике. — За сараем ковёр. Под ним люк. Вернёшься — вернём всё до последней иглы.", "options": [{ "text": "Войти." }] },
+   "bluffed": { "text": "Псарь смотрит на инструмент, потом на пустые руки. — Если врёшь, Толмач узнает прежде меня. Проходи.", "options": [{ "text": "Пройти." }] },
+   "refused": { "text": "— У очистителя есть свои люди. Сдавай вещи, ищи другой путь или уходи.", "options": [{ "text": "Ещё раз.", "next": "halt" }, { "text": "Отойти." }] },
+   "threat": { "text": "Псарь отступает к прожектору. — Ракета не просила ничьей крови. Это твой выбор.", "options": [{ "text": "Начать прорыв.", "effects": [{ "type": "flag", "key": "rocket_gate_open" }], "next": "alarm" }, { "text": "Опустить руки.", "next": "halt" }] },
+   "alarm": { "text": "За стеной звенит тревога. Путь к люку открыт, но стражи не дадут пройти просто так.", "options": [{ "text": "…", "effects": [{ "type": "flag", "key": "rocket_blasphemer" }] }] },
+   "open": { "text": "— Проход открыт. Ящик помечен твоим именем, если в нём что-то лежит.", "options": [{ "text": "Отойти." }] },
+   "friend": { "text": "Псарь кивает. — Друг Ракеты проходит без обряда. Вещи больше не нужны как залог.", "options": [{ "text": "Отойти." }] }
+  }
+ },
+ "rocket_hatch": { "speaker": "Люк под ковром", "entry": [{ "node": "look" }], "nodes": {
+  "look": { "text": "Под потёртым ковром — тяжёлый люк. Снизу доносится ровный гул насоса.", "options": [
+   { "text": "Спуститься.", "if": [{ "flag": "rocket_gate_open" }], "effects": [{ "type": "goto", "map": "rocket_tunnel", "entry": "south" }] },
+   { "text": "Вернуться к посту." }
+  ] }
+ } },
+ "rocket_duct": { "speaker": "Технический лаз", "entry": [{ "node": "look" }], "nodes": {
+  "look": { "text": "За проржавевшей крышкой идёт труба. Её можно открыть инструментом или протиснуться вдоль кабеля.", "options": [
+   { "text": "Разобрать крепления.", "if": [{ "skill": "repair", "gte": 55 }], "effects": [{ "type": "flag", "key": "rocket_gate_open" }, { "type": "goto", "map": "rocket_tunnel", "entry": "south" }] },
+   { "text": "Вскрыть крышку.", "if": [{ "skill": "lockpick", "gte": 55 }], "effects": [{ "type": "flag", "key": "rocket_gate_open" }, { "type": "goto", "map": "rocket_tunnel", "entry": "south" }] },
+   { "text": "Проверить схему кабеля.", "if": [{ "skill": "science", "gte": 55 }], "effects": [{ "type": "flag", "key": "rocket_gate_open" }, { "type": "goto", "map": "rocket_tunnel", "entry": "south" }] },
+   { "text": "Пока оставить." }
+  ] }
+ } },
+ "rocket_chest": { "speaker": "Ящик паломника", "entry": [{ "node": "look" }], "nodes": {
+  "look": { "text": "На крышке — имя и целая печать. По ту сторону поста стоит Псарь.", "options": [
+   { "text": "Забрать своё и уйти.", "if": [{ "flag": "rocket_disarmed" }], "effects": [{ "type": "rocketEscrow", "action": "release" }], "next": "returned" },
+   { "text": "Дёрнуть замок тайком.", "if": [{ "flag": "rocket_disarmed" }], "effects": [{ "type": "inc", "key": "rocket_chest_attempts" }], "next": "warning" },
+   { "text": "Отойти." }
+  ] },
+  "returned": { "text": "Замок открывается на выданный номер. Всё на месте; пост теперь смотрит на тебя внимательнее.", "options": [{ "text": "Закрыть ящик." }] },
+  "warning": { "text": "Псарь замечает руку на замке. — Ящик твой. Зачем ломать собственную печать?", "options": [
+   { "text": "Остановиться.", "if": [{ "flag": "rocket_chest_attempts", "lt": 3 }] },
+   { "text": "Сорвать печать и поднять тревогу.", "if": [{ "flag": "rocket_chest_attempts", "gte": 3 }], "effects": [{ "type": "autosave" }], "next": "alarm" }
+  ] },
+  "alarm": { "text": "Печать рвётся. Стражи поднимают оружие; путь к наружной дороге ещё свободен.", "options": [{ "text": "…", "effects": [{ "type": "flag", "key": "rocket_blasphemer" }] }] }
+ } },
+ "rocket_mark": { "speaker": "Знак Обители", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "На потемневшем металле — голова собаки с надрезом на левом ухе. На обороте дата семидесятилетней давности.", "options": [{ "text": "Отойти." }] } } },
+ "rocket_chain": { "speaker": "Цепь", "portrait": "portrait_rocket_guard", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "— Я сторожу дверь, не воду. И всё чаще думаю, есть ли между ними разница.", "options": [
+  { "text": "Куда ведёт ход?", "next": "way" },
+  { "text": "Соседям нужна вода.", "next": "doubt" },
+  { "text": "Идти дальше." }
+ ] }, "way": { "text": "— К саду. Он меньше, чем говорят снаружи, но больше, чем видят соседи.", "options": [{ "text": "Понятно." }] }, "doubt": { "text": "— Знаю. Моя сестра живёт за стеной. Псарю я этого не говорю.", "options": [{ "text": "Не выдам." }] } } },
+ "rocket_early_archive": { "speaker": "Старые журналы", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Первые листы начинаются семьдесят лет назад: Ракета привела людей к чистой воде, прежде чем загудел очиститель. В поздних записях её отметина на ухе не меняется.", "options": [{ "text": "Запомнить даты.", "effects": [{ "type": "flag", "key": "rocket_same_dog" }] }, { "text": "Отойти." }] } } },
+ "rocket_pantry": { "speaker": "Кладовая", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Мешки с крупой и банки с водой. На двери: «Запас общины — не запас страны». В углу лежит вяленый угорь.", "options": [
+  { "text": "Взять один кусок для подношения.", "if": [{ "notFlag": "rocket_food_taken" }], "effects": [{ "type": "give", "item": "dried_eel" }, { "type": "flag", "key": "rocket_food_taken" }] },
+  { "text": "Отойти." }
+ ] } } },
+ "rocket_gallery": { "speaker": "Галерея", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Камень, жесть и выцветшая краска. На всех изображениях — одна Ракета: та же отметина левого уха. Подписи с датами идут через семь десятилетий, без нумерации и смены имени.", "options": [{ "text": "Сравнить изображения.", "effects": [{ "type": "flag", "key": "rocket_same_dog" }] }, { "text": "Отойти." }] } } },
+ "rocket_forbidden": { "speaker": "Запретная дверь", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Пыль закрывает табличку «R.A.K.E.T.A.». За дверью — старые бланки станции.", "options": [
+  { "text": "Вскрыть замок отмычкой.", "if": [{ "skill": "lockpick", "gte": 55 }], "effects": [{ "type": "goto", "map": "rocket_archive", "entry": "south" }] },
+  { "text": "Разобрать старую петлю.", "if": [{ "skill": "repair", "gte": 55 }], "effects": [{ "type": "goto", "map": "rocket_archive", "entry": "south" }] },
+  { "text": "Попросить Летописца открыть после аудиенции.", "if": [{ "flag": "rocket_friend" }], "effects": [{ "type": "goto", "map": "rocket_archive", "entry": "south" }] },
+  { "text": "Отойти." }
+ ] } } },
+ "rocket_wall": { "speaker": "Фреска", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Ракета у чаши воды. Надпись не обещает дождя: «Не лги о том, сколько осталось». Художник тщательно повторил надрез на ухе.", "options": [{ "text": "Идти дальше." }] } } },
+ "rocket_keeper": { "speaker": "Хранитель Миски", "portrait": "portrait_rocket_keeper", "entry": [
+  { "if": [{ "flag": "rocket_fate" }], "node": "after" },
+  { "if": [{ "flag": "rocket_friend" }], "node": "choose" },
+  { "node": "before" }
+ ], "nodes": {
+  "before": { "text": "— Сначала поговори с Толмачом. Источник мал; решение о нём здесь не принимают у ворот.", "options": [{ "text": "Отойти." }] },
+  "choose": { "text": "— Очиститель поднимает мало воды. Мы оставили её себе и назвали это верностью Ракете. Теперь нужно решить, сколько стен у слова «наше».", "options": [
+   { "text": "Сохранить Обитель, но выдавать воду паломникам.", "effects": [{ "type": "flag", "key": "rocket_fate", "value": "closed" }, { "type": "quest", "quest": "rocket", "stage": "done" }, { "type": "xpOnce", "key": "rocket_finish", "amount": 80 }], "next": "closed" },
+   { "text": "Открыть соседям счётную выдачу воды.", "effects": [{ "type": "flag", "key": "rocket_fate", "value": "shared" }, { "type": "quest", "quest": "rocket", "stage": "done" }, { "type": "xpOnce", "key": "rocket_finish", "amount": 80 }], "next": "shared" },
+   { "text": "Продать сведения об источнике.", "next": "sell_to" },
+   { "text": "Сначала осмотреть архив." }
+  ] },
+  "sell_to": { "text": "— Кому? Трест возьмёт станцию под охрану, Гильдия — под счёт. Ни те ни другие не отдадут её соседям даром.", "options": [
+   { "text": "Передать сведения Тресту.", "effects": [{ "type": "flag", "key": "rocket_buyer", "value": "trust" }, { "type": "flag", "key": "rocket_fate", "value": "sold" }, { "type": "caps", "amount": 80 }, { "type": "quest", "quest": "rocket", "stage": "done" }, { "type": "xpOnce", "key": "rocket_finish", "amount": 80 }], "next": "sold" },
+   { "text": "Передать сведения Гильдии.", "effects": [{ "type": "flag", "key": "rocket_buyer", "value": "guild" }, { "type": "flag", "key": "rocket_fate", "value": "sold" }, { "type": "caps", "amount": 80 }, { "type": "quest", "quest": "rocket", "stage": "done" }, { "type": "xpOnce", "key": "rocket_finish", "amount": 80 }], "next": "sold" },
+   { "text": "Никому. Вернуться к разговору.", "next": "choose" }
+  ] },
+  "closed": { "text": "— Малую долю выдадим за стену. Это меньше, чем просили. Больше, чем было вчера.", "options": [{ "text": "Оставить хранителей работать." }] },
+  "shared": { "text": "Хранитель перечёркивает старые нормы. — Сад придётся уменьшить. Людей за воротами — нет.", "options": [{ "text": "Продолжать." }] },
+  "sold": { "text": "— Нас будут считать чужими счетами. Ты получил капли; они получат нашу воду.", "options": [{ "text": "Уйти." }] },
+  "after": { "text": "— Решение записано. Вода от этого не прибавилась, но теперь известно, кто получит следующую чашу.", "options": [
+   { "text": "Предложить купить дар Ракеты.", "if": [{ "item": "rocket_water" }], "effects": [{ "type": "inc", "key": "rep_rocket", "by": -2 }], "next": "sale" },
+   { "text": "Отойти." }
+  ] },
+  "sale": { "text": "— Дар можно выпить или отдать. Продавать его тем, кто уже наполнил эту флягу, бессмысленно.", "options": [{ "text": "Уйти." }] }
+ } },
+ "rocket_fountain": { "speaker": "Чаша источника", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Струя тонка. На медном счётчике видно: за день сюда приходит меньше воды, чем нужно целому посёлку.", "options": [
+  { "text": "Наполнить одну пустую флягу.", "if": [{ "flag": "rocket_friend" }, { "item": "canteen" }, { "flag": "day", "gteFlag": "rocket_refill_ready" }], "effects": [{ "type": "take", "item": "canteen" }, { "type": "give", "item": "rocket_water" }, { "type": "dayMark", "key": "rocket_refill_ready", "in": 1 }], "next": "filled" },
+  { "text": "Повредить очиститель и поднять тревогу.", "if": [{ "notFlag": "rocket_fate" }], "effects": [{ "type": "autosave" }], "next": "break" },
+  { "text": "Отойти." }
+ ] },
+ "filled": { "text": "Вода заполняет принесённую тару. Хранитель закрывает вентиль до следующего дня.", "options": [{ "text": "Отойти." }] },
+ "break": { "text": "— Насос не выдержит удара, — предупреждает хранитель. — Вместе с садом погибнет и вода для тех, кто придёт после нас.", "options": [
+  { "text": "Разбить щиток.", "effects": [{ "type": "flag", "key": "rocket_fate", "value": "broken" }, { "type": "quest", "quest": "rocket", "stage": "done" }], "next": "broken" },
+  { "text": "Остановиться.", "next": "look" }
+ ] },
+ "broken": { "text": "Очиститель глохнет. Стражи бегут к чаше. Южный выход ещё открыт.", "options": [{ "text": "…", "effects": [{ "type": "flag", "key": "rocket_blasphemer" }] }] }
+ } },
+ "rocket_meter": { "speaker": "Счётчик воды", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Малый водоносный слой падает каждый сухой год. Сад и пайки держатся не чудом, а строгим расходом и работающим очистителем.", "options": [{ "text": "Запомнить расчёт.", "effects": [{ "type": "quest", "quest": "rocket", "stage": "decision" }] }, { "text": "Отойти." }] } } },
+ "rocket_audience": { "speaker": "Ракета", "portrait": "portrait_rocket", "entry": [
+  { "if": [{ "flag": "rocket_friend" }], "node": "friend" },
+  { "if": [{ "flag": "rocket_lied" }], "node": "after_lie" },
+  { "node": "first" }
+ ], "nodes": {
+  "first": { "text": "Чёрно-подпалая собака смотрит на тебя. Левое ухо надрезано. Толмач ждёт, пока она моргнёт: — Она спрашивает, что ты делал с чужой водой.", "options": [
+   { "text": "Люди пострадали из-за меня. Не стану это скрывать.", "if": [{ "flag": "blood_drawn" }], "next": "honest" },
+   { "text": "Мне было важно никому не навредить.", "if": [{ "notFlag": "blood_drawn" }], "next": "honest" },
+   { "text": "От меня никто не пострадал.", "if": [{ "flag": "blood_drawn" }], "effects": [{ "type": "flag", "key": "rocket_lied" }], "next": "lie" },
+   { "text": "Положить перед Ракетой вяленого угря.", "if": [{ "item": "dried_eel" }], "effects": [{ "type": "take", "item": "dried_eel" }], "next": "meat" },
+   { "text": "Уйти." }
+  ] },
+  "lie": { "text": "Ракета тихо рычит. Толмач открывает папку с донесениями: — Не проси собаку поверить бумаге, которую сам же опроверг.", "options": [{ "text": "Признать ложь.", "next": "honest" }, { "text": "Уйти." }] },
+  "after_lie": { "text": "Ракета всё ещё смотрит на тебя. Толмач кладёт папку рядом, не открывая.", "options": [{ "text": "Сказать правду теперь.", "next": "honest" }, { "text": "Уйти." }] },
+  "meat": { "text": "Ракета съедает угря. Толмач начал говорить, но собака уже подошла и обнюхала руку. Кто здесь решил первым, неясно.", "options": [{ "text": "Подождать.", "next": "honest" }] },
+  "honest": { "text": "Толмач ещё не успел заговорить. Кажется, кто-то произнёс: «Воды мало. Людей больше». Ржавчик, если он рядом, поднимает уши; остальные смотрят на старый динамик над дверью.", "options": [
+   { "text": "Не требовать объяснения и принять её взгляд.", "effects": [{ "type": "flag", "key": "rocket_friend" }, { "type": "rocketEscrow", "action": "release" }, { "type": "give", "item": "rocket_collar" }, { "type": "give", "item": "rocket_fang" }, { "type": "give", "item": "rocket_water", "qty": 3 }, { "type": "quest", "quest": "rocket", "stage": "decision" }], "if": [{ "notFlag": "rocket_friend" }], "next": "welcome" },
+   { "text": "Отойти без ответа." }
+  ] },
+  "welcome": { "text": "Ракета садится у чаши. — Друг Ракеты, — говорит Толмач. — Теперь решай, как жить с этой водой.", "options": [{ "text": "Идти к Хранителю Миски." }] },
+  "friend": { "text": "Ракета подставляет голову под ладонь. Толмач молчит — на этот раз перевод не нужен.", "options": [{ "text": "Погладить Ракету.", "next": "pet" }, { "text": "Отойти." }] },
+  "pet": { "text": "Шерсть тёплая, шершавая. Что произошло с ней за эти семьдесят лет, она не расскажет.", "options": [{ "text": "Пусть отдыхает." }] }
+ } },
+ "rocket_tolm": { "speaker": "Толмач", "portrait": "portrait_rocket_tolm", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "— Я передаю то, что вижу, и то, что приносят стражи. Про голос в зале меня не спрашивай: динамик давно отключён, если верить Летописцу.", "options": [
+  { "text": "А Ракета одна и та же?", "next": "same" }, { "text": "Отойти." }
+ ] }, "same": { "text": "— Я родился после неё. Мой отец тоже. Найдёшь в архиве записи его отца — сравни отметину уха.", "options": [{ "text": "Проверить архив." }] } } },
+ "rocket_throne": { "speaker": "Старое основание", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Когда-то здесь крепился насосный пульт. Теперь это возвышение с миской: дворец построен не вместо станции, а вокруг неё.", "options": [{ "text": "Отойти." }] } } },
+ "rocket_guard": { "speaker": "Страж Обители", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "— Воду считаем мы. За стеной считают, сколько у нас осталось совести. Может, правы и те и другие.", "options": [{ "text": "Отойти." }] } } },
+ "rocket_medical": { "speaker": "Медицинский журнал", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Почерки сменяются, даты тянутся семьдесят лет. В каждой записи — одна отметина левого уха и те же измерения. Нет ни смерти, ни появления другой собаки.", "options": [{ "text": "Сверить записи.", "effects": [{ "type": "flag", "key": "rocket_same_dog" }, { "type": "quest", "quest": "rocket", "stage": "source" }] }, { "text": "Отойти." }] } } },
+ "rocket_ledger": { "speaker": "Книга пайков", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Последний год: воды хватает сорока людям и небольшой зелёной полосе. Пока сад поливают, за стену отпускают меньше фляг, чем просят.", "options": [{ "text": "Запомнить расход.", "effects": [{ "type": "quest", "quest": "rocket", "stage": "decision" }] }, { "text": "Отойти." }] } } },
+ "rocket_project": { "speaker": "Папка R.A.K.E.T.A.", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Отчёт неполон. Упомянуты старый очиститель и курс терапии для одного животного. Дозы и результаты вырваны. Это возможное объяснение долгой жизни Ракеты, но не доказательство.", "options": [{ "text": "Оставить гипотезу открытой.", "effects": [{ "type": "flag", "key": "rocket_therapy_hint" }] }, { "text": "Отойти." }] } } },
+ "rocket_dam_record": { "speaker": "Служебная запись", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "Схема обслуживания охранных машин: такой же размыкатель применяли на Заслоне. Это путь к щитку, не право открыть водохранилище.", "options": [
+  { "text": "Снять копию схемы.", "if": [{ "notFlag": "rocket_bypass_known" }], "effects": [{ "type": "flag", "key": "rocket_bypass_known" }, { "type": "give", "item": "rocket_log" }], "next": "copied" },
+  { "text": "Отойти." }
+ ] }, "copied": { "text": "Копия коротка. Летописец отказывается толковать пропущенную строку про Ракету.", "options": [{ "text": "Сложить лист." }] } } },
+ "rocket_chronicler": { "speaker": "Летописец", "portrait": "portrait_rocket_keeper", "entry": [{ "node": "look" }], "nodes": { "look": { "text": "— Здесь нет списка Ракет. Только список людей, которые служили одной собаке. Отец умер, дед умер. Она живёт.", "options": [
+  { "text": "Почему?", "next": "why" }, { "text": "Спросить о служебной записи.", "next": "dam" }, { "text": "Отойти." }
+ ] }, "why": { "text": "— Старые врачи пробовали лечить её. Что помогло — лечение, вода или что-то ещё — никто уже не знает.", "options": [{ "text": "Принять неопределённость." }] }, "dam": { "text": "— Машины Заслона тоже имеют служебный размыкатель. Бумага рядом, если хочешь проверить сам.", "options": [{ "text": "Осмотреть папку." }] } } }
+}

@@ -246,6 +246,7 @@ export const ARMS_ICONS = {
   shiv: ['blade', 'knife', { body: P.grey4, wood: P.sand3 }],
   queen_sting: ['blade', 'knife', { body: P.dark1, lit: P.grey2, wood: P.rust1 }],
   venom_knife: ['blade', 'knife', { body: P.grey5, drip: P.olive2 }],
+  rocket_fang: ['blade', 'knife', { body: P.grey5, lit: P.bone, wood: P.red1 }],
   fire_machete: ['blade', 'machete', { fire: P.fire1 }],
   nut_sledge: ['blade', 'hammer', { head: P.grey2, dark: P.grey1, dots: P.sand4 }],
   salt_hammer: ['blade', 'hammer', { head: P.bone, dark: P.grey5, dots: P.grey6 }],

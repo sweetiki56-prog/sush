@@ -48,6 +48,7 @@ const actors = [
   { id: 'efim', sheet: 'efim', x: 26, y: 15, dir: 5, label: 'Штурман Ефим', dialogue: 'efim' },
   { id: 'scav_a', sheet: 'scavenger', x: 12, y: 13, dir: 1, label: 'Старьёвщик', dialogue: 'barge_scav' },
   { id: 'scav_b', sheet: 'scavenger', x: 20, y: 15, dir: 3, label: 'Старьёвщица', dialogue: 'barge_scav' },
+  { id: 'town_cat', sheet: 'cat_town', x: 8, y: 14, dir: 6, label: 'Палубная кошка', dialogue: 'street_cat' },
 ];
 
 k.write('barge_deck', 'Баржа «Стрежень»', {

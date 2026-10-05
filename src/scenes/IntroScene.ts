@@ -4,14 +4,9 @@ import { session } from '../session';
 import { GAME_W } from '../config';
 import { C, title, txt } from '../ui/theme';
 import { onKey } from '../ui/keys';
-
-const PROLOGUE = (name: string) =>
-  'Двести лет прошло с Огня — войны, в которой реки жгли и травили, лишь бы вода не досталась врагу.\n' +
-  'Светлая пересохла. Её бассейн теперь зовут Сушью.\n' +
-  'Вода стала деньгами, законом и молитвой. Трест чеканит капли, и за капли дают воду.\n\n' +
-  `${name}, вы третий день бредёте по старому тракту. Фляга пуста.\n` +
-  'Впереди, у ржавой цистерны, дымит костёр.\n' +
-  'Поселение называется Ржавый колодец.';
+import { settings } from '../core/Settings';
+import { uiText } from '../i18n/ui';
+import { heroNameForDisplay } from '../i18n/display';
 
 export class IntroScene extends Phaser.Scene {
   constructor() {
@@ -20,11 +15,12 @@ export class IntroScene extends Phaser.Scene {
 
   create(): void {
     this.cameras.main.setBackgroundColor('#0d0a08').setPostPipeline('CrtFX');
-    const full = PROLOGUE(session().game.char.name);
-    title(this, GAME_W / 2, 130, 'СУШЬ', 40, C.amber).setOrigin(0.5);
-    txt(this, GAME_W / 2, 180, 'ГЛАВА I · КАПЛЯ', 16, C.sand).setOrigin(0.5);
+    const locale = settings().language;
+    const full = uiText('intro.prologue', locale).replace('{name}', heroNameForDisplay(session().game.char.name, locale));
+    title(this, GAME_W / 2, 130, uiText('brand.title', locale), 40, C.amber).setOrigin(0.5);
+    txt(this, GAME_W / 2, 180, uiText('intro.chapter', locale), 16, C.sand).setOrigin(0.5);
     const body = txt(this, GAME_W / 2, 240, '', 18, C.crt, 900).setOrigin(0.5, 0).setAlign('center');
-    const hint = txt(this, GAME_W / 2, 640, '[ENTER] В ПУТЬ', 14, C.crtDim).setOrigin(0.5).setVisible(false);
+    const hint = txt(this, GAME_W / 2, 640, uiText('intro.continue', locale), 14, C.crtDim).setOrigin(0.5).setVisible(false);
     let n = 0;
     const typer = this.time.addEvent({
       delay: 24,

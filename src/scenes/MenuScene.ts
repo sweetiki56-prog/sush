@@ -15,6 +15,8 @@ import { C, glass, title, txt } from '../ui/theme';
 import { showAbout, showSettings } from '../ui/SettingsPanel';
 import { onKey } from '../ui/keys';
 import { TOUCH } from '../ui/touch';
+import { settings } from '../core/Settings';
+import { uiText } from '../i18n/ui';
 
 // camera drifts between these tiles
 const TOUR = [[10, 27], [24, 20], [31, 12], [18, 30]];
@@ -62,27 +64,28 @@ export class MenuScene extends Phaser.Scene {
     uiCam.setPostPipeline('CrtFX');
 
     const canContinue = !!loadGame();
+    const locale = settings().language;
     const band = this.add.graphics();
     band.fillGradientStyle(0x120d0a, 0x120d0a, 0x120d0a, 0x120d0a, 0, 0, 0.75, 0.75).fillRect(0, 50, GAME_W, 70);
     band.fillStyle(0x120d0a, 0.75).fillRect(0, 120, GAME_W, 80);
     band.fillGradientStyle(0x120d0a, 0x120d0a, 0x120d0a, 0x120d0a, 0.75, 0.75, 0, 0).fillRect(0, 200, GAME_W, 50);
     band.fillStyle(0x120d0a, 0.7).fillRect(0, 676, GAME_W, 28);
     ui.add(band);
-    ui.add(title(this, GAME_W / 2 + 4, 124, 'СУШЬ', 60, '#120d0a').setOrigin(0.5));
-    ui.add(title(this, GAME_W / 2, 120, 'СУШЬ', 60, C.amber).setOrigin(0.5));
-    ui.add(txt(this, GAME_W / 2, 180, 'Низовье, Солончаки и Верховья · Главы I–IX', 18, C.sand).setOrigin(0.5).setShadow(2, 2, '#120d0a', 0, true, true));
+    ui.add(title(this, GAME_W / 2 + 4, 124, uiText('brand.title', locale), 60, '#120d0a').setOrigin(0.5));
+    ui.add(title(this, GAME_W / 2, 120, uiText('brand.title', locale), 60, C.amber).setOrigin(0.5));
+    ui.add(txt(this, GAME_W / 2, 180, uiText('menu.subtitle', locale), 18, C.sand).setOrigin(0.5).setShadow(2, 2, '#120d0a', 0, true, true));
     ui.add(glass(this, GAME_W / 2 - 170, 262, 340, (ONLINE ? 6 : 4) * 44 + 26));
     this.items = [
-      { label: 'НОВАЯ ИГРА', enabled: true, run: () => this.scene.start('Create') },
-      { label: 'ПРОДОЛЖИТЬ', enabled: canContinue, run: () => this.continueGame() },
+      { label: uiText('menu.newGame', locale), enabled: true, run: () => this.scene.start('Create') },
+      { label: uiText('menu.continue', locale), enabled: canContinue, run: () => this.continueGame() },
       ...(ONLINE
         ? [
-            { label: 'КООПЕРАТИВ', enabled: true, run: () => this.scene.start('Lobby', { mode: 'coop' }) },
-            { label: 'АРЕНА', enabled: true, run: () => this.scene.start('Lobby', { mode: 'arena' }) },
+            { label: uiText('menu.coop', locale), enabled: true, run: () => this.scene.start('Lobby', { mode: 'coop' }) },
+            { label: uiText('menu.arena', locale), enabled: true, run: () => this.scene.start('Lobby', { mode: 'arena' }) },
           ]
         : []),
-      { label: 'НАСТРОЙКИ', enabled: true, run: () => this.open((done) => showSettings(this, done)) },
-      { label: 'ОБ ИГРЕ', enabled: true, run: () => this.open((done) => showAbout(this, done)) },
+      { label: uiText('menu.settings', locale), enabled: true, run: () => this.open((done) => showSettings(this, done)) },
+      { label: uiText('menu.about', locale), enabled: true, run: () => this.open((done) => showAbout(this, done)) },
     ];
     this.items.forEach((it, i) => {
       const t = txt(this, GAME_W / 2, 280 + i * 44, it.label, 20, it.enabled ? C.crt : C.crtDim, undefined, true).setOrigin(0.5, 0).setInteractive();
@@ -93,7 +96,7 @@ export class MenuScene extends Phaser.Scene {
     });
     this.sel = canContinue ? 1 : 0;
     this.paint();
-    ui.add(txt(this, GAME_W / 2, 690, TOUCH ? 'Коснитесь пункта меню' : '↑ ↓ выбрать · Enter подтвердить', 12, C.crtDim).setOrigin(0.5));
+    ui.add(txt(this, GAME_W / 2, 690, uiText(TOUCH ? 'menu.touchHint' : 'menu.keyHint', locale), 12, C.crtDim).setOrigin(0.5));
 
     // settings / about overlays are created later: keep them out of the world camera
     const hide = (o: Phaser.GameObjects.GameObject) => cam.ignore(o);

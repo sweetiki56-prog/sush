@@ -10,7 +10,8 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   preload(): void {
-    for (const id of ['dusk', 'poster', 'chart']) this.load.image(`loading_${id}`, `assets/gen/loading_${id}.jpg`);
+    for (const id of ['dusk', 'poster', 'chart', 'rocket']) this.load.image(`loading_${id}`, `assets/gen/loading_${id}.jpg`);
+    this.load.image('loading_chart_en', 'assets/gen/loading_chart_en.jpg');
   }
 
   async create(): Promise<void> {

@@ -40,6 +40,6 @@ export function craft(g: Game, id: string): boolean {
   }
   for (const [item, n] of Object.entries(r.inputs)) g.take(item, n);
   for (const [item, n] of Object.entries(r.output)) g.give(item, n);
-  g.addXp(CHECK_XP);
+  g.awardXp(`craft:${id}`, CHECK_XP);
   return true;
 }

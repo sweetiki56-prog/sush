@@ -1,6 +1,9 @@
 // Seven attributes: value, rating word, optional − / + for character creation.
 import Phaser from 'phaser';
-import { ATTRS, ATTR_NAMES, ATTR_WORDS, type AttrId, type Attrs, type CharacterContent } from '../../core/character/defs';
+import { ATTRS, type AttrId, type Attrs, type CharacterContent } from '../../core/character/defs';
+import { settings } from '../../core/Settings';
+import { attrName, attrWord } from '../../i18n/character';
+import { uiText } from '../../i18n/ui';
 import { C, glass, glyphButton, hitRow, title, txt } from '../theme';
 import type { InfoCard } from './InfoCard';
 
@@ -9,6 +12,7 @@ const ROW = 30;
 export class AttrPanel {
   private values = new Map<AttrId, [Phaser.GameObjects.Text, Phaser.GameObjects.Text]>();
   private points: Phaser.GameObjects.Text | null = null;
+  private locale = settings().language;
 
   constructor(
     scene: Phaser.Scene,
@@ -21,11 +25,11 @@ export class AttrPanel {
     onChange?: (a: AttrId, delta: 1 | -1) => void,
   ) {
     const h = 44 + ATTRS.length * ROW + (onChange ? 30 : 0);
-    parent.add([glass(scene, x, y, w, h), title(scene, x + 14, y + 12, 'ХАРАКТЕРИСТИКИ', 11, C.amber)]);
+    parent.add([glass(scene, x, y, w, h), title(scene, x + 14, y + 12, uiText('sheet.attrs', this.locale), 11, C.amber)]);
     ATTRS.forEach((a, i) => {
       const ry = y + 40 + i * ROW;
-      const hit = hitRow(scene, x + 6, ry - 3, w - 12, ROW - 2, () => info.show(ATTR_NAMES[a], content.attrs[a]));
-      const name = txt(scene, x + 16, ry, ATTR_NAMES[a], 14, C.crt);
+      const hit = hitRow(scene, x + 6, ry - 3, w - 12, ROW - 2, () => info.show(attrName(a, this.locale), content.attrs[a]));
+      const name = txt(scene, x + 16, ry, attrName(a, this.locale), 14, C.crt);
       const val = txt(scene, x + w - (onChange ? 150 : 110), ry - 2, '', 18, C.crtBright, undefined, true).setOrigin(1, 0);
       const word = txt(scene, x + w - (onChange ? 142 : 100), ry + 1, '', 12, C.crtDim);
       parent.add([hit, name, val, word]);
@@ -45,8 +49,8 @@ export class AttrPanel {
   update(eff: Attrs, footer?: number | string): void {
     for (const [a, [val, word]] of this.values) {
       val.setText(String(eff[a]));
-      word.setText(ATTR_WORDS[eff[a]] ?? '');
+      word.setText(attrWord(eff[a], this.locale));
     }
-    this.points?.setText(typeof footer === 'string' ? footer : `Свободных очков: ${footer ?? 0}`);
+    this.points?.setText(typeof footer === 'string' ? footer : uiText('sheet.freePoints', this.locale).replace('{count}', String(footer ?? 0)));
   }
 }

@@ -34,6 +34,7 @@ const ORDER = [{ notFlag: 'order_enemy' }];
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 19, y: 33, dir: 1 },
   { id: 'gate_knight', sheet: 'dew_knight', x: 17, y: 30, dir: 3, label: 'Привратник Скита', dialogue: 'skit_gate' },
+  { id: 'town_cat', sheet: 'cat_town', x: 11, y: 26, dir: 3, label: 'Кошка Скита', dialogue: 'street_cat' },
   { id: 'trial_knight', sheet: 'dew_knight', x: 24, y: 31, dir: 6, label: 'Рыцарь испытания', dialogue: 'trial_knight', creature: 'dew_knight_trial', group: 'trial', ring: 'arms', peace: [{ notFlag: 'ring_fight' }], if: [{ notFlag: 'skit_in' }] },
   ...[['knight_a', 12, 16, [[12, 16], [26, 16]]], ['knight_b', 26, 22, [[26, 22], [12, 22]]]].map(([id, x, y, patrol]) => ({ id, sheet: 'dew_knight', x, y, dir: 2, label: 'Рыцарь Росы', dialogue: 'dew_knight', creature: 'dew_knight', group: 'knights', peace: ORDER, patrol })),
   ...[['novice_a', 8, 9], ['novice_b', 31, 9]].map(([id, x, y]) => ({ id, sheet: 'novice', x, y, dir: 2, label: 'Послушник', dialogue: 'novice' })),

@@ -8,7 +8,7 @@ import { nextAction } from '../../src/core/combat/ai';
 import { creatureUnit, playerUnit } from '../../src/core/combat/build';
 import { CONTENT } from '../../src/content';
 import { room, until, TOWNS } from './rooms';
-import { placedBattle, premadeGame } from './sim';
+import { placedBattle, premadeGame, toLevel } from './sim';
 import { say, talk, winFight } from './story';
 
 /** After Chapter V: the tube in the bag, sharp eyes, money; every roll lands unless told otherwise. */
@@ -398,7 +398,7 @@ describe('Chapter VI balance', () => {
         let w = 0;
         for (let s = 1; s <= RUNS; s++) {
           const g = premadeGame(t, s * 7919);
-          g.addXp(1100); // level 6–7 by Chapter VI
+          toLevel(g, 6); // level 6 by Chapter VI
           if (placedBattle(g, TOWNS[map], at, foes, friends) === 'victory') w++;
         }
         return [t, w / RUNS];

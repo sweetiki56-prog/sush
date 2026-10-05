@@ -49,9 +49,12 @@ describe('guarding a caravan', () => {
     t.sneak = true; // slip past wanderers on the way
     const caps = g.state.caps;
     const rep = Number(g.flag('rep_guild') ?? 0);
+    const xp = g.char.xp;
     expect(until(r, () => !t.escort, 180_000)).toBe(true);
     expect(g.state.caps).toBe(caps + pay);
     expect(Number(g.flag('rep_guild'))).toBe(rep + 3);
+    expect(g.char.xp).toBe(xp + 40);
+    expect(g.awardXp('escort:kolyuchka', 40)).toBe(false); // another caravan may pay, not level us again
     expect(Math.hypot(t.x - 20.5, t.y - 51.5)).toBeLessThan(1.5); // at Колючка with the caravan
   });
 

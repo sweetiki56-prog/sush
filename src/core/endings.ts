@@ -18,14 +18,15 @@ export interface ShownSlide {
   id: string;
   title: string;
   text: string;
+  variantIndex: number;
 }
 
 /** The slides this game has earned, in the order of the data; {name} is the hero. */
 export function slidesFor(game: { testAll(c: Condition[] | undefined): boolean; char: { name: string } }, slides: EndingSlide[]): ShownSlide[] {
   const out: ShownSlide[] = [];
   for (const s of slides) {
-    const v = s.variants.find((x) => game.testAll(x.if));
-    if (v) out.push({ id: s.id, title: s.title, text: v.text.replaceAll('{name}', game.char.name) });
+    const variantIndex = s.variants.findIndex((x) => game.testAll(x.if));
+    if (variantIndex >= 0) out.push({ id: s.id, title: s.title, text: s.variants[variantIndex].text.replaceAll('{name}', game.char.name), variantIndex });
   }
   return out;
 }

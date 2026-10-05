@@ -572,6 +572,18 @@
       "next": "done"
      },
      {
+      "text": "По записи Обители найти служебный размыкатель и отключить охрану.",
+      "if": [{ "flag": "rocket_bypass_known" }, { "skill": "repair", "gte": 55 }],
+      "effects": [{ "type": "flag", "key": "machines_way", "value": "off" }, { "type": "flag", "key": "sentries_off" }, { "type": "quest", "quest": "dam", "stage": "trial" }, { "type": "xp", "amount": 250 }],
+      "next": "done"
+     },
+     {
+      "text": "По записи Обители перевести машины на старый канал обслуживания.",
+      "if": [{ "flag": "rocket_bypass_known" }, { "skill": "science", "gte": 55 }],
+      "effects": [{ "type": "flag", "key": "machines_way", "value": "off" }, { "type": "flag", "key": "sentries_off" }, { "type": "quest", "quest": "dam", "stage": "trial" }, { "type": "xp", "amount": 250 }],
+      "next": "done"
+     },
+     {
       "text": "Ведро, передай допуск.",
       "if": [
        {
@@ -1243,7 +1255,7 @@
       "next": "judged"
      },
      {
-      "text": "За тобой нет крови. Признай подделку сам — и никто здесь не умрёт.",
+      "text": "Путь сюда пройден без человеческой крови. Признай подделку сам — и никто здесь не умрёт.",
       "if": [
        {
         "flag": "evidence",

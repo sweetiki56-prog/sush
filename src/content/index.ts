@@ -13,6 +13,8 @@ import bones from './dialogues/bones.json';
 import dam from './dialogues/dam.json';
 import lowland from './dialogues/lowland.json';
 import secrets from './dialogues/secrets.json';
+import pets from './dialogues/pets.json';
+import rocket from './dialogues/rocket.json';
 import companions from './companions.json';
 import character from './character.json';
 import weapons from './weapons.json';
@@ -45,7 +47,7 @@ const boards = Object.fromEntries(Object.entries(BOARDS).map(([id, town]) => [id
 export const CONTENT = {
   items,
   quests,
-  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...upper, ...bones, ...dam, ...lowland, ...secrets, ...boards },
+  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...upper, ...bones, ...dam, ...lowland, ...secrets, ...pets, ...rocket, ...boards },
   character,
   weapons,
   creatures,

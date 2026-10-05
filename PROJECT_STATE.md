@@ -1,6 +1,22 @@
 # PROJECT_STATE
 
 ## Current
+The early Mandate/Inspector quest now names the reachable route through Три столба and Колючка to the Notary in Запруда; Соль is the later eastern destination, opened after the Chapter III completion screen. Hank's early directions match. Marta's letter now distinguishes the west exit from the village from the northward road on the world map. The [J] journal has a ДИАЛОГИ tab: expandable speaker names show only actual NPC lines and chosen answers, with duplicate lines omitted. `dialogueHistory` is optional in v2 saves, so existing saves begin recording on the next talk.
+
+The dialogue/localization/art/balance audit is in progress. `tests/unit/dialogue-text.test.ts` checks all dialogue strings and caught a duplicate skill label in the dew-safe choice (fixed in the JSON and generator). `tests/unit/story-coordinates.test.ts` keeps world-map coordinates in the location bible aligned with `locations.json`; the old lowland Y coordinates have been updated after the northward map expansion. `src/i18n` and `tools/i18n-audit.mjs` establish content catalogs for English, Spanish and Simplified Chinese. English covers all 5587 live Russian content strings with **zero drafts**; `node tools/i18n-audit.mjs --locale=en --strict` passes. Spanish and Chinese cover 297 each, with 226 drafts. The 28 canonical place names are curated in all three languages and can be reapplied with `tools/i18n-review-places.mjs`. English is now the default and Settings exposes an English/Russian selector; see `docs/LOCALIZATION.md`. Marta's line about "repairing water" correctly refers to repairing the pump in Russian and in all three translations.
+
+English localization is enabled: room dialogue messages carry optional stable node/original-option references and check metadata; client display helpers localize dialogue, journal and history, generated job boards and road meetings, map labels/logs, ending slides, chapter summaries, multiplayer lobby, world travel console and combat UI while Russian room data and choice indices stay authoritative. Built-in hero names are translated for display, never rewritten in existing saves. New dialogue-history lines record optional references inside unchanged v2 saves; old reference-free lines now resolve by saved speaker, role and text, including recorded placeholder values, when they still match the reviewed catalog. The English world-chart and loading-chart images are generated alongside Russian ones; town plans have English compass variants, and HTML/manifest text follows the stored preference. Language changes restart the client, saving solo progress first. `tools/i18n-surfaces.mjs` inventories 20,568 Russian strings in generated map JSON (824 distinct); the display layer covers their labels, while the Russian map source remains unchanged.
+
+The secret branch «Обитель Ракеты» is implemented in the bible, content, five linked maps, art, room/travel systems and finale. Its moving 3×3 storm opens only after Chapter V, the Sanctuary keeps one real dog alive for ~70 years without a definitive explanation, each player's pilgrim chest restores gear safely, and its four water/power outcomes appear in ending slides. The archive adds a Repair/Science 55 alternative for the dam's sentries without replacing the Mandate or supplying trial evidence. Rocket-specific unit and browser tests cover discovery, gear, story, water economy, save/load inside the Sanctuary and the finale. The complete unit and browser suites, lint, build and non-strict i18n audit pass.
+
+Vehicle frames in the atlas now use four original transparent painted cutouts (sedan, pickup, burnt van, water tanker), cropped and anchored reproducibly by `tools/art/vehicle-raster.mjs`; sources and prompts are in `tools/art/assets/vehicles/`. Static actor/prop occlusion was audited across generated maps with sprite alpha (`tools/audit-prop-occlusion.mjs`): Hank, the campfire and his bag, the Rusty Well caravan visitors and cat, the Zapruda cat and a hidden mite were separated; only shallow intentional overlaps remain (vendors behind stalls, Klyuchnik at the cage). `docs/BALANCE_AUDIT.md` records seeded fight results, not a full-campaign balance approval. Current checks: 1249 unit tests, lint, build, strict English audit and all 44 browser e2e scenarios pass (`--workers=2`). The lowland test skips a long, irrelevant walk across the yard, and visual screenshots wait for the Loading scene to close.
+
+Balance and everyday interactions have been tightened after S15a:
+- XP now climbs through ten levels (400 for level 2, 1000 for level 3); dialogue checks, recipes, repeatable contracts, repeat-spawning foes and caravan escorts to the same destination pay XP only on the first success per character. Material rewards still repeat. The first settlement's main quests leave the hero at level 2.
+- The inventory keeps hand 1 and hand 2 distinct when one is empty. Clicking or right-clicking an item opens its actions; a full flask can be drunk while thirsty even at full HP. The same menu works by touch.
+- Cats and dogs with petting dialogues live in the main areas of nine settlements. Their sprites come from `tools/art/creatures.mjs`, their placement from the map builders, and their talk from `dialogues/pets.json`.
+- `tests/unit/{character,gear,chems,craft,jobs,escort,pets}.test.ts` and `tests/e2e/{inventory-pets,mobile}.spec.ts` cover this pass. Balance simulations now select explicit levels from `XP_TABLE`.
+
 Stage P done: the first half of the secrets pass (S15a).
 - «Последний гонец» at the southern post station, the Watcher's bunker above Deep Water, the treasury train «Литерный» with seal mark 12, and the Chamber of Weights and Seals under the city hall.
 - Four new trial pieces (`courier_letter` counts twice, `watcher_diary`, `drop_stamps`, `chamber_ledger`), the collapse of illegal капли, and ending slides for the courier, the bunker, the train and the Chamber.
@@ -358,6 +374,8 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 **Switching agents (Codex, Claude, Cursor).** Everything needed is in the repo: `AGENTS.md` (rules, commands, «Pitfalls we hit», «Content generators»), this file, the bible in `docs/story/`, the decisions in `docs/DECISIONS.md`. Setup: `npm ci`, `npx playwright install chromium`. The late stages' content scripts are in `tools/content-gen/`. Next work: «Where to continue» below — S15b is the last big content milestone; then the Chapter III side quests 18–20 and publishing co-op on a Node host.
 
 **Where things are**
+- Quest route: `content/quests.json` (`mandate.truth`, `inspector.gone`), Hank in `dialogues/rusty_well.json`; Соль's gate is `locations.json` `chapter3_seen`. Dialogue history: `core/DialogueRunner.ts`, `core/Game.ts`, optional v2 `dialogueHistory`, `ui/Windows.ts` (`JournalWindow`), and `tests/unit/dialogue-history.test.ts`.
+- Progression and inventory: `core/character/defs.ts`, `core/Game.ts`, `ui/Inventory.ts`; `xpAwards` is optional in v2 saves for first-time rewards. Town pets are in `dialogues/pets.json`, `tools/art/creatures.mjs` and the nine main-area builders.
 - Chapter I: `tools/build-map.mjs` and `dialogues/rusty_well.json`.
 - Chapter II:
   - maps: `tools/build-pillars.mjs`, `tools/build-kolyuchka.mjs`;
@@ -382,12 +400,15 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 5. Run `npm run gen:map && npm run gen:assets`; this also bakes its ground, the roofs and the town plan.
 
 **Where to continue**
+
+- **English maintenance:** English is the default, the English/Russian selector is visible, and the 5587-string catalog passes strict audit. Keep new content and runtime messages paired, and continue nuanced copy QA across optional branches; `src/i18n/runtime.ts` is the client-only message layer. `tests/e2e/i18n-preview.spec.ts` checks the menu, world chart, UI and language-selector round trip.
 - **S15b, the rest of the secrets pass:** «Двойник»; «Король Элеватора»; the three steps of «Ученик Печатника»; «Бархан» and Блик; Зеркальное поле; Могильник; the City that does not exist; the twelve special world-map meetings. «Вторая плотина» already works at the dam, but its full secret route may be expanded here.
 - Chapter III side quests 18–20 of the bible («Крысиный король», «Водонапорная башня», «Сын пайщика») are still open; the sewers and the Lower city are ready for them.
 - **The ending slides** are data (`content/endings.json`): add a slide or a variant when a new place, companion or quest outcome should be remembered.
 
 **Known limits**
 - `docs/story/side-quests.md` keeps both the early quest list and the stage R versions. The R versions are the built ones.
+- Obsolete v2 dialogue-history lines absent from the current catalog may remain in Russian; guessing a translation could misstate what was said. Current catalog lines are covered by speaker/role matching, and new entries carry stable references. Spanish and Chinese have independent later gates and are not shown as complete. Full-route resource and encounter balance still needs campaign checkpoint simulations (`docs/BALANCE_AUDIT.md`).
 
 **Where it is published.**
 - The code: https://github.com/sweetiki56-prog/sush.
@@ -395,9 +416,9 @@ Start with `AGENTS.md`: layout, commands, rules, and how to add a quest, map, it
 - Co-op and the arena are not published yet: they need a host that runs the Node server with WebSockets (the Dockerfile is ready).
 
 **How to check that everything works**
-- `npm test`: 784 tests, with the balance numbers printed to stderr.
+- `npm test -- --maxWorkers=2`: 1249 tests pass, with balance numbers printed to stderr.
 - `npm run lint`, `npm run build`.
-- `npm run test:e2e`: 30 tests, about 14 min; use `--workers=2` (see «e2e under load» in `AGENTS.md`). Under 4 workers a few heavy ones (co-op road, road, combat, chapter2) can time out; rerun them alone.
+- `npm run test:e2e -- --workers=2`: all 44 scenarios pass in about 13 min (see «e2e under load» in `AGENTS.md`). Under load a few heavy ones (co-op road, road, combat, chapter2, lowland) can time out; rerun them alone. Do not edit watched source files while this suite runs: Vite hot-reloads the active test pages.
 - By hand, with `npm run dev`:
   - a new game;
   - in the console, `__world.flag('chapter1_seen')`, then `trust_outcome` = `'tax'`, `quest_complete`, `marta_letter`, `chapter1_done`;

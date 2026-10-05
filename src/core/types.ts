@@ -46,6 +46,7 @@ export type Effect =
   | { type: 'quest'; quest: string; stage: string }
   | { type: 'log'; text: string }
   | { type: 'xp'; amount: number }
+  | { type: 'xpOnce'; key: string; amount: number }
   | { type: 'karma'; amount: number }
   | { type: 'open'; window: 'workbench' | 'barter'; id: string } // a window over the game: a bench kind or a trader
   | { type: 'rest' } // sleep till the next morning (the room decides if it is safe)
@@ -55,6 +56,8 @@ export type Effect =
   | { type: 'leave'; id: string } // a companion goes home and waits there
   | { type: 'confiscate' } // an arrest: weapons, grenades, ammo and armor go into the warden's chest
   | { type: 'unconfiscate' } // and come back
+  | { type: 'rocketEscrow'; action: 'seize' | 'release' } // the room handles every co-op player's pilgrim chest
+  | { type: 'autosave' } // preserve a safe checkpoint before a consequential choice
   | { type: 'dayMark'; key: string; in: number } // key = today + `in` (a day something will happen)
   | { type: 'encounter'; action: EncounterAction }; // how a meeting on the road ends (the room acts once the talk closes)
 
@@ -256,6 +259,10 @@ export interface GameStateData {
   player: { x: number; y: number; dir: number };
   stats: { playMs: number; checksPassed: number; checksFailed: number; kills: number };
   log: string[];
+  /** Actual conversations, grouped by speaker. Older v2 saves start recording on their next talk. */
+  dialogueHistory?: { speaker: string; lines: { role: 'npc' | 'hero'; text: string; ref?: { dialogue: string; node: string; option?: number } }[] }[];
+  /** Milestone XP already paid to this character. Missing in old v2 saves. */
+  xpAwards?: Record<string, true>;
   /** Where the party is on the world map: shared world state like flags. Missing until the first trip. */
   travel?: TravelState;
   /** Traders' goods and money: shared world state like flags. Missing in older saves. */
@@ -264,6 +271,8 @@ export interface GameStateData {
   body?: { buffs: { item: string; leftMs: number }[]; hooked: Record<string, number>; thirsty?: boolean };
   /** Weapons, grenades, ammo and armor taken away on an arrest, until they are got back. */
   confiscated?: Record<string, number>;
+  /** Personal pilgrim chest. Presence, including an empty object, means the ritual is active. */
+  rocketEscrow?: Record<string, number>;
 }
 
 export const START_CAPS = 12;

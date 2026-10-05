@@ -1,0 +1,1416 @@
+{
+  "/quests/water/title": {
+    "ru": "Вода для Ржавого колодца",
+    "es": "Agua para el Pozo Oxidado"
+  },
+  "/quests/water/stages/0/journal": {
+    "ru": "Старейшина Марта просит принести клапан давления с заброшенной насосной станции к северо-востоку от поселения.",
+    "es": "Marta, la anciana del poblado, pide traer una válvula de presión de la estación de bombeo abandonada al noreste."
+  },
+  "/quests/mandate/title": {
+    "ru": "Мандат",
+    "es": "El Mandato"
+  },
+  "/quests/mandate/stages/0/journal": {
+    "ru": "В ящике под клапаном лежал запаянный латунный тубус с гербом Водоуправления. Хэнк побледнел бы, увидев его. Стоит спросить.",
+    "es": "Bajo la válvula había un tubo de latón sellado con el emblema de la Autoridad del Agua. A Hank se le borraría el color del rostro al verlo. Conviene preguntarle."
+  },
+  "/quests/mandate/stages/1/journal": {
+    "ru": "Хэнк признался: он дезертир Треста, а в тубусе Мандат — право на всю воду реки Светлой. Трест хочет его сжечь. Хэнк советует уходить из посёлка: через Три столба и Колючку к Нотариусу в Запруде. Соль — позже.",
+    "es": "Hank confesó que desertó del Consorcio. El tubo guarda el Mandato, que otorga derechos sobre toda el agua del río Svetlaya. El Consorcio quiere quemarlo. Hank aconseja salir del poblado: pasar por Tres Pilares y Kolyuchka hasta llegar al Notario en Zapruda. Sal tendrá que esperar."
+  },
+  "/quests/inspector/title": {
+    "ru": "Сборщики Треста",
+    "es": "Los recaudadores del Consorcio"
+  },
+  "/dialogues/marta/speaker": {
+    "ru": "Старейшина Марта",
+    "es": "Marta, anciana del poblado"
+  },
+  "/dialogues/marta/nodes/after/text": {
+    "ru": "Помпа качает. Пей сколько надо, путник. Выход к тракту — на запад, мимо указателя. На карте мира держи на север к Трём столбам, а дальше — к Колючке.",
+    "es": "La bomba vuelve a funcionar. Bebe cuanto necesites, caminante. Para salir al camino, ve al oeste, pasando el poste indicador. En el mapa del mundo, toma rumbo norte hacia Tres Pilares y sigue después hasta Kolyuchka."
+  },
+  "/dialogues/marta/nodes/letter_more/text": {
+    "ru": "— Встретим. — Марта кивает на помпу. — Её мы теперь умеем чинить сами. Выходи на запад, мимо указателя. На тракте держи на север.",
+    "es": "—Aquí estaremos. —Marta señala la bomba con la cabeza—. Ya sabemos repararla por nuestra cuenta. Sal por el oeste, pasando el poste indicador. Una vez en el camino, ve hacia el norte."
+  },
+  "/armor/jacket/name": {
+    "ru": "Кожанка",
+    "es": "Chaqueta de cuero"
+  },
+  "/armor/tirevest/name": {
+    "ru": "Панцирь из покрышек",
+    "es": "Chaleco de neumáticos"
+  },
+  "/armor/vest/name": {
+    "ru": "Бронежилет",
+    "es": "Chaleco blindado"
+  },
+  "/armor/tinplate/name": {
+    "ru": "Консервная банка",
+    "es": "Armadura de hojalata"
+  },
+  "/armor/exo/name": {
+    "ru": "Экзокаркас",
+    "es": "Exoesqueleto"
+  },
+  "/armor/duster/name": {
+    "ru": "Серый пыльник",
+    "es": "Guardapolvo gris"
+  },
+  "/armor/waterman/name": {
+    "ru": "Плащ водоноса",
+    "es": "Capa del aguador"
+  },
+  "/armor/plated_jacket/name": {
+    "ru": "Кожанка с пластинами",
+    "es": "Chaqueta de cuero reforzada"
+  },
+  "/armor/reaper_shell/name": {
+    "ru": "Панцирь жнеца",
+    "es": "Caparazón de segador"
+  },
+  "/armor/raider_rig/name": {
+    "ru": "Броня налётчика",
+    "es": "Armadura de saqueador"
+  },
+  "/armor/nut_mail/name": {
+    "ru": "Гайковая рубаха",
+    "es": "Cota de tuercas y pernos"
+  },
+  "/armor/bark/name": {
+    "ru": "«Кора»",
+    "es": "Corteza"
+  },
+  "/armor/salt_crust/name": {
+    "ru": "Соляная корка",
+    "es": "Armadura de costra salina"
+  },
+  "/armor/shore_plate/name": {
+    "ru": "Береговой доспех",
+    "es": "Coraza de la ribera"
+  },
+  "/armor/dew_cuirass/name": {
+    "ru": "Кираса Росы",
+    "es": "Coraza del Rocío"
+  },
+  "/armor/snake_scale/name": {
+    "ru": "Змеиная чешуя",
+    "es": "Armadura de escamas de serpiente"
+  },
+  "/armor/wax_cloak/name": {
+    "ru": "Плащ Сургуча",
+    "es": "Capa de Surguch"
+  },
+  "/character/attrs/str": {
+    "ru": "Физическая сила. Влияет на очки здоровья, урон в ближнем бою и на то, получится ли что-то сорвать или кого-то запугать.",
+    "es": "Fuerza física. Afecta a la salud, el daño cuerpo a cuerpo y la capacidad para arrancar objetos o intimidar."
+  },
+  "/character/attrs/per": {
+    "ru": "Зоркость и чутьё. Влияет на очерёдность хода в бою, меткость на дальней дистанции и на то, заметите ли вы тайник.",
+    "es": "Vista aguda e instinto. Afecta al orden de los turnos, la puntería a larga distancia y la detección de escondites."
+  },
+  "/character/attrs/end": {
+    "ru": "Стойкость к ранам и ядам. Влияет на очки здоровья и прирост здоровья с уровнем.",
+    "es": "Resistencia a heridas y venenos. Afecta a la salud y a cuánto aumenta al subir de nivel."
+  },
+  "/character/attrs/cha": {
+    "ru": "Умение нравиться и убеждать. Основа Красноречия и Торговли.",
+    "es": "Facilidad para caer bien y convencer. Es la base de Persuasión y Comercio."
+  },
+  "/character/attrs/int": {
+    "ru": "Сообразительность и знания. Влияет на Ремонт, Науку и число очков навыков за уровень. С очень низким интеллектом трудно говорить связно.",
+    "es": "Ingenio y conocimientos. Afecta a Reparación, Ciencia y los puntos de habilidad por nivel. Con una Inteligencia muy baja cuesta expresarse con claridad."
+  },
+  "/character/attrs/agi": {
+    "ru": "Координация и быстрота. Определяет очки действия в бою, Взлом, Скрытность и Стрельбу.",
+    "es": "Coordinación y rapidez. Determina los puntos de acción en combate e influye en Cerrajería, Sigilo y Armas de fuego."
+  },
+  "/character/attrs/luk": {
+    "ru": "Судьба. Влияет на шанс критического попадания и на мелкие находки.",
+    "es": "Los caprichos del destino. Afecta a la probabilidad de impacto crítico y a los pequeños hallazgos."
+  },
+  "/character/skills/guns": {
+    "ru": "Стрельба из винтовок и пистолетов. Шанс попасть с расстояния.",
+    "es": "Uso de rifles y pistolas. Determina la probabilidad de acertar a distancia."
+  },
+  "/character/skills/melee": {
+    "ru": "Нож, дубина, кулаки. Шанс попасть вплотную.",
+    "es": "Cuchillos, garrotes y puños. Determina la probabilidad de acertar de cerca."
+  },
+  "/character/skills/medic": {
+    "ru": "Перевязка ран, бинты лечат лучше.",
+    "es": "Para curar heridas y aprovechar mejor los vendajes."
+  },
+  "/character/skills/sneak": {
+    "ru": "Двигаться незаметно и таскать чужое.",
+    "es": "Moverse sin ser visto y llevarse lo ajeno."
+  },
+  "/character/skills/lockpick": {
+    "ru": "Открывать замки без ключа.",
+    "es": "Abrir cerraduras sin llave."
+  },
+  "/character/skills/speech": {
+    "ru": "Убеждать, уговаривать, выторговывать условия.",
+    "es": "Convencer, salir de apuros hablando y negociar mejores condiciones."
+  },
+  "/character/skills/barter": {
+    "ru": "Цены у торговцев.",
+    "es": "Los precios que te ofrecen los comerciantes."
+  },
+  "/character/skills/repair": {
+    "ru": "Чинить механизмы.",
+    "es": "Reparar mecanismos."
+  },
+  "/character/skills/science": {
+    "ru": "Разбираться в старой технике и записях.",
+    "es": "Entender la tecnología antigua y los documentos."
+  },
+  "/character/skills/survival": {
+    "ru": "Знание пустоши: звери, следы, яды, приманки.",
+    "es": "Conocer el yermo: animales, rastros, venenos y cebos."
+  },
+  "/items/rocket_fang/name": {
+    "ru": "Клык",
+    "es": "Colmillo",
+    "draft": true
+  },
+  "/endings/32/variants/9/text": {
+    "ru": "Весть об источнике купили люди власти. Таблички и сборщики сменили старых хранителей. Ракету не тронули: её имя оказалось полезным для торговли водой.",
+    "es": "Los poderosos compraron el secreto del manantial. Nuevos letreros y recaudadores sustituyeron a los antiguos guardianes. A Raketa no la tocaron: su nombre resultó útil para vender agua.",
+    "draft": true
+  },
+  "/creatures/rocket_guard/name": {
+    "ru": "Страж Обители",
+    "es": "Guardián del Santuario",
+    "draft": true
+  },
+  "/items/rocket_water/name": {
+    "ru": "Вода Обители",
+    "es": "agua del santuario",
+    "draft": true
+  },
+  "/endings/32/title": {
+    "ru": "Обитель Ракеты",
+    "es": "El Santuario de Raketa",
+    "draft": true
+  },
+  "/locations/rocket/name": {
+    "ru": "Обитель Ракеты",
+    "es": "el Santuario de Raketa"
+  },
+  "/companions/timofey/barks/4/text": {
+    "ru": "Семьдесят лет в одном журнале. Люди сменились, а почерк про её ухо всё тот же.",
+    "es": "Setenta años en una revista. La gente ha cambiado, pero la letra en su oreja sigue siendo la misma.",
+    "draft": true
+  },
+  "/endings/32/variants/10/text": {
+    "ru": "После боя очиститель Обители остановился. Воду разбирали поспешно, сад высох; Ракета исчезла в песках. Никто так и не узнал, что удерживало её жизнь семьдесят лет.",
+    "es": "Tras el combate, la depuradora del Santuario se detuvo. Se llevaron el agua a toda prisa y el jardín se secó; Raketa desapareció en la arena. Nadie supo qué la había mantenido viva durante setenta años.",
+    "draft": true
+  },
+  "/endings/32/variants/0/text": {
+    "ru": "После потопа Обитель впустила беженцев. Сад выжил лишь наполовину, зато вода и стены спасли людей. Ракета лежала у дверей, пока не стихли крики.",
+    "es": "Tras la inundación, el Santuario acogió a los refugiados. Perdió medio jardín, pero sus muros y su agua salvaron vidas. Raketa permaneció junto a la entrada hasta que cesaron los gritos.",
+    "draft": true
+  },
+  "/endings/32/variants/5/text": {
+    "ru": "Обитель открыла выдачу воды соседям по счёту. Сад стал меньше, людей за стеной — больше. Ракета всё так же спит возле миски; Толмач называет это согласием.",
+    "es": "El Santuario empezó a repartir agua medida entre sus vecinos. El jardín menguó y aumentó la gente a la que ayudaba. Raketa aún duerme junto a su cuenco; Tolmach lo llama consentimiento.",
+    "draft": true
+  },
+  "/items/rocket_water/desc": {
+    "ru": "Очищенная вода из малого источника. Утоляет жажду; пустая фляга остаётся.",
+    "es": "Agua purificada de una pequeña fuente. Apaga la sed; el matraz vacío permanece.",
+    "draft": true
+  },
+  "/locations/rocket/areas/4/name": {
+    "ru": "Архив",
+    "es": "Archivo",
+    "draft": true
+  },
+  "/items/rocket_log/desc": {
+    "ru": "Семьдесят лет записей об одной собаке и пометка об обходе охранных машин Заслона.",
+    "es": "Setenta años de registros sobre un perro y una nota sobre el paso de los vehículos de seguridad de Zaslon.",
+    "draft": true
+  },
+  "/endings/32/variants/6/text": {
+    "ru": "Обитель сохранила тайну источника и отвела немного воды паломникам. За стеной растут деревья; снаружи спорят, достаточно ли этих капель. Ракета живёт там, как и прежде.",
+    "es": "El Santuario mantuvo oculto el manantial y reservó un poco de agua para los peregrinos. Dentro crecen árboles; fuera se discute si bastan esas pocas gotas. Raketa sigue allí.",
+    "draft": true
+  },
+  "/quests/rocket/title": {
+    "ru": "Обитель Ракеты",
+    "es": "El Santuario de Raketa",
+    "draft": true
+  },
+  "/locations/rocket/areas/0/name": {
+    "ru": "Внешний пост",
+    "es": "Publicación externa",
+    "draft": true
+  },
+  "/quests/rocket/stages/2/journal": {
+    "ru": "Подземный ход ведёт к охраняемому источнику. В нишах спрятаны старые журналы и учёт воды.",
+    "es": "El túnel conduce a un manantial protegido. En sus nichos hay registros antiguos y cuentas de agua.",
+    "draft": true
+  },
+  "/items/rocket_collar/desc": {
+    "ru": "Красная кожа, старая застёжка. Восприятие +1. Хранители прислушиваются к носителю.",
+    "es": "Cuero rojo, cierre antiguo. Percepción +1. Los guardianes escuchan al transportista.",
+    "draft": true
+  },
+  "/items/rocket_collar/name": {
+    "ru": "Ошейник Ракеты",
+    "es": "Collar Raketa",
+    "draft": true
+  },
+  "/items/rocket_fang/desc": {
+    "ru": "Узкий металлический нож хранителей. Не зуб собаки.",
+    "es": "Cuchillo guardián de metal estrecho. Ni un diente de perro.",
+    "draft": true
+  },
+  "/locations/rocket/areas/3/name": {
+    "ru": "Зал Ракеты",
+    "es": "Salón Raketa",
+    "draft": true
+  },
+  "/locations/rocket/areas/2/name": {
+    "ru": "Закрытый сад",
+    "es": "jardín interior",
+    "draft": true
+  },
+  "/weapons/rocket_fang/name": {
+    "ru": "Клык",
+    "es": "Colmillo",
+    "draft": true
+  },
+  "/quests/rocket/stages/1/journal": {
+    "ru": "Под неприметным сараем есть проход. Можно договориться, обойти охрану или идти силой.",
+    "es": "Un cobertizo corriente oculta un pasaje. Puedes negociar, buscar una vía técnica o entrar por la fuerza.",
+    "draft": true
+  },
+  "/quests/rocket/stages/0/journal": {
+    "ru": "Буря привела к скрытому посту. Над воротами — силуэт собаки; стражи требуют сдать вещи.",
+    "es": "La tormenta ha revelado un puesto oculto. La silueta de una perra marca la puerta; los guardias exigen tu equipo.",
+    "draft": true
+  },
+  "/quests/rocket/stages/3/journal": {
+    "ru": "За стеной — маленький сад. Ракета жива; Толмач говорит за неё, а хранители знают о поступках странника.",
+    "es": "Tras el muro hay un jardín pequeño. Raketa sigue viva; el intérprete habla por ella y los guardianes conocen tus actos.",
+    "draft": true
+  },
+  "/quests/rocket/stages/4/journal": {
+    "ru": "Архив подтверждает: это одна и та же Ракета уже семьдесят лет. Почему она живёт так долго, записи не объясняют. Воды слишком мало для всей Суши, но ею можно делиться.",
+    "es": "El archivo confirma que se trata de la misma Raketa desde hace setenta años. No explica su longevidad. No hay agua para todo Sush, aunque sí para compartir una parte.",
+    "draft": true
+  },
+  "/locations/rocket/areas/1/name": {
+    "ru": "Путь Покорности",
+    "es": "Camino de la sumisión",
+    "draft": true
+  },
+  "/items/rocket_log/name": {
+    "ru": "Служебный журнал Обители",
+    "es": "Registro de servicios del Santuario",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/5/text": {
+    "ru": "Пока уйти.",
+    "es": "Vete por ahora.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/1/text": {
+    "ru": "Объяснить, что пришёл проверить очиститель.",
+    "es": "Explique que vino a revisar el purificador.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/2/text": {
+    "ru": "Показать ошейник: Ракета уже знает меня.",
+    "es": "Mostrar cuello: Raketa ya me conoce.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/0/text": {
+    "ru": "Сдать вещи под расписку.",
+    "es": "Entregar las cosas contra recibo.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/passed/options/0/text": {
+    "ru": "Войти.",
+    "es": "Acceso.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/who/options/0/text": {
+    "ru": "Вернуться к разговору.",
+    "es": "Volvamos a la conversación.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/speaker": {
+    "ru": "Псарь",
+    "es": "maestro de perros",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/3/text": {
+    "ru": "Кто такая Ракета?",
+    "es": "¿Quién es Raketa?",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/bluffed/options/0/text": {
+    "ru": "Пройти.",
+    "es": "Aprobar.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/text": {
+    "ru": "— Стой. За этой чертой оружие, одежда и припасы идут в личный ящик. Тубус с печатью оставь при себе: бумагу Ракета не нюхает.",
+    "es": "- Detener. Más allá de este punto, las armas, la ropa y los suministros van a una caja personal. Deja el tubo con el sello: Raketa no huele a papel.",
+    "draft": true
+  },
+  "/quests/rocket/stages/5/journal": {
+    "ru": "Теперь нужно решить, кому будет доступен источник Обители.",
+    "es": "Hay que decidir quién tendrá acceso al manantial del Santuario.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/halt/options/4/text": {
+    "ru": "Прорваться через пост.",
+    "es": "Rompe el poste.",
+    "draft": true
+  },
+  "/quests/rocket/stages/6/journal": {
+    "ru": "Судьба Обители решена. Причина долголетия единственной Ракеты осталась тайной.",
+    "es": "El destino del Santuario está decidido. Sigue sin saberse por qué la única Raketa ha vivido tanto.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/refused/options/0/text": {
+    "ru": "Ещё раз.",
+    "es": "De nuevo.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/refused/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/sentry_panel/nodes/look/options/2/text": {
+    "ru": "По записи Обители найти служебный размыкатель и отключить охрану.",
+    "es": "Usando la entrada de Santuario, encuentre el interruptor de servicio y desactive la seguridad.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/passed/text": {
+    "ru": "Псарь ставит печать на ящике. — За сараем ковёр. Под ним люк. Вернёшься — вернём всё до последней иглы.",
+    "es": "El cazador pone un sello en la caja. — Detrás del granero hay una alfombra. Hay una trampilla debajo. Si vuelves, te lo devolveremos todo hasta la última aguja.",
+    "draft": true
+  },
+  "/dialogues/sentry_panel/nodes/look/options/3/text": {
+    "ru": "По записи Обители перевести машины на старый канал обслуживания.",
+    "es": "Según la entrada del Santuario, trasladar los autos al antiguo canal de servicio.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/bluffed/text": {
+    "ru": "Псарь смотрит на инструмент, потом на пустые руки. — Если врёшь, Толмач узнает прежде меня. Проходи.",
+    "es": "El cazador mira el instrumento y luego sus manos vacías. \"Si estás mintiendo, Tolmach lo descubrirá antes que yo\". Entra.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/open/options/0/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/threat/options/1/text": {
+    "ru": "Опустить руки.",
+    "es": "Baja las manos.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/who/text": {
+    "ru": "— Не «кто». Кому. Вода досталась ей первой. Остальные только научились считать капли.",
+    "es": "- No \"quién\". A quien. Ella tomó el agua primero. El resto acaba de aprender a contar gotas.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/threat/options/0/text": {
+    "ru": "Начать прорыв.",
+    "es": "Comience un gran avance.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/friend/options/0/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/nodes/look/options/0/text": {
+    "ru": "Спуститься.",
+    "es": "Bajar.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/open/text": {
+    "ru": "— Проход открыт. Ящик помечен твоим именем, если в нём что-то лежит.",
+    "es": "- El pasaje está abierto. El cuadro está marcado con su nombre si hay algo en él.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/refused/text": {
+    "ru": "— У очистителя есть свои люди. Сдавай вещи, ищи другой путь или уходи.",
+    "es": "— El purificador tiene su propia gente. Renuncia a tus cosas, busca otro camino o vete.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/threat/text": {
+    "ru": "Псарь отступает к прожектору. — Ракета не просила ничьей крови. Это твой выбор.",
+    "es": "El cazador se retira al centro de atención. \"Raketa no pidió la sangre de nadie. Es tu elección.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/alarm/text": {
+    "ru": "За стеной звенит тревога. Путь к люку открыт, но стражи не дадут пройти просто так.",
+    "es": "Una alarma suena detrás de la pared. El camino hacia la escotilla está abierto, pero los guardias no te dejarán pasar así.",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/nodes/look/text": {
+    "ru": "Под потёртым ковром — тяжёлый люк. Снизу доносится ровный гул насоса.",
+    "es": "Debajo de la alfombra gastada hay una trampilla pesada. Desde abajo llega el constante zumbido de la bomba.",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/0/text": {
+    "ru": "Разобрать крепления.",
+    "es": "Desmontar las fijaciones.",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/text": {
+    "ru": "За проржавевшей крышкой идёт труба. Её можно открыть инструментом или протиснуться вдоль кабеля.",
+    "es": "Detrás de la tapa oxidada hay una tubería. Se puede abrir con una herramienta o apretar a lo largo del cable.",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/3/text": {
+    "ru": "Пока оставить.",
+    "es": "Déjalo por ahora.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/options/2/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/returned/options/0/text": {
+    "ru": "Закрыть ящик.",
+    "es": "Cierra la caja.",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/speaker": {
+    "ru": "Люк под ковром",
+    "es": "Escotilla debajo de la alfombra",
+    "draft": true
+  },
+  "/dialogues/rocket_hatch/nodes/look/options/1/text": {
+    "ru": "Вернуться к посту.",
+    "es": "Volver a la publicación.",
+    "draft": true
+  },
+  "/dialogues/rocket_psar/nodes/friend/text": {
+    "ru": "Псарь кивает. — Друг Ракеты проходит без обряда. Вещи больше не нужны как залог.",
+    "es": "El cazador asiente. — El amigo Raketa fallece sin ceremonia. Ya no se necesitan cosas como garantía.",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/1/text": {
+    "ru": "Вскрыть крышку.",
+    "es": "Abre la tapa.",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/speaker": {
+    "ru": "Технический лаз",
+    "es": "Agujero técnico",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/warning/options/0/text": {
+    "ru": "Остановиться.",
+    "es": "Permanecer.",
+    "draft": true
+  },
+  "/dialogues/rocket_mark/nodes/look/options/0/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/text": {
+    "ru": "На крышке — имя и целая печать. По ту сторону поста стоит Псарь.",
+    "es": "En la tapa hay un nombre y un sello completo. Al otro lado del poste se encuentra el Maestro de Canes.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/options/1/text": {
+    "ru": "Дёрнуть замок тайком.",
+    "es": "Tira de la cerradura en secreto.",
+    "draft": true
+  },
+  "/dialogues/rocket_duct/nodes/look/options/2/text": {
+    "ru": "Проверить схему кабеля.",
+    "es": "Consulte el diagrama de cables.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/warning/text": {
+    "ru": "Псарь замечает руку на замке. — Ящик твой. Зачем ломать собственную печать?",
+    "es": "El cazador nota la mano en la cerradura. - La caja es tuya. ¿Por qué romper tu propio sello?",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/look/options/0/text": {
+    "ru": "Забрать своё и уйти.",
+    "es": "Toma el tuyo y vete.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/speaker": {
+    "ru": "Ящик паломника",
+    "es": "Caja del Peregrino",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/returned/text": {
+    "ru": "Замок открывается на выданный номер. Всё на месте; пост теперь смотрит на тебя внимательнее.",
+    "es": "La cerradura se abre al número emitido. Todo está en su lugar; La publicación te mira más de cerca ahora.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/warning/options/1/text": {
+    "ru": "Сорвать печать и поднять тревогу.",
+    "es": "Rompe el sello y da la alarma.",
+    "draft": true
+  },
+  "/dialogues/rocket_mark/nodes/look/text": {
+    "ru": "На потемневшем металле — голова собаки с надрезом на левом ухе. На обороте дата семидесятилетней давности.",
+    "es": "Sobre el metal oscurecido está la cabeza de un perro con un corte en la oreja izquierda. En el reverso hay una fecha de hace setenta años.",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/speaker": {
+    "ru": "Цепь",
+    "es": "Cadena",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/way/options/0/text": {
+    "ru": "Понятно.",
+    "es": "Está vacío.",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/options/0/text": {
+    "ru": "Куда ведёт ход?",
+    "es": "¿A dónde lleva?",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/options/2/text": {
+    "ru": "Идти дальше.",
+    "es": "Siga adelante.",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/doubt/options/0/text": {
+    "ru": "Не выдам.",
+    "es": "No lo regalaré.",
+    "draft": true
+  },
+  "/dialogues/rocket_chest/nodes/alarm/text": {
+    "ru": "Печать рвётся. Стражи поднимают оружие; путь к наружной дороге ещё свободен.",
+    "es": "El sello se rompe. Los guardias levantan sus armas; El camino hacia la carretera exterior todavía está despejado.",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/speaker": {
+    "ru": "Кладовая",
+    "es": "Despensa",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/way/text": {
+    "ru": "— К саду. Он меньше, чем говорят снаружи, но больше, чем видят соседи.",
+    "es": "- Al jardín. Es más pequeño de lo que dicen por fuera, pero más grande de lo que ven los vecinos.",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/speaker": {
+    "ru": "Галерея",
+    "es": "Galería",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/doubt/text": {
+    "ru": "— Знаю. Моя сестра живёт за стеной. Псарю я этого не говорю.",
+    "es": "- Lo sé. Mi hermana vive detrás del muro. No le digo esto al cuidador del perro.",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/options/1/text": {
+    "ru": "Соседям нужна вода.",
+    "es": "Los vecinos necesitan agua.",
+    "draft": true
+  },
+  "/dialogues/rocket_chain/nodes/look/text": {
+    "ru": "— Я сторожу дверь, не воду. И всё чаще думаю, есть ли между ними разница.",
+    "es": "\"Estoy vigilando la puerta, no el agua\". Y cada vez me pregunto más a menudo si hay alguna diferencia entre ellos.",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/nodes/look/text": {
+    "ru": "Мешки с крупой и банки с водой. На двери: «Запас общины — не запас страны». В углу лежит вяленый угорь.",
+    "es": "Bolsas de cereal y latas de agua. En la puerta: “La reserva comunitaria no es la reserva del país”. En un rincón hay anguila seca.",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/nodes/look/text": {
+    "ru": "Первые листы начинаются семьдесят лет назад: Ракета привела людей к чистой воде, прежде чем загудел очиститель. В поздних записях её отметина на ухе не меняется.",
+    "es": "Las primeras hojas comenzaron hace setenta años: Raketa llevó a la gente al agua potable antes de que el purificador zumbara. En grabaciones posteriores, la marca de su oreja no cambia.",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/speaker": {
+    "ru": "Запретная дверь",
+    "es": "Puerta Prohibida",
+    "draft": true
+  },
+  "/dialogues/rocket_pantry/nodes/look/options/0/text": {
+    "ru": "Взять один кусок для подношения.",
+    "es": "Toma una pieza para ofrecer.",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/3/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_wall/speaker": {
+    "ru": "Фреска",
+    "es": "Fresco",
+    "draft": true
+  },
+  "/dialogues/rocket_wall/nodes/look/options/0/text": {
+    "ru": "Идти дальше.",
+    "es": "Siga adelante.",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/nodes/look/text": {
+    "ru": "Камень, жесть и выцветшая краска. На всех изображениях — одна Ракета: та же отметина левого уха. Подписи с датами идут через семь десятилетий, без нумерации и смены имени.",
+    "es": "Piedra, estaño y pintura descolorida. Todas las imágenes muestran el mismo Raketa: la misma marca en la oreja izquierda. Las firmas con fechas recorren siete décadas, sin numeración ni cambios de nombre.",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/0/text": {
+    "ru": "Вскрыть замок отмычкой.",
+    "es": "Recoge la llave de la cerradura.",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/text": {
+    "ru": "Пыль закрывает табличку «R.A.K.E.T.A.». За дверью — старые бланки станции.",
+    "es": "El polvo cubre el \"R.A.K.E.T.A.\" firmar. Detrás de la puerta hay antiguos formularios de estación.",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/1/text": {
+    "ru": "Разобрать старую петлю.",
+    "es": "Desmontar la bisagra vieja.",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/nodes/look/options/0/text": {
+    "ru": "Запомнить даты.",
+    "es": "Recuerda las fechas.",
+    "draft": true
+  },
+  "/dialogues/rocket_mark/speaker": {
+    "ru": "Знак Обители",
+    "es": "signo santuario",
+    "draft": true
+  },
+  "/dialogues/rocket_early_archive/speaker": {
+    "ru": "Старые журналы",
+    "es": "revistas viejas",
+    "draft": true
+  },
+  "/dialogues/rocket_gallery/nodes/look/options/0/text": {
+    "ru": "Сравнить изображения.",
+    "es": "Compara imágenes.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/before/options/0/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/1/text": {
+    "ru": "Открыть соседям счётную выдачу воды.",
+    "es": "Distribución abierta de agua medida a los vecinos.",
+    "draft": true
+  },
+  "/dialogues/rocket_forbidden/nodes/look/options/2/text": {
+    "ru": "Попросить Летописца открыть после аудиенции.",
+    "es": "Pídale al Cronista que lo abra después de la audiencia.",
+    "draft": true
+  },
+  "/dialogues/rocket_wall/nodes/look/text": {
+    "ru": "Ракета у чаши воды. Надпись не обещает дождя: «Не лги о том, сколько осталось». Художник тщательно повторил надрез на ухе.",
+    "es": "Raketa junto al cuenco de agua. El cartel no promete lluvia: \"No mientas sobre cuánto queda\". El artista repitió cuidadosamente el corte en la oreja.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/shared/options/0/text": {
+    "ru": "Продолжать.",
+    "es": "Continuar.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sold/options/0/text": {
+    "ru": "Уйти.",
+    "es": "Dejar.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/speaker": {
+    "ru": "Хранитель Миски",
+    "es": "Guardián del cuenco",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/before/text": {
+    "ru": "— Сначала поговори с Толмачом. Источник мал; решение о нём здесь не принимают у ворот.",
+    "es": "- Primero, habla con Tolmach. La fuente es pequeña; La decisión al respecto no se toma aquí en la puerta.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/2/text": {
+    "ru": "Продать сведения об источнике.",
+    "es": "Vender información sobre el manantial.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/text": {
+    "ru": "— Очиститель поднимает мало воды. Мы оставили её себе и назвали это верностью Ракете. Теперь нужно решить, сколько стен у слова «наше».",
+    "es": "«La depuradora saca poca agua. Nos la quedamos y lo llamamos lealtad a Raketa. Ahora debemos decidir hasta dónde llega la palabra “nuestra”».",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/after/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sale/options/0/text": {
+    "ru": "Уйти.",
+    "es": "Dejar.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/closed/text": {
+    "ru": "— Малую долю выдадим за стену. Это меньше, чем просили. Больше, чем было вчера.",
+    "es": "\"Daremos una pequeña parte para el muro\". Esto es menos de lo solicitado. Más que ayer.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/closed/options/0/text": {
+    "ru": "Оставить хранителей работать.",
+    "es": "Deja que los guardianes trabajen.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/shared/text": {
+    "ru": "Хранитель перечёркивает старые нормы. — Сад придётся уменьшить. Людей за воротами — нет.",
+    "es": "The Guardian tacha las viejas normas. — Habrá que reducir el jardín. No hay gente fuera de la puerta.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/0/text": {
+    "ru": "Сохранить Обитель, но выдавать воду паломникам.",
+    "es": "Conservar el Santuario, pero dar agua a los peregrinos.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/choose/options/3/text": {
+    "ru": "Сначала осмотреть архив.",
+    "es": "Primero, mire el archivo.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/after/options/0/text": {
+    "ru": "Предложить купить дар Ракеты.",
+    "es": "Oferta para comprar el regalo de Raketa.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/after/text": {
+    "ru": "— Решение записано. Вода от этого не прибавилась, но теперь известно, кто получит следующую чашу.",
+    "es": "- Se anota la decisión. Esto no aumentó el agua, pero ahora se sabe quién recibirá la próxima taza.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/options/0/text": {
+    "ru": "Наполнить одну пустую флягу.",
+    "es": "Llene un matraz vacío.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/filled/options/0/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/speaker": {
+    "ru": "Чаша источника",
+    "es": "Tazón de primavera",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/text": {
+    "ru": "Струя тонка. На медном счётчике видно: за день сюда приходит меньше воды, чем нужно целому посёлку.",
+    "es": "La corriente es fina. El contador de cobre muestra que aquí llega cada día menos agua de la que necesita todo el pueblo.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/options/2/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sold/text": {
+    "ru": "— Нас будут считать чужими счетами. Ты получил капли; они получат нашу воду.",
+    "es": "\"Seremos considerados cuentas de otra persona\". Tienes las gotas; ellos obtendrán nuestra agua.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sale/text": {
+    "ru": "— Дар можно выпить или отдать. Продавать его тем, кто уже наполнил эту флягу, бессмысленно.",
+    "es": "- El regalo se puede beber o regalar. Venderlo a quienes ya han llenado este matraz no tiene sentido.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/filled/text": {
+    "ru": "Вода заполняет принесённую тару. Хранитель закрывает вентиль до следующего дня.",
+    "es": "El agua llena el recipiente traído. El cuidador cierra la válvula hasta el día siguiente.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/look/options/1/text": {
+    "ru": "Повредить очиститель и поднять тревогу.",
+    "es": "Dañar el purificador y dar la alarma.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/break/text": {
+    "ru": "— Насос не выдержит удара, — предупреждает хранитель. — Вместе с садом погибнет и вода для тех, кто придёт после нас.",
+    "es": "“La bomba no resistirá el impacto”, advierte el encargado. “El agua para los que vendrán detrás de nosotros también perecerá junto con el jardín”.",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/break/options/1/text": {
+    "ru": "Остановиться.",
+    "es": "Permanecer.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/speaker": {
+    "ru": "Ракета",
+    "es": "Raqueta",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/4/text": {
+    "ru": "Уйти.",
+    "es": "Dejar.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/break/options/0/text": {
+    "ru": "Разбить щиток.",
+    "es": "Rompe el escudo.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/2/text": {
+    "ru": "От меня никто не пострадал.",
+    "es": "Nadie resultó herido por mí.",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/speaker": {
+    "ru": "Счётчик воды",
+    "es": "medidor de agua",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/nodes/look/options/0/text": {
+    "ru": "Запомнить расчёт.",
+    "es": "Recuerda el cálculo.",
+    "draft": true
+  },
+  "/dialogues/rocket_meter/nodes/look/text": {
+    "ru": "Малый водоносный слой падает каждый сухой год. Сад и пайки держатся не чудом, а строгим расходом и работающим очистителем.",
+    "es": "El pequeño acuífero cae cada año seco. El jardín y las raciones se mantienen no por milagro, sino por un consumo estricto y un purificador que funcione.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/text": {
+    "ru": "Чёрно-подпалая собака смотрит на тебя. Левое ухо надрезано. Толмач ждёт, пока она моргнёт: — Она спрашивает, что ты делал с чужой водой.",
+    "es": "El perro negro y fuego te está mirando. Se corta la oreja izquierda. La intérprete espera que ella parpadee: “Pregunta qué hiciste con el agua de otra persona”.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/1/text": {
+    "ru": "Мне было важно никому не навредить.",
+    "es": "Intenté no hacer daño a nadie.",
+    "draft": true
+  },
+  "/dialogues/rocket_fountain/nodes/broken/text": {
+    "ru": "Очиститель глохнет. Стражи бегут к чаше. Южный выход ещё открыт.",
+    "es": "El purificador se para. Los guardias corren hacia el cuenco. La salida sur sigue abierta.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/0/text": {
+    "ru": "Люди пострадали из-за меня. Не стану это скрывать.",
+    "es": "He lastimado a personas y no lo ocultaré.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/lie/options/1/text": {
+    "ru": "Уйти.",
+    "es": "Dejar.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/after_lie/options/1/text": {
+    "ru": "Уйти.",
+    "es": "Dejar.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/meat/options/0/text": {
+    "ru": "Подождать.",
+    "es": "Esperar.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/lie/options/0/text": {
+    "ru": "Признать ложь.",
+    "es": "Admite la mentira.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/welcome/options/0/text": {
+    "ru": "Идти к Хранителю Миски.",
+    "es": "Ve al guardián del cuenco.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/after_lie/options/0/text": {
+    "ru": "Сказать правду теперь.",
+    "es": "Di la verdad ahora.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/honest/options/1/text": {
+    "ru": "Отойти без ответа.",
+    "es": "Salir sin respuesta.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/first/options/3/text": {
+    "ru": "Положить перед Ракетой вяленого угря.",
+    "es": "Coloca la anguila seca frente a la Raketa.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/honest/options/0/text": {
+    "ru": "Не требовать объяснения и принять её взгляд.",
+    "es": "No exijas una explicación y acepta su punto de vista.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/after_lie/text": {
+    "ru": "Ракета всё ещё смотрит на тебя. Толмач кладёт папку рядом, не открывая.",
+    "es": "Raketa todavía te está mirando. El intérprete pone la carpeta a su lado sin abrirla.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/friend/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/pet/options/0/text": {
+    "ru": "Пусть отдыхает.",
+    "es": "Déjalo descansar.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/lie/text": {
+    "ru": "Ракета тихо рычит. Толмач открывает папку с донесениями: — Не проси собаку поверить бумаге, которую сам же опроверг.",
+    "es": "Raketa gruñe en voz baja. El intérprete abre una carpeta con informes: “No le pidas al perro que crea en un documento que tú mismo has refutado”.",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/friend/text": {
+    "ru": "Ракета подставляет голову под ладонь. Толмач молчит — на этот раз перевод не нужен.",
+    "es": "Raketa pone su cabeza bajo su palma. El intérprete guarda silencio; esta vez no hay necesidad de traducción.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/meat/text": {
+    "ru": "Ракета съедает угря. Толмач начал говорить, но собака уже подошла и обнюхала руку. Кто здесь решил первым, неясно.",
+    "es": "Raketa come una anguila. El intérprete empezó a hablar, pero el perro ya se había acercado y olisqueó la mano. No está claro quién decidió primero aquí.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/honest/text": {
+    "ru": "Толмач ещё не успел заговорить. Кажется, кто-то произнёс: «Воды мало. Людей больше». Ржавчик, если он рядом, поднимает уши; остальные смотрят на старый динамик над дверью.",
+    "es": "Tolmach aún no ha hablado. Crees oír una voz: «Poca agua. Demasiada gente». Si Rzhavchik está contigo, alza las orejas; los demás miran el viejo altavoz sobre la puerta.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/welcome/text": {
+    "ru": "Ракета садится у чаши. — Друг Ракеты, — говорит Толмач. — Теперь решай, как жить с этой водой.",
+    "es": "Raketa se sienta junto al cuenco. “Amigo Raketa”, dice Tolmach. - Ahora decide cómo vivir con esta agua.",
+    "draft": true
+  },
+  "/dialogues/rocket_throne/nodes/look/options/0/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_guard/speaker": {
+    "ru": "Страж Обители",
+    "es": "Guardián del Santuario",
+    "draft": true
+  },
+  "/dialogues/rocket_guard/nodes/look/options/0/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/look/text": {
+    "ru": "— Я передаю то, что вижу, и то, что приносят стражи. Про голос в зале меня не спрашивай: динамик давно отключён, если верить Летописцу.",
+    "es": "“Transmito lo que veo y lo que traen los guardias”. No me pregunten por la voz en la sala: el altavoz hace tiempo que está apagado, según el Cronista.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/pet/text": {
+    "ru": "Шерсть тёплая, шершавая. Что произошло с ней за эти семьдесят лет, она не расскажет.",
+    "es": "La lana es cálida y áspera. No te dirá cómo fueron sus primeros setenta años.",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_audience/nodes/friend/options/0/text": {
+    "ru": "Погладить Ракету.",
+    "es": "Mascota Raketa.",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/same/text": {
+    "ru": "— Я родился после неё. Мой отец тоже. Найдёшь в архиве записи его отца — сравни отметину уха.",
+    "es": "- Nací después de ella. Mi padre también. Si encuentra los registros de su padre en el archivo, compare la marca de la oreja.",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/same/options/0/text": {
+    "ru": "Проверить архив.",
+    "es": "Consulta el archivo.",
+    "draft": true
+  },
+  "/dialogues/rocket_throne/speaker": {
+    "ru": "Старое основание",
+    "es": "Antigua fundación",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/speaker": {
+    "ru": "Толмач",
+    "es": "tolmach",
+    "draft": true
+  },
+  "/dialogues/rocket_tolm/nodes/look/options/0/text": {
+    "ru": "А Ракета одна и та же?",
+    "es": "¿Es Raketa lo mismo?",
+    "draft": true
+  },
+  "/dialogues/rocket_guard/nodes/look/text": {
+    "ru": "— Воду считаем мы. За стеной считают, сколько у нас осталось совести. Может, правы и те и другие.",
+    "es": "— Contamos el agua. Detrás del muro están contando cuánta conciencia nos queda. Quizás ambos tengan razón.",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/nodes/look/text": {
+    "ru": "Почерки сменяются, даты тянутся семьдесят лет. В каждой записи — одна отметина левого уха и те же измерения. Нет ни смерти, ни появления другой собаки.",
+    "es": "Distintas manos llenaron este registro durante setenta años. Todas las entradas describen la misma muesca en la oreja izquierda y las mismas medidas. No hay constancia de muerte ni de otra perra.",
+    "draft": true
+  },
+  "/dialogues/rocket_throne/nodes/look/text": {
+    "ru": "Когда-то здесь крепился насосный пульт. Теперь это возвышение с миской: дворец построен не вместо станции, а вокруг неё.",
+    "es": "Érase una vez aquí un panel de control de bombas. Ahora bien, esta es una elevación con un cuenco: el palacio no se construyó en lugar de la estación, sino alrededor de ella.",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/speaker": {
+    "ru": "Медицинский журнал",
+    "es": "revista medica",
+    "draft": true
+  },
+  "/dialogues/rocket_project/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/speaker": {
+    "ru": "Книга пайков",
+    "es": "libreta de racionamiento",
+    "draft": true
+  },
+  "/dialogues/rocket_medical/nodes/look/options/0/text": {
+    "ru": "Сверить записи.",
+    "es": "Consultar registros.",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/speaker": {
+    "ru": "Летописец",
+    "es": "Cronista",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/look/options/1/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/nodes/look/text": {
+    "ru": "Последний год: воды хватает сорока людям и небольшой зелёной полосе. Пока сад поливают, за стену отпускают меньше фляг, чем просят.",
+    "es": "El año pasado: hay agua suficiente para cuarenta personas y una pequeña franja verde. Mientras se riega el jardín, detrás de la pared se sueltan menos botellas de las solicitadas.",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/look/text": {
+    "ru": "Схема обслуживания охранных машин: такой же размыкатель применяли на Заслоне. Это путь к щитку, не право открыть водохранилище.",
+    "es": "Diagrama de servicio para vehículos de seguridad: en Zaslon se utilizó el mismo disyuntor. Este es el camino hacia el escudo, no el derecho a abrir el depósito.",
+    "draft": true
+  },
+  "/dialogues/rocket_ledger/nodes/look/options/0/text": {
+    "ru": "Запомнить расход.",
+    "es": "Recuerda el consumo.",
+    "draft": true
+  },
+  "/dialogues/rocket_project/nodes/look/options/0/text": {
+    "ru": "Оставить гипотезу открытой.",
+    "es": "Deja la hipótesis abierta.",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/copied/options/0/text": {
+    "ru": "Сложить лист.",
+    "es": "Dobla la hoja.",
+    "draft": true
+  },
+  "/dialogues/rocket_project/speaker": {
+    "ru": "Папка R.A.K.E.T.A.",
+    "es": "Carpeta R.A.K.E.T.A.",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/speaker": {
+    "ru": "Служебная запись",
+    "es": "Registro de servicio",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/options/0/text": {
+    "ru": "Почему?",
+    "es": "¿Por qué?",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/options/2/text": {
+    "ru": "Отойти.",
+    "es": "Alejarse.",
+    "draft": true
+  },
+  "/dialogues/rocket_project/nodes/look/text": {
+    "ru": "Отчёт неполон. Упомянуты старый очиститель и курс терапии для одного животного. Дозы и результаты вырваны. Это возможное объяснение долгой жизни Ракеты, но не доказательство.",
+    "es": "El informe está incompleto. Menciona una vieja depuradora y un tratamiento para un solo animal. Han arrancado las dosis y los resultados. Podría explicar la larga vida de Raketa, pero no demuestra nada.",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/look/options/0/text": {
+    "ru": "Снять копию схемы.",
+    "es": "Haz una copia del diagrama.",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/options/1/text": {
+    "ru": "Спросить о служебной записи.",
+    "es": "Pregunte por los registros de servicio.",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/look/text": {
+    "ru": "— Здесь нет списка Ракет. Только список людей, которые служили одной собаке. Отец умер, дед умер. Она живёт.",
+    "es": "— Aquí no hay una lista de Raketa. Sólo una lista de personas que atendieron a un perro. El padre murió, el abuelo murió. Ella vive.",
+    "draft": true
+  },
+  "/dialogues/rocket_dam_record/nodes/copied/text": {
+    "ru": "Копия коротка. Летописец отказывается толковать пропущенную строку про Ракету.",
+    "es": "La copia es breve. El cronista se niega a interpretar la línea que falta sobre Raketa.",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/why/text": {
+    "ru": "— Старые врачи пробовали лечить её. Что помогло — лечение, вода или что-то ещё — никто уже не знает.",
+    "es": "\"Los viejos médicos intentaron tratarla. Lo que ayudó, el tratamiento, el agua o cualquier otra cosa, ya nadie lo sabe\".",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/why/options/0/text": {
+    "ru": "Принять неопределённость.",
+    "es": "Acepta la incertidumbre.",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/dam/options/0/text": {
+    "ru": "Осмотреть папку.",
+    "es": "Inspeccione la carpeta.",
+    "draft": true
+  },
+  "/dialogues/rocket_chronicler/nodes/dam/text": {
+    "ru": "— Машины Заслона тоже имеют служебный размыкатель. Бумага рядом, если хочешь проверить сам.",
+    "es": "— Las máquinas Zaslon también disponen de un interruptor de servicio. El periódico está cerca si quieres comprobarlo tú mismo.",
+    "draft": true
+  },
+  "/companions/hank/barks/4/text": {
+    "ru": "Малый источник, большие стены. Трест за такой выставил бы счёт всему тракту.",
+    "es": "Un manantial pequeño tras muros enormes. El Consorcio le pasaría la factura a todo el camino.",
+    "draft": true
+  },
+  "/companions/rzhavchik/barks/3/text": {
+    "ru": "Тихое гавканье. Ржавчик обнюхивает след у миски и отступает, не поджимая хвост.",
+    "es": "Un ladrido suave. Rzhavchik olfatea el rastro junto al cuenco y retrocede sin meter la cola entre las patas.",
+    "draft": true
+  },
+  "/companions/shepot/barks/5/text": {
+    "ru": "У Сухарей была бы общая чаша. Но я вижу, как мало сюда капает.",
+    "es": "Los Sukhari compartirían el cuenco. Pero veo lo poco que gotea aquí.",
+    "draft": true
+  },
+  "/companions/granit/barks/3/text": {
+    "ru": "Забирают оружие у гостей. Значит, сами гостями никого не считают.",
+    "es": "Les quitan las armas a los visitantes. Eso dice mucho de cómo los reciben.",
+    "draft": true
+  },
+  "/companions/irga/barks/3/text": {
+    "ru": "Я видела, как тайны Орден называл заботой. Здесь то же искушение.",
+    "es": "He visto a la Orden llamar compasión al secreto. Aquí acecha la misma tentación.",
+    "draft": true
+  },
+  "/companions/lelya/barks/5/text": {
+    "ru": "Терапия тут описана наполовину. Кто назвал это доказательством, не читал вторую страницу.",
+    "es": "Las notas sobre el tratamiento están incompletas. Quien lo llame prueba no leyó la segunda página.",
+    "draft": true
+  },
+  "/companions/vedro/barks/5/text": {
+    "ru": "БИОЛОГИЧЕСКИЙ ОБЪЕКТ. ВОЗРАСТ ПО ДОКУМЕНТАМ НЕ СОВПАДАЕТ С ВНЕШНИМ ВИДОМ.",
+    "es": "SUJETO BIOLÓGICO. LA EDAD DOCUMENTADA NO COINCIDE CON SU ASPECTO.",
+    "draft": true
+  },
+  "/endings/32/variants/1/text": {
+    "ru": "После потопа Обитель заперла ворота перед беженцами. Вода спасла сад, но не людей у стены. Ракета долго сидела у закрытой двери.",
+    "es": "Tras la inundación, el Santuario cerró sus puertas a los refugiados. El agua salvó el jardín, no a quienes quedaron fuera. Raketa esperó junto a la puerta cerrada.",
+    "draft": true
+  },
+  "/endings/32/variants/2/text": {
+    "ru": "После потопа Трест поставил у источника охрану и продавал воду беженцам. Ракету не тронули: её имя стояло на каждом пропуске.",
+    "es": "Tras la inundación, el Consorcio vigiló el manantial y vendió agua a los refugiados. El nombre de Raketa figuraba en cada permiso.",
+    "draft": true
+  },
+  "/endings/32/variants/3/text": {
+    "ru": "После потопа Гильдия открыла у ворот счётную лавку. Беженцы платили за воду, которую прежде сторожили ради Ракеты.",
+    "es": "Tras la inundación, el Gremio abrió un puesto de racionamiento junto a la puerta. Los refugiados pagaron por el agua antes custodiada en nombre de Raketa.",
+    "draft": true
+  },
+  "/endings/32/variants/4/text": {
+    "ru": "Потоп дошёл до руин Обители. Без очистителя вода в чаше стала грязной, сад погиб. Следов Ракеты среди беженцев никто не видел.",
+    "es": "La inundación alcanzó las ruinas del Santuario. Sin depuradora, el agua se ensució y el jardín murió. Ningún refugiado vio rastro de Raketa.",
+    "draft": true
+  },
+  "/endings/32/variants/7/text": {
+    "ru": "Трест выкупил тайну источника и поставил у ворот стражу и сборщика. Имя Ракеты осталось на пропусках, а воду стали выдавать по приказу.",
+    "es": "El Consorcio compró el secreto del manantial y puso guardias y un recaudador en la puerta. Raketa seguía en los permisos; el agua se repartía por orden.",
+    "draft": true
+  },
+  "/endings/32/variants/8/text": {
+    "ru": "Гильдия купила путь к источнику. У старых ворот появились вывеска и цены; имя Ракеты помогает продавать воду.",
+    "es": "El Gremio compró la ruta al manantial. En la vieja puerta aparecieron un letrero y precios; el nombre de Raketa ayudó a vender el agua.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/text": {
+    "ru": "— Кому? Трест возьмёт станцию под охрану, Гильдия — под счёт. Ни те ни другие не отдадут её соседям даром.",
+    "es": "«¿A quién? El Consorcio pondrá guardias; el Gremio, un precio. Ninguno regalará el agua a los vecinos».",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/options/0/text": {
+    "ru": "Передать сведения Тресту.",
+    "es": "Entregar la información al Consorcio.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/options/1/text": {
+    "ru": "Передать сведения Гильдии.",
+    "es": "Entregar la información al Gremio.",
+    "draft": true
+  },
+  "/dialogues/rocket_keeper/nodes/sell_to/options/2/text": {
+    "ru": "Никому. Вернуться к разговору.",
+    "es": "A ninguno. Volver a la conversación.",
+    "draft": true
+  },
+  "/locations/rusty_well/name": {
+    "ru": "Ржавый колодец",
+    "es": "Pozo Oxidado"
+  },
+  "/locations/three_pillars/name": {
+    "ru": "Три столба",
+    "es": "Tres Pilares"
+  },
+  "/locations/kolyuchka/name": {
+    "ru": "Колючка",
+    "es": "Kolyuchka"
+  },
+  "/locations/zapruda/name": {
+    "ru": "Запруда",
+    "es": "Zapruda"
+  },
+  "/locations/barge/name": {
+    "ru": "Баржа «Стрежень»",
+    "es": "la barcaza Strezhen"
+  },
+  "/locations/khlebnoe/name": {
+    "ru": "Мёртвые поля и Хлебное",
+    "es": "los Campos Muertos y Khlebnoe"
+  },
+  "/locations/silence/name": {
+    "ru": "Приют Тишины",
+    "es": "el Refugio del Silencio"
+  },
+  "/locations/elevator/name": {
+    "ru": "Элеватор",
+    "es": "el Elevador"
+  },
+  "/locations/ark/name": {
+    "ru": "Ковчег",
+    "es": "el Arca"
+  },
+  "/locations/salt/name": {
+    "ru": "Соль",
+    "es": "Sal"
+  },
+  "/locations/barkhan/name": {
+    "ru": "Стоянка «Бархана»",
+    "es": "el campamento Barkhan"
+  },
+  "/locations/wrecks/name": {
+    "ru": "Кладбище судов",
+    "es": "el Cementerio de Barcos"
+  },
+  "/locations/crystal/name": {
+    "ru": "Кристалл",
+    "es": "Cristal"
+  },
+  "/locations/skit/name": {
+    "ru": "Скит",
+    "es": "el Eremitorio"
+  },
+  "/locations/rosa/name": {
+    "ru": "«Роса-2»",
+    "es": "Rosa-2"
+  },
+  "/locations/dry_stone/name": {
+    "ru": "Сухой камень",
+    "es": "Piedra Seca"
+  },
+  "/locations/depot/name": {
+    "ru": "Депо «Узловое»",
+    "es": "el Depósito Uzlovoe"
+  },
+  "/locations/whisper/name": {
+    "ru": "Ретранслятор «Шептун»",
+    "es": "el repetidor Sheptun"
+  },
+  "/locations/gates/name": {
+    "ru": "Перевал «Ворота»",
+    "es": "el Paso de las Puertas"
+  },
+  "/locations/bone_circle/name": {
+    "ru": "Костяной круг",
+    "es": "el Círculo de Huesos"
+  },
+  "/locations/capital_ruins/name": {
+    "ru": "Руины Светлоречья",
+    "es": "las Ruinas de Svetlorechye"
+  },
+  "/locations/dam/name": {
+    "ru": "Заслон",
+    "es": "la presa Zaslon"
+  },
+  "/locations/eagle/name": {
+    "ru": "Орлиное гнездо",
+    "es": "el Nido de Águilas"
+  },
+  "/locations/stray_spot/name": {
+    "ru": "Влажная низина",
+    "es": "la Hondonada Húmeda"
+  },
+  "/locations/post_station/name": {
+    "ru": "Последняя почтовая станция",
+    "es": "la Última Estafeta"
+  },
+  "/locations/watcher_bunker/name": {
+    "ru": "Бункер Смотрителя",
+    "es": "el Búnker del Vigilante"
+  },
+  "/locations/literny/name": {
+    "ru": "Тоннель «Литерного»",
+    "es": "el Túnel Literny"
+  }
+}

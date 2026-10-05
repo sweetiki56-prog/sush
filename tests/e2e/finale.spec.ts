@@ -18,7 +18,7 @@ async function pumpFixed(page: Page): Promise<void> {
 
 async function reward(page: Page): Promise<void> {
   await talkTo(page, 'marta');
-  await answer(page, 'Рад был помочь');
+  await answer(page, 'Было приятно помочь.');
   await answer(page, 'Прощай, Марта');
   await closed(page);
   await expect.poll(() => W(page, 'actor', 'shluz'), { timeout: 30_000 }).toEqual({ x: 11, y: 24, moving: false });

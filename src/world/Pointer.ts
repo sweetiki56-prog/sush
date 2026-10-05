@@ -1,6 +1,9 @@
 // Mouse over the world: what is under the pointer, the tile cursor, and clicks turned into intents.
 import Phaser from 'phaser';
 import { session } from '../session';
+import { settings } from '../core/Settings';
+import { mapLabelForDisplay } from '../i18n/display';
+import { uiText } from '../i18n/ui';
 import { synth } from '../audio/Synth';
 import { GAME_H, HUD_H } from '../config';
 import { gridToScreen, screenToTile } from '../iso/IsoMath';
@@ -34,18 +37,21 @@ export class Pointer {
 
   targetAt(wx: number, wy: number): Target | null {
     const cast = this.w.cast;
+    const locale = settings().language;
     for (const m of cast.aliveHostiles())
-      if (m.actor.sprite.getBounds().contains(wx, wy)) return { kind: 'hostile', id: m.id, label: cast.label(m) };
+      if (m.actor.sprite.getBounds().contains(wx, wy)) return { kind: 'hostile', id: m.id, label: mapLabelForDisplay(cast.label(m), locale) };
     for (const m of [...cast.of('npc'), ...cast.of('ally').filter((a) => !a.hostile?.dead)])
-      if (m.actor.sprite.getBounds().contains(wx, wy)) return { kind: 'npc', id: m.id, label: m.label, dialogue: m.dialogue };
+      if (m.actor.sprite.getBounds().contains(wx, wy)) return { kind: 'npc', id: m.id, label: mapLabelForDisplay(m.label, locale), dialogue: m.dialogue };
     for (const m of cast.of('player')) {
       if (m.id === session().net?.you || !m.actor.sprite.getBounds().contains(wx, wy)) continue;
       const info = session().net?.players.find((p) => p.id === m.id);
-      return { kind: 'player', id: m.id, label: info ? `${info.name}, ОЗ ${info.hp}/${info.maxHp}${info.downed ? ' — без сознания' : ''}` : m.label };
+      return { kind: 'player', id: m.id, label: info ? uiText('world.playerHp', locale)
+        .replace('{name}', info.name).replace('{hp}', String(info.hp)).replace('{maxHp}', String(info.maxHp))
+        .replace('{status}', info.downed ? uiText('world.downed', locale) : '') : m.label };
     }
     const p: Prop | null = this.w.map.propAt(wx, wy, (pr) => !!pr.obj.label && pr.image.visible);
     if (!p) return null;
-    return { kind: 'prop', id: p.obj.id, label: p.obj.label!, dialogue: p.obj.dialogue };
+    return { kind: 'prop', id: p.obj.id, label: mapLabelForDisplay(p.obj.label!, locale), dialogue: p.obj.dialogue };
   }
 
   hide(): void {
@@ -68,7 +74,7 @@ export class Pointer {
       s.ui.emit('hover', text ? { label: text, interact: !!target } : null);
     } else {
       const exit = target ? null : this.w.map.exits.at(t.x, t.y);
-      const label = target?.label ?? (exit ? `Выход: ${exit.label}` : null);
+      const label = target?.label ?? (exit ? uiText('world.exit', settings().language).replace('{name}', mapLabelForDisplay(exit.label, settings().language)) : null);
       s.ui.emit('hover', label ? { label, interact: !!target?.dialogue || target?.kind === 'hostile' || !!exit } : null);
     }
     const pf = this.pathfinder();
@@ -97,7 +103,7 @@ export class Pointer {
         if (this.armed !== key) {
           this.armed = key;
           const text = f.describe(unit, t);
-          s.ui.emit('hover', text ? { label: `${text} · коснитесь ещё раз`, interact: true } : null);
+          s.ui.emit('hover', text ? { label: uiText('world.touchAgain', settings().language).replace('{text}', text), interact: true } : null);
           return;
         }
         this.armed = null;

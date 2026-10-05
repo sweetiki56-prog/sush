@@ -68,12 +68,30 @@ export function still() {
 export function waterTruck() {
   const cv = propCanvas(2, 1, 56);
   const { ctx, bx, by } = cv;
-  box(ctx, bx, by - 8, 2, 1, 10, { left: P.grey2, right: P.grey1, top: P.grey3 });
+  box(ctx, bx, by - 8, 1.92, 0.9, 10, { left: P.grey2, right: P.grey1, top: P.grey3 });
   const [cx, cy] = cv.center;
-  ellipse(ctx, cx + 6, cy - 28, 26, 14, P.grey3);
-  ellipse(ctx, cx + 2, cy - 31, 20, 9, shade(P.grey3, 0.15));
-  line(ctx, cx - 18, cy - 26, cx + 30, cy - 26, P.bone);
-  box(ctx, bx + 4, by - 18, 0.5, 1, 22, { left: P.grey3, right: P.grey2, top: P.grey4 });
-  for (const d of [-22, -2, 18, 34]) circle(ctx, cx + d, cy + 4 + d * 0.2, 5, P.dark1);
+  ellipse(ctx, cx - 8, cy - 27, 28, 15, P.grey1);
+  ellipse(ctx, cx - 9, cy - 30, 27, 14, P.grey3);
+  ellipse(ctx, cx - 12, cy - 34, 22, 9, P.grey4);
+  for (const d of [-23, 2]) {
+    line(ctx, cx + d, cy - 40, cx + d + 8, cy - 31, P.grey1);
+    line(ctx, cx + d + 8, cy - 31, cx + d + 7, cy - 19, P.grey1);
+  }
+  line(ctx, cx - 33, cy - 25, cx + 15, cy - 25, P.bone); // Trust stripe
+  line(ctx, cx - 4, cy - 44, cx + 8, cy - 44, P.grey1); // filling hatch
+  const cab = box(ctx, bx + 7, by - 18, 0.62, 0.76, 22, {
+    left: (_x, _y, z) => z > 4 && z < 17 ? P.teal1 : P.grey3,
+    right: (_x, _y, z) => z > 4 && z < 17 ? P.teal0 : P.grey2,
+    top: P.grey4,
+  });
+  line(ctx, cab.up(cab.L)[0], cab.up(cab.L)[1], cab.up(cab.B)[0], cab.up(cab.B)[1], P.grey5);
+  for (const d of [-23, -3, 18]) {
+    const x = cx + d;
+    const y = cy + 3 + d * 0.17;
+    circle(ctx, x, y, 5.5, P.dark0);
+    circle(ctx, x, y, 2.6, P.grey3);
+  }
+  line(ctx, cx - 34, cy - 13, cx - 34, cy - 5, P.grey2); // drain valve
+  circle(ctx, cx - 34, cy - 5, 2, P.rust1);
   return cv;
 }

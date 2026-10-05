@@ -98,6 +98,13 @@ test('by touch alone: menu, name, prologue, a walk, a talk, the journal, a fight
   await tap(page, 1032, 662); // ЖУРНАЛ
   await expect.poll(async () => (await state(page)).modal, { timeout: 10_000 }).toBe(true);
   await page.screenshot({ path: 'test-results/e2e-mobile-06-journal.png' });
+  const history = (await state(page) as Awaited<ReturnType<typeof state>> & { dialogueHistory: { speaker: string; lines: { text: string }[] }[] }).dialogueHistory;
+  expect(history.find((entry) => entry.speaker === 'Старейшина Марта')?.lines.length).toBeGreaterThan(1);
+  await tap(page, 632, 121); // ДИАЛОГИ
+  await tap(page, 450, 188); // раскрыть Марту
+  await page.screenshot({ path: 'test-results/e2e-mobile-06-dialogues.png' });
+  expect((await state(page)).modal).toBe(true);
+  await tap(page, 400, 121); // ЗАДАНИЯ
   const box = (await page.locator('canvas').boundingBox())!;
   const k = box.width / 1280;
   const cdp = await page.context().newCDPSession(page);
@@ -110,6 +117,21 @@ test('by touch alone: menu, name, prologue, a walk, a talk, the journal, a fight
   expect((await state(page)).modal).toBe(true); // scrolling inside the journal does not close it
   await tap(page, 1100, 76); // ЗАКРЫТЬ
   await expect.poll(async () => (await state(page)).modal, { timeout: 10_000 }).toBe(false);
+
+  // Inventory actions are touch targets too: drink from a flask even at full health.
+  await page.evaluate(() => {
+    const g = (window as unknown as { __world: { session(): { game: { give(id: string): void; body: { thirsty?: boolean } } } } }).__world.session().game;
+    g.give('flask');
+    g.body.thirsty = true;
+  });
+  await tap(page, 1032, 630); // ИНВЕНТАРЬ
+  await expect.poll(async () => (await state(page)).modal, { timeout: 10_000 }).toBe(true);
+  await tap(page, 780, 98); // ХИМИЯ
+  await tap(page, 558, 160); // Полная фляга (после бинтов)
+  await page.screenshot({ path: 'test-results/e2e-mobile-08-use-item.png' });
+  await tap(page, 700, 150); // ВЫПИТЬ
+  await expect.poll(async () => (await state(page)).modal, { timeout: 10_000 }).toBe(false);
+  expect(((await state(page)) as Awaited<ReturnType<typeof state>> & { body: { thirsty?: boolean } }).body.thirsty).toBe(false);
 
   // a fight: one tap on the foe aims (nothing spent), a second tap shoots
   const foe = (await W<{ id: string; dead: boolean; x: number; y: number }[]>(page, 'hostiles')).find((h) => !h.dead)!;

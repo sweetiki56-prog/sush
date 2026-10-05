@@ -73,6 +73,10 @@ export class ScrollBox {
     return Math.max(0, this.height - this.h);
   }
 
+  get scroll(): number {
+    return this.offset;
+  }
+
   /** The content is this tall now (call after adding to it). */
   fit(contentHeight: number): void {
     this.height = contentHeight;

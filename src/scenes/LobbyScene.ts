@@ -13,16 +13,23 @@ import { playerToken, serverUrl, WsTransport, type WsStatus } from '../net/WsTra
 import { coopCharacter, currentLoadout, saveCoopCharacter } from '../net/profiles';
 import { C, button, glass, metalPanel, title, txt } from '../ui/theme';
 import { onKey } from '../ui/keys';
+import { settings } from '../core/Settings';
+import { attrNameForDisplay, characterContentForDisplay, contentText, heroNameForDisplay, skillNameForDisplay } from '../i18n/display';
+import { lobbyStatus, lobbyText } from '../i18n/lobby';
+import type { Locale } from '../i18n/content';
+import { runtimeLineForDisplay } from '../i18n/runtime';
 
 export type LobbyMode = 'coop' | 'arena';
 const CODE_CHAR = /^[A-Za-z0-9]$/;
 
 /** One line about an arena build. */
-export function loadoutSummary(l: Loadout): string {
-  const w = l.weapons.map((id) => CONTENT.weapons[id].name).join(', ') || 'кулаки';
-  const armor = l.armor ? CONTENT.items[l.armor]?.name : 'без брони';
-  const kit = Object.entries(l.items).map(([k, n]) => `${CONTENT.items[k]?.name ?? k} ×${n}`).join(', ') || 'пусто';
-  return `${l.name}, уровень ${l.level}\nОружие: ${w}\nБроня: ${armor}\nНабор: ${kit}`;
+export function loadoutSummary(l: Loadout, locale: Locale = 'ru'): string {
+  const w = l.weapons.map((id) => contentText(`/weapons/${id}/name`, CONTENT.weapons[id].name, locale)).join(', ') || (locale === 'en' ? 'fists' : 'кулаки');
+  const armor = l.armor ? contentText(`/items/${l.armor}/name`, CONTENT.items[l.armor]?.name ?? l.armor, locale) : locale === 'en' ? 'none' : 'без брони';
+  const kit = Object.entries(l.items).map(([k, n]) => `${contentText(`/items/${k}/name`, CONTENT.items[k]?.name ?? k, locale)} ×${n}`).join(', ') || (locale === 'en' ? 'empty' : 'пусто');
+  return locale === 'en'
+    ? `${l.name}, level ${l.level}\nWeapons: ${w}\nArmor: ${armor}\nKit: ${kit}`
+    : `${l.name}, уровень ${l.level}\nОружие: ${w}\nБроня: ${armor}\nНабор: ${kit}`;
 }
 
 export class LobbyScene extends Phaser.Scene {
@@ -42,6 +49,9 @@ export class LobbyScene extends Phaser.Scene {
     super('Lobby');
   }
 
+  private get locale(): Locale { return settings().language; }
+  private t(source: string): string { return lobbyText(source, this.locale); }
+
   init(data: { mode?: LobbyMode; code?: string }): void {
     this.mode = data.mode ?? 'coop';
     this.code = (data.code ?? '').toUpperCase().slice(0, 5);
@@ -51,21 +61,21 @@ export class LobbyScene extends Phaser.Scene {
     this.cameras.main.setPostPipeline('CrtFX');
     const arena = this.mode === 'arena';
     metalPanel(this, 0, 0, GAME_W, 720);
-    title(this, GAME_W / 2, 30, arena ? 'АРЕНА · ВСЕ ПРОТИВ ВСЕХ' : 'КООПЕРАТИВ · ГЛАВА I: РЖАВЫЙ КОЛОДЕЦ', 20, C.amber).setOrigin(0.5);
+    title(this, GAME_W / 2, 30, this.t(arena ? 'АРЕНА · ВСЕ ПРОТИВ ВСЕХ' : 'КООПЕРАТИВ · ГЛАВА I: РЖАВЫЙ КОЛОДЕЦ'), 20, C.amber).setOrigin(0.5);
 
     // who you bring
     glass(this, 24, 70, 420, 360);
-    title(this, 38, 82, arena ? 'СНАРЯЖЕНИЕ' : 'ПЕРСОНАЖ', 11, C.amber);
+    title(this, 38, 82, this.t(arena ? 'СНАРЯЖЕНИЕ' : 'ПЕРСОНАЖ'), 11, C.amber);
     glass(this, 38, 108, 100, 100);
     this.portrait = this.add.image(40, 110, 'atlas', 'portrait_hero_0').setOrigin(0).setDisplaySize(96, 96);
     this.who = txt(this, 152, 110, '', 14, C.crtBright, 280);
     if (arena) {
-      button(this, 38, 330, 392, 30, 'ИЗМЕНИТЬ СНАРЯЖЕНИЕ', () => this.leaveTo('Loadout', { back: 'lobby' }));
+      button(this, 38, 330, 392, 30, this.t('ИЗМЕНИТЬ СНАРЯЖЕНИЕ'), () => this.leaveTo('Loadout', { back: 'lobby' }));
     } else {
-      button(this, 38, 290, 392, 30, 'СОЗДАТЬ СВОЕГО', () => this.leaveTo('Create', { then: 'coop' }));
-      txt(this, 38, 332, 'или взять готового:', 12, C.crtDim);
+      button(this, 38, 290, 392, 30, this.t('СОЗДАТЬ СВОЕГО'), () => this.leaveTo('Create', { then: 'coop' }));
+      txt(this, 38, 332, this.t('или взять готового:'), 12, C.crtDim);
       CONTENT.character.premades.forEach((p, i) =>
-        button(this, 38 + i * 132, 352, 124, 28, p.title.toUpperCase(), () => {
+        button(this, 38 + i * 132, 352, 124, 28, contentText(`/character/premades/${i}/title`, p.title, this.locale).toUpperCase(), () => {
           const d = new BuildDraft(CONTENT.character);
           d.applyPremade(p);
           saveCoopCharacter(d.build());
@@ -76,19 +86,19 @@ export class LobbyScene extends Phaser.Scene {
 
     // the room
     glass(this, 468, 70, 788, 360);
-    title(this, 482, 82, 'КОМНАТА', 11, C.amber);
-    button(this, 482, 112, 360, 36, 'СОЗДАТЬ КОМНАТУ', () => this.create_());
-    txt(this, 482, 170, 'или введите код комнаты друга (печатайте с клавиатуры):', 13, C.crt);
+    title(this, 482, 82, this.t('КОМНАТА'), 11, C.amber);
+    button(this, 482, 112, 360, 36, this.t('СОЗДАТЬ КОМНАТУ'), () => this.create_());
+    txt(this, 482, 170, this.t('или введите код комнаты друга (печатайте с клавиатуры):'), 13, C.crt);
     glass(this, 482, 196, 200, 40);
     this.codeText = txt(this, 496, 204, '', 22, C.crtBright, undefined, true);
-    button(this, 696, 198, 146, 36, 'ВОЙТИ [ENTER]', () => this.join());
+    button(this, 696, 198, 146, 36, this.t('ВОЙТИ [ENTER]'), () => this.join());
     txt(
       this,
       482,
       256,
-      arena
+      this.t(arena
         ? 'Арена: от двух до шести бойцов. Каждый приходит со своим снаряжением, все жмут «Готов» — и раунд начинается. До трёх побед.'
-        : 'Кооператив: до четырёх странников в одном мире. Общий квест и находки мира, у каждого свой рюкзак. Друзья могут зайти в любой момент.',
+        : 'Кооператив: до четырёх странников в одном мире. Общий квест и находки мира, у каждого свой рюкзак. Друзья могут зайти в любой момент.'),
       13,
       C.crtDim,
       750,
@@ -96,7 +106,7 @@ export class LobbyScene extends Phaser.Scene {
     this.statusText = txt(this, 482, 330, '', 12, C.crtDim, 750);
     this.msg = txt(this, GAME_W / 2, 460, '', 15, C.sand, 1100).setOrigin(0.5, 0).setAlign('center');
 
-    button(this, 24, 666, 140, 32, 'НАЗАД', () => this.back());
+    button(this, 24, 666, 140, 32, this.t('НАЗАД'), () => this.back());
     onKey(this, (e) => this.key(e));
     this.time.addEvent({ delay: 450, loop: true, callback: () => ((this.caret = !this.caret), this.refreshCode()) });
     this.events.once('shutdown', () => {
@@ -127,13 +137,13 @@ export class LobbyScene extends Phaser.Scene {
     this.net = net;
     this.ws = new WsTransport(serverUrl(), net);
     const show = (s: WsStatus) =>
-      this.statusText?.setText(`Сервер: ${this.ws!.url} · ${s === 'open' ? 'на связи' : s === 'connecting' ? 'подключаемся…' : 'нет связи, пробуем снова'}`).setColor(s === 'open' ? C.crt : C.sand);
+      this.statusText?.setText(lobbyStatus(this.ws!.url, s, this.locale)).setColor(s === 'open' ? C.crt : C.sand);
     this.ws.onStatus = show;
     show(this.ws.status);
     this.unsub.push(
-      net.events.on('joined', (m) => this.say(`Комната ${m.code}. Входим…`)),
+      net.events.on('joined', (m) => this.say(this.locale === 'en' ? `Room ${m.code}. Entering…` : `Комната ${m.code}. Входим…`)),
       net.events.on('welcome', () => this.enter()),
-      net.events.on('error', (m) => this.say(m.text, true)),
+      net.events.on('error', (m) => this.say(runtimeLineForDisplay(m.text, this.locale === 'en' ? 'en' : 'ru'), true)),
     );
   }
 
@@ -142,18 +152,18 @@ export class LobbyScene extends Phaser.Scene {
     if (this.mode === 'arena') ws.frame({ t: 'create', mode: 'arena', token: playerToken(), loadout: currentLoadout() });
     else {
       const c = coopCharacter();
-      if (!c) return this.say('Сначала выберите персонажа.', true);
+      if (!c) return this.say(this.t('Сначала выберите персонажа.'), true);
       ws.frame({ t: 'create', mode: 'coop', token: playerToken(), character: c });
     }
-    this.say('Создаём комнату…');
+    this.say(this.t('Создаём комнату…'));
   }
 
   private join(): void {
-    if (this.code.length !== 5) return this.say('Код комнаты — пять знаков.', true);
+    if (this.code.length !== 5) return this.say(this.t('Код комнаты — пять знаков.'), true);
     const token = playerToken();
     if (this.mode === 'arena') this.ws!.frame({ t: 'join', code: this.code, token, loadout: currentLoadout() });
     else this.ws!.frame({ t: 'join', code: this.code, token, character: coopCharacter() ?? undefined });
-    this.say(`Ищем комнату ${this.code}…`);
+    this.say(this.locale === 'en' ? `Looking for room ${this.code}…` : `Ищем комнату ${this.code}…`);
   }
 
   /** The room said welcome: hand the connection to the session and go in. */
@@ -188,18 +198,23 @@ export class LobbyScene extends Phaser.Scene {
     if (this.mode === 'arena') {
       const l = currentLoadout();
       this.portrait.setFrame(`portrait_hero_${l.look}`).setOrigin(0).setDisplaySize(96, 96);
-      this.who.setText(loadoutSummary(l));
+      this.who.setText(loadoutSummary(l, this.locale));
       return;
     }
     const c = coopCharacter();
     if (!c) {
-      this.who.setText('Персонаж не выбран.\nСоздайте своего или возьмите готового.');
+      this.who.setText(this.t('Персонаж не выбран.\nСоздайте своего или возьмите готового.'));
       return;
     }
     this.portrait.setFrame(`portrait_hero_${c.look}`).setOrigin(0).setDisplaySize(96, 96);
-    const attrs = ATTRS.map((a) => `${ATTR_NAMES[a].slice(0, 3)} ${c.attrs[a]}`).join('  ');
-    const traits = c.traits.map((t) => CONTENT.character.traits[t]?.name).join(', ') || 'нет';
-    this.who.setText(`${c.name}, уровень 1\n${attrs}\nОсновные: ${c.tags.map((t) => SKILL_NAMES[t]).join(', ')}\nОсобенности: ${traits}`);
+    const locale = this.locale;
+    const display = characterContentForDisplay(CONTENT.character, locale);
+    const attrs = ATTRS.map((a) => `${attrNameForDisplay(a, ATTR_NAMES[a], locale).slice(0, 3)} ${c.attrs[a]}`).join('  ');
+    const traits = c.traits.map((t) => display.traits[t]?.name).join(', ') || (locale === 'en' ? 'none' : 'нет');
+    const tags = c.tags.map((t) => skillNameForDisplay(t, SKILL_NAMES[t], locale)).join(', ');
+    this.who.setText(locale === 'en'
+      ? `${heroNameForDisplay(c.name, locale)}, level 1\n${attrs}\nTagged: ${tags}\nTraits: ${traits}`
+      : `${c.name}, уровень 1\n${attrs}\nОсновные: ${tags}\nОсобенности: ${traits}`);
   }
 
   private refreshCode(): void {

@@ -4235,6 +4235,24 @@
    "dialogue": "agafya"
   },
   {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 17,
+   "y": 23,
+   "dir": 1,
+   "label": "Уличная кошка",
+   "dialogue": "street_cat"
+  },
+  {
+   "id": "town_dog",
+   "sheet": "dog_town",
+   "x": 29,
+   "y": 23,
+   "dir": 4,
+   "label": "Пёс водоносов",
+   "dialogue": "street_dog"
+  },
+  {
    "id": "zasov",
    "sheet": "zasov",
    "x": 10,

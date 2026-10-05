@@ -290,7 +290,7 @@ COMP=json.load(open('src/content/companions.json'))
 COMP['timofey']={"name":"Тимофей Книжник","sheet":"timofey","creature":"timofey_ally","dialogue":"comp_timofey","barks":[
  {"map":"khlebnoe_ruins","text":"Хлебное. Здесь пекли на всю Светлую. Я помню запах."},
  {"map":"ark_ship","text":"Приёмник «Звезда-4». Я на таком слушал прогнозы. Дождя они не обещали."},
- {"map":"ruins_library","text":"Библиотека! Двести лет я мечтал сюда вернуться."},
+ {"map":"ruins_library","text":"Библиотека! Сколько лет я мечтал сюда вернуться."},
  {"map":"skit_archive","text":"Архив «Росы». Здесь знают, откуда взялось наше деревенение."}]}
 open('src/content/companions.json','w').write(table(COMP))
 L=json.load(open('src/content/locations.json'))

@@ -138,6 +138,7 @@ export abstract class Room {
     const ev = game.events;
     p.unsub.push(
       ev.on('log', mark),
+      ev.on('dialogueHistory', mark),
       ev.on('inventory', mark),
       ev.on('stats', mark),
       ev.on('flag', (k, v) => this.flagChanged?.(p, k, v)),
@@ -153,6 +154,8 @@ export abstract class Room {
       ev.on('travel', () => this.traveled?.(p)),
       ev.on('goto', (map, entry) => this.moved?.(p, map, entry)),
       ev.on('encounter', (a) => this.encountered?.(p, a)),
+      ev.on('rocketEscrow', (action) => this.rocketEscrowed?.(p, action)),
+      ev.on('autosave', () => this.checkpointed?.(p)),
     );
     this.players.set(id, p);
     return p;
@@ -275,6 +278,8 @@ export abstract class Room {
   protected moved?(p: Player, map: string, entry?: string): void;
   /** A meeting on the road was decided in its talk. */
   protected encountered?(p: Player, action: EncounterAction): void;
+  protected rocketEscrowed?(p: Player, action: 'seize' | 'release'): void;
+  protected checkpointed?(p: Player): void;
   protected questChanged?(p: Player, quest: string, stage: string): void;
 
   protected debug(p: Player, op: Extract<Intent, { t: 'debug' }>['op']): void {
@@ -363,6 +368,7 @@ export abstract class Room {
 
   /** The sprite sheet for a player: their look, in the armor they wear. */
   static sheetOf(p: Player): string {
+    if (p.game.state.rocketEscrow !== undefined) return 'pilgrim';
     const armor = p.game.armor;
     const look = armor ? (armor.look ?? p.game.state.equipped.armor) : null;
     return `hero_${p.game.char.look}${look ? `_${look}` : ''}`;

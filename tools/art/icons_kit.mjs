@@ -73,6 +73,13 @@ const CHARM_SHAPES = {
     ellipse(ctx, 16, 19, 5.5, 3.6, P.dark0);
     line(ctx, 10, 17, 14, 14, c.lit);
   },
+  collar(ctx, c) {
+    ellipse(ctx, 16, 20, 10, 6, c.base);
+    ellipse(ctx, 16, 19, 7, 3.4, P.dark0);
+    poly(ctx, [[12, 13], [20, 13], [20, 17], [12, 17]], c.lit);
+    poly(ctx, [[14, 14], [18, 14], [18, 16], [14, 16]], P.dark1);
+    circle(ctx, 16, 27, 2, P.sand5);
+  },
   crystal(ctx, c) {
     poly(ctx, [[16, 10], [21, 17], [18, 27], [13, 27], [11, 17]], c.base);
     poly(ctx, [[16, 10], [18, 17], [16, 26], [13, 17]], c.lit);
@@ -152,6 +159,7 @@ export const CHARM_ICONS = {
   dog_whistle: { shape: 'bone', base: P.bone, lit: P.sand5 },
   resin_amulet: { shape: 'drop', base: P.brown3, lit: P.fire1 },
   eel_hatchling: { shape: 'shell', base: P.grey4, lit: P.sand3 },
+  rocket_collar: { shape: 'collar', base: P.red1, lit: P.sand4 },
 };
 
 const CHEM_SHAPES = {

@@ -4,7 +4,7 @@
 import { describe, it, expect } from 'vitest';
 import type { Game } from '../../src/core/Game';
 import { room, until, TOWNS } from './rooms';
-import { placedBattle, premadeGame } from './sim';
+import { placedBattle, premadeGame, toLevel } from './sim';
 import { say, talk, winFight } from './story';
 
 /** After Chapter IV: the tube in the bag, a guide who is one of theirs, money, sharp eyes; every roll lands. */
@@ -299,7 +299,7 @@ describe('Chapter V balance', () => {
         let w = 0;
         for (let s = 1; s <= RUNS; s++) {
           const g = premadeGame(t, s * 7919);
-          g.addXp(700); // level 6 by Chapter V
+          toLevel(g, 6); // level 6 by Chapter V
           if (placedBattle(g, camp, [29, 19], foes, friends) === 'victory') w++;
         }
         return [t, w / RUNS];

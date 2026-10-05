@@ -1,7 +1,10 @@
 // Player preferences, stored apart from the save so a new game keeps them.
 import type { KV } from './SaveSystem';
+import type { Locale } from '../i18n/content';
 
 export interface Settings {
+  /** Display preference only. The room and saves remain language-independent. */
+  language: Locale;
   muted: boolean;
   volume: number; // 0..1
   music: number; // 0..1, on top of the volume
@@ -21,7 +24,7 @@ export const TEXT_SPEEDS = [
 const KEY = 'rusty-well-settings';
 // a phone gets the lighter look by default: no film grain (it costs a full-screen pass every frame)
 const COARSE = typeof globalThis.matchMedia === 'function' && globalThis.matchMedia('(pointer: coarse)').matches;
-const DEFAULTS: Settings = { muted: false, volume: 0.7, music: 0.6, textSpeed: 1, grain: !COARSE, zoom: 2, combatFast: false };
+const DEFAULTS: Settings = { language: 'en', muted: false, volume: 0.7, music: 0.6, textSpeed: 1, grain: !COARSE, zoom: 2, combatFast: false };
 
 function storage(): KV | null {
   try {
@@ -42,6 +45,7 @@ export function settings(kv: KV | null = storage()): Settings {
     /* corrupt: use defaults */
   }
   current = { ...DEFAULTS, ...saved };
+  if (!['ru', 'en'].includes(current.language)) current.language = DEFAULTS.language;
   return current;
 }
 

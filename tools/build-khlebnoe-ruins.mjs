@@ -21,7 +21,7 @@ k.exit({ id: 'south', x: 19, y: H - 1, w: 2, h: 1, to: 'dead_fields', entry: 'no
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 19, y: 33, dir: 1 },
   { id: 'ponomar', sheet: 'ponomar', x: 20, y: 11, dir: 3, label: 'Пономарь', dialogue: 'ponomar', if: [{ notFlag: 'bell' }] },
-  ...[['mite_a', 25, 22], ['mite_b', 28, 21], ['mite_c', 24, 25]].map(([id, x, y]) => ({ id, sheet: 'rust_mite', x, y, dir: 2, label: 'Ржавый клещ', creature: 'rust_mite', group: 'mites' })),
+  ...[['mite_a', 25, 22], ['mite_b', 26, 20], ['mite_c', 24, 25]].map(([id, x, y]) => ({ id, sheet: 'rust_mite', x, y, dir: 2, label: 'Ржавый клещ', creature: 'rust_mite', group: 'mites' })),
 ];
 
 k.write('khlebnoe_ruins', 'Руины Хлебного', {

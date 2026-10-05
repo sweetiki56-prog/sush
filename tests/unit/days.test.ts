@@ -21,7 +21,7 @@ describe('days at the Rusty Well', () => {
     expect(g.flag('water_drawn')).toBeFalsy();
     expect(g.flag('caravan_here')).toBe(true);
     expect(until(r, () => r.npcs.get('birjuk')?.mover.moving === false)).toBe(true);
-    expect(r.npcs.get('birjuk')!.mover.tile).toEqual({ x: 7, y: 27 });
+    expect(r.npcs.get('birjuk')!.mover.tile).toEqual({ x: 7, y: 25 });
     expect(r.npcs.has('sipuha')).toBe(false);
     sleep(r, c);
     expect(g.flag('caravan_here')).toBe(false);

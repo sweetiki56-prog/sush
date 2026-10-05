@@ -34,7 +34,7 @@ describe('mission: Water for Rusty Well', () => {
     talk(g, 'pump', ['[Инструкция]', 'Готово']);
     expect(g.flag('pump_fixed')).toBe(true);
     expect(g.count('valve')).toBe(0);
-    const d = talk(g, 'marta', ['Рад был помочь', 'Прощай']);
+    const d = talk(g, 'marta', ['Было приятно помочь.', 'Прощай']);
     expect(d.done).toBe(true);
     expect(g.flag('quest_complete')).toBe(true);
     expect(g.stage('water')).toBe('done');

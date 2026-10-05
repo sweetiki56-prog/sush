@@ -107,7 +107,8 @@ function bomb(w: ItemWorld): void {
       g.setFlag(`dead_${h.id}`);
       g.state.stats.kills++;
       g.log(`${h.def.name} мёртв.`);
-      g.addXp(h.def.xp);
+      if (h.respawn) g.awardXp(`kill:${h.id}`, h.def.xp);
+      else g.addXp(h.def.xp);
       for (const [it, n] of Object.entries(h.def.loot ?? {})) g.give(it, n);
       w.killed(h);
     } else {

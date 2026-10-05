@@ -26,6 +26,9 @@ export const CREATURES = {
   eel_queen: { eel: true, skin: P.brown2, dark: P.brown0, belly: P.sand3, scale: 2.1 },
   rust_mite: { mite: true, shell: P.rust1, dark: P.rust0, joint: P.dark2, scale: 0.8 },
   dog_rzhavchik: { dog: true, fur: P.rust2, dark: P.rust0, belly: P.sand3, collar: P.fire1, scale: 1.3 },
+  dog_town: { dog: true, fur: P.brown2, dark: P.brown0, belly: P.sand3, scale: 1.15 },
+  rocket_dog: { dog: true, fur: P.dark0, dark: P.ink, belly: P.brown4, collar: P.red1, earNotch: true, scale: 1.35 },
+  cat_town: { cat: true, fur: P.grey3, dark: P.dark2, belly: P.grey5, scale: 0.95 },
   // stage K: the Salt sea. A pale spider spinning salt threads; the salt snake, an eel's body as thick as a man
   sentry: { mite: true, shell: P.grey3, dark: P.dark1, joint: P.grey2, scale: 1.7 },
   // stage U: the Верховья. «Счётчики», the old sentries of the water main, brass gone green; Ведро is one of them
@@ -74,9 +77,37 @@ function dogParts(c, phase, walking, pose) {
   cap([0, hy + 1, hz - 0.4], [0, hy + 4, hz - 1], 1.1, c.fur, 0.3);
   ball([0, hy + 4.2, hz - 1], 0.6, P.ink, 0.5); // nose
   for (const side of [-1, 1]) cap([side * 1.2, hy - 0.4, hz + 1.4], [side * 1.6, hy - 0.8, hz + 4], 0.8, c.dark, 0.2);
+  if (c.earNotch) ball([-1.6, hy - 0.8, hz + 3.4], 0.55, c.belly, 0.4);
   if (!dead) for (const side of [-1, 1]) ball([side * 1, hy + 1.8, hz + 0.6], 0.4, P.ink, 0.6);
   if (c.scar) cap([0.9, hy + 0.6, hz + 1.2], [0.5, hy + 2.6, hz - 0.6], 0.3, P.bone, 0.7);
   if (c.collar) for (const side of [-1, 1]) cap([side * 1.5, 4.4 + lunge, bz + 1.9], [side * 0.2, 5 + lunge, bz + 2.6], 0.55, c.collar, 0.5);
+  return out;
+}
+
+/** A smaller cat: pointed ears, a short muzzle and a long raised tail, distinct from the town dogs. */
+function catParts(c, phase, walking, pose) {
+  const out = [];
+  const cap = (a, b, r, color, bias = 0) => out.push({ kind: 'cap', a, b, r, color, bias });
+  const ball = (p, r, color, bias = 0) => out.push({ kind: 'ball', a: p, r, color, bias });
+  const dead = pose === 'dead';
+  const step = walking ? Math.sin(phase) * 1.7 : 0;
+  const z = dead ? 1.6 : 5;
+  if (!dead) for (const [front, side] of [[3, -1], [3, 1], [-3, -1], [-3, 1]]) {
+    const lift = walking && (front * side > 0 ? step > 0 : step < 0) ? 1 : 0;
+    cap([side * 1.3, front, z], [side * 1.5, front + step * side, 0.7 + lift], 0.7, c.dark);
+  }
+  cap([0, -3, z], [0, 3, z + 0.4], 2.1, c.fur);
+  ball([0, 0, z - 0.7], 1.6, c.belly, -0.2);
+  cap([0, -3.5, z + 0.5], [0, -5.7, z + 4.5], 0.7, c.dark);
+  cap([0, -5.7, z + 4.5], [1.4, -7, z + 5.6], 0.55, c.fur);
+  const head = [0, 4.7, z + 2.1];
+  ball(head, 2, c.fur);
+  for (const side of [-1, 1]) {
+    cap([side * 1.2, 4.5, z + 3], [side * 1.5, 4.2, z + 5.5], 0.65, c.dark);
+    if (!dead) ball([side * 0.9, 6.2, z + 2.4], 0.35, P.ink, 0.6);
+    cap([side * 0.6, 6.4, z + 1.1], [side * 2.6, 6.8, z + 1.3], 0.18, c.belly);
+  }
+  ball([0, 7, z + 1.4], 0.45, P.ink, 0.5);
   return out;
 }
 
@@ -269,7 +300,7 @@ export function buildCreatureSheet(c) {
       const pose = S_POSES[col];
       const walking = pose === 'walk';
       const phase = walking ? ((col - 1) / 4) * Math.PI * 2 : 0;
-      const body = c.bird ? birdParts(c, phase, walking, pose) : c.dog ? dogParts(c, phase, walking, pose) : c.eel ? eelParts(c, phase, walking, pose) : c.mite ? miteParts(c, phase, walking, pose) : c.spider ? spiderParts(c, phase, walking, pose) : scorpParts(c, phase, walking, pose);
+      const body = c.bird ? birdParts(c, phase, walking, pose) : c.cat ? catParts(c, phase, walking, pose) : c.dog ? dogParts(c, phase, walking, pose) : c.eel ? eelParts(c, phase, walking, pose) : c.mite ? miteParts(c, phase, walking, pose) : c.spider ? spiderParts(c, phase, walking, pose) : scorpParts(c, phase, walking, pose);
       renderParts(cv.ctx, col * S_FRAME_W + S_FOOT_X, dir * S_FRAME_H + S_FOOT_Y, dir, body, c.scale);
     }
   return finalize(cv);

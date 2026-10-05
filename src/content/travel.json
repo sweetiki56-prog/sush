@@ -441,6 +441,11 @@
           "notFlag": "ambush_done"
         }
       ]
+    },
+    {
+      "id": "rocket_storm",
+      "route": [[89, 42], [91, 42], [93, 42], [95, 42], [93, 43], [91, 43]],
+      "if": [{ "flag": "chapter5_done" }]
     }
   ]
 }

@@ -189,7 +189,7 @@ new=[
 ]
 if not any(o["text"].startswith("Письмо последнего") for o in opts): opts[anchor:anchor]=new; anchor+=len(new)
 opts[:]=[o for o in opts if not o["text"].startswith("Ты пришёл без крови")]
-if not any(o["text"].startswith("За тобой нет крови") for o in opts): opts.insert(anchor+1,opt("За тобой нет крови. Признай подделку сам — и никто здесь не умрёт.","dry_persuaded",**{"if":[{"flag":"evidence","gte":4},nf("blood_drawn")]}))
+if not any(o["text"].startswith("Путь сюда пройден без человеческой крови") for o in opts): opts.insert(anchor+1,opt("Путь сюда пройден без человеческой крови. Признай подделку сам — и никто здесь не умрёт.","dry_persuaded",**{"if":[{"flag":"evidence","gte":4},nf("blood_drawn")]}))
 z["nodes"]["stamps"]=node("Затвор сравнивает штамп с каплей и бледнеет. Весть уйдёт с плотины быстрее воды: накопления бедняков превращаются в металл, а власть Треста — в слух.",[opt("…","intro")])
 z["nodes"]["dry_persuaded"]=node("Затвор смотрит на оружие, которое так и не пришлось поднять. — Путь сюда пройден без человеческой крови. Значит, бумага ещё может остановить кровь. — Он подписывает отказ от поддельной копии и сам отдаёт его Шлюзу.",[opt("…",**{"effects":[F("trial_way","persuaded"),F("zatvor_persuaded"),F("dry_hands"),Q("dam","choice"),XP(300)]})])
 json.dump(dam,open('src/content/dialogues/dam.json','w'),ensure_ascii=False,indent=1)

@@ -4,6 +4,7 @@ import { GAME_H, GAME_W, HUD_H } from '../config';
 import { session } from '../session';
 import type { CombatView } from '../world/CombatView';
 import { C, button, metalPanel, txt, type Button } from './theme';
+import { settings } from '../core/Settings';
 
 const X = 950;
 const Y = GAME_H - HUD_H;
@@ -24,14 +25,14 @@ export class CombatHud {
     // the panel covers the normal HUD buttons; swallow clicks that miss our own buttons
     this.root.add(s.add.rectangle(X, Y, GAME_W - X, HUD_H, 0, 0).setOrigin(0).setInteractive());
     this.root.add(metalPanel(s, X, Y, GAME_W - X, HUD_H));
-    this.root.add(txt(s, X + 14, Y + 10, 'ОД', 12, C.amber, undefined, true));
+    this.root.add(txt(s, X + 14, Y + 10, settings().language === 'en' ? 'AP' : 'ОД', 12, C.amber, undefined, true));
     for (let i = 0; i < 12; i++) {
       const l = s.add.rectangle(X + 44 + i * 22, Y + 12, 16, 12, 0x1f3b22).setOrigin(0).setStrokeStyle(1, 0x3f7a3a);
       this.lamps.push(l);
       this.root.add(l);
     }
     this.weapon = button(s, X + 12, Y + 34, 306, 30, '', () => session().send({ t: 'swapWeapon' }));
-    this.end = button(s, X + 12, Y + 72, 306, 30, 'КОНЕЦ ХОДА [ПРОБЕЛ]', () => session().send({ t: 'endTurn' }));
+    this.end = button(s, X + 12, Y + 72, 306, 30, settings().language === 'en' ? 'END TURN [SPACE]' : 'КОНЕЦ ХОДА [ПРОБЕЛ]', () => session().send({ t: 'endTurn' }));
     this.info = txt(s, X + 14, Y + 106, '', 11, C.crtDim);
     this.root.add([this.weapon.root, this.end.root, this.info]);
     this.order = s.add.container(0, 0).setDepth(15);
@@ -47,8 +48,9 @@ export class CombatHud {
       l.setVisible(i < v.maxAp);
       l.setFillStyle(i < v.ap ? (v.playerTurn ? 0x7ad36a : 0x3f7a3a) : 0x16261a);
     });
-    const ammo = v.ammo === null ? '' : ` · ${v.ammo} патр.`;
-    this.weapon.label.setText(`${v.weaponName.toUpperCase()} · ${v.cost} ОД${ammo} [F]`);
+    const locale = settings().language;
+    const ammo = v.ammo === null ? '' : locale === 'en' ? ` · ${v.ammo} rounds` : ` · ${v.ammo} патр.`;
+    this.weapon.label.setText(`${v.weaponName.toUpperCase()} · ${v.cost} ${locale === 'en' ? 'AP' : 'ОД'}${ammo} [F]`);
     this.weapon.setEnabled(v.playerTurn);
     this.end.setEnabled(v.playerTurn);
     this.tick();
@@ -74,7 +76,8 @@ export class CombatHud {
     const sec = v.deadline === null ? -1 : Math.max(0, Math.ceil((v.deadline - Date.now()) / 1000));
     if (sec === this.shownSec && this.info.text) return;
     this.shownSec = sec;
-    const line = v.aiming ? `${v.aiming}: выберите клетку (ПКМ — отмена)` : v.whose;
-    this.info.setText(sec >= 0 ? `${line} · ${sec} с` : line);
+    const locale = settings().language;
+    const line = v.aiming ? `${v.aiming}: ${locale === 'en' ? 'select a tile (right-click to cancel)' : 'выберите клетку (ПКМ — отмена)'}` : v.whose;
+    this.info.setText(sec >= 0 ? `${line} · ${sec} ${locale === 'en' ? 's' : 'с'}` : line);
   }
 }

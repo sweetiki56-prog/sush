@@ -5,8 +5,12 @@ import { nextLevelXp } from '../core/character/Character';
 import { GAME_H, GAME_W, HUD_H } from '../config';
 import { C, button, glass, metalPanel, txt, type Button } from './theme';
 import { synth } from '../audio/Synth';
+import { settings } from '../core/Settings';
+import { logLineForDisplay, journalLineForDisplay, heroNameForDisplay } from '../i18n/display';
+import { uiText } from '../i18n/ui';
 
 export class Hud {
+  private locale = settings().language;
   private logText: Phaser.GameObjects.Text;
   private vitals: Phaser.GameObjects.Text;
   private tracker: Phaser.GameObjects.Text;
@@ -34,13 +38,13 @@ export class Hud {
     this.vitals = txt(scene, 704, y + 18, '', 13, C.crt);
 
     const bx = 958;
-    button(scene, bx, y + 14, 150, 26, 'ИНВЕНТАРЬ [I]', actions.inventory);
-    button(scene, bx, y + 45, 150, 26, 'ЖУРНАЛ [J]', actions.journal);
-    this.charBtn = button(scene, bx, y + 76, 150, 26, 'ПЕРСОНАЖ [C]', actions.character);
-    button(scene, bx + 160, y + 14, 150, 26, 'МЕНЮ [ESC]', actions.menu);
-    const soundLabel = () => (synth.muted ? 'ЗВУК: ВЫКЛ [M]' : 'ЗВУК: ВКЛ [M]');
+    button(scene, bx, y + 14, 150, 26, uiText('hud.inventory', this.locale), actions.inventory);
+    button(scene, bx, y + 45, 150, 26, uiText('hud.journal', this.locale), actions.journal);
+    this.charBtn = button(scene, bx, y + 76, 150, 26, uiText('hud.character', this.locale), actions.character);
+    button(scene, bx + 160, y + 14, 150, 26, uiText('hud.menu', this.locale), actions.menu);
+    const soundLabel = () => uiText(synth.muted ? 'hud.soundOff' : 'hud.soundOn', this.locale);
     const mute = button(scene, bx + 160, y + 45, 150, 26, soundLabel(), () => (actions.mute(), mute.label.setText(soundLabel())));
-    this.sneakBtn = button(scene, bx + 160, y + 76, 150, 26, 'КРАСТЬСЯ [S]', actions.sneak);
+    this.sneakBtn = button(scene, bx + 160, y + 76, 150, 26, uiText('hud.sneak', this.locale), actions.sneak);
     scene.time.addEvent({ delay: 500, loop: true, callback: () => this.blink() });
 
     this.trackerBg = scene.add.graphics();
@@ -60,7 +64,7 @@ export class Hud {
   }
 
   setSneak(on: boolean): void {
-    this.sneakBtn.label.setText(on ? 'КРАДУСЬ [S]' : 'КРАСТЬСЯ [S]').setColor(on ? C.amber : C.crt);
+    this.sneakBtn.label.setText(uiText(on ? 'hud.sneaking' : 'hud.sneak', this.locale)).setColor(on ? C.amber : C.crt);
   }
 
   /** Stop listening to the game (the scene is going away). */
@@ -76,8 +80,8 @@ export class Hud {
   }
 
   refreshLog(): void {
-    const lines = this.game.state.log.slice(-5);
-    this.logText.setText(lines.length ? lines.map((l) => `> ${l}`).join('\n') : '> Пустошь молчит.');
+    const lines = this.game.state.log.slice(-5).map((line) => logLineForDisplay(this.game, line, this.locale));
+    this.logText.setText(lines.length ? lines.map((l) => `> ${l}`).join('\n') : `> ${uiText('hud.silence', this.locale)}`);
     // keep the newest lines visible if wrapping overflows
     while (this.logText.height > 84 && lines.length > 1) {
       lines.shift();
@@ -91,21 +95,22 @@ export class Hud {
     const next = nextLevelXp(c.level);
     const pending = c.skillPoints > 0 || c.perkPoints > 0 ? '  ▲' : '';
     this.vitals.setText(
-      [`${c.name}, ур. ${c.level}${pending}`, `ОЗ      ${g.state.hp}/${g.maxHp}`, `Опыт    ${c.xp}${next ? `/${next}` : ''}`, `Капли  ${g.state.caps} · день ${Number(g.flag('day') ?? 1)}`].join('\n'),
+      [`${heroNameForDisplay(c.name, this.locale)}, ${uiText('hud.level', this.locale)} ${c.level}${pending}`, `${uiText('hud.hp', this.locale)}      ${g.state.hp}/${g.maxHp}`, `${uiText('hud.xp', this.locale)}    ${c.xp}${next ? `/${next}` : ''}`, `${uiText('hud.drops', this.locale)}  ${g.state.caps} · ${uiText('hud.day', this.locale)} ${Number(g.flag('day') ?? 1)}`].join('\n'),
     );
   }
 
   refreshTracker(): void {
     // the thread the story is on: the Trust at the well, the Mandate once found, the water quest before that
     const g = this.game;
-    const j = g.journal(['inspector', 'mandate', 'water'].find((q) => g.stage(q)) ?? 'water');
+    const quest = ['inspector', 'mandate', 'water'].find((q) => g.stage(q)) ?? 'water';
+    const j = g.journal(quest);
     this.trackerBg.clear();
     if (!j.length) {
       this.tracker.setText('');
       return;
     }
     const cur = j[j.length - 1];
-    this.tracker.setText(`◆ ${cur.text}`);
+    this.tracker.setText(`◆ ${journalLineForDisplay(g, quest, j.length - 1, cur.text, this.locale)}`);
     this.trackerBg.fillStyle(0x120d0a, 0.7).fillRect(12, 10, this.tracker.width + 20, this.tracker.height + 16);
     this.trackerBg.lineStyle(1, 0xa84e24, 0.8).strokeRect(12, 10, this.tracker.width + 20, this.tracker.height + 16);
   }

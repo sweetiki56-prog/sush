@@ -8,6 +8,9 @@ import { areaKnown, areasOf } from '../core/places';
 import { onKey } from '../ui/keys';
 import { synth } from '../audio/Synth';
 import { WESTERN } from './LoadingScene';
+import { settings } from '../core/Settings';
+import { areaNameForDisplay, locationNameForDisplay } from '../i18n/display';
+import { uiText } from '../i18n/ui';
 
 const PLAN_W = 1100;
 const PLAN_H = 600;
@@ -22,6 +25,7 @@ export class TownScene extends Phaser.Scene {
   create(data: { loc: string }): void {
     const s = session();
     const g = s.game!;
+    const locale = settings().language;
     const loc = g.content.locations[data.loc];
     if (!loc) return void this.scene.stop();
     this.loc = data.loc;
@@ -29,11 +33,11 @@ export class TownScene extends Phaser.Scene {
     const x0 = (GAME_W - PLAN_W) / 2;
     const y0 = (GAME_H - PLAN_H) / 2 - 20;
     this.add.rectangle(0, 0, GAME_W, GAME_H, 0x0d0806, 0.78).setOrigin(0).setInteractive(); // swallows clicks on the chart
-    const key = `townplan_${data.loc}`;
+    const key = `townplan_${data.loc}${locale === 'en' ? '_en' : ''}`;
     if (this.textures.exists(key)) this.add.image(x0, y0, key).setOrigin(0).setDisplaySize(PLAN_W, PLAN_H);
     else this.add.rectangle(x0, y0, PLAN_W, PLAN_H, 0xd8bf8e).setOrigin(0);
     this.add
-      .text(GAME_W / 2, y0 + 38, loc.name.toUpperCase(), { fontFamily: WESTERN, fontSize: '46px', color: '#2a160a', stroke: '#e8d3a4', strokeThickness: 4 })
+      .text(GAME_W / 2, y0 + 38, locationNameForDisplay(g, data.loc, locale).toUpperCase(), { fontFamily: WESTERN, fontSize: '46px', color: '#2a160a', stroke: '#e8d3a4', strokeThickness: 4 })
       .setOrigin(0.5);
 
     const known = areasOf(loc).filter((a) => areaKnown(a, g.state.flags, (c) => g.testAll(c)));
@@ -42,9 +46,9 @@ export class TownScene extends Phaser.Scene {
       const py = y0 + a.at[1] * PLAN_H;
       const pin = this.add.circle(px, py, 9, 0xa8321e).setStrokeStyle(2, 0x2a160a);
       this.tweens.add({ targets: pin, scale: 1.35, duration: 700, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-      this.pick(px, py + 34, `${i + 1}. ${a.name}`, () => this.enter(a.map));
+      this.pick(px, py + 34, `${i + 1}. ${areaNameForDisplay(g, data.loc, a.map, locale)}`, () => this.enter(a.map));
     });
-    this.pick(x0 + PLAN_W - 150, y0 + PLAN_H - 34, 'КАРТА МИРА', () => this.close());
+    this.pick(x0 + PLAN_W - 150, y0 + PLAN_H - 34, uiText('map.world', locale), () => this.close());
     onKey(this, (e) => {
       const n = Number(e.key);
       if (n >= 1 && n <= known.length) this.enter(known[n - 1].map);

@@ -86,7 +86,7 @@ for (const [x, y] of [[3, 33], [6, 35], [14, 36]]) place({ id: `scrap_${x}_${y}`
 place({ id: 'burrow', frame: 'burrow', x: 6, y: 6, block: false, label: 'Нора скорпионов' });
 place({ id: 'board', frame: 'board', x: 16, y: 23, label: 'Доска у колодца', dialogue: 'board' });
 place({ id: 'barrel_lame', frame: 'barrel_hazard', x: 35, y: 23, label: 'Бочка с горючим', explosive: true });
-place({ id: 'hank_bag', frame: 'bag', x: 17, y: 30, block: false, label: 'Мешок Хэнка', dialogue: 'hank_bag' });
+place({ id: 'hank_bag', frame: 'bag', x: 16, y: 32, block: false, label: 'Мешок Хэнка', dialogue: 'hank_bag' });
 place({ id: 'sign', frame: 'sign', x: 4, y: 23, label: 'Указатель', dialogue: 'sign' });
 place({ id: 'water_tank', frame: 'tank', x: 18, y: 23, w: 2, h: 2, label: 'Пустая цистерна' });
 for (const [x, y] of [[10, 19], [11, 20], [14, 21], [18, 27], [6, 27]]) place({ id: `barrel_${x}_${y}`, frame: 'barrel', x, y, label: 'Ржавая бочка' });
@@ -155,20 +155,21 @@ const TRUST_PEACE = [{ notFlag: 'trust_fight' }];
 const actors = [
   { id: 'player', sheet: 'hero_0', x: 3, y: 26, dir: 1 },
   { id: 'marta', sheet: 'marta', x: 14, y: 24, dir: 3, label: 'Старейшина Марта', dialogue: 'marta', if: [{ notFlag: 'marta_taken' }] },
-  { id: 'hank', sheet: 'hank', x: 16, y: 31, dir: 5, label: 'Бродяга Хэнк', dialogue: 'hank', if: [{ notFlag: 'hank_hid' }, { notFlag: 'hank_taken' }, { notFlag: 'met_hank' }] },
+  { id: 'hank', sheet: 'hank', x: 15, y: 33, dir: 5, label: 'Бродяга Хэнк', dialogue: 'hank', if: [{ notFlag: 'hank_hid' }, { notFlag: 'hank_taken' }, { notFlag: 'met_hank' }] },
   // companions sent home wait by the fire (stage V)
-  { id: 'hank_home', sheet: 'hank', x: 16, y: 31, dir: 5, label: 'Хэнк', dialogue: 'comp_hank', if: [{ flag: 'met_hank' }, { notFlag: 'with_hank' }, { notFlag: 'lost_hank' }] },
-  { id: 'rzhavchik_wait', sheet: 'dog_rzhavchik', x: 14, y: 32, dir: 2, label: 'Ржавчик', dialogue: 'comp_rzhavchik', if: [{ flag: 'met_rzhavchik' }, { notFlag: 'with_rzhavchik' }, { notFlag: 'lost_rzhavchik' }] },
+  { id: 'hank_home', sheet: 'hank', x: 15, y: 33, dir: 5, label: 'Хэнк', dialogue: 'comp_hank', if: [{ flag: 'met_hank' }, { notFlag: 'with_hank' }, { notFlag: 'lost_hank' }] },
+  { id: 'rzhavchik_wait', sheet: 'dog_rzhavchik', x: 13, y: 32, dir: 2, label: 'Ржавчик', dialogue: 'comp_rzhavchik', if: [{ flag: 'met_rzhavchik' }, { notFlag: 'with_rzhavchik' }, { notFlag: 'lost_rzhavchik' }] },
   { id: 'shluz', sheet: 'shluz', x: 11, y: 24, dir: 1, label: 'Инспектор Шлюз', dialogue: 'shluz', creature: 'inspector', group: 'trust', if: TRUST_HERE, peace: TRUST_PEACE, from: [0, 25] },
   { id: 'collector_a', sheet: 'collector', x: 9, y: 24, dir: 1, label: 'Сборщик Треста', dialogue: 'collector', creature: 'collector', group: 'trust', if: TRUST_HERE, peace: TRUST_PEACE, from: [0, 26] },
   { id: 'collector_b', sheet: 'collector', x: 12, y: 26, dir: 3, label: 'Сборщик Треста', dialogue: 'collector', creature: 'collector', group: 'trust', if: TRUST_HERE, peace: TRUST_PEACE, from: [1, 26] },
   // Ржавчик, the collector's dog, lives off Hank's fire until someone feeds him (stage R: «Пёс сборщика»)
   { id: 'rzhavchik', sheet: 'dog_rzhavchik', x: 13, y: 31, dir: 2, label: 'Тощий пёс', dialogue: 'rzhavchik', if: [{ notFlag: 'rzhavchik' }, { notFlag: 'dog_follows' }] },
+  { id: 'town_cat', sheet: 'cat_town', x: 12, y: 25, dir: 3, label: 'Кошка у колодца', dialogue: 'street_cat' },
   // guests on their days (visits below): the Guild caravan and Сипуха the Полусухая
-  { id: 'birjuk', sheet: 'birjuk', x: 7, y: 27, dir: 1, label: 'Караванщик Бирюк', dialogue: 'birjuk', if: [{ flag: 'caravan_here' }, { notFlag: 'birjuk_gone' }], from: [0, 26] },
-  { id: 'sych', sheet: 'caravan_guard', x: 8, y: 28, dir: 0, label: 'Охранник Сыч', dialogue: 'caravan_guard', if: [{ flag: 'caravan_here' }, { notFlag: 'sych_exposed' }], from: [0, 25] },
+  { id: 'birjuk', sheet: 'birjuk', x: 7, y: 25, dir: 1, label: 'Караванщик Бирюк', dialogue: 'birjuk', if: [{ flag: 'caravan_here' }, { notFlag: 'birjuk_gone' }], from: [0, 26] },
+  { id: 'sych', sheet: 'caravan_guard', x: 5, y: 26, dir: 0, label: 'Охранник Сыч', dialogue: 'caravan_guard', if: [{ flag: 'caravan_here' }, { notFlag: 'sych_exposed' }], from: [0, 25] },
   // the day's ambush on the caravan: they block the road and talk first
-  ...[['raider_boss', 'raider_boss', 4, 28, 'Главарь налётчиков', 'raider_boss'], ['raider_a', 'raider', 2, 29, 'Налётчик «Жажды»', 'raider'], ['raider_b', 'raider', 5, 29, 'Налётчик «Жажды»', 'raider']].map(
+  ...[['raider_boss', 'raider_boss', 4, 28, 'Главарь налётчиков', 'raider_boss'], ['raider_a', 'raider', 2, 27, 'Налётчик «Жажды»', 'raider'], ['raider_b', 'raider', 5, 29, 'Налётчик «Жажды»', 'raider']].map(
     ([id, creature, x, y, label, dialogue]) => ({ id, sheet: 'raider', creature, group: 'raiders', x, y, dir: 1, label, dialogue, if: [{ flag: 'ambush' }, { notFlag: 'ambush_off' }], peace: [{ notFlag: 'ambush_fight' }], from: [0, 26], respawn: true }),
   ),
   // Кривой hides in the north rocks while his bounty is up; if Marta takes him in he guards the boarded shack

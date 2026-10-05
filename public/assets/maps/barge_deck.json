@@ -4149,6 +4149,15 @@
    "dir": 3,
    "label": "Старьёвщица",
    "dialogue": "barge_scav"
+  },
+  {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 8,
+   "y": 14,
+   "dir": 6,
+   "label": "Палубная кошка",
+   "dialogue": "street_cat"
   }
  ],
  "outer": {

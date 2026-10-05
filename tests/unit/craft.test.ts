@@ -35,6 +35,9 @@ describe('crafting', () => {
     const medic = game(['medic', 'speech', 'sneak'] as never);
     medic.give('stinger');
     expect(craft(medic, 'antidote')).toBe(true);
+    medic.give('stinger');
+    expect(craft(medic, 'antidote')).toBe(true);
+    expect(medic.char.xp).toBe(10); // more medicine, but no repeat XP
   });
 
   it('the room crafts only next to the right bench, and a dialogue opens the window', () => {

@@ -107,13 +107,13 @@ describe('progression', () => {
     expect(s.hp).toBe(Ch.maxHp(s.character, C));
   });
 
-  it('levels up at 100 XP: skill points, a perk point, more HP', () => {
+  it('levels up at 400 and 1000 XP: skill points, a perk point, more HP', () => {
     const g = gameWith(plainCharacter());
     const levels: number[] = [];
     g.events.on('level', (l) => levels.push(l));
-    g.addXp(99);
+    g.addXp(399);
     expect(g.char.level).toBe(1);
-    g.addXp(160); // 259 total: straight to 3
+    g.addXp(601); // 1000 total: straight to 3
     expect(levels).toEqual([2, 3]);
     expect(g.char.skillPoints).toBe(30);
     expect(g.char.perkPoints).toBe(2);
@@ -123,7 +123,7 @@ describe('progression', () => {
 
   it('spends skill points only within budget', () => {
     const g = gameWith(plainCharacter());
-    g.addXp(100);
+    g.addXp(400);
     expect(g.spendSkillPoints({ guns: 20 })).toBe(false);
     expect(g.spendSkillPoints({ lockpick: 10, guns: 5 })).toBe(true);
     expect(g.skill('lockpick')).toBe(40 + 20);
@@ -134,7 +134,7 @@ describe('progression', () => {
   it('takes perks only when requirements are met', () => {
     const g = gameWith(plainCharacter());
     expect(g.takePerk('tough')).toBe(false); // no perk point yet
-    g.addXp(250);
+    g.addXp(1000);
     expect(g.takePerk('quickhands')).toBe(false); // agility 5 < 6
     expect(g.takePerk('tough')).toBe(true);
     expect(g.takePerk('tough')).toBe(false); // already taken
@@ -144,12 +144,29 @@ describe('progression', () => {
     expect(g.skill('lockpick')).toBe(60);
   });
 
-  it('quest stages and successful checks give XP', () => {
+  it('quest stages and a successful dialogue check give XP once', () => {
     const g = gameWith(plainCharacter());
     g.setStage('water', 'find_station');
     expect(g.char.xp).toBe(25);
-    g.check({ skill: 'speech' });
+    g.check({ skill: 'speech' }, 0, 'marta:intro:0');
     expect(g.char.xp).toBe(35);
+    g.check({ skill: 'speech' }, 0, 'marta:intro:0');
+    expect(g.char.xp).toBe(35);
+    g.check({ skill: 'speech' }); // a repeatable field check does not pay XP
+    expect(g.char.xp).toBe(35);
+  });
+
+  it('the first settlement stays below level 3 after its main quests', () => {
+    const g = gameWith(plainCharacter());
+    for (const quest of ['water', 'nest', 'mandate', 'inspector', 'well_seal']) {
+      const stages = CONTENT.quests[quest].stages;
+      for (const stage of stages) {
+        if (quest === 'nest' && stage.id === 'avoided') continue;
+        g.setStage(quest, stage.id);
+      }
+    }
+    expect(g.char.level).toBe(2);
+    expect(g.char.xp).toBeLessThan(Ch.nextLevelXp(2)!);
   });
 
   it('save v2 round-trips the character', () => {
@@ -157,9 +174,11 @@ describe('progression', () => {
     const kv: KV = { getItem: (k) => m.get(k) ?? null, setItem: (k, v) => void m.set(k, v), removeItem: (k) => void m.delete(k) };
     const g = gameWith(premade('Механик'));
     g.addXp(120);
+    g.awardXp('craft:antidote', 10);
     saveGame(g.state, kv);
     const back = loadGame(kv)!;
     expect(back.character).toEqual(g.char);
+    expect(new Game(CONTENT, fixedRng([0]), back).awardXp('craft:antidote', 10)).toBe(false);
     expect(loadGame(kv, 'auto')).toBeNull();
     m.set('rusty-well-save-v2:main', JSON.stringify({ ...back, version: 1 }));
     expect(loadGame(kv)).toBeNull();

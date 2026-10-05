@@ -23,6 +23,8 @@ import { exposeDebug } from '../world/debug';
 import { gridToScreen } from '../iso/IsoMath';
 import type { Tile } from '../iso/Pathfinder';
 import { pinchZoom } from '../ui/touch';
+import { areaNameForDisplay, locationNameForDisplay, mapLabelForDisplay } from '../i18n/display';
+import { uiText } from '../i18n/ui';
 
 export class WorldScene extends Phaser.Scene {
   map!: WorldMap;
@@ -134,11 +136,15 @@ export class WorldScene extends Phaser.Scene {
   /** A fresh snapshot: rebuild everyone, restore the map from the flags. */
   /** The loading screen for a place seen for the first time: a notice with its name, or a fight on the road. */
   private arrival(map: MapData): LoadingData {
-    if (this.mapId.startsWith('enc_')) return { style: 'dusk', title: 'Засада на дороге', subtitle: `${map.name}. Держитесь вместе.` };
-    const place = placeOfMap(session().game?.content.locations ?? {}, this.mapId);
-    const area = place && (place.loc.areas?.length ?? 0) > 1 ? place.area.name : null;
-    const where = `${regionOf(place?.loc.cell, session().worldMap)}, бассейн Светлой`;
-    return { style: 'poster', title: place?.loc.name ?? map.name, subtitle: this.mapId === 'arena' ? 'Бой до последнего стоящего' : area ? `${area}. ${where}` : where };
+    const game = session().game;
+    const locale = settings().language;
+    if (this.mapId === 'rocket_outpost' && session().game?.flag('rocket_reveal'))
+      return { style: 'rocket', title: uiText('loading.rocketTitle', locale), subtitle: uiText('loading.rocketSubtitle', locale) };
+    if (this.mapId.startsWith('enc_')) return { style: 'dusk', title: uiText('loading.roadAmbush', locale), subtitle: `${mapLabelForDisplay(map.name, locale)}. ${uiText('loading.stayTogether', locale)}` };
+    const place = placeOfMap(game.content.locations, this.mapId);
+    const area = place && (place.loc.areas?.length ?? 0) > 1 ? areaNameForDisplay(game, place.id, this.mapId, locale) : null;
+    const where = `${regionOf(place?.loc.cell, session().worldMap, locale)}, ${uiText('loading.basin', locale)}`;
+    return { style: 'poster', title: place ? locationNameForDisplay(game, place.id, locale) : mapLabelForDisplay(map.name, locale), subtitle: this.mapId === 'arena' ? uiText('loading.arena', locale) : area ? `${area}. ${where}` : where };
   }
 
   /** The music of this place when nobody is fighting. */
@@ -199,8 +205,8 @@ export class WorldScene extends Phaser.Scene {
 }
 
 /** The region a place lies in, by its cell on the chart: the Верховья on top, the Солончаки east of Низовье. */
-function regionOf(cell: [number, number] | undefined, grid: { north?: number } | null | undefined): string {
-  if (!cell) return 'Низовье';
-  if (cell[1] < (grid?.north ?? 0)) return 'Верховья';
-  return cell[0] >= 64 ? 'Солончаки' : 'Низовье';
+function regionOf(cell: [number, number] | undefined, grid: { north?: number } | null | undefined, locale: 'ru' | 'en' | 'es' | 'zh-Hans'): string {
+  if (!cell) return uiText('region.lowland', locale);
+  if (cell[1] < (grid?.north ?? 0)) return uiText('region.upper', locale);
+  return uiText(cell[0] >= 64 ? 'region.salt' : 'region.lowland', locale);
 }

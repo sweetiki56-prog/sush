@@ -62,7 +62,7 @@ function vignette(ground, map) {
 }
 
 /** The plan: `areas` with their positions (0..1), `maps` by id, baked `grounds` by map id. */
-export function townPlan(areas, maps, grounds, seed = 1) {
+export function townPlan(areas, maps, grounds, seed = 1, locale = 'ru') {
   const cv = canvas(PLAN_W, PLAN_H);
   const { ctx } = cv;
   parchment(ctx, seed);
@@ -103,6 +103,6 @@ export function townPlan(areas, maps, grounds, seed = 1) {
   ctx.closePath();
   ctx.fill();
   ctx.font = 'bold 16px serif';
-  ctx.fillText('С', kx - 6, ky - 46);
+  ctx.fillText(locale === 'en' ? 'N' : 'С', kx - 6, ky - 46);
   return cv;
 }

@@ -74,5 +74,6 @@
   "sentry_zap": { "name": "Разряд машины", "skill": "guns", "ap": 4, "dmg": [6, 12], "range": 6, "type": "shock" },
   "reject_claw": { "name": "Когти «Верблюда»", "skill": "melee", "ap": 3, "dmg": [4, 9], "range": 1 },
   "condor_beak": { "name": "Клюв кондора", "skill": "melee", "ap": 3, "dmg": [4, 8], "range": 1 },
-  "drone_zap": { "name": "Разрядник дрона", "skill": "guns", "ap": 4, "dmg": [4, 8], "range": 6, "type": "shock" }
+  "drone_zap": { "name": "Разрядник дрона", "skill": "guns", "ap": 4, "dmg": [4, 8], "range": 6, "type": "shock" },
+  "rocket_fang": { "name": "Клык", "skill": "melee", "ap": 3, "dmg": [5, 9], "range": 1, "item": "rocket_fang" }
 }

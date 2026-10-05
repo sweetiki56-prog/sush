@@ -2,7 +2,7 @@
 // Clients send intents; the room decides and reports what happened. Plain JSON both ways.
 import type { CombatSnap } from '../combat/Combat';
 import type { CombatEvent, Outcome } from '../combat/types';
-import type { CharacterData, SkillId } from '../character/defs';
+import type { AttrId, CharacterData, SkillId } from '../character/defs';
 import type { FlagValue, GameStateData } from '../types';
 import type { Tile } from '../../iso/Pathfinder';
 import type { CheckResult } from '../SkillCheck';
@@ -116,6 +116,10 @@ export interface DialogueMsg {
   portrait?: string;
   text: string;
   options: string[];
+  /** Optional content references for client-side localization; old clients still use text/options. */
+  nodeId?: string;
+  optionIndices?: number[];
+  checks?: ({ skill?: SkillId; attr?: AttrId; chance: number } | null)[];
 }
 
 export interface CombatSync extends CombatSnap {

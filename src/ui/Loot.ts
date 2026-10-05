@@ -5,6 +5,9 @@ import { C, button, glass, hitRow, txt } from './theme';
 import { itemStats } from './itemText';
 import { Window } from './Window';
 import { ScrollBox } from './ScrollBox';
+import { settings } from '../core/Settings';
+import { contentText } from '../i18n/display';
+import { uiText } from '../i18n/ui';
 
 const W = 640;
 const H = 470;
@@ -22,7 +25,7 @@ export class Loot extends Window {
   /** Show the pile, or redraw it if the window is already open. */
   showPile(items: Record<string, number>): void {
     this.items = items;
-    if (!this.root) this.at = this.frame(W, H, 'ДОБЫЧА');
+    if (!this.root) this.at = this.frame(W, H, uiText('loot.title', settings().language));
     this.draw();
   }
 
@@ -43,6 +46,7 @@ export class Loot extends Window {
   private draw(): void {
     const s = this.scene;
     const g = this.game;
+    const locale = settings().language;
     const { x, y } = this.at;
     this.body?.destroy();
     const body = (this.body = s.add.container(0, 0));
@@ -54,21 +58,21 @@ export class Loot extends Window {
     list.forEach(([id, n], i) => {
       const ry = y + 72 + i * ROW_H;
       const def = g.content.items[id];
-      const stats = itemStats(g.content, id);
+      const stats = itemStats(g.content, id, locale);
       box.content.add([
         s.add.image(x + 56, ry + 15, 'atlas', def?.icon ?? 'icon_note'),
-        txt(s, x + 80, ry + 6, `${def?.name ?? id} ×${n}`, 14, C.crtBright),
+        txt(s, x + 80, ry + 6, `${def ? contentText(`/items/${id}/name`, def.name, locale) : id} ×${n}`, 14, C.crtBright),
         txt(s, x + W - 48, ry + 8, stats ? stats.split('\n')[0] : '', 11, C.crtDim).setOrigin(1, 0),
         hitRow(s, x + 36, ry, W - 72, ROW_H - 2, () => {}, () => this.onTake(id)),
       ]);
     });
     box.fit(list.length * ROW_H + 8);
-    if (!list.length) body.add(txt(s, x + 48, y + 80, 'Всё разобрано.', 14, C.crtDim));
-    else if (list.length > ROWS) body.add(txt(s, x + 48, y + 72 + ROWS * ROW_H + 20, `Ещё ${list.length - ROWS}: колесо ↕ или «Взять всё»`, 12, C.crtDim));
-    body.add(txt(s, x + 32, y + H - 58, 'Клик — забрать вещь', 12, C.crtDim));
-    const all = button(s, x + W - 380, y + H - 64, 160, 30, 'ВЗЯТЬ ВСЁ', () => this.onTake());
+    if (!list.length) body.add(txt(s, x + 48, y + 80, uiText('loot.empty', locale), 14, C.crtDim));
+    else if (list.length > ROWS) body.add(txt(s, x + 48, y + 72 + ROWS * ROW_H + 20, uiText('loot.more', locale).replace('{count}', String(list.length - ROWS)), 12, C.crtDim));
+    body.add(txt(s, x + 32, y + H - 58, uiText('loot.help', locale), 12, C.crtDim));
+    const all = button(s, x + W - 380, y + H - 64, 160, 30, uiText('loot.takeAll', locale), () => this.onTake());
     all.setEnabled(list.length > 0);
-    const go = button(s, x + W - 200, y + H - 64, 160, 30, 'В ПУТЬ', () => this.close());
+    const go = button(s, x + W - 200, y + H - 64, 160, 30, uiText('loot.depart', locale), () => this.close());
     body.add([all.root, go.root]);
   }
 }

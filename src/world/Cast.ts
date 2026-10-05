@@ -3,6 +3,8 @@ import Phaser from 'phaser';
 import type { ActorKind, ActorSnap, HostileSnap } from '../core/room/protocol';
 import { Actor } from './Actor';
 import type { GenMeta } from './MapData';
+import { settings } from '../core/Settings';
+import { mapLabelForDisplay } from '../i18n/display';
 
 export interface Member {
   id: string;
@@ -61,7 +63,9 @@ export class Cast {
   }
 
   label(m: Member): string {
-    return m.hostile ? m.hostile.name + (m.hostile.asleep ? ' (спит)' : '') : m.label;
+    const locale = settings().language;
+    const name = mapLabelForDisplay(m.hostile?.name ?? m.label, locale);
+    return name + (m.hostile?.asleep ? (locale === 'en' ? ' (asleep)' : ' (спит)') : '');
   }
 
   /** A hostile's state changed: corpses lie down, runaways fade out. */

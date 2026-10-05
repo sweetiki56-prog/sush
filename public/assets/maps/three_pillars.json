@@ -4669,7 +4669,7 @@
   {
    "id": "mityay",
    "sheet": "mityay",
-   "x": 15,
+   "x": 14,
    "y": 13,
    "dir": 3,
    "label": "Митяй",
@@ -4689,6 +4689,24 @@
      "eq": "home"
     }
    ]
+  },
+  {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 6,
+   "y": 20,
+   "dir": 2,
+   "label": "Кошка у трактира",
+   "dialogue": "street_cat"
+  },
+  {
+   "id": "town_dog",
+   "sheet": "dog_town",
+   "x": 16,
+   "y": 18,
+   "dir": 5,
+   "label": "Дворовый пёс",
+   "dialogue": "street_dog"
   },
   {
    "id": "mytny",

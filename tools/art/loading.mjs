@@ -422,7 +422,7 @@ export function loadingChart(chart) {
   ctx.font = 'bold 30px "Georgia", serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  for (const [t, a] of [['С', -Math.PI / 2], ['В', 0], ['Ю', Math.PI / 2], ['З', Math.PI]]) ctx.fillText(t, cx + Math.cos(a) * rad * 0.66, cy + Math.sin(a) * rad * 0.66);
+  for (const [t, a] of [['N', -Math.PI / 2], ['E', 0], ['S', Math.PI / 2], ['W', Math.PI]]) ctx.fillText(t, cx + Math.cos(a) * rad * 0.66, cy + Math.sin(a) * rad * 0.66);
   // a lamp's warm light from the upper right
   const lamp = ctx.createRadialGradient(1150, 60, 20, 1150, 60, 900);
   lamp.addColorStop(0, 'rgba(255,190,110,0.28)');
@@ -443,4 +443,86 @@ function star(ctx, x, y, s) {
   }
   ctx.closePath();
   ctx.fill();
+}
+
+/** The first sight of the sanctuary: a dog in the storm, eyes level with the traveler, no baked-in text. */
+export function loadingRocket() {
+  const cv = canvas(W, H);
+  const { ctx } = cv;
+  const sky = ctx.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0, '#3b2721');
+  sky.addColorStop(0.52, '#74533b');
+  sky.addColorStop(1, '#1b1415');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, H);
+  const dust = rng(8166);
+  for (let i = 0; i < 6500; i++) {
+    ctx.fillStyle = `rgba(225,184,129,${0.03 + dust() * 0.15})`;
+    ctx.fillRect(dust() * W, dust() * H, 1 + dust() * 6, 1 + dust() * 2);
+  }
+  // One dog's profile, the left ear visibly notched. Nothing mechanical or mutated.
+  ctx.fillStyle = '#171214';
+  ctx.beginPath();
+  ctx.moveTo(295, 565);
+  ctx.quadraticCurveTo(355, 455, 415, 390);
+  ctx.quadraticCurveTo(430, 290, 485, 255);
+  ctx.lineTo(463, 105);
+  ctx.lineTo(505, 178);
+  ctx.lineTo(532, 161); // the old notch in the left ear
+  ctx.lineTo(577, 110);
+  ctx.lineTo(581, 241);
+  ctx.quadraticCurveTo(635, 225, 676, 240);
+  ctx.lineTo(711, 105);
+  ctx.lineTo(747, 174);
+  ctx.lineTo(771, 119);
+  ctx.lineTo(775, 287);
+  ctx.quadraticCurveTo(824, 340, 818, 426);
+  ctx.quadraticCurveTo(919, 494, 989, 565);
+  ctx.closePath();
+  ctx.fill();
+  // The tan mask and long muzzle read as a Doberman even through the dust.
+  ctx.fillStyle = '#654633';
+  for (const x of [535, 694]) {
+    ctx.beginPath();
+    ctx.ellipse(x, 347, 43, 22, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.fillStyle = '#785039';
+  ctx.beginPath();
+  ctx.moveTo(566, 405);
+  ctx.quadraticCurveTo(635, 384, 714, 405);
+  ctx.lineTo(686, 493);
+  ctx.quadraticCurveTo(622, 522, 572, 485);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = '#201719';
+  ctx.beginPath();
+  ctx.ellipse(630, 454, 45, 25, 0, 0, Math.PI * 2);
+  ctx.fill();
+  const eye = (x, y) => {
+    const glow = ctx.createRadialGradient(x, y, 2, x, y, 58);
+    glow.addColorStop(0, 'rgba(255,218,116,0.88)');
+    glow.addColorStop(0.28, 'rgba(208,137,52,0.38)');
+    glow.addColorStop(1, 'rgba(208,137,52,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(x - 58, y - 58, 116, 116);
+    ctx.fillStyle = '#d6a55b';
+    ctx.beginPath();
+    ctx.ellipse(x, y, 22, 11, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#1b1512';
+    ctx.beginPath();
+    ctx.ellipse(x, y, 6, 11, 0, 0, Math.PI * 2);
+    ctx.fill();
+  };
+  eye(535, 348);
+  eye(694, 348);
+  const haze = ctx.createLinearGradient(0, 395, 0, H);
+  haze.addColorStop(0, 'rgba(159,120,84,0)');
+  haze.addColorStop(1, 'rgba(133,93,62,0.75)');
+  ctx.fillStyle = haze;
+  ctx.fillRect(0, 395, W, H - 395);
+  grain(ctx, 15, 8167);
+  vignette(ctx, 0.85);
+  return cv;
 }

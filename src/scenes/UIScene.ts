@@ -20,6 +20,8 @@ import { OnlinePanel } from '../ui/OnlinePanel';
 import { ArenaPanel } from '../ui/ArenaPanel';
 import { showEnding } from '../ui/Ending';
 import { slidesFor } from '../core/endings';
+import { settings } from '../core/Settings';
+import { dialogueForDisplay, endingSlidesForDisplay } from '../i18n/display';
 
 type Win = Inventory | JournalWindow | CharacterWindow | Workbench | Barter;
 
@@ -110,7 +112,7 @@ export class UIScene extends Phaser.Scene {
         this.hovering = null;
         s.setModal(true);
       }
-      this.dialogue.show(m);
+      this.dialogue.show(dialogueForDisplay(m, g, settings().language));
     });
     on('dialogueEnd', () => this.dialogue.close());
     // a dialogue asked for a window: it opens once the talk has closed
@@ -268,7 +270,7 @@ export class UIScene extends Phaser.Scene {
       resume: done,
       settings: () => {
         this.overlay?.destroy();
-        this.overlay = showSettings(this, done);
+        this.overlay = showSettings(this, done, () => this.toMenu());
       },
       mainMenu: () => this.toMenu(),
       invite: this.online ? () => this.online!.invite() : undefined,
@@ -327,7 +329,7 @@ export class UIScene extends Phaser.Scene {
       window.location.reload();
     };
     // the last chapter ends the story: its slides instead of a table
-    if (chapter === 9) return showEnding(this, slidesFor(s.game, s.game.content.endings), onNew, () => s.setModal(false));
+    if (chapter === 9) return showEnding(this, endingSlidesForDisplay(slidesFor(s.game, s.game.content.endings), s.game.content.endings, s.game, settings().language), onNew, () => s.setModal(false));
     showComplete(this, s.game, chapter, onNew, () => s.setModal(false));
   }
 }

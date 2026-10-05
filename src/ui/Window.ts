@@ -3,6 +3,8 @@ import Phaser from 'phaser';
 import type { Game } from '../core/Game';
 import { GAME_H, GAME_W } from '../config';
 import { button, dimmer, glass, metalPanel, title } from './theme';
+import { settings } from '../core/Settings';
+import { uiText } from '../i18n/ui';
 
 export abstract class Window {
   protected root: Phaser.GameObjects.Container | null = null;
@@ -30,7 +32,7 @@ export abstract class Window {
       if (p.x < x || p.x > x + w || p.y < y || p.y > y + h) this.close();
     });
     this.root.add([dim, metalPanel(s, x, y, w, h), glass(s, x + 16, y + 16, w - 32, h - 32), title(s, x + 32, y + 30, heading, 14)]);
-    const b = button(s, x + w - 130, y + 24, 96, 24, 'ЗАКРЫТЬ', () => this.close());
+    const b = button(s, x + w - 130, y + 24, 96, 24, uiText('character.close', settings().language), () => this.close());
     this.root.add(b.root);
     return { x, y };
   }

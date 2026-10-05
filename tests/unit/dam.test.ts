@@ -6,7 +6,7 @@ import type { Game } from '../../src/core/Game';
 import { CONTENT } from '../../src/content';
 import { slidesFor } from '../../src/core/endings';
 import { room, until, TOWNS } from './rooms';
-import { placedBattle, premadeGame } from './sim';
+import { placedBattle, premadeGame, toLevel } from './sim';
 import { say, talk, winFight } from './story';
 
 /** After Chapter VIII: the whole tube, money; every roll lands unless told otherwise. */
@@ -299,7 +299,7 @@ describe('Chapter IX balance', () => {
         let w = 0;
         for (let s = 1; s <= RUNS; s++) {
           const g = premadeGame(t, s * 7919);
-          g.addXp(3600); // level 9–10 by Chapter IX
+          toLevel(g, 9); // level 9 by Chapter IX
           if (placedBattle(g, TOWNS[map], at, foes, friends) === 'victory') w++;
         }
         return [t, w / RUNS];

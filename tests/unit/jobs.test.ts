@@ -42,8 +42,19 @@ describe('contracts', () => {
     expect(g.state.caps).toBe(caps + 12);
     expect(g.count('scrap')).toBe(0);
     expect(r.world.flags.job_scrap).toBe('done');
+    const firstXp = g.char.xp;
     morning(r, c);
     expect(r.world.flags.job_scrap).toBeFalsy();
+    say(c, 'Хорошо');
+    say(c, 'Отойти');
+    talk(r, c, 'board', BOARD);
+    say(c, 'Взять: «Металлолом»');
+    say(c, 'Ясно');
+    g.give('scrap', 5);
+    say(c, 'Отойти');
+    talk(r, c, 'board', BOARD);
+    say(c, 'Сдать: «Металлолом»');
+    expect(g.char.xp).toBe(firstXp); // daily income stays, repeat XP does not
   });
 
   it('a hunt counts kills of its kind: three from the burrow', () => {

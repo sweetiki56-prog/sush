@@ -24,6 +24,7 @@ import { fitWorld } from '../travel/Travel';
 import { autoJoins, companionActor } from '../companions';
 import { placeParty, settleMeeting } from './Meetings';
 import { afterBattle, endBattle, takeLoot } from './RoadBattle';
+import { isRocketMap, releaseRocketGear, seizeRocketGear } from './RocketEscrow';
 import type { ActorSnap, EquipSlot, HostileSnap, Intent, ServerMsg } from './protocol';
 import { Room, SNEAK_SPEED, type Link, type Player, type RoomOptions } from './Room';
 
@@ -139,6 +140,21 @@ export class MissionRoom extends Room {
     this.logAll(`${p.game.char.name} зовёт отряд ${where ? `в район «${where}»` : 'в путь'}. Через ${DEPART_MS / 1000} с уходят все, если никто не против.`);
   }
 
+  protected rocketEscrowed(_p: Player, action: 'seize' | 'release'): void {
+    if (!isRocketMap(this.map.id)) return;
+    if (action === 'seize') this.save('auto');
+    for (const q of this.players.values()) {
+      const changed = action === 'seize' ? seizeRocketGear(q.game) : releaseRocketGear(q.game);
+      if (changed) this.redraw(q);
+    }
+    this.host?.game.setFlag('rocket_disarmed', action === 'seize');
+    this.save();
+  }
+
+  protected checkpointed(): void {
+    this.save('auto');
+  }
+
   private callOff(text: string): void {
     this.departure = null;
     this.broadcast({ t: 'depart', by: null, ms: 0 });
@@ -214,6 +230,10 @@ export class MissionRoom extends Room {
     const base = this.opts.maps?.[mapId];
     const map = base && extra.length ? { ...base, actors: [...base.actors, ...extra] } : base;
     if (!map || this.fight) return false;
+    if (isRocketMap(this.map.id) && !isRocketMap(mapId)) {
+      for (const q of this.players.values()) releaseRocketGear(q.game);
+      this.host?.game.setFlag('rocket_disarmed', false);
+    }
     for (const p of this.players.values()) {
       if (p.talk) this.endDialogue(p);
       p.sneaking = false;
@@ -253,6 +273,8 @@ export class MissionRoom extends Room {
     state.stock = this.world.stock ??= {};
     state.travel = this.world.travel;
     const p = this.addPlayer(token, state, null);
+    if (!isRocketMap(this.map.id)) releaseRocketGear(p.game);
+    else if (this.world.flags.rocket_disarmed) seizeRocketGear(p.game);
     if (!state.log.length) p.game.log('Вы входите в Ржавый колодец. Где-то скрипит несмазанная помпа.');
     if (this.players.size === 1) {
       this.autoParty();
@@ -633,7 +655,16 @@ export class MissionRoom extends Room {
     if (!r) return;
     if (r.done) return this.endDialogue(p);
     const d = r.dialogue;
-    this.send(p, { t: 'dialogue', id: r.id, speaker: d.speaker, portrait: d.portrait, text: r.text, options: r.options().map((o) => o.label) });
+    const options = r.options();
+    this.send(p, {
+      t: 'dialogue', id: r.id, speaker: d.speaker, portrait: d.portrait, text: r.text,
+      options: options.map((o) => o.label), nodeId: r.nodeId ?? undefined,
+      optionIndices: options.map((o) => o.index),
+      checks: options.map(({ option }) => option.check ? {
+        skill: option.check.skill, attr: option.check.attr,
+        chance: p.game.chance(option.check, option.check.mod),
+      } : null),
+    });
   }
 
   private choose(p: Player, i: number): void {
@@ -948,6 +979,10 @@ export class MissionRoom extends Room {
       this.broadcast({ t: 'place', id: h.id, x: t.x, y: t.y, dir: h.mover.dir });
       const u = creatureUnit(h.def, h.id, t.x, t.y);
       if (h.ally) u.team = 'player';
+      if (h.companion && isRocketMap(this.map.id) && this.world.flags.rocket_disarmed) {
+        u.weapons = ['fists'];
+        u.weapon = 'fists';
+      }
       if (h.companion && this.world.flags[`stance_${h.companion}`] === 'back') u.holdBack = true;
       else if (foesFirst) u.seq += FIRST_SEQ;
       if (this.ring) Object.assign(u, boutRule);

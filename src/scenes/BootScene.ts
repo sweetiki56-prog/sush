@@ -4,6 +4,8 @@ import type { GenMeta, MapData } from '../world/MapData';
 import { session } from '../session';
 import { CONTENT, MAP_IDS } from '../content';
 import type { WorldGridData } from '../core/travel/Travel';
+import { settings } from '../core/Settings';
+import { uiText } from '../i18n/ui';
 
 // Cyrillic + Latin sample so the browser fetches both unicode-range subsets.
 const SAMPLE = 'Сушь, Ржавый колодец 0123';
@@ -14,7 +16,8 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    loadingFor(this, { style: 'dusk', title: 'СУШЬ', subtitle: 'Низовье. Двести лет после воды.' });
+    const locale = settings().language;
+    loadingFor(this, { style: 'dusk', title: uiText('brand.title', locale), subtitle: uiText('loading.startSubtitle', locale) });
     const base = 'assets/gen/';
     this.load.image('ground', base + 'ground.png');
     this.load.image('ground_arena', base + 'ground_arena.png');
@@ -22,7 +25,10 @@ export class BootScene extends Phaser.Scene {
     for (const id of MAP_IDS) this.load.json(`map_${id}`, `assets/maps/${id}.json`);
     this.load.json('world_low', 'assets/maps/world_low.json');
     // the plans of towns of several areas (the town screen)
-    for (const [id, loc] of Object.entries(CONTENT.locations)) if ((loc.areas?.length ?? 0) > 1) this.load.image(`townplan_${id}`, `assets/gen/townplan_${id}.jpg`);
+    for (const [id, loc] of Object.entries(CONTENT.locations)) if ((loc.areas?.length ?? 0) > 1) {
+      this.load.image(`townplan_${id}`, `assets/gen/townplan_${id}.jpg`);
+      this.load.image(`townplan_${id}_en`, `assets/gen/townplan_${id}_en.jpg`);
+    }
     // sprite sheet frame sizes live in meta.json, so queue the sheets once it arrives
     this.load.once('filecomplete-json-meta', (_k: string, _t: string, meta: GenMeta) => {
       for (const [key, s] of Object.entries(meta.sheets)) this.load.spritesheet(key, `${base}${key}.png`, { frameWidth: s.w, frameHeight: s.h });

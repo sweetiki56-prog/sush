@@ -53,6 +53,8 @@ export class DialogueRunner {
     if (!node) throw new Error(`dialogue ${this.id}: missing node ${id}`);
     this.nodeId = id;
     this.game.apply(node.effects);
+    const ref = this.game.content.dialogues[this.id] === this.dialogue ? { dialogue: this.id, node: id } : undefined;
+    this.game.recordDialogue(this.dialogue.speaker, 'npc', this.text, ref);
   }
 
   options(): ShownOption[] {
@@ -83,10 +85,13 @@ export class DialogueRunner {
       this.shown = null;
       return !this.done;
     }
+    const ref = this.game.content.dialogues[this.id] === this.dialogue && this.nodeId
+      ? { dialogue: this.id, node: this.nodeId, option: shown.index } : undefined;
+    this.game.recordDialogue(this.dialogue.speaker, 'hero', this.fill(option.text), ref);
     this.game.apply(option.effects);
     if (option.check) {
       const c = option.check;
-      const res = this.game.check(c, c.mod ?? 0);
+      const res = this.game.check(c, c.mod ?? 0, `${this.id}:${this.nodeId}:${shown.index}`);
       this.game.apply(res.success ? c.passEffects : c.failEffects);
       this.enter(res.success ? c.pass : c.fail);
     } else {

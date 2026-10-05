@@ -1,5 +1,7 @@
 // Lines for the loading screens: how the game works, and a word of the country. Addressed to the player
 // without gender, as everything else.
+import type { Locale } from '../i18n/content';
+
 export const TIPS = [
   'На карте мира время идёт, только пока отряд в пути. Пробел — остановиться и подумать.',
   'Фляга воды — на сутки пути. Без воды жажда отнимает здоровье каждый час.',
@@ -21,6 +23,28 @@ export const TIPS = [
   'Кто пьёт воду Хоря, тот ему должен. Никогда не пейте из чужой фляги в долг.',
 ];
 
-export function randomTip(): string {
-  return TIPS[Math.floor(Math.random() * TIPS.length)];
+export const EN_TIPS = [
+  'Time passes on the world map only while your party travels. Press Space to stop and think.',
+  'One canteen lasts a day on the road. Without water, thirst drains health every hour.',
+  'Sneaking slows you down, but parties that are not hunting you may pass by.',
+  'Outnumbered? Pay, threaten, bluff, or run. A fight is not your only way out.',
+  'It is easier to flee along the road than across rocks, where pursuers stumble and fall behind.',
+  'The Guild caravan hires guards as far as the next stop. Payment comes at the gate.',
+  'Sipukha the Half-Dry buys scorpion stingers. She might also buy your fear of the Sukhovei.',
+  'Notice boards offer fresh contracts each morning. Repeatable work comes around again.',
+  'Fire and roast lizard drive off jackals. A pack without its leader scatters.',
+  'The ring is fists only. Losing is not dying: you wake up beside the counter.',
+  'The Trust mints the drops. Whoever holds the drops holds the water, or so they say.',
+  'A duster or leather jacket may stop a knife, but neither will stop thirst.',
+  'Perception reveals the unseen: ambushes, tracks, and lies in another person’s eyes.',
+  'Speech can settle a dispute without a shot. Not every dispute should be settled with words.',
+  'The Dead Fields are dangerous at night: the Drywood can smell water in your canteen.',
+  'Surguch leaves a trace: red wax stamped with a hand. Someone is collecting those marks.',
+  'The Svetlaya flowed here two centuries ago. Its dry bed still remembers the way.',
+  'Drink Khor’s water and you owe him. Never borrow a drink from someone else’s canteen.',
+];
+
+export function randomTip(locale: Locale = 'ru'): string {
+  const tips = locale === 'en' ? EN_TIPS : TIPS;
+  return tips[Math.floor(Math.random() * tips.length)];
 }

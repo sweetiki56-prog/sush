@@ -20,5 +20,6 @@
   "nothing_key": {},
   "dog_whistle": { "attrs": { "per": 1 }, "sentry": true },
   "resin_amulet": { "hp": 8, "res": { "poison": 25 } },
-  "eel_hatchling": { "skills": { "survival": 10 }, "res": { "normal": 5 } }
+  "eel_hatchling": { "skills": { "survival": 10 }, "res": { "normal": 5 } },
+  "rocket_collar": { "attrs": { "per": 1 } }
 }

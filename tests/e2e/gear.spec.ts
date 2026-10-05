@@ -15,7 +15,7 @@ test('a day of work: rest, trade, craft, a contract', async ({ page }) => {
   let s = await state(page);
   expect(s.flags.day).toBe(2);
   expect(s.flags.caravan_here).toBe(true);
-  await expect.poll(() => W(page, 'actor', 'birjuk'), { timeout: 30_000 }).toMatchObject({ x: 7, y: 27, moving: false });
+  await expect.poll(() => W(page, 'actor', 'birjuk'), { timeout: 30_000 }).toMatchObject({ x: 7, y: 25, moving: false });
 
   // barter: one crossbow bolt (the fourth of Бирюк's goods: guns first, and those are too dear yet)
   await talkTo(page, 'birjuk');

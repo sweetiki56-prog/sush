@@ -9,6 +9,7 @@ import type { Actor } from './Actor';
 import type { Cast } from './Cast';
 import type { WorldMap } from './MapBuilder';
 import { blast, flash, floatText, lob, splat, tracer } from './Fx';
+import { settings } from '../core/Settings';
 
 const WALK = 4.5; // tiles per second in combat
 
@@ -85,13 +86,13 @@ export class CombatAnimator {
         break;
       }
       case 'poisoned':
-        floatText(this.scene, this.spot(e.id).x, this.spot(e.id).y - 20, 'яд', '#b8f5a0', 400 * this.ctl.mult());
+        floatText(this.scene, this.spot(e.id).x, this.spot(e.id).y - 20, settings().language === 'en' ? 'poison' : 'яд', '#b8f5a0', 400 * this.ctl.mult());
         break;
       case 'burning':
-        floatText(this.scene, this.spot(e.id).x, this.spot(e.id).y - 20, 'огонь', '#ffb04a', 400 * this.ctl.mult());
+        floatText(this.scene, this.spot(e.id).x, this.spot(e.id).y - 20, settings().language === 'en' ? 'fire' : 'огонь', '#ffb04a', 400 * this.ctl.mult());
         break;
       case 'stunned':
-        floatText(this.scene, this.spot(e.id).x, this.spot(e.id).y - 20, 'оглушение', '#ffe27a', 400 * this.ctl.mult());
+        floatText(this.scene, this.spot(e.id).x, this.spot(e.id).y - 20, settings().language === 'en' ? 'stunned' : 'оглушение', '#ffe27a', 400 * this.ctl.mult());
         break;
       case 'death':
         this.onDeath(e.id);
@@ -198,7 +199,7 @@ export class CombatAnimator {
       await this.wait(140);
     }
     if (!e.hit) {
-      floatText(this.scene, target.x, target.y - 8, 'мимо', '#e6cc97', 350 * this.ctl.mult());
+      floatText(this.scene, target.x, target.y - 8, settings().language === 'en' ? 'miss' : 'мимо', '#e6cc97', 350 * this.ctl.mult());
       synth.miss();
     }
     if (att && !att.dead) att.setPose('idle');

@@ -17,6 +17,7 @@ import * as UP from './art/props_upper.mjs';
 import * as BN from './art/props_bones.mjs';
 import * as DM from './art/props_dam.mjs';
 import * as LW from './art/props_lowland.mjs';
+import * as RK from './art/props_rocket.mjs';
 import { CHARS, ARMOR_LOOKS, buildSheet, buildPortrait, FRAME_W, FRAME_H, FOOT_X, FOOT_Y, POSES } from './art/chars.mjs';
 import { CREATURES, buildCreatureSheet, S_FRAME_W, S_FRAME_H, S_FOOT_X, S_FOOT_Y, S_POSES } from './art/creatures.mjs';
 import { icon, ICONS } from './art/icons.mjs';
@@ -25,11 +26,12 @@ import { kitIcon, KIT_ICONS } from './art/icons_kit.mjs';
 import { armsIcon, ARMS_ICONS } from './art/icons_arms.mjs';
 import { token, TOKENS } from './art/tokens.mjs';
 import { worldMap, STRIP_PX } from './art/worldmap.mjs';
-import { loadingChart, loadingDusk, loadingPoster } from './art/loading.mjs';
+import { loadingChart, loadingDusk, loadingPoster, loadingRocket } from './art/loading.mjs';
 import { packAtlas } from './art/pack.mjs';
 import { roofArt } from './art/roofs.mjs';
 import { townPlan } from './art/townplan.mjs';
 import { P } from './art/palette.mjs';
+import { vehicleRaster } from './art/vehicle-raster.mjs';
 
 const OUT = 'public/assets/gen';
 mkdirSync(OUT, { recursive: true });
@@ -55,16 +57,26 @@ for (const [id, file, key] of [['rusty_well', 'rusty_well.json', 'ground'], ['ar
 }
 // the plans of towns of several areas (the town screen)
 for (const [id, loc] of Object.entries(LOCATIONS))
-  if ((loc.areas?.length ?? 0) > 1) writeFileSync(`${OUT}/townplan_${id}.jpg`, townPlan(loc.areas, maps, baked, id.length * 31).c.toBuffer('image/jpeg', 88));
+  if ((loc.areas?.length ?? 0) > 1) {
+    writeFileSync(`${OUT}/townplan_${id}.jpg`, townPlan(loc.areas, maps, baked, id.length * 31).c.toBuffer('image/jpeg', 88));
+    writeFileSync(`${OUT}/townplan_${id}_en.jpg`, townPlan(loc.areas, maps, baked, id.length * 31, 'en').c.toBuffer('image/jpeg', 88));
+  }
 
 // the world map chart (kept soft: it is a painting, not a sprite)
-const chart = worldMap(JSON.parse(readFileSync('public/assets/maps/world_low.json', 'utf8')));
+const chartData = JSON.parse(readFileSync('public/assets/maps/world_low.json', 'utf8'));
+let chartRu;
+let chartEn;
 // cut into strips of 64 cells: a whole chart of the Солончаки is wider than a phone's largest texture
-for (let i = 0; i * STRIP_PX < chart.w; i++) {
-  const w = Math.min(STRIP_PX, chart.w - i * STRIP_PX);
-  const strip = canvas(w, chart.h);
-  strip.ctx.drawImage(chart.c, i * STRIP_PX, 0, w, chart.h, 0, 0, w, chart.h);
-  save(`worldmap_low_${i}.png`, strip);
+for (const locale of ['ru', 'en']) {
+  const chart = worldMap(chartData, locale);
+  if (locale === 'ru') chartRu = chart;
+  else chartEn = chart;
+  for (let i = 0; i * STRIP_PX < chart.w; i++) {
+    const w = Math.min(STRIP_PX, chart.w - i * STRIP_PX);
+    const strip = canvas(w, chart.h);
+    strip.ctx.drawImage(chart.c, i * STRIP_PX, 0, w, chart.h, 0, 0, w, chart.h);
+    save(`worldmap_low${locale === 'en' ? '_en' : ''}_${i}.png`, strip);
+  }
 }
 // the app icon for a phone's home screen: a drop over dunes at dusk
 for (const size of [192, 512]) {
@@ -99,12 +111,19 @@ for (const size of [192, 512]) {
   save(`app_icon_${size}.png`, ic);
 }
 // loading screens: small JPEGs, they are the first thing to load
-for (const [id, cv] of [['dusk', loadingDusk()], ['poster', loadingPoster()], ['chart', loadingChart(chart.c)]]) writeFileSync(`${OUT}/loading_${id}.jpg`, cv.c.toBuffer('image/jpeg', 88));
+for (const [id, cv] of [['dusk', loadingDusk()], ['poster', loadingPoster()], ['chart', loadingChart(chartRu.c)], ['rocket', loadingRocket()]]) writeFileSync(`${OUT}/loading_${id}.jpg`, cv.c.toBuffer('image/jpeg', 88));
+writeFileSync(`${OUT}/loading_chart_en.jpg`, loadingChart(chartEn.c).c.toBuffer('image/jpeg', 88));
 
 // props (finalized: palette + outline) and fx (kept soft)
 const prop = (name, cv) => ({ name, cv: finalize(cv), anchor: cv.anchor });
 const raw = (name, cv, anchor) => ({ name, cv, anchor });
+const [sedan, pickup, burntVan, waterTanker] = await Promise.all(['sedan', 'pickup', 'burntVan', 'waterTanker'].map(vehicleRaster));
 const entries = [
+  prop('rocket_plaque', RK.plaque()),
+  prop('rocket_mural', RK.mural()),
+  prop('rocket_statue', RK.statue()),
+  prop('rocket_basin', RK.basin()),
+  raw('portrait_rocket', RK.portrait()),
   prop('shack_a', B.shack('a')),
   prop('shack_b', B.shack('b')),
   prop('wall_hi', B.wall('hi')),
@@ -123,9 +142,9 @@ const entries = [
   prop('tires', M.tires()),
   prop('crate', M.crate(true)),
   prop('crate_small', M.crate(false)),
-  prop('car_x', M.car('x', false)),
-  prop('car_y', M.car('y', false)),
-  prop('car_x_burnt', M.car('x', true)),
+  raw('car_x', sedan, sedan.anchor),
+  raw('car_y', pickup, pickup.anchor),
+  raw('car_x_burnt', burntVan, burntVan.anchor),
   prop('pylon', M.pylon()),
   prop('skeleton', M.skeleton()),
   prop('cactus', M.cactus()),
@@ -187,7 +206,7 @@ const entries = [
   prop('bell_tower', LW.bellTower()),
   prop('suhovey_stack', LW.suhoveyStack()),
   prop('still', LW.still()),
-  prop('water_truck', LW.waterTruck()),
+  raw('water_truck', waterTanker, waterTanker.anchor),
   prop('sluice_gate', DM.sluiceGate()),
   prop('banner_trust', DM.banner(P.grey2)),
   prop('banner_circle', DM.banner(P.teal1)),

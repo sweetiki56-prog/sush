@@ -56,7 +56,7 @@ export const LOOKS = 4;
 export const NAME_MAX = 16;
 
 /** Total XP needed to reach each level (index = level). */
-export const XP_TABLE = [0, 0, 100, 250, 450, 700, 1000];
+export const XP_TABLE = [0, 0, 400, 1000, 1800, 2800, 4000, 5400, 7000, 8800, 10800];
 export const MAX_LEVEL = XP_TABLE.length - 1;
 
 /** Modifiers a trait or perk applies. All optional; numbers add up across sources. */

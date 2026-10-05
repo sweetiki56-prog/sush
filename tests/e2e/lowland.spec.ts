@@ -10,7 +10,9 @@ type Ses = { session(): { send(x: unknown): void; game: { state: { caps: number 
 async function goto(page: Page, map: string, entry?: string): Promise<void> {
   await page.evaluate(([m, e]) => (window as unknown as { __world: Ses }).__world.session().send({ t: 'debug', op: { op: 'goto', map: m, entry: e } }), [map, entry] as const);
   await expect.poll(async () => (await state(page)).flags.at, { timeout: 60_000 }).toBe(map);
+  await expect.poll(() => W(page, 'worldMap'), { timeout: 60_000 }).toBe(map);
   await page.waitForFunction(() => (window as unknown as { __world?: { player(): unknown } }).__world?.player(), null, { timeout: 30_000 });
+  await expect.poll(() => W(page, 'loading'), { timeout: 30_000 }).toBe(false);
   await page.waitForTimeout(800);
 }
 
@@ -62,6 +64,8 @@ test('Низовье: the lead flower and Тимофей, the water truck, the A
 
   // the Elevator: the truck to the Circle
   await goto(page, 'elevator_yard', 'south');
+  await W(page, 'teleport', 29, 20); // the chapter test checks the talk, not the long path across the yard
+  await expect.poll(async () => (await W<{ x: number; y: number }>(page, 'player')).x).toBe(29);
   await page.screenshot({ path: 'test-results/e2e-lowland-03-elevator.png' });
   await talkTo(page, 'stolen_truck');
   await answer(page, 'Отвести воду Кругу');

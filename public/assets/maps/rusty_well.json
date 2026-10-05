@@ -198,8 +198,8 @@
    "block": false,
    "id": "hank_bag",
    "frame": "bag",
-   "x": 17,
-   "y": 30,
+   "x": 16,
+   "y": 32,
    "label": "Мешок Хэнка",
    "dialogue": "hank_bag"
   },
@@ -4497,8 +4497,8 @@
   {
    "id": "hank",
    "sheet": "hank",
-   "x": 16,
-   "y": 31,
+   "x": 15,
+   "y": 33,
    "dir": 5,
    "label": "Бродяга Хэнк",
    "dialogue": "hank",
@@ -4517,8 +4517,8 @@
   {
    "id": "hank_home",
    "sheet": "hank",
-   "x": 16,
-   "y": 31,
+   "x": 15,
+   "y": 33,
    "dir": 5,
    "label": "Хэнк",
    "dialogue": "comp_hank",
@@ -4537,7 +4537,7 @@
   {
    "id": "rzhavchik_wait",
    "sheet": "dog_rzhavchik",
-   "x": 14,
+   "x": 13,
    "y": 32,
    "dir": 2,
    "label": "Ржавчик",
@@ -4656,10 +4656,19 @@
    ]
   },
   {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 12,
+   "y": 25,
+   "dir": 3,
+   "label": "Кошка у колодца",
+   "dialogue": "street_cat"
+  },
+  {
    "id": "birjuk",
    "sheet": "birjuk",
    "x": 7,
-   "y": 27,
+   "y": 25,
    "dir": 1,
    "label": "Караванщик Бирюк",
    "dialogue": "birjuk",
@@ -4679,8 +4688,8 @@
   {
    "id": "sych",
    "sheet": "caravan_guard",
-   "x": 8,
-   "y": 28,
+   "x": 5,
+   "y": 26,
    "dir": 0,
    "label": "Охранник Сыч",
    "dialogue": "caravan_guard",
@@ -4732,7 +4741,7 @@
    "creature": "raider",
    "group": "raiders",
    "x": 2,
-   "y": 29,
+   "y": 27,
    "dir": 1,
    "label": "Налётчик «Жажды»",
    "dialogue": "raider",

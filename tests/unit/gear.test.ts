@@ -76,6 +76,21 @@ describe('gear slots', () => {
     expect(g.state.equipped).toMatchObject({ weapon: 'knife', alt: 'rifle' });
   });
 
+  it('removing hand 1 does not move hand 2 into its slot', () => {
+    const g = game({ shotgun: 1 });
+    expect(g.equip('weapon', null)).toBe(true);
+    expect(g.weaponSlots()).toEqual(['', 'knife']);
+    expect(g.hands()).toEqual(['knife']); // the fight can still use the second hand
+    expect(g.equip('alt', 'shotgun')).toBe(true);
+    expect(g.weaponSlots()).toEqual(['', 'shotgun']);
+    expect(g.equip('weapon', 'rifle')).toBe(true);
+    expect(g.weaponSlots()).toEqual(['rifle', 'shotgun']);
+    expect(g.equip('alt', null)).toBe(true);
+    expect(g.weaponSlots()).toEqual(['rifle', '']);
+    expect(g.equip('alt', 'knife')).toBe(true);
+    expect(g.weaponSlots()).toEqual(['rifle', 'knife']);
+  });
+
   it('charms: two places, their mods reach skills, crit and resistances', () => {
     const g = game({ venom_ward: 1, lucky_nut: 1, jacket: 1 });
     const crit = g.crit;

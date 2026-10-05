@@ -4,7 +4,7 @@ import type { Game } from '../../src/core/Game';
 import { CONTENT } from '../../src/content';
 import { slidesFor } from '../../src/core/endings';
 import { room, TOWNS } from './rooms';
-import { placedBattle, premadeGame } from './sim';
+import { placedBattle, premadeGame, toLevel } from './sim';
 import { say, talk, winFight } from './story';
 
 function setup(patch: (g: Game) => void = () => {}, map = 'post_station', entry?: string) {
@@ -123,7 +123,7 @@ describe('«Сухие руки»', () => {
       g.setFlag('boom_up', true);
     }, 'dam_control', 'ladder');
     meet(s, 'zatvor_dam', [21, 11]);
-    say(s.c, 'За тобой нет крови');
+    say(s.c, 'Путь сюда пройден без человеческой крови');
     say(s.c, '…');
     expect([s.g.flag('trial_way'), s.g.flag('dry_hands')]).toEqual(['persuaded', true]);
     expect(slidesFor(s.g, CONTENT.endings).some((slide) => slide.id === 'dry_hands')).toBe(true);
@@ -135,7 +135,7 @@ describe('S15a balance', () => {
     let wins = 0;
     for (let seed = 1; seed <= 120; seed++) {
       const g = premadeGame('Стрелок', seed * 7919);
-      g.addXp(2600);
+      toLevel(g, 8);
       if (placedBattle(g, TOWNS[map], at, foes, friends) === 'victory') wins++;
     }
     return wins / 120;

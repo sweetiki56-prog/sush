@@ -48,6 +48,8 @@ const actors = [
   { id: 'khrust', sheet: 'khrust', x: 27, y: 23, dir: 5, label: 'Хруст', dialogue: 'khrust' },
   { id: 'ukho', sheet: 'raider', x: 32, y: 28, dir: 6, label: 'Покупатель', dialogue: 'ukho', if: [{ flag: 'salt_smuggle_asked' }, { notFlag: 'salt_smuggle' }] },
   { id: 'efrem', sheet: 'efrem', x: 9, y: 27, dir: 1, label: 'Караванщик Ефрем', dialogue: 'efrem' },
+  { id: 'town_cat', sheet: 'cat_town', x: 12, y: 18, dir: 5, label: 'Кошка у рядов', dialogue: 'street_cat' },
+  { id: 'town_dog', sheet: 'dog_town', x: 25, y: 18, dir: 2, label: 'Пёс караванщиков', dialogue: 'street_dog' },
   { id: 'lada_home', sheet: 'lada', x: 7, y: 28, dir: 1, label: 'Лада', dialogue: 'lada_home', if: [{ flag: 'salt_bride', eq: 'returned' }] },
   { id: 'market_guard', sheet: 'guild_guard', x: 18, y: 14, dir: 3, label: 'Охрана Гильдии', dialogue: 'guild_guard', patrol: [[18, 14], [30, 15], [30, 20], [18, 20]] },
   { id: 'porter', sheet: 'saltfolk', x: 18, y: 25, dir: 2, label: 'Солевик-носильщик', dialogue: 'salt_porter' },

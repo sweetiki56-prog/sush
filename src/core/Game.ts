@@ -12,6 +12,7 @@ import { DMG_TYPES, type ArmorDef, type Resist } from './combat/types';
 
 export type GameEvents = {
   log: [text: string];
+  dialogueHistory: [];
   flag: [key: string, value: FlagValue];
   inventory: [];
   gained: [item: string];
@@ -25,6 +26,8 @@ export type GameEvents = {
   travel: []; // leave for the world map (the room decides)
   goto: [map: string, entry: string | undefined]; // move to another area of this place (the room decides)
   encounter: [action: EncounterAction]; // a meeting on the road is decided (the room acts)
+  rocketEscrow: [action: 'seize' | 'release'];
+  autosave: [];
 };
 
 const MAX_LOG = 60;
@@ -85,16 +88,21 @@ export class Game {
     if (!def || !this.count(item)) return false;
     const heal = def.combat?.heal ?? 0;
     const lasting = !!def.buff || !!def.addict || !!def.cureAddict;
-    if (!inFight && !heal && !lasting) {
+    const quenches = (item === 'flask' || item === 'rocket_water') && !!this.body.thirsty;
+    if (!inFight && !heal && !lasting && !quenches) {
       this.log('Прибережём для боя.');
       return false;
     }
-    if (!inFight && !lasting && this.state.hp >= this.maxHp) {
+    if (!inFight && !lasting && !quenches && this.state.hp >= this.maxHp) {
       this.log('Раны и так в порядке.');
       return false;
     }
     this.take(item);
     if (def.empties) this.give(def.empties);
+    if (quenches) {
+      this.body.thirsty = false;
+      this.log('Жажда отступает. Воды хватит до следующего дня.');
+    }
     if (!inFight && heal) {
       const before = this.state.hp;
       this.addHp(heal);
@@ -125,8 +133,9 @@ export class Game {
   /** A day on the road: a flask each (the canteen comes back), or thirst until the next water. */
   drink(): void {
     const body = this.body;
-    if (this.take('flask')) {
-      if (this.content.items.flask.empties) this.state.items.canteen = this.count('canteen') + 1;
+    const water = this.count('flask') ? 'flask' : this.count('rocket_water') ? 'rocket_water' : null;
+    if (water && this.take(water)) {
+      if (this.content.items[water].empties) this.state.items.canteen = this.count('canteen') + 1;
       body.thirsty = false;
       this.log('Вы делаете несколько глотков из фляги. Воды на день.');
     } else if (!body.thirsty) {
@@ -251,8 +260,8 @@ export class Game {
       .map(([id]) => id);
   }
 
-  /** Hand 1 and hand 2 as weapon ids ('' = empty) that are still in the bag. A missing hand 2 (old saves) takes another weapon from the bag. */
-  private slots(): [string, string] {
+  /** Hand 1 and hand 2 retain their positions even when one is empty. Old saves may infer hand 2. */
+  weaponSlots(): [string, string] {
     const carried = (id: string | undefined) => !!id && !!this.content.weapons[id]?.item && this.count(this.content.weapons[id].item!) > 0;
     const e = this.state.equipped;
     const main = carried(e.weapon) ? e.weapon : '';
@@ -262,7 +271,7 @@ export class Game {
 
   /** The weapons in hand, hand 1 first (fists come on top in a fight). */
   hands(): string[] {
-    return this.slots().filter((id) => id);
+    return this.weaponSlots().filter((id) => id);
   }
 
   /**
@@ -294,7 +303,7 @@ export class Game {
     } else {
       const w = item ? this.handWeapons().find((id) => this.content.weapons[id].item === item) : '';
       if (w === undefined) return false;
-      let [main, alt] = this.slots();
+      let [main, alt] = this.weaponSlots();
       // taking the weapon from the other hand swaps the hands
       if (slot === 'weapon') [main, alt] = [w, w && w === alt ? main : alt];
       else [main, alt] = [w && w === main ? alt : main, w];
@@ -309,7 +318,7 @@ export class Game {
 
   /** In a fight the other hand came up: remember which one leads. Fists change nothing. */
   setActive(weapon: string): void {
-    const [main, alt] = this.slots();
+    const [main, alt] = this.weaponSlots();
     if (weapon && weapon === alt) {
       this.state.equipped.weapon = alt;
       this.state.equipped.alt = main;
@@ -345,6 +354,15 @@ export class Game {
     this.events.emit('stats');
   }
 
+  /** A repeatable activity can still pay, but its experience is earned only on the first success. */
+  awardXp(key: string, amount: number): boolean {
+    const paid = (this.state.xpAwards ??= {});
+    if (paid[key]) return false;
+    paid[key] = true;
+    this.addXp(amount);
+    return true;
+  }
+
   /** Spend unspent skill points; returns false (and changes nothing) if the plan is invalid. */
   spendSkillPoints(plan: Partial<Record<SkillId, number>>): boolean {
     const c = this.char;
@@ -373,6 +391,27 @@ export class Game {
     this.state.log.push(text);
     if (this.state.log.length > MAX_LOG) this.state.log.shift();
     this.events.emit('log', text);
+  }
+
+  /** Keep only lines the player actually saw or chose, once per speaker. */
+  recordDialogue(speaker: string, role: 'npc' | 'hero', text: string, ref?: { dialogue: string; node: string; option?: number }): void {
+    const history = (this.state.dialogueHistory ??= []);
+    let entry = history.find((e) => e.speaker === speaker);
+    if (!entry) {
+      entry = { speaker, lines: [] };
+      history.push(entry);
+    }
+    const existing = entry.lines.find((line) => line.role === role && line.text === text);
+    if (existing) {
+      // A repeated line from an old v2 save can gain its stable reference without duplication.
+      if (ref && !existing.ref) {
+        existing.ref = ref;
+        this.events.emit('dialogueHistory');
+      }
+      return;
+    }
+    entry.lines.push(ref ? { role, text, ref } : { role, text });
+    this.events.emit('dialogueHistory');
   }
 
   // ---------- flags ----------
@@ -479,6 +518,9 @@ export class Game {
         case 'xp':
           this.addXp(e.amount);
           break;
+        case 'xpOnce':
+          this.awardXp(e.key, e.amount);
+          break;
         case 'karma': {
           const v = this.flag('karma');
           this.setFlag('karma', (typeof v === 'number' ? v : 0) + e.amount);
@@ -510,6 +552,12 @@ export class Game {
           break;
         case 'unconfiscate':
           this.unconfiscate();
+          break;
+        case 'rocketEscrow':
+          this.events.emit('rocketEscrow', e.action);
+          break;
+        case 'autosave':
+          this.events.emit('autosave');
           break;
         case 'encounter':
           this.events.emit('encounter', e.action);
@@ -559,14 +607,14 @@ export class Game {
     return true;
   }
 
-  check(t: CheckTarget, mod = 0): CheckResult {
+  check(t: CheckTarget, mod = 0, rewardKey?: string): CheckResult {
     const res = rollCheck(this.checkValue(t), mod, this.rng);
     const label = this.checkLabel(t);
     if (res.success) this.state.stats.checksPassed++;
     else this.state.stats.checksFailed++;
     this.log(`[${label} ${res.chance}%] бросок ${res.roll}: ${res.success ? 'успех' : 'провал'}.`);
     this.events.emit('check', label, res);
-    if (res.success) this.addXp(CHECK_XP);
+    if (res.success && rewardKey) this.awardXp(`check:${rewardKey}`, CHECK_XP);
     return res;
   }
 

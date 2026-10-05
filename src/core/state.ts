@@ -20,6 +20,7 @@ export function newState(character: CharacterData, content: Content): GameStateD
     player: { x: 3, y: 26, dir: 1 },
     stats: { playMs: 0, checksPassed: 0, checksFailed: 0, kills: 0 },
     log: [],
+    dialogueHistory: [],
   };
 }
 

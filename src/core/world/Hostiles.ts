@@ -33,6 +33,7 @@ export interface Hostile {
   ally: boolean; // on the players' side: never notices them, fights with them
   ring: false | 'fists' | 'arms'; // a boxer or an arena fighter: fights only bouts (fists, or own weapons)
   companion?: string; // walks after the leader (core/companions.ts)
+  respawn: boolean; // returning enemies pay XP only for the first defeat
 }
 
 export class Hostiles {
@@ -73,6 +74,7 @@ export class Hostiles {
       ally: !!a.ally,
       ring: a.ring === 'arms' ? 'arms' : a.ring ? 'fists' : false,
       companion: a.companion,
+      respawn: !!a.respawn,
     };
     this.list.push(h);
     return h;

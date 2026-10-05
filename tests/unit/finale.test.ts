@@ -33,7 +33,7 @@ function arrived(players = 1) {
   g.give('tube');
   g.setStage('mandate', 'found');
   talk(r, c, 'marta', [15, 25]);
-  say(c, 'Рад был помочь');
+  say(c, 'Было приятно помочь.');
   say(c, 'Прощай, Марта');
   expect(until(r, () => ['shluz', 'collector_a', 'collector_b'].every((id) => r.npcs.get(id) && !r.npcs.get(id)!.mover.moving))).toBe(true);
   return { r, clients, c, g };

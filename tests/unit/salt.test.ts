@@ -10,7 +10,7 @@ import { fixedRng } from '../../src/core/rng';
 import type { PartyState } from '../../src/core/travel/Parties';
 import { CONTENT } from '../../src/content';
 import { room, until, TOWNS } from './rooms';
-import { arm, placedBattle, premadeGame, roadBattle } from './sim';
+import { arm, placedBattle, premadeGame, roadBattle, toLevel } from './sim';
 import { say, talk, winFight } from './story';
 
 const W = CONTENT.weapons;
@@ -613,9 +613,9 @@ describe('Chapter IV balance', () => {
     return out;
   };
   const pit = TOWNS.salt_arena;
-  // Chapter IV comes at level 5: placedBattle adds 300 xp, roadBattle 600 (level 4)
-  const lvl5 = (g: Game) => (g.addXp(400), g);
-  const lvl5r = (g: Game) => (g.addXp(100), g);
+  // Chapter IV comes at level 5; the helpers prepare the target level explicitly.
+  const lvl5 = (g: Game) => toLevel(g, 5);
+  const lvl5r = (g: Game) => toLevel(g, 5);
 
   it('the arena ladder is a fighter\'s way; the talker has others', () => {
     const r = {

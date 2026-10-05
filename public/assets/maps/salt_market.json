@@ -3567,6 +3567,24 @@
    "dialogue": "efrem"
   },
   {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 12,
+   "y": 18,
+   "dir": 5,
+   "label": "Кошка у рядов",
+   "dialogue": "street_cat"
+  },
+  {
+   "id": "town_dog",
+   "sheet": "dog_town",
+   "x": 25,
+   "y": 18,
+   "dir": 2,
+   "label": "Пёс караванщиков",
+   "dialogue": "street_dog"
+  },
+  {
    "id": "lada_home",
    "sheet": "lada",
    "x": 7,

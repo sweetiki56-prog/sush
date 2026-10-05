@@ -13,6 +13,8 @@ import { trade } from './Trade';
 import { drops, lowerFirst } from '../words';
 import { meet } from './Meetings';
 import { partyOf } from '../companions';
+import { isRocketMap, releaseRocketGear } from './RocketEscrow';
+import type { Storm } from '../travel/Parties';
 
 const SEND_MS = 200;
 const THIRST_HP = 3; // per hour on the road without water
@@ -32,9 +34,19 @@ export function partyPace(room: MissionRoom): PartyPace {
   };
 }
 
+/** A static salt storm or the hourly position of a moving 3×3 sandstorm. */
+export function stormArea(s: Storm, day: number, minute: number): [number, number, number, number] {
+  if (!s.route?.length) return s.area ?? [0, 0, -1, -1];
+  const absoluteHour = Math.floor(((day - 1) * DAY_MIN + minute) / 60);
+  const [x, y] = s.route[((absoluteHour % s.route.length) + s.route.length) % s.route.length];
+  return [x - 1, y - 1, x + 1, y + 1];
+}
+
 /** Salt storms raging now (their conditions hold), as rectangles on the map. */
 export function activeStorms(room: MissionRoom): [number, number, number, number][] {
-  return (room.content.travel.storms ?? []).filter((s) => flagsHold(room.world.flags, s.if)).map((s) => s.area);
+  const day = Number(room.world.flags.day ?? 1);
+  const minute = room.world.travel?.minute ?? MORNING;
+  return (room.content.travel.storms ?? []).filter((s) => flagsHold(room.world.flags, s.if)).map((s) => stormArea(s, day, minute));
 }
 
 export function stormAt(room: MissionRoom, x: number, y: number): boolean {
@@ -105,6 +117,11 @@ export function travelOf(room: MissionRoom): Travel | null {
 export function leaveToWorld(room: MissionRoom, p: Player): boolean {
   const grid = room.worldMap;
   if (!grid || room.fight) return false;
+  if (isRocketMap(room.map.id)) {
+    for (const q of room.players.values()) releaseRocketGear(q.game);
+    p.game.setFlag('rocket_disarmed', false);
+    p.game.setFlag('rocket_reveal', false);
+  }
   const here = placeOfMap(room.content.locations, room.map.id ?? '')?.loc;
   const cell = here?.cell ?? [grid.width / 2, grid.height / 2];
   const t = (room.world.travel ??= freshTravel(grid, cell));
@@ -229,7 +246,16 @@ export function roadTick(room: MissionRoom, ms: number): void {
     }
     return room.sendTravel(false, SEND_MS);
   }
-  const events = tr.tick(ms, partyPace(room));
+  const storm = room.content.travel.storms?.find((s) => s.id === 'rocket_storm');
+  const events = tr.tick(ms, partyPace(room), (x, y, minute) => {
+    if (!storm || room.world.flags.rocket_found || !flagsHold(room.world.flags, storm.if)) return null;
+    const [x0, y0, x1, y1] = stormArea(storm, Number(room.world.flags.day ?? 1), minute);
+    return x >= x0 && x <= x1 && y >= y0 && y <= y1 ? 'rocket' : null;
+  });
+  if (events.some((e) => e.t === 'interrupt')) {
+    for (const e of events) roadEvent(room, e);
+    return;
+  }
   // the others move on the same clock
   for (const e of ps.step(minutes, heroOnMap(room), tr.s.minute)) partyEvent(room, ps, e);
   for (const e of events) roadEvent(room, e);
@@ -249,7 +275,7 @@ function escortArrived(room: MissionRoom): void {
     { type: 'flag', key: `arrived_${esc.party}` }, // a story caravan (a unique party) knows it got there
     { type: 'log', text: `Караван дошёл: ${where}. Караванщик отсчитывает ${esc.pay} ${drops(esc.pay)}.` },
   ]);
-  for (const q of room.players.values()) q.game.addXp(ESCORT_XP);
+  for (const q of room.players.values()) q.game.awardXp(`escort:${esc.to}`, ESCORT_XP);
   room.sendTravel(true);
   room.save();
 }
@@ -281,6 +307,15 @@ function roadEvent(room: MissionRoom, e: TravelEvent): void {
   if (!host) return;
   const people = [...room.players.values()];
   switch (e.t) {
+    case 'interrupt':
+      if (e.reason === 'rocket' && !room.world.flags.rocket_found) {
+        host.game.setFlag('rocket_found', true);
+        host.game.setFlag('rocket_reveal', true);
+        host.game.setStage('rocket', 'found');
+        room.logAll('Буря стирает следы. Когда песок оседает, перед вами ворота с силуэтом собаки.');
+        room.goTo('rocket_outpost', 'south');
+      }
+      break;
     case 'day':
       newDay(room, host);
       populate(room, true);

@@ -156,7 +156,7 @@ D['stairs_up']=dlg("Лестница во двор",E(["look"]),{"look":node("Л
 D['dew_safe']=dlg("Сейф с чертежами",E([fl("dew_way"),"done"],["look"]),{
  "look":node("Довоенный сейф с кодовым колесом и замком под ключ. Надпись: «Роса-1. Техническая документация».",[
   opt("Вскрыть замок.",None,**{"check":chk(skill="lockpick",mod=-20,pass_="stolen",fail="alarm",pe=[F("dew_way","stolen"),G("dew_plans"),F("order_enemy"),Q("skit","stuzha"),XP(150)],fe=[F("depths_alarm")])}),
-  opt("[Ремонт] Обойти замок через щиток питания.",None,**{"if":[sk("repair",50)],"check":chk(skill="repair",mod=0,pass_="stolen",fail="alarm",pe=[F("dew_way","stolen"),G("dew_plans"),F("order_enemy"),Q("skit","stuzha"),XP(150)],fe=[F("depths_alarm")])}),
+  opt("Обойти замок через щиток питания.",None,**{"if":[sk("repair",50)],"check":chk(skill="repair",mod=0,pass_="stolen",fail="alarm",pe=[F("dew_way","stolen"),G("dew_plans"),F("order_enemy"),Q("skit","stuzha"),XP(150)],fe=[F("depths_alarm")])}),
   BYE()]),
  "stolen":node("Дверца отходит. Внутри — рулоны чертежей в вощёном полотне: паруса, насосы, конденсаторы. Вода из воздуха, на бумаге. Наверху уже поднимают тревогу.",[BYE("…")]),
  "alarm":node("Сейф отвечает воем сирены. Сторожевые машины поворачивают головы.",[BYE("…")]),

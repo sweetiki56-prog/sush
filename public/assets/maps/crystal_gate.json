@@ -3953,6 +3953,24 @@
    "dialogue": "slyuda"
   },
   {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 17,
+   "y": 24,
+   "dir": 3,
+   "label": "Кошка на соляном уступе",
+   "dialogue": "street_cat"
+  },
+  {
+   "id": "town_dog",
+   "sheet": "dog_town",
+   "x": 30,
+   "y": 24,
+   "dir": 7,
+   "label": "Пёс у ворот",
+   "dialogue": "street_dog"
+  },
+  {
    "id": "cfolk_a",
    "sheet": "saltfolk",
    "x": 12,

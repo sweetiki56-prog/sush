@@ -2,81 +2,147 @@
 import Phaser from 'phaser';
 import type { Game } from '../core/Game';
 import { GAME_H, GAME_W } from '../config';
-import { C, button, dimmer, fmtTime, glass, metalPanel, title, txt } from './theme';
+import { C, button, dimmer, fmtTime, glass, hitRow, metalPanel, title, txt } from './theme';
 import { karmaWord } from './CharacterWindow';
 import { Window } from './Window';
 import { ScrollBox } from './ScrollBox';
 import { partyOf } from '../core/companions';
 import { jobCount, jobFlag } from '../core/jobs';
+import { settings } from '../core/Settings';
+import { contentText, historyLineForDisplay, historySpeakerForDisplay, journalLineForDisplay } from '../i18n/display';
+import { uiText } from '../i18n/ui';
+import { chapterText } from '../i18n/chapter';
 
 
 
 export class JournalWindow extends Window {
+  private tab: 'quests' | 'dialogues' = 'quests';
+  private expanded: string | null = null;
+  private pane: Phaser.GameObjects.Container | null = null;
+  private box: ScrollBox | null = null;
+  private frameAt = { x: 0, y: 0 };
+
   show(): void {
     if (this.root) return this.close();
     const s = this.scene;
+    const locale = settings().language;
+    const { x, y } = this.frame(700, 520, uiText('journal.title', locale));
+    this.frameAt = { x, y };
+    this.pane = null;
+    this.root!.add(button(s, x + 32, y + 58, 200, 42, uiText('journal.quests', locale), () => this.switchTab('quests')).root);
+    this.root!.add(button(s, x + 242, y + 58, 200, 42, uiText('journal.dialogues', locale), () => this.switchTab('dialogues')).root);
+    this.renderPane();
+  }
+
+  private switchTab(tab: 'quests' | 'dialogues'): void {
+    this.tab = tab;
+    this.renderPane();
+  }
+
+  private renderPane(offset = 0): void {
+    const s = this.scene;
     const g = this.game;
-    const { x, y } = this.frame(700, 520, 'ЖУРНАЛ');
-    // the entries scroll inside the frame (wheel, drag, arrows, PgUp/PgDn); quests still open come first
-    const box = new ScrollBox(s, this.root!, x + 24, y + 64, 652, 520 - 88, true);
-    const top = y + 76;
+    const locale = settings().language;
+    const { x, y } = this.frameAt;
+    this.pane?.destroy();
+    const pane = s.add.container(0, 0);
+    this.pane = pane;
+    this.root!.add(pane);
+    const box = new ScrollBox(s, pane, x + 24, y + 112, 652, 520 - 136, true);
+    this.box = box;
+    const top = y + 124;
     let yy = top;
     const add = (o: Phaser.GameObjects.Text, gap: number) => {
       box.content.add(o);
       yy += o.height + gap;
     };
+    if (this.tab === 'dialogues') {
+      for (const entry of g.state.dialogueHistory ?? []) {
+        const name = historySpeakerForDisplay(entry, g, locale);
+        const open = this.expanded === entry.speaker;
+        const row = hitRow(s, x + 32, yy, 620, 44, () => {}, () => {
+          const currentOffset = this.box?.scroll ?? 0;
+          this.expanded = open ? null : entry.speaker;
+          this.renderPane(currentOffset);
+        });
+        box.content.add(row);
+        box.content.add(txt(s, x + 42, yy + 11, `${open ? '▼' : '▶'}  ${name}`, 15, C.amber, 590, true));
+        yy += 48;
+        if (open) {
+          for (const line of entry.lines) {
+            const who = line.role === 'hero' ? uiText('journal.you', locale) : name;
+            add(txt(s, x + 48, yy, `${who}: ${historyLineForDisplay(line, g, locale, entry.speaker)}`, 13, line.role === 'hero' ? C.crtBright : C.crt, 586), 10);
+          }
+          yy += 8;
+        }
+      }
+      if (yy === top) add(txt(s, x + 36, yy, uiText('journal.noDialogues', locale), 14, C.crt), 0);
+      box.fit(yy - top + 24);
+      box.to(offset);
+      return;
+    }
+    // Quests still open come first.
     const quests = Object.entries(g.content.quests)
-      .map(([id, q]) => ({ q, lines: g.journal(id) }))
+      .map(([id, q]) => ({ id, q, lines: g.journal(id) }))
       .filter((e) => e.lines.length)
       .map((e) => ({ ...e, closed: e.lines.length === e.q.stages.length }));
-    for (const { q, lines, closed } of [...quests.filter((e) => !e.closed), ...quests.filter((e) => e.closed)]) {
-      add(txt(s, x + 36, yy, `${q.title.toUpperCase()}${closed ? '  ✓' : ''}`, 15, closed ? C.crtDim : C.amber, 620, true), 10);
-      for (const l of lines) add(txt(s, x + 48, yy, `${l.done ? '✓' : '◆'} ${l.text}`, 13, l.done ? C.crtDim : C.crtBright, 600), 8);
+    for (const { id, q, lines, closed } of [...quests.filter((e) => !e.closed), ...quests.filter((e) => e.closed)]) {
+      const questTitle = contentText(`/quests/${id}/title`, q.title, locale);
+      add(txt(s, x + 36, yy, `${questTitle.toUpperCase()}${closed ? '  ✓' : ''}`, 15, closed ? C.crtDim : C.amber, 620, true), 10);
+      for (const [index, l] of lines.entries()) {
+        const line = journalLineForDisplay(g, id, index, l.text, locale);
+        add(txt(s, x + 48, yy, `${l.done ? '✓' : '◆'} ${line}`, 13, l.done ? C.crtDim : C.crtBright, 600), 8);
+      }
     }
     // contracts from the board: one line each, with the count for hunts
     const jobs = Object.entries(g.content.jobs).filter(([id]) => g.flag(jobFlag(id)) === 'active');
     if (jobs.length) {
-      add(txt(s, x + 36, yy, 'КОНТРАКТЫ', 15, C.amber, 620, true), 10);
+      add(txt(s, x + 36, yy, uiText('journal.contracts', locale), 15, C.amber, 620, true), 10);
       for (const [id, j] of jobs) {
-        const n = j.hunt ? ` — ${Number(g.flag(jobCount(id)) ?? 0)} из ${j.hunt.count}` : '';
-        add(txt(s, x + 48, yy, `◆ «${j.title}»${n}. ${j.desc}`, 13, C.crtBright, 600), 8);
+        const n = j.hunt ? ` — ${Number(g.flag(jobCount(id)) ?? 0)} ${uiText('journal.of', locale)} ${j.hunt.count}` : '';
+        const name = contentText(`/jobs/${id}/title`, j.title, locale);
+        const desc = contentText(`/jobs/${id}/desc`, j.desc, locale);
+        add(txt(s, x + 48, yy, `◆ «${name}»${n}. ${desc}`, 13, C.crtBright, 600), 8);
       }
     }
-    if (yy === top) add(txt(s, x + 36, yy, 'Записей нет. Поговорите с жителями поселения.', 14, C.crt), 0);
+    if (yy === top) add(txt(s, x + 36, yy, uiText('journal.noEntries', locale), 14, C.crt), 0);
     box.fit(yy - top + 24);
+    box.to(offset);
   }
 }
 
 /** Death screen: load the pre-combat autosave or leave to the main menu. Co-op: the whole party fell. */
 export function showGameOver(scene: Phaser.Scene, h: { load: (() => void) | null; menu: () => void; party?: boolean }): Phaser.GameObjects.Container {
   const s = scene;
+  const locale = settings().language;
   const root = s.add.container(0, 0).setDepth(60);
   root.add(s.add.rectangle(0, 0, GAME_W, GAME_H, 0x0d0a08, 0.88).setOrigin(0).setInteractive());
-  root.add(title(s, GAME_W / 2, 200, h.party ? 'ОТРЯД ПАЛ' : 'ВАС НЕ СТАЛО', 34, C.red).setOrigin(0.5));
-  const line = h.party ? 'Никто не устоял. Любой из отряда может вернуть всех к сохранению перед боем.' : 'Пустошь не прощает ошибок. Песок заметёт следы к утру.';
+  root.add(title(s, GAME_W / 2, 200, uiText(h.party ? 'death.partyTitle' : 'death.soloTitle', locale), 34, C.red).setOrigin(0.5));
+  const line = uiText(h.party ? 'death.partyText' : 'death.soloText', locale);
   root.add(txt(s, GAME_W / 2, 260, line, 16, C.sand).setOrigin(0.5));
-  if (h.load) root.add(button(s, GAME_W / 2 - 150, 330, 300, 36, h.party ? 'ВСЕМ ВЕРНУТЬСЯ К СОХРАНЕНИЮ' : 'ЗАГРУЗИТЬ АВТОСЕЙВ', h.load).root);
-  root.add(button(s, GAME_W / 2 - 150, 380, 300, 36, 'ГЛАВНОЕ МЕНЮ', h.menu).root);
+  if (h.load) root.add(button(s, GAME_W / 2 - 150, 330, 300, 36, uiText(h.party ? 'death.partyLoad' : 'death.soloLoad', locale), h.load).root);
+  root.add(button(s, GAME_W / 2 - 150, 380, 300, 36, uiText('pause.mainMenu', locale), h.menu).root);
   return root;
 }
 
 /** Pause overlay (Esc): resume, settings, back to the main menu. */
 export function showPause(scene: Phaser.Scene, h: { resume: () => void; settings: () => void; mainMenu: () => void; invite?: () => void }): Phaser.GameObjects.Container {
   const s = scene;
+  const locale = settings().language;
   const w = 360;
   const hh = h.invite ? 296 : 250;
   const x = (GAME_W - w) / 2;
   const y = 150;
   const root = s.add.container(0, 0).setDepth(50);
-  root.add([dimmer(s, 0.55), metalPanel(s, x, y, w, hh), glass(s, x + 16, y + 16, w - 32, hh - 32), title(s, GAME_W / 2, y + 42, 'ПАУЗА', 16, C.amber).setOrigin(0.5)]);
+  root.add([dimmer(s, 0.55), metalPanel(s, x, y, w, hh), glass(s, x + 16, y + 16, w - 32, hh - 32), title(s, GAME_W / 2, y + 42, uiText('pause.title', locale), 16, C.amber).setOrigin(0.5)]);
   const items: [string, () => void][] = [
-    ['ПРОДОЛЖИТЬ', () => (root.destroy(), h.resume())],
-    ...(h.invite ? [['ССЫЛКА ДЛЯ ДРУЗЕЙ', h.invite] as [string, () => void]] : []),
-    ['НАСТРОЙКИ', h.settings],
-    ['ГЛАВНОЕ МЕНЮ', h.mainMenu],
+    [uiText('pause.resume', locale), () => (root.destroy(), h.resume())],
+    ...(h.invite ? [[uiText('pause.invite', locale), h.invite] as [string, () => void]] : []),
+    [uiText('menu.settings', locale), h.settings],
+    [uiText('pause.mainMenu', locale), h.mainMenu],
   ];
   items.forEach(([label, fn], i) => root.add(button(s, x + 50, y + 76 + i * 46, w - 100, 32, label, fn).root));
-  root.add(txt(s, GAME_W / 2, y + hh - 34, h.invite ? 'Комнату сохраняет сервер.' : 'Игра сохраняется сама.', 12, C.crtDim).setOrigin(0.5));
+  root.add(txt(s, GAME_W / 2, y + hh - 34, uiText(h.invite ? 'pause.serverSave' : 'pause.autoSave', locale), 12, C.crtDim).setOrigin(0.5));
   return root;
 }
 
@@ -191,12 +257,13 @@ function chapterNext(game: Game): string {
   const out = game.flag('trust_outcome');
   if (out === 'surrender') return 'Колодец снова даёт воду, а тубус уехал в Запруду. Трест у вас в долгу. Только отчего-то кажется, что до Запруды тубус не доедет…';
   if (tubeWhere(game).startsWith('спрятан') || game.flag('tube_bag')) return 'Колодец снова даёт воду. Тубус остался в тайнике — за ним придётся вернуться.';
-  if (out === 'fight') return 'Колодец снова даёт воду, у дороги лежат сборщики Треста, а Шлюз унёс в марево ваше лицо. Дорога ведёт на запад, в Соль…';
-  return 'Колодец снова даёт воду. В мешке у вас тубус, за которым идёт Трест. Дорога ведёт на запад, к Трём столбам, и дальше — в Соль…';
+  if (out === 'fight') return 'Колодец снова даёт воду, у дороги лежат сборщики Треста, а Шлюз унёс в марево ваше лицо. Дорога ведёт на северо-восток, к Трём столбам…';
+  return 'Колодец снова даёт воду. В мешке у вас тубус, за которым идёт Трест. Дорога ведёт на северо-восток, к Трём столбам, а дальше — к Колючке…';
 }
 
 export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, onNew: () => void, onStay: () => void): void {
   const s = scene;
+  const locale = settings().language;
   const st = game.state;
   const c = game.char;
   const root = s.add.container(0, 0).setDepth(30);
@@ -205,7 +272,7 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
   const x = (GAME_W - w) / 2;
   const y = 50;
   root.add([dimmer(s, 0.6), metalPanel(s, x, y, w, h), glass(s, x + 16, y + 16, w - 32, h - 32)]);
-  root.add(title(s, GAME_W / 2, y + 48, `ГЛАВА ${['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][chapter] ?? chapter} ОКОНЧЕНА`, 22, C.amber).setOrigin(0.5));
+  root.add(title(s, GAME_W / 2, y + 48, uiText('chapter.complete', locale).replace('{number}', String(['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][chapter] ?? chapter)), 22, C.amber).setOrigin(0.5));
   const karma = game.flag('karma');
   const well = game.flag('well_sealed') ? 'под пломбой Треста' : game.flag('well_taxed') ? 'платит налог Тресту' : 'свободен';
   const rows2 = [
@@ -262,7 +329,7 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
     ['Капли', String(st.caps)],
     ['Репутация', karmaWord(typeof karma === 'number' ? karma : 0)],
   ];
-  const party = partyOf(game.state.flags, game.content.companions ?? {}).map((id) => game.content.companions[id].name);
+  const party = partyOf(game.state.flags, game.content.companions ?? {}).map((id) => contentText(`/companions/${id}/name`, game.content.companions[id].name, locale));
   const rows5 = [
     ['Странник', `${c.name}, уровень ${c.level}`],
     ['Время в пути', fmtTime(st.stats.playMs)],
@@ -315,11 +382,13 @@ export function showComplete(scene: Phaser.Scene, game: Game, chapter: number, o
   ];
   const rows = chapter === 8 ? rows8 : chapter === 7 ? rows7 : chapter === 6 ? rows6 : chapter === 5 ? rows5 : chapter === 4 ? rows4 : chapter === 3 ? rows3 : chapter === 2 ? rows2 : rows1;
   rows.forEach(([k, v], i) => {
-    root.add(txt(s, x + 60, y + 88 + i * 27, k, 15, C.crt));
-    root.add(txt(s, x + w - 60, y + 88 + i * 27, v, 15, C.crtBright, 360, true).setOrigin(1, 0).setAlign('right'));
+    root.add(txt(s, x + 60, y + 88 + i * 27, chapterText(k, locale), 15, C.crt));
+    const shown = k === 'Репутация' ? karmaWord(typeof karma === 'number' ? karma : 0, locale) : chapterText(v, locale);
+    root.add(txt(s, x + w - 60, y + 88 + i * 27, shown, 15, C.crtBright, 360, true).setOrigin(1, 0).setAlign('right'));
   });
-  root.add(txt(s, GAME_W / 2, y + h - 116, chapter === 8 ? chapter8Next(game) : chapter === 7 ? chapter7Next(game) : chapter === 6 ? chapter6Next(game) : chapter === 5 ? chapter5Next(game) : chapter === 4 ? chapter4Next(game) : chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
-  const bStay = button(s, x + 70, y + h - 72, 250, 32, 'ОСТАТЬСЯ В СУШИ', () => (root.destroy(), onStay()));
-  const bNew = button(s, x + w - 320, y + h - 72, 250, 32, 'НОВАЯ ИГРА', onNew);
+  const next = chapter === 8 ? chapter8Next(game) : chapter === 7 ? chapter7Next(game) : chapter === 6 ? chapter6Next(game) : chapter === 5 ? chapter5Next(game) : chapter === 4 ? chapter4Next(game) : chapter === 3 ? chapter3Next(game) : chapter === 2 ? chapter2Next(game) : chapterNext(game);
+  root.add(txt(s, GAME_W / 2, y + h - 116, chapterText(next, locale), 14, C.sand, w - 80).setOrigin(0.5).setAlign('center'));
+  const bStay = button(s, x + 70, y + h - 72, 250, 32, uiText('ending.stay', locale), () => (root.destroy(), onStay()));
+  const bNew = button(s, x + w - 320, y + h - 72, 250, 32, uiText('ending.new', locale), onNew);
   root.add([bStay.root, bNew.root]);
 }

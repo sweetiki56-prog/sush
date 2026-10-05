@@ -3701,6 +3701,15 @@
    "dialogue": "skit_gate"
   },
   {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 11,
+   "y": 26,
+   "dir": 3,
+   "label": "Кошка Скита",
+   "dialogue": "street_cat"
+  },
+  {
    "id": "trial_knight",
    "sheet": "dew_knight",
    "x": 24,

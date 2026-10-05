@@ -5,7 +5,7 @@ import { describe, it, expect } from 'vitest';
 import type { Game } from '../../src/core/Game';
 import { CONTENT } from '../../src/content';
 import { room, until, untilAlone, TOWNS } from './rooms';
-import { placedBattle, premadeGame } from './sim';
+import { placedBattle, premadeGame, toLevel } from './sim';
 import { say, talk, winFight } from './story';
 
 /** After Chapter I (II when asked); money; every roll lands unless told otherwise. */
@@ -290,13 +290,13 @@ describe('«Долг сборщика»', () => {
 describe('Низовье balance', () => {
   const RUNS = 200;
   const titles = ['Стрелок', 'Механик', 'Говорун'];
-  const rate = (map: string, at: [number, number], foes: [string, number, number][], friends: [string, number, number][] = [], xp = 400) =>
+  const rate = (map: string, at: [number, number], foes: [string, number, number][], friends: [string, number, number][] = [], level = 3) =>
     Object.fromEntries(
       titles.map((t) => {
         let w = 0;
         for (let s = 1; s <= RUNS; s++) {
           const g = premadeGame(t, s * 7919);
-          g.addXp(xp); // level 3–4 in Низовье
+          toLevel(g, level); // level 3–4 in Низовье
           if (placedBattle(g, TOWNS[map], at, foes, friends) === 'victory') w++;
         }
         return [t, w / RUNS];
@@ -309,7 +309,7 @@ describe('Низовье balance', () => {
       raid: rate('silence_house', [19, 26], raid),
       raidWithTimofey: rate('silence_house', [19, 26], raid, [['timofey_ally', 18, 27]]),
       herd: rate('dead_fields', [30, 30], [['dryman', 33, 22], ['dryman', 36, 24], ['dryman', 34, 26]]),
-      sizy: rate('elevator_floors', [17, 24], [['sizy', 17, 11], ['raider', 12, 13], ['raider', 22, 13]], [], 900),
+      sizy: rate('elevator_floors', [17, 24], [['sizy', 17, 11], ['raider', 12, 13], ['raider', 22, 13]], [], 4),
     };
     process.stderr.write(`Низовье, level 3–5: ${JSON.stringify(r)}\n`);
     expect(r.raid['Стрелок']).toBeLessThanOrEqual(0.8);

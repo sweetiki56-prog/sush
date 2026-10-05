@@ -5,6 +5,7 @@ import { barrelUnit, creatureUnit, playerUnit } from '../../src/core/combat/buil
 import { tileDist } from '../../src/iso/LineOfSight';
 import { Game } from '../../src/core/Game';
 import { BuildDraft } from '../../src/core/character/BuildDraft';
+import { XP_TABLE } from '../../src/core/character/defs';
 import { newState } from '../../src/core/state';
 import { mulberry32 } from '../../src/core/rng';
 import { CONTENT } from '../../src/content';
@@ -19,6 +20,12 @@ export function premadeGame(title: string, seed: number): Game {
   const d = new BuildDraft(CONTENT.character);
   d.applyPremade(CONTENT.character.premades.find((p) => p.title === title)!);
   return new Game(CONTENT, mulberry32(seed), newState(d.build(), CONTENT));
+}
+
+/** Prepare a combat scenario at the stated level, independent of the XP curve. */
+export function toLevel(g: Game, level: number): Game {
+  g.addXp(Math.max(0, XP_TABLE[level] - g.char.xp));
+  return g;
 }
 
 export type Result = 'victory' | 'defeat' | 'escape' | 'stalemate';
@@ -42,7 +49,7 @@ export function roadFight(g: Game): Result {
 /** Chapter I finale gone wrong: the Trust's men at the pump, the hero at level 3 right next to the inspector. */
 export const TRUST = { shluz: [11, 24], a: [9, 24], b: [12, 26], player: [12, 25] };
 export function trustFight(g: Game): Result {
-  g.addXp(300);
+  toLevel(g, 3);
   g.state.hp = g.maxHp;
   const c = CONTENT.creatures;
   return run(g, [
@@ -55,7 +62,7 @@ export function trustFight(g: Game): Result {
 
 /** Хромой Жнец by the pickup, the hero at level 3 a few tiles off. */
 export function lameFight(g: Game): Result {
-  g.addXp(300);
+  toLevel(g, 3);
   g.state.hp = g.maxHp;
   return run(g, [playerUnit(g, 30, 22), creatureUnit(CONTENT.creatures.lame_reaper, 'lame', 36, 22)]);
 }
@@ -72,8 +79,7 @@ export function arm(g: Game, weapon: string): Game {
  * far side, and friends (caravan guards) beside the hero under AI.
  */
 export function roadBattle(g: Game, foes: string[], field = 'enc_sand', friends: string[] = [], level = 3): Result {
-  const xp = [0, 0, 100, 300, 600][level] ?? 0;
-  if (xp) g.addXp(xp);
+  toLevel(g, level);
   g.state.hp = g.maxHp;
   const map = FIELDS[field];
   const grid = new Grid(map);
@@ -86,7 +92,7 @@ export function roadBattle(g: Game, foes: string[], field = 'enc_sand', friends:
 
 /** A fight on any map: the hero at a spot (level 3), foes and friends at theirs; `fists` for a bout on the ring. */
 export function placedBattle(g: Game, map: MapData, at: [number, number], foes: [string, number, number][], friends: [string, number, number][] = [], fists = false): Result {
-  g.addXp(300);
+  toLevel(g, 3);
   g.state.hp = g.maxHp;
   const grid = new Grid(map);
   const me = playerUnit(g, at[0], at[1]);

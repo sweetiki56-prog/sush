@@ -32,6 +32,8 @@ const actors = [
   { id: 'player', sheet: 'hero_0', x: 19, y: 33, dir: 1 },
   { id: 'sverlo', sheet: 'sverlo', x: 17, y: 17, dir: 3, label: 'Бригадир Сверло', dialogue: 'sverlo' },
   { id: 'kran', sheet: 'fedot', x: 27, y: 24, dir: 5, label: 'Кран', dialogue: 'kran', if: [{ notFlag: 'fedot_gone' }] },
+  { id: 'town_cat', sheet: 'cat_town', x: 13, y: 24, dir: 1, label: 'Деповская кошка', dialogue: 'street_cat' },
+  { id: 'town_dog', sheet: 'dog_town', x: 22, y: 26, dir: 5, label: 'Пёс Бригады', dialogue: 'street_dog' },
   ...[['brigadier_a', 12, 14, [[12, 14], [12, 18]]], ['brigadier_b', 23, 15]].map(([id, x, y, patrol]) => ({ id, sheet: 'brigadier', x, y, dir: 2, label: 'Бригадник', dialogue: 'brigadier', ...(patrol ? { patrol } : {}) })),
 ];
 

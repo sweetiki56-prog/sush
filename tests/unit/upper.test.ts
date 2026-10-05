@@ -5,7 +5,7 @@ import { describe, it, expect } from 'vitest';
 import type { Game } from '../../src/core/Game';
 import { CONTENT } from '../../src/content';
 import { room, until, TOWNS } from './rooms';
-import { placedBattle, premadeGame } from './sim';
+import { placedBattle, premadeGame, toLevel } from './sim';
 import { say, talk, winFight } from './story';
 
 /** After Chapter VI: the tube in the bag, money; every roll lands unless told otherwise. */
@@ -331,7 +331,7 @@ describe('Chapter VII balance', () => {
         let w = 0;
         for (let s = 1; s <= RUNS; s++) {
           const g = premadeGame(t, s * 7919);
-          g.addXp(1700); // level 7–8 by Chapter VII
+          toLevel(g, 7); // level 7 by Chapter VII
           if (placedBattle(g, TOWNS[map], at, foes, friends) === 'victory') w++;
         }
         return [t, w / RUNS];

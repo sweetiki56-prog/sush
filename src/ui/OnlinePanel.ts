@@ -4,6 +4,8 @@ import Phaser from 'phaser';
 import { GAME_H, GAME_W, HUD_H } from '../config';
 import type { NetClient } from '../net/NetClient';
 import { C, txt } from './theme';
+import { settings } from '../core/Settings';
+import { onlinePlayerStatus, onlineRoomLine } from '../i18n/online';
 
 const FEED = 5;
 const FADE_MS = 15_000;
@@ -41,20 +43,20 @@ export class OnlinePanel {
   /** Copy the room link for friends; the chat feed shows it too (clipboard may be blocked). */
   invite(): void {
     const link = this.link();
-    this.say(`Ссылка на комнату: ${link}`);
+    this.say(settings().language === 'en' ? `Room link: ${link}` : `Ссылка на комнату: ${link}`);
     void navigator.clipboard?.writeText(link).then(
-      () => this.say('Скопировано. Отправьте ссылку друзьям.'),
+      () => this.say(settings().language === 'en' ? 'Copied. Send the link to your friends.' : 'Скопировано. Отправьте ссылку друзьям.'),
       () => {},
     );
   }
 
   refresh(): void {
     const list = this.net.players;
-    this.head.setText(`КОМНАТА ${this.net.code} · ${list.length} игр. · [Enter] чат`);
+    this.head.setText(onlineRoomLine(this.net.code, list.length, settings().language));
     this.party.setVisible(this.showParty && list.length > 1);
     this.party.setText(
       list
-        .map((p) => `${p.id === this.net.you ? '▸' : ' '} ${p.name}${p.connected ? '' : ' (нет связи)'}  ОЗ ${p.hp}/${p.maxHp}${p.downed ? ' — без сознания' : ''}`)
+        .map((p) => `${p.id === this.net.you ? '▸' : ' '} ${p.name}${onlinePlayerStatus(p.connected, p.hp, p.maxHp, p.downed, settings().language)}`)
         .join('\n'),
     );
   }
@@ -100,7 +102,7 @@ export class OnlinePanel {
   }
 
   private showInput(): void {
-    this.input.setText(`Чат> ${this.draft}_`).setVisible(true);
+    this.input.setText(`${settings().language === 'en' ? 'Chat' : 'Чат'}> ${this.draft}_`).setVisible(true);
   }
 
   private stop(): void {

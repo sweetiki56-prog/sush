@@ -5,6 +5,8 @@ import { GAME_H, GAME_W } from '../config';
 import type { ShownSlide } from '../core/endings';
 import { C, button, glass, metalPanel, title, txt } from './theme';
 import { onKey } from './keys';
+import { settings } from '../core/Settings';
+import { uiText } from '../i18n/ui';
 
 export function showEnding(scene: Phaser.Scene, slides: ShownSlide[], onNew: () => void, onStay: () => void): void {
   const s = scene;
@@ -26,9 +28,10 @@ export function showEnding(scene: Phaser.Scene, slides: ShownSlide[], onNew: () 
     root.destroy();
     then();
   };
-  const next = button(s, x + 40, y + h + 24, w - 80, 68, 'ДАЛЕЕ', () => show(i + 1));
-  const stay = button(s, x + 40, y + h + 24, (w - 100) / 2, 68, 'ОСТАТЬСЯ В СУШИ', () => close(onStay));
-  const again = button(s, x + 60 + (w - 100) / 2, y + h + 24, (w - 100) / 2, 68, 'НОВАЯ ИГРА', () => close(onNew));
+  const locale = settings().language;
+  const next = button(s, x + 40, y + h + 24, w - 80, 68, uiText('ending.next', locale), () => show(i + 1));
+  const stay = button(s, x + 40, y + h + 24, (w - 100) / 2, 68, uiText('ending.stay', locale), () => close(onStay));
+  const again = button(s, x + 60 + (w - 100) / 2, y + h + 24, (w - 100) / 2, 68, uiText('ending.new', locale), () => close(onNew));
   root.add([next.root, stay.root, again.root]);
   const show = (n: number) => {
     i = Math.max(0, Math.min(n, slides.length - 1));

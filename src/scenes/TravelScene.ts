@@ -16,11 +16,14 @@ import { dirFromVector } from '../iso/IsoMath';
 import type { GenMeta } from '../world/MapData';
 import { cloudTexture, daylight, heroSheet, walkAnims } from '../world/travelArt';
 import { loadingFor } from './LoadingScene';
+import { settings } from '../core/Settings';
+import { locationNameForDisplay, mapLabelForDisplay } from '../i18n/display';
+import { uiText } from '../i18n/ui';
+import { strengthForDisplay, travelInfoLines } from '../i18n/travel';
 
 export const CELL = 20; // px per world cell on the chart (tools/art/worldmap.mjs)
-const CHART = 'worldmap_low';
 const STRIP = 64; // cells per chart strip: the chart is cut into strips a phone can hold as textures (tools/gen-assets.mjs)
-const strips = (width: number) => Array.from({ length: Math.ceil(width / STRIP) }, (_, i) => `${CHART}_${i}`);
+const strips = (width: number, english: boolean) => Array.from({ length: Math.ceil(width / STRIP) }, (_, i) => `worldmap_low${english ? '_en' : ''}_${i}`);
 const MIN_ZOOM = 1; // never smaller than the chart: no empty edges
 const MAX_ZOOM = 2.4;
 const START_ZOOM = 1.4;
@@ -72,9 +75,9 @@ export class TravelScene extends Phaser.Scene {
 
   create(): void {
     this.net = session().net!;
-    const keys = strips(session().worldMap!.width);
+    const keys = strips(session().worldMap!.width, settings().language === 'en');
     if (!keys.every((k) => this.textures.exists(k))) {
-      loadingFor(this, { style: 'chart', title: 'Карта Суши', subtitle: 'Водоуправление, листы 3–4' });
+      loadingFor(this, { style: 'chart', title: uiText('travel.chartTitle', settings().language), subtitle: uiText('travel.chartSubtitle', settings().language) });
       for (const k of keys) this.load.image(k, `assets/gen/${k}.png`);
       this.load.once('complete', () => this.scene.restart());
       this.load.start();
@@ -196,6 +199,7 @@ export class TravelScene extends Phaser.Scene {
   /** Towns and edges: a token and a name; open ones glow and say come in, the rest are dim until their chapter. */
   private places(): void {
     const g = session().game;
+    const locale = settings().language;
     for (const [id, loc] of Object.entries(g.content.locations)) {
       const [x, y] = loc.cell;
       const px = (x + 0.5) * CELL;
@@ -209,11 +213,12 @@ export class TravelScene extends Phaser.Scene {
         this.world.add(glow);
       }
       const icon = this.add.image(px, py, 'atlas', frame).setDepth(5).setInteractive({ useHandCursor: false });
-      const label = txt(this, px, py + 13, loc.name, 12, open ? '#2b1f17' : '#5e3d24', undefined, true).setOrigin(0.5, 0).setDepth(5);
+      const name = locationNameForDisplay(g, id, locale);
+      const label = txt(this, px, py + 13, name, 12, open ? '#2b1f17' : '#5e3d24', undefined, true).setOrigin(0.5, 0).setDepth(5);
       label.setStroke('#e6cc97', 3);
       icon.on('pointerover', () => {
         this.tweens.add({ targets: icon, scale: 1.25, duration: 120 });
-        const hint = loc.secret ? `${loc.name}: идти` : open ? `${loc.name}: войти` : `${loc.name}: откроется в главе ${loc.chapter}`;
+        const hint = loc.secret ? `${name}: ${uiText('map.go', locale)}` : open ? `${name}: ${uiText('map.enter', locale)}` : `${name}: ${uiText('map.opensInChapter', locale)} ${loc.chapter}`;
         session().ui.emit('hover', { label: hint, interact: true });
       });
       icon.on('pointerout', () => {
@@ -287,8 +292,8 @@ export class TravelScene extends Phaser.Scene {
     this.hudLayer.add(glass(this, x, 10, 288, 132));
     this.info = txt(this, x + 14, 20, '', 13, C.crtBright, 260);
     this.hudLayer.add(this.info);
-    this.sneakBtn = button(this, x + 14, 104, 126, 26, 'СКРЫТНО', () => this.net.send({ t: 'sneak', on: !this.t.sneak }));
-    const camp = button(this, x + 148, 104, 126, 26, 'ПРИВАЛ', () => this.net.send({ t: 'camp' }));
+    this.sneakBtn = button(this, x + 14, 104, 126, 26, uiText('travel.sneak', settings().language), () => this.net.send({ t: 'sneak', on: !this.t.sneak }));
+    const camp = button(this, x + 148, 104, 126, 26, uiText('travel.camp', settings().language), () => this.net.send({ t: 'camp' }));
     this.hudLayer.add([this.sneakBtn.root, camp.root]);
   }
 
@@ -339,9 +344,16 @@ export class TravelScene extends Phaser.Scene {
       if (Math.hypot(x - f.tx, y - f.ty) > 0.2) f.seen = 0;
       f.tx = x;
       f.ty = y;
-      f.badge.off('pointerover').on('pointerover', () =>
-        session().ui.emit('hover', { label: `${p.name} (${p.count}): ${p.word}${p.heading ? `, идёт в ${p.heading}` : ''}${p.chasing ? '. Идёт за вами!' : ''}`, interact: true }),
-      );
+      f.badge.off('pointerover').on('pointerover', () => {
+        const locale = settings().language;
+        const name = mapLabelForDisplay(p.name, locale);
+        const word = strengthForDisplay(p.word, locale);
+        const heading = p.heading ? mapLabelForDisplay(p.heading, locale) : '';
+        const label = locale === 'en'
+          ? `${name} (${p.count}): ${word}${heading ? `, heading to ${heading}` : ''}${p.chasing ? '. Pursuing you!' : ''}`
+          : `${name} (${p.count}): ${word}${heading ? `, идёт в ${heading}` : ''}${p.chasing ? '. Идёт за вами!' : ''}`;
+        session().ui.emit('hover', { label, interact: true });
+      });
       f.badge.setTint(p.chasing ? 0xff8866 : 0xffffff);
     }
   }
@@ -465,18 +477,14 @@ export class TravelScene extends Phaser.Scene {
     const hh = String(Math.floor(this.t.minute / 60)).padStart(2, '0');
     const mm = String(Math.floor(this.t.minute % 60)).padStart(2, '0');
     const flasks = g.count('flask');
-    this.info.setText(
-      [
-        `День ${this.day}, ${hh}:${mm}${tr.night() ? ' · ночь' : ''}`,
-        `${tr.terrainAt(this.t.x, this.t.y).name}${pace.storm ? ' · соляная буря' : ''} · ${tr.pace(pace).toFixed(1)} кл/ч`,
-        `Вода: ${flasks ? `${flasks} ${flasks === 1 ? 'фляга' : flasks < 5 ? 'фляги' : 'фляг'} (дней пути)` : 'нет'}${g.body.thirsty ? ' · ЖАЖДА' : ''}`,
-        this.escort
-          ? `С караваном, путь на «${this.escort.to}»${this.escort.paused ? ' · привал' : ''} · пробел — ${this.escort.paused ? 'в путь' : 'стоять'}`
-          : tr.moving
-            ? 'В пути · пробел — стоять'
-            : 'Стоим · клик по карте — идти',
-      ].join('\n'),
-    );
+    const locale = settings().language;
+    this.info.setText(travelInfoLines({
+      day: this.day, time: `${hh}:${mm}`, night: tr.night(),
+      terrain: tr.terrainAt(this.t.x, this.t.y).name, storm: pace.storm,
+      pace: tr.pace(pace), flasks, thirsty: !!g.body.thirsty,
+      escort: this.escort && { to: mapLabelForDisplay(this.escort.to, locale), paused: this.escort.paused },
+      moving: tr.moving,
+    }, locale).join('\n'));
     this.sneakBtn.label.setColor(this.t.sneak ? C.amber : C.crt);
   }
 }

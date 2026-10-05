@@ -45,6 +45,8 @@ const actors = [
   { id: 'warden_b', sheet: 'salt_guard', x: 23, y: 20, dir: 3, label: 'Страж ворот', dialogue: 'crystal_warden' },
   { id: 'granit', sheet: 'granit', x: 26, y: 23, dir: 3, label: 'Гранит', dialogue: 'granit', if: [{ notFlag: 'with_granit' }, { notFlag: 'lost_granit' }] },
   { id: 'slyuda', sheet: 'slyuda', x: 27, y: 13, dir: 2, label: 'Слюда', dialogue: 'slyuda' },
+  { id: 'town_cat', sheet: 'cat_town', x: 17, y: 24, dir: 3, label: 'Кошка на соляном уступе', dialogue: 'street_cat' },
+  { id: 'town_dog', sheet: 'dog_town', x: 30, y: 24, dir: 7, label: 'Пёс у ворот', dialogue: 'street_dog' },
   ...[['cfolk_a', 'saltfolk', 12, 8], ['cfolk_b', 'councilor', 32, 10], ['cfolk_c', 'saltfolk', 17, 14]].map(([id, sheet, x, y]) => ({ id, sheet, x, y, dir: 2, label: 'Солевик', dialogue: 'crystal_folk' })),
 ];
 

@@ -66,8 +66,10 @@ const actors = [
   { id: 'remen', sheet: 'remen', x: 7, y: 11, dir: 3, label: 'Оружейник Ремень', dialogue: 'remen' },
   { id: 'nyura', sheet: 'nyura', x: 13, y: 11, dir: 3, label: 'Нюра', dialogue: 'nyura' },
   // her boy, and his father's dog once someone brings it home («Пёс сборщика»)
-  { id: 'mityay', sheet: 'mityay', x: 15, y: 13, dir: 3, label: 'Митяй', dialogue: 'mityay' },
+  { id: 'mityay', sheet: 'mityay', x: 14, y: 13, dir: 3, label: 'Митяй', dialogue: 'mityay' },
   { id: 'rzhavchik_home', sheet: 'dog_rzhavchik', x: 14, y: 14, dir: 4, label: 'Ржавчик', dialogue: 'mityay', if: [{ flag: 'rzhavchik', eq: 'home' }] },
+  { id: 'town_cat', sheet: 'cat_town', x: 6, y: 20, dir: 2, label: 'Кошка у трактира', dialogue: 'street_cat' },
+  { id: 'town_dog', sheet: 'dog_town', x: 16, y: 18, dir: 5, label: 'Дворовый пёс', dialogue: 'street_dog' },
   // the Trust post: the sergeant and a collector; hostile if the Trust hunts the hero and it comes to a fight
   { id: 'mytny', sheet: 'mytny', x: 25, y: 14, dir: 3, label: 'Сержант Мытный', dialogue: 'mytny', creature: 'sergeant', group: 'post', peace: [{ notFlag: 'post_fight' }] },
   { id: 'post_guard', sheet: 'collector', x: 29, y: 14, dir: 3, label: 'Сборщик Треста', dialogue: 'collector_post', creature: 'collector', group: 'post', peace: [{ notFlag: 'post_fight' }] },

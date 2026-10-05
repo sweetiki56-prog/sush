@@ -50,37 +50,67 @@ export function crate(big) {
 export function car(axis, burnt) {
   const w = axis === 'x' ? 2 : 1;
   const h = axis === 'x' ? 1 : 2;
-  const cv = propCanvas(w, h, 30);
+  const cv = propCanvas(w, h, burnt ? 42 : 34);
   const { ctx, bx, by } = cv;
-  const body = burnt ? [P.grey2, P.grey1, P.dark1] : [P.rust3, P.rust1, P.brown3];
-  const tex = (a, b) => (x, y) => {
-    const n = nz(x * 0.15, y * 0.15);
-    return n > 0.64 ? (burnt ? P.dark0 : P.brown1) : n > 0.5 ? b : a;
+  const sedan = axis === 'x' && !burnt;
+  const pickup = axis === 'y' && !burnt;
+  const paint = burnt ? [P.grey2, P.grey1, P.dark1] : sedan ? [P.rust3, P.rust1, P.rust2] : [P.olive3, P.olive1, P.olive2];
+  const worn = (lit, shade) => (x, y, z) => {
+    const n = nz(x * 0.17, y * 0.17);
+    if (n > 0.72 && z > 3) return burnt ? P.ink : P.rust0;
+    return n > 0.51 ? shade : lit;
   };
-  const inset = 4;
-  const g = box(ctx, bx, by - inset, w - 0.2, h - 0.2, 12, { left: tex(body[0], body[1]), right: tex(body[1], P.dark1), top: body[2] });
-  // wheels on the two visible faces
+  const g = box(ctx, bx, by - 4, w - 0.12, h - 0.12, 12, {
+    left: worn(paint[0], paint[1]), right: worn(paint[1], P.dark1), top: paint[2],
+  });
+  // Place a part on the chassis top by its distance from the near (+x,+y) vertex.
+  const deck = (fromX, fromY, width, depth, height, faces) => {
+    const p = g.up(g.B);
+    return box(ctx, p[0] - fromX * 32 + fromY * 32, p[1] - (fromX + fromY) * 16, width, depth, height, faces);
+  };
+  const glass = (light) => (_x, _y, z) => z > 2 && z < 8 ? light : paint[0];
+  if (sedan) {
+    // A low saloon roof leaves an obvious bonnet and boot at either end.
+    const cab = deck(0.48, 0.13, 0.86, 0.6, 9, {
+      left: glass(P.teal1), right: glass(P.teal0), top: P.rust1,
+    });
+    line(ctx, cab.up(cab.L)[0], cab.up(cab.L)[1], cab.up(cab.T)[0], cab.up(cab.T)[1], P.rust3);
+  } else if (pickup) {
+    // Open dark bed with raised rails; the separate high cab sits at the far end.
+    const bed = deck(0.06, 0.08, 0.74, 0.98, 4, { left: P.olive1, right: P.olive0, top: P.dark1 });
+    for (let t = 0.2; t < 0.95; t += 0.24) {
+      const a = [bed.up(bed.B)[0] + (bed.up(bed.R)[0] - bed.up(bed.B)[0]) * t, bed.up(bed.B)[1] + (bed.up(bed.R)[1] - bed.up(bed.B)[1]) * t];
+      line(ctx, a[0] - 13, a[1] - 7, a[0] - 3, a[1] - 12, P.brown2);
+    }
+    deck(0.08, 1.14, 0.68, 0.58, 12, { left: glass(P.teal2), right: glass(P.teal0), top: P.olive3 });
+  } else {
+    // Burnt delivery van: tall cargo shell, crushed cab and black empty windows.
+    deck(0.08, 0.06, 1.03, 0.75, 19, { left: worn(P.grey2, P.grey1), right: worn(P.grey1, P.dark0), top: P.grey1 });
+    deck(1.14, 0.08, 0.59, 0.71, 11, { left: glass(P.ink), right: glass(P.dark0), top: P.grey1 });
+    for (let i = 0; i < 24; i++) px(ctx, bx - 48 + ((i * 17) % 92), by - 26 - ((i * 13) % 20), i % 3 ? P.rust0 : P.ink);
+  }
+  // Two wheels on the long visible side, one on the short side: a readable vehicle at game zoom.
   const wheel = (x, y) => {
-    ellipse(ctx, x, y, 5, 5, P.ink);
-    ellipse(ctx, x, y, 2, 2, P.grey2);
+    ellipse(ctx, x, y, 5.8, 4.8, P.ink);
+    ellipse(ctx, x, y, 3.2, 2.9, P.grey1);
+    ellipse(ctx, x - 1, y - 1, 1.2, 1, P.grey4);
   };
   const along = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
-  for (const t of [0.2, 0.8]) {
-    const p = along(g.L, g.B, t);
+  for (const t of [0.18, 0.82]) {
+    const p = axis === 'x' ? along(g.L, g.B, t) : along(g.B, g.R, t);
     wheel(p[0], p[1] - 3);
-    const q = along(g.B, g.R, t);
-    wheel(q[0], q[1] - 3);
   }
-  // cabin
-  const cw = axis === 'x' ? 0.9 : 0.6;
-  const chh = axis === 'x' ? 0.6 : 0.9;
-  const cabB = [g.up(g.B)[0] - (axis === 'x' ? 18 : -2), g.up(g.B)[1] - (axis === 'x' ? 6 : 6)];
-  box(ctx, cabB[0], cabB[1], cw, chh, 9, {
-    left: (x, y, hh) => (hh > 2 && hh < 8 ? (burnt ? P.dark0 : x % 5 === 0 ? P.teal2 : P.teal0) : body[0]),
-    right: (x, y, hh) => (hh > 2 && hh < 8 ? P.dark0 : body[1]),
-    top: body[2],
-  });
-  if (burnt) for (let i = 0; i < 30; i++) px(ctx, bx - 30 + ((i * 13) % 60), by - 26 + ((i * 7) % 18), P.rust0);
+  const side = axis === 'x' ? along(g.B, g.R, 0.5) : along(g.L, g.B, 0.5);
+  wheel(side[0], side[1] - 3);
+  const trim = axis === 'x' ? [g.L, g.B] : [g.B, g.R];
+  const p0 = along(trim[0], trim[1], 0.08);
+  const p1 = along(trim[0], trim[1], 0.92);
+  line(ctx, p0[0], p0[1] - 10, p1[0], p1[1] - 10, burnt ? P.grey0 : P.sand2);
+  if (!burnt) {
+    const nose = axis === 'x' ? g.B : g.R;
+    px(ctx, nose[0] - 3, nose[1] - 11, P.sand5);
+    px(ctx, nose[0] + 3, nose[1] - 13, P.sand5);
+  }
   return cv;
 }
 

@@ -2,7 +2,7 @@
 import Phaser from 'phaser';
 import type { Game } from '../core/Game';
 import * as Ch from '../core/character/Character';
-import { ATTR_NAMES, SKILL_NAMES, type SkillId } from '../core/character/defs';
+import { type SkillId } from '../core/character/defs';
 import { GAME_W } from '../config';
 import { synth } from '../audio/Synth';
 import { session } from '../session';
@@ -14,20 +14,30 @@ import { modsText } from './itemText';
 import { SkillPanel } from './sheet/SkillPanel';
 import { ListPanel, type ListItem } from './sheet/ListPanel';
 import { partyOf } from '../core/companions';
+import { settings } from '../core/Settings';
+import type { Locale } from '../i18n/content';
+import { contentText, heroNameForDisplay } from '../i18n/display';
+import { attrNames, skillNames } from '../i18n/character';
+import { uiText } from '../i18n/ui';
 
 const W = 1180;
 const H = 640;
 const X = (GAME_W - W) / 2;
 const Y = 40;
 
-const FACTIONS: Record<string, string> = { circle: 'Круг колодцев', guild: 'Соляная гильдия', dry: 'Полусухие', trust: 'Трест' };
+const FACTIONS: Record<string, [string, string]> = {
+  circle: ['Круг колодцев', 'Circle of Wells'], guild: ['Соляная гильдия', 'Salt Guild'],
+  dry: ['Полусухие', 'Half-Dry'], trust: ['Трест', 'Trust'],
+};
 
 /** Standing with a faction: враг, недруг, чужак, знакомый, свой. */
-export function repWord(r: number): string {
+export function repWord(r: number, locale: Locale = 'ru'): string {
+  if (locale === 'en') return r <= -20 ? 'enemy' : r < 0 ? 'unfriendly' : r < 10 ? 'outsider' : r < 25 ? 'acquaintance' : 'one of us';
   return r <= -20 ? 'враг' : r < 0 ? 'недруг' : r < 10 ? 'чужак' : r < 25 ? 'знакомый' : 'свой';
 }
 
-export function karmaWord(k: number): string {
+export function karmaWord(k: number, locale: Locale = 'ru'): string {
+  if (locale === 'en') return k <= -2 ? 'Thief and bully' : k < 0 ? 'Under suspicion' : k >= 2 ? 'One of us' : 'Outsider';
   if (k <= -2) return 'Вор и грубиян';
   if (k < 0) return 'Подозрительный';
   if (k >= 2) return 'Свой человек';
@@ -83,11 +93,12 @@ export class CharacterWindow {
     const s = this.scene;
     const c = this.game.char;
     const K = this.game.content.character;
+    const locale = settings().language;
     const root = (this.root = s.add.container(0, 0).setDepth(20));
-    root.add([dimmer(s, 0.5), metalPanel(s, X, Y, W, H), title(s, X + 28, Y + 24, 'ПЕРСОНАЖ', 16, C.amber)]);
-    root.add(button(s, X + W - 140, Y + 18, 110, 26, 'ЗАКРЫТЬ', () => this.close()).root);
+    root.add([dimmer(s, 0.5), metalPanel(s, X, Y, W, H), title(s, X + 28, Y + 24, uiText('hud.character', locale).replace(' [C]', ''), 16, C.amber)]);
+    root.add(button(s, X + W - 140, Y + 18, 110, 26, uiText('character.close', locale), () => this.close()).root);
     const info = new InfoCard(s, root, X + 370, Y + 540, W - 394, 80);
-    info.setDefault('Подсказка', c.skillPoints || c.perkPoints ? 'Есть нераспределённые очки навыков или перк. Кнопки + и − у навыков, «Применить» сохраняет выбор.' : 'Наведите курсор на строку, чтобы прочитать описание.');
+    info.setDefault(uiText('character.help', locale), uiText(c.skillPoints || c.perkPoints ? 'character.unspentHelp' : 'character.hoverHelp', locale));
 
     root.add(glass(s, X + 24, Y + 60, 330, 106));
     root.add(s.add.image(X + 29, Y + 65, 'atlas', `portrait_hero_${c.look}`).setOrigin(0).setDisplaySize(96, 96));
@@ -99,12 +110,12 @@ export class CharacterWindow {
     const spending = c.skillPoints > 0;
     this.skills = new SkillPanel(s, root, X + 370, Y + 60, 420, K, info, spending ? 'spend' : 'view', { onSpend: (sk, d) => this.spend(sk, d) });
     if (spending) {
-      root.add(button(s, X + 370, Y + 486, 200, 28, 'ПРИМЕНИТЬ', () => this.applySkills()).root);
-      root.add(button(s, X + 590, Y + 486, 200, 28, 'СБРОС', () => ((this.pending = {}), this.refresh())).root);
+      root.add(button(s, X + 370, Y + 486, 200, 28, uiText('character.apply', locale), () => this.applySkills()).root);
+      root.add(button(s, X + 590, Y + 486, 200, 28, uiText('character.reset', locale), () => ((this.pending = {}), this.refresh())).root);
     }
 
-    this.traits = new ListPanel(s, root, X + 806, Y + 60, 350, 140, 'ОСОБЕННОСТИ И СОСТОЯНИЕ', info, undefined, 24);
-    this.perks = new ListPanel(s, root, X + 806, Y + 210, 350, 280, 'ПЕРКИ', info, (id) => this.pick(id), 24);
+    this.traits = new ListPanel(s, root, X + 806, Y + 60, 350, 140, uiText('character.traitsState', locale), info, undefined, 24);
+    this.perks = new ListPanel(s, root, X + 806, Y + 210, 350, 280, uiText('character.perks', locale), info, (id) => this.pick(id), 24);
     if (c.perkPoints > 0) {
       this.perkBtn = button(s, X + 806, Y + 500, 350, 28, '', () => this.perkAction());
       root.add(this.perkBtn.root);
@@ -119,18 +130,20 @@ export class CharacterWindow {
     const g = this.game;
     const c = g.char;
     const K = g.content.character;
+    const locale = settings().language;
     const next = Ch.nextLevelXp(c.level);
     const karma = g.flag('karma');
-    this.idText.setText(`${c.name}\nУровень ${c.level}\nОпыт ${c.xp}${next ? ` / ${next}` : ''}\n${karmaWord(typeof karma === 'number' ? karma : 0)}`);
+    this.idText.setText(`${heroNameForDisplay(c.name, locale)}\n${uiText('character.level', locale).replace('{count}', String(c.level))}\n${uiText('character.xp', locale).replace('{count}', String(c.xp))}${next ? ` / ${next}` : ''}\n${karmaWord(typeof karma === 'number' ? karma : 0, locale)}`);
     const values = Ch.skills(c, K);
     for (const [k, v] of Object.entries(this.pending)) values[k as SkillId] += (v ?? 0) * (c.tags.includes(k as SkillId) ? 2 : 1);
-    this.skills.update(values, c.tags, c.skillPoints > 0 ? `Очков навыков: ${this.left}` : '', this.pending);
-    this.traits.setItems(this.stateItems(), 'Нет.');
-    this.perks.setHeading(this.choosing ? 'ВЫБЕРИТЕ ПЕРК' : 'ПЕРКИ');
-    this.perks.setItems(this.perkItems(), 'Пока нет. Новый перк даётся с каждым уровнем.');
+    this.skills.update(values, c.tags, c.skillPoints > 0 ? uiText('character.skillPoints', locale).replace('{count}', String(this.left)) : '', this.pending);
+    this.traits.setItems(this.stateItems(), uiText('character.none', locale));
+    this.perks.setHeading(uiText(this.choosing ? 'character.choosePerk' : 'character.perks', locale));
+    this.perks.setItems(this.perkItems(), uiText('character.noPerks', locale));
     if (this.perkBtn) {
-      const label = !this.choosing ? 'ВЫБРАТЬ ПЕРК' : this.picked ? `ВЗЯТЬ «${K.perks[this.picked].name}»` : 'ВЫБЕРИТЕ ПЕРК В СПИСКЕ';
-      this.perkBtn.label.setText(c.perkPoints > 0 ? label : 'ПЕРК ВЗЯТ');
+      const picked = this.picked ? contentText(`/character/perks/${this.picked}/name`, K.perks[this.picked].name, locale) : '';
+      const label = !this.choosing ? uiText('character.pickPerk', locale) : this.picked ? uiText('character.takePerk', locale).replace('{name}', picked) : uiText('character.chooseInList', locale);
+      this.perkBtn.label.setText(c.perkPoints > 0 ? label : uiText('character.perkTaken', locale));
       this.perkBtn.setEnabled(c.perkPoints > 0 && (!this.choosing || !!this.picked));
     }
   }
@@ -139,23 +152,30 @@ export class CharacterWindow {
   private stateItems(): ListItem[] {
     const g = this.game;
     const K = g.content.character;
-    const items: ListItem[] = g.char.traits.map((id) => ({ id, name: K.traits[id].name, desc: K.traits[id].desc, mark: 'none' }));
+    const locale = settings().language;
+    const items: ListItem[] = g.char.traits.map((id) => ({
+      id, name: contentText(`/character/traits/${id}/name`, K.traits[id].name, locale),
+      desc: contentText(`/character/traits/${id}/desc`, K.traits[id].desc, locale), mark: 'none',
+    }));
     for (const b of g.body.buffs) {
       const def = g.content.items[b.item];
-      items.push({ id: `buff_${b.item}`, name: `◆ ${def.name}: ${Math.ceil(b.leftMs / 1000)} с`, desc: modsText(def.buff?.mods), mark: 'none' });
+      const name = contentText(`/items/${b.item}/name`, def.name, locale);
+      items.push({ id: `buff_${b.item}`, name: `◆ ${name}: ${uiText('character.seconds', locale).replace('{count}', String(Math.ceil(b.leftMs / 1000)))}`, desc: modsText(def.buff?.mods, locale), mark: 'none' });
     }
-    for (const [id, name] of Object.entries(FACTIONS)) {
+    for (const [id, names] of Object.entries(FACTIONS)) {
       const rep = Number(g.flag(`rep_${id}`) ?? 0);
-      if (rep) items.push({ id: `rep_${id}`, name: `${name}: ${repWord(rep)} (${rep})`, desc: 'Репутация: от неё зависят цены, товары для своих и разговоры.', mark: 'none' });
+      if (rep) items.push({ id: `rep_${id}`, name: `${names[locale === 'en' ? 1 : 0]}: ${repWord(rep, locale)} (${rep})`, desc: uiText('character.repDesc', locale), mark: 'none' });
     }
     for (const id of partyOf(g.state.flags, g.content.companions ?? {})) {
       const c = g.content.companions[id];
+      const name = contentText(`/companions/${id}/name`, c.name, locale);
       const back = g.flag(`stance_${id}`) === 'back';
-      items.push({ id: `comp_${id}`, name: `◆ Спутник: ${c.name}${back ? ' (позади)' : ''}`, desc: `${c.name} идёт с вами и дерётся рядом. Приказы — в разговоре: клик по спутнику.${back ? ' Сейчас держится позади и бьёт только тех, кто подошёл вплотную.' : ''}`, mark: 'none' });
+      items.push({ id: `comp_${id}`, name: `${uiText('character.companion', locale).replace('{name}', name)}${back ? uiText('character.behind', locale) : ''}`, desc: `${uiText('character.companionDesc', locale).replace('{name}', name)}${back ? uiText('character.behindDesc', locale) : ''}`, mark: 'none' });
     }
     for (const id of g.withdrawals()) {
       const def = g.content.items[id];
-      items.push({ id: `hooked_${id}`, name: `✕ Ломка: ${def.name}`, desc: `${modsText(def.addict?.withdrawal)}. Пройдёт сама со временем, быстрее — с дозой или «Чистяком».`, mark: 'none' });
+      const name = contentText(`/items/${id}/name`, def.name, locale);
+      items.push({ id: `hooked_${id}`, name: uiText('character.withdrawal', locale).replace('{name}', name), desc: `${modsText(def.addict?.withdrawal, locale)}. ${uiText('character.withdrawalDesc', locale)}`, mark: 'none' });
     }
     return items;
   }
@@ -163,13 +183,20 @@ export class CharacterWindow {
   private perkItems(): ListItem[] {
     const c = this.game.char;
     const K = this.game.content.character;
-    if (!this.choosing) return c.perks.map((id) => ({ id, name: K.perks[id].name, desc: K.perks[id].desc, mark: 'none' }));
-    const names = { attrs: ATTR_NAMES, skills: SKILL_NAMES };
-    return Object.entries(K.perks).map(([id, p]) => {
+    const locale = settings().language;
+    const displayPerk = (id: string) => ({
+      name: contentText(`/character/perks/${id}/name`, K.perks[id].name, locale),
+      desc: contentText(`/character/perks/${id}/desc`, K.perks[id].desc, locale),
+    });
+    if (!this.choosing) return c.perks.map((id) => ({ id, ...displayPerk(id), mark: 'none' }));
+    const names = { attrs: attrNames(locale), skills: skillNames(locale) };
+    return Object.entries(K.perks).map(([id]) => {
       const taken = c.perks.includes(id);
       const ok = Ch.perkRequirementsMet(c, K, id);
-      const req = `Требуется: ${Ch.perkRequirementText(K, id, names)}.`;
-      return { id, name: p.name, desc: `${p.desc}\n${taken ? 'Уже взят.' : req}`, mark: taken || id === this.picked ? 'on' : 'off', dim: !ok && !taken };
+      const rawReq = Ch.perkRequirementText(K, id, names);
+      const req = uiText('character.required', locale).replace('{text}', locale === 'en' ? rawReq.replace('уровень', 'level').replace(/^нет$/, 'none') : rawReq);
+      const displayed = displayPerk(id);
+      return { id, name: displayed.name, desc: `${displayed.desc}\n${taken ? uiText('character.taken', locale) : req}`, mark: taken || id === this.picked ? 'on' : 'off', dim: !ok && !taken };
     });
   }
 

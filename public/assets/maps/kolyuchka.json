@@ -4356,6 +4356,24 @@
    ]
   },
   {
+   "id": "town_cat",
+   "sheet": "cat_town",
+   "x": 16,
+   "y": 15,
+   "dir": 1,
+   "label": "Кошка у капельника",
+   "dialogue": "street_cat"
+  },
+  {
+   "id": "town_dog",
+   "sheet": "dog_town",
+   "x": 23,
+   "y": 22,
+   "dir": 3,
+   "label": "Сторожевой пёс",
+   "dialogue": "street_dog"
+  },
+  {
    "id": "farmer_0",
    "sheet": "farmer",
    "x": 16,

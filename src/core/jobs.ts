@@ -7,10 +7,10 @@ import { drops } from './words';
 export const jobFlag = (id: string) => `job_${id}`;
 export const jobCount = (id: string) => `job_${id}_n`;
 
-function rewardEffects(r: JobReward): Effect[] {
+function rewardEffects(r: JobReward, xpKey?: string): Effect[] {
   const out: Effect[] = [];
   if (r.caps) out.push({ type: 'caps', amount: r.caps });
-  if (r.xp) out.push({ type: 'xp', amount: r.xp });
+  if (r.xp) out.push(xpKey ? { type: 'xpOnce', key: xpKey, amount: r.xp } : { type: 'xp', amount: r.xp });
   for (const [f, by] of Object.entries(r.rep ?? {})) out.push({ type: 'inc', key: `rep_${f}`, by });
   for (const [item, qty] of Object.entries(r.items ?? {})) out.push({ type: 'give', item, qty });
   return out;
@@ -56,9 +56,9 @@ export function boardDialogue(all: Record<string, JobDef>, town = 'rusty_well'):
         options.push({
           text: t.text,
           if: t.if,
-          check: { ...j.check, pass: 'paid', fail: 'failed', passEffects: [...t.effects, ...rewardEffects(t.reward), close], failEffects: [close] },
+          check: { ...j.check, pass: 'paid', fail: 'failed', passEffects: [...t.effects, ...rewardEffects(t.reward, j.repeat ? `job:${id}` : undefined), close], failEffects: [close] },
         });
-      else options.push({ text: t.text, if: t.if, effects: [...t.effects, ...rewardEffects(t.reward), close], next: 'paid' });
+      else options.push({ text: t.text, if: t.if, effects: [...t.effects, ...rewardEffects(t.reward, j.repeat ? `job:${id}` : undefined), close], next: 'paid' });
     }
     options.push({ text: `Как идёт: «${j.title}»`, if: [{ flag: jobFlag(id), eq: 'active' }], next: `job_${id}` });
     const progress = j.hunt ? `\nСделано: {f:${jobCount(id)}} из ${j.hunt.count}.` : '';

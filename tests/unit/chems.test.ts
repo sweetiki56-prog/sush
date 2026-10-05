@@ -64,6 +64,18 @@ describe('chems', () => {
     expect(g.consume('rush')).toBe(false); // fight-only stims wait for a fight
   });
 
+  it('a full flask can be drunk while thirsty even at full health', () => {
+    const g = game(0.5, { flask: 1 });
+    g.body.thirsty = true;
+    const hp = g.state.hp;
+    expect(g.consume('flask')).toBe(true);
+    expect(g.body.thirsty).toBe(false);
+    expect(g.state.hp).toBe(hp);
+    expect(g.count('flask')).toBe(0);
+    expect(g.count('canteen')).toBe(2);
+    expect(g.state.log.some((line) => line.includes('Жажда отступает'))).toBe(true);
+  });
+
   it('a chem taken in a fight works on the unit at once', () => {
     const g = game(0.99, { mirage: 1 });
     const u = playerUnit(g, 0, 0);

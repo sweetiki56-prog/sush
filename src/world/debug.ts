@@ -23,6 +23,8 @@ export function exposeDebug(w: WorldScene): void {
       return true;
     },
     teleport: (x: number, y: number) => s.send({ t: 'debug', op: { op: 'teleport', x, y } }),
+    worldMap: () => w.map?.data.id ?? null,
+    loading: () => w.scene.isActive('Loading'),
     player: () => ({ ...w.player.tile, moving: w.player.moving }),
     // where this client sees anyone (another player, an NPC, a monster)
     actor: (id: string) => {

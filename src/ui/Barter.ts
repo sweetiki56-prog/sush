@@ -6,6 +6,9 @@ import { C, button, glass, txt } from './theme';
 import { itemStats } from './itemText';
 import { Window } from './Window';
 import { dragScroll } from './touch';
+import { settings } from '../core/Settings';
+import { contentText } from '../i18n/display';
+import { uiText } from '../i18n/ui';
 
 const W = 1040;
 const H = 560;
@@ -46,7 +49,9 @@ export class Barter extends Window {
     this.trader = trader;
     this.deal = { buy: {}, sell: {} };
     this.scroll = { buy: 0, sell: 0 };
-    this.at = this.frame(W, H, `ТОРГОВЛЯ С ${this.game.content.traders[trader].name.toUpperCase()}`);
+    const traderDef = this.game.content.traders[trader];
+    const name = contentText(`/traders/${trader}/name`, traderDef.name, settings().language).toUpperCase();
+    this.at = this.frame(W, H, uiText('barter.title', settings().language).replace('{name}', name));
     // the room answers a deal with a new state: start the next one from scratch
     const redraw = () => {
       if (!this.root) return;
@@ -109,17 +114,18 @@ export class Barter extends Window {
       zone.on('pointerout', () => zone.setFillStyle(0x7ad36a, inDeal ? 0.12 : 0));
       zone.on('pointerdown', (p: Phaser.Input.Pointer) => this.change(side, r, p.rightButtonDown() ? -1 : 1));
       const each = r.price < 1 ? r.price.toFixed(1) : String(side === 'buy' ? Math.ceil(r.price) : Math.floor(r.price));
-      const price = side === 'sell' && !r.price ? 'не берут' : `${each} кап.`;
+      const locale = settings().language;
+      const price = side === 'sell' && !r.price ? uiText('barter.noBuy', locale) : uiText('barter.price', locale).replace('{count}', each);
       body.add([
         zone,
         s.add.image(x + 20, ry + 14, 'atlas', def.icon).setScale(0.8),
-        txt(s, x + 40, ry + 6, def.name, 13, inDeal ? C.amber : C.crt, 250),
+        txt(s, x + 40, ry + 6, contentText(`/items/${r.id}/name`, def.name, locale), 13, inDeal ? C.amber : C.crt, 250),
         txt(s, x + 300, ry + 6, `×${r.qty}${inDeal ? ` → ${inDeal}` : ''}`, 13, inDeal ? C.amber : C.crtDim),
         txt(s, x + COL_W - 12, ry + 6, price, 13, C.sand).setOrigin(1, 0),
       ]);
     });
-    if (!rows.length) body.add(txt(s, x + 16, y + 14, 'Пусто.', 13, C.crtDim));
-    if (rows.length > ROWS) body.add(txt(s, x + COL_W - 8, y - 18, 'колесо ↕', 11, C.crtDim).setOrigin(1, 0));
+    if (!rows.length) body.add(txt(s, x + 16, y + 14, uiText('inventory.empty', settings().language), 13, C.crtDim));
+    if (rows.length > ROWS) body.add(txt(s, x + COL_W - 8, y - 18, uiText('inventory.wheel', settings().language), 11, C.crtDim).setOrigin(1, 0));
   }
 
   private cardText: Phaser.GameObjects.Text | null = null;
@@ -130,8 +136,11 @@ export class Barter extends Window {
     this.cardText?.destroy();
     if (!id) return;
     const def = g.content.items[id];
-    const stats = itemStats(g.content, id);
-    this.cardText = txt(this.scene, this.at.x + 36, this.at.y + 386, `${def.name}. ${def.desc}${stats ? `\n${stats}` : ''}`, 12, C.crt, W - 72);
+    const locale = settings().language;
+    const stats = itemStats(g.content, id, locale);
+    const name = contentText(`/items/${id}/name`, def.name, locale);
+    const desc = contentText(`/items/${id}/desc`, def.desc, locale);
+    this.cardText = txt(this.scene, this.at.x + 36, this.at.y + 386, `${name}. ${desc}${stats ? `\n${stats}` : ''}`, 12, C.crt, W - 72);
     body.add(this.cardText);
   }
 
@@ -144,8 +153,9 @@ export class Barter extends Window {
     const body = (this.body = s.add.container(0, 0));
     this.root!.add(body);
     const stock = stockOf(g, this.trader);
-    body.add(txt(s, x + 36, y + 62, `ТОВАР · у торговца ${stock.money} кап.`, 12, C.amber));
-    body.add(txt(s, x + W / 2 + 14, y + 62, `ВАШЕ · у вас ${g.state.caps} кап.`, 12, C.amber));
+    const locale = settings().language;
+    body.add(txt(s, x + 36, y + 62, uiText('barter.theirs', locale).replace('{count}', String(stock.money)), 12, C.amber));
+    body.add(txt(s, x + W / 2 + 14, y + 62, uiText('barter.yours', locale).replace('{count}', String(g.state.caps)), 12, C.amber));
     this.column(body, 'buy', x + 32, y + 82, this.theirs());
     this.column(body, 'sell', x + W / 2 + 10, y + 82, this.yours());
     this.card(body);
@@ -153,21 +163,40 @@ export class Barter extends Window {
     const q = quote(g, this.trader, this.deal);
     const empty = !Object.keys(this.deal.buy).length && !Object.keys(this.deal.sell).length;
     const line = empty
-      ? 'Левый клик — в сделку, правый — обратно.'
+      ? uiText('barter.help', locale)
       : 'error' in q
-        ? q.error
+        ? this.errorForDisplay(q.error)
         : q.total > 0
-          ? `Вы платите ${q.total} кап.`
+          ? uiText('barter.pay', locale).replace('{count}', String(q.total))
           : q.total < 0
-            ? `Вам платят ${-q.total} кап.`
-            : 'Обмен без доплаты.';
+            ? uiText('barter.receive', locale).replace('{count}', String(-q.total))
+            : uiText('barter.even', locale);
     body.add(txt(s, x + 36, y + H - 58, line, 15, !empty && 'error' in q ? C.red : C.crtBright));
-    const deal = button(s, x + W - 300, y + H - 64, 130, 30, 'СДЕЛКА', () => this.onTrade(this.trader, this.deal));
+    const deal = button(s, x + W - 300, y + H - 64, 130, 30, uiText('barter.deal', locale), () => this.onTrade(this.trader, this.deal));
     deal.setEnabled(!empty && !('error' in q));
-    const reset = button(s, x + W - 160, y + H - 64, 120, 30, 'СБРОС', () => {
+    const reset = button(s, x + W - 160, y + H - 64, 120, 30, uiText('barter.reset', locale), () => {
       this.deal = { buy: {}, sell: {} };
       this.draw();
     });
     body.add([deal.root, reset.root]);
+  }
+
+  private errorForDisplay(error: string): string {
+    const locale = settings().language;
+    const exact: Record<string, Parameters<typeof uiText>[0]> = {
+      'Странное количество.': 'barter.badAmount',
+      'Столько у торговца нет.': 'barter.notInStock',
+      'У вас столько нет.': 'barter.notOwned',
+      'Не хватает капель.': 'barter.notEnough',
+      'У торговца не хватает капель.': 'barter.traderShort',
+    };
+    if (exact[error]) return uiText(exact[error], locale);
+    const rejected = error.match(/^(.+): это здесь не берут\.$/);
+    if (rejected) {
+      const match = Object.entries(this.game.content.items).find(([, item]) => item.name === rejected[1]);
+      const name = match ? contentText(`/items/${match[0]}/name`, match[1].name, locale) : rejected[1];
+      return uiText('barter.notAccepted', locale).replace('{name}', name);
+    }
+    return error;
   }
 }

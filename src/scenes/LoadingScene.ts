@@ -5,8 +5,10 @@
 import Phaser from 'phaser';
 import { GAME_H, GAME_W } from '../config';
 import { randomTip } from '../ui/tips';
+import { settings } from '../core/Settings';
+import { uiText } from '../i18n/ui';
 
-export type LoadingStyle = 'dusk' | 'poster' | 'chart';
+export type LoadingStyle = 'dusk' | 'poster' | 'chart' | 'rocket';
 export interface LoadingData {
   style: LoadingStyle;
   title: string;
@@ -25,6 +27,10 @@ export class LoadingScene extends Phaser.Scene {
   private closing = false;
   private drops!: Phaser.GameObjects.Graphics;
   private needle: Phaser.GameObjects.Graphics | null = null;
+  private skipRocket = false;
+  private ready = false;
+  private faded = false;
+  private closeTimer: Phaser.Time.TimerEvent | null = null;
   private dropsAt = { x: 0, y: 0 };
 
   constructor() {
@@ -32,12 +38,17 @@ export class LoadingScene extends Phaser.Scene {
   }
 
   create(data: LoadingData): void {
+    const locale = settings().language;
     this.progress = 0;
     this.closing = false;
+    this.skipRocket = false;
+    this.ready = false;
+    this.faded = false;
+    this.closeTimer = null;
     this.shown = this.time.now;
     this.cameras.main.setAlpha(0);
     this.tweens.add({ targets: this.cameras.main, alpha: 1, duration: FADE_MS });
-    this.add.image(0, 0, `loading_${data.style}`).setOrigin(0).setDisplaySize(GAME_W, GAME_H);
+    this.add.image(0, 0, `loading_${data.style}${data.style === 'chart' && locale === 'en' ? '_en' : ''}`).setOrigin(0).setDisplaySize(GAME_W, GAME_H);
     const text = (x: number, y: number, s: string, size: number, color: string, stroke = '#1a0e08', style: Phaser.Types.GameObjects.Text.TextStyle = {}) =>
       this.add.text(x, y, s, { fontFamily: WESTERN, fontSize: `${size}px`, color, stroke, strokeThickness: Math.max(2, size / 12), align: 'center', ...style }).setOrigin(0.5);
 
@@ -46,10 +57,22 @@ export class LoadingScene extends Phaser.Scene {
       if (data.subtitle) text(GAME_W / 2, 200, data.subtitle.toUpperCase(), 24, '#e8b98a', '#2a0f14', { letterSpacing: 3 });
       this.dropsAt = { x: GAME_W / 2, y: 612 };
     } else if (data.style === 'poster') {
-      text(GAME_W / 2, 132, 'ПУТЕВОЙ ЛИСТ', 34, '#3a2414', '#e8d3a4').setAngle(-1);
+      text(GAME_W / 2, 132, uiText('loading.poster', locale), 34, '#3a2414', '#e8d3a4').setAngle(-1);
       text(GAME_W / 2, 262, data.title.toUpperCase(), data.title.length > 14 ? 58 : 76, '#2a160a', '#e8d3a4').setAngle(-1);
       if (data.subtitle) text(GAME_W / 2, 350, data.subtitle.toUpperCase(), 22, '#4a3020', '#e8d3a4', { wordWrap: { width: 560 }, letterSpacing: 2 }).setAngle(-1);
       this.dropsAt = { x: GAME_W / 2, y: 452 };
+    } else if (data.style === 'rocket') {
+      text(GAME_W / 2, 105, data.title.toUpperCase(), 69, '#eac89b', '#1b1111');
+      if (data.subtitle) text(GAME_W / 2, 590, data.subtitle, 27, '#f0d5ac', '#1b1111', { wordWrap: { width: 880 } });
+      text(GAME_W / 2, 651, uiText('loading.skip', locale), 18, '#c9a67c');
+      this.dropsAt = { x: GAME_W / 2, y: 520 };
+      this.input.once('pointerdown', () => {
+        this.skipRocket = true;
+        if (this.ready) {
+          this.closeTimer?.remove(false);
+          this.fadeOut();
+        }
+      });
     } else {
       text(430, 112, data.title.toUpperCase(), 60, '#2a160a', '#e8d3a4').setAngle(-3.4);
       if (data.subtitle) text(430, 170, data.subtitle.toUpperCase(), 22, '#4a3020', '#e8d3a4', { letterSpacing: 2 }).setAngle(-3.4);
@@ -58,7 +81,7 @@ export class LoadingScene extends Phaser.Scene {
     }
     // a tip on a dark band along the bottom
     this.add.rectangle(0, GAME_H - 64, GAME_W, 64, 0x0d0806, 0.72).setOrigin(0);
-    text(GAME_W / 2, GAME_H - 32, randomTip(), 19, '#e8c890', '#0d0806', { wordWrap: { width: GAME_W - 160 }, fontFamily: PLAIN, fontStyle: 'italic' });
+    text(GAME_W / 2, GAME_H - 32, randomTip(locale), 19, '#e8c890', '#0d0806', { wordWrap: { width: GAME_W - 160 }, fontFamily: PLAIN, fontStyle: 'italic' });
     this.drops = this.add.graphics();
     this.drawDrops(0);
   }
@@ -85,11 +108,16 @@ export class LoadingScene extends Phaser.Scene {
   finish(): void {
     if (this.closing) return;
     this.closing = true;
+    this.ready = true;
     this.progress = 1;
-    const wait = Math.max(0, MIN_MS - (this.time.now - this.shown));
-    this.time.delayedCall(wait, () =>
-      this.tweens.add({ targets: this.cameras.main, alpha: 0, duration: FADE_MS, onComplete: () => this.scene.stop() }),
-    );
+    const wait = this.skipRocket ? 0 : Math.max(0, MIN_MS - (this.time.now - this.shown));
+    this.closeTimer = this.time.delayedCall(wait, () => this.fadeOut());
+  }
+
+  private fadeOut(): void {
+    if (this.faded) return;
+    this.faded = true;
+    this.tweens.add({ targets: this.cameras.main, alpha: 0, duration: FADE_MS, onComplete: () => this.scene.stop() });
   }
 
   /** A row of drops: the full ones water-blue with a glint, the one being filled rising, the rest dry. */

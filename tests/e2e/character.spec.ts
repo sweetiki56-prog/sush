@@ -53,7 +53,7 @@ test('create a character by hand, then level up and take a perk', async ({ page 
   expect(c).toMatchObject({ name: 'Tester', tags: ['guns', 'sneak', 'lockpick'], traits: ['gifted'], level: 1 });
 
   // level up and use the sheet: X = 50, Y = 40 (src/ui/CharacterWindow.ts)
-  await page.evaluate(() => (window as unknown as { __world: { session(): { game: { addXp(n: number): void } } } }).__world.session().game.addXp(100));
+  await page.evaluate(() => (window as unknown as { __world: { session(): { game: { addXp(n: number): void } } } }).__world.session().game.addXp(400));
   await page.keyboard.press('c');
   await frames(page);
   for (let i = 0; i < 3; i++) await click(page, 420 + 420 - 24, 100 + 42 + 0 * 34 + 8); // + Стрельба

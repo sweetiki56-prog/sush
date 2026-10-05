@@ -34,6 +34,9 @@ export const CHARS = {
   scavenger: { skin: P.skin2, hair: P.brown1, shirt: P.rust1, pants: P.brown0, boots: P.dark1, coat: P.brown2, coatLen: 8, sleeve: P.rust1, goggles: true, backpack: P.grey2, height: 0.97 },
   waterbearer: { skin: P.skin1, hair: P.dark1, shirt: P.teal0, pants: P.denim0, boots: P.dark1, coat: P.teal1, coatLen: 12, sleeve: P.teal1, hood: P.teal0, backpack: P.olive1, height: 0.99 },
   pilgrim: { skin: P.skin3, hair: P.grey4, shirt: P.bone, pants: P.sand3, boots: P.brown1, coat: P.bone, coatLen: 18, sleeve: P.bone, scarf: P.teal1, height: 0.96 },
+  rocket_guard: { skin: P.skin1, hair: P.dark1, shirt: P.dark2, pants: P.grey1, boots: P.dark0, coat: P.sand1, coatLen: 13, sleeve: P.sand1, scarf: P.red1, rifle: true, height: 1.03 },
+  rocket_keeper: { skin: P.skin2, hair: P.grey4, shirt: P.bone, pants: P.sand2, boots: P.brown1, coat: P.sand3, coatLen: 15, sleeve: P.sand3, apron: P.bone, height: 0.98 },
+  rocket_tolm: { skin: P.skin0, hair: P.grey3, shirt: P.dark2, pants: P.grey1, boots: P.dark0, coat: P.bone, coatLen: 17, sleeve: P.bone, scarf: P.red1, beard: P.grey4, height: 1.01 },
   dryman: { skin: P.grey2, hair: P.grey1, shirt: P.grey2, pants: P.grey1, boots: P.grey1, coat: null, sleeve: P.grey2, scarf: null, height: 1.04 },
   hank: { skin: P.skin0, hair: P.dark2, shirt: P.sand1, pants: P.brown1, boots: P.dark1, coat: P.sand0, coatLen: 6, sleeve: P.sand0, hat: P.brown2, beard: P.grey3, scarf: null, height: 1.02 },
   // Chapter II: Три столба — the tavern, the rows, the post, the caravan without water

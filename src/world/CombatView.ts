@@ -12,6 +12,8 @@ import { synth } from '../audio/Synth';
 import type { NetClient } from '../net/NetClient';
 import type { WorldScene } from '../scenes/WorldScene';
 import { CombatAnimator } from './CombatAnimator';
+import { contentText, mapLabelForDisplay } from '../i18n/display';
+import { runtimeLineForDisplay } from '../i18n/runtime';
 
 /** What the combat HUD shows. */
 export interface CombatView {
@@ -146,19 +148,23 @@ export class FightView {
     if (!c || !this.myTurn) return null;
     const p = c.unit(this.net.you)!;
     const target = targetId ? c.unit(targetId) : undefined;
+    const locale = settings().language;
+    const ap = locale === 'en' ? 'AP' : 'ОД';
+    const reason = (source: string) => runtimeLineForDisplay(source, locale === 'en' ? 'en' : 'ru');
+    const name = target ? mapLabelForDisplay(target.name, locale) : '';
     if (this.aiming) {
       const at = target ? { x: target.x, y: target.y } : tile;
       const pv = c.throwPreview(p, this.aiming, at);
-      return pv.reason ? `Бросок: ${pv.reason}` : `Бросок: ${pv.chance}% · ${pv.cost} ОД`;
+      return pv.reason ? `${locale === 'en' ? 'Throw' : 'Бросок'}: ${reason(pv.reason)}` : `${locale === 'en' ? 'Throw' : 'Бросок'}: ${pv.chance}% · ${pv.cost} ${ap}`;
     }
     if (target && !target.dead && enemies(p, target)) {
       const pv = c.preview(p, target);
-      return pv.reason ? `${target.name}: ${pv.reason}` : `${target.name}: ${pv.chance}% · ${pv.cost} ОД`;
+      return pv.reason ? `${name}: ${reason(pv.reason)}` : `${name}: ${pv.chance}% · ${pv.cost} ${ap}`;
     }
-    if (target && target.side === 'player' && target.dead && target.id !== p.id) return `${target.name}: поднять (бинты, ${REVIVE_AP} ОД)`;
+    if (target && target.side === 'player' && target.dead && target.id !== p.id) return locale === 'en' ? `${name}: revive (bandages, ${REVIVE_AP} AP)` : `${name}: поднять (бинты, ${REVIVE_AP} ОД)`;
     const path = c.pathfinder(p.id).find(p, [tile]);
-    if (!path) return 'Туда не пройти';
-    return path.length ? `${path.length} ОД${path.length > p.ap ? ' (не хватит)' : ''}` : null;
+    if (!path) return reason('Туда не пройти');
+    return path.length ? `${path.length} ${ap}${path.length > p.ap ? (locale === 'en' ? ' (not enough)' : ' (не хватит)') : ''}` : null;
   }
 
   click(targetId: string | null, tile: Tile): void {
@@ -194,16 +200,18 @@ export class FightView {
     const left = this.sync.timer;
     session().ui.emit('combat', {
       playerTurn: this.myTurn,
-      whose: cur.id === this.net.you ? 'Ваш ход' : !enemies(me, cur) ? `Ход: ${cur.name}` : 'Ход противника…',
-      aiming: this.aiming ? (this.net.game!.content.items[this.aiming]?.name ?? this.aiming) : null,
+      whose: cur.id === this.net.you ? (settings().language === 'en' ? 'Your turn' : 'Ваш ход') : !enemies(me, cur)
+        ? `${settings().language === 'en' ? 'Turn' : 'Ход'}: ${mapLabelForDisplay(cur.name, settings().language)}`
+        : (settings().language === 'en' ? 'Enemy turn…' : 'Ход противника…'),
+      aiming: this.aiming ? contentText(`/items/${this.aiming}/name`, this.net.game!.content.items[this.aiming]?.name ?? this.aiming, settings().language) : null,
       deadline: left !== null && !this.sync.busy ? this.syncAt + left : null,
       ap: me.ap,
       maxAp: me.maxAp,
       weapon: me.weapon,
-      weaponName: w?.name ?? '—',
+      weaponName: w ? contentText(`/weapons/${me.weapon}/name`, w.name, settings().language) : '—',
       cost: w ? attackCost(me, w) : 0,
       ammo: w?.ammo ? this.net.game!.count(w.ammo) : null,
-      order: c.turnOrder.map((u) => ({ id: u.id, name: u.name, hp: u.hp, maxHp: u.maxHp, current: u === cur, friend: !enemies(me, u) })),
+      order: c.turnOrder.map((u) => ({ id: u.id, name: mapLabelForDisplay(u.name, settings().language), hp: u.hp, maxHp: u.maxHp, current: u === cur, friend: !enemies(me, u) })),
     });
   }
 }

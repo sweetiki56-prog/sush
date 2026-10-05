@@ -218,7 +218,10 @@ export class FightRules {
     if (h) r.jobKill(killer, h);
     r.world.stats.kills++;
     r.logAll(`${u.name} мёртв.`);
-    for (const q of r.players.values()) if (c.unit(q.id)) q.game.addXp(u.xp);
+    for (const q of r.players.values()) if (c.unit(q.id)) {
+      if (h?.respawn) q.game.awardXp(`kill:${id}`, u.xp);
+      else q.game.addXp(u.xp);
+    }
     // a road battle: the spoils wait in a pile for everyone, the fallen's main weapon among them
     if (r.world.travel?.encounter) {
       const gun = u.weapons[0];
