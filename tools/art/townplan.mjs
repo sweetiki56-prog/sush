@@ -9,6 +9,7 @@ const VIGNETTE_W = 330;
 
 function parchment(ctx, seed) {
   const n = makeNoise(seed);
+  const grain = rng(seed ^ 0x9e3779b9);
   const img = ctx.createImageData(PLAN_W, PLAN_H);
   for (let y = 0; y < PLAN_H; y++)
     for (let x = 0; x < PLAN_W; x++) {
@@ -16,7 +17,7 @@ function parchment(ctx, seed) {
       const stain = n(x * 0.004, y * 0.004) * 0.6 + n(x * 0.02, y * 0.02) * 0.4;
       const edge = Math.min(x, y, PLAN_W - 1 - x, PLAN_H - 1 - y);
       const burn = edge < 26 ? (26 - edge) / 26 : 0;
-      const k = 1 - stain * 0.18 - burn * 0.55 - Math.random() * 0.04;
+      const k = 1 - stain * 0.18 - burn * 0.55 - grain() * 0.04;
       img.data[i] = 226 * k;
       img.data[i + 1] = 200 * k;
       img.data[i + 2] = 150 * k;

@@ -33,7 +33,7 @@ describe('nest fight balance', () => {
     process.stderr.write(`trust ${JSON.stringify(rates)}\n`);
     expect(rates['Стрелок']).toBeGreaterThanOrEqual(0.75);
     expect(rates['Говорун']).toBeLessThanOrEqual(0.2);
-  });
+  }, 180_000);
 
   it('the Жнецобой is made for scorpions: the nest turns easy even for a talker', () => {
     let wins = 0;

@@ -49,7 +49,7 @@ export function meet(room: MissionRoom, ps: Parties, p: PartyState): void {
   room.meeting = p.id;
   room.logAll(`Вы натыкаетесь на отряд: ${tpl.name}.`);
   const written = tpl.dialogue ? room.content.dialogues[tpl.dialogue] : undefined;
-  const d = written ?? meetingDialogue({
+  const d = written ? { ...written, portrait: written.portrait ?? tpl.portrait } : meetingDialogue({
     party: tpl,
     count: p.members.length,
     ratio: hero.strength / Math.max(1, ps.strength(p)),

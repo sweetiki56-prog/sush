@@ -56,7 +56,8 @@ export class DialogueView {
     const hasPortrait = !!d.portrait;
     if (hasPortrait) {
       this.root.add(glass(s, X + 20, Y + 20, 200, 200));
-      this.root.add(s.add.image(X + 24, Y + 24, 'atlas', d.portrait!).setOrigin(0).setDisplaySize(192, 192));
+      const atlas = d.portrait!.startsWith('portrait_npc_') ? 'npc_portraits' : 'atlas';
+      this.root.add(s.add.image(X + 24, Y + 24, atlas, d.portrait!).setOrigin(0).setDisplaySize(192, 192));
     }
     const tx = hasPortrait ? X + 240 : X + 20;
     const tw = W - (tx - X) - 20;

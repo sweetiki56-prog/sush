@@ -20,6 +20,7 @@ export interface PartyTemplate {
   trader?: string; // barter with them
   toll?: number; // what bandits ask to let you pass
   dialogue?: string; // a written meeting talk instead of the one built for the kind (story encounters)
+  portrait?: string; // the party leader's dialogue portrait, attached by the content catalog
   ambush?: boolean; // lies in wait like bandits do (rocks, the Dead fields, a storm), whatever its kind
   seen?: string; // a flag: the hero saw them coming, so they talk instead of shooting from cover
 }

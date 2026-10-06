@@ -1,0 +1,370 @@
+{
+  "agafya": {
+    "sheet": "agafya",
+    "portrait": "portrait_npc_agafya"
+  },
+  "apprentice": {
+    "sheet": "senka",
+    "portrait": "portrait_npc_apprentice"
+  },
+  "arena_crowd": {
+    "sheet": "nomad",
+    "portrait": "portrait_npc_arena_crowd"
+  },
+  "barge_scav": {
+    "sheet": "scavenger",
+    "portrait": "portrait_npc_barge_scav"
+  },
+  "brigadier": {
+    "sheet": "brigadier",
+    "portrait": "portrait_npc_brigadier"
+  },
+  "bugai": {
+    "sheet": "bugai",
+    "portrait": "portrait_npc_bugai"
+  },
+  "camel_first": {
+    "sheet": "camel_first",
+    "portrait": "portrait_npc_camel_first"
+  },
+  "changer": {
+    "sheet": "scavenger",
+    "portrait": "portrait_npc_changer"
+  },
+  "collector_post": {
+    "sheet": "collector",
+    "portrait": "portrait_npc_collector_post"
+  },
+  "comp_granit": {
+    "sheet": "granit",
+    "portrait": "portrait_granit"
+  },
+  "comp_hank": {
+    "sheet": "hank",
+    "portrait": "portrait_hank"
+  },
+  "comp_irga": {
+    "sheet": "irga",
+    "portrait": "portrait_irga"
+  },
+  "comp_rzhavchik": {
+    "sheet": "dog_rzhavchik",
+    "portrait": "portrait_npc_rzhavchik"
+  },
+  "comp_shepot": {
+    "sheet": "shepot",
+    "portrait": "portrait_shepot"
+  },
+  "comp_vedro": {
+    "sheet": "vedro",
+    "portrait": "portrait_npc_vedro"
+  },
+  "councilor": {
+    "sheet": "councilor",
+    "portrait": "portrait_npc_councilor"
+  },
+  "crystal_folk": {
+    "sheet": "kvarts",
+    "portrait": "portrait_npc_crystal_folk"
+  },
+  "dam_militia": {
+    "sheet": "farmer",
+    "portrait": "portrait_npc_dam_militia"
+  },
+  "dam_salt": {
+    "sheet": "granit",
+    "portrait": "portrait_npc_dam_salt"
+  },
+  "debtor": {
+    "sheet": "debtor",
+    "portrait": "portrait_npc_debtor"
+  },
+  "dew_knight": {
+    "sheet": "dew_knight",
+    "portrait": "portrait_npc_dew_knight"
+  },
+  "eel_queen": {
+    "sheet": "eel_queen",
+    "portrait": "portrait_npc_eel_queen"
+  },
+  "fanatic": {
+    "sheet": "fanatic",
+    "portrait": "portrait_npc_fanatic"
+  },
+  "farmer": {
+    "sheet": "farmer",
+    "portrait": "portrait_npc_farmer"
+  },
+  "foma": {
+    "sheet": "bearer",
+    "portrait": "portrait_npc_foma"
+  },
+  "gate_guard": {
+    "sheet": "zap_guard",
+    "portrait": "portrait_npc_gate_guard"
+  },
+  "guild_clerk": {
+    "sheet": "debtor",
+    "portrait": "portrait_npc_guild_clerk"
+  },
+  "guild_gatekeeper": {
+    "sheet": "guild_guard",
+    "portrait": "portrait_npc_guild_gatekeeper"
+  },
+  "guild_guard": {
+    "sheet": "guild_guard",
+    "portrait": "portrait_npc_guild_guard"
+  },
+  "gvozd": {
+    "sheet": "gvozd",
+    "portrait": "portrait_npc_gvozd"
+  },
+  "halfdry": {
+    "sheet": "halfdry",
+    "portrait": "portrait_npc_halfdry"
+  },
+  "hor": {
+    "sheet": "hor",
+    "portrait": "portrait_npc_hor"
+  },
+  "hor_guard": {
+    "sheet": "caravan_guard",
+    "portrait": "portrait_npc_hor_guard"
+  },
+  "iva": {
+    "sheet": "iva",
+    "portrait": "portrait_npc_iva"
+  },
+  "kids": {
+    "sheet": "shnyr",
+    "portrait": "portrait_npc_kids"
+  },
+  "klesch": {
+    "sheet": "klesch",
+    "portrait": "portrait_npc_klesch"
+  },
+  "kosoy": {
+    "sheet": "kosoy",
+    "portrait": "portrait_npc_kosoy"
+  },
+  "kremen": {
+    "sheet": "kremen",
+    "portrait": "portrait_kremen"
+  },
+  "kulik": {
+    "sheet": "kulik",
+    "portrait": "portrait_npc_kulik"
+  },
+  "lada": {
+    "sheet": "lada",
+    "portrait": "portrait_npc_lada"
+  },
+  "lada_home": {
+    "sheet": "lada",
+    "portrait": "portrait_npc_lada"
+  },
+  "laska": {
+    "sheet": "laska",
+    "portrait": "portrait_npc_laska"
+  },
+  "luka": {
+    "sheet": "luka",
+    "portrait": "portrait_npc_luka"
+  },
+  "mityay": {
+    "sheet": "mityay",
+    "portrait": "portrait_npc_mityay"
+  },
+  "molchun": {
+    "sheet": "molchun",
+    "portrait": "portrait_npc_molchun"
+  },
+  "molchun_blood": {
+    "sheet": "molchun",
+    "portrait": "portrait_npc_molchun"
+  },
+  "mytny": {
+    "sheet": "mytny",
+    "portrait": "portrait_npc_mytny"
+  },
+  "nina": {
+    "sheet": "lejka",
+    "portrait": "portrait_npc_nina"
+  },
+  "nomad": {
+    "sheet": "nomad",
+    "portrait": "portrait_npc_nomad"
+  },
+  "novice": {
+    "sheet": "novice",
+    "portrait": "portrait_npc_novice"
+  },
+  "nyura": {
+    "sheet": "nyura",
+    "portrait": "portrait_npc_nyura"
+  },
+  "pilgrim_talk": {
+    "sheet": "pilgrim",
+    "portrait": "portrait_npc_pilgrim_talk"
+  },
+  "pisar": {
+    "sheet": "pisar",
+    "portrait": "portrait_npc_pisar"
+  },
+  "pit_fighter": {
+    "sheet": "pit_1",
+    "portrait": "portrait_npc_pit_fighter"
+  },
+  "prisoners": {
+    "sheet": "prisoner",
+    "portrait": "portrait_npc_prisoners"
+  },
+  "prokop": {
+    "sheet": "prokop",
+    "portrait": "portrait_npc_prokop"
+  },
+  "raid_collector": {
+    "sheet": "collector",
+    "portrait": "portrait_npc_raid_collector"
+  },
+  "raider_boss": {
+    "sheet": "raider",
+    "portrait": "portrait_npc_raider_boss"
+  },
+  "recruiter": {
+    "sheet": "collector",
+    "portrait": "portrait_npc_recruiter"
+  },
+  "remen": {
+    "sheet": "remen",
+    "portrait": "portrait_npc_remen"
+  },
+  "rocket_chain": {
+    "sheet": "rocket_guard",
+    "portrait": "portrait_npc_rocket_chain"
+  },
+  "rocket_chronicler": {
+    "sheet": "rocket_keeper",
+    "portrait": "portrait_npc_rocket_chronicler"
+  },
+  "rocket_guard": {
+    "sheet": "rocket_guard",
+    "portrait": "portrait_npc_rocket_guard"
+  },
+  "rzhavchik": {
+    "sheet": "dog_rzhavchik",
+    "portrait": "portrait_npc_rzhavchik"
+  },
+  "salt_debtor": {
+    "sheet": "saltfolk",
+    "portrait": "portrait_npc_salt_debtor"
+  },
+  "salt_folk": {
+    "sheet": "nomad",
+    "portrait": "portrait_npc_salt_folk"
+  },
+  "salt_porter": {
+    "sheet": "saltfolk",
+    "portrait": "portrait_npc_salt_porter"
+  },
+  "salt_shop": {
+    "sheet": "nyura",
+    "portrait": "portrait_npc_salt_shop"
+  },
+  "sealwax_agent": {
+    "sheet": "sealwax_agent",
+    "portrait": "portrait_npc_sealwax_agent"
+  },
+  "senka": {
+    "sheet": "senka",
+    "portrait": "portrait_npc_senka"
+  },
+  "shore_soldier": {
+    "sheet": "shore_soldier",
+    "portrait": "portrait_npc_shore_soldier"
+  },
+  "sol": {
+    "sheet": "sol",
+    "portrait": "portrait_npc_sol"
+  },
+  "steward": {
+    "sheet": "kulik",
+    "portrait": "portrait_npc_steward"
+  },
+  "street_cat": {
+    "sheet": "cat_town",
+    "portrait": "portrait_npc_street_cat"
+  },
+  "street_dog": {
+    "sheet": "dog_town",
+    "portrait": "portrait_npc_street_dog"
+  },
+  "suhar": {
+    "sheet": "suhar",
+    "portrait": "portrait_npc_suhar"
+  },
+  "svinec_farmer": {
+    "sheet": "farmer",
+    "portrait": "portrait_npc_svinec_farmer"
+  },
+  "thirst_guard": {
+    "sheet": "raider",
+    "portrait": "portrait_npc_thirst_guard"
+  },
+  "tikhon": {
+    "sheet": "tikhon",
+    "portrait": "portrait_npc_tikhon"
+  },
+  "trial_knight": {
+    "sheet": "dew_knight",
+    "portrait": "portrait_npc_trial_knight"
+  },
+  "trust_soldier": {
+    "sheet": "zap_guard",
+    "portrait": "portrait_npc_trust_soldier"
+  },
+  "ukho": {
+    "sheet": "raider",
+    "portrait": "portrait_npc_ukho"
+  },
+  "upper_gate": {
+    "sheet": "zap_guard",
+    "portrait": "portrait_npc_upper_gate"
+  },
+  "vedro_broken": {
+    "sheet": "vedro",
+    "portrait": "portrait_npc_vedro"
+  },
+  "vyun": {
+    "sheet": "molchun",
+    "portrait": "portrait_npc_vyun"
+  },
+  "warden": {
+    "sheet": "sych_warden",
+    "portrait": "portrait_npc_warden"
+  },
+  "weigher": {
+    "sheet": "weigher",
+    "portrait": "portrait_npc_weigher"
+  },
+  "zap_folk": {
+    "sheet": "debtor",
+    "portrait": "portrait_npc_zap_folk"
+  },
+  "zap_gate": {
+    "sheet": "collector",
+    "portrait": "portrait_npc_zap_gate"
+  },
+  "zap_guard": {
+    "sheet": "zap_guard",
+    "portrait": "portrait_npc_zap_guard"
+  },
+  "zhila": {
+    "sheet": "zhila",
+    "portrait": "portrait_npc_zhila"
+  },
+  "zoya": {
+    "sheet": "zoya",
+    "portrait": "portrait_npc_zoya"
+  }
+}

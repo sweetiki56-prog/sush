@@ -15,6 +15,8 @@ import lowland from './dialogues/lowland.json';
 import secrets from './dialogues/secrets.json';
 import pets from './dialogues/pets.json';
 import rocket from './dialogues/rocket.json';
+import npcPortraits from './npcPortraits.json';
+import roadPortraits from './roadPortraits.json';
 import companions from './companions.json';
 import character from './character.json';
 import weapons from './weapons.json';
@@ -29,7 +31,7 @@ import locations from './locations.json';
 import travel from './travel.json';
 import endings from './endings.json';
 import { boardDialogue } from '../core/jobs';
-import type { Content, JobDef } from '../core/types';
+import type { Content, Dialogue, JobDef } from '../core/types';
 
 /** Every map the game may show: locations, the arena (encounter maps join later). */
 export const MAP_IDS = [
@@ -43,11 +45,19 @@ export const MAP_IDS = [
 // every town's board is a dialogue built from its contracts
 const BOARDS = { board: 'rusty_well', board_pillars: 'three_pillars' };
 const boards = Object.fromEntries(Object.entries(BOARDS).map(([id, town]) => [id, boardDialogue(jobs as Record<string, JobDef>, town)]));
+const dialogues = { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...upper, ...bones, ...dam, ...lowland, ...secrets, ...pets, ...rocket, ...boards } as Record<string, Dialogue>;
+for (const [id, binding] of Object.entries(npcPortraits)) {
+  if (dialogues[id]) dialogues[id] = { ...dialogues[id], portrait: binding.portrait };
+}
+const travelWithPortraits = {
+  ...travel,
+  parties: Object.fromEntries(Object.entries(travel.parties).map(([id, party]) => [id, { ...party, portrait: roadPortraits[id as keyof typeof roadPortraits]?.portrait }])),
+};
 
 export const CONTENT = {
   items,
   quests,
-  dialogues: { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda, ...salt, ...crystal, ...skit, ...upper, ...bones, ...dam, ...lowland, ...secrets, ...pets, ...rocket, ...boards },
+  dialogues,
   character,
   weapons,
   creatures,
@@ -57,7 +67,7 @@ export const CONTENT = {
   traders,
   jobs,
   locations,
-  travel,
+  travel: travelWithPortraits,
   endings,
   arena,
   companions,

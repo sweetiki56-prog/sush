@@ -22,6 +22,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image('ground', base + 'ground.png');
     this.load.image('ground_arena', base + 'ground_arena.png');
     this.load.atlas('atlas', base + 'atlas.png', base + 'atlas.json');
+    this.load.atlas('npc_portraits', base + 'npc-portraits.png', base + 'npc-portraits.json');
     for (const id of MAP_IDS) this.load.json(`map_${id}`, `assets/maps/${id}.json`);
     this.load.json('world_low', 'assets/maps/world_low.json');
     // the plans of towns of several areas (the town screen)

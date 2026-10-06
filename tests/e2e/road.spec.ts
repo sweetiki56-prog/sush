@@ -40,6 +40,16 @@ test('leave town, pay off one gang, fight the next on a battlefield, go on', asy
   await meetGang(page, ['raider', 'raider']);
   const d = (await W<Talk>(page, 'dialogue'))!;
   expect(d.text).toMatch(/Капли или жизнь/);
+  const hasRaiderAvatar = await page.evaluate(() => {
+    const scene = (window as unknown as { __phaser: { scene: { getScene(id: string): { children: { list: unknown[] } } } } }).__phaser.scene.getScene('UI');
+    const containsPortrait = (value: unknown): boolean => {
+      if (!value || typeof value !== 'object') return false;
+      const object = value as { frame?: { name?: string }; list?: unknown[] };
+      return object.frame?.name === 'portrait_raider' || !!object.list?.some(containsPortrait);
+    };
+    return scene.children.list.some(containsPortrait);
+  });
+  expect(hasRaiderAvatar).toBe(true);
   await page.screenshot({ path: 'test-results/e2e-road-02-meeting.png' });
   await answer(page, 'Держите');
   await answer(page, '…');

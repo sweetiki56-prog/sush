@@ -24,7 +24,8 @@ for (const file of readdirSync(ROOT).filter((name) => name.endsWith('.json')).so
 // occur in more than one file, and only the last one is live in the game.
 const index = readFileSync(`${ROOT}/index.ts`, 'utf8');
 const imports = Object.fromEntries([...index.matchAll(/import (\w+) from '\.\/dialogues\/([^']+\.json)';/g)].map(([, name, file]) => [name, file]));
-const spread = index.match(/dialogues:\s*\{([^}]+)\}/)?.[1] ?? '';
+const spread = index.match(/const dialogues =\s*\{([^}]+)\}/)?.[1]
+  ?? index.match(/dialogues:\s*\{([^}]+)\}/)?.[1] ?? '';
 const dialogues = {};
 for (const [, name] of spread.matchAll(/\.\.\.(\w+)/g)) {
   const file = imports[name];

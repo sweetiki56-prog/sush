@@ -168,7 +168,7 @@ export function meetingDialogue(c: MeetingContext): Dialogue {
     };
   }
   nodes.intro = intro;
-  return { speaker: p.name, entry: [{ node: 'intro' }], nodes };
+  return { speaker: p.name, portrait: p.portrait, entry: [{ node: 'intro' }], nodes };
 }
 
 /** A fight already going on: bandits on someone. Help the ones they set upon, help the bandits, or keep out of it. */

@@ -32,6 +32,7 @@ import { roofArt } from './art/roofs.mjs';
 import { townPlan } from './art/townplan.mjs';
 import { P } from './art/palette.mjs';
 import { vehicleRaster } from './art/vehicle-raster.mjs';
+import { generateNpcPortraitAtlas } from './gen-npc-portraits.mjs';
 
 const OUT = 'public/assets/gen';
 mkdirSync(OUT, { recursive: true });
@@ -291,8 +292,9 @@ for (const [id, cfg] of Object.entries(CREATURES)) {
 const atlas = packAtlas(entries, 'atlas.png');
 save('atlas.png', atlas.cv);
 writeFileSync(`${OUT}/atlas.json`, JSON.stringify(atlas.json));
+const npcPortraitCount = generateNpcPortraitAtlas();
 writeFileSync(
   `${OUT}/meta.json`,
   JSON.stringify({ groundOffsetX: grounds.rusty_well.offX, groundOffsetY: grounds.rusty_well.offY, grounds, sheets }),
 );
-console.log(`texture pack: ${entries.length} atlas frames, ${Object.keys(sheets).length} sheets, ${Date.now() - t0} ms`);
+console.log(`texture pack: ${entries.length} atlas frames, ${npcPortraitCount} NPC portraits, ${Object.keys(sheets).length} sheets, ${Date.now() - t0} ms`);

@@ -1,0 +1,78 @@
+{
+  "band": {
+    "sheet": "raider",
+    "portrait": "portrait_raider"
+  },
+  "behemoth": {
+    "sheet": "scorpion_behemoth",
+    "portrait": "portrait_npc_road_behemoth"
+  },
+  "caravan": {
+    "sheet": "birjuk",
+    "portrait": "portrait_birjuk"
+  },
+  "condors": {
+    "sheet": "condor",
+    "portrait": "portrait_npc_road_condors"
+  },
+  "defector": {
+    "sheet": "ratmir",
+    "portrait": "portrait_ratmir"
+  },
+  "dry_herd": {
+    "sheet": "dryman",
+    "portrait": "portrait_dryman"
+  },
+  "dry_stone": {
+    "sheet": "suhar",
+    "portrait": "portrait_suhar"
+  },
+  "erema": {
+    "sheet": "waterbearer",
+    "portrait": "portrait_waterbearer"
+  },
+  "gang": {
+    "sheet": "raider",
+    "portrait": "portrait_raider"
+  },
+  "guild_caravan": {
+    "sheet": "birjuk",
+    "portrait": "portrait_birjuk"
+  },
+  "jackal_pack": {
+    "sheet": "jackal_leader",
+    "portrait": "portrait_npc_road_jackal_pack"
+  },
+  "jackals": {
+    "sheet": "jackal",
+    "portrait": "portrait_npc_road_jackals"
+  },
+  "pilgrims": {
+    "sheet": "pilgrim",
+    "portrait": "portrait_pilgrim"
+  },
+  "salt_spiders": {
+    "sheet": "salt_spider",
+    "portrait": "portrait_npc_road_salt_spiders"
+  },
+  "scavengers": {
+    "sheet": "scavenger",
+    "portrait": "portrait_scavenger"
+  },
+  "shore_drones": {
+    "sheet": "drone",
+    "portrait": "portrait_npc_road_shore_drones"
+  },
+  "trust_hunters": {
+    "sheet": "trust_hunter",
+    "portrait": "portrait_trust_hunter"
+  },
+  "trust_patrol": {
+    "sheet": "collector",
+    "portrait": "portrait_collector"
+  },
+  "waterbearers": {
+    "sheet": "waterbearer",
+    "portrait": "portrait_waterbearer"
+  }
+}
