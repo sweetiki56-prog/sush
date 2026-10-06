@@ -11,6 +11,7 @@ export interface ShownOption {
 
 export class DialogueRunner {
   nodeId: string | null;
+  readonly npcId?: string;
   /** The answers as first shown for this node: the player picks by their number, even if the bag changes meanwhile. */
   private shown: ShownOption[] | null = null;
 
@@ -18,7 +19,9 @@ export class DialogueRunner {
     private game: Game,
     readonly dialogue: Dialogue,
     readonly id: string,
+    npcId?: string,
   ) {
+    this.npcId = npcId ?? dialogue.npcId;
     const entry = dialogue.entry.find((e) => game.testAll(e.if));
     if (!entry) throw new Error(`dialogue ${id}: no entry matches`);
     this.nodeId = null;
@@ -54,7 +57,7 @@ export class DialogueRunner {
     this.nodeId = id;
     this.game.apply(node.effects);
     const ref = this.game.content.dialogues[this.id] === this.dialogue ? { dialogue: this.id, node: id } : undefined;
-    this.game.recordDialogue(this.dialogue.speaker, 'npc', this.text, ref);
+    this.game.recordDialogue(this.dialogue.speaker, 'npc', this.text, ref, this.npcId, this.dialogue.portrait);
   }
 
   options(): ShownOption[] {
@@ -87,7 +90,7 @@ export class DialogueRunner {
     }
     const ref = this.game.content.dialogues[this.id] === this.dialogue && this.nodeId
       ? { dialogue: this.id, node: this.nodeId, option: shown.index } : undefined;
-    this.game.recordDialogue(this.dialogue.speaker, 'hero', this.fill(option.text), ref);
+    this.game.recordDialogue(this.dialogue.speaker, 'hero', this.fill(option.text), ref, this.npcId, this.dialogue.portrait);
     this.game.apply(option.effects);
     if (option.check) {
       const c = option.check;

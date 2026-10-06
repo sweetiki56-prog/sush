@@ -4625,6 +4625,7 @@
   },
   {
    "id": "bugai_clean",
+   "npcId": "bugai",
    "sheet": "bugai",
    "x": 11,
    "y": 26,
@@ -4682,7 +4683,7 @@
    "y": 14,
    "dir": 4,
    "label": "Ржавчик",
-   "dialogue": "mityay",
+   "dialogue": "rzhavchik_home",
    "if": [
     {
      "flag": "rzhavchik",

@@ -58,6 +58,7 @@ export function meet(room: MissionRoom, ps: Parties, p: PartyState): void {
     trustEnemy: hero.trustEnemy,
     hire: hireTerms(room, ps, p) ?? undefined,
   });
+  if (!written && d.portrait) d.npcId = `road_${p.id}`; // each generated leader is a distinct person
   room.talkOnRoad(host, `road_${p.id}`, d);
   room.sendTravel(true);
 }

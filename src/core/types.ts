@@ -97,6 +97,8 @@ export interface DialogueNode {
 
 export interface Dialogue {
   speaker: string;
+  /** Stable identity of the person, independent of the talk graph or translated display name. */
+  npcId?: string;
   portrait?: string;
   entry: { if?: Condition[]; node: string }[];
   nodes: Record<string, DialogueNode>;
@@ -201,6 +203,8 @@ export interface ItemDef {
 
 export interface QuestDef {
   title: string;
+  /** The actual initiator, when this quest has one; environmental quests stay anonymous. */
+  giverNpcId?: string;
   /** alt: journal text that replaces the stage's own when its conditions hold (the first match wins). */
   stages: { id: string; journal: string; xp?: number; alt?: { if: Condition[]; journal: string }[] }[];
 }
@@ -259,8 +263,8 @@ export interface GameStateData {
   player: { x: number; y: number; dir: number };
   stats: { playMs: number; checksPassed: number; checksFailed: number; kills: number };
   log: string[];
-  /** Actual conversations, grouped by speaker. Older v2 saves start recording on their next talk. */
-  dialogueHistory?: { speaker: string; lines: { role: 'npc' | 'hero'; text: string; ref?: { dialogue: string; node: string; option?: number } }[] }[];
+  /** Actual conversations, grouped by stable NPC ID when known. Legacy entries only have speaker. */
+  dialogueHistory?: { speaker: string; npcId?: string; portrait?: string; lines: { role: 'npc' | 'hero'; text: string; ref?: { dialogue: string; node: string; option?: number } }[] }[];
   /** Milestone XP already paid to this character. Missing in old v2 saves. */
   xpAwards?: Record<string, true>;
   /** Where the party is on the world map: shared world state like flags. Missing until the first trip. */

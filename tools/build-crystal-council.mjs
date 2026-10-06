@@ -24,7 +24,7 @@ const actors = [
   { id: 'player', sheet: 'hero_0', x: 17, y: 29, dir: 1 },
   { id: 'kvarts', sheet: 'kvarts', x: 17, y: 9, dir: 1, label: 'Старший Кварц', dialogue: 'quartz' },
   ...[['councilor_a', 13, 11], ['councilor_b', 22, 11], ['councilor_c', 11, 17]].map(([id, x, y]) => ({ id, sheet: 'councilor', x, y, dir: 2, label: 'Советник пластов', dialogue: 'councilor' })),
-  { id: 'gorech_council', sheet: 'gorech', x: 24, y: 17, dir: 5, label: 'Горечь', dialogue: 'gorech', if: [{ flag: 'bitter_blood', eq: 'reconciled' }] },
+  { id: 'gorech_council', npcId: 'gorech', sheet: 'gorech', x: 24, y: 17, dir: 5, label: 'Горечь', dialogue: 'gorech', if: [{ flag: 'bitter_blood', eq: 'reconciled' }] },
 ];
 
 k.write('crystal_council', 'Совет пластов', {

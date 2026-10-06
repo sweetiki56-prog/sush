@@ -56,17 +56,33 @@ export class JournalWindow extends Window {
       box.content.add(o);
       yy += o.height + gap;
     };
+    const portraitOf = (npcId: string | undefined): string | undefined => {
+      if (!npcId) return undefined;
+      return g.content.dialogues[npcId]?.portrait
+        ?? Object.values(g.content.dialogues).find((dialogue) => dialogue.npcId === npcId)?.portrait;
+    };
+    const legacyPortrait = (speaker: string): string | undefined => {
+      const frames = new Set(Object.values(g.content.dialogues).filter((dialogue) => dialogue.speaker === speaker && dialogue.portrait).map((dialogue) => dialogue.portrait!));
+      return frames.size === 1 ? [...frames][0] : undefined;
+    };
+    const avatar = (frame: string, px: number, py: number, size: number) => {
+      const atlas = frame.startsWith('portrait_npc_') ? 'npc_portraits' : 'atlas';
+      if (s.textures.get(atlas).has(frame)) box.content.add(s.add.image(px, py, atlas, frame).setOrigin(0).setDisplaySize(size, size));
+    };
     if (this.tab === 'dialogues') {
       for (const entry of g.state.dialogueHistory ?? []) {
         const name = historySpeakerForDisplay(entry, g, locale);
-        const open = this.expanded === entry.speaker;
+        const key = entry.npcId ?? `legacy:${entry.speaker}`;
+        const open = this.expanded === key;
         const row = hitRow(s, x + 32, yy, 620, 44, () => {}, () => {
           const currentOffset = this.box?.scroll ?? 0;
-          this.expanded = open ? null : entry.speaker;
+          this.expanded = open ? null : key;
           this.renderPane(currentOffset);
         });
         box.content.add(row);
-        box.content.add(txt(s, x + 42, yy + 11, `${open ? '▼' : '▶'}  ${name}`, 15, C.amber, 590, true));
+        const portrait = entry.portrait ?? portraitOf(entry.npcId) ?? legacyPortrait(entry.speaker);
+        if (portrait) avatar(portrait, x + 60, yy + 4, 36);
+        box.content.add(txt(s, portrait ? x + 104 : x + 42, yy + 11, `${open ? '▼' : '▶'}  ${name}`, 15, C.amber, portrait ? 530 : 590, true));
         yy += 48;
         if (open) {
           for (const line of entry.lines) {
@@ -88,7 +104,12 @@ export class JournalWindow extends Window {
       .map((e) => ({ ...e, closed: e.lines.length === e.q.stages.length }));
     for (const { id, q, lines, closed } of [...quests.filter((e) => !e.closed), ...quests.filter((e) => e.closed)]) {
       const questTitle = contentText(`/quests/${id}/title`, q.title, locale);
-      add(txt(s, x + 36, yy, `${questTitle.toUpperCase()}${closed ? '  ✓' : ''}`, 15, closed ? C.crtDim : C.amber, 620, true), 10);
+      const portrait = portraitOf(q.giverNpcId);
+      if (portrait) {
+        avatar(portrait, x + 36, yy, 36);
+        box.content.add(txt(s, x + 82, yy + 9, `${questTitle.toUpperCase()}${closed ? '  ✓' : ''}`, 15, closed ? C.crtDim : C.amber, 566, true));
+        yy += 46;
+      } else add(txt(s, x + 36, yy, `${questTitle.toUpperCase()}${closed ? '  ✓' : ''}`, 15, closed ? C.crtDim : C.amber, 620, true), 10);
       for (const [index, l] of lines.entries()) {
         const line = journalLineForDisplay(g, id, index, l.text, locale);
         add(txt(s, x + 48, yy, `${l.done ? '✓' : '◆'} ${line}`, 13, l.done ? C.crtDim : C.crtBright, 600), 8);

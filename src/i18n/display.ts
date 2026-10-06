@@ -193,9 +193,10 @@ export function historyLineForDisplay(
 }
 
 export function historySpeakerForDisplay(
-  entry: { speaker: string; lines: { role: 'npc' | 'hero'; text: string; ref?: { dialogue: string } }[] }, game: Game, locale: Locale,
+  entry: { speaker: string; npcId?: string; lines: { role: 'npc' | 'hero'; text: string; ref?: { dialogue: string } }[] }, game: Game, locale: Locale,
 ): string {
-  const id = entry.lines.find((line) => line.ref)?.ref?.dialogue;
+  const id = entry.lines.find((line) => line.ref && game.content.dialogues[line.ref.dialogue]?.speaker === entry.speaker)?.ref?.dialogue
+    ?? (entry.npcId && game.content.dialogues[entry.npcId]?.speaker === entry.speaker ? entry.npcId : undefined);
   const source = id && game.content.dialogues[id]?.speaker;
   if (source === entry.speaker) return contentText(`/dialogues/${id}/speaker`, source, locale);
   return locale === 'en' ? legacySpeakerNames.get(entry.speaker) || entry.speaker : entry.speaker;

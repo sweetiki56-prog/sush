@@ -39,7 +39,7 @@ const actors = [
   { id: 'pit_3a', sheet: 'pit_3', x: 13, y: 14, dir: 6, label: 'Жмых-старший', dialogue: 'pit_fighter', creature: 'pit_3', group: 'bout', ring: 'arms', peace: BOUT, if: [{ flag: 'arena_2' }, { notFlag: 'arena_3' }] },
   { id: 'pit_3b', sheet: 'pit_3', x: 15, y: 16, dir: 6, label: 'Жмых-младший', dialogue: 'pit_fighter', creature: 'pit_3', group: 'bout', ring: 'arms', peace: BOUT, if: [{ flag: 'arena_2' }, { notFlag: 'arena_3' }] },
   // Молчун: in his cage till the ladder is climbed, in the pit after; a blood bout is another fight altogether
-  { id: 'molchun_cage', sheet: 'molchun', x: 29, y: 17, dir: 6, label: 'Молчун', dialogue: 'molchun', if: [{ notFlag: 'arena_3' }, { notFlag: 'last_bout' }] },
+  { id: 'molchun_cage', npcId: 'molchun', sheet: 'molchun', x: 29, y: 17, dir: 6, label: 'Молчун', dialogue: 'molchun', if: [{ notFlag: 'arena_3' }, { notFlag: 'last_bout' }] },
   { id: 'molchun', sheet: 'molchun', x: PIT[0], y: PIT[1], dir: 6, label: 'Молчун', dialogue: 'molchun', creature: 'molchun', group: 'bout', ring: 'arms', peace: BOUT, if: [{ flag: 'arena_3' }, { notFlag: 'last_bout' }, { notFlag: 'death_bout' }] },
   { id: 'molchun_blood', sheet: 'molchun', x: PIT[0], y: PIT[1], dir: 6, label: 'Молчун', dialogue: 'molchun_blood', creature: 'molchun_blood', group: 'blood', peace: [{ notFlag: 'death_fight' }], if: [{ flag: 'death_bout' }, { notFlag: 'last_bout' }] },
   { id: 'vyun', sheet: 'molchun', x: 22, y: 9, dir: 5, label: 'Вьюн', dialogue: 'vyun', if: [{ flag: 'vyun_free' }] },

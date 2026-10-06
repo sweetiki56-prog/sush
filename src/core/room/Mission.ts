@@ -27,6 +27,7 @@ import { afterBattle, endBattle, takeLoot } from './RoadBattle';
 import { isRocketMap, releaseRocketGear, seizeRocketGear } from './RocketEscrow';
 import type { ActorSnap, EquipSlot, HostileSnap, Intent, ServerMsg } from './protocol';
 import { Room, SNEAK_SPEED, type Link, type Player, type RoomOptions } from './Room';
+import { npcIdentityForActor } from './NpcIdentity';
 
 const JOIN_RANGE = 10;
 const BARREL_RANGE = 12;
@@ -646,7 +647,10 @@ export class MissionRoom extends Room {
       return p.game.log(`${t.label}: сейчас занят разговором с ${who}.`);
     }
     this.talking.set(t.id, p.id);
-    p.talk = { runner: new DialogueRunner(p.game, d, t.dialogue), target: t.id };
+    const actor = t.npc ? this.map.actors.find((candidate) => candidate.id === t.id) : undefined;
+    const maps = this.opts.maps ? Object.values(this.opts.maps) : [this.map];
+    const npcId = actor ? npcIdentityForActor(actor, this.map.id ?? 'rusty_well', maps, d.npcId) : d.npcId;
+    p.talk = { runner: new DialogueRunner(p.game, d, t.dialogue, npcId), target: t.id };
     this.sendDialogue(p);
   }
 
@@ -657,7 +661,7 @@ export class MissionRoom extends Room {
     const d = r.dialogue;
     const options = r.options();
     this.send(p, {
-      t: 'dialogue', id: r.id, speaker: d.speaker, portrait: d.portrait, text: r.text,
+      t: 'dialogue', id: r.id, speaker: d.speaker, npcId: r.npcId, portrait: d.portrait, text: r.text,
       options: options.map((o) => o.label), nodeId: r.nodeId ?? undefined,
       optionIndices: options.map((o) => o.index),
       checks: options.map(({ option }) => option.check ? {

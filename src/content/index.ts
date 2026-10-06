@@ -16,6 +16,8 @@ import secrets from './dialogues/secrets.json';
 import pets from './dialogues/pets.json';
 import rocket from './dialogues/rocket.json';
 import npcPortraits from './npcPortraits.json';
+import npcIdentity from './npcIdentity.json';
+import questGivers from './questGivers.json';
 import roadPortraits from './roadPortraits.json';
 import companions from './companions.json';
 import character from './character.json';
@@ -49,6 +51,22 @@ const dialogues = { ...rustyWell, ...pillars, ...kolyuchka, ...barge, ...zapruda
 for (const [id, binding] of Object.entries(npcPortraits)) {
   if (dialogues[id]) dialogues[id] = { ...dialogues[id], portrait: binding.portrait };
 }
+// A dialogue is not an identity: the same person can have several talks in different chapters.
+// Only illustrated speakers receive an NPC ID; terminals and props never masquerade as people.
+for (const [id, dialogue] of Object.entries(dialogues)) {
+  if (!dialogue.portrait) continue;
+  const npcId = npcIdentity[id as keyof typeof npcIdentity] ?? id;
+  dialogues[id] = { ...dialogue, npcId };
+}
+for (const dialogue of Object.values(dialogues)) {
+  if (!dialogue.npcId) continue;
+  const canonical = dialogues[dialogue.npcId];
+  if (canonical?.portrait) dialogue.portrait = canonical.portrait;
+}
+const questsWithGivers = Object.fromEntries(Object.entries(quests).map(([id, quest]) => [id, {
+  ...quest,
+  ...((questGivers as Record<string, string>)[id] ? { giverNpcId: (questGivers as Record<string, string>)[id] } : {}),
+}]));
 const travelWithPortraits = {
   ...travel,
   parties: Object.fromEntries(Object.entries(travel.parties).map(([id, party]) => [id, { ...party, portrait: roadPortraits[id as keyof typeof roadPortraits]?.portrait }])),
@@ -56,7 +74,7 @@ const travelWithPortraits = {
 
 export const CONTENT = {
   items,
-  quests,
+  quests: questsWithGivers,
   dialogues,
   character,
   weapons,

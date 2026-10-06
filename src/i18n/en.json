@@ -22346,5 +22346,29 @@
   "/dialogues/widow_well/nodes/look/options/0/text": {
     "ru": "Отойти.",
     "en": "Move away."
+  },
+  "/dialogues/rzhavchik_home/speaker": {
+    "ru": "Ржавчик",
+    "en": "Rzhavchik"
+  },
+  "/dialogues/rzhavchik_home/nodes/home/text": {
+    "ru": "Ржавчик подбегает от прилавка Митяя и узнаёт тебя по запаху. Хвост выбивает пыль из земли.",
+    "en": "Rzhavchik bounds over from Mityay's stall and knows you by scent. His tail drums the dust from the ground."
+  },
+  "/dialogues/rzhavchik_home/nodes/home/options/0/text": {
+    "ru": "Почесать за ухом.",
+    "en": "Scratch behind his ear."
+  },
+  "/dialogues/rzhavchik_home/nodes/home/options/1/text": {
+    "ru": "Отойти.",
+    "en": "Move away."
+  },
+  "/dialogues/rzhavchik_home/nodes/pet/text": {
+    "ru": "Пёс жмурится и прижимается к ладони, потом возвращается к Митяю.",
+    "en": "The dog closes his eyes and leans into your hand, then trots back to Mityay."
+  },
+  "/dialogues/rzhavchik_home/nodes/pet/options/0/text": {
+    "ru": "Отойти.",
+    "en": "Move away."
   }
 }

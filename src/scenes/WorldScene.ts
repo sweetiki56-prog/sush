@@ -16,6 +16,7 @@ import { Ambience } from '../world/Ambience';
 import { Cast } from '../world/Cast';
 import { FightView } from '../world/CombatView';
 import { WorldMap } from '../world/MapBuilder';
+import { HostileOutlines } from '../world/HostileOutlines';
 import { HARD_GROUND, type GenMeta, type MapData } from '../world/MapData';
 import { Pointer } from '../world/Pointer';
 import { blast } from '../world/Fx';
@@ -34,6 +35,7 @@ export class WorldScene extends Phaser.Scene {
   pointer!: Pointer;
   net!: NetClient;
   private ambience!: Ambience;
+  private hostileOutlines!: HostileOutlines;
   private zoomIdx = Math.max(0, ZOOMS.indexOf(settings().zoom));
   private campfire: Tile = { x: 0, y: 0 };
   private unsub: (() => void)[] = [];
@@ -67,6 +69,7 @@ export class WorldScene extends Phaser.Scene {
     }
     this.map = new WorldMap(this, mapData, meta);
     this.cast = new Cast(this, meta);
+    this.hostileOutlines = new HostileOutlines(this, this.map, this.cast);
     this.ready = true;
     this.fight = new FightView(this, this.net);
     this.pointer = new Pointer(this);
@@ -125,6 +128,7 @@ export class WorldScene extends Phaser.Scene {
       music.play(this.calm());
     });
     this.events.once('shutdown', () => {
+      this.hostileOutlines.destroy();
       this.unsub.forEach((u) => u());
       this.unsub = [];
     });
@@ -180,6 +184,7 @@ export class WorldScene extends Phaser.Scene {
     this.net.tick(ms);
     if (!this.ready) return;
     this.cast.update(ms / 1000);
+    this.hostileOutlines.update((id) => !!this.fight.combat?.unit(id));
     this.ambience.update(dtMs);
     const me = this.player;
     if (!me) return;

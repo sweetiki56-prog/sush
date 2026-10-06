@@ -62,12 +62,12 @@ const actors = [
   { id: 'gvozd', sheet: 'gvozd', x: 13, y: 28, dir: 7, label: 'Гвоздь', dialogue: 'gvozd', if: [{ notFlag: 'gvozd_out' }] },
   // the boxer: drugged with «Мираж» until someone stops it; a bout is a fight on the ring (ring_fight)
   { id: 'bugai', sheet: 'bugai', x: 11, y: 26, dir: 3, label: 'Бугай', dialogue: 'bugai', creature: 'boxer_mirage', group: 'ring', ring: true, if: [{ notFlag: 'bugai_clean' }, { notFlag: 'bugai_dead' }], peace: [{ notFlag: 'ring_fight' }] },
-  { id: 'bugai_clean', sheet: 'bugai', x: 11, y: 26, dir: 3, label: 'Бугай', dialogue: 'bugai', creature: 'boxer', group: 'ring', ring: true, if: [{ flag: 'bugai_clean' }, { notFlag: 'bugai_dead' }], peace: [{ notFlag: 'ring_fight' }] },
+  { id: 'bugai_clean', npcId: 'bugai', sheet: 'bugai', x: 11, y: 26, dir: 3, label: 'Бугай', dialogue: 'bugai', creature: 'boxer', group: 'ring', ring: true, if: [{ flag: 'bugai_clean' }, { notFlag: 'bugai_dead' }], peace: [{ notFlag: 'ring_fight' }] },
   { id: 'remen', sheet: 'remen', x: 7, y: 11, dir: 3, label: 'Оружейник Ремень', dialogue: 'remen' },
   { id: 'nyura', sheet: 'nyura', x: 13, y: 11, dir: 3, label: 'Нюра', dialogue: 'nyura' },
   // her boy, and his father's dog once someone brings it home («Пёс сборщика»)
   { id: 'mityay', sheet: 'mityay', x: 14, y: 13, dir: 3, label: 'Митяй', dialogue: 'mityay' },
-  { id: 'rzhavchik_home', sheet: 'dog_rzhavchik', x: 14, y: 14, dir: 4, label: 'Ржавчик', dialogue: 'mityay', if: [{ flag: 'rzhavchik', eq: 'home' }] },
+  { id: 'rzhavchik_home', sheet: 'dog_rzhavchik', x: 14, y: 14, dir: 4, label: 'Ржавчик', dialogue: 'rzhavchik_home', if: [{ flag: 'rzhavchik', eq: 'home' }] },
   { id: 'town_cat', sheet: 'cat_town', x: 6, y: 20, dir: 2, label: 'Кошка у трактира', dialogue: 'street_cat' },
   { id: 'town_dog', sheet: 'dog_town', x: 16, y: 18, dir: 5, label: 'Дворовый пёс', dialogue: 'street_dog' },
   // the Trust post: the sergeant and a collector; hostile if the Trust hunts the hero and it comes to a fight

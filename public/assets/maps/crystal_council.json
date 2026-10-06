@@ -3170,6 +3170,7 @@
   },
   {
    "id": "gorech_council",
+   "npcId": "gorech",
    "sheet": "gorech",
    "x": 24,
    "y": 17,

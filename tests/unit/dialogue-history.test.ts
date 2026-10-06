@@ -55,6 +55,24 @@ describe('dialogue journal', () => {
     new DialogueRunner(oldSave, dialogue, 'traveler');
     expect(oldSave.state.dialogueHistory?.[0].lines).toEqual([{ role: 'npc', text: 'Привет, Странник.' }]);
   });
+
+  it('groups a returning person by ID but keeps two generic speakers separate', () => {
+    const game = new Game(CONTENT);
+    game.recordDialogue('Писарь', 'npc', 'Первая встреча.', { dialogue: 'pisar', node: 'intro' }, 'pisar');
+    game.recordDialogue('Писарь', 'npc', 'В убежище.', { dialogue: 'pisar_hideout', node: 'intro' }, 'pisar');
+    game.recordDialogue('Сборщик Треста', 'npc', 'На посту.', undefined, 'collector_post');
+    game.recordDialogue('Сборщик Треста', 'npc', 'В другом месте.', undefined, 'collector');
+    expect(game.state.dialogueHistory).toHaveLength(3);
+    expect(game.state.dialogueHistory?.[0].lines).toHaveLength(2);
+  });
+
+  it('upgrades an unambiguous legacy history entry without losing or repeating its lines', () => {
+    const game = new Game(CONTENT);
+    game.state.dialogueHistory = [{ speaker: 'Старейшина Марта', lines: [{ role: 'npc', text: 'У колодца.' }] }];
+    game.recordDialogue('Старейшина Марта', 'npc', 'У колодца.', undefined, 'marta');
+    expect(game.state.dialogueHistory).toHaveLength(1);
+    expect(game.state.dialogueHistory?.[0]).toMatchObject({ npcId: 'marta', lines: [{ text: 'У колодца.' }] });
+  });
 });
 
 describe('route to Соль', () => {

@@ -18,6 +18,7 @@ export interface MapObject {
 
 export interface MapActor {
   id: string;
+  npcId?: string; // stable person when several actor IDs are versions of the same NPC
   sheet: string;
   x: number;
   y: number;

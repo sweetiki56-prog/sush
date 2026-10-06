@@ -394,20 +394,38 @@ export class Game {
   }
 
   /** Keep only lines the player actually saw or chose, once per speaker. */
-  recordDialogue(speaker: string, role: 'npc' | 'hero', text: string, ref?: { dialogue: string; node: string; option?: number }): void {
+  recordDialogue(speaker: string, role: 'npc' | 'hero', text: string, ref?: { dialogue: string; node: string; option?: number }, npcId?: string, portrait?: string): void {
     const history = (this.state.dialogueHistory ??= []);
-    let entry = history.find((e) => e.speaker === speaker);
+    let metadataChanged = false;
+    let entry = npcId ? history.find((e) => e.npcId === npcId) : history.find((e) => !e.npcId && e.speaker === speaker);
+    if (!entry && npcId) {
+      // Old v2 entries did not have IDs. Claim one only when the speaker is unambiguous,
+      // or every saved reference belongs to this same person.
+      const identities = new Set(Object.values(this.content.dialogues).filter((d) => d.speaker === speaker && d.npcId).map((d) => d.npcId));
+      entry = history.find((e) => !e.npcId && e.speaker === speaker && (
+        identities.size === 1 || (e.lines.length > 0 && e.lines.every((line) => line.ref && this.content.dialogues[line.ref.dialogue]?.npcId === npcId))
+      ));
+      if (entry) {
+        entry.npcId = npcId;
+        metadataChanged = true;
+      }
+    }
     if (!entry) {
-      entry = { speaker, lines: [] };
+      entry = { speaker, ...(npcId ? { npcId } : {}), ...(portrait ? { portrait } : {}), lines: [] };
       history.push(entry);
+    }
+    if (portrait && entry.portrait !== portrait) {
+      entry.portrait = portrait;
+      metadataChanged = true;
     }
     const existing = entry.lines.find((line) => line.role === role && line.text === text);
     if (existing) {
       // A repeated line from an old v2 save can gain its stable reference without duplication.
       if (ref && !existing.ref) {
         existing.ref = ref;
-        this.events.emit('dialogueHistory');
+        metadataChanged = true;
       }
+      if (metadataChanged) this.events.emit('dialogueHistory');
       return;
     }
     entry.lines.push(ref ? { role, text, ref } : { role, text });

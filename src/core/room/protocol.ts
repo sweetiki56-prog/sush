@@ -113,6 +113,7 @@ export interface PlayerInfo {
 export interface DialogueMsg {
   id: string;
   speaker: string;
+  npcId?: string;
   portrait?: string;
   text: string;
   options: string[];

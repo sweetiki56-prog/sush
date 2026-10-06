@@ -6,6 +6,7 @@ import { CONTENT } from '../../src/content';
 import bindings from '../../src/content/npcPortraits.json';
 import roadBindings from '../../src/content/roadPortraits.json';
 import companions from '../../src/content/companions.json';
+import questGivers from '../../src/content/questGivers.json';
 
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 const mainFrames = read('public/assets/gen/atlas.json').frames as Record<string, unknown>;
@@ -29,6 +30,7 @@ describe('dialogue NPC avatars', () => {
       for (const actor of map.actors ?? []) {
         if (!actor.dialogue || !sheets[actor.sheet] || actor.dialogue === 'cell_other') continue;
         const portrait = CONTENT.dialogues[actor.dialogue]?.portrait;
+        if (portrait && !CONTENT.dialogues[actor.dialogue]?.npcId) missing.push(`${file}:${actor.id} → ${actor.dialogue}: no NPC ID`);
         const frames = portrait?.startsWith('portrait_npc_') ? npcFrames : mainFrames;
         if (!portrait || !frames[portrait]) missing.push(`${file}:${actor.id} → ${actor.dialogue}: ${portrait ?? 'none'}`);
       }
@@ -47,6 +49,29 @@ describe('dialogue NPC avatars', () => {
     expect(portrait('comp_vedro')).toBe(portrait('vedro_broken'));
     expect(portrait('nina')).not.toBe(portrait('kulik'));
     expect(Object.keys(bindings).length).toBeGreaterThan(80);
+  });
+
+  it('uses stable NPC IDs across chapters without merging unrelated people with the same title', () => {
+    for (const [variant, canonical] of [['pisar_hideout', 'pisar'], ['shluz_z', 'shluz'], ['shluz_dam', 'shluz'], ['lada_home', 'lada'], ['comp_rzhavchik', 'rzhavchik']]) {
+      expect(CONTENT.dialogues[variant].npcId).toBe(canonical);
+      expect(CONTENT.dialogues[variant].portrait).toBe(CONTENT.dialogues[canonical].portrait);
+    }
+    expect(CONTENT.dialogues.collector_post.npcId).not.toBe(CONTENT.dialogues.collector.npcId);
+    expect(CONTENT.dialogues.marta.npcId).toBe('marta');
+    expect(CONTENT.dialogues.marta.portrait).toBe('portrait_marta');
+    expect(CONTENT.dialogues.rzhavchik_home.npcId).toBe('rzhavchik');
+    expect(CONTENT.dialogues.rzhavchik_home.portrait).toBe(CONTENT.dialogues.rzhavchik.portrait);
+    const pillars = read('public/assets/maps/three_pillars.json');
+    expect(pillars.actors.find((actor: { id: string }) => actor.id === 'rzhavchik_home').dialogue).toBe('rzhavchik_home');
+  });
+
+  it('only attributes quests to real, illustrated NPCs', () => {
+    for (const [quest, npcId] of Object.entries(questGivers)) {
+      expect(CONTENT.quests[quest]?.giverNpcId, quest).toBe(npcId);
+      expect(CONTENT.dialogues[npcId]?.npcId, `${quest}: ${npcId}`).toBe(npcId);
+      expect(CONTENT.dialogues[npcId]?.portrait, `${quest}: ${npcId}`).toBeTruthy();
+    }
+    for (const quest of ['nest', 'stolen_truck', 'draisine', 'last_courier']) expect(CONTENT.quests[quest].giverNpcId).toBeUndefined();
   });
 
   it('gives every world-map party leader a portrait', () => {
