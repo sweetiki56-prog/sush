@@ -350,6 +350,9 @@ bark('lelya','ruins_library',"Архив Водоуправления! Если 
 bark('lelya','bone_camp',"Сухари смотрят на мой Искровик, как на змею. Я лучше помолчу.")
 bark('vedro','ruins_museum',"ХРАНИТЕЛЬ-4. МОДЕЛЬ СТАРШЕ МЕНЯ. ПРИВЕТСТВИЕ НЕ ПОЛУЧЕНО.")
 bark('vedro','ruins_cellar',"ДЕТЕКТИРОВАН СУРГУЧ. ПРИОРИТЕТ: ЗАЛОЖНИК.")
+# The Rocket's Sanctuary (secret branch) lines come after Chapter VIII's.
+bark('lelya','rocket_archive',"Терапия тут описана наполовину. Кто назвал это доказательством, не читал вторую страницу.")
+bark('vedro','rocket_palace',"БИОЛОГИЧЕСКИЙ ОБЪЕКТ. ВОЗРАСТ ПО ДОКУМЕНТАМ НЕ СОВПАДАЕТ С ВНЕШНИМ ВИДОМ.")
 open('src/content/companions.json','w').write(table(COMP))
 L=json.load(open('src/content/locations.json'))
 O=[{"flag":"chapter7_done"}]

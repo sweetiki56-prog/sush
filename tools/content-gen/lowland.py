@@ -291,7 +291,8 @@ COMP['timofey']={"name":"Тимофей Книжник","sheet":"timofey","creat
  {"map":"khlebnoe_ruins","text":"Хлебное. Здесь пекли на всю Светлую. Я помню запах."},
  {"map":"ark_ship","text":"Приёмник «Звезда-4». Я на таком слушал прогнозы. Дождя они не обещали."},
  {"map":"ruins_library","text":"Библиотека! Сколько лет я мечтал сюда вернуться."},
- {"map":"skit_archive","text":"Архив «Росы». Здесь знают, откуда взялось наше деревенение."}]}
+ {"map":"skit_archive","text":"Архив «Росы». Здесь знают, откуда взялось наше деревенение."},
+ {"map":"rocket_archive","text":"Семьдесят лет в одном журнале. Люди сменились, а почерк про её ухо всё тот же."}]}
 open('src/content/companions.json','w').write(table(COMP))
 L=json.load(open('src/content/locations.json'))
 O=[{"flag":"chapter1_done"}]

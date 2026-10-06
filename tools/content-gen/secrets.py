@@ -211,7 +211,8 @@ slides=[
  {"id":"literny","title":"Литерный","variants":[{"if":[fl("drops_collapsed")],"text":"Законные штампы обрушили капли. Трест ослаб, но бедняки первыми потеряли накопленное железо."},{"if":[fl("drop_stamps","sold")],"text":"Штампы «Литерного» исчезли в хранилище Треста. Капли держатся, будто бронепоезда никогда не было."},{"if":[fl("drop_stamps","destroyed")],"text":"Законные штампы разбиты. Ни старый закон, ни Трест больше не могут доказать право чеканить капли."}]},
  {"id":"dry_hands","title":"Сухие руки","variants":[{"if":[nf("blood_drawn")],"text":"От Ржавого колодца до Заслона за {name} не осталось человеческой крови. В Суши долго спорили, было ли это силой или чудом."}]},
 ]
-name_i=next(i for i,s in enumerate(end) if s["id"]=="name")
+# dam.py puts the Rocket slide just before the nickname; the secrets go before both.
+name_i=next(i for i,s in enumerate(end) if s["id"] in ("rocket","name"))
 for s in slides:
  old=next((x for x in end if x["id"]==s["id"]),None)
  if old: old.update(s)

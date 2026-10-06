@@ -1600,7 +1600,9 @@
     "use": "drink",
     "cat": "chem",
     "value": 0,
-    "combat": { "heal": 5 },
+    "combat": {
+      "heal": 5
+    },
     "empties": "canteen"
   },
   "rocket_log": {
