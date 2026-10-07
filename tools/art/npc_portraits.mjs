@@ -58,7 +58,7 @@ function pixelFrame(source, accent) {
 export function npcPortrait(id, cfg, creature = false) {
   if (!creature) {
     const look = { ...cfg, ...DETAILS[id] };
-    return pixelFrame(buildPortrait(look), look.shawl ?? look.scarf ?? look.coat ?? look.shirt ?? P.sand3);
+    return pixelFrame(buildPortrait(look, id), look.shawl ?? look.scarf ?? look.coat ?? look.shirt ?? P.sand3);
   }
   const cv = canvas(96, 96);
   const gradient = cv.ctx.createLinearGradient(0, 0, 0, 96);

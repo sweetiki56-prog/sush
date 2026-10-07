@@ -2,6 +2,7 @@
 // (side, forward, up) frame, projected to iso screen space and depth-sorted.
 // One model yields all 8 directions, the walk cycle and a large portrait.
 import { canvas, finalize } from './draw.mjs';
+import { buildFace } from './faces.mjs';
 import { P, shade } from './palette.mjs';
 
 export const FRAME_W = 48;
@@ -397,13 +398,7 @@ export function buildSheet(cfg) {
   return finalize(cv);
 }
 
-export function buildPortrait(cfg) {
-  const cv = canvas(96, 96);
-  const g = cv.ctx.createLinearGradient(0, 0, 0, 96);
-  g.addColorStop(0, P.crt1);
-  g.addColorStop(1, P.crt0);
-  cv.ctx.fillStyle = g;
-  cv.ctx.fillRect(0, 0, 96, 96);
-  drawFigure(cv.ctx, 48, 40 + 37 * 3 * cfg.height, 3, cfg, 0, false, 3);
-  return finalize(cv, { outline: false });
+/** A dialogue portrait: a face close-up (tools/art/faces.mjs); the map figure is too small to carry one. */
+export function buildPortrait(cfg, id) {
+  return buildFace(cfg, id);
 }

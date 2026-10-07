@@ -273,7 +273,7 @@ const entries = [
 const sheets = {};
 for (const [id, cfg] of Object.entries(CHARS)) {
   save(`${id}.png`, buildSheet(cfg));
-  entries.push(raw(`portrait_${id}`, buildPortrait(cfg)));
+  entries.push(raw(`portrait_${id}`, buildPortrait(cfg, id)));
   sheets[id] = { w: FRAME_W, h: FRAME_H, footX: FOOT_X, footY: FOOT_Y, poses: POSES };
 }
 // every hero look in every armor (hero_0_vest ...): the sprite shows what you wear
