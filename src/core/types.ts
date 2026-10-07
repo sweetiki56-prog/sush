@@ -248,6 +248,8 @@ export interface Content {
   arena: ArenaDef;
   companions: Record<string, CompanionDef>;
   endings: EndingSlide[]; // the slides of the ending (Chapter IX), see core/endings.ts
+  /** `map:actor` → portrait, for people who share a generic talk but not a face (tools/gen-npc-portrait-manifest.mjs). */
+  actorPortraits?: Record<string, string>;
 }
 
 export interface GameStateData {

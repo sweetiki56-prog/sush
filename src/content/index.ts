@@ -19,6 +19,7 @@ import npcPortraits from './npcPortraits.json';
 import npcIdentity from './npcIdentity.json';
 import questGivers from './questGivers.json';
 import roadPortraits from './roadPortraits.json';
+import actorPortraits from './actorPortraits.json';
 import companions from './companions.json';
 import character from './character.json';
 import weapons from './weapons.json';
@@ -89,4 +90,5 @@ export const CONTENT = {
   endings,
   arena,
   companions,
+  actorPortraits: Object.fromEntries(Object.entries(actorPortraits).map(([key, binding]) => [key, binding.portrait])),
 } as unknown as Content;

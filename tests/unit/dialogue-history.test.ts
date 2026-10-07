@@ -3,6 +3,8 @@ import { CONTENT } from '../../src/content';
 import { DialogueRunner } from '../../src/core/DialogueRunner';
 import { Game } from '../../src/core/Game';
 import type { Dialogue } from '../../src/core/types';
+import { room } from './rooms';
+import { say, talk } from './story';
 
 const dialogue: Dialogue = {
   speaker: 'Путник',
@@ -64,6 +66,24 @@ describe('dialogue journal', () => {
     game.recordDialogue('Сборщик Треста', 'npc', 'В другом месте.', undefined, 'collector');
     expect(game.state.dialogueHistory).toHaveLength(3);
     expect(game.state.dialogueHistory?.[0].lines).toHaveLength(2);
+  });
+
+  it('shows and remembers each of two people sharing one talk with their own face', () => {
+    const { r, clients } = room();
+    const [c] = clients;
+    const g = r.players.get(c.id)!.game;
+    g.setFlag('chapter1_done', true);
+    r.goTo('pillars_ruins');
+    talk(r, c, 'shnyr', [8, 16]);
+    expect(c.last('dialogue')).toMatchObject({ npcId: 'pillars_ruins:shnyr', portrait: CONTENT.dialogues.kids.portrait });
+    say(c, 'Ничего');
+    talk(r, c, 'galka', [9, 19]);
+    expect(c.last('dialogue')).toMatchObject({ npcId: 'pillars_ruins:galka', portrait: 'portrait_galka' });
+    const history = g.state.dialogueHistory ?? [];
+    expect(history.map((entry) => [entry.npcId, entry.portrait])).toEqual([
+      ['pillars_ruins:shnyr', CONTENT.dialogues.kids.portrait],
+      ['pillars_ruins:galka', 'portrait_galka'],
+    ]);
   });
 
   it('upgrades an unambiguous legacy history entry without losing or repeating its lines', () => {

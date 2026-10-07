@@ -12,6 +12,8 @@ export interface ShownOption {
 export class DialogueRunner {
   nodeId: string | null;
   readonly npcId?: string;
+  /** The face shown and remembered: the talk's own, or the actor's when a generic talk is shared. */
+  readonly portrait?: string;
   /** The answers as first shown for this node: the player picks by their number, even if the bag changes meanwhile. */
   private shown: ShownOption[] | null = null;
 
@@ -20,8 +22,10 @@ export class DialogueRunner {
     readonly dialogue: Dialogue,
     readonly id: string,
     npcId?: string,
+    portrait?: string,
   ) {
     this.npcId = npcId ?? dialogue.npcId;
+    this.portrait = portrait ?? dialogue.portrait;
     const entry = dialogue.entry.find((e) => game.testAll(e.if));
     if (!entry) throw new Error(`dialogue ${id}: no entry matches`);
     this.nodeId = null;
@@ -57,7 +61,7 @@ export class DialogueRunner {
     this.nodeId = id;
     this.game.apply(node.effects);
     const ref = this.game.content.dialogues[this.id] === this.dialogue ? { dialogue: this.id, node: id } : undefined;
-    this.game.recordDialogue(this.dialogue.speaker, 'npc', this.text, ref, this.npcId, this.dialogue.portrait);
+    this.game.recordDialogue(this.dialogue.speaker, 'npc', this.text, ref, this.npcId, this.portrait);
   }
 
   options(): ShownOption[] {
@@ -90,7 +94,7 @@ export class DialogueRunner {
     }
     const ref = this.game.content.dialogues[this.id] === this.dialogue && this.nodeId
       ? { dialogue: this.id, node: this.nodeId, option: shown.index } : undefined;
-    this.game.recordDialogue(this.dialogue.speaker, 'hero', this.fill(option.text), ref, this.npcId, this.dialogue.portrait);
+    this.game.recordDialogue(this.dialogue.speaker, 'hero', this.fill(option.text), ref, this.npcId, this.portrait);
     this.game.apply(option.effects);
     if (option.check) {
       const c = option.check;

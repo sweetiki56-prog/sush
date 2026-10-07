@@ -65,6 +65,30 @@ describe('dialogue NPC avatars', () => {
     expect(pillars.actors.find((actor: { id: string }) => actor.id === 'rzhavchik_home').dialogue).toBe('rzhavchik_home');
   });
 
+  it('shows people who share a generic talk with their own face, never the face of someone who looks different', () => {
+    const own = CONTENT.actorPortraits ?? {};
+    const faces = new Map<string, Map<string, string>>(); // dialogue → sheet → portrait
+    const missing: string[] = [];
+    for (const file of readdirSync('public/assets/maps').filter((name) => name.endsWith('.json'))) {
+      const map = read(`public/assets/maps/${file}`);
+      for (const actor of map.actors ?? []) {
+        const dialogue = CONTENT.dialogues[actor.dialogue];
+        if (!dialogue?.portrait || !sheets[actor.sheet]) continue;
+        const portrait = own[`${map.id}:${actor.id}`] ?? dialogue.portrait;
+        const frames = portrait.startsWith('portrait_npc_') ? npcFrames : mainFrames;
+        if (!frames[portrait]) missing.push(`${map.id}:${actor.id} → ${portrait}`);
+        const bySheet = faces.get(actor.dialogue) ?? new Map<string, string>();
+        bySheet.set(actor.sheet, portrait);
+        faces.set(actor.dialogue, bySheet);
+      }
+    }
+    expect(missing).toEqual([]);
+    for (const [dialogue, bySheet] of faces)
+      expect(new Set(bySheet.values()).size, `${dialogue}: ${JSON.stringify([...bySheet])}`).toBe(bySheet.size);
+    expect(own['crystal_deep:bitter_a']).toBe('portrait_bitter');
+    expect(own['crystal_deep:gorech']).toBeUndefined();
+  });
+
   it('only attributes quests to real, illustrated NPCs', () => {
     for (const [quest, npcId] of Object.entries(questGivers)) {
       expect(CONTENT.quests[quest]?.giverNpcId, quest).toBe(npcId);

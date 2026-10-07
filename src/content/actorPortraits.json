@@ -1,0 +1,78 @@
+{
+  "barge_bed:brood_0": {
+    "sheet": "sand_eel",
+    "portrait": "portrait_npc_sheet_sand_eel"
+  },
+  "barge_bed:brood_1": {
+    "sheet": "sand_eel",
+    "portrait": "portrait_npc_sheet_sand_eel"
+  },
+  "crystal_deep:bitter_a": {
+    "sheet": "bitter",
+    "portrait": "portrait_bitter"
+  },
+  "crystal_deep:bitter_b": {
+    "sheet": "bitter",
+    "portrait": "portrait_bitter"
+  },
+  "crystal_gate:cfolk_a": {
+    "sheet": "saltfolk",
+    "portrait": "portrait_saltfolk"
+  },
+  "crystal_gate:cfolk_b": {
+    "sheet": "councilor",
+    "portrait": "portrait_councilor"
+  },
+  "crystal_gate:cfolk_c": {
+    "sheet": "saltfolk",
+    "portrait": "portrait_saltfolk"
+  },
+  "pillars_ruins:galka": {
+    "sheet": "galka",
+    "portrait": "portrait_galka"
+  },
+  "salt_arena:pit_2": {
+    "sheet": "pit_2",
+    "portrait": "portrait_pit_2"
+  },
+  "salt_arena:pit_3a": {
+    "sheet": "pit_3",
+    "portrait": "portrait_pit_3"
+  },
+  "salt_arena:pit_3b": {
+    "sheet": "pit_3",
+    "portrait": "portrait_pit_3"
+  },
+  "salt_arena:crowd_b": {
+    "sheet": "caravan_guard",
+    "portrait": "portrait_caravan_guard"
+  },
+  "salt_arena:crowd_c": {
+    "sheet": "saltfolk",
+    "portrait": "portrait_saltfolk"
+  },
+  "salt_arena:crowd_d": {
+    "sheet": "scavenger",
+    "portrait": "portrait_scavenger"
+  },
+  "salt_market:sfolk_b": {
+    "sheet": "pilgrim",
+    "portrait": "portrait_pilgrim"
+  },
+  "salt_market:sfolk_c": {
+    "sheet": "caravan_guard",
+    "portrait": "portrait_caravan_guard"
+  },
+  "zap_lower:folk_b": {
+    "sheet": "pilgrim",
+    "portrait": "portrait_pilgrim"
+  },
+  "zap_lower:folk_c": {
+    "sheet": "farmer",
+    "portrait": "portrait_farmer"
+  },
+  "zap_market:mfolk_a": {
+    "sheet": "pilgrim",
+    "portrait": "portrait_pilgrim"
+  }
+}

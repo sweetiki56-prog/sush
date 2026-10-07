@@ -649,8 +649,10 @@ export class MissionRoom extends Room {
     this.talking.set(t.id, p.id);
     const actor = t.npc ? this.map.actors.find((candidate) => candidate.id === t.id) : undefined;
     const maps = this.opts.maps ? Object.values(this.opts.maps) : [this.map];
-    const npcId = actor ? npcIdentityForActor(actor, this.map.id ?? 'rusty_well', maps, d.npcId) : d.npcId;
-    p.talk = { runner: new DialogueRunner(p.game, d, t.dialogue, npcId), target: t.id };
+    const mapId = this.map.id ?? 'rusty_well';
+    const npcId = actor ? npcIdentityForActor(actor, mapId, maps, d.npcId) : d.npcId;
+    const portrait = actor && this.content.actorPortraits?.[`${mapId}:${actor.id}`];
+    p.talk = { runner: new DialogueRunner(p.game, d, t.dialogue, npcId, portrait || undefined), target: t.id };
     this.sendDialogue(p);
   }
 
@@ -661,7 +663,7 @@ export class MissionRoom extends Room {
     const d = r.dialogue;
     const options = r.options();
     this.send(p, {
-      t: 'dialogue', id: r.id, speaker: d.speaker, npcId: r.npcId, portrait: d.portrait, text: r.text,
+      t: 'dialogue', id: r.id, speaker: d.speaker, npcId: r.npcId, portrait: r.portrait, text: r.text,
       options: options.map((o) => o.label), nodeId: r.nodeId ?? undefined,
       optionIndices: options.map((o) => o.index),
       checks: options.map(({ option }) => option.check ? {

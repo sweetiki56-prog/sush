@@ -47,6 +47,19 @@ The client presentation path translates room dialogue, generated contract boards
 
 Further English proper names: Затвор → Zatvor, Сургуч → Surguch, Хлебное → Khlebnoe, «Литерный» (train) → Literny. Элеватор is a grain elevator, not a passenger lift; ракетница is a flare gun, not a rocket launcher. Do not translate a person's or town's name as a common noun.
 
+Settled in the October 2026 copy pass (`tests/unit/i18n.test.ts` rejects the old variants):
+- Суховей → Sukhovei; Сухостой → Drywood, also inside a simile.
+- Смотритель (Veres) → the Watcher: the Watcher's Bunker, Rod, Button. Хранитель-4 → Keeper-4. Надзиратель (Сыч) → warden. The three never share a word.
+- Элеватор as a place → the Elevator, the same as on the chart.
+- Печатник → the Printer, always capitalized. A teleprinter's лента → tape feed, never "printer".
+- Орден Росы → the Order of Dew, never "Dew Order". Мэрия → city hall.
+- Сургучная метка → "Wax mark: second." and so on.
+- Фляга → canteen; a laboratory колба can be a flask.
+- Машина В-4 → V-4 (Cyrillic В is V).
+- Толмач → Tolmach (a name), Псарь → the kennel keeper, Летописец → the Chronicler.
+- Armor keeps its `/items` name in `/armor`: Tin Can Armor, Tire Vest, Nut Mail, Reaper Shell (Old Reaper Carapace is the material), “Bark”, High Bank Plate, Snake-Scale Jacket.
+- Item and gear nicknames keep curly quotes: “Bark”, “Swallow”.
+
 Keep placeholders (`{name}`, `{f:key}`) exactly. Translate prose, not flag names or item ids. Late-stage Russian JSON edits must also be made in the relevant `tools/content-gen/*.py` generator before translations are updated.
 
 ## Completion gates

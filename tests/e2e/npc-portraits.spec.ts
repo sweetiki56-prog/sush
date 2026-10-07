@@ -105,3 +105,29 @@ test('two Kolyuchka farmers using one dialogue keep separate history IDs', async
   const farmers = history.filter((entry) => entry.speaker === 'Хуторянин');
   expect(farmers.map((entry) => entry.npcId)).toEqual(['kolyuchka:farmer_0', 'kolyuchka:farmer_1']);
 });
+
+test('Галка, who shares a talk with Шнырь, speaks with her own face', async ({ page }) => {
+  await startGame(page);
+  await page.evaluate(() => (window as unknown as { __world: { session(): { send(intent: unknown): void } } }).__world.session().send({ t: 'debug', op: { op: 'goto', map: 'pillars_ruins' } }));
+  await expect.poll(() => W(page, 'worldMap')).toBe('pillars_ruins');
+  await page.waitForFunction(() => !(window as unknown as { __phaser: { scene: { isActive(id: string): boolean } } }).__phaser.scene.isActive('Loading'));
+  await W(page, 'teleport', 9, 19);
+  expect(await W<boolean>(page, 'interact', 'galka')).toBe(true);
+  await expect.poll(async () => (await state(page)).modal).toBe(true);
+  const frames = await page.evaluate(() => {
+    const scene = (window as unknown as { __phaser: { scene: { getScene(id: string): { children: { list: unknown[] } } } } }).__phaser.scene.getScene('UI');
+    const found: string[] = [];
+    const visit = (value: unknown): void => {
+      if (!value || typeof value !== 'object') return;
+      const object = value as { texture?: { key?: string }; frame?: { name?: string }; list?: unknown[] };
+      if (object.frame?.name?.startsWith('portrait_')) found.push(`${object.texture?.key}:${object.frame.name}`);
+      object.list?.forEach(visit);
+    };
+    scene.children.list.forEach(visit);
+    return found;
+  });
+  expect(frames).toContain('atlas:portrait_galka');
+  expect(frames).not.toContain('npc_portraits:portrait_npc_kids');
+  await page.keyboard.press('Enter');
+  await page.screenshot({ path: 'test-results/e2e-npc-portrait-galka.png' });
+});

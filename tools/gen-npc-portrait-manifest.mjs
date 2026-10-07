@@ -7,9 +7,11 @@ import { CREATURES } from './art/creatures.mjs';
 const source = 'src/content/dialogues';
 const output = 'src/content/npcPortraits.json';
 const roadOutput = 'src/content/roadPortraits.json';
+const actorOutput = 'src/content/actorPortraits.json';
 const dialogues = Object.assign({}, ...readdirSync(source).filter((name) => name.endsWith('.json'))
   .map((name) => JSON.parse(readFileSync(`${source}/${name}`, 'utf8'))));
 const actors = new Map();
+const speakers = []; // [mapId, actor] of every illustrated speaking actor
 for (const file of readdirSync('public/assets/maps').filter((name) => name.endsWith('.json')).sort()) {
   const map = JSON.parse(readFileSync(`public/assets/maps/${file}`, 'utf8'));
   for (const actor of map.actors ?? []) {
@@ -17,6 +19,7 @@ for (const file of readdirSync('public/assets/maps').filter((name) => name.endsW
     const sheets = actors.get(actor.dialogue) ?? [];
     if (!sheets.includes(actor.sheet)) sheets.push(actor.sheet);
     actors.set(actor.dialogue, sheets);
+    speakers.push([map.id ?? file.slice(0, -5), actor]);
   }
 }
 // Party talks are created from companion data, not from a standing map actor.
@@ -49,6 +52,18 @@ for (const [id, dialogue] of Object.entries(dialogues).sort(([a], [b]) => a.loca
   result[id] = { sheet, portrait: REUSE[id] ?? `portrait_npc_${id}` };
 }
 const json = `${JSON.stringify(result, null, 2)}\n`;
+// A generic talk shared by people who look different (Горечь and her Горькие, Шнырь and Галка, an arena crowd):
+// each of them shows a face drawn from their own sprite, not the face of whoever the talk was illustrated for.
+const sheetPortrait = (sheet) => (CHARS[sheet] ? `portrait_${sheet}` : `portrait_npc_sheet_${sheet}`);
+const actorPortraits = {};
+for (const [mapId, actor] of speakers) {
+  const sheets = actors.get(actor.dialogue);
+  if (sheets.length < 2 || NON_NPC.has(actor.dialogue)) continue;
+  const portrait = result[actor.dialogue]?.portrait ?? dialogues[actor.dialogue]?.portrait;
+  const home = result[actor.dialogue]?.sheet ?? (sheets.find((sheet) => portrait === `portrait_${sheet}`) ?? sheets[0]);
+  if (actor.sheet !== home) actorPortraits[`${mapId}:${actor.id}`] = { sheet: actor.sheet, portrait: sheetPortrait(actor.sheet) };
+}
+const actorJson = `${JSON.stringify(actorPortraits, null, 2)}\n`;
 const road = {};
 const travel = JSON.parse(readFileSync('src/content/travel.json', 'utf8'));
 const creatures = JSON.parse(readFileSync('src/content/creatures.json', 'utf8'));
@@ -61,8 +76,10 @@ const roadJson = `${JSON.stringify(road, null, 2)}\n`;
 if (process.argv.includes('--check')) {
   if (readFileSync(output, 'utf8') !== json) throw new Error(`${output} is stale; run npm run gen:assets`);
   if (readFileSync(roadOutput, 'utf8') !== roadJson) throw new Error(`${roadOutput} is stale; run npm run gen:assets`);
+  if (readFileSync(actorOutput, 'utf8') !== actorJson) throw new Error(`${actorOutput} is stale; run npm run gen:assets`);
 } else {
   writeFileSync(output, json);
   writeFileSync(roadOutput, roadJson);
+  writeFileSync(actorOutput, actorJson);
 }
-console.log(`NPC portrait bindings: ${Object.keys(result).length} actor/companion, ${Object.keys(road).length} road`);
+console.log(`NPC portrait bindings: ${Object.keys(result).length} actor/companion, ${Object.keys(road).length} road, ${Object.keys(actorPortraits).length} own-look`);

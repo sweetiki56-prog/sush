@@ -8,9 +8,11 @@ import { packAtlas } from './art/pack.mjs';
 export function generateNpcPortraitAtlas() {
   const portraitBindings = JSON.parse(readFileSync('src/content/npcPortraits.json', 'utf8'));
   const roadPortraits = JSON.parse(readFileSync('src/content/roadPortraits.json', 'utf8'));
+  const actorPortraits = JSON.parse(readFileSync('src/content/actorPortraits.json', 'utf8'));
   const bindings = [
     ...Object.entries(portraitBindings),
     ...Object.entries(roadPortraits).map(([id, value]) => [`road_${id}`, value]),
+    ...Object.values(actorPortraits).map((value) => [value.sheet, value]),
   ];
   const seen = new Set();
   const entries = bindings.flatMap(([id, binding]) => {

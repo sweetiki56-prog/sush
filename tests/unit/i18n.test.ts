@@ -58,4 +58,18 @@ describe('translation catalogs (work in progress)', () => {
     expect(irga.nodes.home.text).not.toContain('Шёпот');
     expect(en['/dialogues/comp_irga/nodes/home/text'].en).toContain('Irga');
   });
+
+  it('spells glossary names one way in English', () => {
+    // Variants that crept into the catalog once; docs/LOCALIZATION.md holds the chosen form.
+    const banned = /Shlyuz|Khlebnoye|Sukhovey|Sukhostoi|Dew Order|grain elevator|Wax-seal|Warden['’]s (?:Bunker|Rod|Button)|Warden-4|\bB-4\b|\bthe printer\b/;
+    const hits = Object.entries(en)
+      .filter(([, entry]) => banned.test(entry.en) || (/фляг/i.test(entry.ru) && /\bflasks?\b/i.test(entry.en)))
+      .map(([path, entry]) => `${path}: ${entry.en}`);
+    expect(hits).toEqual([]);
+    for (const [path, entry] of Object.entries(en)) {
+      const gear = /^\/(armor|weapons)\/([^/]+)\/name$/.exec(path);
+      const item = gear && (en as Record<string, { ru: string; en: string }>)[`/items/${gear[2]}/name`];
+      if (item && item.ru === entry.ru) expect(entry.en, path).toBe(item.en);
+    }
+  });
 });

@@ -41,7 +41,7 @@
   },
   "/armor/tirevest/name": {
     "ru": "Панцирь из покрышек",
-    "en": "Tire-Shell Vest"
+    "en": "Tire Vest"
   },
   "/armor/vest/name": {
     "ru": "Бронежилет",
@@ -77,11 +77,11 @@
   },
   "/armor/nut_mail/name": {
     "ru": "Гайковая рубаха",
-    "en": "Nut-and-Bolt Mail"
+    "en": "Nut Mail"
   },
   "/armor/bark/name": {
     "ru": "«Кора»",
-    "en": "Bark"
+    "en": "“Bark”"
   },
   "/armor/salt_crust/name": {
     "ru": "Соляная корка",
@@ -89,7 +89,7 @@
   },
   "/armor/shore_plate/name": {
     "ru": "Береговой доспех",
-    "en": "Shoreline Plate"
+    "en": "High Bank Plate"
   },
   "/armor/dew_cuirass/name": {
     "ru": "Кираса Росы",
@@ -97,7 +97,7 @@
   },
   "/armor/snake_scale/name": {
     "ru": "Змеиная чешуя",
-    "en": "Snakescale Armor"
+    "en": "Snake-Scale Jacket"
   },
   "/armor/wax_cloak/name": {
     "ru": "Плащ Сургуча",
@@ -281,7 +281,7 @@
   },
   "/quests/rocket/stages/3/journal": {
     "ru": "За стеной — маленький сад. Ракета жива; Толмач говорит за неё, а хранители знают о поступках странника.",
-    "en": "A small garden lies beyond the wall. Raketa is alive; the Interpreter speaks for her, and the keepers know what you have done."
+    "en": "A small garden lies beyond the wall. Raketa is alive; Tolmach speaks for her, and the keepers know what you have done."
   },
   "/dialogues/sentry_panel/nodes/look/options/3/text": {
     "ru": "По записи Обители перевести машины на старый канал обслуживания.",
@@ -353,7 +353,7 @@
   },
   "/dialogues/rocket_psar/nodes/passed/text": {
     "ru": "Псарь ставит печать на ящике. — За сараем ковёр. Под ним люк. Вернёшься — вернём всё до последней иглы.",
-    "en": "The kennel keeper seals the chest. “There's a rug behind the barn. A hatch beneath it. Come back, and you'll get everything down to the last needle.”"
+    "en": "The kennel keeper seals the chest. “There's a rug behind the shed. A hatch beneath it. Come back, and you'll get everything down to the last needle.”"
   },
   "/dialogues/rocket_psar/nodes/halt/options/2/text": {
     "ru": "Показать ошейник: Ракета уже знает меня.",
@@ -733,7 +733,7 @@
   },
   "/dialogues/rocket_fountain/nodes/look/options/0/text": {
     "ru": "Наполнить одну пустую флягу.",
-    "en": "Fill one empty flask."
+    "en": "Fill one empty canteen."
   },
   "/dialogues/rocket_fountain/nodes/filled/text": {
     "ru": "Вода заполняет принесённую тару. Хранитель закрывает вентиль до следующего дня.",
@@ -749,7 +749,7 @@
   },
   "/dialogues/rocket_keeper/nodes/sale/text": {
     "ru": "— Дар можно выпить или отдать. Продавать его тем, кто уже наполнил эту флягу, бессмысленно.",
-    "en": "“A gift can be drunk or given away. Selling it to those who filled the flask in the first place makes no sense.”"
+    "en": "“A gift can be drunk or given away. Selling it to those who filled the canteen in the first place makes no sense.”"
   },
   "/dialogues/rocket_audience/nodes/lie/options/1/text": {
     "ru": "Уйти.",
@@ -969,7 +969,7 @@
   },
   "/dialogues/rocket_ledger/nodes/look/text": {
     "ru": "Последний год: воды хватает сорока людям и небольшой зелёной полосе. Пока сад поливают, за стену отпускают меньше фляг, чем просят.",
-    "en": "Last year's figures: enough water for forty people and a narrow strip of green. While the garden is watered, fewer flasks pass beyond the wall than the neighbors ask for."
+    "en": "Last year's figures: enough water for forty people and a narrow strip of green. While the garden is watered, fewer canteens pass beyond the wall than the neighbors ask for."
   },
   "/dialogues/rocket_chronicler/nodes/look/options/1/text": {
     "ru": "Спросить о служебной записи.",
@@ -2081,7 +2081,7 @@
   },
   "/endings/15/variants/0/text": {
     "ru": "Жезл Смотрителя висит в зале пульта Заслона. Хранитель-4 до сих пор ждёт, когда его вернут после санитарного дня.",
-    "en": "The Warden's Rod hangs in Zaslon's control room. Keeper-4 still waits for it to be returned after sanitation day."
+    "en": "The Watcher's Rod hangs in Zaslon's control room. Keeper-4 still waits for it to be returned after sanitation day."
   },
   "/endings/15/variants/1/text": {
     "ru": "Земельные книги легли на стол суда. Колодцы Круга — собственность посёлков, и это записано.",
@@ -2113,7 +2113,7 @@
   },
   "/endings/17/title": {
     "ru": "Элеватор",
-    "en": "The Grain Elevator"
+    "en": "The Elevator"
   },
   "/endings/17/variants/0/text": {
     "ru": "Варочная «Миража» взорвана. Мёртвые поля перестали расти, а «Жажда» — расти вместе с ними.",
@@ -2125,11 +2125,11 @@
   },
   "/endings/17/variants/2/text": {
     "ru": "Сизый пал, Элеватор пуст. На его башне вьют гнёзда кондоры.",
-    "en": "Sizy fell, and the grain elevator stands empty. Condors nest in its tower."
+    "en": "Sizy fell, and the Elevator stands empty. Condors nest in its tower."
   },
   "/endings/17/variants/3/text": {
     "ru": "«Жажда» держит Элеватор, как держала, и Мёртвые поля вокруг ширятся.",
-    "en": "The Thirst still holds the grain elevator, and the Dead Fields spread around it."
+    "en": "The Thirst still holds the Elevator, and the Dead Fields spread around it."
   },
   "/endings/18/title": {
     "ru": "Ковчег",
@@ -2297,15 +2297,15 @@
   },
   "/endings/28/variants/0/text": {
     "ru": "Последний гонец доставил письмо через двести лет. На конверте рядом с адресом осталось имя {name}; объяснения ему так и не нашли.",
-    "en": "The last courier delivered his letter two centuries late. {name}'s name remained beside the address on the envelope. No one ever found an explanation."
+    "en": "The last courier delivered his letter two centuries late. The name {name} remained beside the address on the envelope. No one ever found an explanation."
   },
   "/endings/29/title": {
     "ru": "Бункер Смотрителя",
-    "en": "The Warden's Bunker"
+    "en": "The Watcher's Bunker"
   },
   "/endings/29/variants/0/text": {
     "ru": "Дневник Вереса вернул Кругу слова Смотрителя. Голос в бункере больше не отвечал, но зелёная лампа не погасла.",
-    "en": "Veres's diary brought the Warden's words back to the Circle. The bunker voice never answered again, but the green light remained on."
+    "en": "Veres's diary brought the Watcher's words back to the Circle. The bunker voice never answered again, but the green light remained on."
   },
   "/endings/30/title": {
     "ru": "Литерный",
@@ -2637,7 +2637,7 @@
   },
   "/items/tinplate/name": {
     "ru": "Консервная банка",
-    "en": "Tinplate Armor"
+    "en": "Tin Can Armor"
   },
   "/items/tinplate/desc": {
     "ru": "Листовое железо на заклёпках. Порог 5, защита 40%, но минус ОД и тишина.",
@@ -2969,7 +2969,7 @@
   },
   "/items/dry_law/desc": {
     "ru": "Револьвер Инспектора Шлюза. Воронёная сталь, гравировка: «Закон сух, но это закон».",
-    "en": "Inspector Shlyuz's revolver. Blued steel, engraved: “The law is dry, but it is the law.”"
+    "en": "Inspector Shluz's revolver. Blued steel, engraved: “The law is dry, but it is the law.”"
   },
   "/items/nomad/name": {
     "ru": "Карабин «Кочевник»",
@@ -3149,7 +3149,7 @@
   },
   "/items/reaper_shell/name": {
     "ru": "Панцирь жнеца",
-    "en": "Reaper Carapace"
+    "en": "Reaper Shell"
   },
   "/items/reaper_shell/desc": {
     "ru": "Панцирь Старого жнеца на кожаной основе. Скорпионье жало скользит по родному хитину.",
@@ -3245,7 +3245,7 @@
   },
   "/items/warden_button/name": {
     "ru": "Пуговица Смотрителя",
-    "en": "Warden's Button"
+    "en": "Watcher's Button"
   },
   "/items/warden_button/desc": {
     "ru": "Латунная пуговица с мундира Водоуправления. Кто её носит, того слушают.",
@@ -3849,7 +3849,7 @@
   },
   "/items/veres_diary/desc": {
     "ru": "Список Бригады с дневника Смотрителя: «Мандат передать совету посёлков бассейна Светлой». Улика на суде.",
-    "en": "The Brigade's transcript of the Warden's diary: “Deliver the Mandate to the council of settlements in the Svetlaya basin.” Evidence for the trial."
+    "en": "The Brigade's transcript of the Watcher's diary: “Deliver the Mandate to the council of settlements in the Svetlaya basin.” Evidence for the trial."
   },
   "/items/gates_pass/name": {
     "ru": "Пропуск к плотине",
@@ -3917,7 +3917,7 @@
   },
   "/items/watcher_rod/name": {
     "ru": "Жезл Смотрителя",
-    "en": "Warden's Rod"
+    "en": "Watcher's Rod"
   },
   "/items/watcher_rod/desc": {
     "ru": "Воронёная сталь, латунная капля. Церемониальный ключ пульта Глубокого.",
@@ -3977,7 +3977,7 @@
   },
   "/items/watcher_diary/desc": {
     "ru": "Смотритель боялся не только Заречья, но и тех, кто ставит печати. Улика против Сургуча.",
-    "en": "The Warden feared not only Zarechye, but also those who affix seals. Evidence against Surguch."
+    "en": "The Watcher feared not only Zarechye, but also those who affix seals. Evidence against Surguch."
   },
   "/items/drop_stamps/name": {
     "ru": "Законные штампы капель",
@@ -4101,7 +4101,7 @@
   },
   "/jobs/thirst_boss/desc": {
     "ru": "С Элеватора по восточной дороге ходит банда «Жажды» с вожаком. Режет караваны. Гильдия платит за его голову сто двадцать капель.",
-    "en": "A Thirst gang comes down the eastern road from the grain elevator and attacks caravans. The Guild offers 120 drops for its leader."
+    "en": "A Thirst gang comes down the eastern road from the Elevator and attacks caravans. The Guild offers 120 drops for its leader."
   },
   "/jobs/thirst_boss/turnIn/0/text": {
     "ru": "Сдать: «Вожак с Элеватора» — показать, что было у него в кармане",
@@ -6053,11 +6053,11 @@
   },
   "/quests/museum/stages/0/journal": {
     "ru": "В музее Водоуправления — Жезл Смотрителя. Автомат-сторож двести лет держит «санитарный день».",
-    "en": "The Water Authority museum holds the Warden's Rod. An automated guard has enforced “sanitation day” for two centuries."
+    "en": "The Water Authority museum holds the Watcher's Rod. An automated guard has enforced “sanitation day” for two centuries."
   },
   "/quests/museum/stages/1/journal": {
     "ru": "Жезл Смотрителя у меня.",
-    "en": "The Warden's Rod is in hand."
+    "en": "The Watcher's Rod is in hand."
   },
   "/quests/city_hall/title": {
     "ru": "Мэрия",
@@ -6233,7 +6233,7 @@
   },
   "/quests/mirage_brew/stages/0/journal": {
     "ru": "«Мираж» варят на Элеваторе.",
-    "en": "“Mirage” is brewed at the grain elevator."
+    "en": "“Mirage” is brewed at the Elevator."
   },
   "/quests/mirage_brew/stages/1/journal": {
     "ru": "Сырьё «Миража» — Суховей со складов Хлебного. Потому и растут Мёртвые поля.",
@@ -6261,7 +6261,7 @@
   },
   "/quests/debtor/stages/0/journal": {
     "ru": "В клетке на Элеваторе — Ключник, брат Лейки.",
-    "en": "Klyuchnik, Leika's brother, is caged at the grain elevator."
+    "en": "Klyuchnik, Leika's brother, is caged at the Elevator."
   },
   "/quests/debtor/stages/1/journal": {
     "ru": "Долг Ключника «Жажде» продала Гильдия.",
@@ -6281,7 +6281,7 @@
   },
   "/quests/debtor/stages/2/alt/2/journal": {
     "ru": "Ключник свободен: Элеватор взят.",
-    "en": "Klyuchnik is free: the grain elevator has fallen."
+    "en": "Klyuchnik is free: the Elevator has fallen."
   },
   "/quests/stolen_truck/title": {
     "ru": "Похищенная вода",
@@ -6289,7 +6289,7 @@
   },
   "/quests/stolen_truck/stages/0/journal": {
     "ru": "Во дворе Элеватора — угнанный водовоз Треста.",
-    "en": "A stolen Trust water truck sits in the grain elevator yard."
+    "en": "A stolen Trust water truck sits in the Elevator yard."
   },
   "/quests/stolen_truck/stages/1/journal": {
     "ru": "С водовозом решено.",
@@ -6401,7 +6401,7 @@
   },
   "/quests/watcher/title": {
     "ru": "Бункер Смотрителя",
-    "en": "The Warden's Bunker"
+    "en": "The Watcher's Bunker"
   },
   "/quests/watcher/stages/0/journal": {
     "ru": "В скале над Глубоким найден кабинет Вереса.",
@@ -6417,7 +6417,7 @@
   },
   "/quests/watcher/stages/3/journal": {
     "ru": "С резервным допуском Смотрителя решено.",
-    "en": "The Warden's reserve clearance has been dealt with."
+    "en": "The Watcher's reserve clearance has been dealt with."
   },
   "/quests/literny/title": {
     "ru": "Литерный",
@@ -7433,7 +7433,7 @@
   },
   "/dialogues/tresh/nodes/lore/text": {
     "ru": "— Наши деды носили каски Водоуправления и стерегли Заслон. Смотритель дал им половину ключа и клятву: не отдать воду войне. Потом пришёл Огонь. Клятва осталась, а слово «война» забылось. Стали говорить «никому не отдать». — Она трогает шнурок. — Я в этом сомневаюсь. Давно.",
-    "en": "“Our grandfathers wore Water Authority helmets and guarded Zaslon. The Warden gave them half the key and an oath: never surrender water to war. Then came the Fire. The oath remained, but the word ‘war’ was forgotten. They began saying ‘give water to no one.’” She touches the cord at her neck. “I've doubted that reading for a long time.”"
+    "en": "“Our grandfathers wore Water Authority helmets and guarded Zaslon. The Watcher gave them half the key and an oath: never surrender water to war. Then came the Fire. The oath remained, but the word ‘war’ was forgotten. They began saying ‘give water to no one.’” She touches the cord at her neck. “I've doubted that reading for a long time.”"
   },
   "/dialogues/tresh/nodes/spy/text": {
     "ru": "— Кто-то носит вести из круга. Трест знает, где мы пьём; Гильдия знает, когда мы спим. — Трещина плюёт в пыль. — Найдёшь — круг запомнит.",
@@ -7865,7 +7865,7 @@
   },
   "/dialogues/land_registry/nodes/copied/text": {
     "ru": "Выписка с номерами страниц, печатью мэрии и твоей подписью. Книги — на полке, где их двести лет никто не трогал.",
-    "en": "An extract bearing page numbers, the town hall seal, and your signature. The books remain on the shelf where they have lain untouched for two hundred years."
+    "en": "An extract bearing page numbers, the city hall seal, and your signature. The books remain on the shelf where they have lain untouched for two hundred years."
   },
   "/dialogues/land_registry/nodes/brigade/text": {
     "ru": "Бригада умеет хранить. Когда понадобятся книги — они будут.",
@@ -8085,11 +8085,11 @@
   },
   "/dialogues/curator/nodes/tour/text": {
     "ru": "— Экскурсия… — Автомат щёлкает. — Экскурсия записана. Экспонат номер один: Жезл Смотрителя. Передаётся экскурсоводу для показа. — Он открывает витрину и вкладывает жезл тебе в руки. — Верните после санитарного дня.",
-    "en": "“Tour…” The automaton clicks. “Tour registered. Exhibit one: the Warden's Rod. Issued to the guide for demonstration.” It opens the display case and places the rod in your hands. “Return it after sanitation day.”"
+    "en": "“Tour…” The automaton clicks. “Tour registered. Exhibit one: the Watcher's Rod. Issued to the guide for demonstration.” It opens the display case and places the rod in your hands. “Return it after sanitation day.”"
   },
   "/dialogues/curator/nodes/reprogrammed/text": {
     "ru": "Календарь на груди Хранителя крутится, щёлкает и останавливается на сегодняшнем дне. — Санитарный день окончен. — Автомат открывает витрину и отходит. — Добро пожаловать.",
-    "en": "The calendar on Warden-4's chest spins, clicks, and stops on today's date. “Sanitation day is over.” It opens the display case and steps back. “Welcome.”"
+    "en": "The calendar on Keeper-4's chest spins, clicks, and stops on today's date. “Sanitation day is over.” It opens the display case and steps back. “Welcome.”"
   },
   "/dialogues/curator/nodes/closed/text": {
     "ru": "— Экскурсии по записи. Санитарный день.",
@@ -8101,7 +8101,7 @@
   },
   "/dialogues/curator/nodes/fight/text": {
     "ru": "— Нарушение режима. — Хранитель-4 поднимает руки.",
-    "en": "“Protocol violation.” Warden-4 raises its arms."
+    "en": "“Protocol violation.” Keeper-4 raises its arms."
   },
   "/dialogues/curator/nodes/after/text": {
     "ru": "— Добро пожаловать в музей Водоуправления.",
@@ -8113,15 +8113,15 @@
   },
   "/dialogues/rod_case/speaker": {
     "ru": "Витрина «Жезл Смотрителя»",
-    "en": "Warden's Rod display case"
+    "en": "Watcher's Rod display case"
   },
   "/dialogues/rod_case/nodes/look/text": {
     "ru": "За стеклом на бархате — жезл из воронёной стали с латунным набалдашником в виде капли. Табличка: «Жезл Смотрителя водохранилища Глубокое. Церемониальный ключ пульта».",
-    "en": "Behind glass, on velvet: a blued-steel rod topped by a brass drop. Plaque: “Rod of the Warden of Glubokoye Reservoir. Ceremonial control-console key.”"
+    "en": "Behind glass, on velvet: a blued-steel rod topped by a brass drop. Plaque: “Rod of the Watcher of Glubokoye Reservoir. Ceremonial control-console key.”"
   },
   "/dialogues/rod_case/nodes/look/options/0/text": {
     "ru": "Вскрыть витрину, пока Хранитель смотрит в другую сторону.",
-    "en": "Break into the display case while the Warden looks away."
+    "en": "Break into the display case while Keeper-4 looks away."
   },
   "/dialogues/rod_case/nodes/look/options/1/text": {
     "ru": "Отойти.",
@@ -8133,7 +8133,7 @@
   },
   "/dialogues/rod_case/nodes/alarm/text": {
     "ru": "Замок визжит. Хранитель-4 разворачивается: — Нарушение режима.",
-    "en": "The lock shrieks. Warden-4 turns. “Protocol violation.”"
+    "en": "The lock shrieks. Keeper-4 turns. “Protocol violation.”"
   },
   "/dialogues/rod_case/nodes/empty/text": {
     "ru": "Пустая витрина.",
@@ -8221,7 +8221,7 @@
   },
   "/dialogues/suhovey_book/nodes/done/text": {
     "ru": "Книга о Суховее.",
-    "en": "Book about Sukhovey."
+    "en": "Book about Sukhovei."
   },
   "/dialogues/suhovey_book/nodes/done/options/0/text": {
     "ru": "Отойти.",
@@ -8385,7 +8385,7 @@
   },
   "/dialogues/pisar_hideout/nodes/talked/text": {
     "ru": "Повисает долгая тишина. Потом старший машет рукой. — Режьте. Печатнику сейчас не до заложников.",
-    "en": "A long silence follows. Then the senior agent waves a hand. “Cut them loose. The printer has bigger worries than hostages right now.”"
+    "en": "A long silence follows. Then the senior agent waves a hand. “Cut them loose. The Printer has bigger worries than hostages right now.”"
   },
   "/dialogues/pisar_hideout/nodes/refuse/text": {
     "ru": "— Слова. — Агенты кладут руки на оружие.",
@@ -8461,7 +8461,7 @@
   },
   "/dialogues/ottisk_hideout/nodes/talked/text": {
     "ru": "Повисает долгая тишина. Потом старший машет рукой. — Режьте. Печатнику сейчас не до заложников.",
-    "en": "A long silence follows. Then the senior agent waves a hand. “Cut them loose. The printer has bigger worries than hostages right now.”"
+    "en": "A long silence follows. Then the senior agent waves a hand. “Cut them loose. The Printer has bigger worries than hostages right now.”"
   },
   "/dialogues/ottisk_hideout/nodes/refuse/text": {
     "ru": "— Слова. — Агенты кладут руки на оружие.",
@@ -9605,7 +9605,7 @@
   },
   "/dialogues/yarina_dam/nodes/intro/text": {
     "ru": "Ветрова стоит у синего знамени, за ней — дроны на земле, как спящие птицы. — Высокий берег ждёт. Если затворы откроют для Треста, мы спустимся. Если для всех — может, договоримся.",
-    "en": "Vetrova stands by a blue banner. Behind her, drones rest on the ground like sleeping birds. “The high bank is waiting. Open the gates for the Trust and we'll descend. Open them for everyone, and perhaps we can talk.”"
+    "en": "Vetrova stands by a blue banner. Behind her, drones rest on the ground like sleeping birds. “The High Bank is waiting. Open the gates for the Trust and we'll descend. Open them for everyone, and perhaps we can talk.”"
   },
   "/dialogues/yarina_dam/nodes/intro/options/0/text": {
     "ru": "Ратмир жив, потому что ему поверили. Поверь и ты: часть воды — Берегу, когда Заслон откроется.",
@@ -11113,7 +11113,7 @@
   },
   "/dialogues/suhovey_store/nodes/look/text": {
     "ru": "Жёлтые бочки с чёрной полосой: «Суховей. Опытная партия». Половина вскрыта. От склада к дороге на Элеватор — свежие следы телег.",
-    "en": "Yellow barrels with black stripes: “Sukhovey. Experimental batch.” Half have been opened. Fresh cart tracks lead from the storehouse toward the road to the Elevator."
+    "en": "Yellow barrels with black stripes: “Sukhovei. Experimental batch.” Half have been opened. Fresh cart tracks lead from the storehouse toward the road to the Elevator."
   },
   "/dialogues/suhovey_store/nodes/look/options/0/text": {
     "ru": "Отойти.",
@@ -11137,7 +11137,7 @@
   },
   "/dialogues/kora/nodes/wood/text": {
     "ru": "— Суховей сушит землю. А нас — изнутри: пальцы деревенеют, потом сердце. Свинцовый цветок помогает. Растёт только на отравленной земле. Тимофей знает, где.",
-    "en": "“Sukhovey dries the earth. It dries us from within: first our fingers turn to wood, then our hearts. Lead flower helps. It grows only in poisoned soil. Timofey knows where.”"
+    "en": "“Sukhovei dries the earth. It dries us from within: first our fingers turn to wood, then our hearts. Lead flower helps. It grows only in poisoned soil. Timofey knows where.”"
   },
   "/dialogues/halfdry/speaker": {
     "ru": "Полусухой",
@@ -11505,7 +11505,7 @@
   },
   "/dialogues/kub/nodes/what/text": {
     "ru": "— Из жёлтых бочек, — Куб кивает на склад. — Порошок со складов Хлебного. Чуток в куб — и голова лёгкая. — Он не видит, что сказал. Порошок — Суховей. Вот почему Мёртвые поля вокруг Элеватора растут.",
-    "en": "“From the yellow barrels.” Kub nods toward the storehouse. “Powder from Khlebnoye's depots. Just a little in the still and your head feels light.” He doesn't realize what he has said. The powder is Sukhovey. That is why the Dead Fields around the Elevator keep spreading."
+    "en": "“From the yellow barrels.” Kub nods toward the storehouse. “Powder from Khlebnoe's depots. Just a little in the still and your head feels light.” He doesn't realize what he has said. The powder is Sukhovei. That is why the Dead Fields around the Elevator keep spreading."
   },
   "/dialogues/kub/nodes/what/options/0/text": {
     "ru": "[Ремонт] Перекрыть клапан и дать кубу закипеть.",
@@ -11833,7 +11833,7 @@
   },
   "/dialogues/street_cat/nodes/pet/options/0/text": {
     "ru": "Пусть отдыхает.",
-    "en": "Let her rest."
+    "en": "Let it rest."
   },
   "/dialogues/street_dog/speaker": {
     "ru": "Дворовый пёс",
@@ -13225,7 +13225,7 @@
   },
   "/dialogues/meet_erema/nodes/intro/text": {
     "ru": "Худой человек с пустыми флягами на ремне поднимает руки. — Я не налётчик! Трест записал меня в бандиты за воду мимо записи. Я водонос, от Лейки из Запруды. Людям воду ношу.",
-    "en": "A thin man with empty flasks at his belt raises his hands. “I'm no raider! The Trust called me a bandit for carrying water off the books. I'm a water carrier with Leika, from Zapruda. I bring water to people.”"
+    "en": "A thin man with empty canteens at his belt raises his hands. “I'm no raider! The Trust called me a bandit for carrying water off the books. I'm a water carrier with Leika, from Zapruda. I bring water to people.”"
   },
   "/dialogues/meet_erema/nodes/intro/options/0/text": {
     "ru": "Награда есть награда.",
@@ -14629,7 +14629,7 @@
   },
   "/dialogues/pump/nodes/working/options/0/text": {
     "ru": "Наполнить флягу водой.",
-    "en": "Fill a flask with water."
+    "en": "Fill a canteen with water."
   },
   "/dialogues/pump/nodes/working/options/1/text": {
     "ru": "Опустить тубус в колодец на верёвке.",
@@ -14661,7 +14661,7 @@
   },
   "/dialogues/pump/nodes/sealed/options/0/text": {
     "ru": "Наполнить флягу водой.",
-    "en": "Fill a flask with water."
+    "en": "Fill a canteen with water."
   },
   "/dialogues/pump/nodes/sealed/options/1/text": {
     "ru": "Опустить тубус в колодец на верёвке.",
@@ -16829,7 +16829,7 @@
   },
   "/dialogues/weigher/nodes/guild/text": {
     "ru": "Весовщик распарывает мешок. Под солью — склянка с серой мутью. Он бледнеет: — Суховей. — Склянку уносят в контору. Вам отсчитывают шестьдесят капель. — Гильдия этого не забудет.",
-    "en": "The weighmaster slits open the sack. Beneath the salt lies a vial of cloudy gray liquid. He goes pale. “Sukhovey.” The vial is carried to the office. You are paid sixty drops. “The Guild won't forget this.”"
+    "en": "The weighmaster slits open the sack. Beneath the salt lies a vial of cloudy gray liquid. He goes pale. “Sukhovei.” The vial is carried to the office. You are paid sixty drops. “The Guild won't forget this.”"
   },
   "/dialogues/khrust/speaker": {
     "ru": "Хруст",
@@ -16869,7 +16869,7 @@
   },
   "/dialogues/khrust/nodes/dumped/text": {
     "ru": "Хруст выплёвывает соломинку. — Суховей? В моих мешках? — Он долго молчит. — Я не знал. Скажи, что не знал. — И уходит к стойкам, не прощаясь.",
-    "en": "Khrust spits out the straw. “Sukhovey? In my sacks?” He falls silent. “I didn't know. Tell them I didn't know.” He walks toward the stalls without a farewell."
+    "en": "Khrust spits out the straw. “Sukhovei? In my sacks?” He falls silent. “I didn't know. Tell them I didn't know.” He walks toward the stalls without a farewell."
   },
   "/dialogues/khrust/nodes/after/text": {
     "ru": "— Чего тебе? — Хруст смотрит мимо.",
@@ -16917,7 +16917,7 @@
   },
   "/dialogues/ukho/nodes/vial/text": {
     "ru": "Под солью — стеклянная склянка с серой мутью, закрученная проволокой. Суховей: одна склянка отравит колодец целого посёлка. Покупатель тянется за ножом, но не достаёт — ждёт, что вы решите.",
-    "en": "Beneath the salt lies a glass vial wired shut, its contents cloudy gray. Sukhovey: one vial could poison an entire settlement's well. The buyer reaches toward his knife but stops. He waits to see what you'll do."
+    "en": "Beneath the salt lies a glass vial wired shut, its contents cloudy gray. Sukhovei: one vial could poison an entire settlement's well. The buyer reaches toward his knife but stops. He waits to see what you'll do."
   },
   "/dialogues/ukho/nodes/vial/options/0/text": {
     "ru": "Высыпать всё в соль. Сделки не будет.",
@@ -17529,7 +17529,7 @@
   },
   "/dialogues/shepot/nodes/tell/text": {
     "ru": "— Ну?",
-    "en": "- Well?"
+    "en": "“Well?”"
   },
   "/dialogues/shepot/nodes/tell/options/0/text": {
     "ru": "Это твой брат. Клан продал его Гильдии за долги.",
@@ -17961,7 +17961,7 @@
   },
   "/dialogues/courier_mummy/nodes/look/options/1/text": {
     "ru": "Дневник Вереса указывает на тайник под стойкой.",
-    "en": "Veres's diary points to a cache beneath the counter."
+    "en": "Veres's diary points to a cache beneath the rack."
   },
   "/dialogues/courier_mummy/nodes/look/options/2/text": {
     "ru": "Заметить пустоту под половицами.",
@@ -17985,7 +17985,7 @@
   },
   "/dialogues/courier_mummy/nodes/open/text": {
     "ru": "В сумке — письмо Смотрителя Вереса «Совету колодцев бассейна Светлой»: Мандат предназначался всем посёлкам ниже по течению. Рядом с адресом другим почерком выведено имя: {name}. Чернилам двести лет.",
-    "en": "Inside the bag is a letter from Warden Veres to the “Council of Wells of the Svetlaya Basin.” The Mandate was meant for every settlement downstream. Beside the address, another hand has written a name: {name}. The ink is two hundred years old."
+    "en": "Inside the bag is a letter from Watcher Veres to the “Council of Wells of the Svetlaya Basin.” The Mandate was meant for every settlement downstream. Beside the address, another hand has written a name: {name}. The ink is two hundred years old."
   },
   "/dialogues/courier_mummy/nodes/open/options/0/text": {
     "ru": "Забрать письмо.",
@@ -18021,7 +18021,7 @@
   },
   "/dialogues/watcher_desk/speaker": {
     "ru": "Стол Смотрителя",
-    "en": "Warden's desk"
+    "en": "Watcher's desk"
   },
   "/dialogues/watcher_desk/nodes/look/text": {
     "ru": "Кожаная тетрадь раскрыта на последней странице: «Заречье придёт с оружием. Но больше я боюсь тех, кто ставит печати: они перепишут воду, и никто не заметит».",
@@ -18085,7 +18085,7 @@
   },
   "/dialogues/watcher_terminal/nodes/rewritten/text": {
     "ru": "Лента выплёвывает новый приказ с сегодняшней датой.",
-    "en": "The printer spits out a new order dated today."
+    "en": "The tape feed spits out a new order dated today."
   },
   "/dialogues/watcher_terminal/nodes/erased/text": {
     "ru": "Строка допуска гаснет. Где-то в коридоре Ведро впервые не ждёт команды.",
@@ -18153,7 +18153,7 @@
   },
   "/dialogues/literny_panel/nodes/locked/options/1/text": {
     "ru": "Ведро, передай допуск машины В-4.",
-    "en": "Vedro, transmit the B-4 machine clearance."
+    "en": "Vedro, transmit the V-4 unit's clearance."
   },
   "/dialogues/literny_panel/nodes/locked/options/2/text": {
     "ru": "Отключить контур распознавания.",
@@ -18201,7 +18201,7 @@
   },
   "/dialogues/seal_mark_12/nodes/after/text": {
     "ru": "Последняя часть плана Палаты снята.",
-    "en": "The final section of the Chamber plan has been taken down."
+    "en": "The last piece of the Chamber plan is in hand."
   },
   "/dialogues/seal_mark_12/nodes/after/options/0/text": {
     "ru": "Отойти.",
@@ -18253,7 +18253,7 @@
   },
   "/dialogues/chamber_door/nodes/shut/text": {
     "ru": "Глухая дверь под лестницей мэрии. В камне двенадцать неглубоких выемок.",
-    "en": "A solid door beneath the town hall stairs. Twelve shallow recesses mark the stone."
+    "en": "A solid door beneath the city hall stairs. Twelve shallow recesses mark the stone."
   },
   "/dialogues/chamber_door/nodes/shut/options/0/text": {
     "ru": "Сложить двенадцать сургучных оттисков.",
@@ -18285,7 +18285,7 @@
   },
   "/dialogues/printer_chamber/speaker": {
     "ru": "Печатник",
-    "en": "the Printer"
+    "en": "The Printer"
   },
   "/dialogues/printer_chamber/nodes/intro/text": {
     "ru": "Печатник стоит среди полок, не скрывая лица. — Двенадцать следов привели тебя сюда. Значит, бумага выбрала правильно. Палата предлагает место, а не смерть.",
@@ -18321,7 +18321,7 @@
   },
   "/dialogues/printer_chamber/nodes/report_order/text": {
     "ru": "Хранители Росы снимают копии при свидетелях. Имена шантажируемых закрывают, приказы Сургуча читают вслух.",
-    "en": "The Dew Order's keepers make copies before witnesses. They conceal the names of those being blackmailed and read Surguch's orders aloud."
+    "en": "The Order of Dew's keepers make copies before witnesses. They conceal the names of those being blackmailed and read Surguch's orders aloud."
   },
   "/dialogues/printer_chamber/nodes/fight/text": {
     "ru": "Печатник отступает за пресс. Писцы достают оружие из ящиков для бумаг.",
@@ -19209,7 +19209,7 @@
   },
   "/dialogues/capsule/nodes/look/text": {
     "ru": "Под инеем стекла — человек с соляными наростами на плечах. Табличка: «Верблюд-1. Первое поколение. Сон по приказу Смотрителя».",
-    "en": "Behind frosted glass lies a person with salt growths on their shoulders. A plaque reads: “Camel-1. First generation. Sleep ordered by the Warden.”"
+    "en": "Behind frosted glass lies a person with salt growths on their shoulders. A plaque reads: “Camel-1. First generation. Sleep ordered by the Watcher.”"
   },
   "/dialogues/capsule/nodes/look/options/0/text": {
     "ru": "Разбудить: подать ток и открыть клапаны.",
@@ -19229,7 +19229,7 @@
   },
   "/dialogues/capsule/nodes/woken/text": {
     "ru": "Иней тает. Человек в капсуле открывает глаза и долго смотрит в потолок. — Верес? — хрипит он. — Где Смотритель? Мы должны… открыть… — Он видит вас и замолкает.",
-    "en": "The frost melts. The man inside opens his eyes and stares at the ceiling. “Veres?” he rasps. “Where is the Warden? We have to… open…” He sees you and falls silent."
+    "en": "The frost melts. The man inside opens his eyes and stares at the ceiling. “Veres?” he rasps. “Where is the Watcher? We have to… open…” He sees you and falls silent."
   },
   "/dialogues/capsule/nodes/fail/text": {
     "ru": "Капсула гудит и гаснет обратно. Попробовать можно ещё раз.",
@@ -19885,7 +19885,7 @@
   },
   "/dialogues/diary_shelf/nodes/look/text": {
     "ru": "Среди журналов дежурств — переплетённая копия: «Дневник Смотрителя И. А. Вереса. Список для Бригады».",
-    "en": "Among the duty logs is a bound copy: “Diary of Warden I. A. Veres. Copy for the Brigade.”"
+    "en": "Among the duty logs is a bound copy: “Diary of Watcher I. A. Veres. Copy for the Brigade.”"
   },
   "/dialogues/diary_shelf/nodes/look/options/0/text": {
     "ru": "Взять копию.",
@@ -19981,11 +19981,11 @@
   },
   "/dialogues/shunt/nodes/intro/text": {
     "ru": "Сухой, серый человек в робе Водоуправления прижимает ухо к трубе. — Илья Андреич? Задвижка семь держит. Держит! Двести… двести смен держит. — Глаза у него как у Сухостоя, но смотрит он прямо на тебя. — Вы не Илья Андреич.",
-    "en": "A gray, desiccated man in a Water Authority uniform presses his ear to a pipe. “Ilya Andreyevich? Valve seven is holding. Holding! Two hundred… two hundred shifts.” His eyes resemble Sukhostoi's, but he looks straight at you. “You're not Ilya Andreyevich.”"
+    "en": "A gray, desiccated man in a Water Authority uniform presses his ear to a pipe. “Ilya Andreyevich? Valve seven is holding. Holding! Two hundred… two hundred shifts.” His eyes are like a Drywood's, but he looks straight at you. “You're not Ilya Andreyevich.”"
   },
   "/dialogues/shunt/nodes/intro/options/0/text": {
     "ru": "Смотритель ушёл наверх. Велел передать: смена окончена.",
-    "en": "The Warden went upstairs. He said to tell you your shift is over."
+    "en": "The Watcher went upstairs. He said to tell you your shift is over."
   },
   "/dialogues/shunt/nodes/intro/options/1/text": {
     "ru": "Первый «Верблюд» помнит Вереса в лицо. Верес велел тебе отдыхать, Шунт.",
@@ -20085,7 +20085,7 @@
   },
   "/dialogues/bunker_door/nodes/shut/text": {
     "ru": "Стальная дверь под мачтой. Кодовый замок, над ним табличка: «Аппаратная. Питание вышки».",
-    "en": "Steel door under the mast. Combination lock, above it there is a sign: “Hardware room. Power supply for the tower.\""
+    "en": "Steel door under the mast. Combination lock, above it there is a sign: “Hardware room. Power supply for the tower.”"
   },
   "/dialogues/bunker_door/nodes/shut/options/0/text": {
     "ru": "Вскрыть кодовый замок.",
@@ -20285,7 +20285,7 @@
   },
   "/dialogues/relay_console/nodes/choice_or_on/options/2/text": {
     "ru": "Забрать свежие метеосводки с ленты.",
-    "en": "Take the latest weather reports from the printer."
+    "en": "Take the latest weather reports from the tape feed."
   },
   "/dialogues/relay_console/nodes/choice_or_on/options/3/text": {
     "ru": "Отойти.",
@@ -21193,7 +21193,7 @@
   },
   "/dialogues/notary/nodes/read/text": {
     "ru": "Нотариус вскрывает тубус тонким ножом, как письмо от любимой. Лупа ползёт по строкам. — Мандат Водоуправления. Номер один. «Выдан предъявителю». — Он поднимает глаза. — Подлинный. А это… — На ладони звякает латунная пластина с зубцами. — Ключ. Половина ключа. Вторая ушла с гонцом, и без неё плотина не откроется.",
-    "en": "The notary opens the tube with a fine blade, as gently as a letter from a loved one. His magnifier moves along the lines. “Water Authority Mandate. Number one. ‘Issued to the bearer.’” He looks up. “Genuine. And this...” A toothed brass plate clinks in his palm. “A key. Half a key. The other half went with a courier. The dam won't open without it.”"
+    "en": "The Notary opens the tube with a fine blade, as gently as a letter from a loved one. His magnifier moves along the lines. “Water Authority Mandate. Number one. ‘Issued to the bearer.’” He looks up. “Genuine. And this...” A toothed brass plate clinks in his palm. “A key. Half a key. The other half went with a courier. The dam won't open without it.”"
   },
   "/dialogues/notary/nodes/price/text": {
     "ru": "— Заверение стоит денег или услуги. Триста капель. Или… — Он понижает голос. — В Башне кто-то травит советников. Сослужите Башне — заверю даром.",
@@ -21289,7 +21289,7 @@
   },
   "/dialogues/notary/nodes/surrender/text": {
     "ru": "— У Треста? — Нотариус на миг бледнеет, но быстро улыбается. — Тогда он в архиве Башни. Всё, что Трест отнимает, лежит там, в одной папке с «копией» Председателя. Принесёте — прочту.",
-    "en": "“The Trust has it?” The notary goes pale for a moment, then recovers his smile. “Then it's in the Tower archive. Everything the Trust confiscates goes there, into a file with the Chairman's ‘copy.’ Bring it to me, and I'll read it.”"
+    "en": "“The Trust has it?” The Notary goes pale for a moment, then recovers his smile. “Then it's in the Tower archive. Everything the Trust confiscates goes there, into a file with the Chairman's ‘copy.’ Bring it to me, and I'll read it.”"
   },
   "/dialogues/notary/nodes/after/text": {
     "ru": "— Заверено, — улыбается Штемпель. — Берегите пластину. И себя.",
@@ -21329,7 +21329,7 @@
   },
   "/dialogues/notary_registry/nodes/look/options/1/effects/1/text": {
     "ru": "Сургучная метка: четвёртая.",
-    "en": "Wax-seal mark: the fourth."
+    "en": "Wax mark: fourth."
   },
   "/dialogues/notary_registry/nodes/look/options/2/text": {
     "ru": "Отойти.",
