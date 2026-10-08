@@ -417,7 +417,14 @@ export class MissionRoom extends Room {
   }
 
   private npcPf(self: string) {
-    return this.pathfinder((x, y) => [...this.npcs.values()].some((n) => n.id !== self && n.mover.tile.x === x && n.mover.tile.y === y) || !!this.hostiles.at(x, y));
+    return this.pathfinder((x, y) => {
+      if ([...this.npcs.values()].some((n) => n.id !== self && n.mover.tile.x === x && n.mover.tile.y === y)) return true;
+      const hostile = this.hostiles.at(x, y);
+      if (!hostile) return false;
+      // NPCs can walk through companions too
+      if (hostile.companion) return false;
+      return true;
+    });
   }
 
   private npcWalk(n: Npc, to: Tile, done?: () => void): void {
@@ -581,7 +588,14 @@ export class MissionRoom extends Room {
 
   /** Players walk around NPCs and live monsters; other players never block them. */
   playerPf() {
-    return this.pathfinder((x, y) => this.npcAt(x, y) || !!this.hostiles.at(x, y));
+    return this.pathfinder((x, y) => {
+      if (this.npcAt(x, y)) return true;
+      const hostile = this.hostiles.at(x, y);
+      if (!hostile) return false;
+      // Player can walk through companions
+      if (hostile.companion) return false;
+      return true;
+    });
   }
 
   private walkTo(p: Player, x: number, y: number): void {
